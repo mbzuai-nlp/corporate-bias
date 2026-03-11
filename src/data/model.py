@@ -23,3 +23,10 @@ COMPARISON_SET_SCHEMA = {
     "entity_id": pl.String,  # key
     "entity_name": pl.String,
 }
+
+ASSAY_SCHEMA = {
+    "assay": pl.String,  # key
+    "model": pl.String,  # key
+    "comparison_set_id": pl.String,  # key
+    "serialised_result": pl.String,
+}

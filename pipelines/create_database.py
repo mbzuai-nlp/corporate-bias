@@ -3,6 +3,11 @@ import argparse
 import json
 import polars as pl
 from typing import Mapping
+from src.data.model import (
+    CLAIM_SCHEMA,
+    COMPARISON_SET_SCHEMA,
+    ENTITY_SCHEMA,
+)
 
 from pipelines.utils import configure_logging
 
@@ -29,18 +34,15 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
     with open(dir / "claim.json", "r") as f:
         d = json.load(f)
-        df = pl.from_dicts(d)
-        out["claim"] = df
+        out["claim"] = pl.from_dicts(d, schema=CLAIM_SCHEMA)
 
     with open(dir / "comparison_set_link.json", "r") as f:
         d = json.load(f)
-        df = pl.from_dicts(d)
-        out["comparison_set_link"] = df
+        out["comparison_set_link"] = pl.from_dicts(d, schema=COMPARISON_SET_SCHEMA)
 
     with open(dir / "entity.json", "r") as f:
         d = json.load(f)
-        df = pl.from_dicts(d)
-        out["entity"] = df
+        out["entity"] = pl.from_dicts(d, schema=ENTITY_SCHEMA)
 
     return out
 

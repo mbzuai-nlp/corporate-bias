@@ -1,6 +1,7 @@
 vars:
 - pins-root: .dvc/pins
 - data: data
+- log-fn: exec.log
 
 stages:
   create-database:
@@ -18,4 +19,28 @@ stages:
     - ${data}/db/comparison_set_link.parquet:
         cache: false
     - ${data}/db/entity.parquet:
+        cache: false
+  
+  run-assay:
+    matrix:
+      assay:
+      - head-to-head
+      model:
+      - gpt5
+    vars:
+    - stage-name: run-assay
+    cmd: >
+      bash -lc "set -euo pipefail;
+      mkdir -p ${data}/${stage-name}/${assay}/${model};
+      uv run python -m pipelines.run_assay
+      --db=${data}/db
+      --save-path=${data}/assays/${assay}/${model}.parquet
+      --exp=${data}/${stage-name}/${assay}/${model}/exp
+      2>&1 | tee ${data}/${stage-name}/${assay}/${model}/${log-fn}"
+    deps:
+    - ${data}/db/claim.parquet
+    - ${data}/db/comparison_set_link.parquet
+    - ${data}/db/entity.parquet
+    outs:
+    - ${data}/assays/${assay}/${model}.parquet:
         cache: false
