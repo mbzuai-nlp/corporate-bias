@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  create-database:
+    cmd: "uv run python -m pipelines.create_database --authored=data/authored --db=data/db\n"
+    deps:
+    - path: data/authored/claim.json
+      hash: md5
+      md5: 2b406ce5b0ba6ccaae301f5d650b0eb7
+      size: 171
+    - path: data/authored/comparison_set_link.json
+      hash: md5
+      md5: 8bebad98067be06bb721ac915ea99a4f
+      size: 750
+    - path: data/authored/entity.json
+      hash: md5
+      md5: 02400e07229c7b8885551443da06962e
+      size: 1111
+    outs:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set_link.parquet
+      hash: md5
+      md5: 1800d22e2f83d315eec02c4c66f1abfb
+      size: 1768
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376

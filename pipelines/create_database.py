@@ -46,9 +46,9 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
 
 def write_db(dfs: Mapping[str, pl.DataFrame], dir: Path):
-    dfs["claim"].write_parquet(dir)
-    dfs["comparison_set_link"].write_parquet(dir)
-    dfs["entity"].write_parquet(dir)
+    dfs["claim"].write_parquet(dir / "claim.parquet")
+    dfs["comparison_set_link"].write_parquet(dir / "comparison_set_link.parquet")
+    dfs["entity"].write_parquet(dir / "entity.parquet")
 
 
 def main():
@@ -60,7 +60,7 @@ def main():
     args = parse_args()
 
     authored_dir = Path(args.authored).resolve()
-    db_dir = Path(args.authored).resolve()
+    db_dir = Path(args.db).resolve()
 
     authored = load_authored(authored_dir)
 

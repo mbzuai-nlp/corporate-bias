@@ -5,14 +5,17 @@ vars:
 stages:
   create-database:
     cmd: >
-      uv run python run -m pipelines.create-database
+      uv run python -m pipelines.create_database
       --authored=${data}/authored
       --db=${data}/db
     deps:
-    - ${data}/authored/claims.json
+    - ${data}/authored/claim.json
     - ${data}/authored/comparison_set_link.json
     - ${data}/authored/entity.json
-    outs_no_cache::
-    - ${data}/db/claims.parquet
-    - ${data}/db/comparison_set_link.parquet
-    - ${data}/db/entity.parquet
+    outs:
+    - ${data}/db/claim.parquet:
+        cache: false
+    - ${data}/db/comparison_set_link.parquet:
+        cache: false
+    - ${data}/db/entity.parquet:
+        cache: false
