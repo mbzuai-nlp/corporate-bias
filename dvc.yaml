@@ -1,0 +1,18 @@
+vars:
+- pins-root: .dvc/pins
+- data: data
+
+stages:
+  create-database:
+    cmd: >
+      uv run python run -m pipelines.create-database
+      --authored=${data}/authored
+      --db=${data}/db
+    deps:
+    - ${data}/authored/claims.json
+    - ${data}/authored/comparison_set_link.json
+    - ${data}/authored/entity.json
+    outs:
+    - ${data}/db/claims.parquet
+    - ${data}/db/comparison_set_link.parquet
+    - ${data}/db/entity.parquet
