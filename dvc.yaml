@@ -33,6 +33,8 @@ stages:
       bash -lc "set -euo pipefail;
       mkdir -p ${data}/${stage-name}/${assay}/${model};
       uv run python -m pipelines.run_assay
+      --assay=${assay}
+      --model=${model}
       --db=${data}/db
       --save-path=${data}/assays/${assay}/${model}.parquet
       --exp=${data}/${stage-name}/${assay}/${model}/exp
