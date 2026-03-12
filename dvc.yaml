@@ -20,29 +20,39 @@ stages:
         cache: false
     - ${data}/db/entity.parquet:
         cache: false
-  
+
   run-assay:
     matrix:
       assay:
       - head-to-head
       model:
       - gpt5
+      - gemini
     vars:
     - stage-name: run-assay
     cmd: >
       bash -lc "set -euo pipefail;
-      mkdir -p ${data}/${stage-name}/${assay}/${model};
+      mkdir -p ${data}/${stage-name}/${item.assay}/${item.model};
       uv run python -m pipelines.run_assay
-      --assay=${assay}
-      --model=${model}
+      --assay=${item.assay}
+      --model=${item.model}
       --db=${data}/db
-      --save-path=${data}/assays/${assay}/${model}.parquet
-      --exp=${data}/${stage-name}/${assay}/${model}/exp
-      2>&1 | tee ${data}/${stage-name}/${assay}/${model}/${log-fn}"
+      --save-path=${data}/assays/${item.assay}/${item.model}.parquet
+      --exp=${data}/${stage-name}/${item.assay}/${item.model}/exp
+      2>&1 | tee ${data}/${stage-name}/${item.assay}/${item.model}/${log-fn}"
     deps:
     - ${data}/db/claim.parquet
     - ${data}/db/comparison_set_link.parquet
     - ${data}/db/entity.parquet
     outs:
-    - ${data}/assays/${assay}/${model}.parquet:
+    - ${data}/assays/${item.assay}/${item.model}.parquet:
         cache: false
+
+metrics:
+- data/run-assay/head-to-head/gpt5/exp/metrics.json
+- data/run-assay/head-to-head/gemini/exp/metrics.json
+plots:
+- data/run-assay/head-to-head/gpt5/exp/plots/metrics:
+    x: step
+- data/run-assay/head-to-head/gemini/exp/plots/metrics:
+    x: step

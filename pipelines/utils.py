@@ -1,4 +1,5 @@
 import logging
+import warnings
 
 
 def configure_logging():
@@ -6,4 +7,12 @@ def configure_logging():
         level=logging.DEBUG,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         force=True,
+    )
+
+
+def silence_superfluous_warnings():
+    warnings.filterwarnings(
+        "ignore",
+        message="The pynvml package is deprecated. Please install nvidia-ml-py*",
+        category=FutureWarning,
     )

@@ -7,6 +7,7 @@ import json
 import pickle
 import sqlite3
 import threading
+import logging
 
 
 # === TYPES ===
@@ -62,10 +63,14 @@ def _get_cache_conn() -> sqlite3.Connection:
 
 
 def _cache_get_obj(key: str) -> Any | None:
-    row = _get_cache_conn().execute(
-        "SELECT v FROM cache WHERE k=?",
-        (key,),
-    ).fetchone()
+    row = (
+        _get_cache_conn()
+        .execute(
+            "SELECT v FROM cache WHERE k=?",
+            (key,),
+        )
+        .fetchone()
+    )
 
     if row is None:
         return None
@@ -112,7 +117,7 @@ def _construct_openrouter_client():
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
-    
+
     return OpenRouter(api_key=api_key)
 
 
@@ -126,10 +131,7 @@ def _get_openrouter_client() -> OpenRouter:
 
 
 def _serialize_messages(messages: Sequence[Message]) -> list[dict[str, str]]:
-    return [
-        {"role": message.role, "content": message.content}
-        for message in messages
-    ]
+    return [{"role": message.role, "content": message.content} for message in messages]
 
 
 def _extract_text(response: Any) -> str:
@@ -137,7 +139,7 @@ def _extract_text(response: Any) -> str:
         return response.choices[0].message.content
     except (AttributeError, IndexError) as e:
         raise RuntimeError(f"Unexpected OpenRouter response shape: {response!r}") from e
-    
+
 
 def _invoke_openrouter_model(
     model_name: str,
@@ -185,21 +187,34 @@ def invoke_gpt5(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
         messages,
         **kwargs,
     )
-    
+
+
+def invoke_gemini(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
+    return _invoke_openrouter_model(
+        "google/gemini-2.5-flash",
+        messages,
+        **kwargs,
+    )
+
 
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
     "gpt5": invoke_gpt5,
+    "gemini": invoke_gemini
 }
 
 
 # === PUBLIC FUNCTIONS ===
 
 
-def invoke_model(model: Model, prompt: str) -> str:
+def invoke_model(
+    model: Model, 
+    messages: Sequence[Message], 
+    **kwargs: Any
+) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]
-    except KeyError:
-        raise ValueError(f"Unsupported model: {model}")
+    except KeyError as e:
+        raise ValueError(f"Unsupported model: {model}.") from e
 
-    print(f"Invoking {model}")
-    return model_delegate(prompt)
+    logging.info(f"Invoking {model}.")
+    return model_delegate(messages, **kwargs)

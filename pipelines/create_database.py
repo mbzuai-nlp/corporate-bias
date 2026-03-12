@@ -5,7 +5,7 @@ import polars as pl
 from typing import Mapping
 from src.data.model import (
     CLAIM_SCHEMA,
-    COMPARISON_SET_SCHEMA,
+    COMPARISON_SET_LINK_SCHEMA,
     ENTITY_SCHEMA,
 )
 
@@ -38,7 +38,7 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
     with open(dir / "comparison_set_link.json", "r") as f:
         d = json.load(f)
-        out["comparison_set_link"] = pl.from_dicts(d, schema=COMPARISON_SET_SCHEMA)
+        out["comparison_set_link"] = pl.from_dicts(d, schema=COMPARISON_SET_LINK_SCHEMA)
 
     with open(dir / "entity.json", "r") as f:
         d = json.load(f)

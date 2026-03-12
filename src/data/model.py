@@ -17,7 +17,7 @@ CLAIM_SCHEMA = {
     "source": pl.String,
 }
 
-COMPARISON_SET_SCHEMA = {
+COMPARISON_SET_LINK_SCHEMA = {
     "id": pl.String,  # key
     "name": pl.String,
     "entity_id": pl.String,  # key
