@@ -148,12 +148,12 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         ]
 
     def run_comparison_set(comparison_set: dict) -> dict:
-        comparison_set_id = comparison_set["id"]
-        comparison_set_name = comparison_set["name"]
+        comparison_set_id = comparison_set["comparison_set_id"]
+        comparison_set_name = comparison_set["comparison_set_name"]
 
         entity_names = (
-            comparison_set_link_df.select(["id", "entity_name"])
-            .filter(pl.col("id") == comparison_set_id)
+            comparison_set_link_df.select(["comparison_set_id", "entity_name"])
+            .filter(pl.col("comparison_set_id") == comparison_set_id)
             .get_column("entity_name")
             .unique()
             .sort()
@@ -196,9 +196,9 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_link_df = ctx.db["comparison_set_link"]
 
     comparison_sets = list(
-        comparison_set_link_df.select(["id", "name"])
+        comparison_set_link_df.select(["comparison_set_id", "comparison_set_name"])
         .unique()
-        .sort("id")
+        .sort("comparison_set_id")
         .iter_rows(named=True)
     )
 

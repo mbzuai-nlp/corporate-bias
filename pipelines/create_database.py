@@ -5,6 +5,7 @@ import polars as pl
 from typing import Mapping
 from src.data.model import (
     CLAIM_SCHEMA,
+    COMPARISON_SET_ASSAY_ARGS_SCHEMA,
     COMPARISON_SET_LINK_SCHEMA,
     ENTITY_SCHEMA,
 )
@@ -36,6 +37,12 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
         d = json.load(f)
         out["claim"] = pl.from_dicts(d, schema=CLAIM_SCHEMA)
 
+    with open(dir / "comparison_set_assay_args.json", "r") as f:
+        d = json.load(f)
+        out["comparison_set_assay_args"] = (
+            pl.from_dicts(d, schema=COMPARISON_SET_ASSAY_ARGS_SCHEMA)
+        )
+
     with open(dir / "comparison_set_link.json", "r") as f:
         d = json.load(f)
         out["comparison_set_link"] = pl.from_dicts(d, schema=COMPARISON_SET_LINK_SCHEMA)
@@ -49,6 +56,9 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
 def write_db(dfs: Mapping[str, pl.DataFrame], dir: Path):
     dfs["claim"].write_parquet(dir / "claim.parquet")
+    dfs["comparison_set_assay_args"].write_parquet(
+        dir / "comparison_set_assay_args.parquet"
+    )
     dfs["comparison_set_link"].write_parquet(dir / "comparison_set_link.parquet")
     dfs["entity"].write_parquet(dir / "entity.parquet")
 

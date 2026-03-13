@@ -18,10 +18,17 @@ CLAIM_SCHEMA = {
 }
 
 COMPARISON_SET_LINK_SCHEMA = {
-    "id": pl.String,  # key
-    "name": pl.String,
+    "comparison_set_id": pl.String,  # key
+    "comparison_set_name": pl.String,
     "entity_id": pl.String,  # key
     "entity_name": pl.String,
+}
+
+COMPARISON_SET_ASSAY_ARGS_SCHEMA = {
+    "comparison_set_id": pl.String, # key
+    "comparison_set_name": pl.String,
+    "assay": pl.String, # key
+    "serialised_args": pl.String
 }
 
 ASSAY_SCHEMA = {
@@ -30,3 +37,4 @@ ASSAY_SCHEMA = {
     "comparison_set_id": pl.String,  # key
     "serialised_result": pl.String,
 }
+
