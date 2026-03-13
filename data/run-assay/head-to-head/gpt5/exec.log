@@ -11,14 +11,288 @@ with this one instead:
   .map_elements(json.loads, return_dtype=pl.Object)
 ['comparison_set_id', 'comparison_set_name', 'assay', 'instance_hash', 'instance']
 [String, String, String, UInt64, Object]
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 123, in <module>
-    main()
-  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 111, in main
-    db = load_db(db_dir=db_dir)
-         ^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 92, in load_db
-    raise Exception("WORKED SUCCESSFULLY")
-Exception: WORKED SUCCESSFULLY
+2026-03-13 23:54:06,762 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:54:06,762 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:54:06,762 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:54:06,762 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:54:06,763 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:54:06,763 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:54:06,763 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:54:06,763 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:54:06,814 [INFO] root: Running assay=head-to-head model=gpt5.
+Assay instances:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-13 23:54:06,836 [INFO] root: Invoking gpt5.
+2026-03-13 23:54:07,104 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-13 23:54:07,235 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x764d31aa2ff0>
+2026-03-13 23:54:07,235 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x764d0e5151d0> server_hostname='openrouter.ai' timeout=None
+2026-03-13 23:54:07,251 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x764d0e5eac00>
+2026-03-13 23:54:07,251 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:07,251 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:54:07,251 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:54:07,251 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:54:07,251 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:08,975 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:54:07 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd96ac1e84f9ef-MCT')])
+2026-03-13 23:54:08,976 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:54:08,976 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:54:19,495 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:54:19,495 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:54:19,495 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:54:19,511 [INFO] root: Invoking gpt5.
+2026-03-13 23:54:19,520 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:19,520 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:54:19,520 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:54:19,521 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:54:19,521 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:19,914 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:54:19 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd96fdcb90f9ef-MCT')])
+2026-03-13 23:54:19,915 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:54:19,915 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:54:28,865 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:54:28,866 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:54:28,866 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:54:28,868 [INFO] root: Invoking gpt5.
+2026-03-13 23:54:28,872 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:28,872 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:54:28,872 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:54:28,873 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:54:28,873 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:29,287 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:54:28 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9735baecf9ef-MCT')])
+2026-03-13 23:54:29,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:54:29,288 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:54:54,631 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:54:54,631 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:54:54,631 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:54:54,633 [INFO] root: Invoking gpt5.
+2026-03-13 23:54:54,638 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:54,638 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:54:54,638 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:54:54,638 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:54:54,638 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:54:55,441 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:54:54 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd97d80d39f9ef-MCT')])
+2026-03-13 23:54:55,441 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:54:55,441 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:55:01,410 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:55:01,410 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:55:01,410 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:55:01,412 [INFO] root: Invoking gpt5.
+2026-03-13 23:55:01,417 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:01,417 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:55:01,417 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:55:01,417 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:55:01,417 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:01,885 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:55:01 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd98008a66f9ef-MCT')])
+2026-03-13 23:55:01,885 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:55:01,885 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:55:15,093 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:55:15,094 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:55:15,094 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:55:15,096 [INFO] root: Invoking gpt5.
+2026-03-13 23:55:15,101 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:15,101 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:55:15,101 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:55:15,101 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:55:15,101 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:15,806 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:55:15 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd985add96f9ef-MCT')])
+2026-03-13 23:55:15,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:55:15,807 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:55:26,000 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:55:26,000 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:55:26,000 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:55:26,002 [INFO] root: Invoking gpt5.
+2026-03-13 23:55:26,007 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:26,007 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:55:26,007 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:55:26,007 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:55:26,007 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:27,356 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:55:26 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd989c2d5cf9ef-MCT')])
+2026-03-13 23:55:27,356 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:55:27,356 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:55:42,256 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:55:42,256 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:55:42,256 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:55:42,258 [INFO] root: Invoking gpt5.
+2026-03-13 23:55:42,263 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:42,263 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:55:42,263 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:55:42,263 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:55:42,263 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:42,647 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:55:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd98fd7dc3f9ef-MCT')])
+2026-03-13 23:55:42,648 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:55:42,648 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:55:51,195 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:55:51,196 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:55:51,196 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:55:51,200 [INFO] root: Invoking gpt5.
+2026-03-13 23:55:51,210 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:51,210 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:55:51,210 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:55:51,210 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:55:51,210 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:55:51,711 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:55:51 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd993b1f68f9ef-MCT')])
+2026-03-13 23:55:51,712 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:55:51,713 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:56:02,631 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:56:02,631 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:56:02,631 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:56:02,635 [INFO] root: Invoking gpt5.
+2026-03-13 23:56:02,642 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:02,642 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:56:02,642 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:56:02,642 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:56:02,642 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:03,572 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:56:02 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd997f8bd6f9ef-MCT')])
+2026-03-13 23:56:03,572 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:56:03,572 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:56:17,227 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:56:17,227 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:56:17,227 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:56:17,229 [INFO] root: Invoking gpt5.
+2026-03-13 23:56:17,238 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:17,238 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:56:17,238 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:56:17,238 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:56:17,238 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:17,646 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:56:17 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd99df4feef9ef-MCT')])
+2026-03-13 23:56:17,646 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:56:17,647 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:56:29,764 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:56:29,764 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:56:29,764 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:56:29,774 [INFO] root: Invoking gpt5.
+2026-03-13 23:56:29,780 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:29,780 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:56:29,780 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:56:29,780 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:56:29,780 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:31,146 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:56:30 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9a2a4f70f9ef-MCT')])
+2026-03-13 23:56:31,147 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:56:31,147 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:56:41,110 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:56:41,110 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:56:41,110 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:56:41,112 [INFO] root: Invoking gpt5.
+2026-03-13 23:56:41,118 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:41,118 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:56:41,118 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:56:41,118 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:56:41,118 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:41,595 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:56:40 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9a6e1ef9f9ef-MCT')])
+2026-03-13 23:56:41,595 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:56:41,596 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:56:54,346 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:56:54,346 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:56:54,346 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:56:54,347 [INFO] root: Invoking gpt5.
+2026-03-13 23:56:54,352 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:54,352 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:56:54,353 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:56:54,353 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:56:54,353 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:56:54,807 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:56:54 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9ac58889f9ef-MCT')])
+2026-03-13 23:56:54,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:56:54,807 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:57:09,436 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:57:09,437 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:57:09,437 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:57:09,441 [INFO] root: Invoking gpt5.
+2026-03-13 23:57:09,449 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:09,449 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:57:09,449 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:57:09,449 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:57:09,449 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:09,842 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:57:08 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9b1f8b62f9ef-MCT')])
+2026-03-13 23:57:09,842 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:57:09,843 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:57:22,410 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:57:22,410 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:57:22,410 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:57:22,412 [INFO] root: Invoking gpt5.
+2026-03-13 23:57:22,417 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:22,417 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:57:22,417 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:57:22,417 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:57:22,417 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:23,298 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:57:23 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9b75abddf9ef-MCT')])
+2026-03-13 23:57:23,298 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:57:23,298 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:57:35,873 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:57:35,873 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:57:35,873 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:57:35,874 [INFO] root: Invoking gpt5.
+2026-03-13 23:57:35,879 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:35,879 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:57:35,879 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:57:35,880 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:57:35,880 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:36,428 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:57:35 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9bc6499ff9ef-MCT')])
+2026-03-13 23:57:36,429 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:57:36,429 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:57:42,448 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:57:42,448 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:57:42,448 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:57:42,450 [INFO] root: Invoking gpt5.
+2026-03-13 23:57:42,455 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:42,455 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:57:42,455 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:57:42,455 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:57:42,455 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:42,919 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:57:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9bed9c67f9ef-MCT')])
+2026-03-13 23:57:42,919 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:57:42,919 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:57:53,193 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:57:53,194 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:57:53,194 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:57:53,197 [INFO] root: Invoking gpt5.
+2026-03-13 23:57:53,204 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:53,204 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:57:53,204 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:57:53,204 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:57:53,204 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:57:53,684 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:57:53 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9c362c64f9ef-MCT')])
+2026-03-13 23:57:53,685 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:57:53,685 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:58:02,365 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:58:02,365 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:58:02,365 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-13 23:58:02,367 [INFO] root: Invoking gpt5.
+2026-03-13 23:58:02,374 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-13 23:58:02,374 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-13 23:58:02,374 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-13 23:58:02,374 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-13 23:58:02,374 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-13 23:58:02,817 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Fri, 13 Mar 2026 19:58:02 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dbd9c6d0aa9f9ef-MCT')])
+2026-03-13 23:58:02,818 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-13 23:58:02,818 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-13 23:58:11,482 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-13 23:58:11,482 [DEBUG] httpcore.http11: response_closed.started
+2026-03-13 23:58:11,482 [DEBUG] httpcore.http11: response_closed.complete
+Assay instances: 100%|██████████| 1/1 [04:04<00:00, 244.66s/it]Assay instances: 100%|██████████| 1/1 [04:04<00:00, 244.66s/it]
+2026-03-13 23:58:11,517 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/head-to-head/gpt5.parquet.
+2026-03-13 23:58:11,557 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,557 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,557 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,557 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,560 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,561 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,563 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,564 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,569 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,569 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,569 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,569 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,570 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-13 23:58:11,570 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-13 23:58:11,570 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-13 23:58:11,570 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-13 23:58:11,580 [DEBUG] httpcore.connection: close.started
+2026-03-13 23:58:11,581 [DEBUG] httpcore.connection: close.complete
