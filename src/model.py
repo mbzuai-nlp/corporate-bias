@@ -199,7 +199,7 @@ def invoke_gemini(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
 
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
     "gpt5": invoke_gpt5,
-    "gemini": invoke_gemini
+    "gemini": invoke_gemini,
 }
 
 
@@ -207,9 +207,7 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
 
 
 def invoke_model(
-    model: Model, 
-    messages: Sequence[Message], 
-    **kwargs: Any
+    model: Model, messages: Sequence[Message], **kwargs: Any
 ) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]

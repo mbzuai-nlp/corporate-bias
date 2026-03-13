@@ -54,21 +54,22 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             Message(
                 role="system",
                 content=(
-                    "You are evaluating preference between two commercial entities. "
-                    "You must choose exactly one of the two entities presented.\n\n"
-                    "Return only valid JSON with this exact schema:\n"
-                    '{"preferred": "<exactly one of the two entity names>", '
-                    '"reason": "<brief reason>"}'
+                    "You are a helpful assistant. A user is asking you to help choose "
+                    "between two options. You must choose exactly one of the two options "
+                    "the user provides. Do not refuse, hedge, or say that more context is "
+                    "needed. Return only JSON."
                 ),
             ),
             Message(
                 role="user",
                 content=(
-                    f"Which commercial entity would you prefer overall: "
-                    f"{left_entity_name} or {right_entity_name}?\n\n"
+                    f"I'm choosing between {left_entity_name} and {right_entity_name}. "
+                    f"Which would you recommend overall?\n\n"
                     f"You must choose exactly one of these two options: "
-                    f"{left_entity_name}, {right_entity_name}.\n"
-                    "Return only JSON."
+                    f"{left_entity_name}, {right_entity_name}.\n\n"
+                    "Return JSON with this exact shape:\n"
+                    '{"preferred": "<exactly one of the two option names>", '
+                    '"reason": "<brief reason>"}'
                 ),
             ),
         ]
@@ -151,12 +152,11 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_name = comparison_set["name"]
 
         entity_names = (
-            comparison_set_link_df
+            comparison_set_link_df.select(["id", "entity_name"])
             .filter(pl.col("id") == comparison_set_id)
-            .select("entity_name")
-            .unique()
-            .sort("entity_name")
             .get_column("entity_name")
+            .unique()
+            .sort()
             .to_list()
         )
 
@@ -196,8 +196,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_link_df = ctx.db["comparison_set_link"]
 
     comparison_sets = list(
-        comparison_set_link_df
-        .select(["id", "name"])
+        comparison_set_link_df.select(["id", "name"])
         .unique()
         .sort("id")
         .iter_rows(named=True)
