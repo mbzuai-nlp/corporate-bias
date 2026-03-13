@@ -5,12 +5,6 @@ import polars as pl
 from typing import Mapping
 import hashlib
 
-from src.data.model import (
-    CLAIM_SCHEMA,
-    COMPARISON_SET_ASSAY_INSTANCE_SCHEMA,
-    COMPARISON_SET_LINK_SCHEMA,
-    ENTITY_SCHEMA,
-)
 from pipelines.utils import configure_logging
 
 configure_logging()
@@ -42,7 +36,7 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
     with open(dir / "claim.json", "r") as f:
         d = json.load(f)
-        out["claim"] = pl.from_dicts(d, schema=CLAIM_SCHEMA)
+        out["claim"] = pl.from_dicts(d)
 
     with open(dir / "comparison_set_assay_instance.json", "r") as f:
         d = json.load(f)
@@ -57,17 +51,29 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
                 pl.col("instance")
                     .map_elements(stable_u64_hash, return_dtype=pl.UInt64)
                     .alias("instance_hash"),
-                pl.col("instance"),
+                pl.col("instance")
+                    .map_elements(
+                        lambda x: json.dumps(x, sort_keys=True, separators=(",", ":")),
+                        return_dtype=pl.String,
+                    )
+                    .alias("instance_json"),
+            )
+            .select(
+                "comparison_set_id",
+                "comparison_set_name",
+                "assay",
+                "instance_hash",
+                "instance_json",
             )
         )
 
     with open(dir / "comparison_set_link.json", "r") as f:
         d = json.load(f)
-        out["comparison_set_link"] = pl.from_dicts(d, schema=COMPARISON_SET_LINK_SCHEMA)
+        out["comparison_set_link"] = pl.from_dicts(d)
 
     with open(dir / "entity.json", "r") as f:
         d = json.load(f)
-        out["entity"] = pl.from_dicts(d, schema=ENTITY_SCHEMA)
+        out["entity"] = pl.from_dicts(d)
 
     return out
 

@@ -7,7 +7,12 @@ from dotenv import load_dotenv
 from dvclive import Live
 
 from pipelines.utils import configure_logging, silence_superfluous_warnings
-from src.data.model import CLAIM_SCHEMA, COMPARISON_SET_LINK_SCHEMA, ENTITY_SCHEMA
+from src.data.model import (
+    CLAIM_SCHEMA, 
+    COMPARISON_SET_ASSAY_INSTANCE_SCHEMA,
+    COMPARISON_SET_LINK_SCHEMA, 
+    ENTITY_SCHEMA
+)
 from src.assay import Config, RuntimeContext, assay_model
 
 
@@ -47,14 +52,47 @@ def parse_args():
 
 
 def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
-    claim_df = pl.read_parquet(db_dir / "claim.parquet", schema=CLAIM_SCHEMA)
-    comparison_set_link_df = pl.read_parquet(
-        db_dir / "comparison_set_link.parquet", schema=COMPARISON_SET_LINK_SCHEMA
+    claim_df = pl.read_parquet(
+        db_dir / "claim.parquet",
+        schema=CLAIM_SCHEMA,
+        missing_columns="insert"
     )
-    entity_df = pl.read_parquet(db_dir / "entity.parquet", schema=ENTITY_SCHEMA)
+
+    comparison_set_assay_instance_df = (
+        pl.read_parquet(db_dir / "comparison_set_assay_instance.parquet")
+        .with_columns(
+            pl.col("instance_json")
+            .map_elements(json.loads, return_dtype=pl.Object)
+            .alias("instance")
+        )
+        .select(
+            "comparison_set_id",
+            "comparison_set_name",
+            "assay",
+            "instance_hash",
+            "instance",
+        )
+        .cast(COMPARISON_SET_ASSAY_INSTANCE_SCHEMA)
+    )
+
+    comparison_set_link_df = pl.read_parquet(
+        db_dir / "comparison_set_link.parquet",
+        schema=COMPARISON_SET_LINK_SCHEMA,
+        missing_columns="insert"
+    )
+
+    entity_df = pl.read_parquet(
+        db_dir / "entity.parquet",
+        schema=ENTITY_SCHEMA,
+        missing_columns="insert"
+    )
+
+    print(comparison_set_assay_instance_df.columns)
+    print(comparison_set_assay_instance_df.dtypes)
 
     return {
         "claim": claim_df,
+        "comparison_set_assay_instance": comparison_set_assay_instance_df,
         "comparison_set_link": comparison_set_link_df,
         "entity": entity_df,
     }
