@@ -3,13 +3,14 @@ import argparse
 import json
 import polars as pl
 from typing import Mapping
+import hashlib
+
 from src.data.model import (
     CLAIM_SCHEMA,
-    COMPARISON_SET_ASSAY_ARGS_SCHEMA,
+    COMPARISON_SET_ASSAY_INSTANCE_SCHEMA,
     COMPARISON_SET_LINK_SCHEMA,
     ENTITY_SCHEMA,
 )
-
 from pipelines.utils import configure_logging
 
 configure_logging()
@@ -30,6 +31,12 @@ def parse_args():
     return parser.parse_args()
 
 
+def stable_u64_hash(value) -> int:
+    s = json.dumps(value, sort_keys=True, separators=(",", ":"))
+    digest = hashlib.blake2b(s.encode("utf-8"), digest_size=8).digest()
+    return int.from_bytes(digest, byteorder="big", signed=False)
+
+
 def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
     out = {}
 
@@ -37,10 +44,21 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
         d = json.load(f)
         out["claim"] = pl.from_dicts(d, schema=CLAIM_SCHEMA)
 
-    with open(dir / "comparison_set_assay_args.json", "r") as f:
+    with open(dir / "comparison_set_assay_instance.json", "r") as f:
         d = json.load(f)
-        out["comparison_set_assay_args"] = (
-            pl.from_dicts(d, schema=COMPARISON_SET_ASSAY_ARGS_SCHEMA)
+        out["comparison_set_assay_instance"] = (
+            pl.from_dicts(d)
+            .explode("instances")
+            .rename({"instances": "instance"})
+            .with_columns(
+                pl.col("comparison_set_id"),
+                pl.col("comparison_set_name"),
+                pl.col("assay"),
+                pl.col("instance")
+                    .map_elements(stable_u64_hash, return_dtype=pl.UInt64)
+                    .alias("instance_hash"),
+                pl.col("instance"),
+            )
         )
 
     with open(dir / "comparison_set_link.json", "r") as f:
@@ -56,8 +74,8 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
 
 def write_db(dfs: Mapping[str, pl.DataFrame], dir: Path):
     dfs["claim"].write_parquet(dir / "claim.parquet")
-    dfs["comparison_set_assay_args"].write_parquet(
-        dir / "comparison_set_assay_args.parquet"
+    dfs["comparison_set_assay_instance"].write_parquet(
+        dir / "comparison_set_assay_instance.parquet"
     )
     dfs["comparison_set_link"].write_parquet(dir / "comparison_set_link.parquet")
     dfs["entity"].write_parquet(dir / "entity.parquet")
