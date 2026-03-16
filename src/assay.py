@@ -73,11 +73,11 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             ),
         ]
 
-    def run_preference(
-        left_entity_name: str,
-        right_entity_name: str,
-        instance: dict,
-    ) -> dict:
+    def run_preference(task: dict) -> dict:
+        left_entity_name = task["left_entity_name"]
+        right_entity_name = task["right_entity_name"]
+        instance = task["instance"]
+
         output = invoke_model(
             model=ctx.cfg.model,
             messages=build_messages(
@@ -114,14 +114,34 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         return {
+            "assay": ctx.cfg.assay,
+            "assay_instance_hash": task["assay_instance_hash"],
+            "model": ctx.cfg.model,
+            "comparison_set_id": task["comparison_set_id"],
+            "comparison_set_name": task["comparison_set_name"],
+            "left_entity_id": task["left_entity_id"],
             "left_entity_name": left_entity_name,
+            "right_entity_id": task["right_entity_id"],
             "right_entity_name": right_entity_name,
             "preferred_entity_name": preferred_entity_name,
             "non_preferred_entity_name": non_preferred_entity_name,
             "reason": parsed["reason"],
         }
 
-    def run_assay_instance(assay_instance: dict) -> list[dict]:
+    comparison_set_link_df = ctx.db["comparison_set_link"]
+    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+
+    assay_instances = list(
+        comparison_set_assay_instance_df
+        .filter(pl.col("assay") == ctx.cfg.assay)
+        .sort(["comparison_set_id", "instance_hash"])
+        .iter_rows(named=True)
+    )
+
+    tasks: list[dict] = []
+    entities_by_instance: dict[str, list[dict]] = {}
+
+    for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
         instance_hash = assay_instance["instance_hash"]
@@ -136,22 +156,55 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             .iter_rows(named=True)
         )
 
-        ordered_pairwise_preferences = [
-            run_preference(
-                left_entity_name=left_entity["entity_name"],
-                right_entity_name=right_entity["entity_name"],
-                instance=instance,
-            )
+        entities_by_instance[instance_hash] = entities
+
+        tasks.extend(
+            {
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "assay_instance_hash": instance_hash,
+                "instance": instance,
+                "left_entity_id": left_entity["entity_id"],
+                "left_entity_name": left_entity["entity_name"],
+                "right_entity_id": right_entity["entity_id"],
+                "right_entity_name": right_entity["entity_name"],
+            }
             for left_entity in entities
             for right_entity in entities
             if left_entity["entity_id"] != right_entity["entity_id"]
-        ]
+        )
 
-        wins = {entity["entity_name"]: 0 for entity in entities}
-        for preference in ordered_pairwise_preferences:
-            wins[preference["preferred_entity_name"]] += 1
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        preferences = list(
+            tqdm(
+                executor.map(run_preference, tasks),
+                total=len(tasks),
+                desc="Preferences",
+            )
+        )
 
-        return [
+    wins: dict[tuple[str, str], int] = {}
+    assay_instance_meta: dict[str, dict] = {}
+
+    for preference in preferences:
+        key = (
+            preference["assay_instance_hash"],
+            preference["preferred_entity_name"],
+        )
+        wins[key] = wins.get(key, 0) + 1
+        assay_instance_meta[preference["assay_instance_hash"]] = {
+            "comparison_set_id": preference["comparison_set_id"],
+            "comparison_set_name": preference["comparison_set_name"],
+        }
+
+    rows = []
+    for assay_instance in assay_instances:
+        instance_hash = assay_instance["instance_hash"]
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        entities = entities_by_instance[instance_hash]
+
+        rows.extend(
             {
                 "assay": ctx.cfg.assay,
                 "assay_instance_hash": instance_hash,
@@ -163,33 +216,12 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                 "result": [
                     {
                         "estimand": "num_wins",
-                        "value": str(wins[entity["entity_name"]]),
+                        "value": str(wins.get((instance_hash, entity["entity_name"]), 0)),
                     }
                 ],
             }
             for entity in entities
-        ]
-
-    comparison_set_link_df = ctx.db["comparison_set_link"]
-    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
-
-    assay_instances = list(
-        comparison_set_assay_instance_df
-        .filter(pl.col("assay") == ctx.cfg.assay)
-        .sort(["comparison_set_id", "instance_hash"])
-        .iter_rows(named=True)
-    )
-
-    with ThreadPoolExecutor(max_workers=32) as executor:
-        row_groups = list(
-            tqdm(
-                executor.map(run_assay_instance, assay_instances),
-                total=len(assay_instances),
-                desc="Assay instances",
-            )
         )
-
-    rows = [row for row_group in row_groups for row in row_group]
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
     ctx.exp.log_metric("entities_scored", len(rows))
