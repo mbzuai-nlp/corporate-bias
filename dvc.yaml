@@ -25,6 +25,7 @@ stages:
     matrix:
       assay:
       - head-to-head
+      - rank
       model:
       - gpt5
       - gemini
@@ -51,8 +52,14 @@ stages:
 metrics:
 - data/run-assay/head-to-head/gpt5/exp/metrics.json
 - data/run-assay/head-to-head/gemini/exp/metrics.json
+- data/run-assay/rank/gpt5/exp/metrics.json
+- data/run-assay/rank/gemini/exp/metrics.json
 plots:
 - data/run-assay/head-to-head/gpt5/exp/plots/metrics:
     x: step
 - data/run-assay/head-to-head/gemini/exp/plots/metrics:
+    x: step
+- data/run-assay/rank/gpt5/exp/plots/metrics:
+    x: step
+- data/run-assay/rank/gemini/exp/plots/metrics:
     x: step

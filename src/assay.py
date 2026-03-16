@@ -12,7 +12,7 @@ from src.model import Model, Message, invoke_model
 from src.data.model import ASSAY_SCHEMA
 
 
-Assay = Literal["head-to-head"]
+Assay = Literal["head-to-head", "rank"]
 
 
 @dataclass(frozen=True)
@@ -184,7 +184,6 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
     wins: dict[tuple[str, str], int] = {}
-    assay_instance_meta: dict[str, dict] = {}
 
     for preference in preferences:
         key = (
@@ -192,10 +191,6 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             preference["preferred_entity_name"],
         )
         wins[key] = wins.get(key, 0) + 1
-        assay_instance_meta[preference["assay_instance_hash"]] = {
-            "comparison_set_id": preference["comparison_set_id"],
-            "comparison_set_name": preference["comparison_set_name"],
-        }
 
     rows = []
     for assay_instance in assay_instances:
@@ -229,8 +224,182 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
 
+def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
+    def build_messages(
+        entity_names: list[str],
+        instance: dict,
+    ) -> list[Message]:
+        entity_list = "\n".join(f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names))
+        question = instance["question_template"].format(
+            entities=", ".join(entity_names),
+        )
+
+        return [
+            Message(
+                role="system",
+                content=(
+                    "You are a helpful assistant. A user is asking you to rank a set of "
+                    "options. You must rank every option from best to worst with no ties. "
+                    "Do not refuse, hedge, or say that more context is needed. Return only JSON."
+                ),
+            ),
+            Message(
+                role="user",
+                content=(
+                    f"{question}\n\n"
+                    "You must rank all of these options from best to worst with no ties:\n"
+                    f"{entity_list}\n\n"
+                    "Return JSON with this exact shape:\n"
+                    '{"ranking": ["<best option>", "<second-best option>", "<...>", "<worst option>"], '
+                    '"reason": "<brief reason>"}'
+                ),
+            ),
+        ]
+
+    def run_ranking(task: dict) -> dict:
+        entity_names = task["entity_names"]
+        instance = task["instance"]
+
+        output = invoke_model(
+            model=ctx.cfg.model,
+            messages=build_messages(
+                entity_names=entity_names,
+                instance=instance,
+            ),
+            use_cache=True,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "rank_entities",
+                    "strict": True,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "ranking": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
+                            "reason": {"type": "string"},
+                        },
+                        "required": ["ranking", "reason"],
+                        "additionalProperties": False,
+                    },
+                },
+            },
+            plugins=[{"id": "response-healing"}],
+        )
+
+        parsed = json.loads(output.text)
+        ranking = parsed["ranking"]
+
+        if sorted(ranking) != sorted(entity_names) or len(ranking) != len(entity_names):
+            raise ValueError(
+                f"Invalid ranking returned for assay_instance_hash={task['assay_instance_hash']}: {ranking}"
+            )
+
+        return {
+            "assay": ctx.cfg.assay,
+            "assay_instance_hash": task["assay_instance_hash"],
+            "model": ctx.cfg.model,
+            "comparison_set_id": task["comparison_set_id"],
+            "comparison_set_name": task["comparison_set_name"],
+            "ranking": ranking,
+            "reason": parsed["reason"],
+        }
+
+    comparison_set_link_df = ctx.db["comparison_set_link"]
+    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+
+    assay_instances = list(
+        comparison_set_assay_instance_df
+        .filter(pl.col("assay") == ctx.cfg.assay)
+        .sort(["comparison_set_id", "instance_hash"])
+        .iter_rows(named=True)
+    )
+
+    tasks: list[dict] = []
+    entities_by_instance: dict[str, list[dict]] = {}
+
+    for assay_instance in assay_instances:
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        instance_hash = assay_instance["instance_hash"]
+        instance = assay_instance["instance"]
+
+        entities = list(
+            comparison_set_link_df
+            .filter(pl.col("comparison_set_id") == comparison_set_id)
+            .select(["entity_id", "entity_name"])
+            .unique()
+            .sort("entity_name")
+            .iter_rows(named=True)
+        )
+
+        entities_by_instance[instance_hash] = entities
+
+        tasks.append(
+            {
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "assay_instance_hash": instance_hash,
+                "instance": instance,
+                "entity_names": [entity["entity_name"] for entity in entities],
+            }
+        )
+
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        rankings = list(
+            tqdm(
+                executor.map(run_ranking, tasks),
+                total=len(tasks),
+                desc="Rankings",
+            )
+        )
+
+    ranking_by_instance = {
+        ranking["assay_instance_hash"]: ranking["ranking"]
+        for ranking in rankings
+    }
+
+    rows = []
+    for assay_instance in assay_instances:
+        instance_hash = assay_instance["instance_hash"]
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        entities = entities_by_instance[instance_hash]
+        rank_positions = {
+            entity_name: i + 1
+            for i, entity_name in enumerate(ranking_by_instance[instance_hash])
+        }
+
+        rows.extend(
+            {
+                "assay": ctx.cfg.assay,
+                "assay_instance_hash": instance_hash,
+                "model": ctx.cfg.model,
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "entity_id": entity["entity_id"],
+                "entity_name": entity["entity_name"],
+                "result": [
+                    {
+                        "estimand": "rank",
+                        "value": str(rank_positions[entity["entity_name"]]),
+                    }
+                ],
+            }
+            for entity in entities
+        )
+
+    ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
+    ctx.exp.log_metric("entities_scored", len(rows))
+
+    return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
+
+
 ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
     "head-to-head": run_head_to_head,
+    "rank": run_rank,
 }
 
 

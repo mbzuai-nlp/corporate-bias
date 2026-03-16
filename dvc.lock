@@ -74,3 +74,49 @@ stages:
       hash: md5
       md5: 48d671e56b22be0bba5ef9af106984e6
       size: 3840
+  run-assay@rank-gpt5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt5; uv run
+      python -m pipelines.run_assay --assay=rank --model=gpt5 --db=data/db --save-path=data/assays/rank/gpt5.parquet
+      --exp=data/run-assay/rank/gpt5/exp 2>&1 | tee data/run-assay/rank/gpt5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set_link.parquet
+      hash: md5
+      md5: c5e58e5ffa7d144a922ae54c345e281f
+      size: 1894
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gpt5.parquet
+      hash: md5
+      md5: 52c4cf676cc88717e1e343a01b9ddb2d
+      size: 3702
+  run-assay@rank-gemini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gemini; uv run
+      python -m pipelines.run_assay --assay=rank --model=gemini --db=data/db --save-path=data/assays/rank/gemini.parquet
+      --exp=data/run-assay/rank/gemini/exp 2>&1 | tee data/run-assay/rank/gemini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set_link.parquet
+      hash: md5
+      md5: c5e58e5ffa7d144a922ae54c345e281f
+      size: 1894
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gemini.parquet
+      hash: md5
+      md5: 47f25af30f7a3b15e3907839ca1725e5
+      size: 3722
