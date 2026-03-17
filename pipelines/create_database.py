@@ -67,9 +67,9 @@ def load_authored(dir: Path) -> Mapping[str, pl.DataFrame]:
             )
         )
 
-    with open(dir / "comparison_set_link.json", "r") as f:
+    with open(dir / "comparison_set.json", "r") as f:
         d = json.load(f)
-        out["comparison_set_link"] = pl.from_dicts(d)
+        out["comparison_set"] = pl.from_dicts(d)
 
     with open(dir / "entity.json", "r") as f:
         d = json.load(f)
@@ -83,7 +83,7 @@ def write_db(dfs: Mapping[str, pl.DataFrame], dir: Path):
     dfs["comparison_set_assay_instance"].write_parquet(
         dir / "comparison_set_assay_instance.parquet"
     )
-    dfs["comparison_set_link"].write_parquet(dir / "comparison_set_link.parquet")
+    dfs["comparison_set"].write_parquet(dir / "comparison_set.parquet")
     dfs["entity"].write_parquet(dir / "entity.parquet")
 
 

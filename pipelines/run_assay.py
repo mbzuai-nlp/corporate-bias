@@ -10,7 +10,7 @@ from pipelines.utils import configure_logging, silence_superfluous_warnings
 from src.data.model import (
     CLAIM_SCHEMA, 
     COMPARISON_SET_ASSAY_INSTANCE_SCHEMA,
-    COMPARISON_SET_LINK_SCHEMA, 
+    COMPARISON_SET_SCHEMA, 
     ENTITY_SCHEMA
 )
 from src.assay import Config, RuntimeContext, assay_model
@@ -75,9 +75,9 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
         .cast(COMPARISON_SET_ASSAY_INSTANCE_SCHEMA)
     )
 
-    comparison_set_link_df = pl.read_parquet(
-        db_dir / "comparison_set_link.parquet",
-        schema=COMPARISON_SET_LINK_SCHEMA,
+    comparison_set_df = pl.read_parquet(
+        db_dir / "comparison_set.parquet",
+        schema=COMPARISON_SET_SCHEMA,
         missing_columns="insert"
     )
 
@@ -93,7 +93,7 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     return {
         "claim": claim_df,
         "comparison_set_assay_instance": comparison_set_assay_instance_df,
-        "comparison_set_link": comparison_set_link_df,
+        "comparison_set": comparison_set_df,
         "entity": entity_df,
     }
 

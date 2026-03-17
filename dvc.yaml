@@ -11,12 +11,12 @@ stages:
       --db=${data}/db
     deps:
     - ${data}/authored/claim.json
-    - ${data}/authored/comparison_set_link.json
+    - ${data}/authored/comparison_set.json
     - ${data}/authored/entity.json
     outs:
     - ${data}/db/claim.parquet:
         cache: false
-    - ${data}/db/comparison_set_link.parquet:
+    - ${data}/db/comparison_set.parquet:
         cache: false
     - ${data}/db/entity.parquet:
         cache: false
@@ -43,7 +43,7 @@ stages:
       2>&1 | tee ${data}/${stage-name}/${item.assay}/${item.model}/${log-fn}"
     deps:
     - ${data}/db/claim.parquet
-    - ${data}/db/comparison_set_link.parquet
+    - ${data}/db/comparison_set.parquet
     - ${data}/db/entity.parquet
     outs:
     - ${data}/assays/${item.assay}/${item.model}.parquet:

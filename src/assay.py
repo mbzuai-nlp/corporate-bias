@@ -128,7 +128,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             "reason": parsed["reason"],
         }
 
-    comparison_set_link_df = ctx.db["comparison_set_link"]
+    comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
 
     assay_instances = list(
@@ -147,13 +147,16 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         instance = assay_instance["instance"]
 
-        entities = list(
-            comparison_set_link_df
-            .filter(pl.col("comparison_set_id") == comparison_set_id)
-            .select(["entity_id", "entity_name"])
-            .unique()
-            .sort("entity_name")
-            .iter_rows(named=True)
+        entities = (
+            comparison_set_df
+            .filter(pl.col("id") == comparison_set_id)
+            .select(
+                pl.col("entities").list.eval(
+                    pl.element().sort_by(pl.element().struct.field("entity_id"))
+                )
+            )
+            .to_series()
+            .item()
         )
 
         entities_by_instance[instance_hash] = entities
@@ -307,7 +310,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             "reason": parsed["reason"],
         }
 
-    comparison_set_link_df = ctx.db["comparison_set_link"]
+    comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
 
     assay_instances = list(
@@ -326,13 +329,16 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         instance = assay_instance["instance"]
 
-        entities = list(
-            comparison_set_link_df
-            .filter(pl.col("comparison_set_id") == comparison_set_id)
-            .select(["entity_id", "entity_name"])
-            .unique()
-            .sort("entity_name")
-            .iter_rows(named=True)
+        entities = (
+            comparison_set_df
+            .filter(pl.col("id") == comparison_set_id)
+            .select(
+                pl.col("entities").list.eval(
+                    pl.element().sort_by(pl.element().struct.field("entity_id"))
+                )
+            )
+            .to_series()
+            .item()
         )
 
         entities_by_instance[instance_hash] = entities

@@ -17,11 +17,17 @@ CLAIM_SCHEMA = {
     "source": pl.String,
 }
 
-COMPARISON_SET_LINK_SCHEMA = {
-    "comparison_set_id": pl.String,  # key
-    "comparison_set_name": pl.String,
-    "entity_id": pl.String,  # key
-    "entity_name": pl.String,
+COMPARISON_SET_SCHEMA = {
+    "id": pl.String,
+    "name": pl.String,
+    "entities": pl.List(
+        pl.Struct(
+            {
+                "entity_id": pl.String,
+                "entity_name": pl.String,
+            }
+        )
+    ),
 }
 
 COMPARISON_SET_ASSAY_INSTANCE_SCHEMA = {
