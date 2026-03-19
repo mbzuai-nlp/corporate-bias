@@ -11,60 +11,43 @@ with this one instead:
   .map_elements(json.loads, return_dtype=pl.Object)
 ['comparison_set_id', 'comparison_set_name', 'assay', 'instance_hash', 'instance']
 [String, String, String, UInt64, Object]
-2026-03-19 14:09:25,056 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:25,056 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:25,056 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:25,056 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:25,057 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:25,057 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:25,057 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:25,057 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:25,167 [INFO] root: Running assay=rank model=gpt5.
-2026-03-19 14:09:25,173 [INFO] root: Invoking gpt5.
-Rankings:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-19 14:09:25,450 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
-2026-03-19 14:09:25,486 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7c0ff8d00470>
-2026-03-19 14:09:25,486 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7c0ff816c350> server_hostname='openrouter.ai' timeout=None
-2026-03-19 14:09:25,513 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7c0fe5367b90>
-2026-03-19 14:09:25,513 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
-2026-03-19 14:09:25,514 [DEBUG] httpcore.http11: send_request_headers.complete
-2026-03-19 14:09:25,514 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
-2026-03-19 14:09:25,526 [DEBUG] httpcore.http11: send_request_body.complete
-2026-03-19 14:09:25,526 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
-2026-03-19 14:09:25,890 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 10:09:25 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9debae75b8c79383-LHR')])
-2026-03-19 14:09:25,892 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-19 14:09:25,892 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
-2026-03-19 14:09:57,652 [DEBUG] httpcore.http11: receive_response_body.complete
-2026-03-19 14:09:57,652 [DEBUG] httpcore.http11: response_closed.started
-2026-03-19 14:09:57,653 [DEBUG] httpcore.http11: response_closed.complete
-Rankings: 100%|██████████| 1/1 [00:32<00:00, 32.51s/it]Rankings: 100%|██████████| 1/1 [00:32<00:00, 32.51s/it]
-2026-03-19 14:09:57,696 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
-2026-03-19 14:09:57,746 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,747 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,747 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,748 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,753 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,753 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,753 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,753 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,754 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,754 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,754 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,755 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,757 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,757 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,757 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,757 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,757 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,758 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,758 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,758 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,774 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,774 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,774 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,774 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,775 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 14:09:57,776 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 14:09:57,776 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 14:09:57,776 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 14:09:57,797 [DEBUG] httpcore.connection: close.started
-2026-03-19 14:09:57,798 [DEBUG] httpcore.connection: close.complete
+2026-03-19 14:38:49,495 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,496 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,496 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,496 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,496 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,497 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,497 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,497 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,604 [INFO] root: Running assay=rank model=gpt5.
+2026-03-19 14:38:49,611 [INFO] root: Invoking gpt5.
+Rankings:   0%|          | 0/1 [00:00<?, ?it/s]Rankings: 100%|██████████| 1/1 [00:00<00:00,  8.60it/s]Rankings: 100%|██████████| 1/1 [00:00<00:00,  8.57it/s]
+2026-03-19 14:38:49,737 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
+2026-03-19 14:38:49,885 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,886 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,886 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,886 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,889 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,889 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,890 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,890 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,891 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,891 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,891 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,891 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,893 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,893 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,893 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,893 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,893 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,894 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,894 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,894 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,905 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,905 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,905 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,906 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 14:38:49,906 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 14:38:49,907 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 14:38:49,907 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 14:38:49,907 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig

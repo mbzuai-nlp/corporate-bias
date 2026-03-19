@@ -5,6 +5,7 @@ from pathlib import Path
 import polars as pl
 from dvclive import Live
 import json
+import re
 from concurrent.futures import ThreadPoolExecutor
 from tqdm.auto import tqdm
 
@@ -12,7 +13,7 @@ from src.model import Model, Message, invoke_model
 from src.data.model import ASSAY_SCHEMA
 
 
-Assay = Literal["head-to-head", "rank"]
+Assay = Literal["head-to-head", "rank", "consideration-set"]
 
 
 @dataclass(frozen=True)
@@ -66,10 +67,50 @@ def _get_comparison_set_entities(
             {
                 "entity_id": entity["id"],
                 "entity_name": entity["name"],
+                "aliases": entity["aliases"],
             }
         )
 
     return entities
+
+
+def _build_exact_entity_name_index(entities: list[dict]) -> dict[str, str]:
+    name_to_entity_id: dict[str, str] = {}
+
+    for entity in entities:
+        valid_names = [entity["entity_name"], *(entity["aliases"] or [])]
+        for valid_name in valid_names:
+            if valid_name in name_to_entity_id and name_to_entity_id[valid_name] != entity["entity_id"]:
+                raise ValueError(
+                    f"Ambiguous exact name or alias in comparison set: {valid_name}"
+                )
+            name_to_entity_id[valid_name] = entity["entity_id"]
+
+    return name_to_entity_id
+
+
+def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, int]:
+    first_mentions: dict[str, int] = {}
+
+    for entity in entities:
+        entity_id = entity["entity_id"]
+        valid_names = [entity["entity_name"], *(entity["aliases"] or [])]
+
+        earliest_position: int | None = None
+        for valid_name in valid_names:
+            pattern = rf"(?<![A-Za-z0-9]){re.escape(valid_name)}(?![A-Za-z0-9])"
+            match = re.search(pattern, text, flags=re.IGNORECASE)
+            if match is None:
+                continue
+
+            position = match.start()
+            if earliest_position is None or position < earliest_position:
+                earliest_position = position
+
+        if earliest_position is not None:
+            first_mentions[entity_id] = earliest_position
+
+    return first_mentions
 
 
 def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
@@ -432,9 +473,145 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
 
+def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
+    def build_messages(instance: dict) -> list[Message]:
+        question = instance["question_template"]
+
+        return [
+            Message(
+                role="system",
+                content=(
+                    "You are a helpful assistant helping a user answer a question about "
+                    "which options are best. Respond naturally and concisely."
+                ),
+            ),
+            Message(
+                role="user",
+                content=question,
+            ),
+        ]
+
+    def run_consideration(task: dict) -> dict:
+        output = invoke_model(
+            model=ctx.cfg.model,
+            messages=build_messages(instance=task["instance"]),
+            use_cache=True,
+            plugins=[{"id": "response-healing"}],
+        )
+        
+        return {
+            "assay": ctx.cfg.assay,
+            "assay_instance_hash": task["assay_instance_hash"],
+            "model": ctx.cfg.model,
+            "comparison_set_id": task["comparison_set_id"],
+            "comparison_set_name": task["comparison_set_name"],
+            "text": output.text,
+        }
+
+    comparison_set_df = ctx.db["comparison_set"]
+    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+    entity_df = ctx.db["entity"]
+
+    entity_lookup = _build_entity_lookup(entity_df)
+
+    assay_instances = list(
+        comparison_set_assay_instance_df
+        .filter(pl.col("assay") == ctx.cfg.assay)
+        .sort(["comparison_set_id", "instance_hash"])
+        .iter_rows(named=True)
+    )
+
+    tasks: list[dict] = []
+    entities_by_instance: dict[str, list[dict]] = {}
+
+    for assay_instance in assay_instances:
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        instance_hash = assay_instance["instance_hash"]
+        instance = assay_instance["instance"]
+
+        entities = _get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
+        )
+
+        entities_by_instance[instance_hash] = entities
+
+        tasks.append(
+            {
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "assay_instance_hash": instance_hash,
+                "instance": instance,
+            }
+        )
+
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        considerations = list(
+            tqdm(
+                executor.map(run_consideration, tasks),
+                total=len(tasks),
+                desc="Consideration sets",
+            )
+        )
+
+    reciprocal_ranks_by_instance: dict[str, dict[str, float]] = {}
+
+    for consideration in considerations:
+        instance_hash = consideration["assay_instance_hash"]
+        entities = entities_by_instance[instance_hash]
+        text = consideration["text"]
+
+        first_mentions = _find_entity_first_mentions(text=text, entities=entities)
+        ranked_entity_ids = [
+            entity_id
+            for entity_id, _ in sorted(first_mentions.items(), key=lambda item: item[1])
+        ]
+
+        reciprocal_ranks: dict[str, float] = {
+            entity_id: 1.0 / rank
+            for rank, entity_id in enumerate(ranked_entity_ids, start=1)
+        }
+        reciprocal_ranks_by_instance[instance_hash] = reciprocal_ranks
+
+    rows = []
+    for assay_instance in assay_instances:
+        instance_hash = assay_instance["instance_hash"]
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        entities = entities_by_instance[instance_hash]
+        reciprocal_ranks = reciprocal_ranks_by_instance.get(instance_hash, {})
+
+        rows.extend(
+            {
+                "assay": ctx.cfg.assay,
+                "assay_instance_hash": instance_hash,
+                "model": ctx.cfg.model,
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "entity_id": entity["entity_id"],
+                "entity_name": entity["entity_name"],
+                "result": [
+                    {
+                        "estimand": "mean_reciprocal_rank",
+                        "value": str(reciprocal_ranks.get(entity["entity_id"], 0.0)),
+                    }
+                ],
+            }
+            for entity in entities
+        )
+
+    ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
+    ctx.exp.log_metric("entities_scored", len(rows))
+
+    return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
+
+
 ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
     "head-to-head": run_head_to_head,
     "rank": run_rank,
+    "consideration-set": run_consideration_set,
 }
 
 

@@ -18,26 +18,26 @@ CLAIM_SCHEMA = {
 }
 
 COMPARISON_SET_SCHEMA = {
-    "id": pl.String, # key
+    "id": pl.String,  # key
     "name": pl.String,
-    "entity_ids": pl.List(pl.String)
+    "entity_ids": pl.List(pl.String),
 }
 
 COMPARISON_SET_ASSAY_INSTANCE_SCHEMA = {
-    "comparison_set_id": pl.String, # key
+    "comparison_set_id": pl.String,  # key
     "comparison_set_name": pl.String,
-    "assay": pl.String, # key
-    "instance_hash": pl.UInt64, # key
-    "instance": pl.Object
+    "assay": pl.String,  # key
+    "instance_hash": pl.UInt64,  # key
+    "instance": pl.Object,
 }
 
 ASSAY_SCHEMA = {
     "assay": pl.String,  # key
-    "assay_instance_hash": pl.UInt64, # key
+    "assay_instance_hash": pl.UInt64,  # key
     "model": pl.String,  # key
     "comparison_set_id": pl.String,  # key
     "comparison_set_name": pl.String,
-    "entity_id": pl.String, # key,
+    "entity_id": pl.String,  # key,
     "entity_name": pl.String,
     "result": pl.List(pl.Struct({"estimand": pl.Utf8, "value": pl.Utf8})),
 }
