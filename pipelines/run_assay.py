@@ -111,7 +111,12 @@ def main():
 
     with Live(dir=exp_dir) as exp:
         ctx = RuntimeContext(
-            cfg=Config(save=save_path, assay=args.assay, model=args.model),
+            cfg=Config(
+                save=save_path, 
+                assay=args.assay, 
+                model=args.model,
+                num_samples_per_instance=5
+            ),
             exp=exp,
             db=db,
         )

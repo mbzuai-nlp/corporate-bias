@@ -1,11 +1,13 @@
 from dataclasses import dataclass
-from typing import Literal, Mapping, Protocol
+from typing import Any, Literal, Mapping, Protocol
 import logging
 from pathlib import Path
 import polars as pl
 from dvclive import Live
 import json
 import re
+import statistics
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from tqdm.auto import tqdm
 import torch
@@ -27,6 +29,7 @@ class Config:
     save: str
     assay: Assay
     model: Model
+    num_samples_per_instance: int
 
 
 @dataclass
@@ -104,6 +107,35 @@ def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, in
     return first_mentions
 
 
+def _mean(values: list[float]) -> float:
+    if not values:
+        return 0.0
+    return float(statistics.fmean(values))
+
+
+def _std(values: list[float]) -> float:
+    if len(values) <= 1:
+        return 0.0
+    return float(statistics.pstdev(values))
+
+
+def _build_estimand_result(metric_name: str, values: list[float]) -> list[dict[str, str]]:
+    return [
+        {
+            "estimand": f"{metric_name}_raw_list",
+            "value": json.dumps(values),
+        },
+        {
+            "estimand": f"{metric_name}_mean",
+            "value": str(_mean(values)),
+        },
+        {
+            "estimand": f"{metric_name}_std",
+            "value": str(_std(values)),
+        },
+    ]
+
+
 _SENTIMENT_PIPELINE = None
 _AD_TOKENIZER = None
 _AD_MODEL = None
@@ -169,8 +201,6 @@ def _load_ad_classifier() -> None:
     if len(_AD_LABELS) != 2:
         raise ValueError(f"Expected binary ad classifier, got labels: {_AD_LABELS!r}")
 
-    # Assumption: model preserves training-dataset label semantics:
-    # label 1 = response contains advertisement
     _AD_POSITIVE_LABEL = "LABEL_1"
 
     if _AD_POSITIVE_LABEL not in _AD_LABELS.values():
@@ -279,6 +309,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                 },
             },
             plugins=[{"id": "response-healing"}],
+            seed=task["sample_id"]
         )
 
         parsed = json.loads(output.text)
@@ -290,6 +321,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         return {
+            "sample_id": task["sample_id"],
             "assay": ctx.cfg.assay,
             "assay_instance_hash": task["assay_instance_hash"],
             "model": ctx.cfg.model,
@@ -335,21 +367,23 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
 
         entities_by_instance[instance_hash] = entities
 
-        tasks.extend(
-            {
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "assay_instance_hash": instance_hash,
-                "instance": instance,
-                "left_entity_id": left_entity["entity_id"],
-                "left_entity_name": left_entity["entity_name"],
-                "right_entity_id": right_entity["entity_id"],
-                "right_entity_name": right_entity["entity_name"],
-            }
-            for left_entity in entities
-            for right_entity in entities
-            if left_entity["entity_id"] != right_entity["entity_id"]
-        )
+        for sample_id in range(ctx.cfg.num_samples_per_instance):
+            tasks.extend(
+                {
+                    "sample_id": sample_id,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "assay_instance_hash": instance_hash,
+                    "instance": instance,
+                    "left_entity_id": left_entity["entity_id"],
+                    "left_entity_name": left_entity["entity_name"],
+                    "right_entity_id": right_entity["entity_id"],
+                    "right_entity_name": right_entity["entity_name"],
+                }
+                for left_entity in entities
+                for right_entity in entities
+                if left_entity["entity_id"] != right_entity["entity_id"]
+            )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
         preferences = list(
@@ -360,26 +394,20 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    wins: dict[tuple[str, str], int] = {}
-    preferences_by_instance_and_entity: dict[tuple[str, str], list[dict]] = {}
+    wins_by_sample_and_entity: dict[tuple[str, int, str], int] = defaultdict(int)
+    preferences_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
 
     for preference in preferences:
-        key = (
-            preference["assay_instance_hash"],
-            preference["preferred_entity_name"],
-        )
-        wins[key] = wins.get(key, 0) + 1
-
-        left_key = (
-            preference["assay_instance_hash"],
-            preference["left_entity_id"],
-        )
-        right_key = (
-            preference["assay_instance_hash"],
-            preference["right_entity_id"],
-        )
+        wins_by_sample_and_entity[
+            (
+                preference["assay_instance_hash"],
+                preference["sample_id"],
+                preference["preferred_entity_name"],
+            )
+        ] += 1
 
         debug_preference = {
+            "sample_id": preference["sample_id"],
             "left_entity_id": preference["left_entity_id"],
             "left_entity_name": preference["left_entity_name"],
             "right_entity_id": preference["right_entity_id"],
@@ -390,8 +418,12 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             "raw_response": preference["raw_response"],
         }
 
-        preferences_by_instance_and_entity.setdefault(left_key, []).append(debug_preference)
-        preferences_by_instance_and_entity.setdefault(right_key, []).append(debug_preference)
+        preferences_by_instance_and_entity[
+            (preference["assay_instance_hash"], preference["left_entity_id"])
+        ].append(debug_preference)
+        preferences_by_instance_and_entity[
+            (preference["assay_instance_hash"], preference["right_entity_id"])
+        ].append(debug_preference)
 
     rows = []
     for assay_instance in assay_instances:
@@ -400,39 +432,47 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
 
-        rows.extend(
-            {
-                "assay": ctx.cfg.assay,
-                "assay_instance_hash": instance_hash,
-                "model": ctx.cfg.model,
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "entity_id": entity["entity_id"],
-                "entity_name": entity["entity_name"],
-                "result": [
-                    {
-                        "estimand": "num_wins",
-                        "value": str(wins.get((instance_hash, entity["entity_name"]), 0)),
-                    }
-                ],
-                "debug_json": json.dumps(
-                    {
-                        "entity_id": entity["entity_id"],
-                        "entity_name": entity["entity_name"],
-                        "preferences": preferences_by_instance_and_entity.get(
-                            (instance_hash, entity["entity_id"]),
-                            [],
-                        ),
-                    },
-                    ensure_ascii=False,
-                    sort_keys=True,
-                ),
-            }
-            for entity in entities
-        )
+        for entity in entities:
+            values = [
+                float(
+                    wins_by_sample_and_entity.get(
+                        (instance_hash, sample_id, entity["entity_name"]),
+                        0,
+                    )
+                )
+                for sample_id in range(ctx.cfg.num_samples_per_instance)
+            ]
+
+            rows.append(
+                {
+                    "assay": ctx.cfg.assay,
+                    "assay_instance_hash": instance_hash,
+                    "model": ctx.cfg.model,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
+                    "result": _build_estimand_result("num_wins", values),
+                    "debug_json": json.dumps(
+                        {
+                            "entity_id": entity["entity_id"],
+                            "entity_name": entity["entity_name"],
+                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
+                            "sample_num_wins": values,
+                            "preferences": preferences_by_instance_and_entity.get(
+                                (instance_hash, entity["entity_id"]),
+                                [],
+                            ),
+                        },
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                }
+            )
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
     ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
@@ -502,6 +542,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                 },
             },
             plugins=[{"id": "response-healing"}],
+            seed=task["sample_id"]
         )
 
         parsed = json.loads(output.text)
@@ -513,6 +554,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
         return {
+            "sample_id": task["sample_id"],
             "assay": ctx.cfg.assay,
             "assay_instance_hash": task["assay_instance_hash"],
             "model": ctx.cfg.model,
@@ -553,15 +595,17 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
 
         entities_by_instance[instance_hash] = entities
 
-        tasks.append(
-            {
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "assay_instance_hash": instance_hash,
-                "instance": instance,
-                "entity_names": [entity["entity_name"] for entity in entities],
-            }
-        )
+        for sample_id in range(ctx.cfg.num_samples_per_instance):
+            tasks.append(
+                {
+                    "sample_id": sample_id,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "assay_instance_hash": instance_hash,
+                    "instance": instance,
+                    "entity_names": [entity["entity_name"] for entity in entities],
+                }
+            )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
         rankings = list(
@@ -572,18 +616,9 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    ranking_by_instance = {
-        ranking["assay_instance_hash"]: ranking["ranking"]
-        for ranking in rankings
-    }
-    ranking_debug_by_instance = {
-        ranking["assay_instance_hash"]: {
-            "ranking": ranking["ranking"],
-            "reason": ranking["reason"],
-            "raw_response": ranking["raw_response"],
-        }
-        for ranking in rankings
-    }
+    rankings_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for ranking in rankings:
+        rankings_by_instance[ranking["assay_instance_hash"]].append(ranking)
 
     rows = []
     for assay_instance in assay_instances:
@@ -591,45 +626,52 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
-        rank_positions = {
-            entity_name: i + 1
-            for i, entity_name in enumerate(ranking_by_instance[instance_hash])
-        }
-        ranking_debug = ranking_debug_by_instance[instance_hash]
+        ranking_samples = sorted(rankings_by_instance[instance_hash], key=lambda row: row["sample_id"])
 
-        rows.extend(
-            {
-                "assay": ctx.cfg.assay,
-                "assay_instance_hash": instance_hash,
-                "model": ctx.cfg.model,
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "entity_id": entity["entity_id"],
-                "entity_name": entity["entity_name"],
-                "result": [
-                    {
-                        "estimand": "rank",
-                        "value": str(rank_positions[entity["entity_name"]]),
-                    }
-                ],
-                "debug_json": json.dumps(
-                    {
-                        "entity_id": entity["entity_id"],
-                        "entity_name": entity["entity_name"],
-                        "rank": rank_positions[entity["entity_name"]],
-                        "ranking": ranking_debug["ranking"],
-                        "reason": ranking_debug["reason"],
-                        "raw_response": ranking_debug["raw_response"],
-                    },
-                    ensure_ascii=False,
-                    sort_keys=True,
-                ),
-            }
-            for entity in entities
-        )
+        for entity in entities:
+            values = []
+            for ranking_sample in ranking_samples:
+                rank_positions = {
+                    entity_name: i + 1
+                    for i, entity_name in enumerate(ranking_sample["ranking"])
+                }
+                values.append(float(rank_positions[entity["entity_name"]]))
+
+            rows.append(
+                {
+                    "assay": ctx.cfg.assay,
+                    "assay_instance_hash": instance_hash,
+                    "model": ctx.cfg.model,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
+                    "result": _build_estimand_result("rank", values),
+                    "debug_json": json.dumps(
+                        {
+                            "entity_id": entity["entity_id"],
+                            "entity_name": entity["entity_name"],
+                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
+                            "sample_rank_values": values,
+                            "samples": [
+                                {
+                                    "sample_id": ranking_sample["sample_id"],
+                                    "ranking": ranking_sample["ranking"],
+                                    "reason": ranking_sample["reason"],
+                                    "raw_response": ranking_sample["raw_response"],
+                                }
+                                for ranking_sample in ranking_samples
+                            ],
+                        },
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                }
+            )
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
     ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
@@ -658,9 +700,11 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             messages=build_messages(instance=task["instance"]),
             use_cache=True,
             plugins=[{"id": "response-healing"}],
+            seed=task["sample_id"]
         )
 
         return {
+            "sample_id": task["sample_id"],
             "assay": ctx.cfg.assay,
             "assay_instance_hash": task["assay_instance_hash"],
             "model": ctx.cfg.model,
@@ -699,14 +743,16 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
 
         entities_by_instance[instance_hash] = entities
 
-        tasks.append(
-            {
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "assay_instance_hash": instance_hash,
-                "instance": instance,
-            }
-        )
+        for sample_id in range(ctx.cfg.num_samples_per_instance):
+            tasks.append(
+                {
+                    "sample_id": sample_id,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "assay_instance_hash": instance_hash,
+                    "instance": instance,
+                }
+            )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
         considerations = list(
@@ -717,9 +763,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    reciprocal_ranks_by_instance: dict[str, dict[str, float]] = {}
-    consideration_debug_by_instance: dict[str, dict] = {}
-
+    consideration_samples_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
         entities = entities_by_instance[instance_hash]
@@ -730,17 +774,20 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             entity_id
             for entity_id, _ in sorted(first_mentions.items(), key=lambda item: item[1])
         ]
-
-        reciprocal_ranks: dict[str, float] = {
+        reciprocal_ranks = {
             entity_id: 1.0 / rank
             for rank, entity_id in enumerate(ranked_entity_ids, start=1)
         }
-        reciprocal_ranks_by_instance[instance_hash] = reciprocal_ranks
-        consideration_debug_by_instance[instance_hash] = {
-            "raw_response": text,
-            "first_mentions": first_mentions,
-            "ranked_entity_ids": ranked_entity_ids,
-        }
+
+        consideration_samples_by_instance[instance_hash].append(
+            {
+                "sample_id": consideration["sample_id"],
+                "raw_response": text,
+                "first_mentions": first_mentions,
+                "ranked_entity_ids": ranked_entity_ids,
+                "reciprocal_ranks": reciprocal_ranks,
+            }
+        )
 
     rows = []
     for assay_instance in assay_instances:
@@ -748,50 +795,57 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
-        reciprocal_ranks = reciprocal_ranks_by_instance.get(instance_hash, {})
-        debug = consideration_debug_by_instance.get(
-            instance_hash,
-            {"raw_response": "", "first_mentions": {}, "ranked_entity_ids": []},
+        consideration_samples = sorted(
+            consideration_samples_by_instance[instance_hash],
+            key=lambda row: row["sample_id"],
         )
 
-        rank_by_entity_id = {
-            entity_id: rank
-            for rank, entity_id in enumerate(debug["ranked_entity_ids"], start=1)
-        }
+        for entity in entities:
+            values = [
+                float(sample["reciprocal_ranks"].get(entity["entity_id"], 0.0))
+                for sample in consideration_samples
+            ]
 
-        rows.extend(
-            {
-                "assay": ctx.cfg.assay,
-                "assay_instance_hash": instance_hash,
-                "model": ctx.cfg.model,
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "entity_id": entity["entity_id"],
-                "entity_name": entity["entity_name"],
-                "result": [
-                    {
-                        "estimand": "mean_reciprocal_rank",
-                        "value": str(reciprocal_ranks.get(entity["entity_id"], 0.0)),
-                    }
-                ],
-                "debug_json": json.dumps(
-                    {
-                        "entity_id": entity["entity_id"],
-                        "entity_name": entity["entity_name"],
-                        "raw_response": debug["raw_response"],
-                        "first_mention_position": debug["first_mentions"].get(entity["entity_id"]),
-                        "rank": rank_by_entity_id.get(entity["entity_id"]),
-                        "mean_reciprocal_rank": reciprocal_ranks.get(entity["entity_id"], 0.0),
-                    },
-                    ensure_ascii=False,
-                    sort_keys=True,
-                ),
-            }
-            for entity in entities
-        )
+            rows.append(
+                {
+                    "assay": ctx.cfg.assay,
+                    "assay_instance_hash": instance_hash,
+                    "model": ctx.cfg.model,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
+                    "result": _build_estimand_result("mean_reciprocal_rank", values),
+                    "debug_json": json.dumps(
+                        {
+                            "entity_id": entity["entity_id"],
+                            "entity_name": entity["entity_name"],
+                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
+                            "sample_mean_reciprocal_rank_values": values,
+                            "samples": [
+                                {
+                                    "sample_id": sample["sample_id"],
+                                    "raw_response": sample["raw_response"],
+                                    "first_mention_position": sample["first_mentions"].get(entity["entity_id"]),
+                                    "rank": (
+                                        sample["ranked_entity_ids"].index(entity["entity_id"]) + 1
+                                        if entity["entity_id"] in sample["ranked_entity_ids"]
+                                        else None
+                                    ),
+                                    "mean_reciprocal_rank": sample["reciprocal_ranks"].get(entity["entity_id"], 0.0),
+                                }
+                                for sample in consideration_samples
+                            ],
+                        },
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                }
+            )
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
     ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
@@ -826,12 +880,14 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             ),
             use_cache=True,
             plugins=[{"id": "response-healing"}],
+            seed=task["sample_id"]
         )
 
         sentiment_polarity = _score_sentiment_polarity(output.text)
         ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
 
         return {
+            "sample_id": task["sample_id"],
             "assay": ctx.cfg.assay,
             "assay_instance_hash": task["assay_instance_hash"],
             "model": ctx.cfg.model,
@@ -873,17 +929,19 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             comparison_set_id=comparison_set_id,
         )
 
-        tasks.extend(
-            {
-                "comparison_set_id": comparison_set_id,
-                "comparison_set_name": comparison_set_name,
-                "assay_instance_hash": instance_hash,
-                "instance": instance,
-                "entity_id": entity["entity_id"],
-                "entity_name": entity["entity_name"],
-            }
-            for entity in entities
-        )
+        for sample_id in range(ctx.cfg.num_samples_per_instance):
+            tasks.extend(
+                {
+                    "sample_id": sample_id,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "assay_instance_hash": instance_hash,
+                    "instance": instance,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
+                }
+                for entity in entities
+            )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
         descriptions = list(
@@ -894,44 +952,73 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    rows = [
-        {
-            "assay": description["assay"],
-            "assay_instance_hash": description["assay_instance_hash"],
-            "model": description["model"],
-            "comparison_set_id": description["comparison_set_id"],
-            "comparison_set_name": description["comparison_set_name"],
-            "entity_id": description["entity_id"],
-            "entity_name": description["entity_name"],
-            "result": [
+    descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for description in descriptions:
+        descriptions_by_instance_and_entity[
+            (description["assay_instance_hash"], description["entity_id"])
+        ].append(description)
+
+    rows = []
+    for assay_instance in assay_instances:
+        instance_hash = assay_instance["instance_hash"]
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+
+        entities = _get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
+        )
+
+        for entity in entities:
+            samples = sorted(
+                descriptions_by_instance_and_entity[(instance_hash, entity["entity_id"])],
+                key=lambda row: row["sample_id"],
+            )
+            sentiment_values = [float(sample["sentiment_polarity"]) for sample in samples]
+            ad_values = [float(sample["ad_likelihood"]) for sample in samples]
+
+            rows.append(
                 {
-                    "estimand": "sentiment_polarity",
-                    "value": str(description["sentiment_polarity"]),
-                },
-                {
-                    "estimand": "ad_likelihood",
-                    "value": str(description["ad_likelihood"]),
-                },
-            ],
-            "debug_json": json.dumps(
-                {
-                    "entity_id": description["entity_id"],
-                    "entity_name": description["entity_name"],
-                    "description": description["description"],
-                    "sentiment_polarity": description["sentiment_polarity"],
-                    "ad_likelihood": description["ad_likelihood"],
-                    "ad_score_by_label": description["ad_score_by_label"],
-                    "ad_positive_label": description["ad_positive_label"],
-                },
-                ensure_ascii=False,
-                sort_keys=True,
-            ),
-        }
-        for description in descriptions
-    ]
+                    "assay": ctx.cfg.assay,
+                    "assay_instance_hash": instance_hash,
+                    "model": ctx.cfg.model,
+                    "comparison_set_id": comparison_set_id,
+                    "comparison_set_name": comparison_set_name,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
+                    "result": (
+                        _build_estimand_result("sentiment_polarity", sentiment_values)
+                        + _build_estimand_result("ad_likelihood", ad_values)
+                    ),
+                    "debug_json": json.dumps(
+                        {
+                            "entity_id": entity["entity_id"],
+                            "entity_name": entity["entity_name"],
+                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
+                            "sample_sentiment_polarity_values": sentiment_values,
+                            "sample_ad_likelihood_values": ad_values,
+                            "samples": [
+                                {
+                                    "sample_id": sample["sample_id"],
+                                    "description": sample["description"],
+                                    "sentiment_polarity": sample["sentiment_polarity"],
+                                    "ad_likelihood": sample["ad_likelihood"],
+                                    "ad_score_by_label": sample["ad_score_by_label"],
+                                    "ad_positive_label": sample["ad_positive_label"],
+                                }
+                                for sample in samples
+                            ],
+                        },
+                        ensure_ascii=False,
+                        sort_keys=True,
+                    ),
+                }
+            )
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
     ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
@@ -947,7 +1034,10 @@ ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
 def assay_model(ctx: RuntimeContext) -> None:
     assay_delegate = ASSAY_DELEGATES[ctx.cfg.assay]
 
-    logging.info(f"Running assay={ctx.cfg.assay} model={ctx.cfg.model}.")
+    logging.info(
+        f"Running assay={ctx.cfg.assay} model={ctx.cfg.model} "
+        f"num_samples_per_instance={ctx.cfg.num_samples_per_instance}."
+    )
 
     assay_df = assay_delegate(ctx)
 

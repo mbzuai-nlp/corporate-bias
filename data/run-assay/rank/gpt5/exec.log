@@ -11,60 +11,132 @@ with this one instead:
   .map_elements(json.loads, return_dtype=pl.Object)
 ['comparison_set_id', 'comparison_set_name', 'assay', 'instance_hash', 'instance']
 [String, String, String, UInt64, Object]
-2026-03-19 16:55:41,905 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:55:41,905 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:55:41,905 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:55:41,906 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:55:41,906 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:55:41,906 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:55:41,906 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:55:41,906 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:55:41,980 [INFO] root: Running assay=rank model=gpt5.
-2026-03-19 16:55:41,986 [INFO] root: Invoking gpt5.
-Rankings:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-19 16:55:42,104 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
-2026-03-19 16:55:42,132 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f90b155baa0>
-2026-03-19 16:55:42,132 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7f9084d868d0> server_hostname='openrouter.ai' timeout=None
-2026-03-19 16:55:42,163 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f904a5217c0>
-2026-03-19 16:55:42,163 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
-2026-03-19 16:55:42,163 [DEBUG] httpcore.http11: send_request_headers.complete
-2026-03-19 16:55:42,163 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
-2026-03-19 16:55:42,163 [DEBUG] httpcore.http11: send_request_body.complete
-2026-03-19 16:55:42,163 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
-2026-03-19 16:55:42,554 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 12:55:41 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9deca204ed3bbedc-LHR')])
-2026-03-19 16:55:42,555 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-19 16:55:42,555 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
-2026-03-19 16:56:08,541 [DEBUG] httpcore.http11: receive_response_body.complete
-2026-03-19 16:56:08,541 [DEBUG] httpcore.http11: response_closed.started
-2026-03-19 16:56:08,541 [DEBUG] httpcore.http11: response_closed.complete
-Rankings: 100%|██████████| 1/1 [00:26<00:00, 26.57s/it]Rankings: 100%|██████████| 1/1 [00:26<00:00, 26.57s/it]
-2026-03-19 16:56:08,563 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
-2026-03-19 16:56:08,599 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,599 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,599 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,599 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,603 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,603 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,603 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,604 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,604 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,604 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,605 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,605 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,607 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,607 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,607 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,607 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,607 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,608 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,608 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,608 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,616 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,617 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,617 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,617 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,618 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
-2026-03-19 16:56:08,618 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
-2026-03-19 16:56:08,618 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
-2026-03-19 16:56:08,618 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
-2026-03-19 16:56:08,630 [DEBUG] httpcore.connection: close.started
-2026-03-19 16:56:08,630 [DEBUG] httpcore.connection: close.complete
+2026-03-19 17:38:30,360 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:38:30,360 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:38:30,360 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:38:30,360 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:38:30,361 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:38:30,361 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:38:30,361 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:38:30,361 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:38:30,432 [INFO] root: Running assay=rank model=gpt5 num_samples_per_instance=5.
+2026-03-19 17:38:30,438 [INFO] root: Invoking gpt5.
+2026-03-19 17:38:30,439 [INFO] root: Invoking gpt5.
+2026-03-19 17:38:30,440 [INFO] root: Invoking gpt5.
+2026-03-19 17:38:30,441 [INFO] root: Invoking gpt5.
+2026-03-19 17:38:30,442 [INFO] root: Invoking gpt5.
+Rankings:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-19 17:38:30,557 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 17:38:30,559 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 17:38:30,564 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 17:38:30,565 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 17:38:30,567 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 17:38:30,589 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f868700bf0>
+2026-03-19 17:38:30,589 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x79f8693637d0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 17:38:30,591 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f868d7fd40>
+2026-03-19 17:38:30,591 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x79f8693636d0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 17:38:30,596 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f868d7fb30>
+2026-03-19 17:38:30,597 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x79f869363750> server_hostname='openrouter.ai' timeout=None
+2026-03-19 17:38:30,614 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f868700b00>
+2026-03-19 17:38:30,614 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,615 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 17:38:30,615 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,615 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 17:38:30,615 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,616 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f8b49b47d0>
+2026-03-19 17:38:30,616 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,616 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 17:38:30,616 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,616 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 17:38:30,616 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,621 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f8686d3d70>
+2026-03-19 17:38:30,621 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x79f8693d5cd0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 17:38:30,623 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f8686d3cb0>
+2026-03-19 17:38:30,623 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,623 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 17:38:30,624 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,624 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 17:38:30,624 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,674 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f8b49b46b0>
+2026-03-19 17:38:30,674 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,674 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 17:38:30,674 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,674 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 17:38:30,674 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,954 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 13:38:29 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dece0b4f805d8b6-LHR')])
+2026-03-19 17:38:30,955 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 17:38:30,955 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,993 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 13:38:29 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dece0b4fa29ea0e-LHR')])
+2026-03-19 17:38:30,993 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 17:38:30,994 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,999 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 13:38:29 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dece0b54bca2534-LHR')])
+2026-03-19 17:38:31,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 17:38:31,000 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 17:38:31,021 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 13:38:29 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dece0b4f9cb9515-LHR')])
+2026-03-19 17:38:31,022 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 17:38:31,022 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,242 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f8687020f0>
+2026-03-19 17:38:30,242 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x79f8693d6dd0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 17:38:30,287 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x79f868702000>
+2026-03-19 17:38:30,287 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:30,287 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 17:38:30,287 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 17:38:30,288 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 17:38:30,288 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 17:38:31,871 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 13:38:31 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dece0bb48f89484-LHR')])
+2026-03-19 17:38:31,872 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 17:38:31,872 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 17:38:52,500 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 17:38:52,500 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 17:38:52,501 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 17:38:54,807 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 17:38:54,807 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 17:38:54,807 [DEBUG] httpcore.http11: response_closed.complete
+Rankings:  20%|██        | 1/5 [00:24<01:37, 24.37s/it]2026-03-19 17:38:56,954 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 17:38:56,955 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 17:38:56,955 [DEBUG] httpcore.http11: response_closed.complete
+Rankings:  60%|██████    | 3/5 [00:26<00:14,  7.11s/it]2026-03-19 17:39:00,330 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 17:39:00,330 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 17:39:00,330 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 17:39:04,193 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 17:39:04,193 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 17:39:04,193 [DEBUG] httpcore.http11: response_closed.complete
+Rankings:  80%|████████  | 4/5 [00:33<00:07,  7.16s/it]Rankings: 100%|██████████| 5/5 [00:33<00:00,  6.75s/it]
+2026-03-19 17:39:04,200 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
+2026-03-19 17:39:04,226 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,226 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,226 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,227 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,231 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,231 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,231 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,231 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,232 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,232 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,232 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,232 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,234 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,234 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,235 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,235 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,235 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,236 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,236 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,236 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,249 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,249 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,249 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,249 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,250 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 17:39:04,250 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 17:39:04,250 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 17:39:04,250 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 17:39:04,260 [DEBUG] httpcore.connection: close.started
+2026-03-19 17:39:04,260 [DEBUG] httpcore.connection: close.complete
+2026-03-19 17:39:04,265 [DEBUG] httpcore.connection: close.started
+2026-03-19 17:39:04,265 [DEBUG] httpcore.connection: close.complete
+2026-03-19 17:39:04,267 [DEBUG] httpcore.connection: close.started
+2026-03-19 17:39:04,267 [DEBUG] httpcore.connection: close.complete
+2026-03-19 17:39:04,269 [DEBUG] httpcore.connection: close.started
+2026-03-19 17:39:04,269 [DEBUG] httpcore.connection: close.complete
+2026-03-19 17:39:04,271 [DEBUG] httpcore.connection: close.started
+2026-03-19 17:39:04,271 [DEBUG] httpcore.connection: close.complete
