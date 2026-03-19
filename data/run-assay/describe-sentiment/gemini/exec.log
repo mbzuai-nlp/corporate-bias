@@ -1,0 +1,193 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+/home/harry/code/corporate-bias/pipelines/run_assay.py:65: PolarsInefficientMapWarning: 
+Expr.map_elements is significantly slower than the native expressions API.
+Only use if you absolutely CANNOT implement your logic otherwise.
+Replace this expression...
+  - pl.col("instance_json").map_elements(json.loads)
+with this one instead:
+  + pl.col("instance_json").str.json_decode()
+
+  .map_elements(json.loads, return_dtype=pl.Object)
+['comparison_set_id', 'comparison_set_name', 'assay', 'instance_hash', 'instance']
+[String, String, String, UInt64, Object]
+2026-03-19 15:59:15,868 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:15,869 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:15,869 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:15,869 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:15,870 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:15,870 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:15,870 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:15,871 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:16,086 [INFO] root: Running assay=describe-sentiment model=gemini.
+2026-03-19 15:59:16,104 [DEBUG] httpcore.connection: connect_tcp.started host='huggingface.co' port=443 local_address=None timeout=10 socket_options=None
+2026-03-19 15:59:16,197 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892861be210>
+2026-03-19 15:59:16,198 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x7892861aecd0> server_hostname='huggingface.co' timeout=10
+2026-03-19 15:59:16,219 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892b0178ef0>
+2026-03-19 15:59:16,220 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,220 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:16,220 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,221 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:16,221 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,401 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 307, b'Temporary Redirect', [(b'Content-Type', b'text/plain; charset=utf-8'), (b'Content-Length', b'320'), (b'Connection', b'keep-alive'), (b'Date', b'Thu, 19 Mar 2026 11:59:15 GMT'), (b'Location', b'/api/resolve-cache/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english/714eb0fa89d2f80546fda750413ed43d93601a13/config.json?%2Fdistilbert%2Fdistilbert-base-uncased-finetuned-sst-2-english%2Fresolve%2Fmain%2Fconfig.json=&etag=%22b57fe5dfcb8ec3f9bab35ed427c3434e3c7dd1ba%22'), (b'X-Powered-By', b'huggingface-moon'), (b'X-Request-Id', b'Root=1-69bbe513-0ea777846ab842501a33e9ca;b3100524-d56a-47bd-9b81-e1de6f167f10'), (b'RateLimit', b'"resolvers";r=19985;t=196'), (b'RateLimit-Policy', b'"fixed window";"resolvers";q=20000;w=300'), (b'cross-origin-opener-policy', b'same-origin'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Access-Control-Max-Age', b'86400'), (b'Access-Control-Allow-Origin', b'https://huggingface.co'), (b'Vary', b'Origin, Accept'), (b'Access-Control-Expose-Headers', b'X-Repo-Commit,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash'), (b'X-Repo-Commit', b'714eb0fa89d2f80546fda750413ed43d93601a13'), (b'Accept-Ranges', b'bytes'), (b'X-Hub-Cache', b'HIT'), (b'Content-Disposition', b'inline; filename*=UTF-8\'\'config.json; filename="config.json";'), (b'Content-Security-Policy', b"default-src 'none'; sandbox"), (b'X-Linked-ETag', b'"b57fe5dfcb8ec3f9bab35ed427c3434e3c7dd1ba"'), (b'X-Cache', b'Miss from cloudfront'), (b'Via', b'1.1 5b74de93e6823b065bf7687a622dcf00.cloudfront.net (CloudFront)'), (b'X-Amz-Cf-Pop', b'LHR3-P3'), (b'X-Amz-Cf-Id', b'6aqBfp0fpdDkgifOs1j_K9WtVADwCC-_yDNvNHtCrtMRv4k9144iQw==')])
+2026-03-19 15:59:16,402 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-03-19 15:59:16,403 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,403 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:16,403 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:16,403 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:16,404 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,404 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:16,404 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,405 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:16,405 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,485 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'text/plain; charset=utf-8'), (b'Content-Length', b'629'), (b'Connection', b'keep-alive'), (b'Date', b'Thu, 19 Mar 2026 11:58:46 GMT'), (b'ETag', b'"b57fe5dfcb8ec3f9bab35ed427c3434e3c7dd1ba"'), (b'X-Powered-By', b'huggingface-moon'), (b'X-Request-Id', b'Root=1-69bbe4f6-587518be0954b6101700c167;52cd37f0-af91-4f4a-baf2-fdc006930395'), (b'RateLimit', b'"resolvers";r=19998;t=225'), (b'RateLimit-Policy', b'"fixed window";"resolvers";q=20000;w=300'), (b'cross-origin-opener-policy', b'same-origin'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Access-Control-Max-Age', b'86400'), (b'Access-Control-Allow-Origin', b'https://huggingface.co'), (b'Access-Control-Expose-Headers', b'X-Repo-Commit,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash'), (b'X-Repo-Commit', b'714eb0fa89d2f80546fda750413ed43d93601a13'), (b'Accept-Ranges', b'bytes'), (b'X-Hub-Cache', b'MISS'), (b'Content-Disposition', b'inline; filename*=UTF-8\'\'config.json; filename="config.json";'), (b'Content-Security-Policy', b"default-src 'none'; sandbox"), (b'Vary', b'Origin'), (b'X-Cache', b'Hit from cloudfront'), (b'Via', b'1.1 5b74de93e6823b065bf7687a622dcf00.cloudfront.net (CloudFront)'), (b'X-Amz-Cf-Pop', b'LHR3-P3'), (b'X-Amz-Cf-Id', b'RNwU4mMEF7cAzEpfYL80BLSJJjLfIyacnrCfLyy0qrn_fKPyegbb7A=='), (b'Age', b'29')])
+2026-03-19 15:59:16,486 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english/714eb0fa89d2f80546fda750413ed43d93601a13/config.json "HTTP/1.1 200 OK"
+2026-03-19 15:59:16,486 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'HEAD']>
+2026-03-19 15:59:16,486 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:16,487 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:16,487 [DEBUG] httpcore.http11: response_closed.complete
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights:  39%|███▉      | 41/104 [00:00<00:00, 403.02it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 526.15it/s]
+2026-03-19 15:59:16,807 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-03-19 15:59:16,807 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:16,808 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-03-19 15:59:16,808 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:16,808 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-03-19 15:59:16,925 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Content-Length', b'64'), (b'Connection', b'keep-alive'), (b'Date', b'Thu, 19 Mar 2026 11:59:15 GMT'), (b'ETag', b'W/"40-09f9IAqP13xarAhQxFS2W8rvRkM"'), (b'X-Powered-By', b'huggingface-moon'), (b'X-Request-Id', b'Root=1-69bbe513-4e704b2026d7ea094d6e9c71;1c9b0c0c-bc7d-42a5-ac52-75b0fe4ab509'), (b'RateLimit', b'"api";r=2996;t=196'), (b'RateLimit-Policy', b'"fixed window";"api";q=3000;w=300'), (b'cross-origin-opener-policy', b'same-origin'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Access-Control-Max-Age', b'86400'), (b'Access-Control-Allow-Origin', b'https://huggingface.co'), (b'Vary', b'Origin'), (b'Access-Control-Expose-Headers', b'X-Repo-Commit,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash'), (b'X-Error-Code', b'EntryNotFound'), (b'X-Error-Message', b'additional_chat_templates does not exist on "main"'), (b'X-Cache', b'Error from cloudfront'), (b'Via', b'1.1 5b74de93e6823b065bf7687a622dcf00.cloudfront.net (CloudFront)'), (b'X-Amz-Cf-Pop', b'LHR3-P3'), (b'X-Amz-Cf-Id', b'NjpNpSZjdTT5yfJdIfgSSnP1LGHMIm22h9Os59zkQUHMRCEZKxfIBg==')])
+2026-03-19 15:59:16,926 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-03-19 15:59:16,926 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-03-19 15:59:16,927 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:16,927 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:16,927 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:16,928 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'GET']>
+2026-03-19 15:59:16,929 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:16,929 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'GET']>
+2026-03-19 15:59:16,929 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:16,929 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'GET']>
+2026-03-19 15:59:17,053 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/json; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Date', b'Thu, 19 Mar 2026 11:59:15 GMT'), (b'Access-Control-Expose-Headers', b'X-Repo-Commit,X-Request-Id,X-Error-Code,X-Error-Message,X-Total-Count,ETag,Link,Accept-Ranges,Content-Range,X-Linked-Size,X-Linked-ETag,X-Xet-Hash'), (b'content-encoding', b'gzip'), (b'X-Powered-By', b'huggingface-moon'), (b'X-Request-Id', b'Root=1-69bbe513-664ef72b2d0669733e55a4cb;9742f2cf-2120-48d6-a867-6d12d62c78ec'), (b'RateLimit', b'"api";r=2995;t=196'), (b'RateLimit-Policy', b'"fixed window";"api";q=3000;w=300'), (b'cross-origin-opener-policy', b'same-origin'), (b'Referrer-Policy', b'strict-origin-when-cross-origin'), (b'Access-Control-Max-Age', b'86400'), (b'Access-Control-Allow-Origin', b'https://huggingface.co'), (b'Vary', b'Origin'), (b'vary', b'accept-encoding'), (b'ETag', b'W/"b11-P/MZ2IFM6cHZRsfhfJ06mTPl5yY"'), (b'X-Cache', b'Miss from cloudfront'), (b'Via', b'1.1 5b74de93e6823b065bf7687a622dcf00.cloudfront.net (CloudFront)'), (b'X-Amz-Cf-Pop', b'LHR3-P3'), (b'X-Amz-Cf-Id', b'pjvTgKaIAld6KI6VhMHHoILgq9L3JwPnTU9L-bQTqeno-BYR4VOSZg==')])
+2026-03-19 15:59:17,054 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/distilbert/distilbert-base-uncased-finetuned-sst-2-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-03-19 15:59:17,054 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'GET']>
+2026-03-19 15:59:17,055 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:17,055 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:17,055 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:18,650 [INFO] root: Invoking gemini.
+2026-03-19 15:59:18,651 [INFO] root: Invoking gemini.
+2026-03-19 15:59:18,653 [INFO] root: Invoking gemini.
+2026-03-19 15:59:18,654 [INFO] root: Invoking gemini.
+2026-03-19 15:59:18,656 [INFO] root: Invoking gemini.
+Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-19 15:59:17,853 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 15:59:17,858 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 15:59:17,859 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 15:59:17,864 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 15:59:17,868 [DEBUG] httpcore.connection: connect_tcp.started host='openrouter.ai' port=443 local_address=None timeout=None socket_options=None
+2026-03-19 15:59:17,893 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892833870e0>
+2026-03-19 15:59:17,894 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x789283f45cd0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 15:59:17,899 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x789283386960>
+2026-03-19 15:59:17,900 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x789283f45350> server_hostname='openrouter.ai' timeout=None
+2026-03-19 15:59:17,908 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x789283385670>
+2026-03-19 15:59:17,908 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x789283f45ad0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 15:59:17,910 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892833861e0>
+2026-03-19 15:59:17,911 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x789283f44fd0> server_hostname='openrouter.ai' timeout=None
+2026-03-19 15:59:17,914 [DEBUG] httpcore.connection: connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892833d7140>
+2026-03-19 15:59:17,914 [DEBUG] httpcore.connection: start_tls.started ssl_context=<ssl.SSLContext object at 0x789283f44c50> server_hostname='openrouter.ai' timeout=None
+2026-03-19 15:59:17,919 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x789283385790>
+2026-03-19 15:59:17,920 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,920 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:17,921 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 15:59:17,921 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:17,921 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,925 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x789283386840>
+2026-03-19 15:59:17,925 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,926 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:17,926 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 15:59:17,927 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:17,927 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,942 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892833d5d60>
+2026-03-19 15:59:17,943 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892861d8560>
+2026-03-19 15:59:17,943 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,943 [DEBUG] httpcore.connection: start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7892833d7050>
+2026-03-19 15:59:17,944 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,945 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:17,945 [DEBUG] httpcore.http11: send_request_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,946 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:17,947 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 15:59:17,947 [DEBUG] httpcore.http11: send_request_headers.complete
+2026-03-19 15:59:17,948 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 15:59:17,948 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:17,950 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,949 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:17,949 [DEBUG] httpcore.http11: send_request_body.started request=<Request [b'POST']>
+2026-03-19 15:59:17,950 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:17,951 [DEBUG] httpcore.http11: send_request_body.complete
+2026-03-19 15:59:17,952 [DEBUG] httpcore.http11: receive_response_headers.started request=<Request [b'POST']>
+2026-03-19 15:59:18,347 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 11:59:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dec4f69095aedf2-LHR')])
+2026-03-19 15:59:18,347 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 15:59:18,348 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 15:59:18,373 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 11:59:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dec4f690ad698d9-LHR')])
+2026-03-19 15:59:18,374 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 15:59:18,375 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 15:59:18,417 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 11:59:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dec4f692dab414c-LHR')])
+2026-03-19 15:59:18,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 15:59:18,419 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 15:59:18,543 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 11:59:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dec4f693e309038-LHR')])
+2026-03-19 15:59:18,543 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 15:59:18,544 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 15:59:18,747 [DEBUG] httpcore.http11: receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 19 Mar 2026 11:59:18 GMT'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Access-Control-Allow-Origin', b'*'), (b'Permissions-Policy', b'payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")'), (b'Referrer-Policy', b'no-referrer, strict-origin-when-cross-origin'), (b'X-Content-Type-Options', b'nosniff'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'CF-RAY', b'9dec4f692e35cdbe-LHR')])
+2026-03-19 15:59:18,748 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-19 15:59:18,748 [DEBUG] httpcore.http11: receive_response_body.started request=<Request [b'POST']>
+2026-03-19 15:59:18,907 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:18,907 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:18,907 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:18,913 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:18,914 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:18,914 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:19,211 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:19,211 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:19,211 [DEBUG] httpcore.http11: response_closed.complete
+2026-03-19 15:59:19,356 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:19,356 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:19,356 [DEBUG] httpcore.http11: response_closed.complete
+Descriptions:  20%|██        | 1/5 [00:01<00:04,  1.01s/it]2026-03-19 15:59:19,666 [DEBUG] httpcore.http11: receive_response_body.complete
+2026-03-19 15:59:19,667 [DEBUG] httpcore.http11: response_closed.started
+2026-03-19 15:59:19,667 [DEBUG] httpcore.http11: response_closed.complete
+Descriptions: 100%|██████████| 5/5 [00:01<00:00,  4.76it/s]
+2026-03-19 15:59:19,717 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini.parquet.
+2026-03-19 15:59:19,782 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,782 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,782 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,783 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,788 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,788 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,789 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,789 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,790 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,790 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,791 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,791 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,793 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,794 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,794 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,794 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,795 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,795 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,795 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,795 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,824 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,825 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,825 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,826 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,828 [DEBUG] dulwich.config: Loading gitconfig from paths: ['/home/harry/.gitconfig', '/home/harry/.config/git/config', '/etc/gitconfig']
+2026-03-19 15:59:19,828 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /home/harry/.gitconfig
+2026-03-19 15:59:19,828 [DEBUG] dulwich.config: Gitconfig file not found: /home/harry/.config/git/config
+2026-03-19 15:59:19,829 [DEBUG] dulwich.config: Successfully loaded gitconfig from: /etc/gitconfig
+2026-03-19 15:59:19,853 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,853 [DEBUG] httpcore.connection: close.complete
+2026-03-19 15:59:19,865 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,866 [DEBUG] httpcore.connection: close.complete
+2026-03-19 15:59:19,869 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,870 [DEBUG] httpcore.connection: close.complete
+2026-03-19 15:59:19,872 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,873 [DEBUG] httpcore.connection: close.complete
+2026-03-19 15:59:19,875 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,875 [DEBUG] httpcore.connection: close.complete
+2026-03-19 15:59:19,888 [DEBUG] httpcore.connection: close.started
+2026-03-19 15:59:19,888 [DEBUG] httpcore.connection: close.complete

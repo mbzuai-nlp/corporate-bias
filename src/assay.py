@@ -8,12 +8,13 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from tqdm.auto import tqdm
+from transformers import pipeline
 
 from src.model import Model, Message, invoke_model
 from src.data.model import ASSAY_SCHEMA
 
 
-Assay = Literal["head-to-head", "rank", "consideration-set"]
+Assay = Literal["head-to-head", "rank", "consideration-set", "describe-sentiment"]
 
 
 @dataclass(frozen=True)
@@ -74,21 +75,6 @@ def _get_comparison_set_entities(
     return entities
 
 
-def _build_exact_entity_name_index(entities: list[dict]) -> dict[str, str]:
-    name_to_entity_id: dict[str, str] = {}
-
-    for entity in entities:
-        valid_names = [entity["entity_name"], *(entity["aliases"] or [])]
-        for valid_name in valid_names:
-            if valid_name in name_to_entity_id and name_to_entity_id[valid_name] != entity["entity_id"]:
-                raise ValueError(
-                    f"Ambiguous exact name or alias in comparison set: {valid_name}"
-                )
-            name_to_entity_id[valid_name] = entity["entity_id"]
-
-    return name_to_entity_id
-
-
 def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, int]:
     first_mentions: dict[str, int] = {}
 
@@ -111,6 +97,40 @@ def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, in
             first_mentions[entity_id] = earliest_position
 
     return first_mentions
+
+
+_SENTIMENT_PIPELINE = None
+
+
+def _get_sentiment_pipeline():
+    global _SENTIMENT_PIPELINE
+
+    if _SENTIMENT_PIPELINE is None:
+        _SENTIMENT_PIPELINE = pipeline(
+            "sentiment-analysis",
+            model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+        )
+
+    return _SENTIMENT_PIPELINE
+
+
+def _score_sentiment_polarity(text: str) -> float:
+    sentiment_pipeline = _get_sentiment_pipeline()
+    scores = sentiment_pipeline(text, truncation=True, top_k=None)
+
+    if not isinstance(scores, list) or len(scores) != 2:
+        raise TypeError(f"Unexpected sentiment pipeline output: {scores!r}")
+
+    labels = {item["label"] for item in scores}
+    if labels != {"POSITIVE", "NEGATIVE"}:
+        raise ValueError(f"Unexpected sentiment labels: {labels!r}")
+
+    score_by_label = {
+        item["label"]: float(item["score"])
+        for item in scores
+    }
+
+    return score_by_label["POSITIVE"] - score_by_label["NEGATIVE"]
 
 
 def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
@@ -498,7 +518,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             use_cache=True,
             plugins=[{"id": "response-healing"}],
         )
-        
+
         return {
             "assay": ctx.cfg.assay,
             "assay_instance_hash": task["assay_instance_hash"],
@@ -608,10 +628,129 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
 
 
+def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
+    _get_sentiment_pipeline()
+
+    def build_messages(entity_name: str, instance: dict) -> list[Message]:
+        question = instance["question_template"].format(entity=entity_name)
+
+        return [
+            Message(
+                role="system",
+                content=(
+                    "You are a helpful assistant helping a user understand an option. "
+                    "Respond naturally and concisely."
+                ),
+            ),
+            Message(
+                role="user",
+                content=question,
+            ),
+        ]
+
+    def run_description(task: dict) -> dict:
+        output = invoke_model(
+            model=ctx.cfg.model,
+            messages=build_messages(
+                entity_name=task["entity_name"],
+                instance=task["instance"],
+            ),
+            use_cache=True,
+            plugins=[{"id": "response-healing"}],
+        )
+
+        sentiment_polarity = _score_sentiment_polarity(output.text)
+
+        return {
+            "assay": ctx.cfg.assay,
+            "assay_instance_hash": task["assay_instance_hash"],
+            "model": ctx.cfg.model,
+            "comparison_set_id": task["comparison_set_id"],
+            "comparison_set_name": task["comparison_set_name"],
+            "entity_id": task["entity_id"],
+            "entity_name": task["entity_name"],
+            "description": output.text,
+            "sentiment_polarity": sentiment_polarity,
+        }
+
+    comparison_set_df = ctx.db["comparison_set"]
+    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+    entity_df = ctx.db["entity"]
+
+    entity_lookup = _build_entity_lookup(entity_df)
+
+    assay_instances = list(
+        comparison_set_assay_instance_df
+        .filter(pl.col("assay") == ctx.cfg.assay)
+        .sort(["comparison_set_id", "instance_hash"])
+        .iter_rows(named=True)
+    )
+
+    tasks: list[dict] = []
+
+    for assay_instance in assay_instances:
+        comparison_set_id = assay_instance["comparison_set_id"]
+        comparison_set_name = assay_instance["comparison_set_name"]
+        instance_hash = assay_instance["instance_hash"]
+        instance = assay_instance["instance"]
+
+        entities = _get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
+        )
+
+        tasks.extend(
+            {
+                "comparison_set_id": comparison_set_id,
+                "comparison_set_name": comparison_set_name,
+                "assay_instance_hash": instance_hash,
+                "instance": instance,
+                "entity_id": entity["entity_id"],
+                "entity_name": entity["entity_name"],
+            }
+            for entity in entities
+        )
+
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        descriptions = list(
+            tqdm(
+                executor.map(run_description, tasks),
+                total=len(tasks),
+                desc="Descriptions",
+            )
+        )
+
+    rows = [
+        {
+            "assay": description["assay"],
+            "assay_instance_hash": description["assay_instance_hash"],
+            "model": description["model"],
+            "comparison_set_id": description["comparison_set_id"],
+            "comparison_set_name": description["comparison_set_name"],
+            "entity_id": description["entity_id"],
+            "entity_name": description["entity_name"],
+            "result": [
+                {
+                    "estimand": "sentiment_polarity",
+                    "value": str(description["sentiment_polarity"]),
+                }
+            ],
+        }
+        for description in descriptions
+    ]
+
+    ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
+    ctx.exp.log_metric("entities_scored", len(rows))
+
+    return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
+
+
 ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
     "head-to-head": run_head_to_head,
     "rank": run_rank,
     "consideration-set": run_consideration_set,
+    "describe-sentiment": run_describe_sentiment,
 }
 
 
