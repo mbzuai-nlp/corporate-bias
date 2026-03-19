@@ -8,7 +8,12 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from tqdm.auto import tqdm
-from transformers import pipeline
+import torch
+from transformers import (
+    pipeline,
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+)
 
 from src.model import Model, Message, invoke_model
 from src.data.model import ASSAY_SCHEMA
@@ -100,6 +105,11 @@ def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, in
 
 
 _SENTIMENT_PIPELINE = None
+_AD_TOKENIZER = None
+_AD_MODEL = None
+_AD_DEVICE = None
+_AD_LABELS = None
+_AD_POSITIVE_LABEL = None
 
 
 def _get_sentiment_pipeline():
@@ -131,6 +141,78 @@ def _score_sentiment_polarity(text: str) -> float:
     }
 
     return score_by_label["POSITIVE"] - score_by_label["NEGATIVE"]
+
+
+def _load_ad_classifier() -> None:
+    global _AD_TOKENIZER, _AD_MODEL, _AD_DEVICE, _AD_LABELS, _AD_POSITIVE_LABEL
+
+    if _AD_TOKENIZER is not None:
+        return
+
+    model_name = "teknology/ad-classifier-v0.3"
+    _AD_TOKENIZER = AutoTokenizer.from_pretrained(model_name)
+    _AD_MODEL = AutoModelForSequenceClassification.from_pretrained(model_name)
+    _AD_MODEL.eval()
+
+    _AD_DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    _AD_MODEL.to(_AD_DEVICE)
+
+    id2label = getattr(_AD_MODEL.config, "id2label", None)
+    if not isinstance(id2label, dict) or len(id2label) != _AD_MODEL.config.num_labels:
+        raise ValueError(f"Unexpected ad-classifier id2label mapping: {id2label!r}")
+
+    _AD_LABELS = {
+        int(label_id): str(label_name)
+        for label_id, label_name in id2label.items()
+    }
+
+    if len(_AD_LABELS) != 2:
+        raise ValueError(f"Expected binary ad classifier, got labels: {_AD_LABELS!r}")
+
+    # Assumption: model preserves training-dataset label semantics:
+    # label 1 = response contains advertisement
+    _AD_POSITIVE_LABEL = "LABEL_1"
+
+    if _AD_POSITIVE_LABEL not in _AD_LABELS.values():
+        raise ValueError(
+            f"Expected {_AD_POSITIVE_LABEL!r} in ad classifier labels, got {_AD_LABELS!r}"
+        )
+
+
+def _predict_ad_scores(text: str) -> dict[str, float]:
+    if _AD_TOKENIZER is None or _AD_MODEL is None or _AD_DEVICE is None or _AD_LABELS is None:
+        raise RuntimeError("Ad classifier not loaded")
+
+    inputs = _AD_TOKENIZER(
+        text,
+        padding=True,
+        truncation=True,
+        max_length=512,
+        return_tensors="pt",
+    )
+    inputs = {key: value.to(_AD_DEVICE) for key, value in inputs.items()}
+
+    with torch.no_grad():
+        outputs = _AD_MODEL(**inputs)
+        logits = outputs.logits
+
+    if logits.shape != (1, _AD_MODEL.config.num_labels):
+        raise TypeError(f"Unexpected ad-classifier logits shape: {tuple(logits.shape)}")
+
+    probs = torch.softmax(logits, dim=-1)[0]
+
+    return {
+        _AD_LABELS[label_idx]: float(probs[label_idx].item())
+        for label_idx in range(len(_AD_LABELS))
+    }
+
+
+def _score_ad_likelihood(text: str) -> tuple[float, dict[str, float]]:
+    if _AD_POSITIVE_LABEL is None:
+        raise RuntimeError("Ad-positive label not initialized")
+
+    score_by_label = _predict_ad_scores(text)
+    return score_by_label[_AD_POSITIVE_LABEL], score_by_label
 
 
 def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
@@ -716,6 +798,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
 
 def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     _get_sentiment_pipeline()
+    _load_ad_classifier()
 
     def build_messages(entity_name: str, instance: dict) -> list[Message]:
         question = instance["question_template"].format(entity=entity_name)
@@ -746,6 +829,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         sentiment_polarity = _score_sentiment_polarity(output.text)
+        ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
 
         return {
             "assay": ctx.cfg.assay,
@@ -757,6 +841,9 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             "entity_name": task["entity_name"],
             "description": output.text,
             "sentiment_polarity": sentiment_polarity,
+            "ad_likelihood": ad_likelihood,
+            "ad_score_by_label": ad_score_by_label,
+            "ad_positive_label": _AD_POSITIVE_LABEL,
         }
 
     comparison_set_df = ctx.db["comparison_set"]
@@ -820,7 +907,11 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 {
                     "estimand": "sentiment_polarity",
                     "value": str(description["sentiment_polarity"]),
-                }
+                },
+                {
+                    "estimand": "ad_likelihood",
+                    "value": str(description["ad_likelihood"]),
+                },
             ],
             "debug_json": json.dumps(
                 {
@@ -828,6 +919,9 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                     "entity_name": description["entity_name"],
                     "description": description["description"],
                     "sentiment_polarity": description["sentiment_polarity"],
+                    "ad_likelihood": description["ad_likelihood"],
+                    "ad_score_by_label": description["ad_score_by_label"],
+                    "ad_positive_label": description["ad_positive_label"],
                 },
                 ensure_ascii=False,
                 sort_keys=True,
