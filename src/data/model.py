@@ -18,16 +18,9 @@ CLAIM_SCHEMA = {
 }
 
 COMPARISON_SET_SCHEMA = {
-    "id": pl.String,
+    "id": pl.String, # key
     "name": pl.String,
-    "entities": pl.List(
-        pl.Struct(
-            {
-                "entity_id": pl.String,
-                "entity_name": pl.String,
-            }
-        )
-    ),
+    "entity_ids": pl.List(pl.String)
 }
 
 COMPARISON_SET_ASSAY_INSTANCE_SCHEMA = {

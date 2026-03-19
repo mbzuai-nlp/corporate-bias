@@ -39,6 +39,39 @@ def _save_assay_df(df: pl.DataFrame, save_path: str) -> None:
     df.write_parquet(path)
 
 
+def _build_entity_lookup(entity_df: pl.DataFrame) -> dict[str, dict]:
+    return {
+        row["id"]: row
+        for row in entity_df.iter_rows(named=True)
+    }
+
+
+def _get_comparison_set_entities(
+    comparison_set_df: pl.DataFrame,
+    entity_lookup: dict[str, dict],
+    comparison_set_id: str,
+) -> list[dict]:
+    entity_ids = (
+        comparison_set_df
+        .filter(pl.col("id") == comparison_set_id)
+        .select("entity_ids")
+        .to_series()
+        .item()
+    )
+
+    entities = []
+    for entity_id in sorted(entity_ids):
+        entity = entity_lookup[entity_id]
+        entities.append(
+            {
+                "entity_id": entity["id"],
+                "entity_name": entity["name"],
+            }
+        )
+
+    return entities
+
+
 def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     def build_messages(
         left_entity_name: str,
@@ -130,6 +163,9 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
 
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+    entity_df = ctx.db["entity"]
+
+    entity_lookup = _build_entity_lookup(entity_df)
 
     assay_instances = list(
         comparison_set_assay_instance_df
@@ -147,16 +183,10 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         instance = assay_instance["instance"]
 
-        entities = (
-            comparison_set_df
-            .filter(pl.col("id") == comparison_set_id)
-            .select(
-                pl.col("entities").list.eval(
-                    pl.element().sort_by(pl.element().struct.field("entity_id"))
-                )
-            )
-            .to_series()
-            .item()
+        entities = _get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
         )
 
         entities_by_instance[instance_hash] = entities
@@ -232,7 +262,9 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         entity_names: list[str],
         instance: dict,
     ) -> list[Message]:
-        entity_list = "\n".join(f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names))
+        entity_list = "\n".join(
+            f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names)
+        )
         question = instance["question_template"].format(
             entities=", ".join(entity_names),
         )
@@ -312,6 +344,9 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
 
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
+    entity_df = ctx.db["entity"]
+
+    entity_lookup = _build_entity_lookup(entity_df)
 
     assay_instances = list(
         comparison_set_assay_instance_df
@@ -329,16 +364,10 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         instance = assay_instance["instance"]
 
-        entities = (
-            comparison_set_df
-            .filter(pl.col("id") == comparison_set_id)
-            .select(
-                pl.col("entities").list.eval(
-                    pl.element().sort_by(pl.element().struct.field("entity_id"))
-                )
-            )
-            .to_series()
-            .item()
+        entities = _get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
         )
 
         entities_by_instance[instance_hash] = entities
