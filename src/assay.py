@@ -220,6 +220,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             "preferred_entity_name": preferred_entity_name,
             "non_preferred_entity_name": non_preferred_entity_name,
             "reason": parsed["reason"],
+            "raw_response": output.text,
         }
 
     comparison_set_df = ctx.db["comparison_set"]
@@ -278,6 +279,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
     wins: dict[tuple[str, str], int] = {}
+    preferences_by_instance_and_entity: dict[tuple[str, str], list[dict]] = {}
 
     for preference in preferences:
         key = (
@@ -285,6 +287,29 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             preference["preferred_entity_name"],
         )
         wins[key] = wins.get(key, 0) + 1
+
+        left_key = (
+            preference["assay_instance_hash"],
+            preference["left_entity_id"],
+        )
+        right_key = (
+            preference["assay_instance_hash"],
+            preference["right_entity_id"],
+        )
+
+        debug_preference = {
+            "left_entity_id": preference["left_entity_id"],
+            "left_entity_name": preference["left_entity_name"],
+            "right_entity_id": preference["right_entity_id"],
+            "right_entity_name": preference["right_entity_name"],
+            "preferred_entity_name": preference["preferred_entity_name"],
+            "non_preferred_entity_name": preference["non_preferred_entity_name"],
+            "reason": preference["reason"],
+            "raw_response": preference["raw_response"],
+        }
+
+        preferences_by_instance_and_entity.setdefault(left_key, []).append(debug_preference)
+        preferences_by_instance_and_entity.setdefault(right_key, []).append(debug_preference)
 
     rows = []
     for assay_instance in assay_instances:
@@ -308,6 +333,18 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                         "value": str(wins.get((instance_hash, entity["entity_name"]), 0)),
                     }
                 ],
+                "debug_json": json.dumps(
+                    {
+                        "entity_id": entity["entity_id"],
+                        "entity_name": entity["entity_name"],
+                        "preferences": preferences_by_instance_and_entity.get(
+                            (instance_hash, entity["entity_id"]),
+                            [],
+                        ),
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
             }
             for entity in entities
         )
@@ -401,6 +438,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             "comparison_set_name": task["comparison_set_name"],
             "ranking": ranking,
             "reason": parsed["reason"],
+            "raw_response": output.text,
         }
 
     comparison_set_df = ctx.db["comparison_set"]
@@ -456,6 +494,14 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         ranking["assay_instance_hash"]: ranking["ranking"]
         for ranking in rankings
     }
+    ranking_debug_by_instance = {
+        ranking["assay_instance_hash"]: {
+            "ranking": ranking["ranking"],
+            "reason": ranking["reason"],
+            "raw_response": ranking["raw_response"],
+        }
+        for ranking in rankings
+    }
 
     rows = []
     for assay_instance in assay_instances:
@@ -467,6 +513,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             entity_name: i + 1
             for i, entity_name in enumerate(ranking_by_instance[instance_hash])
         }
+        ranking_debug = ranking_debug_by_instance[instance_hash]
 
         rows.extend(
             {
@@ -483,6 +530,18 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                         "value": str(rank_positions[entity["entity_name"]]),
                     }
                 ],
+                "debug_json": json.dumps(
+                    {
+                        "entity_id": entity["entity_id"],
+                        "entity_name": entity["entity_name"],
+                        "rank": rank_positions[entity["entity_name"]],
+                        "ranking": ranking_debug["ranking"],
+                        "reason": ranking_debug["reason"],
+                        "raw_response": ranking_debug["raw_response"],
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
             }
             for entity in entities
         )
@@ -577,6 +636,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
     reciprocal_ranks_by_instance: dict[str, dict[str, float]] = {}
+    consideration_debug_by_instance: dict[str, dict] = {}
 
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
@@ -594,6 +654,11 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             for rank, entity_id in enumerate(ranked_entity_ids, start=1)
         }
         reciprocal_ranks_by_instance[instance_hash] = reciprocal_ranks
+        consideration_debug_by_instance[instance_hash] = {
+            "raw_response": text,
+            "first_mentions": first_mentions,
+            "ranked_entity_ids": ranked_entity_ids,
+        }
 
     rows = []
     for assay_instance in assay_instances:
@@ -602,6 +667,15 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
         reciprocal_ranks = reciprocal_ranks_by_instance.get(instance_hash, {})
+        debug = consideration_debug_by_instance.get(
+            instance_hash,
+            {"raw_response": "", "first_mentions": {}, "ranked_entity_ids": []},
+        )
+
+        rank_by_entity_id = {
+            entity_id: rank
+            for rank, entity_id in enumerate(debug["ranked_entity_ids"], start=1)
+        }
 
         rows.extend(
             {
@@ -618,6 +692,18 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                         "value": str(reciprocal_ranks.get(entity["entity_id"], 0.0)),
                     }
                 ],
+                "debug_json": json.dumps(
+                    {
+                        "entity_id": entity["entity_id"],
+                        "entity_name": entity["entity_name"],
+                        "raw_response": debug["raw_response"],
+                        "first_mention_position": debug["first_mentions"].get(entity["entity_id"]),
+                        "rank": rank_by_entity_id.get(entity["entity_id"]),
+                        "mean_reciprocal_rank": reciprocal_ranks.get(entity["entity_id"], 0.0),
+                    },
+                    ensure_ascii=False,
+                    sort_keys=True,
+                ),
             }
             for entity in entities
         )
@@ -736,6 +822,16 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                     "value": str(description["sentiment_polarity"]),
                 }
             ],
+            "debug_json": json.dumps(
+                {
+                    "entity_id": description["entity_id"],
+                    "entity_name": description["entity_name"],
+                    "description": description["description"],
+                    "sentiment_polarity": description["sentiment_polarity"],
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
         }
         for description in descriptions
     ]

@@ -40,4 +40,5 @@ ASSAY_SCHEMA = {
     "entity_id": pl.String,  # key,
     "entity_name": pl.String,
     "result": pl.List(pl.Struct({"estimand": pl.Utf8, "value": pl.Utf8})),
+    "debug_json": pl.String
 }
