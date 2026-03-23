@@ -10,7 +10,7 @@ from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
     get_comparison_set_entities,
-    build_estimand_result
+    build_estimand_result,
 )
 from src.data.model import ASSAY_SCHEMA
 import torch
@@ -52,10 +52,7 @@ def _score_sentiment_polarity(text: str) -> float:
     if labels != {"POSITIVE", "NEGATIVE"}:
         raise ValueError(f"Unexpected sentiment labels: {labels!r}")
 
-    score_by_label = {
-        item["label"]: float(item["score"])
-        for item in scores
-    }
+    score_by_label = {item["label"]: float(item["score"]) for item in scores}
 
     return score_by_label["POSITIVE"] - score_by_label["NEGATIVE"]
 
@@ -79,8 +76,7 @@ def _load_ad_classifier() -> None:
         raise ValueError(f"Unexpected ad-classifier id2label mapping: {id2label!r}")
 
     _AD_LABELS = {
-        int(label_id): str(label_name)
-        for label_id, label_name in id2label.items()
+        int(label_id): str(label_name) for label_id, label_name in id2label.items()
     }
 
     if len(_AD_LABELS) != 2:
@@ -95,7 +91,12 @@ def _load_ad_classifier() -> None:
 
 
 def _predict_ad_scores(text: str) -> dict[str, float]:
-    if _AD_TOKENIZER is None or _AD_MODEL is None or _AD_DEVICE is None or _AD_LABELS is None:
+    if (
+        _AD_TOKENIZER is None
+        or _AD_MODEL is None
+        or _AD_DEVICE is None
+        or _AD_LABELS is None
+    ):
         raise RuntimeError("Ad classifier not loaded")
 
     inputs = _AD_TOKENIZER(
@@ -160,7 +161,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             ),
             use_cache=True,
             plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"]
+            seed=task["sample_id"],
         )
 
         sentiment_polarity = _score_sentiment_polarity(output.text)
@@ -189,8 +190,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     entity_lookup = build_entity_lookup(entity_df)
 
     assay_instances = list(
-        comparison_set_assay_instance_df
-        .filter(pl.col("assay") == ctx.cfg.assay)
+        comparison_set_assay_instance_df.filter(pl.col("assay") == ctx.cfg.assay)
         .sort(["comparison_set_id", "instance_hash"])
         .iter_rows(named=True)
     )
@@ -232,7 +232,9 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
+        defaultdict(list)
+    )
     for description in descriptions:
         descriptions_by_instance_and_entity[
             (description["assay_instance_hash"], description["entity_id"])
@@ -252,10 +254,14 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
 
         for entity in entities:
             samples = sorted(
-                descriptions_by_instance_and_entity[(instance_hash, entity["entity_id"])],
+                descriptions_by_instance_and_entity[
+                    (instance_hash, entity["entity_id"])
+                ],
                 key=lambda row: row["sample_id"],
             )
-            sentiment_values = [float(sample["sentiment_polarity"]) for sample in samples]
+            sentiment_values = [
+                float(sample["sentiment_polarity"]) for sample in samples
+            ]
             ad_values = [float(sample["ad_likelihood"]) for sample in samples]
 
             rows.append(

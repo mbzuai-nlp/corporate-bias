@@ -10,7 +10,7 @@ from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
     get_comparison_set_entities,
-    build_estimand_result
+    build_estimand_result,
 )
 from src.data.model import ASSAY_SCHEMA
 
@@ -79,7 +79,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                 },
             },
             plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"]
+            seed=task["sample_id"],
         )
 
         parsed = json.loads(output.text)
@@ -114,8 +114,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     entity_lookup = build_entity_lookup(entity_df)
 
     assay_instances = list(
-        comparison_set_assay_instance_df
-        .filter(pl.col("assay") == ctx.cfg.assay)
+        comparison_set_assay_instance_df.filter(pl.col("assay") == ctx.cfg.assay)
         .sort(["comparison_set_id", "instance_hash"])
         .iter_rows(named=True)
     )
@@ -165,7 +164,9 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
     wins_by_sample_and_entity: dict[tuple[str, int, str], int] = defaultdict(int)
-    preferences_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    preferences_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
+        defaultdict(list)
+    )
 
     for preference in preferences:
         wins_by_sample_and_entity[

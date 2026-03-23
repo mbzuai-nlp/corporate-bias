@@ -9,10 +9,10 @@ import logging
 
 from pipelines.utils import configure_logging, silence_superfluous_warnings
 from src.data.model import (
-    CLAIM_SCHEMA, 
+    CLAIM_SCHEMA,
     COMPARISON_SET_ASSAY_INSTANCE_SCHEMA,
-    COMPARISON_SET_SCHEMA, 
-    ENTITY_SCHEMA
+    COMPARISON_SET_SCHEMA,
+    ENTITY_SCHEMA,
 )
 from src.assay.common import Config, RuntimeContext, Assay, AssayDelegate, save_assay_df
 from src.assay.head_to_head import run_head_to_head
@@ -66,9 +66,7 @@ def parse_args():
 
 def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     claim_df = pl.read_parquet(
-        db_dir / "claim.parquet",
-        schema=CLAIM_SCHEMA,
-        missing_columns="insert"
+        db_dir / "claim.parquet", schema=CLAIM_SCHEMA, missing_columns="insert"
     )
 
     comparison_set_assay_instance_df = (
@@ -91,13 +89,11 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     comparison_set_df = pl.read_parquet(
         db_dir / "comparison_set.parquet",
         schema=COMPARISON_SET_SCHEMA,
-        missing_columns="insert"
+        missing_columns="insert",
     )
 
     entity_df = pl.read_parquet(
-        db_dir / "entity.parquet",
-        schema=ENTITY_SCHEMA,
-        missing_columns="insert"
+        db_dir / "entity.parquet", schema=ENTITY_SCHEMA, missing_columns="insert"
     )
 
     return {
@@ -137,10 +133,10 @@ def main():
     with Live(dir=exp_dir) as exp:
         ctx = RuntimeContext(
             cfg=Config(
-                save=save_path, 
-                assay=args.assay, 
+                save=save_path,
+                assay=args.assay,
                 model=args.model,
-                num_samples_per_instance=5
+                num_samples_per_instance=5,
             ),
             exp=exp,
             db=db,

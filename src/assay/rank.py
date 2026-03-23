@@ -10,7 +10,7 @@ from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
     get_comparison_set_entities,
-    build_estimand_result
+    build_estimand_result,
 )
 from src.data.model import ASSAY_SCHEMA
 
@@ -80,7 +80,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                 },
             },
             plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"]
+            seed=task["sample_id"],
         )
 
         parsed = json.loads(output.text)
@@ -110,8 +110,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
     entity_lookup = build_entity_lookup(entity_df)
 
     assay_instances = list(
-        comparison_set_assay_instance_df
-        .filter(pl.col("assay") == ctx.cfg.assay)
+        comparison_set_assay_instance_df.filter(pl.col("assay") == ctx.cfg.assay)
         .sort(["comparison_set_id", "instance_hash"])
         .iter_rows(named=True)
     )
@@ -164,7 +163,9 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
-        ranking_samples = sorted(rankings_by_instance[instance_hash], key=lambda row: row["sample_id"])
+        ranking_samples = sorted(
+            rankings_by_instance[instance_hash], key=lambda row: row["sample_id"]
+        )
 
         for entity in entities:
             values = []

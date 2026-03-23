@@ -11,7 +11,7 @@ from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
     get_comparison_set_entities,
-    build_estimand_result
+    build_estimand_result,
 )
 from src.data.model import ASSAY_SCHEMA
 
@@ -64,7 +64,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             messages=build_messages(instance=task["instance"]),
             use_cache=True,
             plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"]
+            seed=task["sample_id"],
         )
 
         return {
@@ -84,8 +84,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     entity_lookup = build_entity_lookup(entity_df)
 
     assay_instances = list(
-        comparison_set_assay_instance_df
-        .filter(pl.col("assay") == ctx.cfg.assay)
+        comparison_set_assay_instance_df.filter(pl.col("assay") == ctx.cfg.assay)
         .sort(["comparison_set_id", "instance_hash"])
         .iter_rows(named=True)
     )
@@ -127,7 +126,9 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             )
         )
 
-    consideration_samples_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    consideration_samples_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(
+        list
+    )
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
         entities = entities_by_instance[instance_hash]
@@ -190,13 +191,21 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                                 {
                                     "sample_id": sample["sample_id"],
                                     "raw_response": sample["raw_response"],
-                                    "first_mention_position": sample["first_mentions"].get(entity["entity_id"]),
+                                    "first_mention_position": sample[
+                                        "first_mentions"
+                                    ].get(entity["entity_id"]),
                                     "rank": (
-                                        sample["ranked_entity_ids"].index(entity["entity_id"]) + 1
-                                        if entity["entity_id"] in sample["ranked_entity_ids"]
+                                        sample["ranked_entity_ids"].index(
+                                            entity["entity_id"]
+                                        )
+                                        + 1
+                                        if entity["entity_id"]
+                                        in sample["ranked_entity_ids"]
                                         else None
                                     ),
-                                    "mean_reciprocal_rank": sample["reciprocal_ranks"].get(entity["entity_id"], 0.0),
+                                    "mean_reciprocal_rank": sample[
+                                        "reciprocal_ranks"
+                                    ].get(entity["entity_id"], 0.0),
                                 }
                                 for sample in consideration_samples
                             ],

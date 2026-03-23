@@ -45,10 +45,7 @@ def save_assay_df(df: pl.DataFrame, save_path: str) -> None:
 
 
 def build_entity_lookup(entity_df: pl.DataFrame) -> dict[str, dict]:
-    return {
-        row["id"]: row
-        for row in entity_df.iter_rows(named=True)
-    }
+    return {row["id"]: row for row in entity_df.iter_rows(named=True)}
 
 
 def get_comparison_set_entities(
@@ -57,8 +54,7 @@ def get_comparison_set_entities(
     comparison_set_id: str,
 ) -> list[dict]:
     entity_ids = (
-        comparison_set_df
-        .filter(pl.col("id") == comparison_set_id)
+        comparison_set_df.filter(pl.col("id") == comparison_set_id)
         .select("entity_ids")
         .to_series()
         .item()
@@ -91,8 +87,7 @@ def std_coalesce(values: list[float]) -> float:
 
 
 def build_estimand_result(
-    metric_name: str, 
-    values: list[float]
+    metric_name: str, values: list[float]
 ) -> list[dict[str, str]]:
     return [
         {
