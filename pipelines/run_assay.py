@@ -5,6 +5,7 @@ import polars as pl
 from typing import Mapping
 from dotenv import load_dotenv
 from dvclive import Live
+import logging
 
 from pipelines.utils import configure_logging, silence_superfluous_warnings
 from src.data.model import (
@@ -13,12 +14,24 @@ from src.data.model import (
     COMPARISON_SET_SCHEMA, 
     ENTITY_SCHEMA
 )
-from src.assay import Config, RuntimeContext, assay_model
+from src.assay.common import Config, RuntimeContext, Assay, AssayDelegate, save_assay_df
+from src.assay.head_to_head import run_head_to_head
+from src.assay.rank import run_rank
+from src.assay.consideration_set import run_consideration_set
+from src.assay.describe_sentiment import run_describe_sentiment
 
 
 configure_logging()
 silence_superfluous_warnings()
 load_dotenv()
+
+
+ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
+    "head-to-head": run_head_to_head,
+    "rank": run_rank,
+    "consideration-set": run_consideration_set,
+    "describe-sentiment": run_describe_sentiment,
+}
 
 
 def parse_args():
@@ -87,15 +100,27 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
         missing_columns="insert"
     )
 
-    print(comparison_set_assay_instance_df.columns)
-    print(comparison_set_assay_instance_df.dtypes)
-
     return {
         "claim": claim_df,
         "comparison_set_assay_instance": comparison_set_assay_instance_df,
         "comparison_set": comparison_set_df,
         "entity": entity_df,
     }
+
+
+def assay_model(ctx: RuntimeContext) -> None:
+    assay_delegate = ASSAY_DELEGATES[ctx.cfg.assay]
+
+    logging.info(
+        f"Running assay={ctx.cfg.assay} model={ctx.cfg.model} "
+        f"num_samples_per_instance={ctx.cfg.num_samples_per_instance}."
+    )
+
+    assay_df = assay_delegate(ctx)
+
+    save_assay_df(assay_df, ctx.cfg.save)
+
+    logging.info(f"Saved assay results to {ctx.cfg.save}.")
 
 
 def main():
