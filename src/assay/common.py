@@ -5,7 +5,7 @@ import json
 from dataclasses import dataclass
 from typing import Mapping, Literal, Protocol
 from dvclive import Live
-
+import math
 
 from src.model import Model
 
@@ -86,6 +86,12 @@ def std_coalesce(values: list[float]) -> float:
     return float(statistics.pstdev(values))
 
 
+def sem_coalesce(values: list[float]) -> float:
+    if not values:
+        return float("nan")
+    return std_coalesce(values) / math.sqrt(len(values))
+
+
 def build_estimand_result(
     metric_name: str, values: list[float]
 ) -> list[dict[str, str]]:
@@ -101,5 +107,9 @@ def build_estimand_result(
         {
             "estimand": f"{metric_name}_std",
             "value": str(std_coalesce(values)),
+        },
+        {
+            "estimand": f"{metric_name}_sem",
+            "value": str(sem_coalesce(values)),
         },
     ]

@@ -1,104 +1,51 @@
-import polars as pl
 import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from tqdm.auto import tqdm
 from typing import Any
 
-from src.model import Message, invoke_model
+import polars as pl
+import torch
+from tqdm.auto import tqdm
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    pipeline,
+)
+
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    get_comparison_set_entities,
     build_estimand_result,
+    get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
-import torch
-from transformers import (
-    pipeline,
-    AutoTokenizer,
-    AutoModelForSequenceClassification,
+from src.model import Message, invoke_model
+
+
+_SENTIMENT_PIPELINE = pipeline(
+    "sentiment-analysis",
+    model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
 )
 
+_AD_MODEL_NAME = "teknology/ad-classifier-v0.3"
+_AD_TOKENIZER = AutoTokenizer.from_pretrained(_AD_MODEL_NAME)
+_AD_MODEL = AutoModelForSequenceClassification.from_pretrained(_AD_MODEL_NAME)
+_AD_MODEL.eval()
 
-_SENTIMENT_PIPELINE = None
-_AD_TOKENIZER = None
-_AD_MODEL = None
-_AD_DEVICE = None
-_AD_LABELS = None
-_AD_POSITIVE_LABEL = None
-
-
-def _get_sentiment_pipeline():
-    global _SENTIMENT_PIPELINE
-
-    if _SENTIMENT_PIPELINE is None:
-        _SENTIMENT_PIPELINE = pipeline(
-            "sentiment-analysis",
-            model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
-        )
-
-    return _SENTIMENT_PIPELINE
+_AD_LABELS = {
+    int(label_id): label_name
+    for label_id, label_name in _AD_MODEL.config.id2label.items()
+}
+_AD_POSITIVE_LABEL = "LABEL_1"
 
 
 def _score_sentiment_polarity(text: str) -> float:
-    sentiment_pipeline = _get_sentiment_pipeline()
-    scores = sentiment_pipeline(text, truncation=True, top_k=None)
-
-    if not isinstance(scores, list) or len(scores) != 2:
-        raise TypeError(f"Unexpected sentiment pipeline output: {scores!r}")
-
-    labels = {item["label"] for item in scores}
-    if labels != {"POSITIVE", "NEGATIVE"}:
-        raise ValueError(f"Unexpected sentiment labels: {labels!r}")
-
+    scores = _SENTIMENT_PIPELINE(text, truncation=True, top_k=None)
     score_by_label = {item["label"]: float(item["score"]) for item in scores}
-
     return score_by_label["POSITIVE"] - score_by_label["NEGATIVE"]
 
 
-def _load_ad_classifier() -> None:
-    global _AD_TOKENIZER, _AD_MODEL, _AD_DEVICE, _AD_LABELS, _AD_POSITIVE_LABEL
-
-    if _AD_TOKENIZER is not None:
-        return
-
-    model_name = "teknology/ad-classifier-v0.3"
-    _AD_TOKENIZER = AutoTokenizer.from_pretrained(model_name)
-    _AD_MODEL = AutoModelForSequenceClassification.from_pretrained(model_name)
-    _AD_MODEL.eval()
-
-    _AD_DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    _AD_MODEL.to(_AD_DEVICE)
-
-    id2label = getattr(_AD_MODEL.config, "id2label", None)
-    if not isinstance(id2label, dict) or len(id2label) != _AD_MODEL.config.num_labels:
-        raise ValueError(f"Unexpected ad-classifier id2label mapping: {id2label!r}")
-
-    _AD_LABELS = {
-        int(label_id): str(label_name) for label_id, label_name in id2label.items()
-    }
-
-    if len(_AD_LABELS) != 2:
-        raise ValueError(f"Expected binary ad classifier, got labels: {_AD_LABELS!r}")
-
-    _AD_POSITIVE_LABEL = "LABEL_1"
-
-    if _AD_POSITIVE_LABEL not in _AD_LABELS.values():
-        raise ValueError(
-            f"Expected {_AD_POSITIVE_LABEL!r} in ad classifier labels, got {_AD_LABELS!r}"
-        )
-
-
-def _predict_ad_scores(text: str) -> dict[str, float]:
-    if (
-        _AD_TOKENIZER is None
-        or _AD_MODEL is None
-        or _AD_DEVICE is None
-        or _AD_LABELS is None
-    ):
-        raise RuntimeError("Ad classifier not loaded")
-
+def _score_ad_likelihood(text: str) -> tuple[float, dict[str, float]]:
     inputs = _AD_TOKENIZER(
         text,
         padding=True,
@@ -106,35 +53,19 @@ def _predict_ad_scores(text: str) -> dict[str, float]:
         max_length=512,
         return_tensors="pt",
     )
-    inputs = {key: value.to(_AD_DEVICE) for key, value in inputs.items()}
 
     with torch.no_grad():
-        outputs = _AD_MODEL(**inputs)
-        logits = outputs.logits
-
-    if logits.shape != (1, _AD_MODEL.config.num_labels):
-        raise TypeError(f"Unexpected ad-classifier logits shape: {tuple(logits.shape)}")
+        logits = _AD_MODEL(**inputs).logits
 
     probs = torch.softmax(logits, dim=-1)[0]
-
-    return {
-        _AD_LABELS[label_idx]: float(probs[label_idx].item())
-        for label_idx in range(len(_AD_LABELS))
+    score_by_label = {
+        _AD_LABELS[i]: float(probs[i].item()) for i in range(len(_AD_LABELS))
     }
 
-
-def _score_ad_likelihood(text: str) -> tuple[float, dict[str, float]]:
-    if _AD_POSITIVE_LABEL is None:
-        raise RuntimeError("Ad-positive label not initialized")
-
-    score_by_label = _predict_ad_scores(text)
     return score_by_label[_AD_POSITIVE_LABEL], score_by_label
 
 
 def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
-    _get_sentiment_pipeline()
-    _load_ad_classifier()
-
     def build_messages(entity_name: str, instance: dict) -> list[Message]:
         question = instance["question_template"].format(entity=entity_name)
 
@@ -196,6 +127,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     )
 
     tasks: list[dict] = []
+    entities_by_instance: dict[str, list[dict]] = {}
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -208,6 +140,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             entity_lookup=entity_lookup,
             comparison_set_id=comparison_set_id,
         )
+        entities_by_instance[instance_hash] = entities
 
         for sample_id in range(ctx.cfg.num_samples_per_instance):
             tasks.extend(
@@ -245,12 +178,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
-
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=comparison_set_id,
-        )
+        entities = entities_by_instance[instance_hash]
 
         for entity in entities:
             samples = sorted(
@@ -259,10 +187,9 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 ],
                 key=lambda row: row["sample_id"],
             )
-            sentiment_values = [
-                float(sample["sentiment_polarity"]) for sample in samples
-            ]
-            ad_values = [float(sample["ad_likelihood"]) for sample in samples]
+
+            sentiment_values = [sample["sentiment_polarity"] for sample in samples]
+            ad_values = [sample["ad_likelihood"] for sample in samples]
 
             rows.append(
                 {

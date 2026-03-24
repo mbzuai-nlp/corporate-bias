@@ -27,28 +27,30 @@ stages:
     #   - head-to-head
     #   - rank
     #   - consideration-set
-      - describe-sentiment
+      - name: describe-sentiment
+        samples-per-instance: 20
       model:
-      - gpt5
+      #- gpt5
       - gemini
     vars:
     - stage-name: run-assay
     cmd: >
       bash -lc "set -euo pipefail;
-      mkdir -p ${data}/${stage-name}/${item.assay}/${item.model};
+      mkdir -p ${data}/${stage-name}/${item.assay.name}/${item.model};
       uv run python -m pipelines.run_assay
-      --assay=${item.assay}
+      --assay=${item.assay.name}
       --model=${item.model}
       --db=${data}/db
-      --save-path=${data}/assays/${item.assay}/${item.model}.parquet
-      --exp=${data}/${stage-name}/${item.assay}/${item.model}/exp
-      2>&1 | tee ${data}/${stage-name}/${item.assay}/${item.model}/${log-fn}"
+      --save-path=${data}/assays/${item.assay.name}/${item.model}.parquet
+      --exp=${data}/${stage-name}/${item.assay.name}/${item.model}/exp
+      --samples-per-instance=${item.assay.samples-per-instance}
+      2>&1 | tee ${data}/${stage-name}/${item.assay.name}/${item.model}/${log-fn}"
     deps:
     - ${data}/db/claim.parquet
     - ${data}/db/comparison_set.parquet
     - ${data}/db/entity.parquet
     outs:
-    - ${data}/assays/${item.assay}/${item.model}.parquet:
+    - ${data}/assays/${item.assay.name}/${item.model}.parquet:
         cache: false
 
 metrics:

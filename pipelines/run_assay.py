@@ -61,6 +61,11 @@ def parse_args():
         type=str,
         required=True,
     )
+    parser.add_argument(
+        "--samples-per-instance",
+        type=int,
+        required=True,
+    )
     return parser.parse_args()
 
 
@@ -136,7 +141,7 @@ def main():
                 save=save_path,
                 assay=args.assay,
                 model=args.model,
-                num_samples_per_instance=5,
+                num_samples_per_instance=args.samples_per_instance,
             ),
             exp=exp,
             db=db,
