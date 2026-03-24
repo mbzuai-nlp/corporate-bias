@@ -240,7 +240,7 @@ stages:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gemini;
       uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gemini
       --db=data/db --save-path=data/assays/describe-sentiment/gemini.parquet --exp=data/run-assay/describe-sentiment/gemini/exp
-      --samples-per-instance=5 2>&1 | tee data/run-assay/describe-sentiment/gemini/exec.log\"\
+      --samples-per-instance=20 2>&1 | tee data/run-assay/describe-sentiment/gemini/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -258,5 +258,5 @@ stages:
     outs:
     - path: data/assays/describe-sentiment/gemini.parquet
       hash: md5
-      md5: 06238921dab711d75b82b33b58e07d1d
-      size: 35942
+      md5: 7f0afd83ce52b4bc70b19e4639813310
+      size: 163252

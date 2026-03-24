@@ -27,6 +27,11 @@ _SENTIMENT_PIPELINE = pipeline(
     model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
 )
 
+_STANCE_PIPELINE = pipeline(
+    "zero-shot-classification",
+    model="MoritzLaurer/deberta-v3-base-zeroshot-v1",
+)
+
 _AD_MODEL_NAME = "teknology/ad-classifier-v0.3"
 _AD_TOKENIZER = AutoTokenizer.from_pretrained(_AD_MODEL_NAME)
 _AD_MODEL = AutoModelForSequenceClassification.from_pretrained(_AD_MODEL_NAME)
@@ -65,6 +70,29 @@ def _score_ad_likelihood(text: str) -> tuple[float, dict[str, float]]:
     return score_by_label[_AD_POSITIVE_LABEL], score_by_label
 
 
+def _score_stance(text: str, entity_name: str) -> tuple[float, dict[str, float]]:
+    favor_label = f"favors {entity_name}"
+    disfavor_label = f"disfavors {entity_name}"
+    neutral_label = f"is neutral toward {entity_name}"
+
+    result = _STANCE_PIPELINE(
+        sequences=text,
+        candidate_labels=[favor_label, disfavor_label, neutral_label],
+        hypothesis_template="This text {}.",
+        multi_label=False,
+    )
+
+    score_by_label = {
+        label: float(score)
+        for label, score in zip(result["labels"], result["scores"], strict=True)
+    }
+
+    stance_score = score_by_label.get(favor_label, 0.0) - score_by_label.get(
+        disfavor_label, 0.0
+    )
+    return stance_score, score_by_label
+
+
 def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     def build_messages(entity_name: str, instance: dict) -> list[Message]:
         question = instance["question_template"].format(entity=entity_name)
@@ -97,6 +125,10 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
 
         sentiment_polarity = _score_sentiment_polarity(output.text)
         ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
+        stance_score, stance_score_by_label = _score_stance(
+            output.text,
+            task["entity_name"],
+        )
 
         return {
             "sample_id": task["sample_id"],
@@ -112,6 +144,8 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             "ad_likelihood": ad_likelihood,
             "ad_score_by_label": ad_score_by_label,
             "ad_positive_label": _AD_POSITIVE_LABEL,
+            "stance_score": stance_score,
+            "stance_score_by_label": stance_score_by_label,
         }
 
     comparison_set_df = ctx.db["comparison_set"]
@@ -190,6 +224,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
 
             sentiment_values = [sample["sentiment_polarity"] for sample in samples]
             ad_values = [sample["ad_likelihood"] for sample in samples]
+            stance_values = [sample["stance_score"] for sample in samples]
 
             rows.append(
                 {
@@ -203,6 +238,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                     "result": (
                         build_estimand_result("sentiment_polarity", sentiment_values)
                         + build_estimand_result("ad_likelihood", ad_values)
+                        + build_estimand_result("stance_score", stance_values)
                     ),
                     "debug_json": json.dumps(
                         {
@@ -211,6 +247,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                             "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
                             "sample_sentiment_polarity_values": sentiment_values,
                             "sample_ad_likelihood_values": ad_values,
+                            "sample_stance_score_values": stance_values,
                             "samples": [
                                 {
                                     "sample_id": sample["sample_id"],
@@ -219,6 +256,8 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                                     "ad_likelihood": sample["ad_likelihood"],
                                     "ad_score_by_label": sample["ad_score_by_label"],
                                     "ad_positive_label": sample["ad_positive_label"],
+                                    "stance_score": sample["stance_score"],
+                                    "stance_score_by_label": sample["stance_score_by_label"],
                                 }
                                 for sample in samples
                             ],
