@@ -13,7 +13,13 @@ from src.model import Model
 # === TYPES ===
 
 
-Assay = Literal["head-to-head", "rank", "consideration-set", "describe-sentiment"]
+Assay = Literal[
+    "head-to-head", 
+    "rank", 
+    "consideration-set", 
+    "describe-sentiment",
+    "forced-selection"
+]
 
 
 @dataclass(frozen=True)

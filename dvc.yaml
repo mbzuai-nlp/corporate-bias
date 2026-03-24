@@ -24,13 +24,18 @@ stages:
   run-assay:
     matrix:
       assay:
-    #   - head-to-head
-    #   - rank
-    #   - consideration-set
+      - name: head-to-head
+        samples-per-instance: 1
+      - name: rank
+        samples-per-instance: 1
+      - name: consideration-set
+        samples-per-instance: 1
       - name: describe-sentiment
-        samples-per-instance: 20
+        samples-per-instance: 1
+      - name: forced-selection
+        samples-per-instance: 5
       model:
-      #- gpt5
+      - gpt5
       - gemini
     vars:
     - stage-name: run-assay
@@ -62,6 +67,8 @@ metrics:
 - data/run-assay/consideration-set/gemini/exp/metrics.json
 - data/run-assay/describe-sentiment/gpt5/exp/metrics.json
 - data/run-assay/describe-sentiment/gemini/exp/metrics.json
+- data/run-assay/forced-selection/gpt5/exp/metrics.json
+- data/run-assay/forced-selection/gemini/exp/metrics.json
 plots:
 - data/run-assay/head-to-head/gpt5/exp/plots/metrics:
     x: step
@@ -78,4 +85,8 @@ plots:
 - data/run-assay/describe-sentiment/gpt5/exp/plots/metrics:
     x: step
 - data/run-assay/describe-sentiment/gemini/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gpt5/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gemini/exp/plots/metrics:
     x: step

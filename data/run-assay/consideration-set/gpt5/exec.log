@@ -1,6 +1,9 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-/home/harry/code/corporate-bias/pipelines/run_assay.py:78: PolarsInefficientMapWarning: 
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 1515.40it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 99/202 [00:00<00:00, 983.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1391.52it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1021.95it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1377.30it/s]
+/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -9,11 +12,8 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-23 22:00:16,930 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=5.
-2026-03-23 22:00:16,936 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:16,938 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:16,939 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:16,940 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:16,941 [INFO] root: Invoking gpt5.
-Consideration sets:   0%|          | 0/5 [00:00<?, ?it/s]Consideration sets: 100%|██████████| 5/5 [00:00<00:00, 65.16it/s]
-2026-03-23 22:00:17,031 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.
+2026-03-24 21:14:06,976 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=1.
+2026-03-24 21:14:06,980 [INFO] root: Invoking gpt5.
+Consideration sets:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-24 21:14:08,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Consideration sets: 100%|██████████| 1/1 [01:21<00:00, 81.89s/it]Consideration sets: 100%|██████████| 1/1 [01:21<00:00, 81.89s/it]
+2026-03-24 21:15:28,874 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.

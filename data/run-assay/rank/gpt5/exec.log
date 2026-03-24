@@ -1,6 +1,10 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-/home/harry/code/corporate-bias/pipelines/run_assay.py:78: PolarsInefficientMapWarning: 
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 1396.74it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 87/202 [00:00<00:00, 866.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1440.08it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 909.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1223.13it/s]
+/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -9,11 +13,8 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-23 22:00:05,235 [INFO] root: Running assay=rank model=gpt5 num_samples_per_instance=5.
-2026-03-23 22:00:05,238 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:05,240 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:05,241 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:05,242 [INFO] root: Invoking gpt5.
-2026-03-23 22:00:05,243 [INFO] root: Invoking gpt5.
-Rankings:   0%|          | 0/5 [00:00<?, ?it/s]Rankings: 100%|██████████| 5/5 [00:00<00:00, 110.76it/s]
-2026-03-23 22:00:05,297 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
+2026-03-24 21:12:42,551 [INFO] root: Running assay=rank model=gpt5 num_samples_per_instance=1.
+2026-03-24 21:12:42,557 [INFO] root: Invoking gpt5.
+Rankings:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-24 21:12:45,570 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Rankings: 100%|██████████| 1/1 [00:53<00:00, 53.53s/it]Rankings: 100%|██████████| 1/1 [00:53<00:00, 53.53s/it]
+2026-03-24 21:13:36,088 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.

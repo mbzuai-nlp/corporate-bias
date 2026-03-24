@@ -19,6 +19,7 @@ from src.assay.head_to_head import run_head_to_head
 from src.assay.rank import run_rank
 from src.assay.consideration_set import run_consideration_set
 from src.assay.describe_sentiment import run_describe_sentiment
+from src.assay.forced_selection import run_forced_selection
 
 
 configure_logging()
@@ -31,6 +32,7 @@ ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
     "rank": run_rank,
     "consideration-set": run_consideration_set,
     "describe-sentiment": run_describe_sentiment,
+    "forced-selection": run_forced_selection
 }
 
 
