@@ -1,9 +1,16 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 1625.69it/s]
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1039.01it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1400.53it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 74/202 [00:00<00:00, 737.09it/s]Loading weights:  75%|███████▌  | 152/202 [00:00<00:00, 759.21it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 948.05it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7698.56it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  50%|████▉     | 100/202 [00:00<00:00, 988.00it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1620.67it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  39%|███▊      | 78/202 [00:00<00:00, 775.03it/s]Loading weights:  77%|███████▋  | 156/202 [00:00<00:00, 729.70it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 932.02it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -13,16 +20,11 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-24 21:15:57,663 [INFO] root: Running assay=describe-sentiment model=gpt5 num_samples_per_instance=1.
-2026-03-24 21:15:57,667 [INFO] root: Invoking gpt5.
-2026-03-24 21:15:57,668 [INFO] root: Invoking gpt5.
-2026-03-24 21:15:57,669 [INFO] root: Invoking gpt5.
-2026-03-24 21:15:57,669 [INFO] root: Invoking gpt5.
-2026-03-24 21:15:57,670 [INFO] root: Invoking gpt5.
-Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-24 21:15:58,771 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-24 21:15:58,796 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-24 21:15:58,844 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-24 21:15:58,876 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-24 21:15:58,908 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  20%|██        | 1/5 [00:44<02:58, 44.65s/it]Descriptions:  40%|████      | 2/5 [00:58<01:19, 26.42s/it]Descriptions: 100%|██████████| 5/5 [00:58<00:00, 11.66s/it]
-2026-03-24 21:16:55,981 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt5.parquet.
+2026-03-25 14:55:42,740 [INFO] root: Running assay=describe-sentiment model=gpt5 num_samples_per_instance=1.
+2026-03-25 14:55:42,746 [INFO] root: Invoking gpt5.
+2026-03-25 14:55:42,746 [INFO] root: Invoking gpt5.
+2026-03-25 14:55:42,747 [INFO] root: Invoking gpt5.
+Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-25 14:55:42,749 [INFO] root: Invoking gpt5.
+2026-03-25 14:55:42,749 [INFO] root: Invoking gpt5.
+Descriptions:  20%|██        | 1/5 [00:05<00:20,  5.03s/it]Descriptions: 100%|██████████| 5/5 [00:05<00:00,  1.01s/it]
+2026-03-25 14:55:47,790 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt5.parquet.

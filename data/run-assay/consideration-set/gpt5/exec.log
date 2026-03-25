@@ -1,8 +1,16 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 1515.40it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 99/202 [00:00<00:00, 983.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1391.52it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1021.95it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1377.30it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 8956.10it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 958.08it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1507.47it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 930.73it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1451.22it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -12,8 +20,64 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-24 21:14:06,976 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=1.
-2026-03-24 21:14:06,980 [INFO] root: Invoking gpt5.
-Consideration sets:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-24 21:14:08,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Consideration sets: 100%|██████████| 1/1 [01:21<00:00, 81.89s/it]Consideration sets: 100%|██████████| 1/1 [01:21<00:00, 81.89s/it]
-2026-03-24 21:15:28,874 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.
+2026-03-25 14:53:59,772 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=10.
+2026-03-25 14:53:59,778 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,778 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,779 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,779 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,780 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,781 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,782 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,784 [INFO] root: Invoking gpt5.
+2026-03-25 14:53:59,785 [INFO] root: Invoking gpt5.
+Consideration sets:   0%|          | 0/10 [00:00<?, ?it/s]2026-03-25 14:53:59,786 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:00,369 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,373 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,401 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,420 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,453 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,509 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:00,513 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Consideration sets:  20%|██        | 2/10 [00:23<01:33, 11.73s/it]Consideration sets:  30%|███       | 3/10 [00:30<01:07,  9.68s/it]Consideration sets:  50%|█████     | 5/10 [00:47<00:44,  8.97s/it]Consideration sets: 100%|██████████| 10/10 [00:47<00:00,  4.70s/it]
+2026-03-25 14:54:46,826 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,826 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,827 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,827 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,828 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,829 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,829 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,836 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,837 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,837 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,842 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,842 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,843 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,843 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,844 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,844 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,845 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,845 [INFO] root: Invoking gemini.
+2026-03-25 14:54:46,846 [INFO] root: Invoking gpt5.
+2026-03-25 14:54:46,846 [INFO] root: Invoking gemini.
+Judge evaluations:   0%|          | 0/20 [00:00<?, ?it/s]2026-03-25 14:54:47,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,443 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,444 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,444 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,444 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,445 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,445 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,446 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,508 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,519 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,579 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,626 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,637 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,660 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,724 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:47,854 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:48,352 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-25 14:54:48,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  15%|█▌        | 3/20 [00:15<01:28,  5.19s/it]Judge evaluations: 100%|██████████| 20/20 [00:15<00:00,  1.28it/s]
+2026-03-25 14:55:02,440 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.

@@ -1,9 +1,16 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/104 [00:00<?, ?it/s]Loading weights: 100%|██████████| 104/104 [00:00<00:00, 1338.40it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7913.06it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  57%|█████▋    | 115/202 [00:00<00:00, 1146.21it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1395.49it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 959.33it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1365.56it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1025.95it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1557.53it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 905.82it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1536.92it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -13,8 +20,7 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-24 21:13:49,016 [INFO] root: Running assay=rank model=gemini num_samples_per_instance=1.
-2026-03-24 21:13:49,022 [INFO] root: Invoking gemini.
-Rankings:   0%|          | 0/1 [00:00<?, ?it/s]2026-03-24 21:13:55,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Rankings: 100%|██████████| 1/1 [00:06<00:00,  6.79s/it]Rankings: 100%|██████████| 1/1 [00:06<00:00,  6.79s/it]
-2026-03-24 21:13:55,821 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gemini.parquet.
+2026-03-25 14:53:50,690 [INFO] root: Running assay=rank model=gemini num_samples_per_instance=1.
+2026-03-25 14:53:50,695 [INFO] root: Invoking gemini.
+Rankings:   0%|          | 0/1 [00:00<?, ?it/s]Rankings: 100%|██████████| 1/1 [00:00<00:00, 34.03it/s]
+2026-03-25 14:53:50,730 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gemini.parquet.

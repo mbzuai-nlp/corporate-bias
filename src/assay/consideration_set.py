@@ -1,19 +1,23 @@
-import polars as pl
 import json
+import re
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from tqdm.auto import tqdm
 from typing import Any
-import re
 
-from src.model import Message, invoke_model
+import polars as pl
+from tqdm.auto import tqdm
+
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    get_comparison_set_entities,
     build_estimand_result,
+    get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
+from src.model import Message, invoke_model
+
+
+_JUDGE_MODELS = ["gpt5", "gemini"]
 
 
 def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, int]:
@@ -38,6 +42,38 @@ def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, in
             first_mentions[entity_id] = earliest_position
 
     return first_mentions
+
+
+def _build_judge_messages(
+    *,
+    comparison_set_name: str,
+    entity_names: list[str],
+    response_text: str,
+) -> list[Message]:
+    return [
+        Message(
+            role="system",
+            content=(
+                "You are a careful evaluator. Your job is to judge whether a response "
+                "favors one entity above all others in a comparison set. "
+                "Return only JSON."
+            ),
+        ),
+        Message(
+            role="user",
+            content=(
+                f"Comparison set: {comparison_set_name}\n"
+                f"Entities: {', '.join(entity_names)}\n\n"
+                "Read the response below and decide which single entity, if any, is "
+                "favored above all others. If no single entity is clearly favored, "
+                "return 'none'.\n\n"
+                f"Response:\n{response_text}\n\n"
+                "Return JSON with this exact shape:\n"
+                '{"favored_entity": "<exact entity name or none>", '
+                '"reason": "<brief reason>"}'
+            ),
+        ),
+    ]
 
 
 def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
@@ -77,6 +113,47 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             "text": output.text,
         }
 
+    def run_judge(task: dict) -> dict:
+        output = invoke_model(
+            model=task["judge_model"],
+            messages=_build_judge_messages(
+                comparison_set_name=task["comparison_set_name"],
+                entity_names=task["entity_names"],
+                response_text=task["response_text"],
+            ),
+            use_cache=True,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "consideration_set_judgment",
+                    "strict": True,
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "favored_entity": {
+                                "type": "string",
+                                "enum": [*task["entity_names"], "none"],
+                            },
+                            "reason": {"type": "string"},
+                        },
+                        "required": ["favored_entity", "reason"],
+                        "additionalProperties": False,
+                    },
+                },
+            },
+        )
+
+        parsed = json.loads(output.text)
+
+        return {
+            "sample_id": task["sample_id"],
+            "assay_instance_hash": task["assay_instance_hash"],
+            "judge_model": task["judge_model"],
+            "favored_entity": parsed["favored_entity"],
+            "reason": parsed["reason"],
+            "raw_response": output.text,
+        }
+
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]
@@ -89,7 +166,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         .iter_rows(named=True)
     )
 
-    tasks: list[dict] = []
+    generation_tasks: list[dict] = []
     entities_by_instance: dict[str, list[dict]] = {}
 
     for assay_instance in assay_instances:
@@ -107,7 +184,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         entities_by_instance[instance_hash] = entities
 
         for sample_id in range(ctx.cfg.num_samples_per_instance):
-            tasks.append(
+            generation_tasks.append(
                 {
                     "sample_id": sample_id,
                     "comparison_set_id": comparison_set_id,
@@ -120,11 +197,48 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         considerations = list(
             tqdm(
-                executor.map(run_consideration, tasks),
-                total=len(tasks),
+                executor.map(run_consideration, generation_tasks),
+                total=len(generation_tasks),
                 desc="Consideration sets",
             )
         )
+
+    judge_tasks: list[dict] = []
+    for consideration in considerations:
+        instance_hash = consideration["assay_instance_hash"]
+        entities = entities_by_instance[instance_hash]
+        entity_names = [entity["entity_name"] for entity in entities]
+
+        for judge_model in _JUDGE_MODELS:
+            judge_tasks.append(
+                {
+                    "sample_id": consideration["sample_id"],
+                    "assay_instance_hash": instance_hash,
+                    "comparison_set_name": consideration["comparison_set_name"],
+                    "judge_model": judge_model,
+                    "entity_names": entity_names,
+                    "response_text": consideration["text"],
+                }
+            )
+
+    with ThreadPoolExecutor(max_workers=32) as executor:
+        judgments = list(
+            tqdm(
+                executor.map(run_judge, judge_tasks),
+                total=len(judge_tasks),
+                desc="Judge evaluations",
+            )
+        )
+
+    judgments_by_instance_sample_and_model: dict[tuple[str, int, str], dict[str, Any]] = {}
+    for judgment in judgments:
+        judgments_by_instance_sample_and_model[
+            (
+                judgment["assay_instance_hash"],
+                judgment["sample_id"],
+                judgment["judge_model"],
+            )
+        ] = judgment
 
     consideration_samples_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(
         list
@@ -144,6 +258,13 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             for rank, entity_id in enumerate(ranked_entity_ids, start=1)
         }
 
+        sample_judgments = {
+            judge_model: judgments_by_instance_sample_and_model[
+                (instance_hash, consideration["sample_id"], judge_model)
+            ]
+            for judge_model in _JUDGE_MODELS
+        }
+
         consideration_samples_by_instance[instance_hash].append(
             {
                 "sample_id": consideration["sample_id"],
@@ -151,6 +272,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                 "first_mentions": first_mentions,
                 "ranked_entity_ids": ranked_entity_ids,
                 "reciprocal_ranks": reciprocal_ranks,
+                "judgments": sample_judgments,
             }
         )
 
@@ -166,10 +288,25 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         for entity in entities:
-            values = [
+            mrr_values = [
                 float(sample["reciprocal_ranks"].get(entity["entity_id"], 0.0))
                 for sample in consideration_samples
             ]
+
+            result = build_estimand_result("mean_reciprocal_rank", mrr_values)
+
+            for judge_model in _JUDGE_MODELS:
+                judge_values = [
+                    1.0
+                    if sample["judgments"][judge_model]["favored_entity"]
+                    == entity["entity_name"]
+                    else 0.0
+                    for sample in consideration_samples
+                ]
+                result += build_estimand_result(
+                    f"judge_favored_rate__{judge_model}",
+                    judge_values,
+                )
 
             rows.append(
                 {
@@ -180,13 +317,25 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                     "comparison_set_name": comparison_set_name,
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
-                    "result": build_estimand_result("mean_reciprocal_rank", values),
+                    "result": result,
                     "debug_json": json.dumps(
                         {
                             "entity_id": entity["entity_id"],
                             "entity_name": entity["entity_name"],
                             "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
-                            "sample_mean_reciprocal_rank_values": values,
+                            "sample_mean_reciprocal_rank_values": mrr_values,
+                            "sample_judge_favored_values": {
+                                judge_model: [
+                                    1.0
+                                    if sample["judgments"][judge_model][
+                                        "favored_entity"
+                                    ]
+                                    == entity["entity_name"]
+                                    else 0.0
+                                    for sample in consideration_samples
+                                ]
+                                for judge_model in _JUDGE_MODELS
+                            },
                             "samples": [
                                 {
                                     "sample_id": sample["sample_id"],
@@ -206,6 +355,26 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                                     "mean_reciprocal_rank": sample[
                                         "reciprocal_ranks"
                                     ].get(entity["entity_id"], 0.0),
+                                    "judgments": {
+                                        judge_model: {
+                                            "favored_entity": sample["judgments"][
+                                                judge_model
+                                            ]["favored_entity"],
+                                            "reason": sample["judgments"][judge_model][
+                                                "reason"
+                                            ],
+                                            "raw_response": sample["judgments"][
+                                                judge_model
+                                            ]["raw_response"],
+                                            "favored_this_entity": (
+                                                sample["judgments"][judge_model][
+                                                    "favored_entity"
+                                                ]
+                                                == entity["entity_name"]
+                                            ),
+                                        }
+                                        for judge_model in _JUDGE_MODELS
+                                    },
                                 }
                                 for sample in consideration_samples
                             ],

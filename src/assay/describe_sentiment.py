@@ -2,6 +2,7 @@ import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any
+
 import polars as pl
 import torch
 from tqdm.auto import tqdm
@@ -21,9 +22,10 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
+_SENTIMENT_MODEL_NAME = "siebert/sentiment-roberta-large-english"
 _SENTIMENT_PIPELINE = pipeline(
     "sentiment-analysis",
-    model="distilbert/distilbert-base-uncased-finetuned-sst-2-english",
+    model=_SENTIMENT_MODEL_NAME,
 )
 
 _STANCE_PIPELINE = pipeline(
