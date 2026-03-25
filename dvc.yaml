@@ -58,6 +58,16 @@ stages:
     - ${data}/assays/${item.assay.name}/${item.model}.parquet:
         cache: false
 
+  combine-assays:
+    cmd: >
+      uv run python -m pipelines.combine_assays
+      --assays=${data}/assays
+      --save=${data}/combined_assays.parquet
+    deps:
+    - ${data}/assays
+    outs:
+    - ${data}/combined_assays.parquet
+
 metrics:
 - data/run-assay/head-to-head/gpt5/exp/metrics.json
 - data/run-assay/head-to-head/gemini/exp/metrics.json

@@ -450,3 +450,16 @@ stages:
       hash: md5
       md5: f6bbcd5c21515db7a1aba1dd1d989fcd
       size: 794057
+  combine-assays:
+    cmd: "uv run python -m pipelines.combine_assays --assays=data/assays --save=data/combined_assays.parquet\n"
+    deps:
+    - path: data/assays
+      hash: md5
+      md5: 8d4f16916e77a5ba93b00a78f0e57eeb.dir
+      size: 2283653
+      nfiles: 10
+    outs:
+    - path: data/combined_assays.parquet
+      hash: md5
+      md5: eac0820db4cb01b8d45203299fa92861
+      size: 471826
