@@ -310,7 +310,7 @@ stages:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gpt5;
       uv run python -m pipelines.run_assay --assay=consideration-set --model=gpt5
       --db=data/db --save-path=data/assays/consideration-set/gpt5.parquet --exp=data/run-assay/consideration-set/gpt5/exp
-      --samples-per-instance=10 2>&1 | tee data/run-assay/consideration-set/gpt5/exec.log\"\
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/gpt5/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -328,13 +328,13 @@ stages:
     outs:
     - path: data/assays/consideration-set/gpt5.parquet
       hash: md5
-      md5: 93ff985d69978128280c764e59db2478
-      size: 253199
+      md5: 44dda5efe3d50d2c8dec85946490f4fc
+      size: 35743
   run-assay@assay2-gemini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gemini;
       uv run python -m pipelines.run_assay --assay=consideration-set --model=gemini
       --db=data/db --save-path=data/assays/consideration-set/gemini.parquet --exp=data/run-assay/consideration-set/gemini/exp
-      --samples-per-instance=10 2>&1 | tee data/run-assay/consideration-set/gemini/exec.log\"\
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/gemini/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -352,8 +352,8 @@ stages:
     outs:
     - path: data/assays/consideration-set/gemini.parquet
       hash: md5
-      md5: 3f40e095050ec98ec37ccaa74c3bc2de
-      size: 178341
+      md5: d2eddde443c6771548adf35efcf72ab8
+      size: 31912
   run-assay@assay3-gpt5:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gpt5;
       uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gpt5
@@ -406,7 +406,7 @@ stages:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gpt5;
       uv run python -m pipelines.run_assay --assay=forced-selection --model=gpt5 --db=data/db
       --save-path=data/assays/forced-selection/gpt5.parquet --exp=data/run-assay/forced-selection/gpt5/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/gpt5/exec.log\"\
+      --samples-per-instance=10 2>&1 | tee data/run-assay/forced-selection/gpt5/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -424,13 +424,13 @@ stages:
     outs:
     - path: data/assays/forced-selection/gpt5.parquet
       hash: md5
-      md5: f3fc559dfa736d2f94f0e30ab3365f0e
-      size: 8577
+      md5: 6675d1c98eaed029ba8b0248a4d02080
+      size: 464932
   run-assay@assay4-gemini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gemini;
       uv run python -m pipelines.run_assay --assay=forced-selection --model=gemini
       --db=data/db --save-path=data/assays/forced-selection/gemini.parquet --exp=data/run-assay/forced-selection/gemini/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/gemini/exec.log\"\
+      --samples-per-instance=10 2>&1 | tee data/run-assay/forced-selection/gemini/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -448,5 +448,5 @@ stages:
     outs:
     - path: data/assays/forced-selection/gemini.parquet
       hash: md5
-      md5: da7c4743cf4805820f467528729f511a
-      size: 9091
+      md5: 3ce58975d8cdc3f75f9eb8e5fa39edb1
+      size: 254879
