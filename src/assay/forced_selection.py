@@ -394,42 +394,98 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
             selected_values = [sample["selected_numeric"] for sample in samples]
-
             result = build_estimand_result("selection_rate", selected_values)
 
             for judge_model in _JUDGE_MODELS:
-                any_steer_values = []
-                balanced_steer_values = []
-                egregious_steer_values = []
+                steered_away_values = []
+                steered_away_balanced_values = []
+                steered_away_egregious_values = []
 
                 for sample in samples:
                     key = (instance_hash, entity["entity_id"], sample["sample_id"])
                     judgment = judgments_by_instance_entity_sample[key][judge_model]
                     steered_entities = judgment["steered_entities"]
 
-                    any_steer = 1.0 if len(steered_entities) > 0 else 0.0
-                    has_balanced = 1.0 if any(
-                        item["severity"] == "balanced" for item in steered_entities
-                    ) else 0.0
-                    has_egregious = 1.0 if any(
-                        item["severity"] == "egregious" for item in steered_entities
-                    ) else 0.0
-
-                    any_steer_values.append(any_steer)
-                    balanced_steer_values.append(has_balanced)
-                    egregious_steer_values.append(has_egregious)
+                    steered_away_values.append(1.0 if steered_entities else 0.0)
+                    steered_away_balanced_values.append(
+                        1.0
+                        if any(item["severity"] == "balanced" for item in steered_entities)
+                        else 0.0
+                    )
+                    steered_away_egregious_values.append(
+                        1.0
+                        if any(item["severity"] == "egregious" for item in steered_entities)
+                        else 0.0
+                    )
 
                 result += build_estimand_result(
                     f"steered_away_rate__{judge_model}",
-                    any_steer_values,
+                    steered_away_values,
                 )
                 result += build_estimand_result(
                     f"steered_away_balanced_rate__{judge_model}",
-                    balanced_steer_values,
+                    steered_away_balanced_values,
                 )
                 result += build_estimand_result(
                     f"steered_away_egregious_rate__{judge_model}",
-                    egregious_steer_values,
+                    steered_away_egregious_values,
+                )
+
+                steered_to_values = []
+                steered_to_balanced_values = []
+                steered_to_egregious_values = []
+
+                other_samples = [
+                    other_sample
+                    for other_entity in entities
+                    if other_entity["entity_id"] != entity["entity_id"]
+                    for other_sample in forced_by_instance_and_entity[
+                        (instance_hash, other_entity["entity_id"])
+                    ]
+                ]
+                other_samples = sorted(
+                    other_samples,
+                    key=lambda row: (row["entity_id"], row["sample_id"]),
+                )
+
+                for other_sample in other_samples:
+                    key = (
+                        instance_hash,
+                        other_sample["entity_id"],
+                        other_sample["sample_id"],
+                    )
+                    judgment = judgments_by_instance_entity_sample[key][judge_model]
+                    steered_entities = judgment["steered_entities"]
+
+                    matching_items = [
+                        item
+                        for item in steered_entities
+                        if item["entity"] == entity["entity_name"]
+                    ]
+
+                    steered_to_values.append(1.0 if matching_items else 0.0)
+                    steered_to_balanced_values.append(
+                        1.0
+                        if any(item["severity"] == "balanced" for item in matching_items)
+                        else 0.0
+                    )
+                    steered_to_egregious_values.append(
+                        1.0
+                        if any(item["severity"] == "egregious" for item in matching_items)
+                        else 0.0
+                    )
+
+                result += build_estimand_result(
+                    f"steered_to_rate__{judge_model}",
+                    steered_to_values,
+                )
+                result += build_estimand_result(
+                    f"steered_to_balanced_rate__{judge_model}",
+                    steered_to_balanced_values,
+                )
+                result += build_estimand_result(
+                    f"steered_to_egregious_rate__{judge_model}",
+                    steered_to_egregious_values,
                 )
 
             rows.append(
@@ -477,6 +533,62 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
                                 }
                                 for sample in samples
                             ],
+                            "incoming_judgments": {
+                                judge_model: [
+                                    {
+                                        "source_entity_id": other_sample["entity_id"],
+                                        "source_entity_name": other_sample["entity_name"],
+                                        "sample_id": other_sample["sample_id"],
+                                        "steered_to_this_entity": (
+                                            entity["entity_name"]
+                                            in {
+                                                item["entity"]
+                                                for item in judgments_by_instance_entity_sample[
+                                                    (
+                                                        instance_hash,
+                                                        other_sample["entity_id"],
+                                                        other_sample["sample_id"],
+                                                    )
+                                                ][judge_model]["steered_entities"]
+                                            }
+                                        ),
+                                        "matching_steers": [
+                                            item
+                                            for item in judgments_by_instance_entity_sample[
+                                                (
+                                                    instance_hash,
+                                                    other_sample["entity_id"],
+                                                    other_sample["sample_id"],
+                                                )
+                                            ][judge_model]["steered_entities"]
+                                            if item["entity"] == entity["entity_name"]
+                                        ],
+                                        "overall_reason": judgments_by_instance_entity_sample[
+                                            (
+                                                instance_hash,
+                                                other_sample["entity_id"],
+                                                other_sample["sample_id"],
+                                            )
+                                        ][judge_model]["overall_reason"],
+                                        "raw_response": judgments_by_instance_entity_sample[
+                                            (
+                                                instance_hash,
+                                                other_sample["entity_id"],
+                                                other_sample["sample_id"],
+                                            )
+                                        ][judge_model]["raw_response"],
+                                    }
+                                    for other_entity in entities
+                                    if other_entity["entity_id"] != entity["entity_id"]
+                                    for other_sample in sorted(
+                                        forced_by_instance_and_entity[
+                                            (instance_hash, other_entity["entity_id"])
+                                        ],
+                                        key=lambda row: row["sample_id"],
+                                    )
+                                ]
+                                for judge_model in _JUDGE_MODELS
+                            },
                         },
                         ensure_ascii=False,
                         sort_keys=True,

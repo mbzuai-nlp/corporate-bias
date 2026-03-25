@@ -1,6 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6780.42it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6744.27it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -8,8 +8,9 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 106/202 [00:00<00:00, 1050.63it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1444.22it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1028.89it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1533.13it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 2074.00it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 44/202 [00:00<00:00, 436.93it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1087.88it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -19,11 +20,11 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 16:44:05,167 [INFO] root: Running assay=describe-sentiment model=gemini num_samples_per_instance=1.
-2026-03-25 16:44:05,170 [INFO] root: Invoking gemini.
-2026-03-25 16:44:05,170 [INFO] root: Invoking gemini.
-2026-03-25 16:44:05,170 [INFO] root: Invoking gemini.
-Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-25 16:44:05,171 [INFO] root: Invoking gemini.
-2026-03-25 16:44:05,172 [INFO] root: Invoking gemini.
-Descriptions:  20%|██        | 1/5 [00:03<00:13,  3.27s/it]Descriptions: 100%|██████████| 5/5 [00:03<00:00,  1.52it/s]
-2026-03-25 16:44:08,473 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini.parquet.
+2026-03-25 19:30:52,172 [INFO] root: Running assay=describe-sentiment model=gemini num_samples_per_instance=1.
+2026-03-25 19:30:52,177 [INFO] root: Invoking gemini.
+2026-03-25 19:30:52,177 [INFO] root: Invoking gemini.
+2026-03-25 19:30:52,178 [INFO] root: Invoking gemini.
+2026-03-25 19:30:52,179 [INFO] root: Invoking gemini.
+2026-03-25 19:30:52,180 [INFO] root: Invoking gemini.
+Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]Descriptions:  20%|██        | 1/5 [00:05<00:21,  5.43s/it]Descriptions: 100%|██████████| 5/5 [00:05<00:00,  1.09s/it]
+2026-03-25 19:30:57,618 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini.parquet.

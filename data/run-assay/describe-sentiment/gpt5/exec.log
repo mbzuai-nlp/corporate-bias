@@ -1,7 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7262.18it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4067.49it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +8,9 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1045.47it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1449.16it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  53%|█████▎    | 108/202 [00:00<00:00, 1075.73it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1414.36it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  39%|███▊      | 78/202 [00:00<00:00, 772.63it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1263.38it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 58/202 [00:00<00:00, 569.72it/s]Loading weights:  57%|█████▋    | 116/202 [00:00<00:00, 572.65it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 922.79it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,11 +20,11 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 16:43:51,928 [INFO] root: Running assay=describe-sentiment model=gpt5 num_samples_per_instance=1.
-2026-03-25 16:43:51,934 [INFO] root: Invoking gpt5.
-2026-03-25 16:43:51,935 [INFO] root: Invoking gpt5.
-2026-03-25 16:43:51,936 [INFO] root: Invoking gpt5.
-2026-03-25 16:43:51,936 [INFO] root: Invoking gpt5.
-2026-03-25 16:43:51,937 [INFO] root: Invoking gpt5.
-Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]Descriptions:  20%|██        | 1/5 [00:03<00:13,  3.42s/it]Descriptions: 100%|██████████| 5/5 [00:03<00:00,  1.46it/s]
-2026-03-25 16:43:55,361 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt5.parquet.
+2026-03-25 19:30:33,290 [INFO] root: Running assay=describe-sentiment model=gpt5 num_samples_per_instance=1.
+2026-03-25 19:30:33,294 [INFO] root: Invoking gpt5.
+2026-03-25 19:30:33,295 [INFO] root: Invoking gpt5.
+2026-03-25 19:30:33,296 [INFO] root: Invoking gpt5.
+Descriptions:   0%|          | 0/5 [00:00<?, ?it/s]2026-03-25 19:30:33,296 [INFO] root: Invoking gpt5.
+2026-03-25 19:30:33,297 [INFO] root: Invoking gpt5.
+Descriptions:  20%|██        | 1/5 [00:05<00:21,  5.42s/it]Descriptions: 100%|██████████| 5/5 [00:05<00:00,  1.08s/it]
+2026-03-25 19:30:38,725 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt5.parquet.
