@@ -1,6 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4792.18it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6832.81it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +9,8 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 83/202 [00:00<00:00, 824.50it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1179.75it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 47/202 [00:00<00:00, 462.81it/s]Loading weights:  61%|██████▏   | 124/202 [00:00<00:00, 639.67it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 846.70it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 964.59it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1404.42it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 915.11it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1295.34it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,7 +20,17 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 19:29:39,966 [INFO] root: Running assay=rank model=gpt5 num_samples_per_instance=1.
-2026-03-25 19:29:39,971 [INFO] root: Invoking gpt5.
-Rankings:   0%|          | 0/1 [00:00<?, ?it/s]Rankings: 100%|██████████| 1/1 [00:00<00:00, 14.76it/s]
-2026-03-25 19:29:40,045 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.
+WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:33:20,969 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:33:21,338 [INFO] root: Running assay=rank model=gpt5 num_samples_per_instance=2.
+2026-03-26 20:33:21,342 [INFO] root: Invoking gpt5.
+2026-03-26 20:33:21,343 [INFO] root: Invoking gpt5.
+2026-03-26 20:33:21,344 [INFO] root: Invoking gpt5.
+Rankings:   0%|          | 0/4 [00:00<?, ?it/s]2026-03-26 20:33:21,344 [INFO] root: Invoking gpt5.
+2026-03-26 20:33:22,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:22,599 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:22,599 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Rankings:  25%|██▌       | 1/4 [00:25<01:15, 25.10s/it]Rankings: 100%|██████████| 4/4 [00:26<00:00,  5.00s/it]Rankings: 100%|██████████| 4/4 [00:26<00:00,  6.51s/it]
+2026-03-26 20:33:47,392 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt5.parquet.

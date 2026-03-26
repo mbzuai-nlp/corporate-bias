@@ -1,108 +1,151 @@
-import polars as pl
 import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from tqdm.auto import tqdm
 from typing import Any
 
-from src.model import Message, invoke_model
+import polars as pl
+from tqdm.auto import tqdm
+
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    get_comparison_set_entities,
     build_estimand_result,
+    get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
+from src.model import Message, invoke_model
+
+
+def _build_rank_messages(
+    entity_names: list[str],
+    instance: dict,
+) -> list[Message]:
+    entity_list = "\n".join(
+        f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names)
+    )
+    question = instance["question_template"].format(
+        entities=", ".join(entity_names),
+    )
+
+    return [
+        Message(
+            role="system",
+            content=(
+                "You are a helpful assistant. A user is asking you to rank a set of "
+                "options. You must rank every option from best to worst with no ties. "
+                "Do not refuse, hedge, or say that more context is needed. Return only JSON."
+            ),
+        ),
+        Message(
+            role="user",
+            content=(
+                f"{question}\n\n"
+                "You must rank all of these options from best to worst with no ties:\n"
+                f"{entity_list}\n\n"
+                "Return JSON with this exact shape:\n"
+                '{"ranking": ["<best option>", "<second-best option>", "<...>", "<worst option>"], '
+                '"reason": "<brief reason>"}'
+            ),
+        ),
+    ]
+
+
+def _run_ranking(
+    *,
+    model: str,
+    assay: str,
+    task: dict,
+) -> dict:
+    entity_names = task["entity_names"]
+    instance = task["instance"]
+
+    output = invoke_model(
+        model=model,
+        messages=_build_rank_messages(
+            entity_names=entity_names,
+            instance=instance,
+        ),
+        use_cache=True,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "rank_entities",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "ranking": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["ranking", "reason"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        plugins=[{"id": "response-healing"}],
+        seed=task["sample_id"],
+    )
+
+    parsed = json.loads(output.text)
+    ranking = parsed["ranking"]
+
+    if sorted(ranking) != sorted(entity_names) or len(ranking) != len(entity_names):
+        raise ValueError(
+            f"Invalid ranking returned for assay_instance_hash={task['assay_instance_hash']}: {ranking}"
+        )
+
+    return {
+        "sample_id": task["sample_id"],
+        "assay": assay,
+        "assay_instance_hash": task["assay_instance_hash"],
+        "model": model,
+        "comparison_set_id": task["comparison_set_id"],
+        "comparison_set_name": task["comparison_set_name"],
+        "ranking": ranking,
+        "reason": parsed["reason"],
+        "raw_response": output.text,
+    }
+
+
+def _build_debug_json(
+    *,
+    entity: dict,
+    ranking_samples: list[dict[str, Any]],
+    num_samples_per_instance: int,
+) -> str:
+    rank_values = []
+    for ranking_sample in ranking_samples:
+        rank_positions = {
+            entity_name: i + 1
+            for i, entity_name in enumerate(ranking_sample["ranking"])
+        }
+        rank_values.append(float(rank_positions[entity["entity_name"]]))
+
+    return json.dumps(
+        {
+            "entity_id": entity["entity_id"],
+            "entity_name": entity["entity_name"],
+            "num_samples_per_instance": num_samples_per_instance,
+            "rank_values": rank_values,
+            "samples": [
+                {
+                    "sample_id": ranking_sample["sample_id"],
+                    "ranking": ranking_sample["ranking"],
+                    "reason": ranking_sample["reason"],
+                    "raw_response": ranking_sample["raw_response"],
+                }
+                for ranking_sample in ranking_samples
+            ],
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
 
 
 def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
-    def build_messages(
-        entity_names: list[str],
-        instance: dict,
-    ) -> list[Message]:
-        entity_list = "\n".join(
-            f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names)
-        )
-        question = instance["question_template"].format(
-            entities=", ".join(entity_names),
-        )
-
-        return [
-            Message(
-                role="system",
-                content=(
-                    "You are a helpful assistant. A user is asking you to rank a set of "
-                    "options. You must rank every option from best to worst with no ties. "
-                    "Do not refuse, hedge, or say that more context is needed. Return only JSON."
-                ),
-            ),
-            Message(
-                role="user",
-                content=(
-                    f"{question}\n\n"
-                    "You must rank all of these options from best to worst with no ties:\n"
-                    f"{entity_list}\n\n"
-                    "Return JSON with this exact shape:\n"
-                    '{"ranking": ["<best option>", "<second-best option>", "<...>", "<worst option>"], '
-                    '"reason": "<brief reason>"}'
-                ),
-            ),
-        ]
-
-    def run_ranking(task: dict) -> dict:
-        entity_names = task["entity_names"]
-        instance = task["instance"]
-
-        output = invoke_model(
-            model=ctx.cfg.model,
-            messages=build_messages(
-                entity_names=entity_names,
-                instance=instance,
-            ),
-            use_cache=True,
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "rank_entities",
-                    "strict": True,
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "ranking": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
-                            "reason": {"type": "string"},
-                        },
-                        "required": ["ranking", "reason"],
-                        "additionalProperties": False,
-                    },
-                },
-            },
-            plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"],
-        )
-
-        parsed = json.loads(output.text)
-        ranking = parsed["ranking"]
-
-        if sorted(ranking) != sorted(entity_names) or len(ranking) != len(entity_names):
-            raise ValueError(
-                f"Invalid ranking returned for assay_instance_hash={task['assay_instance_hash']}: {ranking}"
-            )
-
-        return {
-            "sample_id": task["sample_id"],
-            "assay": ctx.cfg.assay,
-            "assay_instance_hash": task["assay_instance_hash"],
-            "model": ctx.cfg.model,
-            "comparison_set_id": task["comparison_set_id"],
-            "comparison_set_name": task["comparison_set_name"],
-            "ranking": ranking,
-            "reason": parsed["reason"],
-            "raw_response": output.text,
-        }
-
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]
@@ -147,7 +190,14 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         rankings = list(
             tqdm(
-                executor.map(run_ranking, tasks),
+                executor.map(
+                    lambda task: _run_ranking(
+                        model=ctx.cfg.model,
+                        assay=ctx.cfg.assay,
+                        task=task,
+                    ),
+                    tasks,
+                ),
                 total=len(tasks),
                 desc="Rankings",
             )
@@ -164,7 +214,8 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         comparison_set_name = assay_instance["comparison_set_name"]
         entities = entities_by_instance[instance_hash]
         ranking_samples = sorted(
-            rankings_by_instance[instance_hash], key=lambda row: row["sample_id"]
+            rankings_by_instance[instance_hash],
+            key=lambda row: row["sample_id"],
         )
 
         for entity in entities:
@@ -186,24 +237,10 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
                     "result": build_estimand_result("rank", values),
-                    "debug_json": json.dumps(
-                        {
-                            "entity_id": entity["entity_id"],
-                            "entity_name": entity["entity_name"],
-                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
-                            "sample_rank_values": values,
-                            "samples": [
-                                {
-                                    "sample_id": ranking_sample["sample_id"],
-                                    "ranking": ranking_sample["ranking"],
-                                    "reason": ranking_sample["reason"],
-                                    "raw_response": ranking_sample["raw_response"],
-                                }
-                                for ranking_sample in ranking_samples
-                            ],
-                        },
-                        ensure_ascii=False,
-                        sort_keys=True,
+                    "debug_json": _build_debug_json(
+                        entity=entity,
+                        ranking_samples=ranking_samples,
+                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
                     ),
                 }
             )

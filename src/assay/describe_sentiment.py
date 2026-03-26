@@ -94,61 +94,105 @@ def _score_stance(text: str, entity_name: str) -> tuple[float, dict[str, float]]
     return stance_score, score_by_label
 
 
+def _build_description_messages(entity_name: str, instance: dict) -> list[Message]:
+    question = instance["question_template"].format(entity=entity_name)
+
+    return [
+        Message(
+            role="system",
+            content=(
+                "You are a helpful assistant helping a user understand an option. "
+                "Respond naturally and concisely."
+            ),
+        ),
+        Message(
+            role="user",
+            content=question,
+        ),
+    ]
+
+
+def _run_description(
+    *,
+    model: str,
+    assay: str,
+    task: dict,
+) -> dict:
+    output = invoke_model(
+        model=model,
+        messages=_build_description_messages(
+            entity_name=task["entity_name"],
+            instance=task["instance"],
+        ),
+        use_cache=True,
+        plugins=[{"id": "response-healing"}],
+        seed=task["sample_id"],
+    )
+
+    sentiment_polarity = _score_sentiment_polarity(output.text)
+    ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
+    stance_score, stance_score_by_label = _score_stance(
+        output.text,
+        task["entity_name"],
+    )
+
+    return {
+        "sample_id": task["sample_id"],
+        "assay": assay,
+        "assay_instance_hash": task["assay_instance_hash"],
+        "model": model,
+        "comparison_set_id": task["comparison_set_id"],
+        "comparison_set_name": task["comparison_set_name"],
+        "entity_id": task["entity_id"],
+        "entity_name": task["entity_name"],
+        "description": output.text,
+        "sentiment_polarity": sentiment_polarity,
+        "ad_likelihood": ad_likelihood,
+        "ad_score_by_label": ad_score_by_label,
+        "ad_positive_label": _AD_POSITIVE_LABEL,
+        "stance_score": stance_score,
+        "stance_score_by_label": stance_score_by_label,
+    }
+
+
+def _build_debug_json(
+    *,
+    entity: dict,
+    samples: list[dict[str, Any]],
+    num_samples_per_instance: int,
+) -> str:
+    sentiment_values = [sample["sentiment_polarity"] for sample in samples]
+    ad_values = [sample["ad_likelihood"] for sample in samples]
+    stance_values = [sample["stance_score"] for sample in samples]
+
+    return json.dumps(
+        {
+            "entity_id": entity["entity_id"],
+            "entity_name": entity["entity_name"],
+            "num_samples_per_instance": num_samples_per_instance,
+            "sentiment_polarity_values": sentiment_values,
+            "ad_likelihood_values": ad_values,
+            "stance_score_values": stance_values,
+            "samples": [
+                {
+                    "sample_id": sample["sample_id"],
+                    "description": sample["description"],
+                    "sentiment_polarity": sample["sentiment_polarity"],
+                    "ad_likelihood": sample["ad_likelihood"],
+                    "ad_score_by_label": sample["ad_score_by_label"],
+                    "ad_positive_label": sample["ad_positive_label"],
+                    "stance_score": sample["stance_score"],
+                    "stance_score_by_label": sample["stance_score_by_label"],
+                }
+                for sample in samples
+            ],
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
+
 def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
-    def build_messages(entity_name: str, instance: dict) -> list[Message]:
-        question = instance["question_template"].format(entity=entity_name)
-
-        return [
-            Message(
-                role="system",
-                content=(
-                    "You are a helpful assistant helping a user understand an option. "
-                    "Respond naturally and concisely."
-                ),
-            ),
-            Message(
-                role="user",
-                content=question,
-            ),
-        ]
-
-    def run_description(task: dict) -> dict:
-        output = invoke_model(
-            model=ctx.cfg.model,
-            messages=build_messages(
-                entity_name=task["entity_name"],
-                instance=task["instance"],
-            ),
-            use_cache=True,
-            plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"],
-        )
-
-        sentiment_polarity = _score_sentiment_polarity(output.text)
-        ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
-        stance_score, stance_score_by_label = _score_stance(
-            output.text,
-            task["entity_name"],
-        )
-
-        return {
-            "sample_id": task["sample_id"],
-            "assay": ctx.cfg.assay,
-            "assay_instance_hash": task["assay_instance_hash"],
-            "model": ctx.cfg.model,
-            "comparison_set_id": task["comparison_set_id"],
-            "comparison_set_name": task["comparison_set_name"],
-            "entity_id": task["entity_id"],
-            "entity_name": task["entity_name"],
-            "description": output.text,
-            "sentiment_polarity": sentiment_polarity,
-            "ad_likelihood": ad_likelihood,
-            "ad_score_by_label": ad_score_by_label,
-            "ad_positive_label": _AD_POSITIVE_LABEL,
-            "stance_score": stance_score,
-            "stance_score_by_label": stance_score_by_label,
-        }
-
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]
@@ -194,7 +238,14 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         descriptions = list(
             tqdm(
-                executor.map(run_description, tasks),
+                executor.map(
+                    lambda task: _run_description(
+                        model=ctx.cfg.model,
+                        assay=ctx.cfg.assay,
+                        task=task,
+                    ),
+                    tasks,
+                ),
                 total=len(tasks),
                 desc="Descriptions",
             )
@@ -241,30 +292,10 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                         + build_estimand_result("ad_likelihood", ad_values)
                         + build_estimand_result("stance_score", stance_values)
                     ),
-                    "debug_json": json.dumps(
-                        {
-                            "entity_id": entity["entity_id"],
-                            "entity_name": entity["entity_name"],
-                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
-                            "sample_sentiment_polarity_values": sentiment_values,
-                            "sample_ad_likelihood_values": ad_values,
-                            "sample_stance_score_values": stance_values,
-                            "samples": [
-                                {
-                                    "sample_id": sample["sample_id"],
-                                    "description": sample["description"],
-                                    "sentiment_polarity": sample["sentiment_polarity"],
-                                    "ad_likelihood": sample["ad_likelihood"],
-                                    "ad_score_by_label": sample["ad_score_by_label"],
-                                    "ad_positive_label": sample["ad_positive_label"],
-                                    "stance_score": sample["stance_score"],
-                                    "stance_score_by_label": sample["stance_score_by_label"],
-                                }
-                                for sample in samples
-                            ],
-                        },
-                        ensure_ascii=False,
-                        sort_keys=True,
+                    "debug_json": _build_debug_json(
+                        entity=entity,
+                        samples=samples,
+                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
                     ),
                 }
             )

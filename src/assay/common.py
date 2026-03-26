@@ -3,7 +3,7 @@ from pathlib import Path
 import statistics
 import json
 from dataclasses import dataclass
-from typing import Mapping, Literal, Protocol
+from typing import Mapping, Literal, Protocol, Tuple
 from dvclive import Live
 import math
 
@@ -99,23 +99,11 @@ def sem_coalesce(values: list[float]) -> float:
 
 
 def build_estimand_result(
-    metric_name: str, values: list[float]
-) -> list[dict[str, str]]:
-    return [
-        {
-            "estimand": f"{metric_name}_raw_list",
-            "value": json.dumps(values),
-        },
-        {
-            "estimand": f"{metric_name}_mean",
-            "value": str(mean_coalesce(values)),
-        },
-        {
-            "estimand": f"{metric_name}_std",
-            "value": str(std_coalesce(values)),
-        },
-        {
-            "estimand": f"{metric_name}_sem",
-            "value": str(sem_coalesce(values)),
-        },
-    ]
+    estimand: str, values: list[float]
+) -> Tuple[dict[str, str]]:
+    return ({
+        "estimand": estimand,
+        "num_samples": len(values),
+        "sample_mean": mean_coalesce(values),
+        "sample_std": std_coalesce(values) 
+    },)

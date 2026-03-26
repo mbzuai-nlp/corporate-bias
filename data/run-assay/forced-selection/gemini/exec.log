@@ -1,7 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6691.95it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6633.49it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +8,9 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  54%|█████▍    | 109/202 [00:00<00:00, 1071.36it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1424.54it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  50%|█████     | 102/202 [00:00<00:00, 1015.32it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1443.04it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1022.01it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1363.26it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 87/202 [00:00<00:00, 858.85it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1239.35it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,208 +20,92 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 19:31:20,900 [INFO] root: Running assay=forced-selection model=gemini num_samples_per_instance=10.
-2026-03-25 19:31:20,903 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,904 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,905 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,906 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,906 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,907 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,908 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,908 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,910 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,911 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,912 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,913 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,914 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,915 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,916 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,924 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,926 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,929 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,937 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,940 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,941 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,944 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,947 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,950 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,956 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,961 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,963 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,966 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,968 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,973 [INFO] root: Invoking gemini.
-2026-03-25 19:31:20,975 [INFO] root: Invoking gemini.
-Forced selection (JSON):   0%|          | 0/50 [00:00<?, ?it/s]2026-03-25 19:31:20,980 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,041 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,042 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,043 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,043 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,043 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,044 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,044 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,045 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,045 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,046 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,046 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,046 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,047 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,048 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,048 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,049 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,049 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,049 [INFO] root: Invoking gemini.
-Forced selection (JSON): 100%|██████████| 50/50 [00:00<00:00, 669.23it/s]
-2026-03-25 19:31:21,067 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,067 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,068 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,069 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,071 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,072 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,074 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,075 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,075 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,077 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,078 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,083 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,085 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,087 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,091 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,092 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,094 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,095 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,098 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,100 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,101 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,102 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,103 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,104 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,105 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,107 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,110 [INFO] root: Invoking gemini.
-Forced selection (free text):   0%|          | 0/50 [00:00<?, ?it/s]2026-03-25 19:31:21,112 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,112 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,113 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,114 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,115 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,117 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,117 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,118 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,121 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,122 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,122 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,123 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,123 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,125 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,126 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,127 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,128 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,128 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,129 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,130 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,130 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,131 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,131 [INFO] root: Invoking gemini.
-Forced selection (free text): 100%|██████████| 50/50 [00:00<00:00, 882.51it/s]
-2026-03-25 19:31:21,191 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,191 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,192 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,193 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,194 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,195 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,196 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,197 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,198 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,200 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,224 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,225 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,226 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,226 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,226 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,227 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,227 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,228 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,228 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,229 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,229 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,230 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,230 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,230 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,231 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,233 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,234 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,239 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,266 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,266 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,266 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,267 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,268 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,268 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,269 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,269 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,269 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,270 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,270 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,270 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,271 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,271 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,272 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,272 [INFO] root: Invoking gemini.
-Steering judgments:   0%|          | 0/100 [00:00<?, ?it/s]2026-03-25 19:31:21,273 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,274 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,275 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,276 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,276 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,277 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,278 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,279 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,279 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,281 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,281 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,284 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,287 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,287 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,287 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,289 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,290 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,292 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,293 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,293 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,293 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,295 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,296 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,296 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,298 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,298 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,299 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,300 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,302 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,307 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,308 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,311 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,312 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,316 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,317 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,320 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,321 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,324 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,328 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,329 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,330 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,331 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,332 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,334 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,337 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,338 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,341 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,341 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,343 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,344 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,346 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,346 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,347 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,349 [INFO] root: Invoking gemini.
-2026-03-25 19:31:21,350 [INFO] root: Invoking gpt5.
-2026-03-25 19:31:21,350 [INFO] root: Invoking gemini.
-Steering judgments: 100%|██████████| 100/100 [00:00<00:00, 1264.45it/s]
-2026-03-25 19:31:21,397 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/forced-selection/gemini.parquet.
+WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:35:55,211 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:35:55,594 [INFO] root: Running assay=forced-selection model=gemini num_samples_per_instance=2.
+2026-03-26 20:35:55,601 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,602 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,603 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,604 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,605 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,606 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,606 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,608 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,609 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,610 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,611 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,612 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,613 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,615 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,617 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,618 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,630 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,636 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,645 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,650 [INFO] root: Invoking gemini.
+Forced selection (JSON):   0%|          | 0/20 [00:00<?, ?it/s]Forced selection (JSON): 100%|██████████| 20/20 [00:00<00:00, 265.72it/s]
+2026-03-26 20:35:55,733 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,734 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,734 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,735 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,736 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,737 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,740 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,741 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,742 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,744 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,747 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,747 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,749 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,750 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,751 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,755 [INFO] root: Invoking gemini.
+Forced selection (free text):   0%|          | 0/20 [00:00<?, ?it/s]2026-03-26 20:35:55,756 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,756 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,757 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,759 [INFO] root: Invoking gemini.
+Forced selection (free text): 100%|██████████| 20/20 [00:00<00:00, 1346.21it/s]
+2026-03-26 20:35:55,780 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,780 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,781 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,781 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,782 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,783 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,784 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,784 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,786 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,787 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,788 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,792 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,811 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,811 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,811 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,813 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,813 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,814 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,815 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,815 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,816 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,817 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,819 [INFO] root: Invoking gpt5.
+Steering judgments:   0%|          | 0/40 [00:00<?, ?it/s]2026-03-26 20:35:55,820 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,822 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,826 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,826 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,827 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,828 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,829 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,831 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,832 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,832 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,833 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,834 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,834 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,835 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,837 [INFO] root: Invoking gemini.
+2026-03-26 20:35:55,837 [INFO] root: Invoking gpt5.
+2026-03-26 20:35:55,839 [INFO] root: Invoking gemini.
+Steering judgments: 100%|██████████| 40/40 [00:00<00:00, 972.25it/s]
+2026-03-26 20:35:55,896 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/forced-selection/gemini.parquet.

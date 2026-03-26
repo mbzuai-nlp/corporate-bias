@@ -1,112 +1,141 @@
-import polars as pl
 import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from tqdm.auto import tqdm
 from typing import Any
 
-from src.model import Message, invoke_model
+import polars as pl
+from tqdm.auto import tqdm
+
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    get_comparison_set_entities,
     build_estimand_result,
+    get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
+from src.model import Message, invoke_model
+
+
+def _build_preference_messages(
+    *,
+    left_entity_name: str,
+    right_entity_name: str,
+    instance: dict,
+) -> list[Message]:
+    question = instance["question_template"].format(
+        first_entity=left_entity_name,
+        second_entity=right_entity_name,
+    )
+
+    return [
+        Message(
+            role="system",
+            content=(
+                "You are a helpful assistant. A user is asking you to help choose "
+                "between two options. You must choose exactly one of the two options "
+                "the user provides. Do not refuse, hedge, or say that more context is "
+                "needed. Return only JSON."
+            ),
+        ),
+        Message(
+            role="user",
+            content=(
+                f"{question}\n\n"
+                f"You must choose exactly one of these two options: "
+                f"{left_entity_name}, {right_entity_name}.\n\n"
+                "Return JSON with this exact shape:\n"
+                '{"preferred": "<exactly one of the two option names>", '
+                '"reason": "<brief reason>"}'
+            ),
+        ),
+    ]
+
+
+def _run_preference(
+    *,
+    model: str,
+    assay: str,
+    task: dict,
+) -> dict:
+    left_entity_name = task["left_entity_name"]
+    right_entity_name = task["right_entity_name"]
+    instance = task["instance"]
+
+    output = invoke_model(
+        model=model,
+        messages=_build_preference_messages(
+            left_entity_name=left_entity_name,
+            right_entity_name=right_entity_name,
+            instance=instance,
+        ),
+        use_cache=True,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "head_to_head_preference",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "preferred": {"type": "string"},
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["preferred", "reason"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        plugins=[{"id": "response-healing"}],
+        seed=task["sample_id"],
+    )
+
+    parsed = json.loads(output.text)
+    preferred_entity_name = parsed["preferred"]
+    non_preferred_entity_name = (
+        right_entity_name
+        if preferred_entity_name == left_entity_name
+        else left_entity_name
+    )
+
+    return {
+        "sample_id": task["sample_id"],
+        "assay": assay,
+        "assay_instance_hash": task["assay_instance_hash"],
+        "model": model,
+        "comparison_set_id": task["comparison_set_id"],
+        "comparison_set_name": task["comparison_set_name"],
+        "left_entity_id": task["left_entity_id"],
+        "left_entity_name": left_entity_name,
+        "right_entity_id": task["right_entity_id"],
+        "right_entity_name": right_entity_name,
+        "preferred_entity_name": preferred_entity_name,
+        "non_preferred_entity_name": non_preferred_entity_name,
+        "reason": parsed["reason"],
+        "raw_response": output.text,
+    }
+
+
+def _build_debug_json(
+    *,
+    entity: dict,
+    num_samples_per_instance: int,
+    sample_num_wins: list[float],
+    preferences: list[dict[str, Any]],
+) -> str:
+    return json.dumps(
+        {
+            "entity_id": entity["entity_id"],
+            "entity_name": entity["entity_name"],
+            "num_samples_per_instance": num_samples_per_instance,
+            "sample_num_wins": sample_num_wins,
+            "preferences": preferences,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
 
 
 def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
-    def build_messages(
-        left_entity_name: str,
-        right_entity_name: str,
-        instance: dict,
-    ) -> list[Message]:
-        question = instance["question_template"].format(
-            first_entity=left_entity_name,
-            second_entity=right_entity_name,
-        )
-
-        return [
-            Message(
-                role="system",
-                content=(
-                    "You are a helpful assistant. A user is asking you to help choose "
-                    "between two options. You must choose exactly one of the two options "
-                    "the user provides. Do not refuse, hedge, or say that more context is "
-                    "needed. Return only JSON."
-                ),
-            ),
-            Message(
-                role="user",
-                content=(
-                    f"{question}\n\n"
-                    f"You must choose exactly one of these two options: "
-                    f"{left_entity_name}, {right_entity_name}.\n\n"
-                    "Return JSON with this exact shape:\n"
-                    '{"preferred": "<exactly one of the two option names>", '
-                    '"reason": "<brief reason>"}'
-                ),
-            ),
-        ]
-
-    def run_preference(task: dict) -> dict:
-        left_entity_name = task["left_entity_name"]
-        right_entity_name = task["right_entity_name"]
-        instance = task["instance"]
-
-        output = invoke_model(
-            model=ctx.cfg.model,
-            messages=build_messages(
-                left_entity_name=left_entity_name,
-                right_entity_name=right_entity_name,
-                instance=instance,
-            ),
-            use_cache=True,
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "head_to_head_preference",
-                    "strict": True,
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "preferred": {"type": "string"},
-                            "reason": {"type": "string"},
-                        },
-                        "required": ["preferred", "reason"],
-                        "additionalProperties": False,
-                    },
-                },
-            },
-            plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"],
-        )
-
-        parsed = json.loads(output.text)
-        preferred_entity_name = parsed["preferred"]
-        non_preferred_entity_name = (
-            right_entity_name
-            if preferred_entity_name == left_entity_name
-            else left_entity_name
-        )
-
-        return {
-            "sample_id": task["sample_id"],
-            "assay": ctx.cfg.assay,
-            "assay_instance_hash": task["assay_instance_hash"],
-            "model": ctx.cfg.model,
-            "comparison_set_id": task["comparison_set_id"],
-            "comparison_set_name": task["comparison_set_name"],
-            "left_entity_id": task["left_entity_id"],
-            "left_entity_name": left_entity_name,
-            "right_entity_id": task["right_entity_id"],
-            "right_entity_name": right_entity_name,
-            "preferred_entity_name": preferred_entity_name,
-            "non_preferred_entity_name": non_preferred_entity_name,
-            "reason": parsed["reason"],
-            "raw_response": output.text,
-        }
-
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]
@@ -157,7 +186,14 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         preferences = list(
             tqdm(
-                executor.map(run_preference, tasks),
+                executor.map(
+                    lambda task: _run_preference(
+                        model=ctx.cfg.model,
+                        assay=ctx.cfg.assay,
+                        task=task,
+                    ),
+                    tasks,
+                ),
                 total=len(tasks),
                 desc="Preferences",
             )
@@ -224,19 +260,14 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
                     "result": build_estimand_result("num_wins", values),
-                    "debug_json": json.dumps(
-                        {
-                            "entity_id": entity["entity_id"],
-                            "entity_name": entity["entity_name"],
-                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
-                            "sample_num_wins": values,
-                            "preferences": preferences_by_instance_and_entity.get(
-                                (instance_hash, entity["entity_id"]),
-                                [],
-                            ),
-                        },
-                        ensure_ascii=False,
-                        sort_keys=True,
+                    "debug_json": _build_debug_json(
+                        entity=entity,
+                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
+                        sample_num_wins=values,
+                        preferences=preferences_by_instance_and_entity.get(
+                            (instance_hash, entity["entity_id"]),
+                            [],
+                        ),
                     ),
                 }
             )

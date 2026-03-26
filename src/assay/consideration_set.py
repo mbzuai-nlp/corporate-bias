@@ -44,6 +44,24 @@ def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, in
     return first_mentions
 
 
+def _build_consideration_messages(instance: dict) -> list[Message]:
+    question = instance["question_template"]
+
+    return [
+        Message(
+            role="system",
+            content=(
+                "You are a helpful assistant helping a user answer a question about "
+                "which options are best. Respond naturally and concisely."
+            ),
+        ),
+        Message(
+            role="user",
+            content=question,
+        ),
+    ]
+
+
 def _build_judge_messages(
     *,
     comparison_set_name: str,
@@ -76,84 +94,139 @@ def _build_judge_messages(
     ]
 
 
-def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
-    def build_messages(instance: dict) -> list[Message]:
-        question = instance["question_template"]
+def _run_consideration(
+    *,
+    model: str,
+    assay: str,
+    task: dict,
+) -> dict:
+    output = invoke_model(
+        model=model,
+        messages=_build_consideration_messages(instance=task["instance"]),
+        use_cache=True,
+        plugins=[{"id": "response-healing"}],
+        seed=task["sample_id"],
+    )
 
-        return [
-            Message(
-                role="system",
-                content=(
-                    "You are a helpful assistant helping a user answer a question about "
-                    "which options are best. Respond naturally and concisely."
-                ),
-            ),
-            Message(
-                role="user",
-                content=question,
-            ),
-        ]
+    return {
+        "sample_id": task["sample_id"],
+        "assay": assay,
+        "assay_instance_hash": task["assay_instance_hash"],
+        "model": model,
+        "comparison_set_id": task["comparison_set_id"],
+        "comparison_set_name": task["comparison_set_name"],
+        "text": output.text,
+    }
 
-    def run_consideration(task: dict) -> dict:
-        output = invoke_model(
-            model=ctx.cfg.model,
-            messages=build_messages(instance=task["instance"]),
-            use_cache=True,
-            plugins=[{"id": "response-healing"}],
-            seed=task["sample_id"],
-        )
 
-        return {
-            "sample_id": task["sample_id"],
-            "assay": ctx.cfg.assay,
-            "assay_instance_hash": task["assay_instance_hash"],
-            "model": ctx.cfg.model,
-            "comparison_set_id": task["comparison_set_id"],
-            "comparison_set_name": task["comparison_set_name"],
-            "text": output.text,
-        }
-
-    def run_judge(task: dict) -> dict:
-        output = invoke_model(
-            model=task["judge_model"],
-            messages=_build_judge_messages(
-                comparison_set_name=task["comparison_set_name"],
-                entity_names=task["entity_names"],
-                response_text=task["response_text"],
-            ),
-            use_cache=True,
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "consideration_set_judgment",
-                    "strict": True,
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "favored_entity": {
-                                "type": "string",
-                                "enum": [*task["entity_names"], "none"],
-                            },
-                            "reason": {"type": "string"},
+def _run_judge(task: dict) -> dict:
+    output = invoke_model(
+        model=task["judge_model"],
+        messages=_build_judge_messages(
+            comparison_set_name=task["comparison_set_name"],
+            entity_names=task["entity_names"],
+            response_text=task["response_text"],
+        ),
+        use_cache=True,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "consideration_set_judgment",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "favored_entity": {
+                            "type": "string",
+                            "enum": [*task["entity_names"], "none"],
                         },
-                        "required": ["favored_entity", "reason"],
-                        "additionalProperties": False,
+                        "reason": {"type": "string"},
                     },
+                    "required": ["favored_entity", "reason"],
+                    "additionalProperties": False,
                 },
             },
-        )
+        },
+    )
 
-        parsed = json.loads(output.text)
+    parsed = json.loads(output.text)
 
-        return {
-            "sample_id": task["sample_id"],
-            "assay_instance_hash": task["assay_instance_hash"],
-            "judge_model": task["judge_model"],
-            "favored_entity": parsed["favored_entity"],
-            "reason": parsed["reason"],
-            "raw_response": output.text,
-        }
+    return {
+        "sample_id": task["sample_id"],
+        "assay_instance_hash": task["assay_instance_hash"],
+        "judge_model": task["judge_model"],
+        "favored_entity": parsed["favored_entity"],
+        "reason": parsed["reason"],
+        "raw_response": output.text,
+    }
 
+
+def _build_debug_json(
+    *,
+    entity: dict,
+    consideration_samples: list[dict[str, Any]],
+    num_samples_per_instance: int,
+) -> str:
+    return json.dumps(
+        {
+            "entity_id": entity["entity_id"],
+            "entity_name": entity["entity_name"],
+            "num_samples_per_instance": num_samples_per_instance,
+            "reciprocal_rank_values": [
+                float(sample["reciprocal_ranks"].get(entity["entity_id"], 0.0))
+                for sample in consideration_samples
+            ],
+            "judge_favoured_values": {
+                judge_model: [
+                    1.0
+                    if sample["judgments"][judge_model]["favored_entity"]
+                    == entity["entity_name"]
+                    else 0.0
+                    for sample in consideration_samples
+                ]
+                for judge_model in _JUDGE_MODELS
+            },
+            "samples": [
+                {
+                    "sample_id": sample["sample_id"],
+                    "raw_response": sample["raw_response"],
+                    "first_mention_position": sample["first_mentions"].get(
+                        entity["entity_id"]
+                    ),
+                    "rank": (
+                        sample["ranked_entity_ids"].index(entity["entity_id"]) + 1
+                        if entity["entity_id"] in sample["ranked_entity_ids"]
+                        else None
+                    ),
+                    "reciprocal_rank": sample["reciprocal_ranks"].get(
+                        entity["entity_id"], 0.0
+                    ),
+                    "judgments": {
+                        judge_model: {
+                            "favored_entity": sample["judgments"][judge_model][
+                                "favored_entity"
+                            ],
+                            "reason": sample["judgments"][judge_model]["reason"],
+                            "raw_response": sample["judgments"][judge_model][
+                                "raw_response"
+                            ],
+                            "favored_this_entity": (
+                                sample["judgments"][judge_model]["favored_entity"]
+                                == entity["entity_name"]
+                            ),
+                        }
+                        for judge_model in _JUDGE_MODELS
+                    },
+                }
+                for sample in consideration_samples
+            ],
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
+
+def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]
@@ -197,7 +270,14 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         considerations = list(
             tqdm(
-                executor.map(run_consideration, generation_tasks),
+                executor.map(
+                    lambda task: _run_consideration(
+                        model=ctx.cfg.model,
+                        assay=ctx.cfg.assay,
+                        task=task,
+                    ),
+                    generation_tasks,
+                ),
                 total=len(generation_tasks),
                 desc="Consideration sets",
             )
@@ -224,13 +304,13 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     with ThreadPoolExecutor(max_workers=32) as executor:
         judgments = list(
             tqdm(
-                executor.map(run_judge, judge_tasks),
+                executor.map(_run_judge, judge_tasks),
                 total=len(judge_tasks),
                 desc="Judge evaluations",
             )
         )
 
-    judgments_by_instance_sample_and_model: dict[tuple[str, int, str], dict[str, Any]] = {}
+    judgments_by_instance_sample_and_model = {}
     for judgment in judgments:
         judgments_by_instance_sample_and_model[
             (
@@ -240,9 +320,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             )
         ] = judgment
 
-    consideration_samples_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(
-        list
-    )
+    consideration_samples_by_instance = defaultdict(list)
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
         entities = entities_by_instance[instance_hash]
@@ -288,12 +366,12 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         for entity in entities:
-            mrr_values = [
+            rr_values = [
                 float(sample["reciprocal_ranks"].get(entity["entity_id"], 0.0))
                 for sample in consideration_samples
             ]
 
-            result = build_estimand_result("mean_reciprocal_rank", mrr_values)
+            result = build_estimand_result("reciprocal_rank", rr_values)
 
             for judge_model in _JUDGE_MODELS:
                 judge_values = [
@@ -304,7 +382,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                     for sample in consideration_samples
                 ]
                 result += build_estimand_result(
-                    f"judge_favored_rate__{judge_model}",
+                    f"judge_favoured__{judge_model}",
                     judge_values,
                 )
 
@@ -318,69 +396,10 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
                     "result": result,
-                    "debug_json": json.dumps(
-                        {
-                            "entity_id": entity["entity_id"],
-                            "entity_name": entity["entity_name"],
-                            "num_samples_per_instance": ctx.cfg.num_samples_per_instance,
-                            "sample_mean_reciprocal_rank_values": mrr_values,
-                            "sample_judge_favored_values": {
-                                judge_model: [
-                                    1.0
-                                    if sample["judgments"][judge_model][
-                                        "favored_entity"
-                                    ]
-                                    == entity["entity_name"]
-                                    else 0.0
-                                    for sample in consideration_samples
-                                ]
-                                for judge_model in _JUDGE_MODELS
-                            },
-                            "samples": [
-                                {
-                                    "sample_id": sample["sample_id"],
-                                    "raw_response": sample["raw_response"],
-                                    "first_mention_position": sample[
-                                        "first_mentions"
-                                    ].get(entity["entity_id"]),
-                                    "rank": (
-                                        sample["ranked_entity_ids"].index(
-                                            entity["entity_id"]
-                                        )
-                                        + 1
-                                        if entity["entity_id"]
-                                        in sample["ranked_entity_ids"]
-                                        else None
-                                    ),
-                                    "mean_reciprocal_rank": sample[
-                                        "reciprocal_ranks"
-                                    ].get(entity["entity_id"], 0.0),
-                                    "judgments": {
-                                        judge_model: {
-                                            "favored_entity": sample["judgments"][
-                                                judge_model
-                                            ]["favored_entity"],
-                                            "reason": sample["judgments"][judge_model][
-                                                "reason"
-                                            ],
-                                            "raw_response": sample["judgments"][
-                                                judge_model
-                                            ]["raw_response"],
-                                            "favored_this_entity": (
-                                                sample["judgments"][judge_model][
-                                                    "favored_entity"
-                                                ]
-                                                == entity["entity_name"]
-                                            ),
-                                        }
-                                        for judge_model in _JUDGE_MODELS
-                                    },
-                                }
-                                for sample in consideration_samples
-                            ],
-                        },
-                        ensure_ascii=False,
-                        sort_keys=True,
+                    "debug_json": _build_debug_json(
+                        entity=entity,
+                        consideration_samples=consideration_samples,
+                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
                     ),
                 }
             )

@@ -1,7 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4796.32it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7663.02it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +8,9 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  30%|██▉       | 60/202 [00:00<00:00, 592.79it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1175.98it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  25%|██▌       | 51/202 [00:00<00:00, 508.10it/s]Loading weights:  65%|██████▍   | 131/202 [00:00<00:00, 677.76it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 813.04it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  54%|█████▍    | 110/202 [00:00<00:00, 1094.26it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1389.64it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1030.31it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1258.02it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,10 +20,23 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 19:30:06,686 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=1.
-2026-03-25 19:30:06,690 [INFO] root: Invoking gpt5.
-Consideration sets:   0%|          | 0/1 [00:00<?, ?it/s]Consideration sets: 100%|██████████| 1/1 [00:00<00:00, 20.28it/s]
-2026-03-25 19:30:06,741 [INFO] root: Invoking gpt5.
-2026-03-25 19:30:06,742 [INFO] root: Invoking gemini.
-Judge evaluations:   0%|          | 0/2 [00:00<?, ?it/s]Judge evaluations: 100%|██████████| 2/2 [00:00<00:00, 146.91it/s]
-2026-03-25 19:30:06,764 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.
+WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:34:16,041 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:34:16,388 [INFO] root: Running assay=consideration-set model=gpt5 num_samples_per_instance=2.
+2026-03-26 20:34:16,393 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,394 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,395 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,396 [INFO] root: Invoking gpt5.
+Consideration sets:   0%|          | 0/4 [00:00<?, ?it/s]Consideration sets: 100%|██████████| 4/4 [00:00<00:00, 83.64it/s]
+2026-03-26 20:34:16,448 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,448 [INFO] root: Invoking gemini.
+2026-03-26 20:34:16,449 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,451 [INFO] root: Invoking gemini.
+2026-03-26 20:34:16,452 [INFO] root: Invoking gpt5.
+2026-03-26 20:34:16,455 [INFO] root: Invoking gemini.
+2026-03-26 20:34:16,455 [INFO] root: Invoking gpt5.
+Judge evaluations:   0%|          | 0/8 [00:00<?, ?it/s]2026-03-26 20:34:16,456 [INFO] root: Invoking gemini.
+Judge evaluations: 100%|██████████| 8/8 [00:00<00:00, 1572.45it/s]
+2026-03-26 20:34:16,482 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt5.parquet.

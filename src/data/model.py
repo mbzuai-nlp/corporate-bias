@@ -39,6 +39,11 @@ ASSAY_SCHEMA = {
     "comparison_set_name": pl.String,
     "entity_id": pl.String,  # key,
     "entity_name": pl.String,
-    "result": pl.List(pl.Struct({"estimand": pl.Utf8, "value": pl.Utf8})),
+    "result": pl.List(pl.Struct({
+        "estimand": pl.Utf8, 
+        "num_samples": pl.Int64, 
+        "sample_mean": pl.Float64,
+        "sample_std": pl.Float64
+    })),
     "debug_json": pl.String
 }

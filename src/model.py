@@ -29,7 +29,7 @@ class ModelDelegate(Protocol):
     def __call__(self, messages: Sequence[Message], **kwargs: Any) -> ModelOutput: ...
 
 
-Model = Literal["gpt5"]
+Model = Literal["gpt5", "gemini"]
 
 
 # === DEPENDENCY INJECTION ===

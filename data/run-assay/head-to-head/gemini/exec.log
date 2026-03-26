@@ -1,6 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 16041.35it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7073.51it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +9,8 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 67/202 [00:00<00:00, 669.29it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1157.52it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  20%|██        | 41/202 [00:00<00:00, 406.32it/s]Loading weights:  53%|█████▎    | 108/202 [00:00<00:00, 560.46it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 834.47it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  56%|█████▋    | 114/202 [00:00<00:00, 1133.95it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1303.66it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▊     | 98/202 [00:00<00:00, 975.36it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1351.61it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,26 +20,130 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 19:29:26,136 [INFO] root: Running assay=head-to-head model=gemini num_samples_per_instance=1.
-2026-03-25 19:29:26,141 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,142 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,144 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,145 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,146 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,147 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,148 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,149 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,151 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,153 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,155 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,159 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,165 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,169 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,174 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,182 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,188 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,196 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,213 [INFO] root: Invoking gemini.
-2026-03-25 19:29:26,216 [INFO] root: Invoking gemini.
-Preferences:   0%|          | 0/20 [00:00<?, ?it/s]Preferences: 100%|██████████| 20/20 [00:00<00:00, 223.12it/s]
-2026-03-25 19:29:26,330 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/head-to-head/gemini.parquet.
+WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:33:03,109 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:33:03,469 [INFO] root: Running assay=head-to-head model=gemini num_samples_per_instance=2.
+2026-03-26 20:33:03,475 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,476 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,476 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,477 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,478 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,479 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,480 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,482 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,483 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,485 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,487 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,489 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,489 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,491 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,495 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,511 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,520 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,527 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,536 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,540 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,542 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,547 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,550 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,556 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,560 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,562 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,575 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,581 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,586 [INFO] root: Invoking gemini.
+Preferences:   0%|          | 0/80 [00:00<?, ?it/s]2026-03-26 20:33:03,588 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,590 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,595 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,655 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,656 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,657 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,658 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,658 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,659 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,659 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,659 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,660 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,662 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,662 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,663 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,663 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,664 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,665 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,666 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,667 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,667 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,667 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,668 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,674 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,674 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,676 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,677 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,678 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,680 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,685 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,685 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,686 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,687 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,690 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,692 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,696 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,696 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,697 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,697 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,699 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,700 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,704 [INFO] root: Invoking gemini.
+2026-03-26 20:33:03,707 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,393 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,393 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,431 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,477 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,481 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,527 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,528 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,552 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,563 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,571 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,577 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,589 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,593 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,630 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,651 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,662 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,679 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,681 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,689 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,703 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,704 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,712 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,725 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,743 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,744 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,746 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,763 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,767 [INFO] root: Invoking gemini.
+2026-03-26 20:33:04,767 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:04,780 [INFO] root: Invoking gemini.
+Preferences:  26%|██▋       | 21/80 [00:01<00:03, 17.63it/s]Preferences:  29%|██▉       | 23/80 [00:01<00:03, 16.52it/s]2026-03-26 20:33:05,203 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,205 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Preferences:  44%|████▍     | 35/80 [00:01<00:01, 25.14it/s]2026-03-26 20:33:05,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,247 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:05,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:33:06,135 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Preferences:  81%|████████▏ | 65/80 [00:02<00:00, 26.42it/s]Preferences: 100%|██████████| 80/80 [00:02<00:00, 29.56it/s]
+2026-03-26 20:33:06,325 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/head-to-head/gemini.parquet.

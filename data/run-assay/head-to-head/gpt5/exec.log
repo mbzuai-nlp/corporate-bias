@@ -1,7 +1,7 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5318.48it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 105/393 [00:00<00:00, 1049.85it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3641.18it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +9,8 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 45/202 [00:00<00:00, 449.57it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 466.57it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 735.00it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  19%|█▉        | 39/202 [00:00<00:00, 382.20it/s]Loading weights:  39%|███▊      | 78/202 [00:00<00:00, 378.81it/s]Loading weights:  57%|█████▋    | 116/202 [00:00<00:00, 363.39it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 637.02it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 847.67it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1182.26it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 954.86it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1269.52it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -20,26 +20,130 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-25 19:29:10,643 [INFO] root: Running assay=head-to-head model=gpt5 num_samples_per_instance=1.
-2026-03-25 19:29:10,674 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,675 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,677 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,679 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,681 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,683 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,685 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,685 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,687 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,689 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,691 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,693 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,697 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,700 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,720 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,732 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,739 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,742 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,750 [INFO] root: Invoking gpt5.
-2026-03-25 19:29:10,756 [INFO] root: Invoking gpt5.
-Preferences:   0%|          | 0/20 [00:00<?, ?it/s]Preferences:   5%|▌         | 1/20 [00:00<00:01,  9.83it/s]Preferences: 100%|██████████| 20/20 [00:00<00:00, 187.25it/s]
-2026-03-25 19:29:10,891 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/head-to-head/gpt5.parquet.
+WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:32:11,404 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+Use `dvc exp run` to save experiment.
+2026-03-26 20:32:11,775 [INFO] root: Running assay=head-to-head model=gpt5 num_samples_per_instance=2.
+2026-03-26 20:32:11,780 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,781 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,782 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,783 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,784 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,785 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,786 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,788 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,789 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,791 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,798 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,808 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,809 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,810 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,812 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,813 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,819 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,820 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,824 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,827 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,837 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,848 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,852 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,854 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,856 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,859 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,862 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,866 [INFO] root: Invoking gpt5.
+Preferences:   0%|          | 0/80 [00:00<?, ?it/s]2026-03-26 20:32:11,870 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,872 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,874 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,877 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,980 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,981 [INFO] root: Invoking gpt5.
+Preferences:   1%|▏         | 1/80 [00:00<00:07,  9.97it/s]2026-03-26 20:32:11,984 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,984 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,985 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,987 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,989 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,989 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,990 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,991 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,991 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,994 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,994 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,996 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,998 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,999 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,999 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:11,999 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,000 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,000 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,001 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,001 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,005 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,005 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,006 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,007 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,009 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,011 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,013 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,014 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,017 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,018 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,019 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,021 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,022 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,023 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,025 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,025 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,026 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,027 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:12,792 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,800 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,806 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,826 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,830 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,830 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,837 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,840 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,852 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,864 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,867 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,867 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,875 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,878 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,893 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,894 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,908 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,911 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,924 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,925 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:12,970 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,010 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,071 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,098 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,232 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:13,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:14,619 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:18,973 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:19,100 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:19,173 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:19,331 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:19,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:19,568 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:19,671 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:19,772 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:20,213 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:20,644 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:20,664 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:20,797 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:21,207 [INFO] root: Invoking gpt5.
+2026-03-26 20:32:21,675 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-26 20:32:21,720 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Preferences:  26%|██▋       | 21/80 [00:10<00:29,  1.99it/s]2026-03-26 20:32:22,528 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Preferences:  30%|███       | 24/80 [00:12<00:29,  1.88it/s]Preferences:  31%|███▏      | 25/80 [00:14<00:35,  1.54it/s]Preferences:  49%|████▉     | 39/80 [00:15<00:12,  3.35it/s]Preferences:  89%|████████▉ | 71/80 [00:31<00:03,  2.34it/s]Preferences:  98%|█████████▊| 78/80 [00:36<00:00,  2.03it/s]Preferences: 100%|██████████| 80/80 [00:36<00:00,  2.17it/s]
+2026-03-26 20:32:48,768 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/head-to-head/gpt5.parquet.
