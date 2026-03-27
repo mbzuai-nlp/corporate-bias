@@ -197,9 +197,18 @@ def invoke_gemini(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
     )
 
 
+def invoke_phi(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
+    return _invoke_openrouter_model(
+        "microsoft/phi-4",
+        messages,
+        **kwargs,
+    )
+
+
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
     "gpt5": invoke_gpt5,
     "gemini": invoke_gemini,
+    "phi": invoke_phi
 }
 
 

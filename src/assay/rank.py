@@ -77,7 +77,12 @@ def _run_ranking(
                     "properties": {
                         "ranking": {
                             "type": "array",
-                            "items": {"type": "string"},
+                            "items": {
+                                "type": "string",
+                                "enum": entity_names,
+                            },
+                            "minItems": len(entity_names),
+                            "maxItems": len(entity_names),
                         },
                         "reason": {"type": "string"},
                     },
@@ -93,7 +98,11 @@ def _run_ranking(
     parsed = json.loads(output.text)
     ranking = parsed["ranking"]
 
-    if sorted(ranking) != sorted(entity_names) or len(ranking) != len(entity_names):
+    if (
+        len(ranking) != len(entity_names)
+        or len(set(ranking)) != len(entity_names)
+        or set(ranking) != set(entity_names)
+    ):
         raise ValueError(
             f"Invalid ranking returned for assay_instance_hash={task['assay_instance_hash']}: {ranking}"
         )

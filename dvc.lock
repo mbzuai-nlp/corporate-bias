@@ -455,11 +455,130 @@ stages:
     deps:
     - path: data/assays
       hash: md5
-      md5: e3b88861de42a174879665d513cdc51a.dir
-      size: 4213603
-      nfiles: 10
+      md5: e0b6649ecf933377c5fc6bbab509e755.dir
+      size: 6615511
+      nfiles: 15
     outs:
     - path: data/combined_assays.parquet
       hash: md5
-      md5: 9446eecbe83e01408f49cdbd4adc5e4a
-      size: 1904527
+      md5: 5a96ab21ff0f0770f7a0a4f2c6e0bc16
+      size: 2997014
+  run-assay@assay0-phi:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/phi;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=phi --db=data/db
+      --save-path=data/assays/head-to-head/phi.parquet --exp=data/run-assay/head-to-head/phi/exp
+      --samples-per-instance=10 2>&1 | tee data/run-assay/head-to-head/phi/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/phi.parquet
+      hash: md5
+      md5: 1f6a8933019875909438d11f439d09eb
+      size: 453135
+  run-assay@assay1-phi:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/phi; uv run python
+      -m pipelines.run_assay --assay=rank --model=phi --db=data/db --save-path=data/assays/rank/phi.parquet
+      --exp=data/run-assay/rank/phi/exp --samples-per-instance=10 2>&1 | tee data/run-assay/rank/phi/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/phi.parquet
+      hash: md5
+      md5: 841ede9a345ef4e7ffb0bce4f7f87558
+      size: 138086
+  run-assay@assay2-phi:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/phi;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=phi --db=data/db
+      --save-path=data/assays/consideration-set/phi.parquet --exp=data/run-assay/consideration-set/phi/exp
+      --samples-per-instance=10 2>&1 | tee data/run-assay/consideration-set/phi/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/phi.parquet
+      hash: md5
+      md5: 81fb7829fef43ce341dfdb7a51c9883f
+      size: 292395
+  run-assay@assay3-phi:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/phi;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=phi
+      --db=data/db --save-path=data/assays/describe-sentiment/phi.parquet --exp=data/run-assay/describe-sentiment/phi/exp
+      --samples-per-instance=10 2>&1 | tee data/run-assay/describe-sentiment/phi/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/phi.parquet
+      hash: md5
+      md5: 7d4e47b1b8676aa20d4c502af45bdd08
+      size: 202212
+  run-assay@assay4-phi:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/phi;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=phi --db=data/db
+      --save-path=data/assays/forced-selection/phi.parquet --exp=data/run-assay/forced-selection/phi/exp
+      --samples-per-instance=10 2>&1 | tee data/run-assay/forced-selection/phi/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/phi.parquet
+      hash: md5
+      md5: 265e89cba51ae7dad56b087c7881cc81
+      size: 1316080
