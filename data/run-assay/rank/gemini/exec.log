@@ -1,7 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7192.68it/s]
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 8399.81it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -9,8 +8,9 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 95/202 [00:00<00:00, 945.02it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1273.11it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 907.08it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1453.58it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1027.64it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1506.98it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 87/202 [00:00<00:00, 856.19it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1393.76it/s]
 /home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
@@ -22,15 +22,38 @@ with this one instead:
   .map_elements(json.loads, return_dtype=pl.Object)
 WARNING:dvclive:Ignoring `save_dvc_exp` because `dvc repro` is running.
 Use `dvc exp run` to save experiment.
-2026-03-26 20:33:59,260 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
+2026-03-27 17:22:04,979 [WARNING] dvclive: Ignoring `save_dvc_exp` because `dvc repro` is running.
 Use `dvc exp run` to save experiment.
-2026-03-26 20:33:59,668 [INFO] root: Running assay=rank model=gemini num_samples_per_instance=2.
-2026-03-26 20:33:59,674 [INFO] root: Invoking gemini.
-2026-03-26 20:33:59,675 [INFO] root: Invoking gemini.
-2026-03-26 20:33:59,676 [INFO] root: Invoking gemini.
-Rankings:   0%|          | 0/4 [00:00<?, ?it/s]2026-03-26 20:33:59,676 [INFO] root: Invoking gemini.
-2026-03-26 20:34:00,511 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-26 20:34:00,955 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Rankings:  25%|██▌       | 1/4 [00:01<00:05,  1.84s/it]2026-03-26 20:34:02,096 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Rankings:  50%|█████     | 2/4 [00:02<00:02,  1.44s/it]Rankings: 100%|██████████| 4/4 [00:02<00:00,  1.33it/s]
-2026-03-26 20:34:02,681 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gemini.parquet.
+2026-03-27 17:22:05,353 [INFO] root: Running assay=rank model=gemini num_samples_per_instance=10.
+2026-03-27 17:22:05,359 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,359 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,360 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,361 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,362 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,363 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,363 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,365 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,366 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,368 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,369 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,370 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,372 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,374 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,383 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,388 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,392 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,407 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,410 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,414 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,418 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,422 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,425 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,430 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,435 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,437 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,440 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,444 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,446 [INFO] root: Invoking gemini.
+2026-03-27 17:22:05,447 [INFO] root: Invoking gemini.
+Rankings:   0%|          | 0/30 [00:00<?, ?it/s]Rankings: 100%|██████████| 30/30 [00:00<00:00, 410.16it/s]
+2026-03-27 17:22:05,540 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gemini.parquet.

@@ -1,4 +1,5 @@
 import json
+import random
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any
@@ -104,6 +105,7 @@ def _run_ranking(
         "model": model,
         "comparison_set_id": task["comparison_set_id"],
         "comparison_set_name": task["comparison_set_name"],
+        "entity_names_prompt_order": entity_names,
         "ranking": ranking,
         "reason": parsed["reason"],
         "raw_response": output.text,
@@ -133,6 +135,7 @@ def _build_debug_json(
             "samples": [
                 {
                     "sample_id": ranking_sample["sample_id"],
+                    "entity_names_prompt_order": ranking_sample["entity_names_prompt_order"],
                     "ranking": ranking_sample["ranking"],
                     "reason": ranking_sample["reason"],
                     "raw_response": ranking_sample["raw_response"],
@@ -174,8 +177,12 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         )
 
         entities_by_instance[instance_hash] = entities
+        base_entity_names = [entity["entity_name"] for entity in entities]
 
         for sample_id in range(ctx.cfg.num_samples_per_instance):
+            shuffled_entity_names = base_entity_names.copy()
+            random.Random(f"{instance_hash}:{sample_id}").shuffle(shuffled_entity_names)
+
             tasks.append(
                 {
                     "sample_id": sample_id,
@@ -183,7 +190,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                     "comparison_set_name": comparison_set_name,
                     "assay_instance_hash": instance_hash,
                     "instance": instance,
-                    "entity_names": [entity["entity_name"] for entity in entities],
+                    "entity_names": shuffled_entity_names,
                 }
             )
 

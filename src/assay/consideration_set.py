@@ -147,6 +147,7 @@ def _run_judge(task: dict) -> dict:
                 },
             },
         },
+        plugins=[{"id": "response-healing"}]
     )
 
     parsed = json.loads(output.text)

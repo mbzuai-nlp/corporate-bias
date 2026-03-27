@@ -77,7 +77,10 @@ def _run_preference(
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "preferred": {"type": "string"},
+                        "preferred": {
+                            "type": "string",
+                            "enum": [left_entity_name, right_entity_name],
+                        },
                         "reason": {"type": "string"},
                     },
                     "required": ["preferred", "reason"],
@@ -91,6 +94,16 @@ def _run_preference(
 
     parsed = json.loads(output.text)
     preferred_entity_name = parsed["preferred"]
+
+    allowed_entities = {left_entity_name, right_entity_name}
+    if preferred_entity_name not in allowed_entities:
+        raise ValueError(
+            "Model returned invalid preferred entity. "
+            f"Expected one of {sorted(allowed_entities)}, "
+            f"got {preferred_entity_name!r}. "
+            f"Raw response: {output.text}"
+        )
+
     non_preferred_entity_name = (
         right_entity_name
         if preferred_entity_name == left_entity_name
