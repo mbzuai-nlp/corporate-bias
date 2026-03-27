@@ -328,8 +328,8 @@ stages:
     outs:
     - path: data/assays/consideration-set/gpt5.parquet
       hash: md5
-      md5: ac846aef08d47075674516692f07a4cf
-      size: 377836
+      md5: 8e3269e3e608ff5c4c165f5659e82db3
+      size: 332287
   run-assay@assay2-gemini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gemini;
       uv run python -m pipelines.run_assay --assay=consideration-set --model=gemini
@@ -352,8 +352,8 @@ stages:
     outs:
     - path: data/assays/consideration-set/gemini.parquet
       hash: md5
-      md5: d28a5884e2cd42d41370bc2934a022b3
-      size: 164287
+      md5: c02ed03dd7ba038431cc37653f2447ed
+      size: 167778
   run-assay@assay3-gpt5:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gpt5;
       uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gpt5
@@ -424,8 +424,8 @@ stages:
     outs:
     - path: data/assays/forced-selection/gpt5.parquet
       hash: md5
-      md5: a009a2fbef02b0b2fde3d2da92eb2a77
-      size: 1351112
+      md5: 335be62621239ddc7cbb4a10f6945618
+      size: 1425883
   run-assay@assay4-gemini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gemini;
       uv run python -m pipelines.run_assay --assay=forced-selection --model=gemini
@@ -448,18 +448,18 @@ stages:
     outs:
     - path: data/assays/forced-selection/gemini.parquet
       hash: md5
-      md5: 3ad90e90074a99f6ba17b5149a332fa2
-      size: 858338
+      md5: 01c95c9e185a5a278b50013533ebd810
+      size: 932439
   combine-assays:
     cmd: "uv run python -m pipelines.combine_assays --assays=data/assays --save=data/combined_assays.parquet\n"
     deps:
     - path: data/assays
       hash: md5
-      md5: c4f6aeec9418502849a36a31d83f17e2.dir
-      size: 4106789
+      md5: e3b88861de42a174879665d513cdc51a.dir
+      size: 4213603
       nfiles: 10
     outs:
     - path: data/combined_assays.parquet
       hash: md5
-      md5: b62a93e4ab579e4ff9cdb6860c599682
-      size: 1840541
+      md5: 9446eecbe83e01408f49cdbd4adc5e4a
+      size: 1904527

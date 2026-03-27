@@ -147,7 +147,7 @@ def _run_judge(task: dict) -> dict:
                 },
             },
         },
-        plugins=[{"id": "response-healing"}]
+        plugins=[{"id": "response-healing"}],
     )
 
     parsed = json.loads(output.text)
@@ -160,6 +160,23 @@ def _run_judge(task: dict) -> dict:
         "reason": parsed["reason"],
         "raw_response": output.text,
     }
+
+
+def _aggregate_judge_favoured_value(
+    *,
+    sample: dict[str, Any],
+    entity_name: str,
+) -> float:
+    if not _JUDGE_MODELS:
+        return 0.0
+
+    votes = [
+        1.0
+        if sample["judgments"][judge_model]["favored_entity"] == entity_name
+        else 0.0
+        for judge_model in _JUDGE_MODELS
+    ]
+    return float(sum(votes) / len(votes))
 
 
 def _build_debug_json(
@@ -187,6 +204,13 @@ def _build_debug_json(
                 ]
                 for judge_model in _JUDGE_MODELS
             },
+            "judge_favoured_aggregate_values": [
+                _aggregate_judge_favoured_value(
+                    sample=sample,
+                    entity_name=entity["entity_name"],
+                )
+                for sample in consideration_samples
+            ],
             "samples": [
                 {
                     "sample_id": sample["sample_id"],
@@ -218,6 +242,10 @@ def _build_debug_json(
                         }
                         for judge_model in _JUDGE_MODELS
                     },
+                    "judge_favoured_aggregate": _aggregate_judge_favoured_value(
+                        sample=sample,
+                        entity_name=entity["entity_name"],
+                    ),
                 }
                 for sample in consideration_samples
             ],
@@ -386,6 +414,18 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                     f"judge_favoured__{judge_model}",
                     judge_values,
                 )
+
+            aggregate_judge_values = [
+                _aggregate_judge_favoured_value(
+                    sample=sample,
+                    entity_name=entity["entity_name"],
+                )
+                for sample in consideration_samples
+            ]
+            result += build_estimand_result(
+                "judge_favoured__aggregate",
+                aggregate_judge_values,
+            )
 
             rows.append(
                 {
