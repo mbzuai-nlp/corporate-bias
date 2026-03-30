@@ -7,7 +7,7 @@ from bokeh.plotting import figure
 
 pn.extension()
 
-ASSAY_PARQUET_PATH = "/home/harry/code/corporate-bias/data/combined_assays.parquet"
+ASSAY_PARQUET_PATH = "data/combined_assays.parquet"
 ASSAY_DF = pl.read_parquet(ASSAY_PARQUET_PATH)
 
 
