@@ -114,8 +114,8 @@ def make_bar_plot(pdf, ylabel: str):
     p = figure(
         x_range=FactorRange(*factors),
         y_range=(y_min - pad, y_max + pad),
-        height=500,
-        width=1100,
+        sizing_mode="scale_width",
+        aspect_ratio=2,
         toolbar_location="above",
         tools="pan,wheel_zoom,box_zoom,reset,save",
         y_axis_label=ylabel,
@@ -199,4 +199,12 @@ def app():
     )
 
 
-app().servable()
+tabs = app()
+tabs.sizing_mode = "stretch_width"
+tabs.styles = {
+    "margin-left": "auto",
+    "margin-right": "auto",
+    "max-width": "70%",
+}
+
+tabs.servable()
