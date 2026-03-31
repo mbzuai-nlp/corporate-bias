@@ -1,6 +1,6 @@
 import json
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
@@ -16,7 +16,7 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_JUDGE_MODELS = ["gpt5", "gemini"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
 
 
 def _build_forced_messages(entity_name: str, instance: dict) -> list[Message]:
@@ -298,7 +298,9 @@ def _aggregate_judge_metric_for_source_sample(
     if not _JUDGE_MODELS:
         return 0.0
 
-    values = [float(value_fn(judgment_by_model[judge_model])) for judge_model in _JUDGE_MODELS]
+    values = [
+        float(value_fn(judgment_by_model[judge_model])) for judge_model in _JUDGE_MODELS
+    ]
     return float(sum(values) / len(values))
 
 
@@ -310,7 +312,9 @@ def _build_debug_json(
     entities: list[dict],
     free_text_by_key: dict[tuple[str, str, int], dict[str, Any]],
     forced_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]],
-    judgments_by_instance_entity_sample: dict[tuple[str, str, int], dict[str, dict[str, Any]]],
+    judgments_by_instance_entity_sample: dict[
+        tuple[str, str, int], dict[str, dict[str, Any]]
+    ],
     num_samples_per_instance: int,
 ) -> str:
     selected_values = [sample["selected_numeric"] for sample in samples]
@@ -524,34 +528,40 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        forced_outputs = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_forced_selection(
-                        model=ctx.cfg.model,
-                        task=task,
-                    ),
-                    tasks,
-                ),
-                total=len(tasks),
-                desc="Forced selection (JSON)",
+        futures = [
+            executor.submit(
+                _run_forced_selection,
+                model=ctx.cfg.model,
+                task=task,
             )
-        )
+            for task in tasks
+        ]
+
+        forced_outputs = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Forced selection (JSON)",
+        ):
+            forced_outputs.append(future.result())
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        free_text_outputs = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_free_text(
-                        model=ctx.cfg.model,
-                        task=task,
-                    ),
-                    tasks,
-                ),
-                total=len(tasks),
-                desc="Forced selection (free text)",
+        futures = [
+            executor.submit(
+                _run_free_text,
+                model=ctx.cfg.model,
+                task=task,
             )
-        )
+            for task in tasks
+        ]
+
+        free_text_outputs = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Forced selection (free text)",
+        ):
+            free_text_outputs.append(future.result())
 
     free_text_by_key: dict[tuple[str, str, int], dict[str, Any]] = {}
     for row in free_text_outputs:
@@ -591,13 +601,15 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        judge_outputs = list(
-            tqdm(
-                executor.map(_run_judge, judge_tasks),
-                total=len(judge_tasks),
-                desc="Steering judgments",
-            )
-        )
+        futures = [executor.submit(_run_judge, task) for task in judge_tasks]
+
+        judge_outputs = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Steering judgments",
+        ):
+            judge_outputs.append(future.result())
 
     forced_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
         defaultdict(list)

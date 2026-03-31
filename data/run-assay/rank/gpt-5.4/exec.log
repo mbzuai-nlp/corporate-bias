@@ -1,0 +1,28 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6224.79it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  53%|█████▎    | 107/202 [00:00<00:00, 1067.98it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1574.60it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1027.64it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1372.99it/s]
+/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+Expr.map_elements is significantly slower than the native expressions API.
+Only use if you absolutely CANNOT implement your logic otherwise.
+Replace this expression...
+  - pl.col("instance_json").map_elements(json.loads)
+with this one instead:
+  + pl.col("instance_json").str.json_decode()
+
+  .map_elements(json.loads, return_dtype=pl.Object)
+2026-03-31 18:17:15,199 [INFO] root: Running assay=rank model=gpt-5.4 num_samples_per_instance=1.
+2026-03-31 18:17:15,206 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:17:15,207 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:17:15,208 [INFO] root: Invoking gpt-5.4.
+Rankings:   0%|          | 0/3 [00:00<?, ?it/s]Rankings: 100%|██████████| 3/3 [00:00<00:00, 80.34it/s]
+2026-03-31 18:17:15,255 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/gpt-5.4.parquet.

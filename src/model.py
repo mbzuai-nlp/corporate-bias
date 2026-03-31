@@ -1,3 +1,4 @@
+from functools import partial
 from typing import Literal, Mapping, Sequence, Any, Protocol
 from openrouter import OpenRouter
 import os
@@ -8,6 +9,8 @@ import pickle
 import sqlite3
 import threading
 import logging
+import backoff
+import httpx
 
 
 # === TYPES ===
@@ -29,13 +32,32 @@ class ModelDelegate(Protocol):
     def __call__(self, messages: Sequence[Message], **kwargs: Any) -> ModelOutput: ...
 
 
-Model = Literal["gpt5", "gemini", "phi"]
+Model = Literal[
+    "openai/gpt-oss-120b",
+    "openai/gpt-5.4",
+    "openai/gpt-4o-mini",
+    "anthropic/claude-sonnet-4.6",
+    "anthropic/claude-opus-4.6",
+    "google/gemini-2.5-flash",
+    "google/gemini-2.5-pro",
+    "x-ai/grok-4.1-fast",
+    "x-ai/grok-4",
+    "meta-llama/llama-3.1-8b-instruct",
+    "meta-llama/llama-3.1-70b-instruct",
+    "mistralai/mistral-nemo",
+    "mistralai/mistral-small-2603",
+    "deepseek/deepseek-v3.2",
+    "qwen/qwen3-235b-a22b-2507",
+    "qwen/qwen3.5-flash-02-23",
+    "nvidia/nemotron-3-super-120b-a12b:free",
+    "nvidia/nemotron-3-nano-30b-a3b:free",
+    "microsoft/phi-4",
+]
 
 
 # === DEPENDENCY INJECTION ===
 
 
-# lazy loaded client singleton
 _openrouter_client: OpenRouter | None = None
 
 
@@ -136,11 +158,75 @@ def _serialize_messages(messages: Sequence[Message]) -> list[dict[str, str]]:
 
 def _extract_text(response: Any) -> str:
     try:
-        return response.choices[0].message.content
+        content = response.choices[0].message.content
     except (AttributeError, IndexError) as e:
         raise RuntimeError(f"Unexpected OpenRouter response shape: {response!r}") from e
 
+    if not isinstance(content, str):
+        raise TypeError(
+            f"Expected text content to be str, got {type(content).__name__}: {content!r}"
+        )
 
+    if not content.strip():
+        raise TypeError("Model returned empty content")
+
+    return content
+
+
+def _send_openrouter_request(
+    client: OpenRouter,
+    model_name: str,
+    messages: Sequence[Message],
+    **kwargs: Any,
+) -> Any:
+    return client.chat.send(
+        model=model_name,
+        messages=_serialize_messages(messages),
+        timeout_ms=30000,
+        provider={
+            # "require_parameters": True,
+        },
+        **kwargs,
+    )
+
+
+def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
+    out = dict(kwargs)
+
+    raw_plugins = out.get("plugins")
+    plugins: list[Any]
+
+    if raw_plugins is None:
+        plugins = []
+    else:
+        plugins = list(raw_plugins)
+
+    updated = []
+    saw_web = False
+
+    for plugin in plugins:
+        if isinstance(plugin, dict) and plugin.get("id") == "web":
+            p = dict(plugin)
+            p["enabled"] = False
+            updated.append(p)
+            saw_web = True
+        else:
+            updated.append(plugin)
+
+    if not saw_web:
+        updated.append({"id": "web", "enabled": False})
+
+    out["plugins"] = updated
+    return out
+
+
+@backoff.on_exception(
+    backoff.constant,
+    (httpx.ReadTimeout, TypeError),
+    interval=0,
+    max_tries=3,
+    jitter=None,
+)
 def _invoke_openrouter_model(
     model_name: str,
     messages: Sequence[Message],
@@ -149,6 +235,8 @@ def _invoke_openrouter_model(
     client = _get_openrouter_client()
 
     use_cache = bool(kwargs.pop("use_cache", False))
+    kwargs = _disable_web_plugin(kwargs)
+
     cache_key = None
 
     if use_cache:
@@ -161,9 +249,10 @@ def _invoke_openrouter_model(
         if cached is not None:
             return cached
 
-    response = client.chat.send(
-        model=model_name,
-        messages=_serialize_messages(messages),
+    response = _send_openrouter_request(
+        client=client,
+        model_name=model_name,
+        messages=messages,
         **kwargs,
     )
 
@@ -181,34 +270,42 @@ def _invoke_openrouter_model(
 # === MODEL DELEGATES ===
 
 
-def invoke_gpt5(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
-    return _invoke_openrouter_model(
-        "openai/gpt-5",
-        messages,
-        **kwargs,
-    )
-
-
-def invoke_gemini(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
-    return _invoke_openrouter_model(
-        "google/gemini-2.5-flash",
-        messages,
-        **kwargs,
-    )
-
-
-def invoke_phi(messages: Sequence[Message], **kwargs: Any) -> ModelOutput:
-    return _invoke_openrouter_model(
-        "microsoft/phi-4",
-        messages,
-        **kwargs,
-    )
-
-
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
-    "gpt5": invoke_gpt5,
-    "gemini": invoke_gemini,
-    "phi": invoke_phi
+    "gpt-oss-120b": partial(_invoke_openrouter_model, "openai/gpt-oss-120b"),
+    "gpt-5.4": partial(_invoke_openrouter_model, "openai/gpt-5.4"),
+    "gpt-4o-mini": partial(_invoke_openrouter_model, "openai/gpt-4o-mini"),
+    "claude-sonnet-4.6": partial(
+        _invoke_openrouter_model, "anthropic/claude-sonnet-4.6"
+    ),
+    "claude-opus-4.6": partial(_invoke_openrouter_model, "anthropic/claude-opus-4.6"),
+    "gemini-2.5-flash": partial(_invoke_openrouter_model, "google/gemini-2.5-flash"),
+    "gemini-2.5-pro": partial(_invoke_openrouter_model, "google/gemini-2.5-pro"),
+    "grok-4.1-fast": partial(_invoke_openrouter_model, "x-ai/grok-4.1-fast"),
+    "grok-4": partial(_invoke_openrouter_model, "x-ai/grok-4"),
+    "llama-3.1-8b-instruct": partial(
+        _invoke_openrouter_model, "meta-llama/llama-3.1-8b-instruct"
+    ),
+    "llama-3.1-70b-instruct": partial(
+        _invoke_openrouter_model, "meta-llama/llama-3.1-70b-instruct"
+    ),
+    "mistral-nemo": partial(_invoke_openrouter_model, "mistralai/mistral-nemo"),
+    "mistral-small-2603": partial(
+        _invoke_openrouter_model, "mistralai/mistral-small-2603"
+    ),
+    "deepseek-v3.2": partial(_invoke_openrouter_model, "deepseek/deepseek-v3.2"),
+    "qwen3-235b-a22b-2507": partial(
+        _invoke_openrouter_model, "qwen/qwen3-235b-a22b-2507"
+    ),
+    "qwen3.5-flash-02-23": partial(
+        _invoke_openrouter_model, "qwen/qwen3.5-flash-02-23"
+    ),
+    "nemotron-3-super-120b-a12b": partial(
+        _invoke_openrouter_model, "nvidia/nemotron-3-super-120b-a12b"
+    ),
+    "nemotron-3-nano-30b-a3b": partial(
+        _invoke_openrouter_model, "nvidia/nemotron-3-nano-30b-a3b"
+    ),
+    "phi-4": partial(_invoke_openrouter_model, "microsoft/phi-4"),
 }
 
 

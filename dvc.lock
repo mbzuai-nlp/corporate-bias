@@ -455,14 +455,14 @@ stages:
     deps:
     - path: data/assays
       hash: md5
-      md5: e0b6649ecf933377c5fc6bbab509e755.dir
-      size: 6615511
-      nfiles: 15
+      md5: 8f3c2249dc0c2d679b981457a31d291b.dir
+      size: 4678323
+      nfiles: 90
     outs:
     - path: data/combined_assays.parquet
       hash: md5
-      md5: 5a96ab21ff0f0770f7a0a4f2c6e0bc16
-      size: 2997014
+      md5: bda56a285bd384301bf975562798f1f6
+      size: 641382
   run-assay@assay0-phi:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/phi;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=phi --db=data/db
@@ -582,3 +582,2607 @@ stages:
       hash: md5
       md5: 265e89cba51ae7dad56b087c7881cc81
       size: 1316080
+  run-assay@assay0-openai/gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/openai/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=openai/gpt-oss-120b
+      --db=data/db --save-path=data/assays/head-to-head/openai/gpt-oss-120b.parquet
+      --exp=data/run-assay/head-to-head/openai/gpt-oss-120b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/openai/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/openai/gpt-oss-120b.parquet
+      hash: md5
+      md5: 6e0b83c66b7f1dcbe757cabd9bd308d3
+      size: 44178
+  run-assay@assay0-openai/gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/openai/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=openai/gpt-5.4
+      --db=data/db --save-path=data/assays/head-to-head/openai/gpt-5.4.parquet --exp=data/run-assay/head-to-head/openai/gpt-5.4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/openai/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/openai/gpt-5.4.parquet
+      hash: md5
+      md5: 0ac90bc377b2d68d8f7da8158a3343b4
+      size: 47477
+  run-assay@assay0-openai/gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/openai/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=openai/gpt-4o-mini
+      --db=data/db --save-path=data/assays/head-to-head/openai/gpt-4o-mini.parquet
+      --exp=data/run-assay/head-to-head/openai/gpt-4o-mini/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/openai/gpt-4o-mini/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/openai/gpt-4o-mini.parquet
+      hash: md5
+      md5: d843b55ec7054b232048267492cda9ff
+      size: 42400
+  run-assay@assay0-anthropic/claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/anthropic/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=anthropic/claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/head-to-head/anthropic/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/head-to-head/anthropic/claude-sonnet-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/anthropic/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/anthropic/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 5fbd8bf50547c59271ebd4a6b71f6eef
+      size: 63758
+  run-assay@assay0-anthropic/claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/anthropic/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=anthropic/claude-opus-4.6
+      --db=data/db --save-path=data/assays/head-to-head/anthropic/claude-opus-4.6.parquet
+      --exp=data/run-assay/head-to-head/anthropic/claude-opus-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/anthropic/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/anthropic/claude-opus-4.6.parquet
+      hash: md5
+      md5: 5e364d1a5208e4c7ad8d4865dd5676d6
+      size: 75249
+  run-assay@assay0-google/gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/google/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=google/gemini-2.5-flash
+      --db=data/db --save-path=data/assays/head-to-head/google/gemini-2.5-flash.parquet
+      --exp=data/run-assay/head-to-head/google/gemini-2.5-flash/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/google/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/google/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 9d45c5e7ede6ae85235ac6135287c36f
+      size: 46585
+  run-assay@assay0-google/gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/google/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=google/gemini-2.5-pro
+      --db=data/db --save-path=data/assays/head-to-head/google/gemini-2.5-pro.parquet
+      --exp=data/run-assay/head-to-head/google/gemini-2.5-pro/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/google/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/google/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 5b8a7ccb6417a8f47869bfce7b6657f3
+      size: 55410
+  run-assay@assay0-x-ai/grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/x-ai/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=x-ai/grok-4.1-fast
+      --db=data/db --save-path=data/assays/head-to-head/x-ai/grok-4.1-fast.parquet
+      --exp=data/run-assay/head-to-head/x-ai/grok-4.1-fast/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/x-ai/grok-4.1-fast/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/x-ai/grok-4.1-fast.parquet
+      hash: md5
+      md5: 40898c6700e6fa67fff5c117331d42bd
+      size: 49486
+  run-assay@assay0-x-ai/grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/x-ai/grok-4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=x-ai/grok-4
+      --db=data/db --save-path=data/assays/head-to-head/x-ai/grok-4.parquet --exp=data/run-assay/head-to-head/x-ai/grok-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/x-ai/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/x-ai/grok-4.parquet
+      hash: md5
+      md5: f7a405c6396897d98620215cd232fb93
+      size: 45109
+  run-assay@assay0-meta-llama/llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/meta-llama/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=meta-llama/llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/head-to-head/meta-llama/llama-3.1-8b-instruct.parquet
+      --exp=data/run-assay/head-to-head/meta-llama/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/meta-llama/llama-3.1-8b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/meta-llama/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: da72379a48977fb304123716c2066d9c
+      size: 36021
+  run-assay@assay0-meta-llama/llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/meta-llama/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=meta-llama/llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/head-to-head/meta-llama/llama-3.1-70b-instruct.parquet
+      --exp=data/run-assay/head-to-head/meta-llama/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/meta-llama/llama-3.1-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/meta-llama/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: 71740cabd8b44625aaae883124c24a7c
+      size: 35944
+  run-assay@assay0-mistralai/mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistralai/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=mistralai/mistral-nemo
+      --db=data/db --save-path=data/assays/head-to-head/mistralai/mistral-nemo.parquet
+      --exp=data/run-assay/head-to-head/mistralai/mistral-nemo/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/mistralai/mistral-nemo/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/mistralai/mistral-nemo.parquet
+      hash: md5
+      md5: 630024a830b2aabda7e2f5f39509b05f
+      size: 38334
+  run-assay@assay0-mistralai/mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistralai/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=mistralai/mistral-small-2603
+      --db=data/db --save-path=data/assays/head-to-head/mistralai/mistral-small-2603.parquet
+      --exp=data/run-assay/head-to-head/mistralai/mistral-small-2603/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/mistralai/mistral-small-2603/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/mistralai/mistral-small-2603.parquet
+      hash: md5
+      md5: e74a47ac62b7febe288099590b1d3f69
+      size: 46439
+  run-assay@assay0-deepseek/deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/deepseek/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=deepseek/deepseek-v3.2
+      --db=data/db --save-path=data/assays/head-to-head/deepseek/deepseek-v3.2.parquet
+      --exp=data/run-assay/head-to-head/deepseek/deepseek-v3.2/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/deepseek/deepseek-v3.2/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/deepseek/deepseek-v3.2.parquet
+      hash: md5
+      md5: 9a1044b98fcdbef140dcac68759aca44
+      size: 48694
+  run-assay@assay0-qwen/qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen/qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/head-to-head/qwen/qwen3-235b-a22b-2507.parquet
+      --exp=data/run-assay/head-to-head/qwen/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/qwen/qwen3-235b-a22b-2507/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/qwen/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: 04518f22fd2002fbf2af631bb741d99f
+      size: 47692
+  run-assay@assay0-qwen/qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen/qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/head-to-head/qwen/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/head-to-head/qwen/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/qwen/qwen3.5-flash-02-23/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/qwen/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: b82efc5c187b3d253fd0f2b394a16218
+      size: 42704
+  run-assay@assay0-nvidia/nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/nvidia/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=nvidia/nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/head-to-head/nvidia/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/head-to-head/nvidia/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/nvidia/nemotron-3-super-120b-a12b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/nvidia/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: 64a921c663be324db17766bae08e93ed
+      size: 45682
+  run-assay@assay0-microsoft/phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/microsoft/phi-4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=microsoft/phi-4
+      --db=data/db --save-path=data/assays/head-to-head/microsoft/phi-4.parquet --exp=data/run-assay/head-to-head/microsoft/phi-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/microsoft/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/microsoft/phi-4.parquet
+      hash: md5
+      md5: 7c23bd231b00c521a6647d332bdac88e
+      size: 53278
+  run-assay@assay0-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/head-to-head/gpt-oss-120b.parquet --exp=data/run-assay/head-to-head/gpt-oss-120b/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/gpt-oss-120b.parquet
+      hash: md5
+      md5: 164a739751c13e1ae1cbcddb10ab4e0f
+      size: 45458
+  run-assay@assay0-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-5.4 --db=data/db
+      --save-path=data/assays/head-to-head/gpt-5.4.parquet --exp=data/run-assay/head-to-head/gpt-5.4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/gpt-5.4.parquet
+      hash: md5
+      md5: f912e587bffcfba1c2b65969ca370c7c
+      size: 46221
+  run-assay@assay0-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/head-to-head/gpt-4o-mini.parquet --exp=data/run-assay/head-to-head/gpt-4o-mini/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/gpt-4o-mini.parquet
+      hash: md5
+      md5: cd68049378f7a3ca5d1cb4546bdd09a2
+      size: 42970
+  run-assay@assay0-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/head-to-head/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/head-to-head/claude-sonnet-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 49bc72429d7ea7d735261be1d73fdcce
+      size: 62306
+  run-assay@assay0-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/head-to-head/claude-opus-4.6.parquet --exp=data/run-assay/head-to-head/claude-opus-4.6/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/claude-opus-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/claude-opus-4.6.parquet
+      hash: md5
+      md5: a23b0079cbba4aa990a0e3caeae0679c
+      size: 77510
+  run-assay@assay0-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/head-to-head/gemini-2.5-flash.parquet --exp=data/run-assay/head-to-head/gemini-2.5-flash/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-flash/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 05a41fd48337fbd020efdfe5ae943361
+      size: 46400
+  run-assay@assay0-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/head-to-head/gemini-2.5-pro.parquet --exp=data/run-assay/head-to-head/gemini-2.5-pro/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/gemini-2.5-pro.parquet
+      hash: md5
+      md5: f1070b00366efb1e9deb6422694327ad
+      size: 54769
+  run-assay@assay0-grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=grok-4.1-fast
+      --db=data/db --save-path=data/assays/head-to-head/grok-4.1-fast.parquet --exp=data/run-assay/head-to-head/grok-4.1-fast/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/grok-4.1-fast/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/grok-4.1-fast.parquet
+      hash: md5
+      md5: 9784c8fc44f5982d17c3bbf366604f38
+      size: 46336
+  run-assay@assay0-grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/grok-4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=grok-4 --db=data/db
+      --save-path=data/assays/head-to-head/grok-4.parquet --exp=data/run-assay/head-to-head/grok-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/grok-4.parquet
+      hash: md5
+      md5: 454b64f23fde31be0e3c691bbd8fad32
+      size: 44619
+  run-assay@assay0-llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/head-to-head/llama-3.1-8b-instruct.parquet
+      --exp=data/run-assay/head-to-head/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/llama-3.1-8b-instruct/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: 7380a263699cb53af59aafc243e13ed3
+      size: 37630
+  run-assay@assay0-llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/head-to-head/llama-3.1-70b-instruct.parquet
+      --exp=data/run-assay/head-to-head/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/llama-3.1-70b-instruct/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: 71485004a1b19b847a5bc933597a93f8
+      size: 37733
+  run-assay@assay0-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=mistral-nemo
+      --db=data/db --save-path=data/assays/head-to-head/mistral-nemo.parquet --exp=data/run-assay/head-to-head/mistral-nemo/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/mistral-nemo/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/mistral-nemo.parquet
+      hash: md5
+      md5: 84fca71a255ca528a91e6fc51cbb9de8
+      size: 36749
+  run-assay@assay0-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=mistral-small-2603
+      --db=data/db --save-path=data/assays/head-to-head/mistral-small-2603.parquet
+      --exp=data/run-assay/head-to-head/mistral-small-2603/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/mistral-small-2603/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/mistral-small-2603.parquet
+      hash: md5
+      md5: cda047f4aaf9e83c155a5e265349756d
+      size: 45896
+  run-assay@assay0-deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=deepseek-v3.2
+      --db=data/db --save-path=data/assays/head-to-head/deepseek-v3.2.parquet --exp=data/run-assay/head-to-head/deepseek-v3.2/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/deepseek-v3.2/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/deepseek-v3.2.parquet
+      hash: md5
+      md5: c60021734699fc3093fd0223764cb6ca
+      size: 50477
+  run-assay@assay0-qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/head-to-head/qwen3-235b-a22b-2507.parquet
+      --exp=data/run-assay/head-to-head/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/qwen3-235b-a22b-2507/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: 2c7f1d0af64966634cf38ba98ae2192d
+      size: 48519
+  run-assay@assay0-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/head-to-head/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/head-to-head/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/qwen3.5-flash-02-23/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: 3d67b4efeaeea0cb3b9e2a97245c2a6d
+      size: 42373
+  run-assay@assay0-nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/head-to-head/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/head-to-head/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/head-to-head/nemotron-3-super-120b-a12b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: a8f4ea9afae3ba0f72c08f2093befffe
+      size: 48817
+  run-assay@assay0-phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/phi-4;
+      uv run python -m pipelines.run_assay --assay=head-to-head --model=phi-4 --db=data/db
+      --save-path=data/assays/head-to-head/phi-4.parquet --exp=data/run-assay/head-to-head/phi-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/head-to-head/phi-4.parquet
+      hash: md5
+      md5: 6438d207d4878209060c6d1eb4a8b8b4
+      size: 53367
+  run-assay@assay1-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=rank --model=gpt-oss-120b --db=data/db
+      --save-path=data/assays/rank/gpt-oss-120b.parquet --exp=data/run-assay/rank/gpt-oss-120b/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gpt-oss-120b.parquet
+      hash: md5
+      md5: 7100556265b4abe479d8395bc72f4f9c
+      size: 14704
+  run-assay@assay1-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-5.4; uv run
+      python -m pipelines.run_assay --assay=rank --model=gpt-5.4 --db=data/db --save-path=data/assays/rank/gpt-5.4.parquet
+      --exp=data/run-assay/rank/gpt-5.4/exp --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gpt-5.4.parquet
+      hash: md5
+      md5: 209910a92a0f0e4441c46725c076aa88
+      size: 17359
+  run-assay@assay1-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=rank --model=gpt-4o-mini --db=data/db
+      --save-path=data/assays/rank/gpt-4o-mini.parquet --exp=data/run-assay/rank/gpt-4o-mini/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gpt-4o-mini.parquet
+      hash: md5
+      md5: d0bc94aca57a0a4feaa3899303901bfe
+      size: 14593
+  run-assay@assay1-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=rank --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/rank/claude-sonnet-4.6.parquet --exp=data/run-assay/rank/claude-sonnet-4.6/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 5d2e8d9c6ce69e9d4cd2c9bbf1fc1dcf
+      size: 18128
+  run-assay@assay1-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=rank --model=claude-opus-4.6 --db=data/db
+      --save-path=data/assays/rank/claude-opus-4.6.parquet --exp=data/run-assay/rank/claude-opus-4.6/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/claude-opus-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/claude-opus-4.6.parquet
+      hash: md5
+      md5: 5884739a3ec2ecacb06365dc0ddb2f33
+      size: 19071
+  run-assay@assay1-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=rank --model=gemini-2.5-flash --db=data/db
+      --save-path=data/assays/rank/gemini-2.5-flash.parquet --exp=data/run-assay/rank/gemini-2.5-flash/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gemini-2.5-flash/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gemini-2.5-flash.parquet
+      hash: md5
+      md5: ccad8fd29b8ef069e477f30a16d05867
+      size: 14041
+  run-assay@assay1-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=rank --model=gemini-2.5-pro --db=data/db
+      --save-path=data/assays/rank/gemini-2.5-pro.parquet --exp=data/run-assay/rank/gemini-2.5-pro/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gemini-2.5-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 817fa47fd52f819e2480013a06396789
+      size: 18472
+  run-assay@assay1-grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=rank --model=grok-4.1-fast --db=data/db
+      --save-path=data/assays/rank/grok-4.1-fast.parquet --exp=data/run-assay/rank/grok-4.1-fast/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/grok-4.1-fast/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/grok-4.1-fast.parquet
+      hash: md5
+      md5: e66d4b3091445beebe73ac8945fb21c5
+      size: 12926
+  run-assay@assay1-grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/grok-4; uv run
+      python -m pipelines.run_assay --assay=rank --model=grok-4 --db=data/db --save-path=data/assays/rank/grok-4.parquet
+      --exp=data/run-assay/rank/grok-4/exp --samples-per-instance=1 2>&1 | tee data/run-assay/rank/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/grok-4.parquet
+      hash: md5
+      md5: 9767c7b731beb3852ef916713e3cf207
+      size: 12110
+  run-assay@assay1-llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=rank --model=llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/rank/llama-3.1-8b-instruct.parquet --exp=data/run-assay/rank/llama-3.1-8b-instruct/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/llama-3.1-8b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: e99790233cc0ecd7253094b9e3467f74
+      size: 15063
+  run-assay@assay1-llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=rank --model=llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/rank/llama-3.1-70b-instruct.parquet --exp=data/run-assay/rank/llama-3.1-70b-instruct/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/llama-3.1-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: b52886eb8c46adf99f4c09840e2a351d
+      size: 13828
+  run-assay@assay1-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=rank --model=mistral-nemo --db=data/db
+      --save-path=data/assays/rank/mistral-nemo.parquet --exp=data/run-assay/rank/mistral-nemo/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/mistral-nemo/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/mistral-nemo.parquet
+      hash: md5
+      md5: 31c583873dd14bc97e75ebdcfaac0e36
+      size: 12782
+  run-assay@assay1-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=rank --model=mistral-small-2603
+      --db=data/db --save-path=data/assays/rank/mistral-small-2603.parquet --exp=data/run-assay/rank/mistral-small-2603/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/mistral-small-2603/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/mistral-small-2603.parquet
+      hash: md5
+      md5: 22d7730d8f11f9b1b6071d463e5dc1de
+      size: 16502
+  run-assay@assay1-deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=rank --model=deepseek-v3.2 --db=data/db
+      --save-path=data/assays/rank/deepseek-v3.2.parquet --exp=data/run-assay/rank/deepseek-v3.2/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/deepseek-v3.2/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/deepseek-v3.2.parquet
+      hash: md5
+      md5: afdaaba540b76b8ef9ff3746171e7241
+      size: 16094
+  run-assay@assay1-qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=rank --model=qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/rank/qwen3-235b-a22b-2507.parquet --exp=data/run-assay/rank/qwen3-235b-a22b-2507/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/qwen3-235b-a22b-2507/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: 874d954f3c7e31a93911cc54bd69adb0
+      size: 14200
+  run-assay@assay1-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=rank --model=qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/rank/qwen3.5-flash-02-23.parquet --exp=data/run-assay/rank/qwen3.5-flash-02-23/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/qwen3.5-flash-02-23/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: 862fa65b9cac0194fac9e03297b9eaf3
+      size: 14027
+  run-assay@assay1-nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=rank --model=nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/rank/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/rank/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/rank/nemotron-3-super-120b-a12b/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: fda4d02df9bc19cc521660c3bfc4c3ae
+      size: 13878
+  run-assay@assay1-phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/phi-4; uv run
+      python -m pipelines.run_assay --assay=rank --model=phi-4 --db=data/db --save-path=data/assays/rank/phi-4.parquet
+      --exp=data/run-assay/rank/phi-4/exp --samples-per-instance=1 2>&1 | tee data/run-assay/rank/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/rank/phi-4.parquet
+      hash: md5
+      md5: 9649a4d6dcefcb5f007149fd9ff7ef02
+      size: 24156
+  run-assay@assay2-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/consideration-set/gpt-oss-120b.parquet
+      --exp=data/run-assay/consideration-set/gpt-oss-120b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/gpt-oss-120b.parquet
+      hash: md5
+      md5: aace886b0ad36084124cf407b3d327f5
+      size: 68755
+  run-assay@assay2-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=gpt-5.4
+      --db=data/db --save-path=data/assays/consideration-set/gpt-5.4.parquet --exp=data/run-assay/consideration-set/gpt-5.4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/gpt-5.4.parquet
+      hash: md5
+      md5: 735738222691231b7e3dc1e515233215
+      size: 29649
+  run-assay@assay2-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/consideration-set/gpt-4o-mini.parquet --exp=data/run-assay/consideration-set/gpt-4o-mini/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/gpt-4o-mini.parquet
+      hash: md5
+      md5: 64c3fea459bc7a61866430d89a8bcfc9
+      size: 26757
+  run-assay@assay2-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/consideration-set/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/consideration-set/claude-sonnet-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 5535840a052659ab12ceb5bd66f0d40c
+      size: 28571
+  run-assay@assay2-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/consideration-set/claude-opus-4.6.parquet
+      --exp=data/run-assay/consideration-set/claude-opus-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/claude-opus-4.6.parquet
+      hash: md5
+      md5: d775af8e4e49f456595433cb236bc81c
+      size: 32875
+  run-assay@assay2-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/consideration-set/gemini-2.5-flash.parquet
+      --exp=data/run-assay/consideration-set/gemini-2.5-flash/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 8301e78adc898025e7b9f8dd4649bad5
+      size: 26117
+  run-assay@assay2-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/consideration-set/gemini-2.5-pro.parquet
+      --exp=data/run-assay/consideration-set/gemini-2.5-pro/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/gemini-2.5-pro.parquet
+      hash: md5
+      md5: f61f83b274723d44809d63b0d58a705e
+      size: 28507
+  run-assay@assay2-grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=grok-4.1-fast
+      --db=data/db --save-path=data/assays/consideration-set/grok-4.1-fast.parquet
+      --exp=data/run-assay/consideration-set/grok-4.1-fast/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/grok-4.1-fast/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/grok-4.1-fast.parquet
+      hash: md5
+      md5: 75c10046516ba41e2557fdc6399d4573
+      size: 25048
+  run-assay@assay2-grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/grok-4;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=grok-4
+      --db=data/db --save-path=data/assays/consideration-set/grok-4.parquet --exp=data/run-assay/consideration-set/grok-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/grok-4.parquet
+      hash: md5
+      md5: 13746b5064e6f3be0fe9c006f67ec294
+      size: 44261
+  run-assay@assay2-llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/consideration-set/llama-3.1-8b-instruct.parquet
+      --exp=data/run-assay/consideration-set/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/llama-3.1-8b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: 7ac9f02de9093bfbc1ef3f348435ffb3
+      size: 26854
+  run-assay@assay2-llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/consideration-set/llama-3.1-70b-instruct.parquet
+      --exp=data/run-assay/consideration-set/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/llama-3.1-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: e52d00658e7801877c9912360a4e6369
+      size: 30549
+  run-assay@assay2-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=mistral-nemo
+      --db=data/db --save-path=data/assays/consideration-set/mistral-nemo.parquet
+      --exp=data/run-assay/consideration-set/mistral-nemo/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/mistral-nemo/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/mistral-nemo.parquet
+      hash: md5
+      md5: 475238ce6b6bf13a2ea9658b24494c7e
+      size: 26085
+  run-assay@assay2-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=mistral-small-2603
+      --db=data/db --save-path=data/assays/consideration-set/mistral-small-2603.parquet
+      --exp=data/run-assay/consideration-set/mistral-small-2603/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/mistral-small-2603/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/mistral-small-2603.parquet
+      hash: md5
+      md5: ef52e0e9b3a4ea9f67f10de86a5dc517
+      size: 23731
+  run-assay@assay2-deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=deepseek-v3.2
+      --db=data/db --save-path=data/assays/consideration-set/deepseek-v3.2.parquet
+      --exp=data/run-assay/consideration-set/deepseek-v3.2/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/deepseek-v3.2/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/deepseek-v3.2.parquet
+      hash: md5
+      md5: 64242eeffbca0d0734e4a309a295d7a7
+      size: 35436
+  run-assay@assay2-qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/consideration-set/qwen3-235b-a22b-2507.parquet
+      --exp=data/run-assay/consideration-set/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/qwen3-235b-a22b-2507/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: 48686105fdb51e6da4d55458ed87f92b
+      size: 27807
+  run-assay@assay2-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/consideration-set/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/consideration-set/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/qwen3.5-flash-02-23/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: dd9f32a3d8726b8a6cae17b10aa37961
+      size: 26485
+  run-assay@assay2-nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/consideration-set/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/consideration-set/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/consideration-set/nemotron-3-super-120b-a12b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: 70e0088e204e02d205f8d4ddfd934667
+      size: 36296
+  run-assay@assay2-phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/consideration-set/phi-4;
+      uv run python -m pipelines.run_assay --assay=consideration-set --model=phi-4
+      --db=data/db --save-path=data/assays/consideration-set/phi-4.parquet --exp=data/run-assay/consideration-set/phi-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/consideration-set/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/consideration-set/phi-4.parquet
+      hash: md5
+      md5: 8e79321b71cf95a94f6df8b970321ce1
+      size: 47100
+  run-assay@assay3-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/describe-sentiment/gpt-oss-120b.parquet
+      --exp=data/run-assay/describe-sentiment/gpt-oss-120b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/gpt-oss-120b.parquet
+      hash: md5
+      md5: 9b47894f95f9aaefcfb2722ce14f0250
+      size: 44251
+  run-assay@assay3-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gpt-5.4
+      --db=data/db --save-path=data/assays/describe-sentiment/gpt-5.4.parquet --exp=data/run-assay/describe-sentiment/gpt-5.4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/describe-sentiment/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/gpt-5.4.parquet
+      hash: md5
+      md5: 0a234e97f963ff832e28c4a17dbc52e5
+      size: 27865
+  run-assay@assay3-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/describe-sentiment/gpt-4o-mini.parquet
+      --exp=data/run-assay/describe-sentiment/gpt-4o-mini/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/gpt-4o-mini/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/gpt-4o-mini.parquet
+      hash: md5
+      md5: 6e262934cfc8e7aa049d9945f0af2414
+      size: 20899
+  run-assay@assay3-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/describe-sentiment/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/describe-sentiment/claude-sonnet-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 6e5d5fb50ab895cd2f94f89f9df57b25
+      size: 28453
+  run-assay@assay3-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/describe-sentiment/claude-opus-4.6.parquet
+      --exp=data/run-assay/describe-sentiment/claude-opus-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/claude-opus-4.6.parquet
+      hash: md5
+      md5: 57fe0e7efd7e70ee73fa6fde38dfd4b7
+      size: 30340
+  run-assay@assay3-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/describe-sentiment/gemini-2.5-flash.parquet
+      --exp=data/run-assay/describe-sentiment/gemini-2.5-flash/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/gemini-2.5-flash.parquet
+      hash: md5
+      md5: bc978bf1b932c259581d77dc23babed8
+      size: 18378
+  run-assay@assay3-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/describe-sentiment/gemini-2.5-pro.parquet
+      --exp=data/run-assay/describe-sentiment/gemini-2.5-pro/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 088b6b2a730045cb08fc09d907e7fc98
+      size: 26623
+  run-assay@assay3-grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=grok-4.1-fast
+      --db=data/db --save-path=data/assays/describe-sentiment/grok-4.1-fast.parquet
+      --exp=data/run-assay/describe-sentiment/grok-4.1-fast/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/grok-4.1-fast/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/grok-4.1-fast.parquet
+      hash: md5
+      md5: a6d5325fe2ce6e07994932333c8b1d40
+      size: 22626
+  run-assay@assay3-grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/grok-4;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=grok-4
+      --db=data/db --save-path=data/assays/describe-sentiment/grok-4.parquet --exp=data/run-assay/describe-sentiment/grok-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/describe-sentiment/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/grok-4.parquet
+      hash: md5
+      md5: eb2390e375ebbdd0b231258fe28728f4
+      size: 31070
+  run-assay@assay3-llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/describe-sentiment/llama-3.1-8b-instruct.parquet
+      --exp=data/run-assay/describe-sentiment/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/llama-3.1-8b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: fb3338a92d10369c3256fa34ee9c514f
+      size: 24752
+  run-assay@assay3-llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/describe-sentiment/llama-3.1-70b-instruct.parquet
+      --exp=data/run-assay/describe-sentiment/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/llama-3.1-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: b1be030362b2698d3a502617edbf7dd6
+      size: 30179
+  run-assay@assay3-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=mistral-nemo
+      --db=data/db --save-path=data/assays/describe-sentiment/mistral-nemo.parquet
+      --exp=data/run-assay/describe-sentiment/mistral-nemo/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/mistral-nemo/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/mistral-nemo.parquet
+      hash: md5
+      md5: ca090494183462a9f23ec8f200575c1f
+      size: 21324
+  run-assay@assay3-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=mistral-small-2603
+      --db=data/db --save-path=data/assays/describe-sentiment/mistral-small-2603.parquet
+      --exp=data/run-assay/describe-sentiment/mistral-small-2603/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/mistral-small-2603/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/mistral-small-2603.parquet
+      hash: md5
+      md5: d0164823ec318ef79d2dc4fd10256619
+      size: 21584
+  run-assay@assay3-deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=deepseek-v3.2
+      --db=data/db --save-path=data/assays/describe-sentiment/deepseek-v3.2.parquet
+      --exp=data/run-assay/describe-sentiment/deepseek-v3.2/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/deepseek-v3.2/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/deepseek-v3.2.parquet
+      hash: md5
+      md5: d448d52e4e61e7edcf99528947b3ae19
+      size: 26046
+  run-assay@assay3-qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet
+      --exp=data/run-assay/describe-sentiment/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/qwen3-235b-a22b-2507/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: cc64a93365bab7c75da754c0faa920d2
+      size: 23213
+  run-assay@assay3-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/describe-sentiment/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/describe-sentiment/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/qwen3.5-flash-02-23/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: f0e436650cfa431f8f1d1c79a72c15fa
+      size: 24329
+  run-assay@assay3-nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/describe-sentiment/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/describe-sentiment/nemotron-3-super-120b-a12b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: 6500ef85d4a954fc9253dc86ffd061e1
+      size: 36127
+  run-assay@assay3-phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/describe-sentiment/phi-4;
+      uv run python -m pipelines.run_assay --assay=describe-sentiment --model=phi-4
+      --db=data/db --save-path=data/assays/describe-sentiment/phi-4.parquet --exp=data/run-assay/describe-sentiment/phi-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/describe-sentiment/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/describe-sentiment/phi-4.parquet
+      hash: md5
+      md5: c96396c47e6c88d9ea6af9d581f28a59
+      size: 29328
+  run-assay@assay4-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/forced-selection/gpt-oss-120b.parquet --exp=data/run-assay/forced-selection/gpt-oss-120b/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/gpt-oss-120b.parquet
+      hash: md5
+      md5: d9ee82b7312dc9c8eea1819728f57ee9
+      size: 178182
+  run-assay@assay4-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=gpt-5.4
+      --db=data/db --save-path=data/assays/forced-selection/gpt-5.4.parquet --exp=data/run-assay/forced-selection/gpt-5.4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/gpt-5.4.parquet
+      hash: md5
+      md5: 1e21cdc135133a849b10540713fed0f0
+      size: 142304
+  run-assay@assay4-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/forced-selection/gpt-4o-mini.parquet --exp=data/run-assay/forced-selection/gpt-4o-mini/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/gpt-4o-mini.parquet
+      hash: md5
+      md5: b463b559a0b6bfb947a1e8bfdccaf033
+      size: 112190
+  run-assay@assay4-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/forced-selection/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/forced-selection/claude-sonnet-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 04e634c151d71a274c7b16200edcdd68
+      size: 165025
+  run-assay@assay4-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/forced-selection/claude-opus-4.6.parquet
+      --exp=data/run-assay/forced-selection/claude-opus-4.6/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/claude-opus-4.6.parquet
+      hash: md5
+      md5: 9a593eaf73fba93f57e7c2ad76b46c7b
+      size: 171514
+  run-assay@assay4-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/forced-selection/gemini-2.5-flash.parquet
+      --exp=data/run-assay/forced-selection/gemini-2.5-flash/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 5e5ef0c766b1ccf6808838f8b039661a
+      size: 113577
+  run-assay@assay4-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/forced-selection/gemini-2.5-pro.parquet
+      --exp=data/run-assay/forced-selection/gemini-2.5-pro/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 4001edd34c285a2237535525ef11c91b
+      size: 121350
+  run-assay@assay4-grok-4.1-fast:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/grok-4.1-fast;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=grok-4.1-fast
+      --db=data/db --save-path=data/assays/forced-selection/grok-4.1-fast.parquet
+      --exp=data/run-assay/forced-selection/grok-4.1-fast/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/grok-4.1-fast/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/grok-4.1-fast.parquet
+      hash: md5
+      md5: fca59131c84e485a23cf8de2b67e5cd6
+      size: 114583
+  run-assay@assay4-grok-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/grok-4;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=grok-4
+      --db=data/db --save-path=data/assays/forced-selection/grok-4.parquet --exp=data/run-assay/forced-selection/grok-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/grok-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/grok-4.parquet
+      hash: md5
+      md5: 83f62fcf28bbfddb316f8a03651d3995
+      size: 133892
+  run-assay@assay4-llama-3.1-8b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/llama-3.1-8b-instruct;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=llama-3.1-8b-instruct
+      --db=data/db --save-path=data/assays/forced-selection/llama-3.1-8b-instruct.parquet
+      --exp=data/run-assay/forced-selection/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/llama-3.1-8b-instruct/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/llama-3.1-8b-instruct.parquet
+      hash: md5
+      md5: 98d50985d797b9d2b50448d5f7b94ece
+      size: 120863
+  run-assay@assay4-llama-3.1-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/llama-3.1-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=llama-3.1-70b-instruct
+      --db=data/db --save-path=data/assays/forced-selection/llama-3.1-70b-instruct.parquet
+      --exp=data/run-assay/forced-selection/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/llama-3.1-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/llama-3.1-70b-instruct.parquet
+      hash: md5
+      md5: 94685281e139b9214c7ce570f3bc94a7
+      size: 124551
+  run-assay@assay4-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=mistral-nemo
+      --db=data/db --save-path=data/assays/forced-selection/mistral-nemo.parquet --exp=data/run-assay/forced-selection/mistral-nemo/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/mistral-nemo/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/mistral-nemo.parquet
+      hash: md5
+      md5: 740a41ad6458940dbe24bc1cad8ebeb3
+      size: 118034
+  run-assay@assay4-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=mistral-small-2603
+      --db=data/db --save-path=data/assays/forced-selection/mistral-small-2603.parquet
+      --exp=data/run-assay/forced-selection/mistral-small-2603/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/mistral-small-2603/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/mistral-small-2603.parquet
+      hash: md5
+      md5: 9d2eb60f6619bf9443a6bb097b0d3377
+      size: 119778
+  run-assay@assay4-deepseek-v3.2:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/deepseek-v3.2;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=deepseek-v3.2
+      --db=data/db --save-path=data/assays/forced-selection/deepseek-v3.2.parquet
+      --exp=data/run-assay/forced-selection/deepseek-v3.2/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/deepseek-v3.2/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/deepseek-v3.2.parquet
+      hash: md5
+      md5: 1835733b51c60d0efba0f1f7f452c697
+      size: 146071
+  run-assay@assay4-qwen3-235b-a22b-2507:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/qwen3-235b-a22b-2507;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=qwen3-235b-a22b-2507
+      --db=data/db --save-path=data/assays/forced-selection/qwen3-235b-a22b-2507.parquet
+      --exp=data/run-assay/forced-selection/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/qwen3-235b-a22b-2507/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/qwen3-235b-a22b-2507.parquet
+      hash: md5
+      md5: 8cfcc9a72bb30391e468f871637bff82
+      size: 149197
+  run-assay@assay4-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=qwen3.5-flash-02-23
+      --db=data/db --save-path=data/assays/forced-selection/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/forced-selection/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/qwen3.5-flash-02-23/exec.log\"\n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: 3d05b745391a25383156614189a20e18
+      size: 110776
+  run-assay@assay4-nemotron-3-super-120b-a12b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/nemotron-3-super-120b-a12b;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=nemotron-3-super-120b-a12b
+      --db=data/db --save-path=data/assays/forced-selection/nemotron-3-super-120b-a12b.parquet
+      --exp=data/run-assay/forced-selection/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      2>&1 | tee data/run-assay/forced-selection/nemotron-3-super-120b-a12b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/nemotron-3-super-120b-a12b.parquet
+      hash: md5
+      md5: 2f88ca107fe74cab9c81aee01eaad87d
+      size: 158984
+  run-assay@assay4-phi-4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/forced-selection/phi-4;
+      uv run python -m pipelines.run_assay --assay=forced-selection --model=phi-4
+      --db=data/db --save-path=data/assays/forced-selection/phi-4.parquet --exp=data/run-assay/forced-selection/phi-4/exp
+      --samples-per-instance=1 2>&1 | tee data/run-assay/forced-selection/phi-4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db/claim.parquet
+      hash: md5
+      md5: cff981ffd0772bffcf271be1e44ae1d2
+      size: 1826
+    - path: data/db/comparison_set.parquet
+      hash: md5
+      md5: 08da1ee03bc620a684f689c4be13212e
+      size: 1451
+    - path: data/db/entity.parquet
+      hash: md5
+      md5: 2d87982937f2e08ac74c4a5b21ee0f6c
+      size: 2376
+    outs:
+    - path: data/assays/forced-selection/phi-4.parquet
+      hash: md5
+      md5: 8d09e1545e7433ee6b43a33acd445dae
+      size: 149098

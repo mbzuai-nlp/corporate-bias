@@ -25,19 +25,35 @@ stages:
     matrix:
       assay:
       - name: head-to-head
-        samples-per-instance: 10
+        samples-per-instance: 1
       - name: rank
-        samples-per-instance: 10
+        samples-per-instance: 1
       - name: consideration-set
-        samples-per-instance: 10
+        samples-per-instance: 1
       - name: describe-sentiment
-        samples-per-instance: 10
+        samples-per-instance: 1
       - name: forced-selection
-        samples-per-instance: 10
+        samples-per-instance: 1
       model:
-      - gpt5
-      - gemini
-      - phi
+      - gpt-oss-120b
+      - gpt-5.4
+      - gpt-4o-mini
+      - claude-sonnet-4.6
+      - claude-opus-4.6
+      - gemini-2.5-flash
+      - gemini-2.5-pro
+      - grok-4.1-fast
+      - grok-4
+      - llama-3.1-8b-instruct
+      - llama-3.1-70b-instruct
+      - mistral-nemo
+      - mistral-small-2603
+      - deepseek-v3.2
+      - qwen3-235b-a22b-2507
+      - qwen3.5-flash-02-23
+      - nemotron-3-super-120b-a12b
+      #- nemotron-3-nano-30b-a3b
+      - phi-4
     vars:
     - stage-name: run-assay
     cmd: >
@@ -69,51 +85,167 @@ stages:
     outs:
     - ${data}/combined_assays.parquet:
         cache: false
-
 metrics:
-- data/run-assay/head-to-head/gpt5/exp/metrics.json
-- data/run-assay/head-to-head/gemini/exp/metrics.json
-- data/run-assay/rank/gpt5/exp/metrics.json
-- data/run-assay/rank/gemini/exp/metrics.json
-- data/run-assay/consideration-set/gpt5/exp/metrics.json
-- data/run-assay/consideration-set/gemini/exp/metrics.json
-- data/run-assay/describe-sentiment/gpt5/exp/metrics.json
-- data/run-assay/describe-sentiment/gemini/exp/metrics.json
-- data/run-assay/forced-selection/gpt5/exp/metrics.json
-- data/run-assay/forced-selection/gemini/exp/metrics.json
-- data/run-assay/head-to-head/phi/exp/metrics.json
-- data/run-assay/rank/phi/exp/metrics.json
-- data/run-assay/consideration-set/phi/exp/metrics.json
-- data/run-assay/describe-sentiment/phi/exp/metrics.json
-- data/run-assay/forced-selection/phi/exp/metrics.json
+- data/run-assay/consideration-set/gpt-oss-120b/exp/metrics.json
+- data/run-assay/consideration-set/gpt-5.4/exp/metrics.json
+- data/run-assay/consideration-set/gpt-4o-mini/exp/metrics.json
+- data/run-assay/consideration-set/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/consideration-set/claude-opus-4.6/exp/metrics.json
+- data/run-assay/consideration-set/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/consideration-set/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/consideration-set/grok-4.1-fast/exp/metrics.json
+- data/run-assay/consideration-set/grok-4/exp/metrics.json
+- data/run-assay/consideration-set/llama-3.1-8b-instruct/exp/metrics.json
+- data/run-assay/consideration-set/llama-3.1-70b-instruct/exp/metrics.json
+- data/run-assay/consideration-set/mistral-nemo/exp/metrics.json
+- data/run-assay/consideration-set/mistral-small-2603/exp/metrics.json
+- data/run-assay/consideration-set/deepseek-v3.2/exp/metrics.json
+- data/run-assay/consideration-set/qwen3-235b-a22b-2507/exp/metrics.json
+- data/run-assay/consideration-set/qwen3.5-flash-02-23/exp/metrics.json
+- data/run-assay/consideration-set/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/consideration-set/phi-4/exp/metrics.json
+- data/run-assay/describe-sentiment/gpt-oss-120b/exp/metrics.json
+- data/run-assay/describe-sentiment/gpt-5.4/exp/metrics.json
+- data/run-assay/describe-sentiment/gpt-4o-mini/exp/metrics.json
+- data/run-assay/describe-sentiment/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/describe-sentiment/claude-opus-4.6/exp/metrics.json
+- data/run-assay/describe-sentiment/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/describe-sentiment/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/describe-sentiment/grok-4.1-fast/exp/metrics.json
+- data/run-assay/describe-sentiment/grok-4/exp/metrics.json
+- data/run-assay/describe-sentiment/llama-3.1-8b-instruct/exp/metrics.json
+- data/run-assay/describe-sentiment/llama-3.1-70b-instruct/exp/metrics.json
+- data/run-assay/describe-sentiment/mistral-nemo/exp/metrics.json
+- data/run-assay/describe-sentiment/mistral-small-2603/exp/metrics.json
+- data/run-assay/describe-sentiment/deepseek-v3.2/exp/metrics.json
+- data/run-assay/describe-sentiment/qwen3-235b-a22b-2507/exp/metrics.json
+- data/run-assay/describe-sentiment/qwen3.5-flash-02-23/exp/metrics.json
+- data/run-assay/describe-sentiment/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/describe-sentiment/phi-4/exp/metrics.json
+- data/run-assay/forced-selection/gpt-oss-120b/exp/metrics.json
+- data/run-assay/forced-selection/gpt-5.4/exp/metrics.json
+- data/run-assay/forced-selection/gpt-4o-mini/exp/metrics.json
+- data/run-assay/forced-selection/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/forced-selection/claude-opus-4.6/exp/metrics.json
+- data/run-assay/forced-selection/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/forced-selection/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/forced-selection/grok-4.1-fast/exp/metrics.json
+- data/run-assay/forced-selection/grok-4/exp/metrics.json
+- data/run-assay/forced-selection/llama-3.1-8b-instruct/exp/metrics.json
+- data/run-assay/forced-selection/llama-3.1-70b-instruct/exp/metrics.json
+- data/run-assay/forced-selection/mistral-nemo/exp/metrics.json
+- data/run-assay/forced-selection/mistral-small-2603/exp/metrics.json
+- data/run-assay/forced-selection/deepseek-v3.2/exp/metrics.json
+- data/run-assay/forced-selection/qwen3-235b-a22b-2507/exp/metrics.json
+- data/run-assay/forced-selection/qwen3.5-flash-02-23/exp/metrics.json
+- data/run-assay/forced-selection/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/forced-selection/phi-4/exp/metrics.json
 plots:
-- data/run-assay/head-to-head/gpt5/exp/plots/metrics:
+- data/run-assay/consideration-set/gpt-oss-120b/exp/plots/metrics:
     x: step
-- data/run-assay/head-to-head/gemini/exp/plots/metrics:
+- data/run-assay/consideration-set/gpt-5.4/exp/plots/metrics:
     x: step
-- data/run-assay/rank/gpt5/exp/plots/metrics:
+- data/run-assay/consideration-set/gpt-4o-mini/exp/plots/metrics:
     x: step
-- data/run-assay/rank/gemini/exp/plots/metrics:
+- data/run-assay/consideration-set/claude-sonnet-4.6/exp/plots/metrics:
     x: step
-- data/run-assay/consideration-set/gpt5/exp/plots/metrics:
+- data/run-assay/consideration-set/claude-opus-4.6/exp/plots/metrics:
     x: step
-- data/run-assay/consideration-set/gemini/exp/plots/metrics:
+- data/run-assay/consideration-set/gemini-2.5-flash/exp/plots/metrics:
     x: step
-- data/run-assay/describe-sentiment/gpt5/exp/plots/metrics:
+- data/run-assay/consideration-set/gemini-2.5-pro/exp/plots/metrics:
     x: step
-- data/run-assay/describe-sentiment/gemini/exp/plots/metrics:
+- data/run-assay/consideration-set/grok-4.1-fast/exp/plots/metrics:
     x: step
-- data/run-assay/forced-selection/gpt5/exp/plots/metrics:
+- data/run-assay/consideration-set/grok-4/exp/plots/metrics:
     x: step
-- data/run-assay/forced-selection/gemini/exp/plots/metrics:
+- data/run-assay/consideration-set/llama-3.1-8b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/head-to-head/phi/exp/plots/metrics:
+- data/run-assay/consideration-set/llama-3.1-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/rank/phi/exp/plots/metrics:
+- data/run-assay/consideration-set/mistral-nemo/exp/plots/metrics:
     x: step
-- data/run-assay/consideration-set/phi/exp/plots/metrics:
+- data/run-assay/consideration-set/mistral-small-2603/exp/plots/metrics:
     x: step
-- data/run-assay/describe-sentiment/phi/exp/plots/metrics:
+- data/run-assay/consideration-set/deepseek-v3.2/exp/plots/metrics:
     x: step
-- data/run-assay/forced-selection/phi/exp/plots/metrics:
+- data/run-assay/consideration-set/qwen3-235b-a22b-2507/exp/plots/metrics:
+    x: step
+- data/run-assay/consideration-set/qwen3.5-flash-02-23/exp/plots/metrics:
+    x: step
+- data/run-assay/consideration-set/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/consideration-set/phi-4/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/gemini-2.5-pro/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/grok-4.1-fast/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/grok-4/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/llama-3.1-8b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/llama-3.1-70b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/mistral-nemo/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/mistral-small-2603/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/deepseek-v3.2/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/qwen3-235b-a22b-2507/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/qwen3.5-flash-02-23/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/describe-sentiment/phi-4/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/gemini-2.5-pro/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/grok-4.1-fast/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/grok-4/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/llama-3.1-8b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/llama-3.1-70b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/mistral-nemo/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/mistral-small-2603/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/deepseek-v3.2/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/qwen3-235b-a22b-2507/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/qwen3.5-flash-02-23/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/forced-selection/phi-4/exp/plots/metrics:
     x: step

@@ -1,0 +1,41 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6000.17it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 903.83it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1401.38it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  59%|█████▉    | 119/202 [00:00<00:00, 1180.51it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1265.13it/s]
+/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+Expr.map_elements is significantly slower than the native expressions API.
+Only use if you absolutely CANNOT implement your logic otherwise.
+Replace this expression...
+  - pl.col("instance_json").map_elements(json.loads)
+with this one instead:
+  + pl.col("instance_json").str.json_decode()
+
+  .map_elements(json.loads, return_dtype=pl.Object)
+2026-03-31 18:49:27,494 [INFO] root: Running assay=consideration-set model=gpt-5.4 num_samples_per_instance=1.
+2026-03-31 18:49:27,499 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:49:27,499 [INFO] root: Invoking gpt-5.4.
+Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 18:49:27,500 [INFO] root: Invoking gpt-5.4.
+Consideration sets: 100%|██████████| 3/3 [00:00<00:00, 75.62it/s]
+2026-03-31 18:49:27,542 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:49:27,543 [INFO] root: Invoking gemini-2.5-pro.
+2026-03-31 18:49:27,544 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:49:27,544 [INFO] root: Invoking gemini-2.5-pro.
+2026-03-31 18:49:27,545 [INFO] root: Invoking gpt-5.4.
+2026-03-31 18:49:27,572 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 18:49:28,040 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 18:49:28,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 18:49:28,379 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  17%|█▋        | 1/6 [00:01<00:08,  1.68s/it]Judge evaluations:  33%|███▎      | 2/6 [00:02<00:03,  1.12it/s]2026-03-31 18:49:29,901 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  50%|█████     | 3/6 [00:05<00:06,  2.28s/it]2026-03-31 18:49:37,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 18:49:37,819 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  67%|██████▋   | 4/6 [00:15<00:10,  5.20s/it]Judge evaluations:  83%|████████▎ | 5/6 [00:18<00:04,  4.33s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  3.06s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  3.17s/it]
+2026-03-31 18:49:46,611 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gpt-5.4.parquet.

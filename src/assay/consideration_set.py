@@ -1,7 +1,7 @@
 import json
 import re
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
@@ -17,7 +17,7 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_JUDGE_MODELS = ["gpt5", "gemini"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
 
 
 def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, int]:
@@ -297,20 +297,23 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        considerations = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_consideration(
-                        model=ctx.cfg.model,
-                        assay=ctx.cfg.assay,
-                        task=task,
-                    ),
-                    generation_tasks,
-                ),
-                total=len(generation_tasks),
-                desc="Consideration sets",
+        futures = [
+            executor.submit(
+                _run_consideration,
+                model=ctx.cfg.model,
+                assay=ctx.cfg.assay,
+                task=task,
             )
-        )
+            for task in generation_tasks
+        ]
+
+        considerations = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Consideration sets",
+        ):
+            considerations.append(future.result())
 
     judge_tasks: list[dict] = []
     for consideration in considerations:
@@ -331,13 +334,15 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        judgments = list(
-            tqdm(
-                executor.map(_run_judge, judge_tasks),
-                total=len(judge_tasks),
-                desc="Judge evaluations",
-            )
-        )
+        futures = [executor.submit(_run_judge, task) for task in judge_tasks]
+
+        judgments = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Judge evaluations",
+        ):
+            judgments.append(future.result())
 
     judgments_by_instance_sample_and_model = {}
     for judgment in judgments:

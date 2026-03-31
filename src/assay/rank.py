@@ -1,7 +1,7 @@
 import json
 import random
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
@@ -81,8 +81,8 @@ def _run_ranking(
                                 "type": "string",
                                 "enum": entity_names,
                             },
-                            "minItems": len(entity_names),
-                            "maxItems": len(entity_names),
+                            # "minItems": len(entity_names),
+                            # "maxItems": len(entity_names),
                         },
                         "reason": {"type": "string"},
                     },
@@ -144,7 +144,9 @@ def _build_debug_json(
             "samples": [
                 {
                     "sample_id": ranking_sample["sample_id"],
-                    "entity_names_prompt_order": ranking_sample["entity_names_prompt_order"],
+                    "entity_names_prompt_order": ranking_sample[
+                        "entity_names_prompt_order"
+                    ],
                     "ranking": ranking_sample["ranking"],
                     "reason": ranking_sample["reason"],
                     "raw_response": ranking_sample["raw_response"],
@@ -204,20 +206,19 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        rankings = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_ranking(
-                        model=ctx.cfg.model,
-                        assay=ctx.cfg.assay,
-                        task=task,
-                    ),
-                    tasks,
-                ),
-                total=len(tasks),
-                desc="Rankings",
+        futures = [
+            executor.submit(
+                _run_ranking,
+                model=ctx.cfg.model,
+                assay=ctx.cfg.assay,
+                task=task,
             )
-        )
+            for task in tasks
+        ]
+
+        rankings = []
+        for future in tqdm(as_completed(futures), total=len(futures), desc="Rankings"):
+            rankings.append(future.result())
 
     rankings_by_instance: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for ranking in rankings:

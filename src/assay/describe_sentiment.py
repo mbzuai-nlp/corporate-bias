@@ -1,6 +1,6 @@
 import json
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
@@ -236,20 +236,23 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        descriptions = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_description(
-                        model=ctx.cfg.model,
-                        assay=ctx.cfg.assay,
-                        task=task,
-                    ),
-                    tasks,
-                ),
-                total=len(tasks),
-                desc="Descriptions",
+        futures = [
+            executor.submit(
+                _run_description,
+                model=ctx.cfg.model,
+                assay=ctx.cfg.assay,
+                task=task,
             )
-        )
+            for task in tasks
+        ]
+
+        descriptions = []
+        for future in tqdm(
+            as_completed(futures),
+            total=len(futures),
+            desc="Descriptions",
+        ):
+            descriptions.append(future.result())
 
     descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
         defaultdict(list)

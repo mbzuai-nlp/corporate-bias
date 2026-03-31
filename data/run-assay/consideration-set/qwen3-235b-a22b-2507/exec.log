@@ -1,0 +1,44 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7006.11it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1022.62it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1556.07it/s]
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▊     | 98/202 [00:00<00:00, 965.06it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1501.88it/s]
+/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+Expr.map_elements is significantly slower than the native expressions API.
+Only use if you absolutely CANNOT implement your logic otherwise.
+Replace this expression...
+  - pl.col("instance_json").map_elements(json.loads)
+with this one instead:
+  + pl.col("instance_json").str.json_decode()
+
+  .map_elements(json.loads, return_dtype=pl.Object)
+2026-03-31 19:10:15,351 [INFO] root: Running assay=consideration-set model=qwen3-235b-a22b-2507 num_samples_per_instance=1.
+2026-03-31 19:10:15,358 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-03-31 19:10:15,358 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-03-31 19:10:15,359 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 19:10:15,918 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:17,016 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:17,757 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Consideration sets:  33%|███▎      | 1/3 [00:02<00:04,  2.41s/it]Consideration sets:  67%|██████▋   | 2/3 [00:16<00:09,  9.46s/it]Consideration sets: 100%|██████████| 3/3 [00:22<00:00,  7.60s/it]Consideration sets: 100%|██████████| 3/3 [00:22<00:00,  7.40s/it]
+2026-03-31 19:10:37,558 [INFO] root: Invoking gpt-5.4.
+2026-03-31 19:10:37,558 [INFO] root: Invoking gemini-2.5-pro.
+2026-03-31 19:10:37,565 [INFO] root: Invoking gpt-5.4.
+2026-03-31 19:10:37,566 [INFO] root: Invoking gemini-2.5-pro.
+2026-03-31 19:10:37,567 [INFO] root: Invoking gpt-5.4.
+2026-03-31 19:10:37,568 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 19:10:38,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:38,085 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:38,160 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  17%|█▋        | 1/6 [00:01<00:08,  1.66s/it]2026-03-31 19:10:39,683 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:41,511 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-31 19:10:43,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judge evaluations:  67%|██████▋   | 4/6 [00:07<00:03,  1.79s/it]Judge evaluations:  83%|████████▎ | 5/6 [00:07<00:01,  1.40s/it]Judge evaluations: 100%|██████████| 6/6 [00:09<00:00,  1.55s/it]Judge evaluations: 100%|██████████| 6/6 [00:09<00:00,  1.57s/it]
+2026-03-31 19:10:47,020 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/qwen3-235b-a22b-2507.parquet.

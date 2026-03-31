@@ -1,6 +1,6 @@
 import json
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
@@ -197,20 +197,21 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             )
 
     with ThreadPoolExecutor(max_workers=32) as executor:
-        preferences = list(
-            tqdm(
-                executor.map(
-                    lambda task: _run_preference(
-                        model=ctx.cfg.model,
-                        assay=ctx.cfg.assay,
-                        task=task,
-                    ),
-                    tasks,
-                ),
-                total=len(tasks),
-                desc="Preferences",
+        futures = [
+            executor.submit(
+                _run_preference,
+                model=ctx.cfg.model,
+                assay=ctx.cfg.assay,
+                task=task,
             )
-        )
+            for task in tasks
+        ]
+
+        preferences = []
+        for future in tqdm(
+            as_completed(futures), total=len(futures), desc="Preferences"
+        ):
+            preferences.append(future.result())
 
     wins_by_sample_and_entity: dict[tuple[str, int, str], int] = defaultdict(int)
     preferences_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
