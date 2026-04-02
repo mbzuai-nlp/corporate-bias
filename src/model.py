@@ -1,6 +1,6 @@
 from functools import partial
 from typing import Literal, Mapping, Sequence, Any, Protocol
-from openrouter import OpenRouter
+from openrouter import OpenRouter, errors as or_errors
 import os
 from dataclasses import dataclass
 import hashlib
@@ -33,25 +33,25 @@ class ModelDelegate(Protocol):
 
 
 Model = Literal[
-    "openai/gpt-oss-120b",
-    "openai/gpt-5.4",
-    "openai/gpt-4o-mini",
-    "anthropic/claude-sonnet-4.6",
-    "anthropic/claude-opus-4.6",
-    "google/gemini-2.5-flash",
-    "google/gemini-2.5-pro",
-    "x-ai/grok-4.1-fast",
-    "x-ai/grok-4",
-    "meta-llama/llama-3.1-8b-instruct",
-    "meta-llama/llama-3.1-70b-instruct",
-    "mistralai/mistral-nemo",
-    "mistralai/mistral-small-2603",
-    "deepseek/deepseek-v3.2",
-    "qwen/qwen3-235b-a22b-2507",
-    "qwen/qwen3.5-flash-02-23",
-    "nvidia/nemotron-3-super-120b-a12b:free",
-    "nvidia/nemotron-3-nano-30b-a3b:free",
-    "microsoft/phi-4",
+    "gpt-oss-120b",
+    "gpt-5.4",
+    "gpt-4o-mini",
+    "claude-sonnet-4.6",
+    "claude-opus-4.6",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "grok-4.1-fast",
+    "grok-4",
+    "llama-3.1-8b-instruct",
+    "llama-3.1-70b-instruct",
+    "mistral-nemo",
+    "mistral-small-2603",
+    "deepseek-v3.2",
+    "qwen3-235b-a22b-2507",
+    "qwen3.5-flash-02-23",
+    "nemotron-3-super-120b-a12b:free",
+    "nemotron-3-nano-30b-a3b:free",
+    "phi-4",
 ]
 
 
@@ -222,8 +222,17 @@ def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
 
 @backoff.on_exception(
     backoff.constant,
-    (httpx.ReadTimeout, TypeError),
-    interval=0,
+    (
+        httpx.ReadTimeout,
+        httpx.ConnectError,
+        or_errors.TooManyRequestsResponseError,
+        or_errors.InternalServerResponseError,
+        or_errors.BadGatewayResponseError,
+        or_errors.ServiceUnavailableResponseError,
+        or_errors.EdgeNetworkTimeoutResponseError,
+        or_errors.ProviderOverloadedResponseError,
+    ),
+    interval=30,
     max_tries=3,
     jitter=None,
 )

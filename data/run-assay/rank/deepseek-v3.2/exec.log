@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7319.93it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  53%|█████▎    | 107/202 [00:00<00:00, 1066.47it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1681.15it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▍     | 90/202 [00:00<00:00, 898.35it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1526.33it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,12 +9,44 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 18:30:38,016 [INFO] root: Running assay=rank model=deepseek-v3.2 num_samples_per_instance=1.
-2026-03-31 18:30:38,021 [INFO] root: Invoking deepseek-v3.2.
-2026-03-31 18:30:38,021 [INFO] root: Invoking deepseek-v3.2.
-Rankings:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 18:30:38,022 [INFO] root: Invoking deepseek-v3.2.
-2026-03-31 18:30:39,376 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:30:39,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:30:41,478 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Rankings:  33%|███▎      | 1/3 [00:04<00:09,  4.74s/it]Rankings:  67%|██████▋   | 2/3 [00:06<00:03,  3.08s/it]Rankings: 100%|██████████| 3/3 [00:07<00:00,  1.86s/it]Rankings: 100%|██████████| 3/3 [00:07<00:00,  2.36s/it]
-2026-03-31 18:30:45,093 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/rank/deepseek-v3.2.parquet.
+2026-04-02 20:19:14,421 [INFO] root: Running assay=rank model=deepseek-v3.2 num_samples_per_instance=5.
+2026-04-02 20:19:14,427 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,428 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,429 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,429 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,430 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,431 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,432 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,433 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,434 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,435 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,436 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,437 [INFO] root: Invoking deepseek-v3.2.
+Rankings:   0%|          | 0/15 [00:00<?, ?it/s]2026-04-02 20:19:14,437 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,440 [INFO] root: Invoking deepseek-v3.2.
+2026-04-02 20:19:14,442 [INFO] root: Invoking deepseek-v3.2.
+Rankings:   7%|▋         | 1/15 [00:00<00:02,  4.77it/s]Rankings:  47%|████▋     | 7/15 [00:00<00:00, 32.92it/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 141, in <module>
+    main()
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 137, in main
+    assay_model(ctx)
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 110, in assay_model
+    assay_df = assay_delegate(ctx)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/src/assay/rank.py", line 221, in run_rank
+    rankings.append(future.result())
+                    ^^^^^^^^^^^^^^^
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/src/assay/rank.py", line 106, in _run_ranking
+    raise ValueError(
+ValueError: Invalid ranking returned for assay_instance_hash=3647482347956262639: ['proton mail', 'proton mail', 'proton mail']

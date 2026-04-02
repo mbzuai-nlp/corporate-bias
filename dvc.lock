@@ -455,14 +455,14 @@ stages:
     deps:
     - path: data/assays
       hash: md5
-      md5: 8f3c2249dc0c2d679b981457a31d291b.dir
-      size: 4678323
-      nfiles: 90
+      md5: 9ed9962ae5a2f4b07071ec780513fb7c.dir
+      size: 8028987
+      nfiles: 89
     outs:
     - path: data/combined_assays.parquet
       hash: md5
-      md5: bda56a285bd384301bf975562798f1f6
-      size: 641382
+      md5: c8153646f031ac338ddcb3c207cdd9cb
+      size: 1317015
   run-assay@assay0-phi:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/phi;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=phi --db=data/db
@@ -1023,7 +1023,7 @@ stages:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-oss-120b;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-oss-120b
       --db=data/db --save-path=data/assays/head-to-head/gpt-oss-120b.parquet --exp=data/run-assay/head-to-head/gpt-oss-120b/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-oss-120b/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/gpt-oss-120b/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1041,13 +1041,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/gpt-oss-120b.parquet
       hash: md5
-      md5: 164a739751c13e1ae1cbcddb10ab4e0f
-      size: 45458
+      md5: 0bf4fe19eb3a2f1457efd39c7698bcc0
+      size: 184558
   run-assay@assay0-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-5.4;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-5.4 --db=data/db
       --save-path=data/assays/head-to-head/gpt-5.4.parquet --exp=data/run-assay/head-to-head/gpt-5.4/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-5.4/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/gpt-5.4/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1065,13 +1065,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/gpt-5.4.parquet
       hash: md5
-      md5: f912e587bffcfba1c2b65969ca370c7c
-      size: 46221
+      md5: f77ce2331d2b46319bb11f3798426cca
+      size: 195754
   run-assay@assay0-gpt-4o-mini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gpt-4o-mini;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=gpt-4o-mini
       --db=data/db --save-path=data/assays/head-to-head/gpt-4o-mini.parquet --exp=data/run-assay/head-to-head/gpt-4o-mini/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gpt-4o-mini/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/gpt-4o-mini/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1089,13 +1089,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/gpt-4o-mini.parquet
       hash: md5
-      md5: cd68049378f7a3ca5d1cb4546bdd09a2
-      size: 42970
+      md5: b247e4c761f3b8f07ec1deed1872d96e
+      size: 182117
   run-assay@assay0-claude-sonnet-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/claude-sonnet-4.6;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=claude-sonnet-4.6
       --db=data/db --save-path=data/assays/head-to-head/claude-sonnet-4.6.parquet
-      --exp=data/run-assay/head-to-head/claude-sonnet-4.6/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/claude-sonnet-4.6/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/claude-sonnet-4.6/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1113,13 +1113,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/claude-sonnet-4.6.parquet
       hash: md5
-      md5: 49bc72429d7ea7d735261be1d73fdcce
-      size: 62306
+      md5: 9fb81f395227c6b8584d689d6ea580e4
+      size: 275715
   run-assay@assay0-claude-opus-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/claude-opus-4.6;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=claude-opus-4.6
       --db=data/db --save-path=data/assays/head-to-head/claude-opus-4.6.parquet --exp=data/run-assay/head-to-head/claude-opus-4.6/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/claude-opus-4.6/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/claude-opus-4.6/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1137,13 +1137,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/claude-opus-4.6.parquet
       hash: md5
-      md5: a23b0079cbba4aa990a0e3caeae0679c
-      size: 77510
+      md5: 735f1cadf2202cedd9812253ef6c4bfa
+      size: 345342
   run-assay@assay0-gemini-2.5-flash:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gemini-2.5-flash;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=gemini-2.5-flash
       --db=data/db --save-path=data/assays/head-to-head/gemini-2.5-flash.parquet --exp=data/run-assay/head-to-head/gemini-2.5-flash/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-flash/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-flash/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1161,13 +1161,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/gemini-2.5-flash.parquet
       hash: md5
-      md5: 05a41fd48337fbd020efdfe5ae943361
-      size: 46400
+      md5: b93f6310d8bccc6d8c0deb81e1054200
+      size: 201753
   run-assay@assay0-gemini-2.5-pro:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/gemini-2.5-pro;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=gemini-2.5-pro
       --db=data/db --save-path=data/assays/head-to-head/gemini-2.5-pro.parquet --exp=data/run-assay/head-to-head/gemini-2.5-pro/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-pro/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/gemini-2.5-pro/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1185,13 +1185,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/gemini-2.5-pro.parquet
       hash: md5
-      md5: f1070b00366efb1e9deb6422694327ad
-      size: 54769
+      md5: 88e5f847ae7f192cad861a16bbff5d1b
+      size: 236460
   run-assay@assay0-grok-4.1-fast:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/grok-4.1-fast;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=grok-4.1-fast
       --db=data/db --save-path=data/assays/head-to-head/grok-4.1-fast.parquet --exp=data/run-assay/head-to-head/grok-4.1-fast/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/grok-4.1-fast/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/grok-4.1-fast/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1209,13 +1209,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/grok-4.1-fast.parquet
       hash: md5
-      md5: 9784c8fc44f5982d17c3bbf366604f38
-      size: 46336
+      md5: 34d9d3025941b5c5419cbdfdef3b4f65
+      size: 202083
   run-assay@assay0-grok-4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/grok-4;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=grok-4 --db=data/db
       --save-path=data/assays/head-to-head/grok-4.parquet --exp=data/run-assay/head-to-head/grok-4/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/grok-4/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/grok-4/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1233,13 +1233,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/grok-4.parquet
       hash: md5
-      md5: 454b64f23fde31be0e3c691bbd8fad32
-      size: 44619
+      md5: c8021f3efc3203d6bbe9ed5573b4b71c
+      size: 183983
   run-assay@assay0-llama-3.1-8b-instruct:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/llama-3.1-8b-instruct;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=llama-3.1-8b-instruct
       --db=data/db --save-path=data/assays/head-to-head/llama-3.1-8b-instruct.parquet
-      --exp=data/run-assay/head-to-head/llama-3.1-8b-instruct/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/llama-3.1-8b-instruct/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/llama-3.1-8b-instruct/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1257,13 +1257,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/llama-3.1-8b-instruct.parquet
       hash: md5
-      md5: 7380a263699cb53af59aafc243e13ed3
-      size: 37630
+      md5: 701a2ebd809ed7ce6e7ae3502140fdfc
+      size: 159057
   run-assay@assay0-llama-3.1-70b-instruct:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/llama-3.1-70b-instruct;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=llama-3.1-70b-instruct
       --db=data/db --save-path=data/assays/head-to-head/llama-3.1-70b-instruct.parquet
-      --exp=data/run-assay/head-to-head/llama-3.1-70b-instruct/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/llama-3.1-70b-instruct/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/llama-3.1-70b-instruct/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1281,13 +1281,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/llama-3.1-70b-instruct.parquet
       hash: md5
-      md5: 71485004a1b19b847a5bc933597a93f8
-      size: 37733
+      md5: 9a205ca51c0a5ca4b78344518b1f2087
+      size: 150413
   run-assay@assay0-mistral-nemo:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistral-nemo;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=mistral-nemo
       --db=data/db --save-path=data/assays/head-to-head/mistral-nemo.parquet --exp=data/run-assay/head-to-head/mistral-nemo/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/mistral-nemo/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/mistral-nemo/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1305,13 +1305,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/mistral-nemo.parquet
       hash: md5
-      md5: 84fca71a255ca528a91e6fc51cbb9de8
-      size: 36749
+      md5: 0f254fedf60289e0e0edbfb50dcd320a
+      size: 152117
   run-assay@assay0-mistral-small-2603:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/mistral-small-2603;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=mistral-small-2603
       --db=data/db --save-path=data/assays/head-to-head/mistral-small-2603.parquet
-      --exp=data/run-assay/head-to-head/mistral-small-2603/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/mistral-small-2603/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/mistral-small-2603/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1329,13 +1329,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/mistral-small-2603.parquet
       hash: md5
-      md5: cda047f4aaf9e83c155a5e265349756d
-      size: 45896
+      md5: 951f26b5476cd9eeaa8add59411997a9
+      size: 189893
   run-assay@assay0-deepseek-v3.2:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/deepseek-v3.2;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=deepseek-v3.2
       --db=data/db --save-path=data/assays/head-to-head/deepseek-v3.2.parquet --exp=data/run-assay/head-to-head/deepseek-v3.2/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/deepseek-v3.2/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/deepseek-v3.2/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1353,13 +1353,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/deepseek-v3.2.parquet
       hash: md5
-      md5: c60021734699fc3093fd0223764cb6ca
-      size: 50477
+      md5: 1cd69003f48b14abe8dbff573c46ea7e
+      size: 301652
   run-assay@assay0-qwen3-235b-a22b-2507:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen3-235b-a22b-2507;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen3-235b-a22b-2507
       --db=data/db --save-path=data/assays/head-to-head/qwen3-235b-a22b-2507.parquet
-      --exp=data/run-assay/head-to-head/qwen3-235b-a22b-2507/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/qwen3-235b-a22b-2507/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/qwen3-235b-a22b-2507/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1377,13 +1377,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/qwen3-235b-a22b-2507.parquet
       hash: md5
-      md5: 2c7f1d0af64966634cf38ba98ae2192d
-      size: 48519
+      md5: 1b5647d2c271e679f388ca2f3c6dd7b9
+      size: 208047
   run-assay@assay0-qwen3.5-flash-02-23:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/qwen3.5-flash-02-23;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=qwen3.5-flash-02-23
       --db=data/db --save-path=data/assays/head-to-head/qwen3.5-flash-02-23.parquet
-      --exp=data/run-assay/head-to-head/qwen3.5-flash-02-23/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/qwen3.5-flash-02-23/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/qwen3.5-flash-02-23/exec.log\"\n"
     deps:
     - path: data/db/claim.parquet
@@ -1401,13 +1401,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/qwen3.5-flash-02-23.parquet
       hash: md5
-      md5: 3d67b4efeaeea0cb3b9e2a97245c2a6d
-      size: 42373
+      md5: 5b708314340801610660e56be0b53847
+      size: 183354
   run-assay@assay0-nemotron-3-super-120b-a12b:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/nemotron-3-super-120b-a12b;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=nemotron-3-super-120b-a12b
       --db=data/db --save-path=data/assays/head-to-head/nemotron-3-super-120b-a12b.parquet
-      --exp=data/run-assay/head-to-head/nemotron-3-super-120b-a12b/exp --samples-per-instance=1
+      --exp=data/run-assay/head-to-head/nemotron-3-super-120b-a12b/exp --samples-per-instance=5
       2>&1 | tee data/run-assay/head-to-head/nemotron-3-super-120b-a12b/exec.log\"\
       \n"
     deps:
@@ -1426,13 +1426,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/nemotron-3-super-120b-a12b.parquet
       hash: md5
-      md5: a8f4ea9afae3ba0f72c08f2093befffe
-      size: 48817
+      md5: 33b838e51e7dcd41b7f8c527032f2f68
+      size: 198411
   run-assay@assay0-phi-4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/head-to-head/phi-4;
       uv run python -m pipelines.run_assay --assay=head-to-head --model=phi-4 --db=data/db
       --save-path=data/assays/head-to-head/phi-4.parquet --exp=data/run-assay/head-to-head/phi-4/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/head-to-head/phi-4/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/head-to-head/phi-4/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1450,13 +1450,13 @@ stages:
     outs:
     - path: data/assays/head-to-head/phi-4.parquet
       hash: md5
-      md5: 6438d207d4878209060c6d1eb4a8b8b4
-      size: 53367
+      md5: 2bbd59243b55ab81333f056e56eeda19
+      size: 222158
   run-assay@assay1-gpt-oss-120b:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-oss-120b;
       uv run python -m pipelines.run_assay --assay=rank --model=gpt-oss-120b --db=data/db
       --save-path=data/assays/rank/gpt-oss-120b.parquet --exp=data/run-assay/rank/gpt-oss-120b/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-oss-120b/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/gpt-oss-120b/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1474,12 +1474,12 @@ stages:
     outs:
     - path: data/assays/rank/gpt-oss-120b.parquet
       hash: md5
-      md5: 7100556265b4abe479d8395bc72f4f9c
-      size: 14704
+      md5: f328bbdb70a17c5987731f5847e30639
+      size: 43568
   run-assay@assay1-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-5.4; uv run
       python -m pipelines.run_assay --assay=rank --model=gpt-5.4 --db=data/db --save-path=data/assays/rank/gpt-5.4.parquet
-      --exp=data/run-assay/rank/gpt-5.4/exp --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-5.4/exec.log\"\
+      --exp=data/run-assay/rank/gpt-5.4/exp --samples-per-instance=5 2>&1 | tee data/run-assay/rank/gpt-5.4/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1497,13 +1497,13 @@ stages:
     outs:
     - path: data/assays/rank/gpt-5.4.parquet
       hash: md5
-      md5: 209910a92a0f0e4441c46725c076aa88
-      size: 17359
+      md5: 9d1249bf84be265fd881ba6401d31ce6
+      size: 63476
   run-assay@assay1-gpt-4o-mini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gpt-4o-mini;
       uv run python -m pipelines.run_assay --assay=rank --model=gpt-4o-mini --db=data/db
       --save-path=data/assays/rank/gpt-4o-mini.parquet --exp=data/run-assay/rank/gpt-4o-mini/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gpt-4o-mini/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/gpt-4o-mini/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1521,13 +1521,13 @@ stages:
     outs:
     - path: data/assays/rank/gpt-4o-mini.parquet
       hash: md5
-      md5: d0bc94aca57a0a4feaa3899303901bfe
-      size: 14593
+      md5: 33fb3d262d7ee6eca6a9a586dee44099
+      size: 45128
   run-assay@assay1-claude-sonnet-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/claude-sonnet-4.6;
       uv run python -m pipelines.run_assay --assay=rank --model=claude-sonnet-4.6
       --db=data/db --save-path=data/assays/rank/claude-sonnet-4.6.parquet --exp=data/run-assay/rank/claude-sonnet-4.6/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/claude-sonnet-4.6/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/claude-sonnet-4.6/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1545,13 +1545,13 @@ stages:
     outs:
     - path: data/assays/rank/claude-sonnet-4.6.parquet
       hash: md5
-      md5: 5d2e8d9c6ce69e9d4cd2c9bbf1fc1dcf
-      size: 18128
+      md5: c7436012a337fa90836b952393850aa0
+      size: 59457
   run-assay@assay1-claude-opus-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/claude-opus-4.6;
       uv run python -m pipelines.run_assay --assay=rank --model=claude-opus-4.6 --db=data/db
       --save-path=data/assays/rank/claude-opus-4.6.parquet --exp=data/run-assay/rank/claude-opus-4.6/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/claude-opus-4.6/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/claude-opus-4.6/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1569,13 +1569,13 @@ stages:
     outs:
     - path: data/assays/rank/claude-opus-4.6.parquet
       hash: md5
-      md5: 5884739a3ec2ecacb06365dc0ddb2f33
-      size: 19071
+      md5: 8c12f41895622db4751ccb5347e5379c
+      size: 67700
   run-assay@assay1-gemini-2.5-flash:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gemini-2.5-flash;
       uv run python -m pipelines.run_assay --assay=rank --model=gemini-2.5-flash --db=data/db
       --save-path=data/assays/rank/gemini-2.5-flash.parquet --exp=data/run-assay/rank/gemini-2.5-flash/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gemini-2.5-flash/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/gemini-2.5-flash/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1593,13 +1593,13 @@ stages:
     outs:
     - path: data/assays/rank/gemini-2.5-flash.parquet
       hash: md5
-      md5: ccad8fd29b8ef069e477f30a16d05867
-      size: 14041
+      md5: 1f7a15b406d5c434447e150049b5f6dd
+      size: 46903
   run-assay@assay1-gemini-2.5-pro:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/gemini-2.5-pro;
       uv run python -m pipelines.run_assay --assay=rank --model=gemini-2.5-pro --db=data/db
       --save-path=data/assays/rank/gemini-2.5-pro.parquet --exp=data/run-assay/rank/gemini-2.5-pro/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/gemini-2.5-pro/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/gemini-2.5-pro/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1617,13 +1617,13 @@ stages:
     outs:
     - path: data/assays/rank/gemini-2.5-pro.parquet
       hash: md5
-      md5: 817fa47fd52f819e2480013a06396789
-      size: 18472
+      md5: 7b054a25a6a5d5e922d84d08a73ac895
+      size: 64190
   run-assay@assay1-grok-4.1-fast:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/grok-4.1-fast;
       uv run python -m pipelines.run_assay --assay=rank --model=grok-4.1-fast --db=data/db
       --save-path=data/assays/rank/grok-4.1-fast.parquet --exp=data/run-assay/rank/grok-4.1-fast/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/grok-4.1-fast/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/grok-4.1-fast/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1641,12 +1641,12 @@ stages:
     outs:
     - path: data/assays/rank/grok-4.1-fast.parquet
       hash: md5
-      md5: e66d4b3091445beebe73ac8945fb21c5
-      size: 12926
+      md5: 7d0bdde346aa47fb016a3e86bb0ae6eb
+      size: 41082
   run-assay@assay1-grok-4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/grok-4; uv run
       python -m pipelines.run_assay --assay=rank --model=grok-4 --db=data/db --save-path=data/assays/rank/grok-4.parquet
-      --exp=data/run-assay/rank/grok-4/exp --samples-per-instance=1 2>&1 | tee data/run-assay/rank/grok-4/exec.log\"\
+      --exp=data/run-assay/rank/grok-4/exp --samples-per-instance=5 2>&1 | tee data/run-assay/rank/grok-4/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1664,13 +1664,13 @@ stages:
     outs:
     - path: data/assays/rank/grok-4.parquet
       hash: md5
-      md5: 9767c7b731beb3852ef916713e3cf207
-      size: 12110
+      md5: eb7ac7c168a5cf09a4bfa3c2fbf64fef
+      size: 34157
   run-assay@assay1-llama-3.1-8b-instruct:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/llama-3.1-8b-instruct;
       uv run python -m pipelines.run_assay --assay=rank --model=llama-3.1-8b-instruct
       --db=data/db --save-path=data/assays/rank/llama-3.1-8b-instruct.parquet --exp=data/run-assay/rank/llama-3.1-8b-instruct/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/llama-3.1-8b-instruct/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/llama-3.1-8b-instruct/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1688,13 +1688,13 @@ stages:
     outs:
     - path: data/assays/rank/llama-3.1-8b-instruct.parquet
       hash: md5
-      md5: e99790233cc0ecd7253094b9e3467f74
-      size: 15063
+      md5: 82a5c2091a29026b1712e9cc077df3cd
+      size: 52387
   run-assay@assay1-llama-3.1-70b-instruct:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/llama-3.1-70b-instruct;
       uv run python -m pipelines.run_assay --assay=rank --model=llama-3.1-70b-instruct
       --db=data/db --save-path=data/assays/rank/llama-3.1-70b-instruct.parquet --exp=data/run-assay/rank/llama-3.1-70b-instruct/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/llama-3.1-70b-instruct/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/llama-3.1-70b-instruct/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1712,13 +1712,13 @@ stages:
     outs:
     - path: data/assays/rank/llama-3.1-70b-instruct.parquet
       hash: md5
-      md5: b52886eb8c46adf99f4c09840e2a351d
-      size: 13828
+      md5: e9b4d186d08dfd40223c53a6cefd9ee3
+      size: 42129
   run-assay@assay1-mistral-nemo:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/mistral-nemo;
       uv run python -m pipelines.run_assay --assay=rank --model=mistral-nemo --db=data/db
       --save-path=data/assays/rank/mistral-nemo.parquet --exp=data/run-assay/rank/mistral-nemo/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/mistral-nemo/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/mistral-nemo/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1736,13 +1736,13 @@ stages:
     outs:
     - path: data/assays/rank/mistral-nemo.parquet
       hash: md5
-      md5: 31c583873dd14bc97e75ebdcfaac0e36
-      size: 12782
+      md5: 97bcccd9432f75ac1ba553438e4ac05e
+      size: 32373
   run-assay@assay1-mistral-small-2603:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/mistral-small-2603;
       uv run python -m pipelines.run_assay --assay=rank --model=mistral-small-2603
       --db=data/db --save-path=data/assays/rank/mistral-small-2603.parquet --exp=data/run-assay/rank/mistral-small-2603/exp
-      --samples-per-instance=1 2>&1 | tee data/run-assay/rank/mistral-small-2603/exec.log\"\
+      --samples-per-instance=5 2>&1 | tee data/run-assay/rank/mistral-small-2603/exec.log\"\
       \n"
     deps:
     - path: data/db/claim.parquet
@@ -1760,8 +1760,8 @@ stages:
     outs:
     - path: data/assays/rank/mistral-small-2603.parquet
       hash: md5
-      md5: 22d7730d8f11f9b1b6071d463e5dc1de
-      size: 16502
+      md5: 0beea6ecb6f0900ed1d54f16e9ce859e
+      size: 56507
   run-assay@assay1-deepseek-v3.2:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/rank/deepseek-v3.2;
       uv run python -m pipelines.run_assay --assay=rank --model=deepseek-v3.2 --db=data/db

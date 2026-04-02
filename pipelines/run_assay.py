@@ -1,11 +1,13 @@
 from pathlib import Path
 import argparse
+import importlib
 import json
-import polars as pl
+import logging
 from typing import Mapping
+
+import polars as pl
 from dotenv import load_dotenv
 from dvclive import Live
-import logging
 
 from pipelines.utils import configure_logging, silence_superfluous_warnings
 from src.data.model import (
@@ -14,12 +16,7 @@ from src.data.model import (
     COMPARISON_SET_SCHEMA,
     ENTITY_SCHEMA,
 )
-from src.assay.common import Config, RuntimeContext, Assay, AssayDelegate, save_assay_df
-from src.assay.head_to_head import run_head_to_head
-from src.assay.rank import run_rank
-from src.assay.consideration_set import run_consideration_set
-from src.assay.describe_sentiment import run_describe_sentiment
-from src.assay.forced_selection import run_forced_selection
+from src.assay.common import Config, RuntimeContext, AssayDelegate, save_assay_df
 
 
 configure_logging()
@@ -27,53 +24,31 @@ silence_superfluous_warnings()
 load_dotenv()
 
 
-ASSAY_DELEGATES: Mapping[Assay, AssayDelegate] = {
-    "head-to-head": run_head_to_head,
-    "rank": run_rank,
-    "consideration-set": run_consideration_set,
-    "describe-sentiment": run_describe_sentiment,
-    "forced-selection": run_forced_selection
+ASSAY_MODULES: Mapping[str, tuple[str, str]] = {
+    "head-to-head": ("src.assay.head_to_head", "run_head_to_head"),
+    "rank": ("src.assay.rank", "run_rank"),
+    "consideration-set": ("src.assay.consideration_set", "run_consideration_set"),
+    "describe-sentiment": ("src.assay.describe_sentiment", "run_describe_sentiment"),
+    "forced-selection": ("src.assay.forced_selection", "run_forced_selection"),
 }
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--assay",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "--model",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "--db",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "--save-path",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "--exp",
-        type=str,
-        required=True,
-    )
-    parser.add_argument(
-        "--samples-per-instance",
-        type=int,
-        required=True,
-    )
+    parser.add_argument("--assay", type=str, required=True, choices=ASSAY_MODULES.keys())
+    parser.add_argument("--model", type=str, required=True)
+    parser.add_argument("--db", type=str, required=True)
+    parser.add_argument("--save-path", type=str, required=True)
+    parser.add_argument("--exp", type=str, required=True)
+    parser.add_argument("--samples-per-instance", type=int, required=True)
     return parser.parse_args()
 
 
 def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     claim_df = pl.read_parquet(
-        db_dir / "claim.parquet", schema=CLAIM_SCHEMA, missing_columns="insert"
+        db_dir / "claim.parquet",
+        schema=CLAIM_SCHEMA,
+        missing_columns="insert",
     )
 
     comparison_set_assay_instance_df = (
@@ -100,7 +75,9 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     )
 
     entity_df = pl.read_parquet(
-        db_dir / "entity.parquet", schema=ENTITY_SCHEMA, missing_columns="insert"
+        db_dir / "entity.parquet",
+        schema=ENTITY_SCHEMA,
+        missing_columns="insert",
     )
 
     return {
@@ -111,8 +88,19 @@ def load_db(db_dir: Path) -> Mapping[str, pl.DataFrame]:
     }
 
 
+def load_assay_delegate(assay: str) -> AssayDelegate:
+    try:
+        module_path, fn_name = ASSAY_MODULES[assay]
+    except KeyError as exc:
+        raise ValueError(f"Unsupported assay: {assay}") from exc
+
+    module = importlib.import_module(module_path)
+    delegate = getattr(module, fn_name)
+    return delegate
+
+
 def assay_model(ctx: RuntimeContext) -> None:
-    assay_delegate = ASSAY_DELEGATES[ctx.cfg.assay]
+    assay_delegate = load_assay_delegate(ctx.cfg.assay)
 
     logging.info(
         f"Running assay={ctx.cfg.assay} model={ctx.cfg.model} "
@@ -120,7 +108,6 @@ def assay_model(ctx: RuntimeContext) -> None:
     )
 
     assay_df = assay_delegate(ctx)
-
     save_assay_df(assay_df, ctx.cfg.save)
 
     logging.info(f"Saved assay results to {ctx.cfg.save}.")
@@ -128,7 +115,6 @@ def assay_model(ctx: RuntimeContext) -> None:
 
 def main():
     """Runs a specified assay of a model against all comparison sets."""
-
     args = parse_args()
 
     db_dir = Path(args.db).resolve()

@@ -33,8 +33,8 @@ def _build_preference_messages(
             content=(
                 "You are a helpful assistant. A user is asking you to help choose "
                 "between two options. You must choose exactly one of the two options "
-                "the user provides. Do not refuse, hedge, or say that more context is "
-                "needed. Return only JSON."
+                "the user provides (without changing capitalisation/abbreviation). "
+                "Do not refuse, hedge, or say that more context is needed. Return only JSON."
             ),
         ),
         Message(
