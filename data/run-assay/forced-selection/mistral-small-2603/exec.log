@@ -1,16 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights:  99%|█████████▉| 389/393 [00:00<00:00, 3889.30it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3909.02it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 52/202 [00:00<00:00, 518.12it/s]Loading weights:  59%|█████▉    | 119/202 [00:00<00:00, 606.60it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 865.46it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  21%|██▏       | 43/202 [00:00<00:00, 426.24it/s]Loading weights:  63%|██████▎   | 128/202 [00:00<00:00, 673.53it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 738.45it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -19,128 +9,612 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:57:53,920 [INFO] root: Running assay=forced-selection model=mistral-small-2603 num_samples_per_instance=1.
-2026-03-31 19:57:53,925 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,926 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,927 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,927 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,929 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,930 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,932 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,932 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,933 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,938 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,943 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,948 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,949 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,961 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:53,965 [INFO] root: Invoking mistral-small-2603.
-Forced selection (JSON):   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:57:55,988 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:55,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:55,996 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:55,998 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,013 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,083 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,084 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (JSON):   7%|▋         | 1/15 [00:02<00:30,  2.17s/it]2026-03-31 19:57:56,150 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,166 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (JSON):  33%|███▎      | 5/15 [00:02<00:03,  2.86it/s]Forced selection (JSON):  67%|██████▋   | 10/15 [00:02<00:00,  6.53it/s]2026-03-31 19:57:56,397 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:56,399 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (JSON):  87%|████████▋ | 13/15 [00:02<00:00,  6.78it/s]2026-03-31 19:57:57,187 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (JSON): 100%|██████████| 15/15 [00:03<00:00,  4.62it/s]
-2026-03-31 19:57:57,218 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,219 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,232 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,235 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,236 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,237 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,240 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,241 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,244 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,248 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,250 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,264 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,288 [INFO] root: Invoking mistral-small-2603.
-Forced selection (free text):   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:57:57,294 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:57,299 [INFO] root: Invoking mistral-small-2603.
-2026-03-31 19:57:58,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,630 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,631 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,632 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,637 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,638 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (free text):   7%|▋         | 1/15 [00:01<00:19,  1.38s/it]2026-03-31 19:57:58,732 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,829 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,833 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:58,840 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:59,077 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:57:59,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Forced selection (free text):  13%|█▎        | 2/15 [00:01<00:10,  1.24it/s]Forced selection (free text):  47%|████▋     | 7/15 [00:01<00:01,  5.79it/s]Forced selection (free text):  80%|████████  | 12/15 [00:02<00:00,  9.68it/s]Forced selection (free text): 100%|██████████| 15/15 [00:02<00:00,  9.11it/s]Forced selection (free text): 100%|██████████| 15/15 [00:02<00:00,  6.05it/s]
-2026-03-31 19:57:59,791 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,792 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,793 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,794 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,831 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,832 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,835 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,842 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,848 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,862 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,865 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,867 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,870 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,872 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,875 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,878 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,882 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,886 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,889 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,894 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,903 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,913 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,920 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:57:59,971 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:57:59,980 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:58:00,001 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:58:00,011 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:58:00,023 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:58:00,052 [INFO] root: Invoking gpt-5.4.
-Steering judgments:   0%|          | 0/30 [00:00<?, ?it/s]2026-03-31 19:58:00,071 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:58:00,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:00,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:00,981 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:00,983 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,013 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,687 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,688 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,689 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,711 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:01,781 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:   3%|▎         | 1/30 [00:02<00:59,  2.06s/it]2026-03-31 19:58:02,587 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:02,693 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:02,704 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:02,785 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:  10%|█         | 3/30 [00:02<00:20,  1.31it/s]Steering judgments:  17%|█▋        | 5/30 [00:02<00:11,  2.22it/s]2026-03-31 19:58:03,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:  20%|██        | 6/30 [00:03<00:08,  2.73it/s]2026-03-31 19:58:03,309 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,345 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,412 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,457 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,521 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,565 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:03,603 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:  23%|██▎       | 7/30 [00:03<00:09,  2.32it/s]Steering judgments:  30%|███       | 9/30 [00:03<00:05,  3.81it/s]2026-03-31 19:58:03,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:  33%|███▎      | 10/30 [00:03<00:04,  4.44it/s]2026-03-31 19:58:04,220 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:04,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:04,264 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:04,275 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:58:04,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Steering judgments:  37%|███▋      | 11/30 [00:04<00:06,  3.12it/s]Steering judgments:  40%|████      | 12/30 [00:04<00:05,  3.34it/s]Steering judgments:  43%|████▎     | 13/30 [00:05<00:05,  2.86it/s]Steering judgments:  47%|████▋     | 14/30 [00:05<00:05,  2.83it/s]Steering judgments:  50%|█████     | 15/30 [00:05<00:04,  3.33it/s]Steering judgments:  53%|█████▎    | 16/30 [00:06<00:04,  2.96it/s]Steering judgments:  57%|█████▋    | 17/30 [00:06<00:03,  3.71it/s]Steering judgments:  60%|██████    | 18/30 [00:07<00:05,  2.32it/s]Steering judgments:  67%|██████▋   | 20/30 [00:07<00:03,  2.88it/s]Steering judgments:  73%|███████▎  | 22/30 [00:08<00:02,  2.75it/s]Steering judgments:  77%|███████▋  | 23/30 [00:08<00:02,  2.64it/s]Steering judgments:  80%|████████  | 24/30 [00:09<00:02,  2.62it/s]Steering judgments:  83%|████████▎ | 25/30 [00:09<00:02,  2.39it/s]Steering judgments:  90%|█████████ | 27/30 [00:10<00:00,  3.36it/s]Steering judgments:  93%|█████████▎| 28/30 [00:11<00:00,  2.02it/s]Steering judgments:  97%|█████████▋| 29/30 [00:11<00:00,  2.36it/s]Steering judgments: 100%|██████████| 30/30 [00:11<00:00,  2.11it/s]Steering judgments: 100%|██████████| 30/30 [00:11<00:00,  2.50it/s]
-2026-03-31 19:58:12,164 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/forced-selection/mistral-small-2603.parquet.
+2026-04-04 22:31:31,143 [INFO] root: Running assay=forced-selection model=mistral-small-2603 num_samples_per_instance=5.
+2026-04-04 22:31:31,148 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,149 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,150 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,151 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,152 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,153 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,154 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,154 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,155 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,156 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,157 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,158 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,159 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,159 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,160 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,162 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,163 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,164 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,165 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,166 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,166 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,171 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,172 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,172 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,175 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,175 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,176 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,177 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,179 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,180 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,180 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:31,182 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 22:31:31,950 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,033 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,067 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,089 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,100 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,102 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,108 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,119 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,138 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,141 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,144 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,152 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,154 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,158 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,176 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):   1%|▏         | 1/75 [00:00<01:13,  1.01it/s]2026-04-04 22:31:32,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,196 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,229 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,234 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,259 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,284 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):   4%|▍         | 3/75 [00:01<00:21,  3.37it/s]2026-04-04 22:31:32,308 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,346 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,365 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,376 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,387 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  11%|█         | 8/75 [00:01<00:06, 10.36it/s]2026-04-04 22:31:32,408 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,420 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,429 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,437 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,461 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,473 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,484 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  19%|█▊        | 14/75 [00:01<00:03, 19.04it/s]2026-04-04 22:31:32,502 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,517 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,539 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,554 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,571 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,582 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,595 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  28%|██▊       | 21/75 [00:01<00:01, 29.04it/s]2026-04-04 22:31:32,614 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,711 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,719 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,728 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,743 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,771 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  35%|███▍      | 26/75 [00:01<00:01, 28.75it/s]2026-04-04 22:31:32,789 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,795 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,797 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,814 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:32,849 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,855 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,904 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,907 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,952 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,954 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:32,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,010 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,041 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,053 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  41%|████▏     | 31/75 [00:01<00:01, 24.04it/s]2026-04-04 22:31:33,093 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,097 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,105 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,107 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,107 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,136 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,148 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,177 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,182 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,196 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  47%|████▋     | 35/75 [00:02<00:01, 24.97it/s]2026-04-04 22:31:33,217 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,226 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,238 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,268 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,275 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,300 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,323 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,327 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  52%|█████▏    | 39/75 [00:02<00:01, 26.31it/s]2026-04-04 22:31:33,363 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,368 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,371 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,401 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,409 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:31:33,448 [INFO] root: Invoking mistral-small-2603.
+Forced selection (JSON):  57%|█████▋    | 43/75 [00:02<00:01, 27.59it/s]2026-04-04 22:31:33,455 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,489 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,492 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,536 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,572 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,602 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  67%|██████▋   | 50/75 [00:02<00:00, 32.72it/s]2026-04-04 22:31:33,665 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,699 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  72%|███████▏  | 54/75 [00:02<00:00, 33.29it/s]2026-04-04 22:31:33,773 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,827 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:33,837 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  77%|███████▋  | 58/75 [00:02<00:00, 32.73it/s]Forced selection (JSON):  83%|████████▎ | 62/75 [00:02<00:00, 31.27it/s]2026-04-04 22:31:34,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,033 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,047 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,158 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,203 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,204 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  88%|████████▊ | 66/75 [00:03<00:00, 18.03it/s]2026-04-04 22:31:34,526 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  92%|█████████▏| 69/75 [00:03<00:00, 14.37it/s]2026-04-04 22:31:33,769 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:31:34,606 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON):  92%|█████████▏| 69/75 [00:20<00:00, 14.37it/s]2026-04-04 22:32:00,323 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 30.0s (httpx.ReadTimeout: The read operation timed out)
+2026-04-04 22:32:29,503 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (JSON): 100%|██████████| 75/75 [00:58<00:00,  3.68s/it]Forced selection (JSON): 100%|██████████| 75/75 [00:58<00:00,  1.28it/s]
+2026-04-04 22:32:29,644 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,645 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,645 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,646 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,646 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,647 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,647 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,650 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,651 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,651 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,652 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,663 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,678 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,682 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,684 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,701 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,702 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,704 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,706 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,722 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,739 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,741 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,742 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,742 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,756 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,787 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,790 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,800 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,848 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,855 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 22:32:29,864 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:29,870 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,256 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,311 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,312 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,313 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,314 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,330 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,348 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,368 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,429 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,430 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,433 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,449 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,476 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,483 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,493 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,496 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,503 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,506 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,540 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,596 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,597 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,690 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):   1%|▏         | 1/75 [00:00<00:58,  1.26it/s]2026-04-04 22:32:30,743 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,747 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,749 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,755 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,779 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:30,785 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,822 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):   5%|▌         | 4/75 [00:00<00:13,  5.39it/s]2026-04-04 22:32:30,843 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,851 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,864 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,882 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,899 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,908 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,928 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  15%|█▍        | 11/75 [00:01<00:03, 16.17it/s]2026-04-04 22:32:30,938 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:30,947 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,000 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,010 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,039 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  21%|██▏       | 16/75 [00:01<00:02, 22.50it/s]2026-04-04 22:32:31,079 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,146 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,154 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,161 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,168 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,196 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  28%|██▊       | 21/75 [00:01<00:02, 25.37it/s]2026-04-04 22:32:31,212 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,274 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,295 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,295 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,308 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  33%|███▎      | 25/75 [00:01<00:01, 27.76it/s]2026-04-04 22:32:31,328 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,373 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,384 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,393 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,502 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,525 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,536 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,542 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,615 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,722 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  39%|███▊      | 29/75 [00:01<00:02, 17.61it/s]2026-04-04 22:32:31,730 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,741 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,785 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:31,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,831 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,861 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,893 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,907 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,915 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,922 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,943 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,943 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,956 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,960 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  44%|████▍     | 33/75 [00:02<00:02, 17.50it/s]2026-04-04 22:32:31,969 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:31,987 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,010 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,010 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,117 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,141 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,181 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,184 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,257 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  48%|████▊     | 36/75 [00:02<00:02, 14.84it/s]2026-04-04 22:32:32,267 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,276 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,289 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,302 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,328 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,369 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  55%|█████▍    | 41/75 [00:02<00:01, 19.67it/s]2026-04-04 22:32:32,418 [INFO] root: Invoking mistral-small-2603.
+2026-04-04 22:32:32,439 [INFO] root: Invoking mistral-small-2603.
+Forced selection (free text):  63%|██████▎   | 47/75 [00:02<00:01, 25.63it/s]2026-04-04 22:32:32,538 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,559 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,579 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  68%|██████▊   | 51/75 [00:02<00:00, 28.33it/s]2026-04-04 22:32:32,662 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  75%|███████▍  | 56/75 [00:02<00:00, 28.32it/s]2026-04-04 22:32:32,819 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:32,885 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  80%|████████  | 60/75 [00:03<00:00, 21.07it/s]Forced selection (free text):  84%|████████▍ | 63/75 [00:03<00:00, 20.25it/s]2026-04-04 22:32:33,510 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  88%|████████▊ | 66/75 [00:03<00:00, 15.92it/s]2026-04-04 22:32:33,698 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:33,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  91%|█████████ | 68/75 [00:03<00:00, 12.53it/s]2026-04-04 22:32:34,352 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:34,357 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:34,362 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:34,375 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:32:34,407 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text):  93%|█████████▎| 70/75 [00:04<00:00,  7.24it/s]Forced selection (free text):  96%|█████████▌| 72/75 [00:05<00:00,  6.42it/s]Forced selection (free text):  97%|█████████▋| 73/75 [00:05<00:00,  6.00it/s]Forced selection (free text):  99%|█████████▊| 74/75 [00:05<00:00,  4.32it/s]2026-04-04 22:32:58,534 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 30.0s (httpx.ReadTimeout: The read operation timed out)
+2026-04-04 22:33:55,684 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 30.0s (httpx.ReadTimeout: The read operation timed out)
+2026-04-04 22:34:25,601 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Forced selection (free text): 100%|██████████| 75/75 [01:56<00:00, 21.62s/it]Forced selection (free text): 100%|██████████| 75/75 [01:56<00:00,  1.55s/it]
+2026-04-04 22:34:26,079 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,080 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,081 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,081 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,082 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,083 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,085 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,086 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,089 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,090 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,092 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,093 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,095 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,102 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,107 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,110 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,126 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,127 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,130 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,143 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,148 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,150 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,168 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,172 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,181 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,188 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,193 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,198 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,209 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,217 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   0%|          | 0/150 [00:00<?, ?it/s]2026-04-04 22:34:26,227 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:26,238 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:26,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,729 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,770 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,776 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,822 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,829 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,844 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,865 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,891 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,902 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,939 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:26,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:27,003 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,101 [INFO] root: Invoking gpt-5.4.
+Steering judgments:   1%|          | 1/150 [00:01<04:26,  1.79s/it]2026-04-04 22:34:28,214 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   1%|▏         | 2/150 [00:01<01:59,  1.24it/s]2026-04-04 22:34:28,234 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:28,319 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   3%|▎         | 4/150 [00:02<00:48,  3.01it/s]2026-04-04 22:34:28,359 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:28,428 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   4%|▍         | 6/150 [00:02<00:29,  4.96it/s]2026-04-04 22:34:28,606 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,685 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:28,721 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   5%|▌         | 8/150 [00:02<00:25,  5.58it/s]2026-04-04 22:34:28,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,751 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,763 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,774 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:28,869 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,892 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,910 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,959 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,979 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:28,994 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,006 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,012 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   7%|▋         | 10/150 [00:02<00:23,  5.99it/s]2026-04-04 22:34:29,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,059 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:29,072 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:29,084 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:29,108 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,158 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:   9%|▉         | 14/150 [00:02<00:13,  9.97it/s]2026-04-04 22:34:29,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,215 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,223 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:29,322 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,583 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,584 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,604 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:29,815 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:30,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:30,860 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,111 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  11%|█         | 16/150 [00:04<00:44,  2.99it/s]2026-04-04 22:34:31,128 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:31,142 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:31,156 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:31,200 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:31,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,375 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,501 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,532 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  14%|█▍        | 21/150 [00:05<00:27,  4.71it/s]2026-04-04 22:34:31,620 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,646 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,712 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:31,738 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:31,794 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  15%|█▌        | 23/150 [00:05<00:24,  5.14it/s]2026-04-04 22:34:31,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:32,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:32,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:32,647 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:32,747 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  17%|█▋        | 25/150 [00:06<00:32,  3.82it/s]2026-04-04 22:34:33,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:33,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:33,529 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  17%|█▋        | 26/150 [00:07<00:41,  2.97it/s]2026-04-04 22:34:33,568 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:33,621 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:33,776 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  19%|█▊        | 28/150 [00:07<00:33,  3.64it/s]2026-04-04 22:34:33,793 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:33,857 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:34,003 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  20%|██        | 30/150 [00:07<00:27,  4.39it/s]2026-04-04 22:34:34,093 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:34,576 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  21%|██        | 31/150 [00:08<00:34,  3.48it/s]2026-04-04 22:34:34,655 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:34,781 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  22%|██▏       | 33/150 [00:08<00:26,  4.41it/s]2026-04-04 22:34:34,864 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:34,926 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  23%|██▎       | 35/150 [00:08<00:20,  5.68it/s]2026-04-04 22:34:35,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,058 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,084 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  24%|██▍       | 36/150 [00:08<00:19,  5.79it/s]2026-04-04 22:34:35,147 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:35,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,287 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  25%|██▌       | 38/150 [00:08<00:16,  6.76it/s]2026-04-04 22:34:35,338 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,424 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  26%|██▌       | 39/150 [00:09<00:16,  6.86it/s]2026-04-04 22:34:35,478 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:35,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,663 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:35,780 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  27%|██▋       | 41/150 [00:09<00:17,  6.35it/s]2026-04-04 22:34:35,886 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  28%|██▊       | 42/150 [00:09<00:15,  6.81it/s]2026-04-04 22:34:35,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:36,043 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  29%|██▊       | 43/150 [00:09<00:15,  6.71it/s]2026-04-04 22:34:36,097 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:36,205 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  30%|███       | 45/150 [00:09<00:12,  8.11it/s]2026-04-04 22:34:36,284 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:36,451 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:36,457 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  31%|███       | 46/150 [00:10<00:15,  6.59it/s]2026-04-04 22:34:36,513 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:36,639 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:36,966 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:37,054 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  31%|███▏      | 47/150 [00:10<00:26,  3.88it/s]2026-04-04 22:34:37,173 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  32%|███▏      | 48/150 [00:10<00:22,  4.49it/s]2026-04-04 22:34:37,197 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:37,292 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  33%|███▎      | 50/150 [00:10<00:15,  6.55it/s]2026-04-04 22:34:37,532 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:37,535 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:37,595 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  34%|███▍      | 51/150 [00:11<00:18,  5.33it/s]2026-04-04 22:34:37,602 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:37,678 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:37,884 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  35%|███▍      | 52/150 [00:11<00:20,  4.67it/s]2026-04-04 22:34:37,951 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:37,978 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:38,026 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,051 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,258 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  37%|███▋      | 55/150 [00:11<00:15,  5.99it/s]2026-04-04 22:34:38,348 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:38,469 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  38%|███▊      | 57/150 [00:12<00:13,  6.81it/s]2026-04-04 22:34:38,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,486 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,720 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,810 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  39%|███▊      | 58/150 [00:12<00:16,  5.44it/s]2026-04-04 22:34:38,958 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,036 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  39%|███▉      | 59/150 [00:12<00:17,  5.19it/s]2026-04-04 22:34:39,320 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,607 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,612 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  40%|████      | 60/150 [00:13<00:25,  3.54it/s]2026-04-04 22:34:39,680 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,267 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:38,306 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:38,349 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:38,358 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:38,410 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:38,796 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,923 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:38,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,189 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,191 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,205 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:39,213 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:39,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,357 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:39,380 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:39,511 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:39,546 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:39,735 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,756 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  48%|████▊     | 72/150 [00:13<00:05, 15.07it/s]2026-04-04 22:34:39,898 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:39,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:40,139 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:40,488 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:40,541 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:40,600 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:40,825 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  50%|█████     | 75/150 [00:14<00:09,  7.67it/s]2026-04-04 22:34:41,115 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:41,224 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  51%|█████▏    | 77/150 [00:14<00:10,  7.02it/s]2026-04-04 22:34:41,260 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:41,386 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:41,641 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:41,787 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:41,886 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:41,900 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  53%|█████▎    | 79/150 [00:15<00:12,  5.51it/s]2026-04-04 22:34:41,922 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:41,993 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,037 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  54%|█████▍    | 81/150 [00:15<00:10,  6.39it/s]2026-04-04 22:34:42,057 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:42,110 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,474 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,741 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  55%|█████▌    | 83/150 [00:16<00:13,  4.90it/s]2026-04-04 22:34:42,767 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,776 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,811 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:42,870 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:42,963 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  57%|█████▋    | 85/150 [00:16<00:11,  5.57it/s]2026-04-04 22:34:42,998 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:43,115 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:43,185 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:43,209 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  58%|█████▊    | 87/150 [00:16<00:10,  6.08it/s]2026-04-04 22:34:43,354 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:43,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:43,631 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  59%|█████▊    | 88/150 [00:17<00:12,  4.84it/s]2026-04-04 22:34:43,698 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:43,857 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  59%|█████▉    | 89/150 [00:17<00:12,  4.76it/s]2026-04-04 22:34:44,114 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  60%|██████    | 90/150 [00:17<00:13,  4.57it/s]2026-04-04 22:34:44,170 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:44,199 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:44,370 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  61%|██████▏   | 92/150 [00:18<00:10,  5.38it/s]2026-04-04 22:34:44,376 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:44,422 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:44,478 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  63%|██████▎   | 94/150 [00:18<00:07,  7.21it/s]2026-04-04 22:34:44,514 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:44,697 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:44,852 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,027 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,109 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:45,413 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  64%|██████▍   | 96/150 [00:19<00:13,  4.01it/s]2026-04-04 22:34:45,421 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,445 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:45,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,744 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  65%|██████▌   | 98/150 [00:19<00:11,  4.52it/s]2026-04-04 22:34:45,751 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:45,895 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  66%|██████▌   | 99/150 [00:19<00:10,  4.80it/s]2026-04-04 22:34:46,024 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:46,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:46,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:46,501 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  67%|██████▋   | 100/150 [00:20<00:14,  3.42it/s]2026-04-04 22:34:46,587 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:46,798 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  68%|██████▊   | 102/150 [00:20<00:11,  4.20it/s]2026-04-04 22:34:46,837 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:46,862 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:46,938 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:47,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:47,289 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:47,373 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:47,448 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  69%|██████▉   | 104/150 [00:21<00:12,  3.73it/s]2026-04-04 22:34:47,569 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  70%|███████   | 105/150 [00:21<00:10,  4.16it/s]2026-04-04 22:34:47,621 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:47,794 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  71%|███████▏  | 107/150 [00:21<00:08,  5.19it/s]2026-04-04 22:34:47,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:47,966 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  72%|███████▏  | 108/150 [00:21<00:07,  5.31it/s]2026-04-04 22:34:48,039 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:48,095 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  73%|███████▎  | 110/150 [00:21<00:05,  7.02it/s]2026-04-04 22:34:48,116 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,272 [INFO] root: Invoking gpt-5.4.
+Steering judgments:  74%|███████▍  | 111/150 [00:21<00:05,  6.68it/s]2026-04-04 22:34:48,282 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-04 22:34:48,289 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,343 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:48,406 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  76%|███████▌  | 114/150 [00:22<00:03,  9.99it/s]2026-04-04 22:34:48,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,528 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,690 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:48,716 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  77%|███████▋  | 116/150 [00:22<00:03,  8.54it/s]2026-04-04 22:34:48,740 [INFO] root: Invoking gpt-5.4.
+2026-04-04 22:34:48,753 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:48,923 [INFO] root: Invoking gemini-2.5-pro.
+Steering judgments:  79%|███████▊  | 118/150 [00:22<00:03,  8.85it/s]2026-04-04 22:34:49,154 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  80%|████████  | 120/150 [00:23<00:04,  6.24it/s]2026-04-04 22:34:49,506 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:49,858 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  81%|████████  | 121/150 [00:23<00:07,  3.67it/s]2026-04-04 22:34:50,371 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  82%|████████▏ | 123/150 [00:24<00:05,  4.92it/s]2026-04-04 22:34:50,513 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  83%|████████▎ | 124/150 [00:24<00:04,  5.22it/s]2026-04-04 22:34:50,659 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:50,676 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  83%|████████▎ | 125/150 [00:24<00:05,  4.53it/s]2026-04-04 22:34:50,980 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  84%|████████▍ | 126/150 [00:24<00:04,  4.90it/s]2026-04-04 22:34:51,111 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  85%|████████▍ | 127/150 [00:24<00:05,  4.50it/s]2026-04-04 22:34:51,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 22:34:51,503 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  85%|████████▌ | 128/150 [00:25<00:04,  4.45it/s]Steering judgments:  87%|████████▋ | 130/150 [00:25<00:03,  5.88it/s]Steering judgments:  88%|████████▊ | 132/150 [00:25<00:02,  7.67it/s]Steering judgments:  89%|████████▊ | 133/150 [00:25<00:02,  5.90it/s]Steering judgments:  89%|████████▉ | 134/150 [00:25<00:02,  6.43it/s]Steering judgments:  90%|█████████ | 135/150 [00:26<00:03,  4.71it/s]Steering judgments:  91%|█████████ | 136/150 [00:26<00:02,  5.01it/s]Steering judgments:  91%|█████████▏| 137/150 [00:27<00:06,  1.89it/s]Steering judgments:  93%|█████████▎| 139/150 [00:28<00:04,  2.58it/s]Steering judgments:  94%|█████████▍| 141/150 [00:28<00:02,  3.42it/s]2026-04-04 22:34:54,946 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 30.0s (httpx.ReadTimeout: The read operation timed out)
+Steering judgments:  95%|█████████▍| 142/150 [00:28<00:02,  3.46it/s]Steering judgments:  95%|█████████▌| 143/150 [00:29<00:02,  3.32it/s]Steering judgments:  96%|█████████▌| 144/150 [00:29<00:02,  2.56it/s]Steering judgments:  97%|█████████▋| 146/150 [00:29<00:01,  3.97it/s]2026-04-04 22:34:57,172 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments:  98%|█████████▊| 147/150 [00:31<00:01,  2.33it/s]Steering judgments:  99%|█████████▊| 148/150 [00:35<00:03,  1.52s/it]Steering judgments:  99%|█████████▉| 149/150 [00:36<00:01,  1.25s/it]2026-04-04 22:35:23,785 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Steering judgments: 100%|██████████| 150/150 [00:59<00:00,  7.25s/it]Steering judgments: 100%|██████████| 150/150 [00:59<00:00,  2.51it/s]
+2026-04-04 22:35:26,015 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/forced-selection/mistral-small-2603.parquet.

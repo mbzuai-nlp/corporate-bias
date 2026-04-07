@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6489.77it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  54%|█████▍    | 109/202 [00:00<00:00, 1079.39it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1482.50it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▊     | 98/202 [00:00<00:00, 979.47it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1448.31it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,37 +9,118 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:13:51,110 [INFO] root: Running assay=describe-sentiment model=gpt-oss-120b num_samples_per_instance=1.
-2026-03-31 19:13:51,115 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,116 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,116 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,117 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,119 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,119 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,120 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,121 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,122 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,123 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,124 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,125 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,128 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,131 [INFO] root: Invoking gpt-oss-120b.
-2026-03-31 19:13:51,132 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:13:51,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:51,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:51,951 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:51,971 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:51,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,126 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,128 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,302 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,758 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,835 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:13:52,835 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 1/15 [00:03<00:47,  3.40s/it]2026-03-31 19:13:54,603 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  20%|██        | 3/15 [00:04<00:15,  1.31s/it]Descriptions:  27%|██▋       | 4/15 [00:05<00:14,  1.31s/it]Descriptions:  33%|███▎      | 5/15 [00:10<00:23,  2.33s/it]Descriptions:  40%|████      | 6/15 [00:11<00:18,  2.00s/it]Descriptions:  47%|████▋     | 7/15 [00:13<00:16,  2.01s/it]Descriptions:  53%|█████▎    | 8/15 [00:13<00:10,  1.45s/it]Descriptions:  60%|██████    | 9/15 [00:15<00:08,  1.49s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Descriptions:  67%|██████▋   | 10/15 [00:23<00:17,  3.56s/it]Descriptions:  73%|███████▎  | 11/15 [00:23<00:10,  2.55s/it]Descriptions:  80%|████████  | 12/15 [00:25<00:07,  2.37s/it]Descriptions:  87%|████████▋ | 13/15 [00:37<00:10,  5.07s/it]Descriptions:  93%|█████████▎| 14/15 [00:40<00:04,  4.53s/it]Descriptions: 100%|██████████| 15/15 [00:47<00:00,  5.24s/it]Descriptions: 100%|██████████| 15/15 [00:47<00:00,  3.16s/it]
-2026-03-31 19:14:38,502 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-oss-120b.parquet.
+2026-04-07 16:47:16,754 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:47:16,785 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:47:16,955 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-07 16:47:17,108 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-07 16:47:17,286 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-07 16:47:17,456 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-07 16:47:15,493 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-07 16:47:15,640 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-07 16:47:15,769 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6079.93it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-04-07 16:47:16,729 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:47:16,862 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:47:18,880 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:47:18,921 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 58/202 [00:00<00:00, 574.10it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 615.88it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 775.84it/s]
+2026-04-07 16:47:19,681 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:47:19,819 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:47:20,967 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-07 16:47:21,789 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:47:21,815 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:47:21,950 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:47:21,980 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-07 16:47:22,130 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:47:22,312 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:47:23,065 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-07 16:47:23,228 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:47:23,287 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 56/202 [00:00<00:00, 558.79it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 617.52it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 827.24it/s]
+2026-04-07 16:47:23,572 [INFO] root: Running assay=describe-sentiment model=gpt-oss-120b num_samples_per_instance=5.
+2026-04-07 16:47:23,580 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,581 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,582 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,582 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,584 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,585 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,587 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,590 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,593 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,594 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,595 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,596 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,598 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,599 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,602 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,604 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,608 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,612 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,617 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,622 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,626 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,635 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,637 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,641 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,656 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,658 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,661 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,663 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,672 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,682 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:23,688 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:47:23,691 [INFO] root: Invoking gpt-oss-120b.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-07 16:47:54,342 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   1%|▏         | 1/75 [00:30<37:47, 30.64s/it]2026-04-07 16:47:54,428 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,434 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,478 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   5%|▌         | 4/75 [00:30<06:54,  5.83s/it]2026-04-07 16:47:54,495 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,507 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,510 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,524 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,568 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,608 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  13%|█▎        | 10/75 [00:30<01:55,  1.77s/it]2026-04-07 16:47:54,611 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,634 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,641 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,647 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,698 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,720 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  21%|██▏       | 16/75 [00:31<00:52,  1.11it/s]2026-04-07 16:47:54,729 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,738 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,779 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,831 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,838 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  28%|██▊       | 21/75 [00:31<00:30,  1.75it/s]2026-04-07 16:47:54,849 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,868 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,918 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:54,920 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:55,037 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  35%|███▍      | 26/75 [00:31<00:18,  2.59it/s]2026-04-07 16:47:55,091 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:55,106 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:55,178 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:55,222 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  40%|████      | 30/75 [00:31<00:13,  3.45it/s]2026-04-07 16:47:55,341 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:47:55,573 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  40%|████      | 30/75 [00:42<00:13,  3.45it/s]2026-04-07 16:48:28,663 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  44%|████▍     | 33/75 [01:04<01:58,  2.82s/it]2026-04-07 16:48:29,065 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  45%|████▌     | 34/75 [01:05<01:45,  2.58s/it]2026-04-07 16:48:29,118 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:48:29,176 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:48:29,268 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  49%|████▉     | 37/75 [01:05<01:09,  1.83s/it]2026-04-07 16:48:29,349 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:48:29,517 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  52%|█████▏    | 39/75 [01:05<00:52,  1.45s/it]2026-04-07 16:48:29,575 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:48:29,585 [INFO] root: Invoking gpt-oss-120b.
+2026-04-07 16:48:29,689 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  56%|█████▌    | 42/75 [01:05<00:33,  1.00s/it]2026-04-07 16:48:29,705 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  60%|██████    | 45/75 [01:06<00:20,  1.43it/s]Descriptions:  64%|██████▍   | 48/75 [01:06<00:13,  2.02it/s]Descriptions:  71%|███████   | 53/75 [01:06<00:06,  3.41it/s]Descriptions:  77%|███████▋  | 58/75 [01:06<00:03,  5.22it/s]Descriptions:  83%|████████▎ | 62/75 [01:06<00:01,  6.76it/s]Descriptions:  87%|████████▋ | 65/75 [01:18<00:11,  1.11s/it]Descriptions:  91%|█████████ | 68/75 [01:19<00:05,  1.19it/s]Descriptions: 100%|██████████| 75/75 [01:19<00:00,  1.06s/it]
+2026-04-07 16:48:42,910 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-oss-120b.parquet.

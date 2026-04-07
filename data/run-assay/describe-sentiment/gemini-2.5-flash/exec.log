@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6133.92it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1045.15it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1370.14it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 953.47it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1419.14it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,37 +9,116 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:16:48,915 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-flash num_samples_per_instance=1.
-2026-03-31 19:16:48,920 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,921 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,921 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,922 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,923 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,924 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,925 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,926 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,927 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,928 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,929 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,930 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,930 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,931 [INFO] root: Invoking gemini-2.5-flash.
-2026-03-31 19:16:48,934 [INFO] root: Invoking gemini-2.5-flash.
-Descriptions:   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:16:49,636 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:49,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:49,969 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:49,970 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,033 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,068 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,154 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,639 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,872 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:50,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:51,079 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:51,202 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:51,210 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-07 16:54:36,296 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:54:36,363 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:54:36,559 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-07 16:54:36,720 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-07 16:54:36,868 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-07 16:54:37,011 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4354.66it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-04-07 16:54:37,151 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-07 16:54:37,258 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:54:37,282 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-07 16:54:37,385 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:54:37,465 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-07 16:54:38,732 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:54:38,755 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 68/202 [00:00<00:00, 674.97it/s]Loading weights:  72%|███████▏  | 146/202 [00:00<00:00, 734.36it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 949.73it/s]
+2026-04-07 16:54:39,200 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:54:39,325 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:54:40,376 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-07 16:54:40,612 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:54:40,637 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:54:50,835 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:54:51,048 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:54:51,674 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-07 16:54:51,800 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:54:51,823 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  30%|██▉       | 60/202 [00:00<00:00, 595.49it/s]Loading weights:  66%|██████▌   | 133/202 [00:00<00:00, 670.14it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 982.39it/s]
+2026-04-07 16:54:52,062 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-flash num_samples_per_instance=5.
+2026-04-07 16:54:52,068 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,069 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,070 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,071 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,071 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,073 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,074 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,075 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,077 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,078 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,079 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,081 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,083 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,086 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,089 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,096 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,101 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,106 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,111 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,115 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,122 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,125 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,131 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,135 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,140 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,143 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,146 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,149 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,157 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,160 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:54:52,163 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:54:52,172 [INFO] root: Invoking gemini-2.5-flash.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-03-31 19:16:51,659 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:16:51,705 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 1/15 [00:09<02:13,  9.56s/it]Descriptions:  20%|██        | 3/15 [00:09<00:30,  2.55s/it]Descriptions:  27%|██▋       | 4/15 [00:10<00:21,  1.93s/it]Descriptions:  33%|███▎      | 5/15 [00:13<00:21,  2.13s/it]Descriptions:  40%|████      | 6/15 [00:13<00:14,  1.59s/it]Descriptions:  53%|█████▎    | 8/15 [00:13<00:06,  1.16it/s]Descriptions:  73%|███████▎  | 11/15 [00:13<00:01,  2.25it/s]Descriptions: 100%|██████████| 15/15 [00:13<00:00,  1.09it/s]
-2026-03-31 19:17:02,751 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-flash.parquet.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-07 16:55:21,975 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:   1%|▏         | 1/75 [00:29<36:44, 29.78s/it]2026-04-07 16:55:22,137 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:   3%|▎         | 2/75 [00:29<15:02, 12.36s/it]2026-04-07 16:55:22,208 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,265 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:   5%|▌         | 4/75 [00:30<05:30,  4.65s/it]2026-04-07 16:55:22,273 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,292 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,295 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,341 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,350 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,377 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  13%|█▎        | 10/75 [00:30<01:22,  1.28s/it]2026-04-07 16:55:22,384 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,390 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,487 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,567 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  19%|█▊        | 14/75 [00:30<00:47,  1.30it/s]2026-04-07 16:55:22,575 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,591 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,595 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,604 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,605 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,628 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,634 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,643 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,672 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  31%|███       | 23/75 [00:30<00:17,  2.94it/s]2026-04-07 16:55:22,702 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,719 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,841 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,866 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  37%|███▋      | 28/75 [00:30<00:11,  4.06it/s]2026-04-07 16:55:22,868 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,953 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,957 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:22,963 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:23,133 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  43%|████▎     | 32/75 [00:30<00:08,  5.02it/s]Descriptions:  43%|████▎     | 32/75 [00:44<00:08,  5.02it/s]2026-04-07 16:55:52,422 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  44%|████▍     | 33/75 [01:00<01:52,  2.69s/it]2026-04-07 16:55:52,635 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  45%|████▌     | 34/75 [01:00<01:39,  2.42s/it]2026-04-07 16:55:52,643 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:52,825 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:52,833 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  49%|████▉     | 37/75 [01:00<01:03,  1.67s/it]2026-04-07 16:55:52,890 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:52,920 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:52,924 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:52,932 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  55%|█████▍    | 41/75 [01:00<00:35,  1.05s/it]2026-04-07 16:55:52,976 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-07 16:55:53,084 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  59%|█████▊    | 44/75 [01:00<00:23,  1.31it/s]Descriptions:  64%|██████▍   | 48/75 [01:01<00:13,  1.98it/s]Descriptions:  73%|███████▎  | 55/75 [01:01<00:05,  3.60it/s]Descriptions:  83%|████████▎ | 62/75 [01:01<00:02,  5.80it/s]Descriptions:  89%|████████▉ | 67/75 [01:12<00:06,  1.28it/s]Descriptions:  96%|█████████▌| 72/75 [01:12<00:01,  1.80it/s]Descriptions: 100%|██████████| 75/75 [01:12<00:00,  1.03it/s]
+2026-04-07 16:56:04,936 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-flash.parquet.

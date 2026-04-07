@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6749.94it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 106/202 [00:00<00:00, 1057.60it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1474.51it/s]
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 106/202 [00:00<00:00, 1059.35it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1465.01it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,25 +9,52 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:12:37,760 [INFO] root: Running assay=consideration-set model=phi-4 num_samples_per_instance=1.
-2026-03-31 19:12:37,766 [INFO] root: Invoking phi-4.
-2026-03-31 19:12:37,767 [INFO] root: Invoking phi-4.
-Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 19:12:37,768 [INFO] root: Invoking phi-4.
-2026-03-31 19:12:38,142 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:38,183 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:38,242 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Consideration sets:  33%|███▎      | 1/3 [00:04<00:09,  4.88s/it]Consideration sets:  67%|██████▋   | 2/3 [00:06<00:02,  2.92s/it]Consideration sets: 100%|██████████| 3/3 [00:06<00:00,  1.76s/it]Consideration sets: 100%|██████████| 3/3 [00:06<00:00,  2.27s/it]
-2026-03-31 19:12:44,570 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:12:44,570 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:12:44,571 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:12:44,577 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:12:44,579 [INFO] root: Invoking gpt-5.4.
-Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 19:12:44,580 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:12:44,891 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:45,054 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:45,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  17%|█▋        | 1/6 [00:01<00:07,  1.43s/it]Judge evaluations:  33%|███▎      | 2/6 [00:01<00:02,  1.38it/s]Judge evaluations:  50%|█████     | 3/6 [00:02<00:01,  1.82it/s]2026-03-31 19:12:47,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:54,814 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:12:54,824 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  67%|██████▋   | 4/6 [00:13<00:09,  4.69s/it]Judge evaluations:  83%|████████▎ | 5/6 [00:18<00:05,  5.10s/it]Judge evaluations: 100%|██████████| 6/6 [00:20<00:00,  3.87s/it]Judge evaluations: 100%|██████████| 6/6 [00:20<00:00,  3.39s/it]
-2026-03-31 19:13:04,956 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/phi-4.parquet.
+2026-04-07 16:47:05,083 [INFO] root: Running assay=consideration-set model=phi-4 num_samples_per_instance=5.
+2026-04-07 16:47:05,089 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,090 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,091 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,093 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,094 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,095 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,095 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,096 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,099 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,101 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,102 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,103 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,104 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,105 [INFO] root: Invoking phi-4.
+2026-04-07 16:47:05,107 [INFO] root: Invoking phi-4.
+Consideration sets:   0%|          | 0/15 [00:00<?, ?it/s]Consideration sets:   7%|▋         | 1/15 [00:00<00:01,  7.79it/s]Consideration sets: 100%|██████████| 15/15 [00:00<00:00, 113.35it/s]
+2026-04-07 16:47:05,244 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,244 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,246 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,247 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,249 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,251 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,252 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,254 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,258 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,261 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,265 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,267 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,268 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,269 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,273 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,275 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,276 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,277 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,278 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,280 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,280 [INFO] root: Invoking gpt-5.4.
+Judge evaluations:   0%|          | 0/30 [00:00<?, ?it/s]2026-04-07 16:47:05,281 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,285 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,285 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,285 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,287 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,289 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,289 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:47:05,290 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:47:05,290 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations: 100%|██████████| 30/30 [00:00<00:00, 635.51it/s]
+2026-04-07 16:47:05,366 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/phi-4.parquet.

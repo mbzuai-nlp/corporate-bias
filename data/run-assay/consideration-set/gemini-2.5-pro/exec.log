@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5641.11it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 909.61it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1410.75it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1018.16it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1445.46it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,25 +9,52 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 18:52:55,489 [INFO] root: Running assay=consideration-set model=gemini-2.5-pro num_samples_per_instance=1.
-2026-03-31 18:52:55,495 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:52:55,495 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:52:55,496 [INFO] root: Invoking gemini-2.5-pro.
-Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 18:53:01,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:53:04,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:53:05,656 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Consideration sets:  33%|███▎      | 1/3 [00:15<00:30, 15.28s/it]Consideration sets:  67%|██████▋   | 2/3 [00:17<00:07,  7.38s/it]Consideration sets: 100%|██████████| 3/3 [00:23<00:00,  6.82s/it]Consideration sets: 100%|██████████| 3/3 [00:23<00:00,  7.76s/it]
-2026-03-31 18:53:18,782 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:53:18,782 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:53:18,783 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:53:18,784 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:53:18,785 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:53:18,787 [INFO] root: Invoking gemini-2.5-pro.
-Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 18:53:19,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:53:19,225 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:53:19,392 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  17%|█▋        | 1/6 [00:01<00:07,  1.55s/it]Judge evaluations:  33%|███▎      | 2/6 [00:01<00:02,  1.37it/s]2026-03-31 18:53:21,398 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:53:22,748 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  67%|██████▋   | 4/6 [00:04<00:02,  1.25s/it]2026-03-31 18:53:29,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  83%|████████▎ | 5/6 [00:10<00:02,  2.66s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  4.57s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  3.25s/it]
-2026-03-31 18:53:38,326 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gemini-2.5-pro.parquet.
+2026-04-07 16:46:34,711 [INFO] root: Running assay=consideration-set model=gemini-2.5-pro num_samples_per_instance=5.
+2026-04-07 16:46:34,717 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,718 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,719 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,720 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,721 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,722 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,723 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,723 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,725 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,725 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,726 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,727 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,729 [INFO] root: Invoking gemini-2.5-pro.
+Consideration sets:   0%|          | 0/15 [00:00<?, ?it/s]2026-04-07 16:46:34,730 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,731 [INFO] root: Invoking gemini-2.5-pro.
+Consideration sets:   7%|▋         | 1/15 [00:00<00:01,  8.09it/s]Consideration sets: 100%|██████████| 15/15 [00:00<00:00, 118.14it/s]
+2026-04-07 16:46:34,862 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,863 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,864 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,865 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,865 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,866 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,867 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,869 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,870 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,871 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,872 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,874 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,875 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,876 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,877 [INFO] root: Invoking gpt-5.4.
+Judge evaluations:   0%|          | 0/30 [00:00<?, ?it/s]2026-04-07 16:46:34,879 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,881 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,882 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,885 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,888 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,888 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,890 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,893 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,894 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,895 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,895 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,898 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,900 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:34,900 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:34,904 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations: 100%|██████████| 30/30 [00:00<00:00, 545.69it/s]
+2026-04-07 16:46:34,984 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/gemini-2.5-pro.parquet.

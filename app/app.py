@@ -54,8 +54,8 @@ def family_mean_and_se(
     return family_mean, family_se
 
 
-def get_plot_df(assay: str, comparison_set_name: str, estimand: str):
-    exploded = (
+def get_exploded_df(assay: str, comparison_set_name: str, estimand: str) -> pl.DataFrame:
+    return (
         ASSAY_DF
         .filter(
             (pl.col("assay") == assay)
@@ -73,6 +73,29 @@ def get_plot_df(assay: str, comparison_set_name: str, estimand: str):
         .filter(pl.col("estimand") == estimand)
         .sort("entity_name", "model")
     )
+
+
+def get_comparison_set_stats(assay: str, comparison_set_name: str, estimand: str) -> dict:
+    exploded = get_exploded_df(assay, comparison_set_name, estimand)
+
+    if exploded.height == 0:
+        return {
+            "num_instances": 0,
+            "samples_per_instance": 0,
+        }
+
+    # Pick any entity/model group, since these counts are constant within the
+    # comparison set for a given assay.
+    first_group = next(iter(exploded.group_by("entity_name", "model")))[1]
+
+    return {
+        "num_instances": first_group.height,
+        "samples_per_instance": first_group["num_samples"][0],
+    }
+
+
+def get_plot_df(assay: str, comparison_set_name: str, estimand: str):
+    exploded = get_exploded_df(assay, comparison_set_name, estimand)
 
     rows = []
     for _, g in exploded.group_by("entity_name", "model"):
@@ -173,6 +196,16 @@ class AssayView:
         )
 
         @pn.depends(comparison_set, estimand)
+        def summary(comparison_set, estimand):
+            stats = get_comparison_set_stats(self.assay, comparison_set, estimand)
+            return pn.pane.Markdown(
+                (
+                    f"**Instances:** {stats['num_instances']}  \n"
+                    f"**Samples per instance:** {stats['samples_per_instance']}"
+                )
+            )
+
+        @pn.depends(comparison_set, estimand)
         def plot(comparison_set, estimand):
             pdf = get_plot_df(self.assay, comparison_set, estimand)
             return make_bar_plot(pdf, estimand)
@@ -180,6 +213,7 @@ class AssayView:
         return pn.Column(
             f"## {self.assay}",
             pn.Row(comparison_set, estimand),
+            summary,
             plot,
         )
 

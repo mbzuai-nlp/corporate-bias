@@ -1,16 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6837.01it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1027.13it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1582.10it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|████      | 81/202 [00:00<00:00, 808.20it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1280.62it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -19,37 +9,118 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:17:14,545 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-pro num_samples_per_instance=1.
-2026-03-31 19:17:14,550 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,551 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,551 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,552 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,553 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,554 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,555 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,557 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,558 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,559 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,559 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,561 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,562 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,568 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:17:14,577 [INFO] root: Invoking gemini-2.5-pro.
-Descriptions:   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:17:19,663 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:19,664 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:19,665 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:19,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:20,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:20,735 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:21,337 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:25,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:25,814 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:26,406 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:26,408 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:26,411 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:27,100 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:27,103 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:17:27,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 1/15 [00:17<03:58, 17.03s/it]Descriptions:  20%|██        | 3/15 [00:17<00:56,  4.70s/it]Descriptions:  27%|██▋       | 4/15 [00:18<00:35,  3.22s/it]Descriptions:  33%|███▎      | 5/15 [00:21<00:33,  3.34s/it]Descriptions:  40%|████      | 6/15 [00:21<00:20,  2.33s/it]Descriptions:  47%|████▋     | 7/15 [00:24<00:18,  2.27s/it]Descriptions:  53%|█████▎    | 8/15 [00:24<00:11,  1.67s/it]Descriptions:  60%|██████    | 9/15 [00:24<00:07,  1.20s/it]Descriptions:  67%|██████▋   | 10/15 [00:25<00:05,  1.10s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Descriptions:  73%|███████▎  | 11/15 [00:27<00:04,  1.25s/it]Descriptions:  87%|████████▋ | 13/15 [00:27<00:01,  1.34it/s]Descriptions:  93%|█████████▎| 14/15 [00:30<00:01,  1.22s/it]Descriptions: 100%|██████████| 15/15 [00:39<00:00,  3.44s/it]Descriptions: 100%|██████████| 15/15 [00:39<00:00,  2.65s/it]
-2026-03-31 19:17:54,320 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-pro.parquet.
+2026-04-07 16:59:12,802 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:59:12,862 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:59:13,048 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-07 16:59:13,199 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-07 16:59:13,402 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5373.30it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-04-07 16:59:13,600 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-07 16:59:13,797 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-07 16:59:13,946 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-07 16:59:13,954 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:59:14,090 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:59:14,091 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-07 16:59:15,403 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:59:15,467 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|████      | 81/202 [00:00<00:00, 809.75it/s]Loading weights:  80%|████████  | 162/202 [00:00<00:00, 783.71it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 976.51it/s]
+2026-04-07 16:59:15,934 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:59:16,106 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:59:17,242 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-07 16:59:17,526 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:59:17,587 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-07 16:59:17,713 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:59:18,044 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-07 16:59:18,221 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-07 16:59:18,404 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-07 16:59:19,148 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-07 16:59:19,293 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-07 16:59:19,357 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  30%|███       | 61/202 [00:00<00:00, 603.38it/s]Loading weights:  62%|██████▏   | 126/202 [00:00<00:00, 626.98it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 891.81it/s]
+2026-04-07 16:59:19,625 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-pro num_samples_per_instance=5.
+2026-04-07 16:59:19,632 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,633 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,634 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,635 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,636 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,637 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,638 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,640 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,640 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,641 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,642 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,643 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,644 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,650 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,655 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,664 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,666 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,680 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,683 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,687 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,698 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,702 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,705 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,708 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,710 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,712 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,713 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,716 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,721 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,723 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,729 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:19,731 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-07 16:59:49,389 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   1%|▏         | 1/75 [00:29<36:33, 29.64s/it]2026-04-07 16:59:49,596 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   3%|▎         | 2/75 [00:29<14:59, 12.33s/it]2026-04-07 16:59:49,669 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,690 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,717 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   7%|▋         | 5/75 [00:29<04:07,  3.53s/it]2026-04-07 16:59:49,802 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,815 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,860 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  11%|█         | 8/75 [00:30<01:58,  1.77s/it]2026-04-07 16:59:49,882 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,915 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,944 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:49,972 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  16%|█▌        | 12/75 [00:30<00:57,  1.09it/s]2026-04-07 16:59:50,007 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,011 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,024 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,030 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,032 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,055 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,057 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,064 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,088 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  28%|██▊       | 21/75 [00:30<00:19,  2.76it/s]2026-04-07 16:59:50,100 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,128 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,153 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,172 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,206 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  35%|███▍      | 26/75 [00:30<00:12,  3.97it/s]2026-04-07 16:59:50,247 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,269 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,335 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,363 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:59:50,430 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  41%|████▏     | 31/75 [00:30<00:08,  5.37it/s]2026-04-07 16:59:50,590 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  41%|████▏     | 31/75 [00:43<00:08,  5.37it/s]2026-04-07 17:00:20,887 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  44%|████▍     | 33/75 [01:01<01:45,  2.50s/it]2026-04-07 17:00:21,012 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  45%|████▌     | 34/75 [01:01<01:32,  2.27s/it]2026-04-07 17:00:21,359 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,361 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  49%|████▉     | 37/75 [01:01<01:01,  1.63s/it]2026-04-07 17:00:21,364 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,405 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,508 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,575 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  53%|█████▎    | 40/75 [01:01<00:40,  1.16s/it]2026-04-07 17:00:21,620 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,622 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 17:00:21,632 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  60%|██████    | 45/75 [01:01<00:20,  1.45it/s]Descriptions:  71%|███████   | 53/75 [01:02<00:07,  2.75it/s]Descriptions:  81%|████████▏ | 61/75 [01:02<00:03,  4.54it/s]Descriptions:  88%|████████▊ | 66/75 [01:13<00:07,  1.28it/s]Descriptions:  92%|█████████▏| 69/75 [01:13<00:03,  1.56it/s]Descriptions: 100%|██████████| 75/75 [01:13<00:00,  1.01it/s]
+2026-04-07 17:00:33,758 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-pro.parquet.

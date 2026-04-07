@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5935.12it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 99/202 [00:00<00:00, 987.54it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1383.52it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 106/202 [00:00<00:00, 1054.65it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1440.25it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,25 +9,52 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 18:54:26,189 [INFO] root: Running assay=consideration-set model=grok-4 num_samples_per_instance=1.
-2026-03-31 18:54:26,193 [INFO] root: Invoking grok-4.
-2026-03-31 18:54:26,194 [INFO] root: Invoking grok-4.
-2026-03-31 18:54:26,194 [INFO] root: Invoking grok-4.
-Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 18:54:26,822 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:26,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:26,913 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Consideration sets:  33%|███▎      | 1/3 [00:13<00:27, 13.63s/it]Consideration sets:  67%|██████▋   | 2/3 [00:13<00:05,  5.80s/it]Consideration sets: 100%|██████████| 3/3 [00:16<00:00,  4.34s/it]Consideration sets: 100%|██████████| 3/3 [00:16<00:00,  5.52s/it]
-2026-03-31 18:54:42,758 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:54:42,758 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:54:42,759 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:54:42,760 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 18:54:42,767 [INFO] root: Invoking gpt-5.4.
-2026-03-31 18:54:42,768 [INFO] root: Invoking gemini-2.5-pro.
-Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 18:54:43,175 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:43,250 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:43,251 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  17%|█▋        | 1/6 [00:01<00:06,  1.32s/it]Judge evaluations:  33%|███▎      | 2/6 [00:01<00:03,  1.27it/s]2026-03-31 18:54:45,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:48,278 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 18:54:50,289 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  67%|██████▋   | 4/6 [00:08<00:04,  2.26s/it]Judge evaluations:  83%|████████▎ | 5/6 [00:10<00:02,  2.34s/it]Judge evaluations: 100%|██████████| 6/6 [00:13<00:00,  2.53s/it]Judge evaluations: 100%|██████████| 6/6 [00:13<00:00,  2.25s/it]
-2026-03-31 18:54:56,276 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/grok-4.parquet.
+2026-04-07 16:46:40,703 [INFO] root: Running assay=consideration-set model=grok-4 num_samples_per_instance=5.
+2026-04-07 16:46:40,710 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,711 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,712 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,714 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,715 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,715 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,716 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,718 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,720 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,721 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,722 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,723 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,724 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,724 [INFO] root: Invoking grok-4.
+2026-04-07 16:46:40,725 [INFO] root: Invoking grok-4.
+Consideration sets:   0%|          | 0/15 [00:00<?, ?it/s]Consideration sets:   7%|▋         | 1/15 [00:00<00:01,  7.68it/s]Consideration sets: 100%|██████████| 15/15 [00:00<00:00, 111.50it/s]
+2026-04-07 16:46:40,863 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,864 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,865 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,865 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,866 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,867 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,868 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,870 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,871 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,872 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,875 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,876 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,879 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,880 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,882 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,883 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,886 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,888 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations:   0%|          | 0/30 [00:00<?, ?it/s]2026-04-07 16:46:40,890 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,891 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,893 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,894 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,895 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,897 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,897 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,900 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,901 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,903 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:40,906 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:40,908 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations: 100%|██████████| 30/30 [00:00<00:00, 477.11it/s]
+2026-04-07 16:46:40,992 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/grok-4.parquet.

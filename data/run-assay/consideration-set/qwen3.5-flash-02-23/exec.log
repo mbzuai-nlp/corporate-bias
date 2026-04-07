@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6633.01it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  50%|█████     | 102/202 [00:00<00:00, 1015.10it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1433.79it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▍     | 89/202 [00:00<00:00, 888.62it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1355.90it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,25 +9,52 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:10:57,599 [INFO] root: Running assay=consideration-set model=qwen3.5-flash-02-23 num_samples_per_instance=1.
-2026-03-31 19:10:57,604 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-03-31 19:10:57,605 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-03-31 19:10:57,606 [INFO] root: Invoking qwen3.5-flash-02-23.
-Consideration sets:   0%|          | 0/3 [00:00<?, ?it/s]2026-03-31 19:10:58,278 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:10:58,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:10:58,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Consideration sets:  33%|███▎      | 1/3 [00:07<00:15,  7.73s/it]Consideration sets:  67%|██████▋   | 2/3 [00:12<00:06,  6.26s/it]Consideration sets: 100%|██████████| 3/3 [00:17<00:00,  5.47s/it]Consideration sets: 100%|██████████| 3/3 [00:17<00:00,  5.83s/it]
-2026-03-31 19:11:15,098 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:11:15,098 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:11:15,099 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:11:15,099 [INFO] root: Invoking gemini-2.5-pro.
-2026-03-31 19:11:15,101 [INFO] root: Invoking gpt-5.4.
-2026-03-31 19:11:15,103 [INFO] root: Invoking gemini-2.5-pro.
-Judge evaluations:   0%|          | 0/6 [00:00<?, ?it/s]2026-03-31 19:11:15,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:11:15,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:11:15,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  17%|█▋        | 1/6 [00:01<00:08,  1.80s/it]Judge evaluations:  33%|███▎      | 2/6 [00:01<00:03,  1.25it/s]2026-03-31 19:11:17,601 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:11:25,361 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:11:25,362 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Judge evaluations:  67%|██████▋   | 4/6 [00:11<00:06,  3.18s/it]Judge evaluations:  83%|████████▎ | 5/6 [00:18<00:04,  4.59s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  3.45s/it]Judge evaluations: 100%|██████████| 6/6 [00:19<00:00,  3.28s/it]
-2026-03-31 19:11:34,795 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/qwen3.5-flash-02-23.parquet.
+2026-04-07 16:46:59,293 [INFO] root: Running assay=consideration-set model=qwen3.5-flash-02-23 num_samples_per_instance=5.
+2026-04-07 16:46:59,300 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,301 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,302 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,302 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,303 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,304 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,306 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,307 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,308 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,309 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,310 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,311 [INFO] root: Invoking qwen3.5-flash-02-23.
+Consideration sets:   0%|          | 0/15 [00:00<?, ?it/s]2026-04-07 16:46:59,311 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,312 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-04-07 16:46:59,313 [INFO] root: Invoking qwen3.5-flash-02-23.
+Consideration sets:   7%|▋         | 1/15 [00:00<00:01,  8.38it/s]Consideration sets: 100%|██████████| 15/15 [00:00<00:00, 120.67it/s]
+2026-04-07 16:46:59,444 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,444 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,445 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,446 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,447 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,448 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,449 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,450 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,453 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,455 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,457 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,459 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,460 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,461 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,463 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,465 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,466 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,467 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,468 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,471 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,474 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,475 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations:   0%|          | 0/30 [00:00<?, ?it/s]2026-04-07 16:46:59,476 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,477 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,479 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,480 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,483 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,484 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-07 16:46:59,485 [INFO] root: Invoking gpt-5.4.
+2026-04-07 16:46:59,489 [INFO] root: Invoking gemini-2.5-pro.
+Judge evaluations: 100%|██████████| 30/30 [00:00<00:00, 671.95it/s]
+2026-04-07 16:46:59,550 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/consideration-set/qwen3.5-flash-02-23.parquet.

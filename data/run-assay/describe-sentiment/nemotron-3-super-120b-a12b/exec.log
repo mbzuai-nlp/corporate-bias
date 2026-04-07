@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6579.44it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 105/202 [00:00<00:00, 1049.52it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1440.85it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 935.01it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1387.58it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,37 +9,192 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:23:29,475 [INFO] root: Running assay=describe-sentiment model=nemotron-3-super-120b-a12b num_samples_per_instance=1.
-2026-03-31 19:23:29,479 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,480 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,481 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,481 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,482 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,483 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,484 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,485 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,486 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,487 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,489 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,488 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,490 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-Descriptions:   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:23:29,491 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,492 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-03-31 19:23:29,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,952 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,975 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,976 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,978 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:29,983 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,010 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,053 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,223 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:30,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:23:31,540 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 1/15 [00:02<00:29,  2.14s/it]Descriptions:  20%|██        | 3/15 [00:02<00:07,  1.53it/s]Descriptions:  27%|██▋       | 4/15 [00:02<00:05,  1.92it/s]Descriptions:  33%|███▎      | 5/15 [00:02<00:04,  2.41it/s]2026-03-31 19:23:32,437 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  40%|████      | 6/15 [00:03<00:04,  2.17it/s]Descriptions:  47%|████▋     | 7/15 [00:03<00:03,  2.47it/s]Descriptions:  53%|█████▎    | 8/15 [00:03<00:02,  2.75it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Descriptions:  60%|██████    | 9/15 [00:05<00:04,  1.29it/s]Descriptions:  67%|██████▋   | 10/15 [00:06<00:03,  1.46it/s]Descriptions:  73%|███████▎  | 11/15 [00:06<00:02,  1.69it/s]Descriptions:  80%|████████  | 12/15 [00:06<00:01,  2.19it/s]Descriptions:  87%|████████▋ | 13/15 [00:06<00:00,  2.75it/s]Descriptions:  93%|█████████▎| 14/15 [00:06<00:00,  3.33it/s]Descriptions: 100%|██████████| 15/15 [00:22<00:00,  4.94s/it]Descriptions: 100%|██████████| 15/15 [00:22<00:00,  1.51s/it]
-2026-03-31 19:23:52,222 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet.
+2026-04-04 21:56:38,828 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:56:38,884 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-04 21:56:39,017 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-04 21:56:39,146 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7197.71it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-04-04 21:56:39,303 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-04 21:56:39,442 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-04 21:56:39,524 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:56:39,587 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-04 21:56:39,649 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:56:39,722 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-04 21:56:39,851 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-04 21:56:40,699 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:56:40,748 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▊     | 98/202 [00:00<00:00, 974.75it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1502.77it/s]
+2026-04-04 21:56:41,059 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:56:41,206 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:56:41,989 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-04 21:56:42,218 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:56:42,267 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-04 21:56:42,396 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:56:42,446 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-04 21:56:42,595 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:56:42,731 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:56:43,230 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-04 21:56:43,369 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:56:43,409 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  53%|█████▎    | 107/202 [00:00<00:00, 1069.58it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1606.10it/s]
+2026-04-04 21:56:43,561 [INFO] root: Running assay=describe-sentiment model=nemotron-3-super-120b-a12b num_samples_per_instance=5.
+2026-04-04 21:56:43,567 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,567 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,568 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,568 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,569 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,570 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,571 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,571 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,572 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,573 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,574 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,575 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,576 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,577 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,578 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,578 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,586 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,591 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,600 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,603 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,606 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,611 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,614 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,617 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,618 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,620 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,621 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,626 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,627 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,628 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,632 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:56:43,637 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 21:56:44,110 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,114 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,129 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,131 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,131 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,134 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,134 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,141 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,161 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,212 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,220 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,222 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,235 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,251 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,338 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,408 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,416 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,425 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,448 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,725 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,725 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,749 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:56:44,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-04 21:57:06,084 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   1%|▏         | 1/75 [00:22<27:41, 22.45s/it]2026-04-04 21:57:06,552 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:06,657 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   3%|▎         | 2/75 [00:23<11:39,  9.58s/it]2026-04-04 21:57:07,080 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:08,091 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   4%|▍         | 3/75 [00:24<07:01,  5.86s/it]2026-04-04 21:57:08,494 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:10,718 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   5%|▌         | 4/75 [00:27<05:25,  4.58s/it]2026-04-04 21:57:10,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:11,291 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   7%|▋         | 5/75 [00:27<03:39,  3.14s/it]2026-04-04 21:57:11,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:11,963 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   8%|▊         | 6/75 [00:28<02:38,  2.30s/it]2026-04-04 21:57:11,966 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,007 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,073 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  12%|█▏        | 9/75 [00:28<01:03,  1.04it/s]2026-04-04 21:57:12,119 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,224 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  15%|█▍        | 11/75 [00:28<00:40,  1.57it/s]2026-04-04 21:57:12,276 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,359 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  17%|█▋        | 13/75 [00:28<00:27,  2.25it/s]2026-04-04 21:57:12,365 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,420 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,456 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,463 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  20%|██        | 15/75 [00:28<00:18,  3.16it/s]2026-04-04 21:57:12,496 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,527 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:12,542 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,582 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  23%|██▎       | 17/75 [00:28<00:13,  4.27it/s]2026-04-04 21:57:12,624 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,859 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:12,979 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,016 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,059 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  25%|██▌       | 19/75 [00:29<00:13,  4.24it/s]2026-04-04 21:57:13,088 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,142 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,222 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  28%|██▊       | 21/75 [00:29<00:10,  5.32it/s]2026-04-04 21:57:13,222 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,226 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,325 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  32%|███▏      | 24/75 [00:29<00:06,  7.88it/s]2026-04-04 21:57:13,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,476 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,584 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  35%|███▍      | 26/75 [00:29<00:06,  7.83it/s]2026-04-04 21:57:13,602 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,612 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,645 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,646 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,702 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  39%|███▊      | 29/75 [00:30<00:04, 10.56it/s]2026-04-04 21:57:13,717 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,725 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,818 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,824 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  41%|████▏     | 31/75 [00:30<00:03, 11.63it/s]2026-04-04 21:57:13,842 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:13,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,894 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:13,990 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  44%|████▍     | 33/75 [00:30<00:03, 11.75it/s]2026-04-04 21:57:14,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,114 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,120 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,154 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,223 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,271 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,303 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,338 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:14,406 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:15,900 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:16,157 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  47%|████▋     | 35/75 [00:32<00:14,  2.75it/s]2026-04-04 21:57:16,304 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:16,785 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:16,891 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:17,027 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  49%|████▉     | 37/75 [00:33<00:14,  2.60it/s]2026-04-04 21:57:17,207 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:17,403 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:17,917 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  51%|█████     | 38/75 [00:34<00:17,  2.13it/s]2026-04-04 21:57:17,987 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-04 21:57:18,305 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:18,401 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:36,498 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  53%|█████▎    | 40/75 [00:52<01:57,  3.35s/it]2026-04-04 21:57:36,716 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  55%|█████▍    | 41/75 [00:53<01:33,  2.76s/it]2026-04-04 21:57:36,942 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:37,103 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:38,769 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  56%|█████▌    | 42/75 [00:55<01:26,  2.61s/it]2026-04-04 21:57:39,151 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:57:39,759 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  57%|█████▋    | 43/75 [00:56<01:11,  2.23s/it]2026-04-04 21:57:40,143 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  59%|█████▊    | 44/75 [00:57<01:05,  2.11s/it]Descriptions:  60%|██████    | 45/75 [00:58<00:47,  1.60s/it]Descriptions:  61%|██████▏   | 46/75 [00:58<00:36,  1.25s/it]Descriptions:  63%|██████▎   | 47/75 [00:59<00:33,  1.18s/it]Descriptions:  64%|██████▍   | 48/75 [01:00<00:33,  1.25s/it]Descriptions:  67%|██████▋   | 50/75 [01:01<00:23,  1.07it/s]Descriptions:  69%|██████▉   | 52/75 [01:02<00:13,  1.69it/s]Descriptions:  72%|███████▏  | 54/75 [01:02<00:09,  2.21it/s]Descriptions:  73%|███████▎  | 55/75 [01:02<00:07,  2.57it/s]Descriptions:  76%|███████▌  | 57/75 [01:02<00:05,  3.28it/s]Descriptions:  80%|████████  | 60/75 [01:03<00:03,  4.61it/s]Descriptions:  83%|████████▎ | 62/75 [01:03<00:02,  5.68it/s]Descriptions:  85%|████████▌ | 64/75 [01:03<00:02,  5.25it/s]Descriptions:  89%|████████▉ | 67/75 [01:04<00:01,  6.17it/s]Descriptions:  92%|█████████▏| 69/75 [01:04<00:01,  5.36it/s]Descriptions:  96%|█████████▌| 72/75 [01:05<00:00,  5.54it/s]Descriptions:  99%|█████████▊| 74/75 [01:05<00:00,  6.76it/s]Descriptions: 100%|██████████| 75/75 [01:05<00:00,  1.15it/s]
+2026-04-04 21:57:49,015 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet.

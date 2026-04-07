@@ -1,17 +1,6 @@
 /home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
   from pynvml import (
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6687.44it/s]
-RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
-Key                             | Status     |  | 
---------------------------------+------------+--+-
-roberta.embeddings.position_ids | UNEXPECTED |  | 
-
-Notes:
-- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  55%|█████▍    | 111/202 [00:00<00:00, 1104.97it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1462.63it/s]
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1038.58it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1553.83it/s]
-/home/harry/code/corporate-bias/pipelines/run_assay.py:83: PolarsInefficientMapWarning: 
+/home/harry/code/corporate-bias/pipelines/run_assay.py:58: PolarsInefficientMapWarning: 
 Expr.map_elements is significantly slower than the native expressions API.
 Only use if you absolutely CANNOT implement your logic otherwise.
 Replace this expression...
@@ -20,37 +9,192 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-03-31 19:22:24,092 [INFO] root: Running assay=describe-sentiment model=qwen3-235b-a22b-2507 num_samples_per_instance=1.
-2026-03-31 19:22:24,097 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,098 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,098 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,098 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,099 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,100 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,101 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,102 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,103 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,104 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,105 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,106 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,106 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,107 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-03-31 19:22:24,108 [INFO] root: Invoking qwen3-235b-a22b-2507.
-Descriptions:   0%|          | 0/15 [00:00<?, ?it/s]2026-03-31 19:22:25,018 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,370 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,377 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,404 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,530 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,536 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:25,887 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:26,098 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:26,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:26,266 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 1/15 [00:03<00:42,  3.03s/it]Descriptions:  13%|█▎        | 2/15 [00:03<00:20,  1.55s/it]Descriptions:  20%|██        | 3/15 [00:04<00:13,  1.10s/it]Descriptions:  27%|██▋       | 4/15 [00:04<00:10,  1.08it/s]Descriptions:  33%|███▎      | 5/15 [00:04<00:06,  1.49it/s]2026-03-31 19:22:29,448 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:29,750 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:29,984 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-03-31 19:22:30,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  40%|████      | 6/15 [00:07<00:10,  1.21s/it]2026-03-31 19:22:31,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  47%|████▋     | 7/15 [00:08<00:09,  1.14s/it]Descriptions:  53%|█████▎    | 8/15 [00:09<00:07,  1.02s/it]Descriptions:  60%|██████    | 9/15 [00:10<00:06,  1.02s/it]Descriptions:  67%|██████▋   | 10/15 [00:11<00:05,  1.01s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Descriptions:  73%|███████▎  | 11/15 [00:12<00:04,  1.15s/it]Descriptions:  87%|████████▋ | 13/15 [00:16<00:03,  1.54s/it]Descriptions:  93%|█████████▎| 14/15 [00:18<00:01,  1.66s/it]Descriptions: 100%|██████████| 15/15 [00:18<00:00,  1.27s/it]Descriptions: 100%|██████████| 15/15 [00:18<00:00,  1.24s/it]
-2026-03-31 19:22:42,779 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet.
+2026-04-04 21:54:01,622 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:54:01,673 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-04 21:54:01,840 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-04 21:54:01,987 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6946.26it/s]
+RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
+Key                             | Status     |  | 
+--------------------------------+------------+--+-
+roberta.embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+2026-04-04 21:54:02,140 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-04 21:54:02,297 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-04 21:54:02,359 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:54:02,459 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-04 21:54:02,495 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:54:02,618 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-04 21:54:02,764 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-04 21:54:03,704 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:54:03,762 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 106/202 [00:00<00:00, 1046.92it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1527.87it/s]
+2026-04-04 21:54:04,123 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:54:04,303 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:54:05,238 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-04 21:54:05,492 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:54:05,568 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-04 21:54:05,722 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:54:05,780 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-04 21:54:05,937 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-04 21:54:06,091 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-04 21:54:06,682 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-04 21:54:06,833 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-04 21:54:06,875 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▎     | 88/202 [00:00<00:00, 870.23it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1349.94it/s]
+2026-04-04 21:54:07,051 [INFO] root: Running assay=describe-sentiment model=qwen3-235b-a22b-2507 num_samples_per_instance=5.
+2026-04-04 21:54:07,056 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,057 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,058 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,059 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,059 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,060 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,063 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,066 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,067 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,070 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,071 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,072 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,073 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,074 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,079 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,081 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,084 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,089 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,092 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,095 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,097 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,099 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,100 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,103 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,105 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,106 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,108 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,112 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,115 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,118 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 21:54:07,119 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,120 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:07,808 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,814 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,831 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,981 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,990 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:07,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,015 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,043 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,161 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,527 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,533 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,544 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,545 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,547 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:08,810 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,035 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,052 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,152 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,223 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,232 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,256 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,266 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:09,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-04 21:54:10,918 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:10,925 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:29,650 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   1%|▏         | 1/75 [00:22<27:46, 22.53s/it]2026-04-04 21:54:30,198 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   3%|▎         | 2/75 [00:23<11:40,  9.60s/it]2026-04-04 21:54:30,337 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   4%|▍         | 3/75 [00:23<06:20,  5.28s/it]2026-04-04 21:54:30,444 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   5%|▌         | 4/75 [00:23<03:49,  3.24s/it]2026-04-04 21:54:30,665 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:30,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:31,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:31,178 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   7%|▋         | 5/75 [00:24<02:43,  2.33s/it]2026-04-04 21:54:30,639 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:30,924 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:31,914 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   9%|▉         | 7/75 [00:24<01:30,  1.34s/it]2026-04-04 21:54:32,027 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  11%|█         | 8/75 [00:24<01:07,  1.01s/it]2026-04-04 21:54:32,245 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  12%|█▏        | 9/75 [00:25<00:52,  1.26it/s]2026-04-04 21:54:32,294 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:32,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:32,426 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:32,439 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  15%|█▍        | 11/75 [00:25<00:31,  2.06it/s]2026-04-04 21:54:32,551 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  16%|█▌        | 12/75 [00:25<00:24,  2.52it/s]2026-04-04 21:54:32,949 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  17%|█▋        | 13/75 [00:25<00:24,  2.52it/s]2026-04-04 21:54:33,118 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  19%|█▊        | 14/75 [00:25<00:20,  2.98it/s]2026-04-04 21:54:33,195 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:33,381 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:33,422 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  21%|██▏       | 16/75 [00:26<00:15,  3.89it/s]2026-04-04 21:54:33,585 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:33,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:33,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:33,703 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:33,943 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  23%|██▎       | 17/75 [00:26<00:18,  3.14it/s]2026-04-04 21:54:34,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:34,181 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  24%|██▍       | 18/75 [00:27<00:17,  3.35it/s]2026-04-04 21:54:34,206 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:34,388 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:34,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:34,647 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:34,740 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  27%|██▋       | 20/75 [00:27<00:15,  3.45it/s]2026-04-04 21:54:34,970 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:35,483 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:35,541 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:37,099 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:37,358 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  28%|██▊       | 21/75 [00:30<00:44,  1.21it/s]2026-04-04 21:54:37,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:37,876 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  29%|██▉       | 22/75 [00:30<00:39,  1.33it/s]2026-04-04 21:54:37,908 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:38,125 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  31%|███       | 23/75 [00:31<00:32,  1.62it/s]2026-04-04 21:54:38,594 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  32%|███▏      | 24/75 [00:31<00:29,  1.73it/s]2026-04-04 21:54:39,118 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  33%|███▎      | 25/75 [00:31<00:28,  1.78it/s]2026-04-04 21:54:39,155 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:39,340 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:39,454 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:39,579 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  36%|███▌      | 27/75 [00:32<00:19,  2.41it/s]2026-04-04 21:54:40,004 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  37%|███▋      | 28/75 [00:32<00:19,  2.39it/s]2026-04-04 21:54:40,327 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  39%|███▊      | 29/75 [00:33<00:18,  2.54it/s]2026-04-04 21:54:40,459 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:40,476 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  40%|████      | 30/75 [00:33<00:14,  3.05it/s]2026-04-04 21:54:40,538 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:40,690 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:41,060 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  41%|████▏     | 31/75 [00:33<00:17,  2.48it/s]2026-04-04 21:54:41,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:41,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:42,077 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:42,085 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  43%|████▎     | 32/75 [00:34<00:24,  1.74it/s]2026-04-04 21:54:42,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:42,384 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:43,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:52,525 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  44%|████▍     | 33/75 [00:45<02:23,  3.42s/it]2026-04-04 21:54:53,218 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  45%|████▌     | 34/75 [00:46<01:47,  2.62s/it]2026-04-04 21:54:53,682 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:54,698 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  47%|████▋     | 35/75 [00:47<01:31,  2.29s/it]2026-04-04 21:54:55,020 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:56,681 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:57,071 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  48%|████▊     | 36/75 [00:49<01:30,  2.31s/it]2026-04-04 21:54:58,102 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  49%|████▉     | 37/75 [00:50<01:13,  1.93s/it]2026-04-04 21:54:58,138 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:58,145 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-04 21:54:58,409 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:58,452 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  53%|█████▎    | 40/75 [00:51<00:32,  1.09it/s]2026-04-04 21:54:58,749 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  55%|█████▍    | 41/75 [00:51<00:26,  1.27it/s]2026-04-04 21:54:59,132 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  56%|█████▌    | 42/75 [00:52<00:22,  1.44it/s]2026-04-04 21:54:59,599 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:54:59,916 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  57%|█████▋    | 43/75 [00:52<00:22,  1.40it/s]2026-04-04 21:55:00,069 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:55:00,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:55:00,406 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:55:00,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:55:01,207 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-04 21:55:01,462 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  60%|██████    | 45/75 [00:54<00:23,  1.28it/s]Descriptions:  61%|██████▏   | 46/75 [00:54<00:18,  1.59it/s]Descriptions:  63%|██████▎   | 47/75 [00:55<00:17,  1.59it/s]Descriptions:  65%|██████▌   | 49/75 [00:56<00:14,  1.81it/s]Descriptions:  67%|██████▋   | 50/75 [00:57<00:17,  1.40it/s]Descriptions:  69%|██████▉   | 52/75 [00:57<00:10,  2.11it/s]Descriptions:  71%|███████   | 53/75 [00:58<00:10,  2.16it/s]Descriptions:  72%|███████▏  | 54/75 [00:58<00:08,  2.61it/s]Descriptions:  73%|███████▎  | 55/75 [00:58<00:08,  2.46it/s]Descriptions:  75%|███████▍  | 56/75 [00:59<00:10,  1.86it/s]Descriptions:  77%|███████▋  | 58/75 [01:00<00:06,  2.51it/s]Descriptions:  80%|████████  | 60/75 [01:00<00:06,  2.44it/s]Descriptions:  81%|████████▏ | 61/75 [01:01<00:07,  1.91it/s]Descriptions:  83%|████████▎ | 62/75 [01:02<00:05,  2.20it/s]Descriptions:  85%|████████▌ | 64/75 [01:02<00:03,  3.39it/s]Descriptions:  87%|████████▋ | 65/75 [01:04<00:06,  1.45it/s]Descriptions:  88%|████████▊ | 66/75 [01:05<00:07,  1.25it/s]Descriptions:  89%|████████▉ | 67/75 [01:05<00:05,  1.56it/s]Descriptions:  91%|█████████ | 68/75 [01:06<00:05,  1.29it/s]Descriptions:  92%|█████████▏| 69/75 [01:06<00:03,  1.56it/s]Descriptions:  93%|█████████▎| 70/75 [01:07<00:02,  1.87it/s]Descriptions:  95%|█████████▍| 71/75 [01:07<00:02,  1.75it/s]Descriptions:  96%|█████████▌| 72/75 [01:07<00:01,  2.30it/s]Descriptions: 100%|██████████| 75/75 [01:08<00:00,  1.10it/s]
+2026-04-04 21:55:15,184 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet.

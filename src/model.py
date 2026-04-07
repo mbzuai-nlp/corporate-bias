@@ -11,6 +11,7 @@ import threading
 import logging
 import backoff
 import httpx
+import jsonschema
 
 
 # === TYPES ===
@@ -220,17 +221,64 @@ def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+class InvalidModelOutputError(RuntimeError):
+    pass
+
+
+def _validate_structured_output(text: str, kwargs: dict[str, Any]) -> None:
+    response_format = kwargs.get("response_format")
+    if not response_format:
+        return
+
+    response_type = response_format.get("type")
+
+    if response_type == "json_object":
+        try:
+            json.loads(text)
+        except json.JSONDecodeError as e:
+            raise InvalidModelOutputError(
+                f"Model returned invalid JSON: {text!r}"
+            ) from e
+        return
+
+    if response_type == "json_schema":
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError as e:
+            raise InvalidModelOutputError(
+                f"Model returned invalid JSON for json_schema response: {text!r}"
+            ) from e
+
+        json_schema = response_format.get("json_schema") or {}
+        schema = json_schema.get("schema")
+        schema_name = json_schema.get("name", "unnamed_schema")
+
+        if schema is None:
+            raise InvalidModelOutputError(
+                "response_format.type='json_schema' but no schema was provided"
+            )
+
+        try:
+            jsonschema.Draft202012Validator(schema).validate(parsed)
+        except jsonschema.ValidationError as e:
+            raise InvalidModelOutputError(
+                f"Model returned JSON that failed schema validation for {schema_name}: {e.message}"
+            ) from e
+
+
 @backoff.on_exception(
     backoff.constant,
     (
-        httpx.ReadTimeout,
-        httpx.ConnectError,
+        httpx.HTTPError,
+        httpx.TransportError,
         or_errors.TooManyRequestsResponseError,
         or_errors.InternalServerResponseError,
         or_errors.BadGatewayResponseError,
         or_errors.ServiceUnavailableResponseError,
         or_errors.EdgeNetworkTimeoutResponseError,
         or_errors.ProviderOverloadedResponseError,
+        TypeError,
+        InvalidModelOutputError,
     ),
     interval=30,
     max_tries=3,
@@ -269,6 +317,8 @@ def _invoke_openrouter_model(
         text=_extract_text(response),
         raw=response,
     )
+
+    _validate_structured_output(output.text, kwargs)
 
     if use_cache:
         _cache_set_obj(cache_key, output)
