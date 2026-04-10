@@ -277,6 +277,7 @@ def _validate_structured_output(text: str, kwargs: dict[str, Any]) -> None:
         or_errors.ServiceUnavailableResponseError,
         or_errors.EdgeNetworkTimeoutResponseError,
         or_errors.ProviderOverloadedResponseError,
+        or_errors.ResponseValidationError,
         TypeError,
         InvalidModelOutputError,
     ),

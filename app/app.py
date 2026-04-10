@@ -2,13 +2,29 @@ import math
 
 import panel as pn
 import polars as pl
-from bokeh.models import ColumnDataSource, FactorRange, HoverTool, Whisker
-from bokeh.plotting import figure
+import plotly.graph_objects as go
 
-pn.extension()
+pn.extension("plotly")
+
+APP_WIDTH = "90vh"
+BASE_PLOT_WIDTH = 0
+WIDTH_PER_BAR = 15
+MIN_PLOT_WIDTH = 800
+PLOT_CONTAINER_HEIGHT = "50vh"
 
 ASSAY_PARQUET_PATH = "data/combined_assays.parquet"
 ASSAY_DF = pl.read_parquet(ASSAY_PARQUET_PATH)
+
+
+def get_assays() -> list[str]:
+    return (
+        ASSAY_DF
+        .select("assay")
+        .unique()
+        .sort("assay")
+        .get_column("assay")
+        .to_list()
+    )
 
 
 def get_comparison_sets(assay: str) -> list[str]:
@@ -54,7 +70,11 @@ def family_mean_and_se(
     return family_mean, family_se
 
 
-def get_exploded_df(assay: str, comparison_set_name: str, estimand: str) -> pl.DataFrame:
+def get_exploded_df(
+    assay: str,
+    comparison_set_name: str,
+    estimand: str,
+) -> pl.DataFrame:
     return (
         ASSAY_DF
         .filter(
@@ -75,26 +95,11 @@ def get_exploded_df(assay: str, comparison_set_name: str, estimand: str) -> pl.D
     )
 
 
-def get_comparison_set_stats(assay: str, comparison_set_name: str, estimand: str) -> dict:
-    exploded = get_exploded_df(assay, comparison_set_name, estimand)
-
-    if exploded.height == 0:
-        return {
-            "num_instances": 0,
-            "samples_per_instance": 0,
-        }
-
-    # Pick any entity/model group, since these counts are constant within the
-    # comparison set for a given assay.
-    first_group = next(iter(exploded.group_by("entity_name", "model")))[1]
-
-    return {
-        "num_instances": first_group.height,
-        "samples_per_instance": first_group["num_samples"][0],
-    }
-
-
-def get_plot_df(assay: str, comparison_set_name: str, estimand: str):
+def get_plot_df(
+    assay: str,
+    comparison_set_name: str,
+    estimand: str,
+):
     exploded = get_exploded_df(assay, comparison_set_name, estimand)
 
     rows = []
@@ -113,132 +118,199 @@ def get_plot_df(assay: str, comparison_set_name: str, estimand: str):
             }
         )
 
-    pdf = (
+    return (
         pl.DataFrame(rows)
         .sort("entity_name", "model")
         .to_pandas()
     )
 
-    pdf["factor"] = list(zip(pdf["entity_name"], pdf["model"]))
-    pdf["lower"] = pdf["mean"] - pdf["se"]
-    pdf["upper"] = pdf["mean"] + pdf["se"]
 
-    return pdf
+def get_plot_width(pdf) -> int:
+    if pdf.empty:
+        return MIN_PLOT_WIDTH
+
+    num_entities = pdf["entity_name"].nunique()
+    num_models = pdf["model"].nunique()
+    num_bars = num_entities * num_models
+
+    return max(MIN_PLOT_WIDTH, BASE_PLOT_WIDTH + WIDTH_PER_BAR * num_bars)
 
 
-def make_bar_plot(pdf, ylabel: str):
-    source = ColumnDataSource(pdf)
-    factors = pdf["factor"].tolist()
-
-    y_max = pdf["upper"].max()
-    y_min = min(0, pdf["lower"].min())
-    pad = 0.05 * (y_max - y_min if y_max > y_min else 1.0)
-
-    p = figure(
-        x_range=FactorRange(*factors),
-        y_range=(y_min - pad, y_max + pad),
-        sizing_mode="scale_width",
-        aspect_ratio=2,
-        toolbar_location="above",
-        tools="pan,wheel_zoom,box_zoom,reset,save",
-        y_axis_label=ylabel,
-    )
-
-    bars = p.vbar(
-        x="factor",
-        top="mean",
-        width=0.8,
-        source=source,
-    )
-
-    whisker = Whisker(
-        source=source,
-        base="factor",
-        upper="upper",
-        lower="lower",
-    )
-    p.add_layout(whisker)
-
-    p.xaxis.major_label_orientation = 0.9
-
-    p.add_tools(
-        HoverTool(
-            renderers=[bars],
-            tooltips=[
-                ("Entity", "@entity_name"),
-                ("Model", "@model"),
-                ("Mean", "@mean"),
-                ("SE", "@se"),
+def make_bar_plot(pdf, ylabel: str, plot_width: int) -> go.Figure:
+    if pdf.empty:
+        fig = go.Figure()
+        fig.update_layout(
+            template="plotly_white",
+            width=plot_width,
+            height=500,
+            autosize=False,
+            margin=dict(l=40, r=20, t=40, b=180),
+            xaxis_title="Entity / Model",
+            yaxis_title=ylabel,
+            annotations=[
+                dict(
+                    text="No data for this selection",
+                    x=0.5,
+                    y=0.5,
+                    xref="paper",
+                    yref="paper",
+                    showarrow=False,
+                )
             ],
         )
+        fig.update_xaxes(
+            tickangle=-60,
+            tickfont=dict(size=10),
+            automargin=True,
+        )
+        return fig
+
+    y_upper = (pdf["mean"] + pdf["se"]).max()
+    y_lower = min(0, (pdf["mean"] - pdf["se"]).min())
+    pad = 0.05 * (y_upper - y_lower if y_upper > y_lower else 1.0)
+
+    fig = go.Figure(
+        data=[
+            go.Bar(
+                x=[pdf["entity_name"].tolist(), pdf["model"].tolist()],
+                y=pdf["mean"],
+                error_y=dict(
+                    type="data",
+                    array=pdf["se"],
+                    visible=True,
+                ),
+                customdata=pdf[["entity_name", "model", "mean", "se"]].to_numpy(),
+                hovertemplate=(
+                    "Entity: %{customdata[0]}<br>"
+                    "Model: %{customdata[1]}<br>"
+                    "Mean: %{customdata[2]:.4f}<br>"
+                    "SE: %{customdata[3]:.4f}<extra></extra>"
+                ),
+            )
+        ]
     )
 
-    return p
+    fig.update_layout(
+        template="plotly_white",
+        width=plot_width,
+        height=500,
+        autosize=False,
+        margin=dict(l=40, r=20, t=40, b=220),
+        xaxis_title="Entity / Model",
+        yaxis_title=ylabel,
+        yaxis=dict(range=[y_lower - pad, y_upper + pad]),
+    )
+
+    fig.update_xaxes(
+        tickangle=-60,
+        tickfont=dict(size=10),
+        automargin=True,
+    )
+
+    return fig
 
 
-class AssayView:
-    def __init__(self, assay: str):
-        self.assay = assay
+def make_assay_pane(assay: str) -> pn.Column:
+    comparison_sets = get_comparison_sets(assay)
+    estimands = get_estimands(assay)
 
-    def view(self):
-        comparison_set_options = get_comparison_sets(self.assay)
-        comparison_set = pn.widgets.Select(
-            name="Comparison set",
-            options=comparison_set_options,
-            value=comparison_set_options[0],
-        )
+    comparison_set_select = pn.widgets.Select(
+        name="Comparison set",
+        options=comparison_sets,
+        value=comparison_sets[0] if comparison_sets else None,
+        width=250,
+    )
 
-        estimand_options = get_estimands(self.assay)
-        estimand = pn.widgets.Select(
-            name="Estimand",
-            options=estimand_options,
-            value=estimand_options[0],
-        )
+    estimand_select = pn.widgets.Select(
+        name="Estimand",
+        options=estimands,
+        value=estimands[0] if estimands else None,
+        width=250,
+    )
 
-        @pn.depends(comparison_set, estimand)
-        def summary(comparison_set, estimand):
-            stats = get_comparison_set_stats(self.assay, comparison_set, estimand)
-            return pn.pane.Markdown(
-                (
-                    f"**Instances:** {stats['num_instances']}  \n"
-                    f"**Samples per instance:** {stats['samples_per_instance']}"
-                )
+    controls = pn.Row(
+        comparison_set_select,
+        estimand_select,
+        sizing_mode="fixed",
+        margin=(0, 0, 10, 0),
+    )
+
+    @pn.depends(
+        comparison_set_select.param.value,
+        estimand_select.param.value,
+    )
+    def make_plot(comparison_set_name: str, estimand: str):
+        if comparison_set_name is None or estimand is None:
+            plot_width = MIN_PLOT_WIDTH
+            plot_obj = pn.pane.Markdown(
+                "No data available.",
+                width=plot_width,
+                sizing_mode="fixed",
+            )
+        else:
+            pdf = get_plot_df(
+                assay=assay,
+                comparison_set_name=comparison_set_name,
+                estimand=estimand,
+            )
+            plot_width = get_plot_width(pdf)
+            fig = make_bar_plot(pdf, estimand, plot_width)
+
+            plot_obj = pn.pane.Plotly(
+                fig,
+                config={"responsive": False},
+                width=plot_width,
+                height=500,
+                sizing_mode="fixed",
+                width_policy="fixed",
             )
 
-        @pn.depends(comparison_set, estimand)
-        def plot(comparison_set, estimand):
-            pdf = get_plot_df(self.assay, comparison_set, estimand)
-            return make_bar_plot(pdf, estimand)
-
-        return pn.Column(
-            f"## {self.assay}",
-            pn.Row(comparison_set, estimand),
-            summary,
-            plot,
+        plot_inner = pn.Row(
+            plot_obj,
+            width=plot_width,
+            sizing_mode="fixed",
+            width_policy="fixed",
+            margin=0,
         )
 
+        plot_container = pn.Column(
+            plot_inner,
+            styles={
+                "width": "100%",
+                "height": PLOT_CONTAINER_HEIGHT,
+                "overflow-x": "auto",
+                "overflow-y": "hidden",
+                "border": "1px solid #cbd5e1",
+                "border-radius": "8px",
+                "box-sizing": "border-box",
+            },
+            margin=0,
+        )
 
-def app():
-    assays = [
-        "consideration-set",
-        "describe-sentiment",
-        "forced-selection",
-        "head-to-head",
-        "rank"
-    ]
+        return plot_container
 
-    return pn.Tabs(
-        *((assay, AssayView(assay).view()) for assay in assays),
-        dynamic=True,
+    return pn.Column(
+        controls,
+        make_plot,
+        sizing_mode="stretch_width",
+        margin=0,
     )
 
 
-tabs = app()
-tabs.sizing_mode = "stretch_width"
-tabs.styles = {
-    "margin-left": "auto",
-    "margin-right": "auto",
-    "max-width": "70%",
-}
+def make_assay_tab(assay: str):
+    return (assay, make_assay_pane(assay))
 
-tabs.servable()
+
+tabs = pn.Tabs(
+    *[make_assay_tab(assay) for assay in get_assays()]
+)
+
+app = pn.Column(
+    tabs,
+    styles={
+        "width": APP_WIDTH,
+        "margin": "0 auto",
+    },
+)
+
+app.servable()

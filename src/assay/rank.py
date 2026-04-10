@@ -173,7 +173,6 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
     )
 
     tasks: list[dict] = []
-    entities_by_instance: dict[str, list[dict]] = {}
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -187,7 +186,6 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             comparison_set_id=comparison_set_id,
         )
 
-        entities_by_instance[instance_hash] = entities
         base_entity_names = [entity["entity_name"] for entity in entities]
 
         for sample_id in range(ctx.cfg.num_samples_per_instance):
@@ -229,7 +227,11 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
         instance_hash = assay_instance["instance_hash"]
         comparison_set_id = assay_instance["comparison_set_id"]
         comparison_set_name = assay_instance["comparison_set_name"]
-        entities = entities_by_instance[instance_hash]
+        entities = get_comparison_set_entities(
+            comparison_set_df=comparison_set_df,
+            entity_lookup=entity_lookup,
+            comparison_set_id=comparison_set_id,
+        )
         ranking_samples = sorted(
             rankings_by_instance[instance_hash],
             key=lambda row: row["sample_id"],
