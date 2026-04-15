@@ -9,12 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-04 21:57:56,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:57:56,428 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-04 21:57:56,620 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-04 21:57:56,763 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-04 21:57:56,920 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6619.90it/s]
+2026-04-14 13:11:46,230 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 13:11:46,315 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 13:11:46,561 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 13:11:46,724 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-14 13:11:46,911 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7828.24it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,179 +22,317 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-04 21:57:57,065 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-04 21:57:57,155 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:57:57,228 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-04 21:57:57,295 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:57:57,406 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-04 21:57:57,538 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-04 21:57:58,445 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:57:58,498 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▍     | 89/202 [00:00<00:00, 883.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1257.75it/s]
-2026-04-04 21:57:58,853 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:57:59,012 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:57:59,890 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-04 21:58:00,133 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:58:00,214 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-04 21:58:00,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:58:00,426 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-04 21:58:00,568 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:58:00,733 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:58:01,321 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-04 21:58:01,463 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:58:01,519 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 77/202 [00:00<00:00, 769.31it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1169.50it/s]
-2026-04-04 21:58:01,718 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=5.
-2026-04-04 21:58:01,724 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,724 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,725 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,726 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,727 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,727 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,728 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,729 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,730 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,731 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,732 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,733 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,734 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,735 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,736 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,740 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,742 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,743 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,753 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,760 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,764 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,769 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,774 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,776 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,778 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,779 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,780 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,782 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,784 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,786 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:01,788 [INFO] root: Invoking phi-4.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 21:58:01,788 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:02,483 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,552 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,553 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,571 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,572 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,586 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,591 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,596 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,601 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,605 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,612 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,613 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,622 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,629 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,644 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,656 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,690 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,739 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,791 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,839 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,848 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,867 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,868 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:02,937 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:03,278 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:03,375 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:03,872 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:03,889 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:03,898 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:47,088 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-14 13:11:47,232 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 13:11:47,241 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-14 13:11:47,379 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 13:11:47,431 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 13:11:47,603 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-14 13:11:48,645 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 13:11:48,705 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 74/202 [00:00<00:00, 727.31it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1480.17it/s]
+2026-04-14 13:11:49,042 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 13:11:49,197 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 13:11:50,294 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 13:11:50,565 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 13:11:50,627 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 13:11:50,780 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 13:11:50,829 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 13:11:50,988 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 13:11:51,133 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 13:11:51,744 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 13:11:52,001 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 13:11:52,173 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 95/202 [00:00<00:00, 949.85it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1463.31it/s]
+2026-04-14 13:11:52,336 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=3.
+2026-04-14 13:11:52,342 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,343 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,344 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,344 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,345 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,346 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,347 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,348 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,350 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,351 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,352 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,354 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,355 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,360 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,367 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,369 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,375 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,389 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,393 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,396 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,400 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,401 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,404 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,406 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,408 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,410 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,411 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,412 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,414 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,415 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,416 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,417 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,423 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,425 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,432 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,434 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,436 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,442 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,446 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,452 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,459 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,462 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,464 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,466 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,468 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,472 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,474 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,477 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,483 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,484 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,486 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,488 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,493 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,495 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,496 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,499 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,502 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,504 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,505 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,506 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,508 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,509 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,510 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,511 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,514 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,516 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,518 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,518 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,519 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,519 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,520 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,520 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,521 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,521 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,521 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,522 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,522 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,523 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,523 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,523 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,524 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,524 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,525 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,525 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,526 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,526 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,527 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,527 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,527 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,528 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,528 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,529 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,530 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,530 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,531 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,531 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,532 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,533 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,534 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,535 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,535 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,535 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,536 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,537 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,537 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,538 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,538 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,539 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,539 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,540 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,541 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,542 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,542 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,543 [INFO] root: Invoking phi-4.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 13:11:52,543 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,547 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,552 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,561 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,568 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,577 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,582 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,588 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,592 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,596 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,601 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,605 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,614 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:52,638 [INFO] root: Invoking phi-4.
+2026-04-14 13:11:53,307 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,307 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,313 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,358 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,404 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,417 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,419 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,422 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,443 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,466 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,495 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,496 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,522 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,546 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,547 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,555 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,555 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,616 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,630 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,684 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,688 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,699 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,960 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,966 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,967 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,968 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,968 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,969 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,976 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,978 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,980 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,981 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,982 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,983 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,983 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,985 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:53,985 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,014 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,031 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,038 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,086 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,143 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,145 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,146 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,186 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,255 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,256 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,269 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,273 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,277 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,277 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,302 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,303 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,303 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,304 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,328 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,338 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,377 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,381 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,381 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,392 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,426 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,432 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,456 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,458 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,520 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,575 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,658 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,717 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,795 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:54,875 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:55,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-04 21:58:26,907 [INFO] root: Invoking phi-4.
-Descriptions:   1%|▏         | 1/75 [00:25<30:58, 25.12s/it]2026-04-04 21:58:26,995 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:27,124 [INFO] root: Invoking phi-4.
-Descriptions:   4%|▍         | 3/75 [00:25<07:54,  6.59s/it]2026-04-04 21:58:27,139 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:27,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:27,590 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:27,654 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:27,676 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:   7%|▋         | 5/75 [00:25<03:54,  3.35s/it]2026-04-04 21:58:27,679 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:27,701 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:27,861 [INFO] root: Invoking phi-4.
-Descriptions:   9%|▉         | 7/75 [00:26<02:13,  1.97s/it]2026-04-04 21:58:27,991 [INFO] root: Invoking phi-4.
-Descriptions:  11%|█         | 8/75 [00:26<01:43,  1.54s/it]2026-04-04 21:58:28,063 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:28,106 [INFO] root: Invoking phi-4.
-Descriptions:  13%|█▎        | 10/75 [00:26<01:01,  1.05it/s]2026-04-04 21:58:28,129 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:28,191 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:28,320 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:28,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:28,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:30,292 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:30,317 [INFO] root: Invoking phi-4.
-Descriptions:  16%|█▌        | 12/75 [00:28<01:03,  1.01s/it]2026-04-04 21:58:30,491 [INFO] root: Invoking phi-4.
-Descriptions:  17%|█▋        | 13/75 [00:28<00:51,  1.20it/s]2026-04-04 21:58:30,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:30,656 [INFO] root: Invoking phi-4.
-Descriptions:  19%|█▊        | 14/75 [00:28<00:41,  1.47it/s]2026-04-04 21:58:30,681 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:30,707 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:30,723 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:30,777 [INFO] root: Invoking phi-4.
-Descriptions:  23%|██▎       | 17/75 [00:28<00:21,  2.74it/s]2026-04-04 21:58:30,795 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:30,825 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:30,879 [INFO] root: Invoking phi-4.
-Descriptions:  25%|██▌       | 19/75 [00:29<00:14,  3.77it/s]2026-04-04 21:58:30,952 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:30,965 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,006 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,074 [INFO] root: Invoking phi-4.
-Descriptions:  28%|██▊       | 21/75 [00:29<00:11,  4.71it/s]2026-04-04 21:58:31,084 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:31,185 [INFO] root: Invoking phi-4.
-Descriptions:  31%|███       | 23/75 [00:29<00:08,  6.11it/s]2026-04-04 21:58:31,217 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:31,231 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,235 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,281 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:31,282 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:31,301 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,335 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,364 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,516 [INFO] root: Invoking phi-4.
-Descriptions:  36%|███▌      | 27/75 [00:29<00:06,  7.91it/s]2026-04-04 21:58:31,561 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,691 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,702 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,782 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,849 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:31,850 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:31,869 [INFO] root: Invoking phi-4.
-Descriptions:  39%|███▊      | 29/75 [00:30<00:06,  7.23it/s]2026-04-04 21:58:31,902 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:32,119 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:32,337 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:32,542 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:32,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:32,979 [INFO] root: Invoking phi-4.
-Descriptions:  41%|████▏     | 31/75 [00:31<00:10,  4.03it/s]2026-04-04 21:58:33,044 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:33,381 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:33,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:51,572 [INFO] root: Invoking phi-4.
-Descriptions:  44%|████▍     | 33/75 [00:49<01:54,  2.73s/it]2026-04-04 21:58:51,643 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:51,792 [INFO] root: Invoking phi-4.
-Descriptions:  47%|████▋     | 35/75 [00:50<01:19,  1.99s/it]2026-04-04 21:58:52,120 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:52,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:52,331 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:52,416 [INFO] root: Invoking phi-4.
-Descriptions:  48%|████▊     | 36/75 [00:50<01:08,  1.76s/it]2026-04-04 21:58:53,691 [INFO] root: Invoking phi-4.
-Descriptions:  49%|████▉     | 37/75 [00:51<01:03,  1.67s/it]2026-04-04 21:58:53,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:54,141 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:54,413 [INFO] root: Invoking phi-4.
-Descriptions:  51%|█████     | 38/75 [00:52<00:54,  1.46s/it]2026-04-04 21:58:54,479 [INFO] root: Invoking phi-4.
-2026-04-04 21:58:54,894 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:54,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:55,813 [INFO] root: Invoking phi-4.
-Descriptions:  53%|█████▎    | 40/75 [00:54<00:41,  1.17s/it]2026-04-04 21:58:56,134 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:56,650 [INFO] root: Invoking phi-4.
-Descriptions:  55%|█████▍    | 41/75 [00:54<00:37,  1.10s/it]2026-04-04 21:58:56,916 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:58:57,389 [INFO] root: Invoking phi-4.
-Descriptions:  56%|█████▌    | 42/75 [00:55<00:33,  1.02s/it]2026-04-04 21:58:57,565 [INFO] root: Invoking phi-4.
-Descriptions:  57%|█████▋    | 43/75 [00:55<00:25,  1.24it/s]2026-04-04 21:58:57,830 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  59%|█████▊    | 44/75 [00:56<00:20,  1.49it/s]2026-04-04 21:58:58,060 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  60%|██████    | 45/75 [00:56<00:20,  1.50it/s]Descriptions:  61%|██████▏   | 46/75 [00:56<00:15,  1.91it/s]Descriptions:  63%|██████▎   | 47/75 [00:57<00:13,  2.12it/s]Descriptions:  64%|██████▍   | 48/75 [00:57<00:12,  2.18it/s]Descriptions:  65%|██████▌   | 49/75 [00:57<00:10,  2.51it/s]Descriptions:  68%|██████▊   | 51/75 [00:58<00:05,  4.02it/s]Descriptions:  69%|██████▉   | 52/75 [00:58<00:06,  3.68it/s]Descriptions:  72%|███████▏  | 54/75 [00:58<00:03,  5.52it/s]Descriptions:  73%|███████▎  | 55/75 [00:58<00:03,  5.62it/s]Descriptions:  75%|███████▍  | 56/75 [00:59<00:05,  3.77it/s]Descriptions:  76%|███████▌  | 57/75 [00:59<00:05,  3.44it/s]Descriptions:  77%|███████▋  | 58/75 [00:59<00:04,  3.85it/s]Descriptions:  79%|███████▊  | 59/75 [01:00<00:04,  3.49it/s]Descriptions:  80%|████████  | 60/75 [01:00<00:03,  4.19it/s]Descriptions:  81%|████████▏ | 61/75 [01:00<00:03,  4.17it/s]Descriptions:  85%|████████▌ | 64/75 [01:00<00:01,  7.64it/s]Descriptions:  88%|████████▊ | 66/75 [01:07<00:11,  1.23s/it]Descriptions:  89%|████████▉ | 67/75 [01:08<00:09,  1.22s/it]Descriptions:  91%|█████████ | 68/75 [01:08<00:07,  1.05s/it]Descriptions:  92%|█████████▏| 69/75 [01:08<00:04,  1.20it/s]Descriptions:  95%|█████████▍| 71/75 [01:09<00:02,  1.91it/s]Descriptions: 100%|██████████| 75/75 [01:09<00:00,  3.91it/s]Descriptions: 100%|██████████| 75/75 [01:09<00:00,  1.08it/s]
-2026-04-04 21:59:11,061 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.
+2026-04-14 13:11:55,818 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,241 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,277 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,380 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,458 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,614 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:55,342 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,371 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,703 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,908 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,918 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:56,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,226 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,395 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,570 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,903 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:57,963 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:11:58,153 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:32,952 [INFO] root: Invoking phi-4.
+Descriptions:   1%|          | 1/144 [01:40<3:59:05, 100.32s/it]2026-04-14 13:13:33,390 [INFO] root: Invoking phi-4.
+Descriptions:   1%|▏         | 2/144 [01:40<1:38:23, 41.58s/it] 2026-04-14 13:13:33,515 [INFO] root: Invoking phi-4.
+Descriptions:   2%|▏         | 3/144 [01:40<53:12, 22.64s/it]  2026-04-14 13:13:34,012 [INFO] root: Invoking phi-4.
+Descriptions:   3%|▎         | 4/144 [01:41<32:25, 13.90s/it]2026-04-14 13:13:34,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:34,164 [INFO] root: Invoking phi-4.
+Descriptions:   3%|▎         | 5/144 [01:41<20:42,  8.94s/it]2026-04-14 13:13:34,249 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:34,334 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:34,580 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:34,866 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:35,129 [INFO] root: Invoking phi-4.
+Descriptions:   4%|▍         | 6/144 [01:42<14:19,  6.23s/it]2026-04-14 13:13:35,132 [INFO] root: Invoking phi-4.
+2026-04-14 13:13:35,183 [INFO] root: Invoking phi-4.
+2026-04-14 13:13:35,252 [INFO] root: Invoking phi-4.
+Descriptions:   6%|▋         | 9/144 [01:42<05:46,  2.56s/it]2026-04-14 13:13:35,353 [INFO] root: Invoking phi-4.
+2026-04-14 13:13:35,440 [INFO] root: Invoking phi-4.
+Descriptions:   8%|▊         | 11/144 [01:42<03:41,  1.67s/it]2026-04-14 13:13:35,602 [INFO] root: Invoking phi-4.
+2026-04-14 13:13:35,783 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:35,794 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:35,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:36,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:36,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:36,054 [INFO] root: Invoking phi-4.
+Descriptions:   9%|▉         | 13/144 [01:43<02:37,  1.20s/it]2026-04-14 13:13:36,330 [INFO] root: Invoking phi-4.
+2026-04-14 13:13:36,345 [INFO] root: Invoking phi-4.
+Descriptions:  10%|▉         | 14/144 [01:43<02:14,  1.03s/it]2026-04-14 13:13:36,501 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:36,648 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:36,690 [INFO] root: Invoking phi-4.
+Descriptions:  11%|█         | 16/144 [01:44<01:31,  1.39it/s]2026-04-14 13:13:36,868 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:37,017 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 13:13:37,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  12%|█▏        | 17/144 [01:44<01:26,  1.47it/s]2026-04-14 13:13:37,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  12%|█▎        | 18/144 [01:44<01:14,  1.70it/s]Descriptions:  13%|█▎        | 19/144 [01:45<01:04,  1.93it/s]Descriptions:  14%|█▍        | 20/144 [01:45<01:12,  1.71it/s]Descriptions:  15%|█▍        | 21/144 [01:46<01:01,  1.99it/s]Descriptions:  15%|█▌        | 22/144 [01:46<00:47,  2.56it/s]Descriptions:  17%|█▋        | 24/144 [01:46<00:34,  3.44it/s]Descriptions:  17%|█▋        | 25/144 [01:46<00:35,  3.38it/s]Descriptions:  18%|█▊        | 26/144 [01:47<00:36,  3.27it/s]Descriptions:  19%|█▉        | 27/144 [01:48<00:55,  2.11it/s]Descriptions:  19%|█▉        | 28/144 [01:48<00:51,  2.23it/s]Descriptions:  21%|██        | 30/144 [01:48<00:32,  3.55it/s]Descriptions:  22%|██▏       | 32/144 [01:48<00:23,  4.79it/s]Descriptions:  24%|██▎       | 34/144 [01:49<00:18,  5.92it/s]Descriptions:  24%|██▍       | 35/144 [01:49<00:18,  5.85it/s]Descriptions:  26%|██▌       | 37/144 [01:49<00:23,  4.51it/s]Descriptions:  27%|██▋       | 39/144 [01:50<00:19,  5.52it/s]Descriptions:  28%|██▊       | 41/144 [01:50<00:14,  7.15it/s]Descriptions:  30%|██▉       | 43/144 [01:50<00:11,  8.95it/s]Descriptions:  31%|███▏      | 45/144 [01:50<00:13,  7.30it/s]Descriptions:  33%|███▎      | 47/144 [01:50<00:10,  8.99it/s]Descriptions:  34%|███▍      | 49/144 [01:51<00:11,  8.06it/s]Descriptions:  35%|███▌      | 51/144 [01:51<00:11,  8.34it/s]Descriptions:  37%|███▋      | 53/144 [01:51<00:11,  7.73it/s]Descriptions:  38%|███▊      | 54/144 [01:51<00:13,  6.76it/s]Descriptions:  38%|███▊      | 55/144 [01:52<00:12,  6.88it/s]Descriptions:  40%|████      | 58/144 [01:52<00:08, 10.04it/s]Descriptions:  43%|████▎     | 62/144 [01:52<00:06, 12.12it/s]Descriptions:  44%|████▍     | 64/144 [01:52<00:07, 11.03it/s]Descriptions:  47%|████▋     | 68/144 [01:52<00:04, 15.59it/s]Descriptions:  49%|████▉     | 71/144 [01:52<00:04, 15.48it/s]Descriptions:  51%|█████     | 73/144 [01:53<00:04, 15.44it/s]Descriptions:  53%|█████▎    | 76/144 [01:53<00:03, 17.73it/s]Descriptions:  54%|█████▍    | 78/144 [01:53<00:04, 16.04it/s]Descriptions:  56%|█████▋    | 81/144 [01:53<00:03, 18.89it/s]Descriptions:  58%|█████▊    | 84/144 [01:53<00:03, 17.22it/s]Descriptions:  60%|█████▉    | 86/144 [01:53<00:03, 16.98it/s]Descriptions:  62%|██████▏   | 89/144 [01:53<00:02, 19.82it/s]Descriptions:  64%|██████▍   | 92/144 [01:54<00:02, 21.65it/s]Descriptions:  66%|██████▌   | 95/144 [01:54<00:03, 15.17it/s]Descriptions:  67%|██████▋   | 97/144 [01:54<00:03, 14.01it/s]Descriptions:  69%|██████▉   | 100/144 [01:54<00:03, 14.29it/s]Descriptions:  71%|███████   | 102/144 [01:54<00:03, 12.29it/s]Descriptions:  72%|███████▏  | 104/144 [01:55<00:03, 12.36it/s]Descriptions:  74%|███████▎  | 106/144 [01:55<00:03, 12.26it/s]Descriptions:  76%|███████▌  | 109/144 [01:55<00:02, 13.94it/s]Descriptions:  77%|███████▋  | 111/144 [01:55<00:02, 11.62it/s]Descriptions:  78%|███████▊  | 113/144 [01:55<00:02, 12.66it/s]Descriptions:  80%|███████▉  | 115/144 [01:56<00:02, 10.67it/s]Descriptions:  82%|████████▏ | 118/144 [01:56<00:02, 10.87it/s]Descriptions:  83%|████████▎ | 120/144 [01:56<00:02,  9.08it/s]Descriptions:  85%|████████▌ | 123/144 [01:56<00:02,  9.92it/s]Descriptions:  87%|████████▋ | 125/144 [01:57<00:01, 10.12it/s]Descriptions:  88%|████████▊ | 127/144 [01:57<00:01, 11.57it/s]Descriptions:  90%|████████▉ | 129/144 [02:08<00:25,  1.68s/it]Descriptions:  92%|█████████▏| 132/144 [02:09<00:13,  1.09s/it]Descriptions:  93%|█████████▎| 134/144 [02:09<00:08,  1.18it/s]Descriptions:  94%|█████████▍| 136/144 [02:09<00:05,  1.57it/s]Descriptions:  96%|█████████▌| 138/144 [02:09<00:02,  2.10it/s]Descriptions: 100%|██████████| 144/144 [02:09<00:00,  1.11it/s]
+2026-04-14 13:14:02,832 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.

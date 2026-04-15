@@ -9,11 +9,16 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-04 21:51:22,369 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:51:22,421 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-04 21:51:22,583 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-04 21:51:22,734 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6900.20it/s]
+2026-04-14 12:06:24,907 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 12:06:24,964 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 12:06:25,240 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 12:06:25,390 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-14 12:06:25,661 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-14 12:06:25,877 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-14 12:06:26,088 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-14 12:06:26,232 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 12:06:26,408 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4358.77it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -21,180 +26,315 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-04 21:51:22,907 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-04 21:51:23,063 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-04 21:51:23,127 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:51:23,232 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-04 21:51:23,278 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:51:23,414 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-04 21:51:23,568 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-04 21:51:24,444 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:51:24,501 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  50%|████▉     | 100/202 [00:00<00:00, 985.97it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1239.37it/s]
-2026-04-04 21:51:24,867 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:51:25,019 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:51:25,918 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,153 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:51:26,206 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,348 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:51:26,391 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,557 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-04 21:51:26,717 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-04 21:51:25,821 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-04 21:51:25,972 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-04 21:51:26,023 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▍     | 90/202 [00:00<00:00, 893.69it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1326.86it/s]
-2026-04-04 21:51:26,201 [INFO] root: Running assay=describe-sentiment model=mistral-small-2603 num_samples_per_instance=5.
-2026-04-04 21:51:26,207 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,207 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,208 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,209 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,210 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,210 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,211 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,212 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,214 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,215 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,216 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,217 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,218 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,219 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,222 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,225 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,227 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,231 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,235 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,238 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,239 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,241 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,246 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,249 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,250 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,253 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,256 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,258 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,260 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,266 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,268 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-04 21:51:26,274 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:26,938 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,951 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:26,990 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,003 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,009 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,014 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,024 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,045 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,047 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,054 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,067 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,091 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,126 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,292 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,391 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,990 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,994 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:27,995 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:28,506 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 12:06:28,812 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 12:06:32,042 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 12:06:32,145 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 26/202 [00:00<00:00, 257.46it/s]Loading weights:  28%|██▊       | 57/202 [00:00<00:00, 288.02it/s]Loading weights:  43%|████▎     | 86/202 [00:00<00:00, 273.81it/s]Loading weights:  58%|█████▊    | 117/202 [00:00<00:00, 282.66it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 455.66it/s]
+2026-04-14 12:06:33,214 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 12:06:33,444 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 12:06:35,495 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 12:06:36,681 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 12:06:36,747 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 12:06:36,993 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 12:06:37,050 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 12:06:37,418 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 12:06:37,574 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 12:06:38,928 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 12:06:39,151 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 12:06:39,207 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  12%|█▏        | 25/202 [00:00<00:00, 246.06it/s]Loading weights:  27%|██▋       | 54/202 [00:00<00:00, 268.50it/s]Loading weights:  40%|████      | 81/202 [00:00<00:00, 256.67it/s]Loading weights:  53%|█████▎    | 107/202 [00:00<00:00, 251.59it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 403.37it/s]
+2026-04-14 12:06:39,801 [INFO] root: Running assay=describe-sentiment model=mistral-small-2603 num_samples_per_instance=3.
+2026-04-14 12:06:39,824 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,825 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,826 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,827 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,829 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,832 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,835 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,836 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,838 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,842 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,843 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,846 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,846 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,849 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,851 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,864 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,920 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,952 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,957 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,981 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:39,993 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,000 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,003 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,015 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,030 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,044 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,048 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,069 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,074 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,082 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,097 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,100 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,108 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,111 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,122 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,127 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,134 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,139 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,144 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,152 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,156 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,180 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,189 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,195 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,205 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,209 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,216 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,219 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,225 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,227 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,231 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,236 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,244 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,247 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,252 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,262 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,267 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,274 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,277 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,285 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,295 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,300 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,307 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,313 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,321 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,324 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,327 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,337 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,342 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,350 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,358 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,364 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,371 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,374 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,386 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,394 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,405 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,411 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,415 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,417 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,420 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,422 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,424 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,437 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,440 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,443 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,448 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,455 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,459 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,461 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,464 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,469 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,472 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,484 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,491 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,498 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,504 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,511 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,513 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,516 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,520 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,529 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,532 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 12:06:40,541 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,544 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,550 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,556 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,561 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,565 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,580 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,584 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,597 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,602 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,613 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,620 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,623 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,631 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,638 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,644 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,648 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,653 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,664 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,676 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,678 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,682 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,684 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:40,693 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:06:42,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:42,978 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,032 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,114 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,207 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,233 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,248 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,252 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,276 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,319 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,335 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,414 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,440 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,972 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,448 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,450 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,494 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,497 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,537 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,595 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,599 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,603 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,611 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,041 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,057 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,058 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,084 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,094 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,106 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,113 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,115 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,116 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,117 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,124 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,126 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,132 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,134 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,173 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,179 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,181 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,198 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,200 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,202 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,210 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,211 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,212 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,213 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,307 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-04 21:51:28,105 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:28,348 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:28,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:28,445 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:28,446 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:28,454 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:29,556 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:51,366 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   1%|▏         | 1/75 [00:25<30:55, 25.07s/it]2026-04-04 21:51:51,528 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   3%|▎         | 2/75 [00:25<12:40, 10.42s/it]2026-04-04 21:51:51,678 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   4%|▍         | 3/75 [00:25<06:52,  5.73s/it]2026-04-04 21:51:52,091 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   5%|▌         | 4/75 [00:25<04:17,  3.63s/it]2026-04-04 21:51:52,165 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:52,761 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:52,880 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:52,965 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   7%|▋         | 5/75 [00:26<03:04,  2.64s/it]2026-04-04 21:51:53,310 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:53,879 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:54,467 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   8%|▊         | 6/75 [00:28<02:35,  2.25s/it]2026-04-04 21:51:54,862 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   9%|▉         | 7/75 [00:28<01:51,  1.65s/it]2026-04-04 21:51:54,927 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,018 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:55,023 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  12%|█▏        | 9/75 [00:28<00:58,  1.12it/s]2026-04-04 21:51:55,040 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,241 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:55,277 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  15%|█▍        | 11/75 [00:28<00:36,  1.73it/s]2026-04-04 21:51:55,314 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,345 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,376 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,383 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  20%|██        | 15/75 [00:29<00:16,  3.56it/s]2026-04-04 21:51:55,536 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,553 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:55,578 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:55,673 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  23%|██▎       | 17/75 [00:29<00:14,  4.12it/s]2026-04-04 21:51:55,709 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,816 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  25%|██▌       | 19/75 [00:29<00:10,  5.15it/s]2026-04-04 21:51:55,818 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:55,860 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,943 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  29%|██▉       | 22/75 [00:29<00:07,  7.31it/s]2026-04-04 21:51:55,963 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:55,966 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,190 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,258 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  32%|███▏      | 24/75 [00:29<00:07,  7.01it/s]2026-04-04 21:51:56,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,307 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:56,349 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:56,377 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  36%|███▌      | 27/75 [00:30<00:05,  9.50it/s]2026-04-04 21:51:56,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,513 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:56,578 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,617 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  39%|███▊      | 29/75 [00:30<00:05,  9.19it/s]2026-04-04 21:51:56,653 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:56,677 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:51:56,772 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,773 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,883 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  43%|████▎     | 32/75 [00:30<00:04,  9.84it/s]2026-04-04 21:51:56,938 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,951 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:56,966 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,155 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,158 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:57,401 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:59,363 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:59,371 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:59,397 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:51:59,410 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:01,080 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  43%|████▎     | 32/75 [00:46<00:04,  9.84it/s]2026-04-04 21:52:15,987 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  44%|████▍     | 33/75 [00:49<01:59,  2.85s/it]2026-04-04 21:52:16,544 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:17,325 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  45%|████▌     | 34/75 [00:51<01:46,  2.59s/it]2026-04-04 21:52:17,749 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:17,969 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  47%|████▋     | 35/75 [00:51<01:28,  2.21s/it]2026-04-04 21:52:18,223 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  48%|████▊     | 36/75 [00:51<01:09,  1.78s/it]2026-04-04 21:52:19,596 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:20,083 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  49%|████▉     | 37/75 [00:53<01:08,  1.80s/it]2026-04-04 21:52:20,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:20,450 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  51%|█████     | 38/75 [00:54<00:53,  1.43s/it]2026-04-04 21:52:20,990 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  52%|█████▏    | 39/75 [00:54<00:43,  1.20s/it]2026-04-04 21:52:21,283 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  53%|█████▎    | 40/75 [00:54<00:33,  1.06it/s]2026-04-04 21:52:21,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:21,345 [INFO] root: Invoking mistral-small-2603.
-2026-04-04 21:52:21,391 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  56%|█████▌    | 42/75 [00:55<00:18,  1.81it/s]2026-04-04 21:52:21,421 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:21,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:21,946 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  57%|█████▋    | 43/75 [00:55<00:17,  1.80it/s]2026-04-04 21:52:21,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:22,042 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-04 21:52:22,053 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  59%|█████▊    | 44/75 [00:55<00:14,  2.07it/s]2026-04-04 21:52:22,307 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  60%|██████    | 45/75 [00:56<00:11,  2.63it/s]Descriptions:  61%|██████▏   | 46/75 [00:56<00:08,  3.23it/s]Descriptions:  63%|██████▎   | 47/75 [00:56<00:09,  2.88it/s]Descriptions:  65%|██████▌   | 49/75 [00:56<00:06,  4.16it/s]Descriptions:  67%|██████▋   | 50/75 [00:56<00:05,  4.47it/s]Descriptions:  68%|██████▊   | 51/75 [00:57<00:04,  5.12it/s]Descriptions:  71%|███████   | 53/75 [00:57<00:03,  6.64it/s]Descriptions:  73%|███████▎  | 55/75 [00:57<00:02,  8.17it/s]Descriptions:  75%|███████▍  | 56/75 [00:57<00:03,  5.49it/s]Descriptions:  77%|███████▋  | 58/75 [00:58<00:03,  4.62it/s]Descriptions:  79%|███████▊  | 59/75 [00:58<00:04,  3.49it/s]Descriptions:  80%|████████  | 60/75 [00:59<00:05,  2.76it/s]Descriptions:  81%|████████▏ | 61/75 [00:59<00:04,  3.19it/s]Descriptions:  85%|████████▌ | 64/75 [01:00<00:02,  3.85it/s]Descriptions:  87%|████████▋ | 65/75 [01:04<00:09,  1.04it/s]Descriptions:  88%|████████▊ | 66/75 [01:04<00:07,  1.20it/s]Descriptions:  89%|████████▉ | 67/75 [01:05<00:06,  1.27it/s]Descriptions:  92%|█████████▏| 69/75 [01:05<00:03,  1.93it/s]Descriptions:  93%|█████████▎| 70/75 [01:05<00:02,  2.34it/s]Descriptions:  99%|█████████▊| 74/75 [01:05<00:00,  4.96it/s]Descriptions: 100%|██████████| 75/75 [01:05<00:00,  1.14it/s]
-2026-04-04 21:52:31,953 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-small-2603.parquet.
+2026-04-14 12:06:44,433 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,433 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,443 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,618 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,667 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,760 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,823 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,856 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,869 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:43,447 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:44,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,016 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,017 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,101 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,191 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,225 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,304 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,325 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,393 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,450 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,478 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,608 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,634 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,657 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,751 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,800 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,811 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,843 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,894 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,900 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,906 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,931 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 503 Service Unavailable"
+2026-04-14 12:06:45,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:45,966 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.serviceunavailableresponse_error.ServiceUnavailableResponseError: Provider returned error)
+2026-04-14 12:06:45,979 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,015 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,018 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,040 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,044 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,069 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,115 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,116 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,121 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,215 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,320 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,329 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,349 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:46,526 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:06:50,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:21,796 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   1%|          | 1/144 [03:41<8:46:58, 221.11s/it]2026-04-14 12:10:22,227 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   1%|▏         | 2/144 [03:41<3:36:07, 91.32s/it] 2026-04-14 12:10:22,282 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:23,405 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   3%|▎         | 4/144 [03:42<1:20:20, 34.43s/it]2026-04-14 12:10:23,690 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:23,696 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:23,801 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:23,865 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   3%|▎         | 5/144 [03:43<55:24, 23.91s/it]  2026-04-14 12:10:24,510 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   4%|▍         | 6/144 [03:43<38:36, 16.78s/it]2026-04-14 12:10:23,056 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:23,059 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:23,145 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:23,290 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:23,313 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:23,575 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:23,712 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:24,086 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,249 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:24,309 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:24,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,684 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,791 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  10%|▉         | 14/144 [03:44<08:08,  3.75s/it]2026-04-14 12:10:24,819 [INFO] root: Invoking mistral-small-2603.
+2026-04-14 12:10:24,868 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:24,930 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  11%|█         | 16/144 [03:44<06:18,  2.95s/it]Descriptions:  12%|█▎        | 18/144 [03:44<04:49,  2.30s/it]Descriptions:  14%|█▍        | 20/144 [03:44<03:35,  1.74s/it]2026-04-14 12:10:25,727 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:25,837 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:25,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 12:10:25,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  15%|█▌        | 22/144 [03:45<02:47,  1.38s/it]Descriptions:  18%|█▊        | 26/144 [03:45<01:34,  1.26it/s]2026-04-14 12:10:26,556 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  19%|█▉        | 28/144 [03:46<01:15,  1.54it/s]Descriptions:  22%|██▏       | 31/144 [03:46<00:50,  2.25it/s]Descriptions:  23%|██▎       | 33/144 [03:46<00:41,  2.65it/s]Descriptions:  24%|██▍       | 35/144 [03:46<00:32,  3.40it/s]Descriptions:  27%|██▋       | 39/144 [03:46<00:18,  5.53it/s]Descriptions:  29%|██▉       | 42/144 [03:46<00:15,  6.78it/s]Descriptions:  31%|███       | 44/144 [03:47<00:13,  7.63it/s]Descriptions:  32%|███▏      | 46/144 [03:47<00:13,  7.01it/s]Descriptions:  34%|███▍      | 49/144 [03:47<00:12,  7.51it/s]Descriptions:  35%|███▌      | 51/144 [03:47<00:10,  8.86it/s]Descriptions:  37%|███▋      | 53/144 [03:48<00:09,  9.21it/s]Descriptions:  38%|███▊      | 55/144 [03:48<00:12,  7.03it/s]Descriptions:  40%|███▉      | 57/144 [03:48<00:13,  6.48it/s]Descriptions:  40%|████      | 58/144 [03:49<00:15,  5.67it/s]Descriptions:  42%|████▏     | 60/144 [03:49<00:11,  7.20it/s]Descriptions:  43%|████▎     | 62/144 [03:49<00:09,  8.59it/s]Descriptions:  44%|████▍     | 64/144 [03:49<00:09,  8.76it/s]Descriptions:  46%|████▌     | 66/144 [03:49<00:10,  7.62it/s]Descriptions:  48%|████▊     | 69/144 [03:50<00:07,  9.67it/s]Descriptions:  49%|████▉     | 71/144 [03:50<00:07,  9.89it/s]Descriptions:  51%|█████     | 73/144 [03:50<00:09,  7.48it/s]Descriptions:  52%|█████▏    | 75/144 [03:50<00:08,  8.55it/s]Descriptions:  53%|█████▎    | 77/144 [03:51<00:07,  9.50it/s]Descriptions:  55%|█████▍    | 79/144 [03:51<00:06, 10.23it/s]Descriptions:  58%|█████▊    | 83/144 [03:51<00:04, 15.11it/s]Descriptions:  59%|█████▉    | 85/144 [03:51<00:04, 14.07it/s]Descriptions:  60%|██████    | 87/144 [03:51<00:04, 14.08it/s]Descriptions:  62%|██████▏   | 89/144 [03:51<00:04, 12.49it/s]Descriptions:  63%|██████▎   | 91/144 [03:52<00:04, 12.45it/s]Descriptions:  65%|██████▌   | 94/144 [03:52<00:03, 14.27it/s]Descriptions:  67%|██████▋   | 96/144 [03:52<00:03, 14.24it/s]Descriptions:  68%|██████▊   | 98/144 [03:52<00:03, 15.02it/s]Descriptions:  71%|███████   | 102/144 [03:52<00:02, 19.15it/s]Descriptions:  72%|███████▏  | 104/144 [03:52<00:03, 13.17it/s]Descriptions:  74%|███████▍  | 107/144 [03:53<00:02, 14.85it/s]Descriptions:  76%|███████▌  | 109/144 [03:53<00:02, 15.39it/s]Descriptions:  77%|███████▋  | 111/144 [03:53<00:02, 11.90it/s]Descriptions:  79%|███████▉  | 114/144 [03:53<00:03,  9.87it/s]Descriptions:  81%|████████▏ | 117/144 [03:53<00:02, 12.19it/s]Descriptions:  83%|████████▎ | 119/144 [03:54<00:02, 10.74it/s]Descriptions:  85%|████████▍ | 122/144 [03:54<00:01, 13.48it/s]Descriptions:  88%|████████▊ | 126/144 [03:54<00:01,  9.42it/s]Descriptions:  89%|████████▉ | 128/144 [03:55<00:02,  7.74it/s]Descriptions:  89%|████████▉ | 128/144 [04:07<00:02,  7.74it/s]Descriptions:  90%|████████▉ | 129/144 [04:28<01:10,  4.67s/it]Descriptions:  91%|█████████ | 131/144 [04:29<00:44,  3.40s/it]Descriptions:  92%|█████████▏| 133/144 [04:29<00:26,  2.45s/it]Descriptions:  94%|█████████▍| 135/144 [04:29<00:15,  1.76s/it]Descriptions:  95%|█████████▌| 137/144 [04:29<00:09,  1.29s/it]Descriptions:  97%|█████████▋| 139/144 [04:29<00:04,  1.07it/s]Descriptions: 100%|██████████| 144/144 [04:30<00:00,  1.88s/it]
+2026-04-14 12:11:11,443 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-small-2603.parquet.

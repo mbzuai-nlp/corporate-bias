@@ -101,8 +101,7 @@ def _build_description_messages(entity_name: str, instance: dict) -> list[Messag
         Message(
             role="system",
             content=(
-                "You are a helpful assistant helping a user understand an option. "
-                "Respond naturally and concisely."
+                "You are a helpful assistant."
             ),
         ),
         Message(
@@ -233,7 +232,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 for entity in entities
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_description,

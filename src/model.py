@@ -1,3 +1,4 @@
+from copy import deepcopy
 from functools import partial
 from typing import Literal, Mapping, Sequence, Any, Protocol
 from openrouter import OpenRouter, errors as or_errors
@@ -53,6 +54,7 @@ Model = Literal[
     "nemotron-3-super-120b-a12b:free",
     "nemotron-3-nano-30b-a3b:free",
     "phi-4",
+    "llama-3.1-swallow-8b-instruct-v0.3"
 ]
 
 
@@ -225,8 +227,77 @@ class InvalidModelOutputError(RuntimeError):
     pass
 
 
-def _validate_structured_output(text: str, kwargs: dict[str, Any]) -> None:
-    response_format = kwargs.get("response_format")
+CANONICAL_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
+    "anthropic/claude-sonnet-4.6": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "anthropic/claude-opus-4.6": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "openai/gpt-5.4": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "openai/gpt-4o-mini": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "mistralai/mistral-nemo": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "mistralai/mistral-small-2603": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "microsoft/phi-4": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+}
+
+
+def _strip_schema_keywords(node: Any, keywords_to_strip: set[str]) -> Any:
+    if isinstance(node, dict):
+        return {
+            k: _strip_schema_keywords(v, keywords_to_strip)
+            for k, v in node.items()
+            if k not in keywords_to_strip
+        }
+    if isinstance(node, list):
+        return [_strip_schema_keywords(item, keywords_to_strip) for item in node]
+    return node
+
+
+def canonicalise_json_schema(
+    *,
+    model_name: str,
+    response_format: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    if response_format is None:
+        return None
+
+    out = deepcopy(response_format)
+
+    if out.get("type") != "json_schema":
+        return out
+
+    json_schema_payload = out.get("json_schema")
+    if not isinstance(json_schema_payload, dict):
+        return out
+
+    schema = json_schema_payload.get("schema")
+    if schema is None:
+        return out
+
+    rules = CANONICAL_JSON_SCHEMA_RULES.get(model_name, {})
+    strip_keywords = set(rules.get("strip_keywords", set()))
+
+    if strip_keywords:
+        json_schema_payload["schema"] = _strip_schema_keywords(schema, strip_keywords)
+
+    return out
+
+
+def _validate_structured_output(
+    text: str,
+    response_format: dict[str, Any] | None,
+) -> None:
     if not response_format:
         return
 
@@ -249,9 +320,9 @@ def _validate_structured_output(text: str, kwargs: dict[str, Any]) -> None:
                 f"Model returned invalid JSON for json_schema response: {text!r}"
             ) from e
 
-        json_schema = response_format.get("json_schema") or {}
-        schema = json_schema.get("schema")
-        schema_name = json_schema.get("name", "unnamed_schema")
+        json_schema_payload = response_format.get("json_schema") or {}
+        schema = json_schema_payload.get("schema")
+        schema_name = json_schema_payload.get("name", "unnamed_schema")
 
         if schema is None:
             raise InvalidModelOutputError(
@@ -281,8 +352,8 @@ def _validate_structured_output(text: str, kwargs: dict[str, Any]) -> None:
         TypeError,
         InvalidModelOutputError,
     ),
-    interval=30,
-    max_tries=3,
+    interval=5,
+    max_tries=5,
     jitter=None,
 )
 def _invoke_openrouter_model(
@@ -293,7 +364,21 @@ def _invoke_openrouter_model(
     client = _get_openrouter_client()
 
     use_cache = bool(kwargs.pop("use_cache", False))
-    kwargs = _disable_web_plugin(kwargs)
+
+    original_response_format = kwargs.get("response_format")
+    request_response_format = canonicalise_json_schema(
+        model_name=model_name,
+        response_format=original_response_format,
+    )
+
+    cache_kwargs = dict(kwargs)
+    request_kwargs = dict(kwargs)
+
+    if original_response_format is not None:
+        request_kwargs["response_format"] = request_response_format
+
+    request_kwargs = _disable_web_plugin(request_kwargs)
+    request_kwargs.pop("seed", None)
 
     cache_key = None
 
@@ -301,17 +386,22 @@ def _invoke_openrouter_model(
         cache_key = _cache_key_for_openrouter_call(
             model_name=model_name,
             messages=messages,
-            kwargs=kwargs,
+            kwargs=cache_kwargs,
         )
         cached = _cache_get_obj(cache_key)
         if cached is not None:
+            try:
+                _validate_structured_output(cached.text, original_response_format)
+            except InvalidModelOutputError as e:
+                raise InvalidModelOutputError(
+                    f"Tried returning invalid result from cache.") from e
             return cached
 
     response = _send_openrouter_request(
         client=client,
         model_name=model_name,
         messages=messages,
-        **kwargs,
+        **request_kwargs,
     )
 
     output = ModelOutput(
@@ -319,7 +409,8 @@ def _invoke_openrouter_model(
         raw=response,
     )
 
-    _validate_structured_output(output.text, kwargs)
+    # Validate against the original, stronger contract.
+    _validate_structured_output(output.text, original_response_format)
 
     if use_cache:
         _cache_set_obj(cache_key, output)
@@ -331,41 +422,106 @@ def _invoke_openrouter_model(
 
 
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
-    "gpt-oss-120b": partial(_invoke_openrouter_model, "openai/gpt-oss-120b"),
-    "gpt-5.4": partial(_invoke_openrouter_model, "openai/gpt-5.4"),
-    "gpt-4o-mini": partial(_invoke_openrouter_model, "openai/gpt-4o-mini"),
-    "claude-sonnet-4.6": partial(
-        _invoke_openrouter_model, "anthropic/claude-sonnet-4.6"
+    "gpt-oss-120b": partial(
+        _invoke_openrouter_model,
+        "openai/gpt-oss-120b",
+        reasoning={"effort": "minimal"},
     ),
-    "claude-opus-4.6": partial(_invoke_openrouter_model, "anthropic/claude-opus-4.6"),
-    "gemini-2.5-flash": partial(_invoke_openrouter_model, "google/gemini-2.5-flash"),
-    "gemini-2.5-pro": partial(_invoke_openrouter_model, "google/gemini-2.5-pro"),
-    "grok-4.1-fast": partial(_invoke_openrouter_model, "x-ai/grok-4.1-fast"),
-    "grok-4": partial(_invoke_openrouter_model, "x-ai/grok-4"),
+    "gpt-5.4": partial(
+        _invoke_openrouter_model,
+        "openai/gpt-5.4",
+        reasoning={"effort": "none"},
+    ),
+    "gpt-4o-mini": partial(
+        _invoke_openrouter_model,
+        "openai/gpt-4o-mini",
+        reasoning={"effort": "none"},
+    ),
+    "claude-sonnet-4.6": partial(
+        _invoke_openrouter_model,
+        "anthropic/claude-sonnet-4.6",
+        reasoning={"effort": "none"},
+    ),
+    "claude-opus-4.6": partial(
+        _invoke_openrouter_model,
+        "anthropic/claude-opus-4.6",
+        reasoning={"effort": "none"},
+    ),
+    "gemini-2.5-flash": partial(
+        _invoke_openrouter_model,
+        "google/gemini-2.5-flash",
+        reasoning={"effort": "none"},
+    ),
+    "gemini-2.5-pro": partial(
+        _invoke_openrouter_model,
+        "google/gemini-2.5-pro",
+        reasoning={"effort": "minimal"},
+    ),
+    "grok-4.1-fast": partial(
+        _invoke_openrouter_model,
+        "x-ai/grok-4.1-fast",
+        reasoning={"effort": "none"},
+    ),
+    "grok-4": partial(
+        _invoke_openrouter_model,
+        "x-ai/grok-4",
+        reasoning={"effort": "minimal"},
+    ),
     "llama-3.1-8b-instruct": partial(
-        _invoke_openrouter_model, "meta-llama/llama-3.1-8b-instruct"
+        _invoke_openrouter_model,
+        "meta-llama/llama-3.1-8b-instruct",
+        reasoning={"effort": "none"},
     ),
     "llama-3.1-70b-instruct": partial(
-        _invoke_openrouter_model, "meta-llama/llama-3.1-70b-instruct"
+        _invoke_openrouter_model,
+        "meta-llama/llama-3.1-70b-instruct",
+        reasoning={"effort": "none"},
     ),
-    "mistral-nemo": partial(_invoke_openrouter_model, "mistralai/mistral-nemo"),
+    "mistral-nemo": partial(
+        _invoke_openrouter_model,
+        "mistralai/mistral-nemo",
+        reasoning={"effort": "none"},
+    ),
     "mistral-small-2603": partial(
-        _invoke_openrouter_model, "mistralai/mistral-small-2603"
+        _invoke_openrouter_model,
+        "mistralai/mistral-small-2603",
+        reasoning={"effort": "none"},
     ),
-    "deepseek-v3.2": partial(_invoke_openrouter_model, "deepseek/deepseek-v3.2"),
+    "deepseek-v3.2": partial(
+        _invoke_openrouter_model,
+        "deepseek/deepseek-v3.2",
+        reasoning={"effort": "none"},
+    ),
     "qwen3-235b-a22b-2507": partial(
-        _invoke_openrouter_model, "qwen/qwen3-235b-a22b-2507"
+        _invoke_openrouter_model,
+        "qwen/qwen3-235b-a22b-2507",
+        reasoning={"effort": "none"},
     ),
     "qwen3.5-flash-02-23": partial(
-        _invoke_openrouter_model, "qwen/qwen3.5-flash-02-23"
+        _invoke_openrouter_model,
+        "qwen/qwen3.5-flash-02-23",
+        reasoning={"effort": "none"},
     ),
     "nemotron-3-super-120b-a12b": partial(
-        _invoke_openrouter_model, "nvidia/nemotron-3-super-120b-a12b"
+        _invoke_openrouter_model,
+        "nvidia/nemotron-3-super-120b-a12b",
+        reasoning={"effort": "none"},
     ),
     "nemotron-3-nano-30b-a3b": partial(
-        _invoke_openrouter_model, "nvidia/nemotron-3-nano-30b-a3b"
+        _invoke_openrouter_model,
+        "nvidia/nemotron-3-nano-30b-a3b",
+        reasoning={"effort": "none"},
     ),
-    "phi-4": partial(_invoke_openrouter_model, "microsoft/phi-4"),
+    "phi-4": partial(
+        _invoke_openrouter_model,
+        "microsoft/phi-4",
+        reasoning={"effort": "none"},
+    ),
+    "llama-3.1-swallow-8b-instruct-v0.3": partial(
+        _invoke_openrouter_model,
+        "tokyotech-llm/llama-3.1-swallow-8b-instruct-v0.3",
+        reasoning={"effort": "none"},
+    ),
 }
 
 

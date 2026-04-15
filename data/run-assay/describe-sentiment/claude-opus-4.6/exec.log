@@ -9,12 +9,14 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-07 16:53:08,260 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:53:08,284 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:53:08,418 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-07 16:53:08,541 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-07 16:53:08,694 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6057.21it/s]
+2026-04-14 10:28:59,544 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:28:59,591 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:28:59,752 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 10:28:59,918 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-14 10:29:00,069 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-14 10:29:00,232 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-14 10:29:00,416 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7501.49it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,105 +24,315 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-07 16:53:08,849 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-07 16:53:08,988 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-07 16:53:09,059 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:53:09,113 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-07 16:53:09,185 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:53:09,241 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-07 16:53:10,465 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:53:10,489 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 75/202 [00:00<00:00, 743.19it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1017.97it/s]
-2026-04-07 16:53:10,890 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:53:11,003 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:53:11,884 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-07 16:53:12,103 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:53:12,149 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:53:12,288 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:53:12,313 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-07 16:53:12,443 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:53:12,574 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:53:13,230 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-07 16:53:13,361 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:53:13,402 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 76/202 [00:00<00:00, 759.19it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1040.16it/s]
-2026-04-07 16:53:13,625 [INFO] root: Running assay=describe-sentiment model=claude-opus-4.6 num_samples_per_instance=5.
-2026-04-07 16:53:13,629 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,630 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,631 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,632 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,633 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,634 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,635 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,637 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,639 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,642 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,644 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,646 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,650 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,652 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,656 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,658 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,661 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,666 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,680 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,686 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,688 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,698 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,699 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,701 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,704 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,707 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,708 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,710 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:53:13,712 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,715 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,718 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:13,723 [INFO] root: Invoking claude-opus-4.6.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-07 16:53:44,259 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:   1%|▏         | 1/75 [00:30<37:39, 30.54s/it]2026-04-07 16:53:44,334 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,406 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:   4%|▍         | 3/75 [00:30<09:33,  7.97s/it]2026-04-07 16:53:44,455 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,538 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:   7%|▋         | 5/75 [00:30<04:33,  3.91s/it]2026-04-07 16:53:44,609 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,634 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,699 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  11%|█         | 8/75 [00:30<02:06,  1.89s/it]2026-04-07 16:53:44,719 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,720 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,724 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,725 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,764 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,824 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  19%|█▊        | 14/75 [00:31<00:46,  1.30it/s]2026-04-07 16:53:44,837 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,866 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,876 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,902 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,911 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:44,934 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  27%|██▋       | 20/75 [00:31<00:23,  2.37it/s]2026-04-07 16:53:44,979 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,001 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,011 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,015 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,057 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  33%|███▎      | 25/75 [00:31<00:14,  3.56it/s]2026-04-07 16:53:45,077 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,122 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,137 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,192 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  39%|███▊      | 29/75 [00:31<00:09,  4.76it/s]2026-04-07 16:53:45,313 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,405 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:53:45,608 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  39%|███▊      | 29/75 [00:45<00:09,  4.76it/s]2026-04-07 16:54:17,106 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  44%|████▍     | 33/75 [01:03<01:44,  2.48s/it]2026-04-07 16:54:17,218 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  45%|████▌     | 34/75 [01:03<01:32,  2.25s/it]2026-04-07 16:54:17,471 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,476 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,503 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  49%|████▉     | 37/75 [01:03<01:02,  1.63s/it]2026-04-07 16:54:17,575 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,592 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,602 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,663 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  55%|█████▍    | 41/75 [01:03<00:36,  1.07s/it]2026-04-07 16:54:17,692 [INFO] root: Invoking claude-opus-4.6.
-2026-04-07 16:54:17,835 [INFO] root: Invoking claude-opus-4.6.
-Descriptions:  59%|█████▊    | 44/75 [01:04<00:24,  1.27it/s]Descriptions:  64%|██████▍   | 48/75 [01:04<00:14,  1.90it/s]Descriptions:  75%|███████▍  | 56/75 [01:04<00:05,  3.65it/s]Descriptions:  80%|████████  | 60/75 [01:04<00:03,  4.79it/s]Descriptions:  85%|████████▌ | 64/75 [01:04<00:01,  6.14it/s]Descriptions:  85%|████████▌ | 64/75 [01:15<00:01,  6.14it/s]Descriptions:  87%|████████▋ | 65/75 [01:15<00:11,  1.12s/it]Descriptions:  92%|█████████▏| 69/75 [01:15<00:04,  1.33it/s]Descriptions: 100%|██████████| 75/75 [01:15<00:00,  1.01s/it]
-2026-04-07 16:54:29,722 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-opus-4.6.parquet.
+2026-04-14 10:29:00,573 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 10:29:00,708 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:29:00,721 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-14 10:29:01,021 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:29:02,229 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:29:02,275 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1037.14it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1531.42it/s]
+2026-04-14 10:29:02,612 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:29:02,763 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:29:03,653 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 10:29:02,513 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:29:02,554 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:29:02,694 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:29:02,741 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 10:29:02,889 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:29:03,047 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:29:03,607 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 10:29:03,751 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:29:03,807 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 953.04it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1515.96it/s]
+2026-04-14 10:29:03,964 [INFO] root: Running assay=describe-sentiment model=claude-opus-4.6 num_samples_per_instance=3.
+2026-04-14 10:29:03,969 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,970 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,970 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,971 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,971 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,972 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,973 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,975 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,976 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,977 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,978 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,979 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,980 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,981 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,982 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,983 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:03,985 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,006 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,009 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,012 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,018 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,021 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,024 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,027 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,030 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,033 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,035 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,036 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,038 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,041 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,044 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:04,045 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 10:29:06,086 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,118 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,178 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,179 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,224 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,262 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,274 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,295 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,339 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,345 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,346 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,357 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,383 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,523 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,545 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,587 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,622 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,701 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,790 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,866 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:06,955 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:07,014 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:07,150 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:07,274 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:07,574 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:07,864 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:08,243 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:10,500 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   1%|          | 1/144 [00:06<15:22,  6.45s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-14 10:29:12,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:12,598 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:13,419 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:13,863 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   1%|▏         | 2/144 [00:09<10:58,  4.64s/it]2026-04-14 10:29:14,816 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:16,470 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:23,612 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   2%|▏         | 3/144 [00:19<16:22,  6.97s/it]2026-04-14 10:29:24,469 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   3%|▎         | 4/144 [00:20<10:38,  4.56s/it]2026-04-14 10:29:25,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:26,976 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   3%|▎         | 5/144 [00:22<08:50,  3.82s/it]2026-04-14 10:29:28,982 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:32,189 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   4%|▍         | 6/144 [00:28<09:52,  4.29s/it]2026-04-14 10:29:32,930 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   5%|▍         | 7/144 [00:28<07:08,  3.13s/it]2026-04-14 10:29:32,975 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:34,154 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   6%|▋         | 9/144 [00:30<04:18,  1.91s/it]2026-04-14 10:29:34,327 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:34,404 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   7%|▋         | 10/144 [00:30<03:19,  1.49s/it]2026-04-14 10:29:33,666 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:33,713 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:33,779 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:33,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:34,927 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:34,947 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   8%|▊         | 12/144 [00:30<02:08,  1.03it/s]2026-04-14 10:29:35,182 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:   9%|▉         | 13/144 [00:31<01:45,  1.25it/s]2026-04-14 10:29:35,783 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:35,865 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:37,350 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  10%|▉         | 14/144 [00:33<02:28,  1.14s/it]2026-04-14 10:29:37,600 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:37,737 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  10%|█         | 15/144 [00:33<02:01,  1.06it/s]2026-04-14 10:29:37,738 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:38,186 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  11%|█         | 16/144 [00:34<01:43,  1.24it/s]2026-04-14 10:29:38,266 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:38,461 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  12%|█▎        | 18/144 [00:34<01:04,  1.94it/s]2026-04-14 10:29:38,729 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  13%|█▎        | 19/144 [00:34<00:57,  2.19it/s]2026-04-14 10:29:38,806 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:38,863 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  15%|█▍        | 21/144 [00:34<00:36,  3.35it/s]2026-04-14 10:29:38,913 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:39,012 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:39,243 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  16%|█▌        | 23/144 [00:35<00:31,  3.86it/s]2026-04-14 10:29:39,278 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:39,566 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  17%|█▋        | 25/144 [00:35<00:26,  4.43it/s]2026-04-14 10:29:39,773 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,014 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  18%|█▊        | 26/144 [00:35<00:31,  3.72it/s]2026-04-14 10:29:40,154 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  19%|█▉        | 27/144 [00:36<00:28,  4.15it/s]2026-04-14 10:29:40,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,307 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,502 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  19%|█▉        | 28/144 [00:36<00:30,  3.76it/s]2026-04-14 10:29:40,547 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,557 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:40,662 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,738 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  21%|██        | 30/144 [00:36<00:23,  4.85it/s]2026-04-14 10:29:40,873 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:40,895 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:41,059 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  22%|██▏       | 31/144 [00:37<00:26,  4.31it/s]2026-04-14 10:29:41,203 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  22%|██▏       | 32/144 [00:37<00:23,  4.75it/s]2026-04-14 10:29:41,260 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:41,386 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  23%|██▎       | 33/144 [00:37<00:22,  4.92it/s]2026-04-14 10:29:41,503 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:41,514 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  24%|██▎       | 34/144 [00:37<00:20,  5.46it/s]2026-04-14 10:29:41,552 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:41,721 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  24%|██▍       | 35/144 [00:37<00:20,  5.28it/s]2026-04-14 10:29:41,754 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:29:41,826 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,199 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,588 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,718 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:42,987 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:43,254 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  26%|██▌       | 37/144 [00:39<00:47,  2.25it/s]2026-04-14 10:29:43,717 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:43,796 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:43,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:43,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:44,428 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  26%|██▋       | 38/144 [00:40<01:05,  1.61it/s]2026-04-14 10:29:44,710 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  27%|██▋       | 39/144 [00:40<00:56,  1.87it/s]2026-04-14 10:29:45,531 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  28%|██▊       | 40/144 [00:41<01:03,  1.64it/s]2026-04-14 10:29:45,958 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:46,122 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  28%|██▊       | 41/144 [00:42<01:02,  1.65it/s]2026-04-14 10:29:46,264 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  29%|██▉       | 42/144 [00:42<00:48,  2.11it/s]2026-04-14 10:29:46,505 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:46,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:46,821 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:46,934 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  30%|██▉       | 43/144 [00:42<00:53,  1.89it/s]2026-04-14 10:29:47,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:47,651 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  31%|███       | 44/144 [00:43<00:58,  1.71it/s]2026-04-14 10:29:49,052 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:49,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:51,596 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:29:53,685 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:03,486 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  31%|███▏      | 45/144 [00:59<08:21,  5.07s/it]2026-04-14 10:30:05,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:05,472 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  32%|███▏      | 46/144 [01:01<06:47,  4.16s/it]2026-04-14 10:30:05,504 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:06,691 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  33%|███▎      | 48/144 [01:02<04:03,  2.53s/it]2026-04-14 10:30:07,789 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:07,844 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:08,819 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  34%|███▍      | 49/144 [01:04<03:51,  2.43s/it]2026-04-14 10:30:10,700 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:11,041 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  35%|███▍      | 50/144 [01:06<03:43,  2.38s/it]2026-04-14 10:30:11,768 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:12,687 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  35%|███▌      | 51/144 [01:08<03:22,  2.18s/it]2026-04-14 10:30:13,976 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  36%|███▌      | 52/144 [01:09<02:57,  1.93s/it]2026-04-14 10:30:14,189 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  37%|███▋      | 53/144 [01:10<02:11,  1.44s/it]2026-04-14 10:30:14,591 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  38%|███▊      | 54/144 [01:10<01:42,  1.14s/it]2026-04-14 10:30:14,675 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:14,707 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:15,137 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  38%|███▊      | 55/144 [01:11<01:26,  1.03it/s]2026-04-14 10:30:15,299 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  39%|███▉      | 56/144 [01:11<01:04,  1.37it/s]2026-04-14 10:30:15,650 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  40%|███▉      | 57/144 [01:11<00:53,  1.62it/s]2026-04-14 10:30:15,818 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  40%|████      | 58/144 [01:11<00:41,  2.07it/s]2026-04-14 10:30:15,878 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:16,002 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  41%|████      | 59/144 [01:11<00:33,  2.54it/s]2026-04-14 10:30:16,124 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:16,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:16,619 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  42%|████▏     | 60/144 [01:12<00:38,  2.17it/s]2026-04-14 10:30:16,779 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  42%|████▏     | 61/144 [01:12<00:30,  2.70it/s]2026-04-14 10:30:16,909 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  43%|████▎     | 62/144 [01:12<00:24,  3.35it/s]2026-04-14 10:30:17,323 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:17,330 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:17,407 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:17,469 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  44%|████▍     | 63/144 [01:13<00:30,  2.66it/s]2026-04-14 10:30:17,576 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:17,764 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  44%|████▍     | 64/144 [01:13<00:28,  2.83it/s]2026-04-14 10:30:17,806 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:17,871 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  45%|████▌     | 65/144 [01:13<00:21,  3.59it/s]2026-04-14 10:30:17,991 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  46%|████▌     | 66/144 [01:13<00:18,  4.33it/s]2026-04-14 10:30:18,261 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  47%|████▋     | 67/144 [01:14<00:18,  4.11it/s]2026-04-14 10:30:18,488 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  47%|████▋     | 68/144 [01:14<00:18,  4.21it/s]2026-04-14 10:30:18,672 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  48%|████▊     | 69/144 [01:14<00:16,  4.50it/s]2026-04-14 10:30:18,931 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  49%|████▊     | 70/144 [01:14<00:17,  4.29it/s]2026-04-14 10:30:18,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:19,218 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  49%|████▉     | 71/144 [01:15<00:18,  4.02it/s]2026-04-14 10:30:19,297 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:19,396 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  50%|█████     | 72/144 [01:15<00:16,  4.39it/s]2026-04-14 10:30:19,426 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:19,531 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  51%|█████▏    | 74/144 [01:15<00:10,  6.51it/s]2026-04-14 10:30:19,694 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  52%|█████▏    | 75/144 [01:15<00:10,  6.41it/s]2026-04-14 10:30:19,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:19,768 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:19,798 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:19,815 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  53%|█████▎    | 76/144 [01:15<00:09,  6.81it/s]2026-04-14 10:30:20,185 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:20,274 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  53%|█████▎    | 77/144 [01:16<00:15,  4.32it/s]2026-04-14 10:30:20,292 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:20,399 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  54%|█████▍    | 78/144 [01:16<00:13,  4.96it/s]2026-04-14 10:30:20,413 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:20,454 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:20,773 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  56%|█████▌    | 80/144 [01:16<00:12,  5.12it/s]2026-04-14 10:30:20,982 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:20,984 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:21,262 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  56%|█████▋    | 81/144 [01:17<00:16,  3.76it/s]2026-04-14 10:30:21,422 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:21,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:21,664 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:21,739 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:21,760 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:22,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:22,281 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:22,470 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:23,093 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:23,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:25,120 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:30,748 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  57%|█████▋    | 82/144 [01:26<02:42,  2.63s/it]2026-04-14 10:30:31,537 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:32,471 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:33,617 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  58%|█████▊    | 83/144 [01:29<02:44,  2.69s/it]2026-04-14 10:30:35,078 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  58%|█████▊    | 84/144 [01:31<02:21,  2.35s/it]2026-04-14 10:30:36,357 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:39,865 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  59%|█████▉    | 85/144 [01:35<02:59,  3.04s/it]2026-04-14 10:30:40,991 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  60%|█████▉    | 86/144 [01:36<02:24,  2.49s/it]2026-04-14 10:30:41,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:41,831 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:44,041 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  60%|██████    | 87/144 [01:39<02:31,  2.65s/it]2026-04-14 10:30:44,121 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:44,133 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  62%|██████▏   | 89/144 [01:40<01:20,  1.47s/it]2026-04-14 10:30:44,342 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  62%|██████▎   | 90/144 [01:40<01:02,  1.16s/it]2026-04-14 10:30:44,453 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:46,084 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:46,096 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  63%|██████▎   | 91/144 [01:42<01:09,  1.31s/it]2026-04-14 10:30:46,346 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:46,423 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:46,550 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:47,163 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  64%|██████▍   | 92/144 [01:43<01:04,  1.25s/it]2026-04-14 10:30:47,631 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  65%|██████▍   | 93/144 [01:43<00:52,  1.03s/it]2026-04-14 10:30:47,749 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  65%|██████▌   | 94/144 [01:43<00:38,  1.30it/s]2026-04-14 10:30:48,655 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:48,732 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  66%|██████▌   | 95/144 [01:44<00:40,  1.20it/s]2026-04-14 10:30:48,967 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  67%|██████▋   | 96/144 [01:44<00:31,  1.52it/s]2026-04-14 10:30:48,976 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:49,420 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  68%|██████▊   | 98/144 [01:45<00:21,  2.17it/s]2026-04-14 10:30:49,510 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:49,658 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:49,720 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:49,737 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  69%|██████▉   | 100/144 [01:45<00:15,  2.92it/s]2026-04-14 10:30:49,826 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:49,831 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:49,848 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  71%|███████   | 102/144 [01:45<00:10,  4.18it/s]2026-04-14 10:30:49,905 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:49,975 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  72%|███████▏  | 104/144 [01:45<00:07,  5.58it/s]2026-04-14 10:30:50,233 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:50,275 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  74%|███████▎  | 106/144 [01:46<00:06,  5.90it/s]2026-04-14 10:30:50,309 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:50,410 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  75%|███████▌  | 108/144 [01:46<00:04,  7.29it/s]2026-04-14 10:30:50,478 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:50,597 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  76%|███████▋  | 110/144 [01:46<00:04,  8.11it/s]2026-04-14 10:30:50,622 [INFO] root: Invoking claude-opus-4.6.
+2026-04-14 10:30:50,744 [INFO] root: Invoking claude-opus-4.6.
+Descriptions:  78%|███████▊  | 112/144 [01:46<00:03,  9.25it/s]2026-04-14 10:30:50,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  79%|███████▉  | 114/144 [01:46<00:03,  9.86it/s]2026-04-14 10:30:51,437 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,585 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,620 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,760 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,956 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:51,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,106 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,331 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,709 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:52,772 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  81%|████████  | 116/144 [01:48<00:10,  2.66it/s]2026-04-14 10:30:52,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:53,128 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  81%|████████▏ | 117/144 [01:49<00:09,  2.89it/s]2026-04-14 10:30:53,768 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:30:54,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  82%|████████▏ | 118/144 [01:51<00:17,  1.50it/s]Descriptions:  83%|████████▎ | 119/144 [01:51<00:17,  1.40it/s]Descriptions:  83%|████████▎ | 120/144 [01:54<00:30,  1.27s/it]Descriptions:  84%|████████▍ | 121/144 [01:56<00:32,  1.41s/it]Descriptions:  85%|████████▍ | 122/144 [01:57<00:27,  1.23s/it]Descriptions:  85%|████████▌ | 123/144 [01:59<00:28,  1.34s/it]Descriptions:  86%|████████▌ | 124/144 [01:59<00:20,  1.03s/it]Descriptions:  87%|████████▋ | 125/144 [02:00<00:18,  1.01it/s]Descriptions:  88%|████████▊ | 126/144 [02:00<00:13,  1.31it/s]Descriptions:  88%|████████▊ | 127/144 [02:11<01:02,  3.66s/it]Descriptions:  89%|████████▉ | 128/144 [02:11<00:43,  2.72s/it]Descriptions:  90%|████████▉ | 129/144 [02:12<00:32,  2.19s/it]Descriptions:  90%|█████████ | 130/144 [02:13<00:28,  2.00s/it]Descriptions:  91%|█████████ | 131/144 [02:14<00:20,  1.60s/it]Descriptions:  92%|█████████▏| 132/144 [02:14<00:14,  1.19s/it]Descriptions:  92%|█████████▏| 133/144 [02:14<00:09,  1.15it/s]Descriptions:  93%|█████████▎| 134/144 [02:15<00:07,  1.39it/s]Descriptions:  94%|█████████▍| 135/144 [02:15<00:05,  1.53it/s]Descriptions:  94%|█████████▍| 136/144 [02:16<00:03,  2.01it/s]Descriptions:  96%|█████████▌| 138/144 [02:16<00:01,  3.33it/s]Descriptions:  97%|█████████▋| 140/144 [02:16<00:00,  4.91it/s]Descriptions: 100%|██████████| 144/144 [02:16<00:00,  1.06it/s]
+2026-04-14 10:31:20,432 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-opus-4.6.parquet.

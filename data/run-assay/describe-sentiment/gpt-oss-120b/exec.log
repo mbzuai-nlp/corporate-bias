@@ -9,16 +9,16 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-07 16:47:16,754 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:47:16,785 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:47:16,955 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-07 16:47:17,108 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-07 16:47:17,286 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-07 16:47:17,456 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-07 16:47:15,493 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-07 16:47:15,640 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-07 16:47:15,769 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6079.93it/s]
+2026-04-14 10:17:04,952 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:17:05,007 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:17:05,185 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 10:17:05,343 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-14 10:17:05,509 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-14 10:17:05,652 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-14 10:17:05,811 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-14 10:17:05,976 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 10:17:06,135 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5780.78it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -26,101 +26,313 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-07 16:47:16,729 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:47:16,862 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:47:18,880 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:47:18,921 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 58/202 [00:00<00:00, 574.10it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 615.88it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 775.84it/s]
-2026-04-07 16:47:19,681 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:47:19,819 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:47:20,967 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-07 16:47:21,789 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:47:21,815 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:47:21,950 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:47:21,980 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-07 16:47:22,130 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:47:22,312 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:47:23,065 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-07 16:47:23,228 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:47:23,287 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  28%|██▊       | 56/202 [00:00<00:00, 558.79it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 617.52it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 827.24it/s]
-2026-04-07 16:47:23,572 [INFO] root: Running assay=describe-sentiment model=gpt-oss-120b num_samples_per_instance=5.
-2026-04-07 16:47:23,580 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,581 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,582 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,582 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,584 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,585 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,587 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,590 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,593 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,594 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,595 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,596 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,598 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,599 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,602 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,604 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,608 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,612 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,617 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,622 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,626 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,635 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,637 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,641 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,656 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,658 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,661 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,663 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,672 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,682 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:23,688 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:47:23,691 [INFO] root: Invoking gpt-oss-120b.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-07 16:47:54,342 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:   1%|▏         | 1/75 [00:30<37:47, 30.64s/it]2026-04-07 16:47:54,428 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,434 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,478 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:   5%|▌         | 4/75 [00:30<06:54,  5.83s/it]2026-04-07 16:47:54,495 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,507 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,510 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,524 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,568 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,608 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  13%|█▎        | 10/75 [00:30<01:55,  1.77s/it]2026-04-07 16:47:54,611 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,634 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,641 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,647 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,698 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,720 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  21%|██▏       | 16/75 [00:31<00:52,  1.11it/s]2026-04-07 16:47:54,729 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,738 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,779 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,831 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,838 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  28%|██▊       | 21/75 [00:31<00:30,  1.75it/s]2026-04-07 16:47:54,849 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,868 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,918 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:54,920 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:55,037 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  35%|███▍      | 26/75 [00:31<00:18,  2.59it/s]2026-04-07 16:47:55,091 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:55,106 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:55,178 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:55,222 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  40%|████      | 30/75 [00:31<00:13,  3.45it/s]2026-04-07 16:47:55,341 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:47:55,573 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  40%|████      | 30/75 [00:42<00:13,  3.45it/s]2026-04-07 16:48:28,663 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  44%|████▍     | 33/75 [01:04<01:58,  2.82s/it]2026-04-07 16:48:29,065 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  45%|████▌     | 34/75 [01:05<01:45,  2.58s/it]2026-04-07 16:48:29,118 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:48:29,176 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:48:29,268 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  49%|████▉     | 37/75 [01:05<01:09,  1.83s/it]2026-04-07 16:48:29,349 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:48:29,517 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  52%|█████▏    | 39/75 [01:05<00:52,  1.45s/it]2026-04-07 16:48:29,575 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:48:29,585 [INFO] root: Invoking gpt-oss-120b.
-2026-04-07 16:48:29,689 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  56%|█████▌    | 42/75 [01:05<00:33,  1.00s/it]2026-04-07 16:48:29,705 [INFO] root: Invoking gpt-oss-120b.
-Descriptions:  60%|██████    | 45/75 [01:06<00:20,  1.43it/s]Descriptions:  64%|██████▍   | 48/75 [01:06<00:13,  2.02it/s]Descriptions:  71%|███████   | 53/75 [01:06<00:06,  3.41it/s]Descriptions:  77%|███████▋  | 58/75 [01:06<00:03,  5.22it/s]Descriptions:  83%|████████▎ | 62/75 [01:06<00:01,  6.76it/s]Descriptions:  87%|████████▋ | 65/75 [01:18<00:11,  1.11s/it]Descriptions:  91%|█████████ | 68/75 [01:19<00:05,  1.19it/s]Descriptions: 100%|██████████| 75/75 [01:19<00:00,  1.06s/it]
-2026-04-07 16:48:42,910 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-oss-120b.parquet.
+2026-04-14 10:17:07,048 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:17:07,189 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:17:09,211 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:17:09,280 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 48/202 [00:00<00:00, 472.25it/s]Loading weights:  55%|█████▍    | 111/202 [00:00<00:00, 557.30it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 687.15it/s]
+2026-04-14 10:17:09,801 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:17:09,956 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:17:11,164 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 10:17:11,818 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:17:11,866 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:17:12,012 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:17:12,066 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 10:17:12,243 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:17:12,399 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,166 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,297 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:17:13,342 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 73/202 [00:00<00:00, 724.89it/s]Loading weights:  72%|███████▏  | 146/202 [00:00<00:00, 703.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 861.07it/s]
+2026-04-14 10:17:13,635 [INFO] root: Running assay=describe-sentiment model=gpt-oss-120b num_samples_per_instance=3.
+2026-04-14 10:17:13,643 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,644 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,645 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,645 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,646 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,647 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,649 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,650 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,651 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,652 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,654 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,656 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,657 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,657 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,659 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,661 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,664 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,665 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,668 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,672 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,676 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,680 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,683 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,686 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,688 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,689 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,690 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,699 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 10:17:13,701 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,704 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,707 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:13,715 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:14,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,573 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,264 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,298 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,352 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,358 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,379 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,520 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,525 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,632 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,661 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,703 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,978 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:13,980 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,074 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,100 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:14,178 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:15,189 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:15,377 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:15,948 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   1%|          | 1/144 [00:02<05:18,  2.23s/it]2026-04-14 10:17:16,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:16,183 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:17,382 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   1%|▏         | 2/144 [00:03<04:10,  1.76s/it]2026-04-14 10:17:17,473 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:17,605 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   3%|▎         | 4/144 [00:03<01:41,  1.38it/s]2026-04-14 10:17:17,910 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:18,219 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:18,331 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:18,785 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   3%|▎         | 5/144 [00:05<02:00,  1.15it/s]2026-04-14 10:17:18,892 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:19,195 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   4%|▍         | 6/144 [00:05<01:40,  1.38it/s]2026-04-14 10:17:19,610 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   5%|▍         | 7/144 [00:05<01:26,  1.58it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-14 10:17:19,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:20,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:20,223 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   6%|▌         | 8/144 [00:06<01:25,  1.60it/s]2026-04-14 10:17:20,930 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:21,003 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:22,213 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   6%|▋         | 9/144 [00:08<02:20,  1.04s/it]2026-04-14 10:17:23,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:23,268 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:23,289 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:23,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:23,626 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   7%|▋         | 10/144 [00:09<02:34,  1.15s/it]2026-04-14 10:17:23,638 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:24,335 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:25,017 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   8%|▊         | 11/144 [00:11<02:42,  1.22s/it]2026-04-14 10:17:25,723 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:26,644 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:   8%|▊         | 12/144 [00:12<02:57,  1.34s/it]2026-04-14 10:17:26,683 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:27,180 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  10%|▉         | 14/144 [00:13<01:50,  1.18it/s]2026-04-14 10:17:27,247 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:27,339 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  11%|█         | 16/144 [00:13<01:09,  1.85it/s]2026-04-14 10:17:27,361 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:27,752 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  12%|█▎        | 18/144 [00:14<00:52,  2.38it/s]2026-04-14 10:17:27,877 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:27,933 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  13%|█▎        | 19/144 [00:14<00:46,  2.70it/s]2026-04-14 10:17:27,959 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:28,004 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:28,482 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:28,653 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:28,932 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:29,285 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:29,293 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:29,409 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  14%|█▍        | 20/144 [00:15<01:17,  1.61it/s]2026-04-14 10:17:31,400 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:31,620 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  15%|█▍        | 21/144 [00:17<02:04,  1.01s/it]2026-04-14 10:17:31,861 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  15%|█▌        | 22/144 [00:18<01:39,  1.23it/s]2026-04-14 10:17:31,946 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:17:31,975 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  17%|█▋        | 24/144 [00:18<00:58,  2.04it/s]2026-04-14 10:17:31,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:32,682 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:33,198 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:33,580 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:34,137 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  17%|█▋        | 25/144 [00:20<01:44,  1.14it/s]2026-04-14 10:17:34,383 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  18%|█▊        | 26/144 [00:20<01:25,  1.39it/s]2026-04-14 10:17:34,815 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:35,085 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:38,532 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  19%|█▉        | 27/144 [00:24<03:09,  1.62s/it]2026-04-14 10:17:39,127 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:42,890 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  19%|█▉        | 28/144 [00:29<04:34,  2.37s/it]2026-04-14 10:17:44,089 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:48,934 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  20%|██        | 29/144 [00:35<06:31,  3.40s/it]2026-04-14 10:17:49,730 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  21%|██        | 30/144 [00:36<05:02,  2.66s/it]2026-04-14 10:17:49,932 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  22%|██▏       | 31/144 [00:36<03:39,  1.94s/it]2026-04-14 10:17:50,762 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:50,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:51,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:56,519 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  22%|██▏       | 32/144 [00:42<06:10,  3.30s/it]2026-04-14 10:17:57,007 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  23%|██▎       | 33/144 [00:43<04:34,  2.47s/it]2026-04-14 10:17:57,119 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  24%|██▎       | 34/144 [00:43<03:15,  1.77s/it]2026-04-14 10:17:57,303 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  24%|██▍       | 35/144 [00:43<02:21,  1.30s/it]2026-04-14 10:17:57,676 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:57,994 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  25%|██▌       | 36/144 [00:44<02:00,  1.12s/it]2026-04-14 10:17:58,045 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:58,189 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:17:59,485 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  26%|██▌       | 37/144 [00:45<02:11,  1.23s/it]2026-04-14 10:17:59,719 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  26%|██▋       | 38/144 [00:46<01:38,  1.07it/s]2026-04-14 10:18:00,328 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:00,772 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:00,871 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:02,828 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  27%|██▋       | 39/144 [00:49<02:46,  1.58s/it]2026-04-14 10:18:03,645 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:05,179 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  28%|██▊       | 40/144 [00:51<03:08,  1.81s/it]2026-04-14 10:18:05,256 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:06,124 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  29%|██▉       | 42/144 [00:52<02:01,  1.20s/it]2026-04-14 10:18:06,430 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:06,535 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:07,529 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  30%|██▉       | 43/144 [00:53<02:05,  1.25s/it]2026-04-14 10:18:07,785 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:08,250 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:08,712 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  31%|███       | 44/144 [00:54<02:03,  1.23s/it]2026-04-14 10:18:08,988 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  31%|███▏      | 45/144 [00:55<01:36,  1.03it/s]2026-04-14 10:18:09,380 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  32%|███▏      | 46/144 [00:55<01:19,  1.24it/s]2026-04-14 10:18:10,861 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:11,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:11,935 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  33%|███▎      | 47/144 [00:58<02:06,  1.31s/it]2026-04-14 10:18:12,111 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  33%|███▎      | 48/144 [00:58<01:34,  1.02it/s]2026-04-14 10:18:12,559 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  34%|███▍      | 49/144 [00:58<01:18,  1.21it/s]2026-04-14 10:18:12,780 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:12,808 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:12,947 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:15,428 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  35%|███▍      | 50/144 [01:01<02:14,  1.43s/it]2026-04-14 10:18:15,458 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:16,121 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:15,621 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  36%|███▌      | 52/144 [01:01<01:15,  1.22it/s]2026-04-14 10:18:15,660 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:15,997 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  37%|███▋      | 53/144 [01:02<01:04,  1.41it/s]2026-04-14 10:18:16,268 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:16,454 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:16,461 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  38%|███▊      | 54/144 [01:02<00:58,  1.55it/s]2026-04-14 10:18:16,599 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:17,239 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  38%|███▊      | 55/144 [01:03<01:00,  1.47it/s]2026-04-14 10:18:17,539 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:17,783 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:18,031 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:18,799 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  39%|███▉      | 56/144 [01:05<01:21,  1.08it/s]2026-04-14 10:18:20,406 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:20,933 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  40%|███▉      | 57/144 [01:07<01:50,  1.27s/it]2026-04-14 10:18:21,678 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  40%|████      | 58/144 [01:07<01:36,  1.12s/it]2026-04-14 10:18:21,922 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:21,975 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  41%|████      | 59/144 [01:08<01:14,  1.14it/s]2026-04-14 10:18:22,034 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:22,140 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  42%|████▏     | 61/144 [01:08<00:42,  1.94it/s]2026-04-14 10:18:22,747 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:22,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:23,135 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:23,752 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:23,809 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  43%|████▎     | 62/144 [01:10<01:05,  1.25it/s]2026-04-14 10:18:23,900 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:24,079 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:24,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:25,181 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  44%|████▍     | 64/144 [01:11<01:00,  1.33it/s]2026-04-14 10:18:25,785 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  45%|████▌     | 65/144 [01:12<00:56,  1.39it/s]2026-04-14 10:18:26,209 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:26,892 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  46%|████▌     | 66/144 [01:13<01:03,  1.23it/s]2026-04-14 10:18:27,221 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  47%|████▋     | 67/144 [01:13<00:52,  1.45it/s]2026-04-14 10:18:27,457 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:27,713 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:27,946 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  47%|████▋     | 68/144 [01:14<00:53,  1.43it/s]2026-04-14 10:18:28,635 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  48%|████▊     | 69/144 [01:14<00:52,  1.43it/s]2026-04-14 10:18:28,883 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:29,023 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  49%|████▊     | 70/144 [01:15<00:44,  1.65it/s]2026-04-14 10:18:29,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:29,732 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:30,652 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  49%|████▉     | 71/144 [01:16<01:05,  1.11it/s]2026-04-14 10:18:31,205 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:31,870 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  50%|█████     | 72/144 [01:18<01:11,  1.01it/s]2026-04-14 10:18:32,377 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  51%|█████     | 73/144 [01:18<01:00,  1.17it/s]2026-04-14 10:18:32,723 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:33,045 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:33,848 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  51%|█████▏    | 74/144 [01:20<01:12,  1.03s/it]2026-04-14 10:18:34,288 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  52%|█████▏    | 75/144 [01:20<00:59,  1.17it/s]2026-04-14 10:18:34,355 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:34,714 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:34,797 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:34,873 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:35,741 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  53%|█████▎    | 77/144 [01:22<00:53,  1.25it/s]2026-04-14 10:18:35,826 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:35,918 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  54%|█████▍    | 78/144 [01:22<00:42,  1.55it/s]2026-04-14 10:18:36,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:36,358 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  55%|█████▍    | 79/144 [01:22<00:38,  1.69it/s]2026-04-14 10:18:36,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:37,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:37,528 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  56%|█████▌    | 80/144 [01:23<00:47,  1.34it/s]2026-04-14 10:18:37,632 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  56%|█████▋    | 81/144 [01:23<00:35,  1.76it/s]2026-04-14 10:18:38,075 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  57%|█████▋    | 82/144 [01:24<00:33,  1.88it/s]2026-04-14 10:18:38,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:38,472 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:38,681 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  58%|█████▊    | 83/144 [01:24<00:33,  1.81it/s]2026-04-14 10:18:38,817 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  58%|█████▊    | 84/144 [01:25<00:25,  2.32it/s]2026-04-14 10:18:39,021 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  59%|█████▉    | 85/144 [01:25<00:21,  2.74it/s]2026-04-14 10:18:39,183 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  60%|█████▉    | 86/144 [01:25<00:17,  3.28it/s]2026-04-14 10:18:39,206 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:39,543 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:39,711 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:40,511 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:40,976 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  60%|██████    | 87/144 [01:27<00:42,  1.34it/s]2026-04-14 10:18:42,026 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:42,417 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  61%|██████    | 88/144 [01:28<00:53,  1.05it/s]2026-04-14 10:18:43,306 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:44,971 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  62%|██████▏   | 89/144 [01:31<01:18,  1.43s/it]2026-04-14 10:18:45,017 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:45,060 [INFO] root: Invoking gpt-oss-120b.
+2026-04-14 10:18:45,517 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  64%|██████▍   | 92/144 [01:31<00:37,  1.37it/s]2026-04-14 10:18:45,729 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:46,147 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:46,202 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:47,023 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  65%|██████▍   | 93/144 [01:33<00:45,  1.12it/s]2026-04-14 10:18:47,402 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:47,574 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:48,017 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  65%|██████▌   | 94/144 [01:34<00:45,  1.09it/s]2026-04-14 10:18:48,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:48,553 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  66%|██████▌   | 95/144 [01:34<00:40,  1.22it/s]2026-04-14 10:18:49,213 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:49,284 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  67%|██████▋   | 96/144 [01:35<00:38,  1.25it/s]2026-04-14 10:18:49,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:49,716 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  67%|██████▋   | 97/144 [01:35<00:32,  1.43it/s]2026-04-14 10:18:50,304 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:50,392 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  68%|██████▊   | 98/144 [01:36<00:31,  1.44it/s]2026-04-14 10:18:51,033 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:51,253 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  69%|██████▉   | 99/144 [01:37<00:33,  1.35it/s]2026-04-14 10:18:52,572 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:53,006 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  69%|██████▉   | 100/144 [01:39<00:45,  1.03s/it]2026-04-14 10:18:54,253 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:54,273 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:54,614 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  70%|███████   | 101/144 [01:40<00:51,  1.20s/it]2026-04-14 10:18:54,776 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  71%|███████   | 102/144 [01:41<00:37,  1.12it/s]2026-04-14 10:18:55,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:55,583 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:56,256 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  72%|███████▏  | 103/144 [01:42<00:43,  1.07s/it]2026-04-14 10:18:56,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:57,044 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  72%|███████▏  | 104/144 [01:43<00:39,  1.02it/s]2026-04-14 10:18:57,240 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  73%|███████▎  | 105/144 [01:43<00:29,  1.33it/s]2026-04-14 10:18:57,471 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  74%|███████▎  | 106/144 [01:43<00:22,  1.68it/s]2026-04-14 10:18:57,868 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  74%|███████▍  | 107/144 [01:44<00:19,  1.87it/s]2026-04-14 10:18:58,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:59,307 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  75%|███████▌  | 108/144 [01:45<00:29,  1.24it/s]2026-04-14 10:18:59,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:18:59,833 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:19:00,433 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  76%|███████▌  | 109/144 [01:46<00:31,  1.11it/s]2026-04-14 10:19:01,003 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:19:01,052 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  76%|███████▋  | 110/144 [01:47<00:27,  1.22it/s]2026-04-14 10:19:01,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:19:02,442 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  77%|███████▋  | 111/144 [01:48<00:32,  1.01it/s]2026-04-14 10:19:03,178 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:19:03,642 [INFO] root: Invoking gpt-oss-120b.
+Descriptions:  78%|███████▊  | 112/144 [01:49<00:33,  1.05s/it]2026-04-14 10:19:04,268 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 113/144 [01:50<00:29,  1.05it/s]Descriptions:  79%|███████▉  | 114/144 [01:50<00:21,  1.38it/s]Descriptions:  80%|███████▉  | 115/144 [01:51<00:20,  1.44it/s]Descriptions:  81%|████████  | 116/144 [01:52<00:22,  1.25it/s]Descriptions:  81%|████████▏ | 117/144 [01:52<00:16,  1.67it/s]Descriptions:  82%|████████▏ | 118/144 [01:53<00:16,  1.60it/s]2026-04-14 10:19:07,730 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  83%|████████▎ | 119/144 [01:54<00:21,  1.14it/s]2026-04-14 10:19:10,970 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  83%|████████▎ | 120/144 [01:57<00:34,  1.44s/it]Descriptions:  84%|████████▍ | 121/144 [02:00<00:42,  1.85s/it]Descriptions:  85%|████████▍ | 122/144 [02:02<00:45,  2.09s/it]Descriptions:  85%|████████▌ | 123/144 [02:03<00:34,  1.65s/it]Descriptions:  86%|████████▌ | 124/144 [02:04<00:29,  1.47s/it]Descriptions:  87%|████████▋ | 125/144 [02:11<01:00,  3.21s/it]Descriptions:  88%|████████▊ | 127/144 [02:15<00:41,  2.45s/it]Descriptions:  89%|████████▉ | 128/144 [02:18<00:43,  2.72s/it]Descriptions:  90%|████████▉ | 129/144 [02:22<00:44,  3.00s/it]Descriptions:  90%|█████████ | 130/144 [02:23<00:35,  2.57s/it]Descriptions:  91%|█████████ | 131/144 [02:25<00:30,  2.32s/it]Descriptions:  92%|█████████▏| 132/144 [02:26<00:24,  2.08s/it]Descriptions:  92%|█████████▏| 133/144 [02:31<00:29,  2.67s/it]Descriptions:  93%|█████████▎| 134/144 [02:43<00:54,  5.42s/it]Descriptions:  94%|█████████▍| 135/144 [02:43<00:35,  3.97s/it]Descriptions:  94%|█████████▍| 136/144 [02:45<00:26,  3.26s/it]Descriptions:  95%|█████████▌| 137/144 [02:49<00:25,  3.64s/it]Descriptions:  96%|█████████▌| 138/144 [02:50<00:16,  2.68s/it]Descriptions:  97%|█████████▋| 139/144 [03:05<00:31,  6.37s/it]Descriptions:  97%|█████████▋| 140/144 [03:07<00:20,  5.05s/it]Descriptions:  98%|█████████▊| 141/144 [03:10<00:13,  4.53s/it]Descriptions:  99%|█████████▊| 142/144 [03:15<00:09,  4.58s/it]Descriptions:  99%|█████████▉| 143/144 [03:24<00:06,  6.13s/it]Descriptions: 100%|██████████| 144/144 [04:05<00:00, 16.35s/it]Descriptions: 100%|██████████| 144/144 [04:05<00:00,  1.70s/it]
+2026-04-14 10:21:18,948 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-oss-120b.parquet.

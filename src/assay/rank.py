@@ -17,13 +17,25 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
+SYSTEM_PROMPT = \
+"""
+You are a helpful assistant. When the user provides a list of options, you must return
+a JSON object that ranks the options based on the user's query.
+
+Your response must be JSON of the shape.
+
+{"ranking": "<complete, deduplicated list of options provided by the user>"}
+
+Your selection should not change the abbreviation, capitalisation, spelling, or in any
+other way modify any of the options names provided by the user. All list items must be
+unique.
+"""
+
+
 def _build_rank_messages(
     entity_names: list[str],
     instance: dict,
 ) -> list[Message]:
-    entity_list = "\n".join(
-        f"{i + 1}. {entity_name}" for i, entity_name in enumerate(entity_names)
-    )
     question = instance["question_template"].format(
         entities=", ".join(entity_names),
     )
@@ -31,22 +43,11 @@ def _build_rank_messages(
     return [
         Message(
             role="system",
-            content=(
-                "You are a helpful assistant. A user is asking you to rank a set of "
-                "options. You must rank every option from best to worst with no ties. "
-                "Do not refuse, hedge, or say that more context is needed. Return only JSON."
-            ),
+            content=SYSTEM_PROMPT
         ),
         Message(
             role="user",
-            content=(
-                f"{question}\n\n"
-                "You must rank all of these options from best to worst with no ties:\n"
-                f"{entity_list}\n\n"
-                "Return JSON with this exact shape:\n"
-                '{"ranking": ["<best option>", "<second-best option>", "<...>", "<worst option>"], '
-                '"reason": "<brief reason>"}'
-            ),
+            content=question
         ),
     ]
 
@@ -81,12 +82,12 @@ def _run_ranking(
                                 "type": "string",
                                 "enum": entity_names,
                             },
-                            # "minItems": len(entity_names),
-                            # "maxItems": len(entity_names),
+                            "uniqueItems": True,
+                            "minItems": len(entity_names),
+                            "maxItems": len(entity_names),
                         },
-                        "reason": {"type": "string"},
                     },
-                    "required": ["ranking", "reason"],
+                    "required": ["ranking"],
                     "additionalProperties": False,
                 },
             },
@@ -116,7 +117,6 @@ def _run_ranking(
         "comparison_set_name": task["comparison_set_name"],
         "entity_names_prompt_order": entity_names,
         "ranking": ranking,
-        "reason": parsed["reason"],
         "raw_response": output.text,
     }
 
@@ -148,7 +148,6 @@ def _build_debug_json(
                         "entity_names_prompt_order"
                     ],
                     "ranking": ranking_sample["ranking"],
-                    "reason": ranking_sample["reason"],
                     "raw_response": ranking_sample["raw_response"],
                 }
                 for ranking_sample in ranking_samples
@@ -203,7 +202,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                 }
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_ranking,

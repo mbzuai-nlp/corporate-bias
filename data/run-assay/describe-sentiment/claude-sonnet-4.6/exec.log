@@ -9,12 +9,14 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-07 16:51:40,347 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:51:40,373 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:51:40,523 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-07 16:51:40,677 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-07 16:51:40,822 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4771.98it/s]
+2026-04-14 10:26:27,893 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:26:27,965 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:26:28,117 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 10:26:28,267 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-14 10:26:28,440 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-14 10:26:28,603 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-14 10:26:28,785 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 8657.22it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,105 +24,315 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-07 16:51:40,979 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-07 16:51:41,157 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-07 16:51:41,218 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:51:41,335 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-07 16:51:41,397 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:51:41,516 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-07 16:51:42,722 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:51:42,771 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 74/202 [00:00<00:00, 729.25it/s]Loading weights:  73%|███████▎  | 147/202 [00:00<00:00, 720.34it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 874.96it/s]
-2026-04-07 16:51:43,241 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:51:43,395 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:51:44,382 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-07 16:51:44,675 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:51:44,758 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:51:44,938 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:51:45,021 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-07 16:51:45,204 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:51:45,399 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:51:46,450 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-07 16:51:46,581 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:51:46,611 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 65/202 [00:00<00:00, 645.43it/s]Loading weights:  65%|██████▍   | 131/202 [00:00<00:00, 648.61it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 892.98it/s]
-2026-04-07 16:51:46,883 [INFO] root: Running assay=describe-sentiment model=claude-sonnet-4.6 num_samples_per_instance=5.
-2026-04-07 16:51:46,891 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,892 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,893 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,894 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,895 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,896 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,897 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,898 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,899 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,901 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,902 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,903 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,904 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,905 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,906 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,912 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,923 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,934 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,942 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,948 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,956 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,958 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,961 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,966 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,968 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,971 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,976 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,981 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,985 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,989 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:51:46,991 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:51:46,996 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:28,927 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 10:26:29,067 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-14 10:26:29,144 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:26:29,298 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:26:29,066 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:26:29,162 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  55%|█████▍    | 111/202 [00:00<00:00, 1095.05it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1601.40it/s]
+2026-04-14 10:26:29,537 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:26:29,696 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:26:30,554 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 10:26:30,872 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:26:30,924 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:26:31,091 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:26:31,149 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 10:26:31,299 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:26:31,494 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:26:32,206 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 10:26:32,362 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:26:32,416 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 92/202 [00:00<00:00, 917.11it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1088.67it/s]
+2026-04-14 10:26:32,631 [INFO] root: Running assay=describe-sentiment model=claude-sonnet-4.6 num_samples_per_instance=3.
+2026-04-14 10:26:32,640 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,640 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,641 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,642 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,643 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,643 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,645 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,646 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,647 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,649 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,651 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,652 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,655 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,660 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,662 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,665 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,669 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,675 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,681 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,682 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,690 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,693 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,694 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,696 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,699 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,702 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,705 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,708 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,710 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,711 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,712 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:26:32,713 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 10:26:34,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,362 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,438 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,573 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,576 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,576 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,626 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,636 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,641 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,642 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,645 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,666 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,719 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,735 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,737 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,745 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,754 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:34,877 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,118 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,398 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,433 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,795 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:35,968 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:36,176 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:36,212 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:36,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:37,160 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:37,715 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-07 16:52:18,177 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   1%|▏         | 1/75 [00:31<38:26, 31.17s/it]2026-04-07 16:52:18,207 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,215 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,232 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,297 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   7%|▋         | 5/75 [00:31<05:26,  4.67s/it]2026-04-07 16:52:18,345 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,352 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,355 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,380 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,384 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,416 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  15%|█▍        | 11/75 [00:31<01:46,  1.67s/it]2026-04-07 16:52:18,446 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,502 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,508 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,532 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,577 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  21%|██▏       | 16/75 [00:31<00:56,  1.05it/s]2026-04-07 16:52:18,621 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,626 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,627 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,646 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,650 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,672 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,730 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,734 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  31%|███       | 23/75 [00:31<00:27,  1.92it/s]2026-04-07 16:52:18,751 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,752 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,842 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,860 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  37%|███▋      | 28/75 [00:31<00:17,  2.76it/s]2026-04-07 16:52:18,886 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,894 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:18,965 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:19,161 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  37%|███▋      | 28/75 [00:43<00:17,  2.76it/s]2026-04-07 16:52:49,388 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  44%|████▍     | 33/75 [01:02<01:31,  2.17s/it]2026-04-07 16:52:49,441 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,517 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  47%|████▋     | 35/75 [01:02<01:13,  1.85s/it]2026-04-07 16:52:49,521 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,526 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,557 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,631 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,640 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  52%|█████▏    | 39/75 [01:02<00:46,  1.30s/it]2026-04-07 16:52:49,699 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,706 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-07 16:52:49,709 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  60%|██████    | 45/75 [01:02<00:23,  1.26it/s]Descriptions:  65%|██████▌   | 49/75 [01:02<00:15,  1.71it/s]Descriptions:  71%|███████   | 53/75 [01:02<00:09,  2.33it/s]Descriptions:  80%|████████  | 60/75 [01:03<00:03,  3.84it/s]Descriptions:  80%|████████  | 60/75 [01:13<00:03,  3.84it/s]Descriptions:  87%|████████▋ | 65/75 [01:14<00:08,  1.13it/s]Descriptions:  89%|████████▉ | 67/75 [01:15<00:06,  1.31it/s]Descriptions: 100%|██████████| 75/75 [01:15<00:00,  1.00s/it]
-2026-04-07 16:53:02,225 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-sonnet-4.6.parquet.
+2026-04-14 10:26:54,422 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   1%|          | 1/144 [00:21<51:44, 21.71s/it]2026-04-14 10:26:54,589 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   1%|▏         | 2/144 [00:21<21:23,  9.04s/it]2026-04-14 10:26:56,294 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   2%|▏         | 3/144 [00:23<13:22,  5.69s/it]2026-04-14 10:26:56,827 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   3%|▎         | 4/144 [00:24<08:31,  3.65s/it]2026-04-14 10:26:56,927 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:59,621 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:00,309 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:01,480 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   3%|▎         | 5/144 [00:28<09:17,  4.01s/it]2026-04-14 10:27:01,941 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   4%|▍         | 6/144 [00:29<06:27,  2.81s/it]2026-04-14 10:27:01,996 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:03,282 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   5%|▍         | 7/144 [00:30<05:18,  2.33s/it]2026-04-14 10:27:03,337 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:03,338 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:03,604 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:03,639 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   7%|▋         | 10/144 [00:30<02:19,  1.04s/it]2026-04-14 10:27:03,661 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:03,986 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   8%|▊         | 12/144 [00:31<01:36,  1.37it/s]2026-04-14 10:27:04,178 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   9%|▉         | 13/144 [00:31<01:21,  1.61it/s]2026-04-14 10:27:04,517 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  10%|▉         | 14/144 [00:31<01:12,  1.80it/s]2026-04-14 10:27:04,786 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  10%|█         | 15/144 [00:32<01:02,  2.05it/s]2026-04-14 10:27:04,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:04,911 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  11%|█         | 16/144 [00:32<00:50,  2.54it/s]2026-04-14 10:27:04,963 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:05,274 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  12%|█▎        | 18/144 [00:32<00:38,  3.29it/s]2026-04-14 10:27:05,555 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  13%|█▎        | 19/144 [00:32<00:37,  3.35it/s]2026-04-14 10:27:05,613 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:05,959 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:06,041 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  14%|█▍        | 20/144 [00:33<00:42,  2.90it/s]2026-04-14 10:27:06,066 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:06,176 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  15%|█▍        | 21/144 [00:33<00:35,  3.45it/s]2026-04-14 10:27:06,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:06,202 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,230 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,350 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  17%|█▋        | 24/144 [00:33<00:20,  5.99it/s]2026-04-14 10:27:06,363 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,426 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:06,483 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  18%|█▊        | 26/144 [00:33<00:15,  7.51it/s]2026-04-14 10:27:06,555 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,660 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  19%|█▉        | 28/144 [00:33<00:13,  8.41it/s]2026-04-14 10:27:06,714 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,831 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  21%|██        | 30/144 [00:34<00:12,  9.22it/s]2026-04-14 10:27:06,847 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:06,885 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:07,057 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:07,222 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  23%|██▎       | 33/144 [00:34<00:12,  8.54it/s]2026-04-14 10:27:07,297 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:07,459 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:07,818 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,151 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,217 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,471 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,726 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,736 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:08,763 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,546 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,644 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,875 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,982 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:09,985 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:10,120 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  24%|██▍       | 35/144 [00:37<00:53,  2.05it/s]2026-04-14 10:27:10,880 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:11,256 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:11,881 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  25%|██▌       | 36/144 [00:39<01:15,  1.43it/s]2026-04-14 10:27:12,478 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:12,549 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  26%|██▌       | 37/144 [00:39<01:14,  1.44it/s]2026-04-14 10:27:13,668 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:13,839 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:14,482 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:15,683 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:15,893 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  26%|██▋       | 38/144 [00:43<02:13,  1.26s/it]2026-04-14 10:27:17,398 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:17,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:17,428 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:18,571 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  27%|██▋       | 39/144 [00:45<02:47,  1.59s/it]2026-04-14 10:27:20,083 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:20,635 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  28%|██▊       | 40/144 [00:47<02:58,  1.71s/it]2026-04-14 10:27:23,275 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  28%|██▊       | 41/144 [00:50<03:21,  1.96s/it]2026-04-14 10:27:24,407 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:29,714 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  29%|██▉       | 42/144 [00:56<05:24,  3.18s/it]2026-04-14 10:27:30,571 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  30%|██▉       | 43/144 [00:57<04:15,  2.53s/it]2026-04-14 10:27:31,224 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:30,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:32,416 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:33,290 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  31%|███       | 44/144 [01:00<04:18,  2.58s/it]2026-04-14 10:27:33,929 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  31%|███▏      | 45/144 [01:01<03:19,  2.02s/it]2026-04-14 10:27:34,940 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:34,968 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  32%|███▏      | 46/144 [01:02<02:49,  1.73s/it]2026-04-14 10:27:36,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:36,107 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  33%|███▎      | 47/144 [01:03<02:30,  1.56s/it]2026-04-14 10:27:36,440 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  33%|███▎      | 48/144 [01:03<01:54,  1.20s/it]2026-04-14 10:27:36,749 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:37,139 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  34%|███▍      | 49/144 [01:04<01:39,  1.05s/it]2026-04-14 10:27:37,233 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:37,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:37,998 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:38,284 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  35%|███▌      | 51/144 [01:05<01:16,  1.21it/s]2026-04-14 10:27:38,707 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  36%|███▌      | 52/144 [01:05<01:06,  1.37it/s]2026-04-14 10:27:38,755 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:27:39,258 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:39,635 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:39,764 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:40,229 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  38%|███▊      | 54/144 [01:07<01:06,  1.35it/s]2026-04-14 10:27:40,258 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:40,901 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  38%|███▊      | 55/144 [01:08<01:04,  1.38it/s]2026-04-14 10:27:41,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:41,174 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  39%|███▉      | 56/144 [01:08<00:54,  1.63it/s]2026-04-14 10:27:41,394 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  40%|███▉      | 57/144 [01:08<00:44,  1.95it/s]2026-04-14 10:27:41,789 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:41,948 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  40%|████      | 58/144 [01:09<00:45,  1.91it/s]2026-04-14 10:27:42,155 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  41%|████      | 59/144 [01:09<00:36,  2.30it/s]2026-04-14 10:27:42,269 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:42,901 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  42%|████▏     | 60/144 [01:10<00:43,  1.91it/s]2026-04-14 10:27:43,048 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:43,322 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  42%|████▏     | 61/144 [01:10<00:41,  2.02it/s]2026-04-14 10:27:43,687 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  43%|████▎     | 62/144 [01:10<00:37,  2.19it/s]2026-04-14 10:27:43,868 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  44%|████▍     | 63/144 [01:11<00:30,  2.65it/s]2026-04-14 10:27:44,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:44,336 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:44,400 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  44%|████▍     | 64/144 [01:11<00:33,  2.38it/s]2026-04-14 10:27:44,565 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  45%|████▌     | 65/144 [01:11<00:27,  2.89it/s]2026-04-14 10:27:44,786 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  46%|████▌     | 66/144 [01:12<00:23,  3.25it/s]2026-04-14 10:27:44,958 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  47%|████▋     | 67/144 [01:12<00:20,  3.75it/s]2026-04-14 10:27:45,252 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:45,348 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  47%|████▋     | 68/144 [01:12<00:23,  3.29it/s]2026-04-14 10:27:45,602 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:45,891 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:46,026 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  48%|████▊     | 69/144 [01:13<00:31,  2.40it/s]2026-04-14 10:27:46,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:46,559 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  49%|████▊     | 70/144 [01:13<00:33,  2.22it/s]2026-04-14 10:27:46,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:47,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:47,468 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:47,816 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  49%|████▉     | 71/144 [01:15<00:50,  1.44it/s]2026-04-14 10:27:48,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:48,669 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:50,723 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  50%|█████     | 72/144 [01:18<01:37,  1.36s/it]2026-04-14 10:27:52,224 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:52,761 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:52,777 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:52,968 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  51%|█████     | 73/144 [01:20<01:55,  1.62s/it]2026-04-14 10:27:53,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:55,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:57,227 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:27:57,540 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  51%|█████▏    | 74/144 [01:24<02:55,  2.51s/it]2026-04-14 10:27:58,770 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  52%|█████▏    | 75/144 [01:26<02:26,  2.12s/it]2026-04-14 10:27:59,452 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  53%|█████▎    | 76/144 [01:26<01:55,  1.69s/it]2026-04-14 10:28:01,131 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:01,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:01,668 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:01,176 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  53%|█████▎    | 77/144 [01:28<01:54,  1.70s/it]2026-04-14 10:28:01,576 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  54%|█████▍    | 78/144 [01:28<01:26,  1.31s/it]2026-04-14 10:28:01,933 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  55%|█████▍    | 79/144 [01:29<01:06,  1.02s/it]2026-04-14 10:28:02,564 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  56%|█████▌    | 80/144 [01:29<00:58,  1.10it/s]2026-04-14 10:28:03,292 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:04,706 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:04,770 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  56%|█████▋    | 81/144 [01:32<01:21,  1.30s/it]2026-04-14 10:28:04,933 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  57%|█████▋    | 82/144 [01:32<00:59,  1.05it/s]2026-04-14 10:28:06,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:06,428 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  58%|█████▊    | 83/144 [01:33<01:08,  1.12s/it]2026-04-14 10:28:06,433 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:06,480 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:06,705 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  58%|█████▊    | 84/144 [01:33<00:51,  1.15it/s]2026-04-14 10:28:07,633 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  59%|█████▉    | 85/144 [01:34<00:52,  1.13it/s]2026-04-14 10:28:07,987 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  60%|█████▉    | 86/144 [01:35<00:42,  1.38it/s]2026-04-14 10:28:08,526 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  60%|██████    | 87/144 [01:35<00:38,  1.49it/s]2026-04-14 10:28:08,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:09,366 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:09,375 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  61%|██████    | 88/144 [01:36<00:40,  1.38it/s]2026-04-14 10:28:09,665 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  62%|██████▏   | 89/144 [01:36<00:32,  1.69it/s]2026-04-14 10:28:10,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:10,184 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:10,270 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  62%|██████▎   | 90/144 [01:37<00:32,  1.68it/s]2026-04-14 10:28:10,983 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:11,135 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  63%|██████▎   | 91/144 [01:38<00:36,  1.47it/s]2026-04-14 10:28:11,193 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:28:11,451 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  65%|██████▍   | 93/144 [01:38<00:22,  2.29it/s]2026-04-14 10:28:11,549 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-14 10:28:11,770 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:11,947 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:12,505 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:13,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:13,679 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:14,035 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:14,402 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  66%|██████▌   | 95/144 [01:41<00:41,  1.18it/s]2026-04-14 10:28:14,651 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  67%|██████▋   | 96/144 [01:41<00:34,  1.40it/s]2026-04-14 10:28:15,404 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  67%|██████▋   | 97/144 [01:42<00:34,  1.38it/s]2026-04-14 10:28:15,629 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  68%|██████▊   | 98/144 [01:42<00:27,  1.67it/s]2026-04-14 10:28:15,693 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:15,770 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  69%|██████▉   | 99/144 [01:43<00:21,  2.10it/s]2026-04-14 10:28:15,787 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:15,969 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  69%|██████▉   | 100/144 [01:43<00:17,  2.51it/s]2026-04-14 10:28:16,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:16,883 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:16,952 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:17,051 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:17,539 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:18,663 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  70%|███████   | 101/144 [01:45<00:45,  1.05s/it]2026-04-14 10:28:19,239 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  71%|███████   | 102/144 [01:46<00:38,  1.10it/s]2026-04-14 10:28:19,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:20,106 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  72%|███████▏  | 103/144 [01:47<00:36,  1.11it/s]2026-04-14 10:28:20,961 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:21,037 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:21,136 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  72%|███████▏  | 104/144 [01:48<00:37,  1.07it/s]2026-04-14 10:28:21,475 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:22,466 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  73%|███████▎  | 105/144 [01:49<00:41,  1.06s/it]2026-04-14 10:28:22,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:23,452 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  74%|███████▎  | 106/144 [01:50<00:39,  1.03s/it]2026-04-14 10:28:23,932 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  74%|███████▍  | 107/144 [01:51<00:32,  1.15it/s]2026-04-14 10:28:24,222 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:24,388 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  75%|███████▌  | 108/144 [01:51<00:26,  1.34it/s]2026-04-14 10:28:24,908 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  76%|███████▌  | 109/144 [01:52<00:23,  1.48it/s]2026-04-14 10:28:25,745 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  76%|███████▋  | 110/144 [01:53<00:24,  1.38it/s]2026-04-14 10:28:26,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:26,301 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:26,423 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  77%|███████▋  | 111/144 [01:53<00:23,  1.41it/s]2026-04-14 10:28:26,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:27,725 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:27,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:28:28,928 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  78%|███████▊  | 112/144 [01:56<00:39,  1.25s/it]2026-04-14 10:28:30,240 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 113/144 [01:58<00:51,  1.65s/it]2026-04-14 10:28:33,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  79%|███████▉  | 114/144 [02:02<01:10,  2.34s/it]Descriptions:  80%|███████▉  | 115/144 [02:05<01:07,  2.32s/it]Descriptions:  81%|████████▏ | 117/144 [02:07<00:51,  1.91s/it]Descriptions:  82%|████████▏ | 118/144 [02:09<00:45,  1.73s/it]Descriptions:  83%|████████▎ | 119/144 [02:10<00:43,  1.74s/it]Descriptions:  83%|████████▎ | 120/144 [02:11<00:35,  1.48s/it]Descriptions:  84%|████████▍ | 121/144 [02:12<00:29,  1.28s/it]Descriptions:  85%|████████▍ | 122/144 [02:12<00:22,  1.04s/it]Descriptions:  85%|████████▌ | 123/144 [02:13<00:16,  1.26it/s]Descriptions:  86%|████████▌ | 124/144 [02:13<00:12,  1.54it/s]Descriptions:  88%|████████▊ | 126/144 [02:13<00:07,  2.36it/s]Descriptions:  88%|████████▊ | 127/144 [02:14<00:10,  1.58it/s]Descriptions:  89%|████████▉ | 128/144 [02:15<00:09,  1.72it/s]Descriptions:  90%|████████▉ | 129/144 [02:16<00:10,  1.44it/s]Descriptions:  90%|█████████ | 130/144 [02:16<00:07,  1.86it/s]Descriptions:  91%|█████████ | 131/144 [02:17<00:07,  1.78it/s]Descriptions:  92%|█████████▏| 132/144 [02:17<00:05,  2.23it/s]Descriptions:  92%|█████████▏| 133/144 [02:17<00:04,  2.67it/s]Descriptions:  93%|█████████▎| 134/144 [02:17<00:03,  2.67it/s]Descriptions:  94%|█████████▍| 135/144 [02:18<00:04,  2.09it/s]Descriptions:  94%|█████████▍| 136/144 [02:18<00:02,  2.70it/s]Descriptions:  95%|█████████▌| 137/144 [02:19<00:03,  2.27it/s]Descriptions:  96%|█████████▌| 138/144 [02:19<00:02,  2.94it/s]Descriptions:  97%|█████████▋| 139/144 [02:19<00:01,  3.36it/s]Descriptions:  99%|█████████▊| 142/144 [02:19<00:00,  6.37it/s]Descriptions: 100%|██████████| 144/144 [02:19<00:00,  1.03it/s]
+2026-04-14 10:28:52,581 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-sonnet-4.6.parquet.

@@ -9,11 +9,13 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-07 16:50:16,555 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:50:16,625 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:50:16,806 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-07 16:50:16,991 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5506.74it/s]
+2026-04-14 10:24:00,091 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:24:00,142 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:24:00,316 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-14 10:24:00,467 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-14 10:24:00,620 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-14 10:24:00,785 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5443.59it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -21,107 +23,316 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-07 16:50:17,180 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-07 16:50:17,352 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-07 16:50:17,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:50:17,528 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-07 16:50:17,664 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:50:17,729 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-07 16:50:17,882 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-07 16:50:16,957 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:50:17,008 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 76/202 [00:00<00:00, 754.14it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1044.88it/s]
-2026-04-07 16:50:17,447 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:50:17,622 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:50:18,611 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-07 16:50:18,852 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:50:18,883 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-07 16:50:19,029 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:50:19,083 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-07 16:50:19,252 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-07 16:50:19,373 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-07 16:50:20,020 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-07 16:50:20,466 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-07 16:50:20,513 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  39%|███▉      | 79/202 [00:00<00:00, 773.17it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1081.26it/s]
-2026-04-07 16:50:20,735 [INFO] root: Running assay=describe-sentiment model=gpt-4o-mini num_samples_per_instance=5.
-2026-04-07 16:50:20,740 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,741 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,742 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,742 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,743 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,744 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,745 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,746 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,747 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,749 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,750 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,751 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,752 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,754 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,755 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,757 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,760 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,770 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,776 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,783 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,787 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,795 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,798 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,801 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,806 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,808 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,809 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,811 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,814 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   0%|          | 0/75 [00:00<?, ?it/s]2026-04-07 16:50:20,817 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,826 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:20,831 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:00,961 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-14 10:24:01,108 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-14 10:24:01,122 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:24:01,251 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-14 10:24:01,278 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:24:02,509 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:24:02,554 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  50%|████▉     | 100/202 [00:00<00:00, 986.81it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1342.49it/s]
+2026-04-14 10:24:02,927 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:24:03,090 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:24:04,009 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-14 10:24:04,278 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:24:04,314 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-14 10:24:04,467 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:24:04,520 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-14 10:24:04,665 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-14 10:24:04,815 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-14 10:24:05,369 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-14 10:24:05,510 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-14 10:24:05,567 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 840.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1108.92it/s]
+2026-04-14 10:24:05,771 [INFO] root: Running assay=describe-sentiment model=gpt-4o-mini num_samples_per_instance=3.
+2026-04-14 10:24:05,776 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,777 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,777 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,778 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,779 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,780 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,781 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,781 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,782 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,783 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,784 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,784 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,785 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,786 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,787 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,788 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,798 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,815 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,823 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,827 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,830 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,833 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,839 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,843 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,845 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,847 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,850 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,853 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,857 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,862 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:05,865 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 10:24:05,867 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:06,618 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,656 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,671 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,677 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,695 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,698 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,698 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,699 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,714 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,717 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,740 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,752 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,753 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,755 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,760 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,771 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,782 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,788 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,795 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,801 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,804 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,860 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:06,862 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,075 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,113 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:07,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-07 16:50:50,214 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   1%|▏         | 1/75 [00:29<36:14, 29.38s/it]2026-04-07 16:50:50,250 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,278 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,342 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   5%|▌         | 4/75 [00:29<06:37,  5.59s/it]2026-04-07 16:50:50,389 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,455 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,476 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   9%|▉         | 7/75 [00:29<02:57,  2.62s/it]2026-04-07 16:50:50,479 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,492 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,525 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,587 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  15%|█▍        | 11/75 [00:29<01:23,  1.31s/it]2026-04-07 16:50:50,593 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,610 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,616 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,634 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,661 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,684 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,709 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  24%|██▍       | 18/75 [00:29<00:33,  1.70it/s]2026-04-07 16:50:50,714 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,720 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,776 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,785 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,793 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,805 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,831 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  33%|███▎      | 25/75 [00:29<00:16,  2.99it/s]2026-04-07 16:50:50,842 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,854 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,874 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,956 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:50,961 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  40%|████      | 30/75 [00:30<00:10,  4.20it/s]2026-04-07 16:50:51,017 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:50:51,072 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  40%|████      | 30/75 [00:46<00:10,  4.20it/s]2026-04-07 16:51:20,168 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  44%|████▍     | 33/75 [00:59<01:34,  2.24s/it]2026-04-07 16:51:20,279 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  45%|████▌     | 34/75 [00:59<01:23,  2.05s/it]2026-04-07 16:51:20,354 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,473 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,607 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,645 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  51%|█████     | 38/75 [00:59<00:50,  1.38s/it]2026-04-07 16:51:20,663 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,721 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,747 [INFO] root: Invoking gpt-4o-mini.
-2026-04-07 16:51:20,780 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  56%|█████▌    | 42/75 [00:59<00:30,  1.07it/s]2026-04-07 16:51:20,783 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  60%|██████    | 45/75 [01:00<00:21,  1.43it/s]Descriptions:  71%|███████   | 53/75 [01:00<00:07,  2.78it/s]Descriptions:  77%|███████▋  | 58/75 [01:00<00:04,  3.93it/s]Descriptions:  84%|████████▍ | 63/75 [01:00<00:02,  5.37it/s]Descriptions:  89%|████████▉ | 67/75 [01:11<00:06,  1.18it/s]Descriptions: 100%|██████████| 75/75 [01:11<00:00,  1.05it/s]
-2026-04-07 16:51:32,371 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-4o-mini.parquet.
+2026-04-14 10:24:30,331 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   1%|          | 1/144 [00:24<58:16, 24.45s/it]2026-04-14 10:24:30,435 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   1%|▏         | 2/144 [00:24<23:58, 10.13s/it]2026-04-14 10:24:30,714 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   2%|▏         | 3/144 [00:24<13:14,  5.63s/it]2026-04-14 10:24:30,857 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   3%|▎         | 4/144 [00:24<08:05,  3.47s/it]2026-04-14 10:24:31,026 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:31,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:31,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:31,643 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:32,099 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   3%|▎         | 5/144 [00:26<06:10,  2.66s/it]2026-04-14 10:24:32,273 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   4%|▍         | 6/144 [00:26<04:10,  1.82s/it]2026-04-14 10:24:32,366 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:32,754 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:32,823 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:32,937 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   6%|▌         | 8/144 [00:27<02:27,  1.09s/it]2026-04-14 10:24:33,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:33,032 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:33,380 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   7%|▋         | 10/144 [00:27<01:37,  1.37it/s]2026-04-14 10:24:33,508 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:33,524 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   8%|▊         | 11/144 [00:27<01:19,  1.68it/s]2026-04-14 10:24:33,605 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:33,760 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   8%|▊         | 12/144 [00:27<01:07,  1.97it/s]2026-04-14 10:24:33,863 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:33,907 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  10%|▉         | 14/144 [00:28<00:42,  3.05it/s]2026-04-14 10:24:33,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:34,113 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:34,288 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  10%|█         | 15/144 [00:28<00:43,  2.94it/s]2026-04-14 10:24:34,542 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:34,545 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:34,638 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  11%|█         | 16/144 [00:28<00:43,  2.92it/s]2026-04-14 10:24:34,821 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:34,939 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  12%|█▏        | 17/144 [00:29<00:42,  3.01it/s]2026-04-14 10:24:35,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:35,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:35,548 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:36,381 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  12%|█▎        | 18/144 [00:30<01:19,  1.58it/s]2026-04-14 10:24:36,550 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  13%|█▎        | 19/144 [00:30<01:02,  1.99it/s]2026-04-14 10:24:36,595 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:36,672 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  15%|█▍        | 21/144 [00:30<00:37,  3.26it/s]2026-04-14 10:24:36,895 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:36,941 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  15%|█▌        | 22/144 [00:31<00:36,  3.35it/s]2026-04-14 10:24:37,001 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,112 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  16%|█▌        | 23/144 [00:31<00:32,  3.77it/s]2026-04-14 10:24:37,229 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,318 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,374 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  17%|█▋        | 24/144 [00:31<00:31,  3.78it/s]2026-04-14 10:24:37,492 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  17%|█▋        | 25/144 [00:31<00:26,  4.46it/s]2026-04-14 10:24:37,601 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  18%|█▊        | 26/144 [00:31<00:22,  5.23it/s]2026-04-14 10:24:37,634 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:37,799 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,896 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  19%|█▉        | 28/144 [00:32<00:19,  5.82it/s]2026-04-14 10:24:37,917 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,921 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:37,958 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:38,121 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:38,131 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:38,154 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  21%|██        | 30/144 [00:32<00:17,  6.46it/s]2026-04-14 10:24:38,250 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:24:38,390 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  22%|██▏       | 32/144 [00:32<00:15,  7.06it/s]2026-04-14 10:24:38,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:38,828 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:38,939 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:39,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:39,473 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:42,303 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  23%|██▎       | 33/144 [00:36<01:41,  1.10it/s]2026-04-14 10:24:42,854 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:53,579 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  24%|██▎       | 34/144 [00:47<05:56,  3.24s/it]2026-04-14 10:24:54,016 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:56,049 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  24%|██▍       | 35/144 [00:50<05:33,  3.06s/it]2026-04-14 10:24:56,764 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:57,810 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  25%|██▌       | 36/144 [00:51<04:53,  2.72s/it]2026-04-14 10:24:58,344 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  26%|██▌       | 37/144 [00:52<03:48,  2.13s/it]2026-04-14 10:24:58,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:58,799 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  26%|██▋       | 38/144 [00:52<02:56,  1.67s/it]2026-04-14 10:24:59,056 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:24:59,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:03,511 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  27%|██▋       | 39/144 [00:57<04:25,  2.53s/it]2026-04-14 10:25:03,900 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:04,769 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  28%|██▊       | 40/144 [00:58<03:44,  2.16s/it]2026-04-14 10:25:05,265 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  28%|██▊       | 41/144 [00:59<02:52,  1.68s/it]2026-04-14 10:25:05,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:05,829 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:06,520 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  29%|██▉       | 42/144 [01:00<02:38,  1.55s/it]2026-04-14 10:25:06,932 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:07,007 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  30%|██▉       | 43/144 [01:01<02:04,  1.24s/it]2026-04-14 10:25:07,408 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:07,770 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  31%|███       | 44/144 [01:01<01:49,  1.10s/it]2026-04-14 10:25:08,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:08,768 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  31%|███▏      | 45/144 [01:02<01:45,  1.07s/it]2026-04-14 10:25:08,944 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  32%|███▏      | 46/144 [01:03<01:18,  1.25it/s]2026-04-14 10:25:09,044 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:09,245 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:09,385 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  33%|███▎      | 48/144 [01:03<00:51,  1.87it/s]2026-04-14 10:25:09,462 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:09,540 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  34%|███▍      | 49/144 [01:03<00:41,  2.27it/s]2026-04-14 10:25:09,815 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  35%|███▍      | 50/144 [01:03<00:37,  2.52it/s]2026-04-14 10:25:09,816 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:09,936 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  35%|███▌      | 51/144 [01:04<00:29,  3.11it/s]2026-04-14 10:25:10,060 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,108 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  36%|███▌      | 52/144 [01:04<00:25,  3.57it/s]2026-04-14 10:25:10,142 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:10,151 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,379 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  38%|███▊      | 54/144 [01:04<00:19,  4.64it/s]2026-04-14 10:25:10,383 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,391 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:10,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,686 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,723 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,874 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  39%|███▉      | 56/144 [01:04<00:20,  4.39it/s]2026-04-14 10:25:10,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:10,980 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  40%|███▉      | 57/144 [01:05<00:17,  4.96it/s]2026-04-14 10:25:10,985 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:11,391 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  40%|████      | 58/144 [01:05<00:21,  3.97it/s]2026-04-14 10:25:11,474 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:11,522 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  41%|████      | 59/144 [01:05<00:18,  4.53it/s]2026-04-14 10:25:11,596 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:11,758 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  42%|████▏     | 60/144 [01:05<00:18,  4.45it/s]2026-04-14 10:25:11,806 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:12,038 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:12,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:12,201 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:12,304 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  43%|████▎     | 62/144 [01:06<00:20,  4.07it/s]2026-04-14 10:25:12,570 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:12,629 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  44%|████▍     | 63/144 [01:06<00:21,  3.79it/s]2026-04-14 10:25:12,757 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:12,825 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  44%|████▍     | 64/144 [01:06<00:19,  4.05it/s]2026-04-14 10:25:13,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:13,287 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:14,371 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  45%|████▌     | 65/144 [01:08<00:46,  1.69it/s]2026-04-14 10:25:14,794 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:21,369 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  46%|████▌     | 66/144 [01:15<03:03,  2.35s/it]2026-04-14 10:25:21,861 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:27,002 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  47%|████▋     | 67/144 [01:21<04:11,  3.27s/it]2026-04-14 10:25:27,544 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:28,085 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  47%|████▋     | 68/144 [01:22<03:20,  2.64s/it]2026-04-14 10:25:27,232 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:29,599 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  48%|████▊     | 69/144 [01:23<02:53,  2.32s/it]2026-04-14 10:25:30,020 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:30,992 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  49%|████▊     | 70/144 [01:25<02:31,  2.05s/it]2026-04-14 10:25:31,194 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  49%|████▉     | 71/144 [01:25<01:49,  1.50s/it]2026-04-14 10:25:31,416 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:31,921 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:32,974 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  50%|█████     | 72/144 [01:27<01:54,  1.58s/it]2026-04-14 10:25:33,496 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  51%|█████     | 73/144 [01:27<01:29,  1.27s/it]2026-04-14 10:25:33,614 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:33,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:33,967 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  51%|█████▏    | 74/144 [01:28<01:12,  1.03s/it]2026-04-14 10:25:34,343 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  52%|█████▏    | 75/144 [01:28<00:57,  1.20it/s]2026-04-14 10:25:34,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:35,212 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:35,872 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  53%|█████▎    | 76/144 [01:29<01:10,  1.04s/it]2026-04-14 10:25:36,356 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:36,388 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  53%|█████▎    | 77/144 [01:30<00:59,  1.13it/s]2026-04-14 10:25:36,938 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:37,287 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  54%|█████▍    | 78/144 [01:31<00:58,  1.12it/s]2026-04-14 10:25:37,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:38,022 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  55%|█████▍    | 79/144 [01:32<00:54,  1.19it/s]2026-04-14 10:25:38,115 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:38,125 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  56%|█████▋    | 81/144 [01:32<00:30,  2.09it/s]2026-04-14 10:25:38,168 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:38,327 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  58%|█████▊    | 83/144 [01:32<00:20,  3.05it/s]2026-04-14 10:25:38,414 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:38,500 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:38,769 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:38,828 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:38,969 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:39,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:39,262 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:39,310 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  59%|█████▉    | 85/144 [01:33<00:22,  2.58it/s]2026-04-14 10:25:39,433 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  60%|█████▉    | 86/144 [01:33<00:19,  3.00it/s]2026-04-14 10:25:39,523 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:39,714 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  61%|██████    | 88/144 [01:33<00:14,  3.82it/s]2026-04-14 10:25:39,825 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  62%|██████▏   | 89/144 [01:33<00:12,  4.35it/s]2026-04-14 10:25:39,951 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,001 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,350 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,419 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  62%|██████▎   | 90/144 [01:34<00:16,  3.19it/s]2026-04-14 10:25:40,488 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,624 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  63%|██████▎   | 91/144 [01:34<00:15,  3.48it/s]2026-04-14 10:25:40,636 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:40,677 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,827 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:40,871 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  65%|██████▍   | 93/144 [01:34<00:11,  4.55it/s]2026-04-14 10:25:40,959 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:40,979 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  66%|██████▌   | 95/144 [01:35<00:07,  6.34it/s]2026-04-14 10:25:41,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:41,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:41,335 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:41,463 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:41,671 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:41,714 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:41,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:42,329 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  67%|██████▋   | 97/144 [01:36<00:15,  2.97it/s]2026-04-14 10:25:43,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:45,633 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  68%|██████▊   | 98/144 [01:39<00:42,  1.08it/s]2026-04-14 10:25:46,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:50,567 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  69%|██████▉   | 99/144 [01:44<01:21,  1.81s/it]2026-04-14 10:25:51,056 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:52,040 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  69%|██████▉   | 100/144 [01:46<01:16,  1.73s/it]2026-04-14 10:25:52,507 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:56,315 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  70%|███████   | 101/144 [01:50<01:42,  2.38s/it]2026-04-14 10:25:57,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:57,336 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  71%|███████   | 102/144 [01:51<01:24,  2.02s/it]2026-04-14 10:25:57,639 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  72%|███████▏  | 103/144 [01:51<01:03,  1.54s/it]2026-04-14 10:25:57,887 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:58,748 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:58,902 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  72%|███████▏  | 104/144 [01:53<00:58,  1.46s/it]2026-04-14 10:25:58,918 [INFO] root: Invoking gpt-4o-mini.
+2026-04-14 10:25:59,387 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:25:59,622 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  74%|███████▎  | 106/144 [01:53<00:36,  1.03it/s]2026-04-14 10:26:00,116 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:00,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:01,476 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  74%|███████▍  | 107/144 [01:55<00:43,  1.18s/it]2026-04-14 10:26:01,630 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  75%|███████▌  | 108/144 [01:55<00:33,  1.09it/s]2026-04-14 10:26:01,917 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:02,531 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:03,182 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  76%|███████▌  | 109/144 [01:57<00:38,  1.09s/it]2026-04-14 10:26:03,344 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  76%|███████▋  | 110/144 [01:57<00:28,  1.20it/s]2026-04-14 10:26:03,672 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  77%|███████▋  | 111/144 [01:57<00:22,  1.45it/s]2026-04-14 10:26:03,743 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:03,985 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:04,095 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  78%|███████▊  | 112/144 [01:58<00:19,  1.63it/s]2026-04-14 10:26:04,253 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-14 10:26:04,585 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 113/144 [01:58<00:19,  1.61it/s]Descriptions:  79%|███████▉  | 114/144 [01:59<00:15,  1.94it/s]Descriptions:  80%|███████▉  | 115/144 [02:01<00:29,  1.03s/it]Descriptions:  81%|████████  | 116/144 [02:03<00:34,  1.23s/it]Descriptions:  81%|████████▏ | 117/144 [02:03<00:24,  1.10it/s]Descriptions:  82%|████████▏ | 118/144 [02:04<00:23,  1.08it/s]Descriptions:  83%|████████▎ | 119/144 [02:05<00:23,  1.06it/s]Descriptions:  84%|████████▍ | 121/144 [02:05<00:14,  1.56it/s]Descriptions:  85%|████████▍ | 122/144 [02:06<00:13,  1.62it/s]Descriptions:  86%|████████▌ | 124/144 [02:06<00:08,  2.50it/s]Descriptions:  87%|████████▋ | 125/144 [02:06<00:06,  2.99it/s]Descriptions:  89%|████████▉ | 128/144 [02:07<00:05,  3.00it/s]Descriptions:  90%|████████▉ | 129/144 [02:08<00:05,  2.50it/s]Descriptions:  90%|█████████ | 130/144 [02:08<00:04,  2.92it/s]Descriptions:  91%|█████████ | 131/144 [02:09<00:07,  1.86it/s]Descriptions:  92%|█████████▏| 132/144 [02:10<00:07,  1.53it/s]Descriptions:  92%|█████████▏| 133/144 [02:11<00:09,  1.18it/s]Descriptions:  93%|█████████▎| 134/144 [02:12<00:06,  1.44it/s]Descriptions:  94%|█████████▍| 135/144 [02:13<00:07,  1.18it/s]Descriptions:  95%|█████████▌| 137/144 [02:13<00:03,  1.89it/s]Descriptions:  96%|█████████▌| 138/144 [02:14<00:03,  1.80it/s]Descriptions:  97%|█████████▋| 140/144 [02:14<00:01,  2.31it/s]Descriptions:  99%|█████████▊| 142/144 [02:15<00:00,  3.34it/s]Descriptions: 100%|██████████| 144/144 [02:15<00:00,  1.07it/s]
+2026-04-14 10:26:21,090 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-4o-mini.parquet.

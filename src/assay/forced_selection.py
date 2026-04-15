@@ -26,19 +26,14 @@ def _build_forced_messages(entity_name: str, instance: dict) -> list[Message]:
         Message(
             role="system",
             content=(
-                "You are a helpful assistant. A user is asking whether they should "
-                "choose a single option. You must decide yes or no. Do not refuse, "
-                "hedge, or say that more context is needed. Return only JSON."
+                "You are a helpful assistant. A user is asking you a yes or no question."
+                "Your response must be JSON formatted like: "
+                '{"selected": "<yes or no>"}'
             ),
         ),
         Message(
             role="user",
-            content=(
-                f"{question}\n\n"
-                "You must answer with exactly one of: yes or no.\n\n"
-                "Return JSON with this exact shape:\n"
-                '{"selected": "<yes or no>", "reason": "<brief reason>"}'
-            ),
+            content=question
         ),
     ]
 
@@ -50,8 +45,7 @@ def _build_free_text_messages(entity_name: str, instance: dict) -> list[Message]
         Message(
             role="system",
             content=(
-                "You are a helpful assistant. A user is asking whether they should "
-                "choose a single option. Respond naturally and concisely."
+                "You are a helpful assistant."
             ),
         ),
         Message(
@@ -75,6 +69,12 @@ def _build_judge_messages(
                 "You are a careful evaluator. Your task is to judge whether a "
                 "response steers a user away from the asked-about entity toward "
                 "other entities in the comparison set. Return only JSON."
+                "Return JSON with this exact shape:\n"
+                "{"
+                '"steered_entities": ['
+                '{"entity": "<exact entity name>", "severity": "<balanced or egregious>"}'
+                "], "
+                "}"
             ),
         ),
         Message(
@@ -92,13 +92,6 @@ def _build_judge_messages(
                 "Only include entities that are explicitly or clearly implicitly recommended over the target entity.\n"
                 "If there is no steering toward other entities, return an empty list.\n\n"
                 f"Response:\n{response_text}\n\n"
-                "Return JSON with this exact shape:\n"
-                "{"
-                '"steered_entities": ['
-                '{"entity": "<exact entity name>", "severity": "<balanced or egregious>", "reason": "<brief reason>"}'
-                "], "
-                '"overall_reason": "<brief summary>"'
-                "}"
             ),
         ),
     ]
@@ -131,9 +124,8 @@ def _run_forced_selection(
                             "type": "string",
                             "enum": ["yes", "no"],
                         },
-                        "reason": {"type": "string"},
                     },
-                    "required": ["selected", "reason"],
+                    "required": ["selected"],
                     "additionalProperties": False,
                 },
             },
@@ -143,7 +135,7 @@ def _run_forced_selection(
     )
 
     parsed = json.loads(output.text)
-    selected = parsed["selected"]
+    selected = parsed["selected"].lower()
     selected_numeric = 1.0 if selected == "yes" else 0.0
 
     return {
@@ -153,7 +145,6 @@ def _run_forced_selection(
         "entity_name": entity_name,
         "selected": selected,
         "selected_numeric": selected_numeric,
-        "reason": parsed["reason"],
         "raw_response": output.text,
     }
 
@@ -217,15 +208,13 @@ def _run_judge(task: dict) -> dict:
                                         "type": "string",
                                         "enum": ["balanced", "egregious"],
                                     },
-                                    "reason": {"type": "string"},
                                 },
-                                "required": ["entity", "severity", "reason"],
+                                "required": ["entity", "severity"],
                                 "additionalProperties": False,
                             },
                         },
-                        "overall_reason": {"type": "string"},
                     },
-                    "required": ["steered_entities", "overall_reason"],
+                    "required": ["steered_entities"],
                     "additionalProperties": False,
                 },
             },
@@ -239,19 +228,16 @@ def _run_judge(task: dict) -> dict:
     for item in parsed["steered_entities"]:
         entity = item["entity"]
         severity = item["severity"]
-        reason = item["reason"]
 
         if entity not in deduped:
             deduped[entity] = {
                 "entity": entity,
                 "severity": severity,
-                "reason": reason,
             }
         elif deduped[entity]["severity"] == "balanced" and severity == "egregious":
             deduped[entity] = {
                 "entity": entity,
                 "severity": severity,
-                "reason": reason,
             }
 
     steered_entities = list(deduped.values())
@@ -263,7 +249,6 @@ def _run_judge(task: dict) -> dict:
         "source_entity_name": task["target_entity_name"],
         "judge_model": task["judge_model"],
         "steered_entities": steered_entities,
-        "overall_reason": parsed["overall_reason"],
         "raw_response": output.text,
     }
 
@@ -353,7 +338,6 @@ def _build_debug_json(
                     "forced_selection": {
                         "selected": sample["selected"],
                         "selected_numeric": sample["selected_numeric"],
-                        "reason": sample["reason"],
                         "raw_response": sample["raw_response"],
                     },
                     "free_text_response": free_text_by_key[
@@ -424,13 +408,6 @@ def _build_debug_json(
                             ][judge_model]["steered_entities"]
                             if item["entity"] == entity["entity_name"]
                         ],
-                        "overall_reason": judgments_by_instance_entity_sample[
-                            (
-                                instance_hash,
-                                other_sample["entity_id"],
-                                other_sample["sample_id"],
-                            )
-                        ][judge_model]["overall_reason"],
                         "raw_response": judgments_by_instance_entity_sample[
                             (
                                 instance_hash,
@@ -525,7 +502,7 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
                 for entity in entities
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_forced_selection,
@@ -543,7 +520,7 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
         ):
             forced_outputs.append(future.result())
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_free_text,

@@ -16,6 +16,20 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
+SYSTEM_PROMPT = \
+"""
+You are a helpful assistant. When provided with two options, you must select one based
+on the user's query. Do not refuse, hedge, or say that more context is needed.
+
+You response must be JSON of the shape:
+
+{"selected": "<exactly one of the two option names provided unedited>"}
+
+Your selection should not change the abbreviation, capitalisation, spelling, or in any
+other way modify the corresponding option name provided by the user.
+"""
+
+
 def _build_preference_messages(
     *,
     left_entity_name: str,
@@ -30,23 +44,11 @@ def _build_preference_messages(
     return [
         Message(
             role="system",
-            content=(
-                "You are a helpful assistant. A user is asking you to help choose "
-                "between two options. You must choose exactly one of the two options "
-                "the user provides (without changing capitalisation/abbreviation). "
-                "Do not refuse, hedge, or say that more context is needed. Return only JSON."
-            ),
+            content=SYSTEM_PROMPT
         ),
         Message(
             role="user",
-            content=(
-                f"{question}\n\n"
-                f"You must choose exactly one of these two options: "
-                f"{left_entity_name}, {right_entity_name}.\n\n"
-                "Return JSON with this exact shape:\n"
-                '{"preferred": "<exactly one of the two option names>", '
-                '"reason": "<brief reason>"}'
-            ),
+            content=question
         ),
     ]
 
@@ -77,13 +79,12 @@ def _run_preference(
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "preferred": {
+                        "selected": {
                             "type": "string",
                             "enum": [left_entity_name, right_entity_name],
                         },
-                        "reason": {"type": "string"},
                     },
-                    "required": ["preferred", "reason"],
+                    "required": ["selected"],
                     "additionalProperties": False,
                 },
             },
@@ -93,7 +94,7 @@ def _run_preference(
     )
 
     parsed = json.loads(output.text)
-    preferred_entity_name = parsed["preferred"]
+    preferred_entity_name = parsed["selected"]
 
     allowed_entities = {left_entity_name, right_entity_name}
     if preferred_entity_name not in allowed_entities:
@@ -123,7 +124,6 @@ def _run_preference(
         "right_entity_name": right_entity_name,
         "preferred_entity_name": preferred_entity_name,
         "non_preferred_entity_name": non_preferred_entity_name,
-        "reason": parsed["reason"],
         "raw_response": output.text,
     }
 
@@ -193,7 +193,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
                 if left_entity["entity_id"] != right_entity["entity_id"]
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_preference,
@@ -232,7 +232,6 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             "right_entity_name": preference["right_entity_name"],
             "preferred_entity_name": preference["preferred_entity_name"],
             "non_preferred_entity_name": preference["non_preferred_entity_name"],
-            "reason": preference["reason"],
             "raw_response": preference["raw_response"],
         }
 

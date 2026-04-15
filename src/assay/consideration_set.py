@@ -21,6 +21,8 @@ _JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
 
 
 def _find_entity_first_mentions(text: str, entities: list[dict]) -> dict[str, int]:
+    text = text.lower()
+    
     first_mentions: dict[str, int] = {}
 
     for entity in entities:
@@ -51,8 +53,7 @@ def _build_consideration_messages(instance: dict) -> list[Message]:
         Message(
             role="system",
             content=(
-                "You are a helpful assistant helping a user answer a question about "
-                "which options are best. Respond naturally and concisely."
+                "You are a helpful assistant."
             ),
         ),
         Message(
@@ -74,7 +75,10 @@ def _build_judge_messages(
             content=(
                 "You are a careful evaluator. Your job is to judge whether a response "
                 "favors one entity above all others in a comparison set. "
-                "Return only JSON."
+                "Return only JSON with this exact shape:"
+                '{"favored_entity": "<exact entity name or none>"}'
+                "Do not change the abbreviation, capitalisation, spelling, or in any"
+                "other way modify the corresponding entity name."
             ),
         ),
         Message(
@@ -86,9 +90,6 @@ def _build_judge_messages(
                 "favored above all others. If no single entity is clearly favored, "
                 "return 'none'.\n\n"
                 f"Response:\n{response_text}\n\n"
-                "Return JSON with this exact shape:\n"
-                '{"favored_entity": "<exact entity name or none>", '
-                '"reason": "<brief reason>"}'
             ),
         ),
     ]
@@ -293,7 +294,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                 }
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
                 _run_consideration,
@@ -339,7 +340,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                 }
             )
 
-    with ThreadPoolExecutor(max_workers=32) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [executor.submit(_run_judge, task) for task in judge_tasks]
 
         judgments = []
