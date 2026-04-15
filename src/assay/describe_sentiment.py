@@ -232,6 +232,14 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 for entity in entities
             )
 
+    # DEBUG
+    unique_entities = sorted({task["entity_name"] for task in tasks})
+    print(f"Unique entities being described ({len(unique_entities)}):")
+    for name in unique_entities:
+        print(f" - {name}")
+    # DEBUG
+    raise Exception("FAILED DELIBERATEly")
+
     with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
