@@ -1,3 +1,4 @@
+import json
 import math
 
 import panel as pn
@@ -11,9 +12,13 @@ BASE_PLOT_WIDTH = 0
 WIDTH_PER_BAR = 15
 MIN_PLOT_WIDTH = 800
 PLOT_CONTAINER_HEIGHT = "50vh"
+INSTANCE_CONTAINER_HEIGHT = "35vh"
 
 ASSAY_PARQUET_PATH = "data/combined_assays.parquet"
+INSTANCE_PARQUET_PATH = "data/db/comparison_set_assay_instance.parquet"
+
 ASSAY_DF = pl.read_parquet(ASSAY_PARQUET_PATH)
+INSTANCE_DF = pl.read_parquet(INSTANCE_PARQUET_PATH)
 
 
 def get_assays() -> list[str]:
@@ -122,6 +127,89 @@ def get_plot_df(
         pl.DataFrame(rows)
         .sort("entity_name", "model")
         .to_pandas()
+    )
+
+
+def get_instance_jsons(
+    assay: str,
+    comparison_set_name: str,
+) -> list[str]:
+    df = (
+        INSTANCE_DF
+        .filter(
+            (pl.col("assay") == assay)
+            & (pl.col("comparison_set_name") == comparison_set_name)
+        )
+        .select("instance_json")
+    )
+
+    values = df.get_column("instance_json").to_list()
+
+    rendered = []
+    for value in values:
+        if value is None:
+            continue
+
+        if isinstance(value, str):
+            try:
+                parsed = json.loads(value)
+                rendered.append(json.dumps(parsed, indent=2, ensure_ascii=False))
+            except json.JSONDecodeError:
+                rendered.append(value)
+        else:
+            rendered.append(json.dumps(value, indent=2, ensure_ascii=False))
+
+    return rendered
+
+
+def make_instance_list_pane(
+    assay: str,
+    comparison_set_name: str,
+) -> pn.Column:
+    instance_jsons = get_instance_jsons(assay, comparison_set_name)
+
+    if not instance_jsons:
+        return pn.Column(
+            pn.pane.Markdown("### Instances"),
+            pn.pane.Markdown("No instance JSON found for this assay/comparison set."),
+            sizing_mode="stretch_width",
+            margin=(10, 0, 0, 0),
+        )
+
+    blocks = [
+        pn.pane.Markdown("### Instances", margin=(0, 0, 10, 0)),
+        pn.pane.Markdown(f"{len(instance_jsons)} instance(s)", margin=(0, 0, 10, 0)),
+    ]
+
+    for i, payload in enumerate(instance_jsons, start=1):
+        blocks.append(
+            pn.pane.Markdown(
+                f"**Instance {i}**",
+                margin=(8, 0, 4, 0),
+            )
+        )
+        blocks.append(
+            pn.pane.JSON(
+                json.loads(payload) if payload.strip().startswith(("{", "[")) else payload,
+                depth=-1,
+                sizing_mode="stretch_width",
+            )
+        )
+
+    return pn.Column(
+        *blocks,
+        styles={
+            "width": "100%",
+            "height": INSTANCE_CONTAINER_HEIGHT,
+            "overflow-y": "auto",
+            "overflow-x": "auto",
+            "border": "1px solid #cbd5e1",
+            "border-radius": "8px",
+            "padding": "10px",
+            "box-sizing": "border-box",
+        },
+        sizing_mode="stretch_width",
+        margin=(10, 0, 0, 0),
     )
 
 
@@ -247,6 +335,7 @@ def make_assay_pane(assay: str) -> pn.Column:
                 width=plot_width,
                 sizing_mode="fixed",
             )
+            instances_obj = pn.pane.Markdown("No instances available.")
         else:
             pdf = get_plot_df(
                 assay=assay,
@@ -263,6 +352,11 @@ def make_assay_pane(assay: str) -> pn.Column:
                 height=500,
                 sizing_mode="fixed",
                 width_policy="fixed",
+            )
+
+            instances_obj = make_instance_list_pane(
+                assay=assay,
+                comparison_set_name=comparison_set_name,
             )
 
         plot_inner = pn.Row(
@@ -287,7 +381,12 @@ def make_assay_pane(assay: str) -> pn.Column:
             margin=0,
         )
 
-        return plot_container
+        return pn.Column(
+            plot_container,
+            instances_obj,
+            sizing_mode="stretch_width",
+            margin=0,
+        )
 
     return pn.Column(
         controls,
