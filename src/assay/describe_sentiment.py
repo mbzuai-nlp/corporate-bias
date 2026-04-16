@@ -205,6 +205,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
     )
 
     tasks: list[dict] = []
+    total_entity_instance_pairs = 0
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -217,6 +218,8 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             entity_lookup=entity_lookup,
             comparison_set_id=comparison_set_id,
         )
+
+        total_entity_instance_pairs += len(entities)
 
         for sample_id in range(ctx.cfg.num_samples_per_instance):
             tasks.extend(
@@ -232,13 +235,20 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 for entity in entities
             )
 
-    # DEBUG
-    unique_entities = sorted({task["entity_name"] for task in tasks})
-    print(f"Unique entities being described ({len(unique_entities)}):")
-    for name in unique_entities:
-        print(f" - {name}")
-    # DEBUG
-    raise Exception("FAILED DELIBERATEly")
+    num_distinct_entities = len({task["entity_id"] for task in tasks})
+    num_instances = len(assay_instances)
+    num_samples_per_instance = ctx.cfg.num_samples_per_instance
+    total_invocations = len(tasks)
+
+    print(
+        "Invoking model "
+        f"{total_invocations:,} times "
+        f"for {num_distinct_entities:,} distinct entities "
+        f"across {num_instances:,} assay instances "
+        f"with {num_samples_per_instance:,} samples per instance "
+        f"({total_entity_instance_pairs:,} entity-instance pairs × "
+        f"{num_samples_per_instance:,} samples)."
+    )
 
     with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [

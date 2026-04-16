@@ -9,14 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-14 12:19:04,813 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-14 12:19:04,867 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-14 12:19:05,125 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-14 12:19:05,361 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-14 12:19:05,677 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-14 12:19:05,993 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-14 12:19:06,182 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-Loading weights:   9%|▉         | 35/393 [00:00<00:01, 349.74it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3215.66it/s]
+2026-04-16 12:30:53,190 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-16 12:30:53,214 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-16 12:30:53,347 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-16 12:30:53,475 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-16 12:30:53,608 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5347.60it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -24,315 +22,339 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-14 12:19:06,347 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-14 12:19:06,520 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-14 12:19:06,568 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-14 12:19:06,850 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-14 12:19:09,124 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-14 12:19:09,342 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  20%|█▉        | 40/202 [00:00<00:00, 395.75it/s]Loading weights:  40%|███▉      | 80/202 [00:00<00:00, 343.43it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 378.82it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 494.67it/s]
-2026-04-14 12:19:10,186 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-14 12:19:10,526 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-14 12:19:12,628 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-14 12:19:13,102 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-14 12:19:13,164 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-14 12:19:13,439 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-14 12:19:13,505 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-14 12:19:13,771 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-14 12:19:13,985 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-14 12:19:15,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-14 12:19:15,843 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-14 12:19:15,905 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 35/202 [00:00<00:00, 349.08it/s]Loading weights:  36%|███▌      | 72/202 [00:00<00:00, 357.06it/s]Loading weights:  53%|█████▎    | 108/202 [00:00<00:00, 347.23it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 509.78it/s]
-2026-04-14 12:19:16,395 [INFO] root: Running assay=describe-sentiment model=deepseek-v3.2 num_samples_per_instance=3.
-2026-04-14 12:19:16,412 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,414 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,416 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,417 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,419 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,420 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,423 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,424 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,426 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,428 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,430 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,431 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,433 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,436 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,438 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,442 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,455 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,474 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,489 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,507 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,519 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,525 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,529 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,539 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,550 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,561 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,571 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,591 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,596 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,605 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,615 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,627 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,638 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,642 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,658 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,667 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,676 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,679 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,683 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,688 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,695 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,703 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,709 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,714 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,717 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,723 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,728 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,733 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,736 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,741 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,748 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,751 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,755 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,760 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,768 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,771 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,774 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,779 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,788 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,800 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,807 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,812 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,817 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,820 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,828 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,833 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,839 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,845 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,851 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,855 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,871 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,879 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,883 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,890 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,894 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,901 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,911 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,915 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,923 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,932 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,954 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,958 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,980 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,992 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:16,999 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,007 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,017 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,026 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,035 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,038 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,046 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,049 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,055 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,058 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,066 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,076 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,084 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,087 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,095 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,109 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,112 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,116 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,123 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,133 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,136 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,140 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,143 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,148 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,154 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,159 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,170 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,174 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,177 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,194 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,198 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,202 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,205 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,219 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   0%|          | 0/144 [00:00<?, ?it/s]2026-04-14 12:19:17,225 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,229 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,235 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,256 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,265 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,276 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,280 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,283 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,285 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:17,287 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:19:19,320 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,321 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,508 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,692 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,819 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,855 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,856 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,862 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,943 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:19,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,358 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,359 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,361 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,391 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,392 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,395 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,395 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,396 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,400 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,415 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,445 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,449 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,452 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,453 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,468 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,580 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,679 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,715 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,792 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,968 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,975 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:20,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,077 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,226 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,238 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,286 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,316 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,340 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,594 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,634 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,681 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,700 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,713 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,875 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,877 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,878 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,886 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,980 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:21,996 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,075 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,080 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,165 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,201 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,238 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,369 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,437 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,522 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,686 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,688 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,695 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,706 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,758 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,801 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,834 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,865 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:22,963 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,059 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,102 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,152 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,282 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,403 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,417 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,528 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,590 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,595 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,613 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,876 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,887 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:23,948 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,124 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,219 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,233 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,398 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,660 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:24,665 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,171 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,173 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,256 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,343 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,472 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,838 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:25,908 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:26,009 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:30:53,846 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-16 12:30:53,980 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-16 12:30:54,003 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-16 12:30:54,102 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-16 12:30:54,122 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-16 12:30:54,228 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-16 12:30:55,447 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-16 12:30:55,478 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 92/202 [00:00<00:00, 913.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1127.69it/s]
+2026-04-16 12:30:55,978 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-16 12:30:56,108 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-16 12:30:57,131 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-16 12:30:57,373 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-16 12:30:57,404 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-16 12:30:57,536 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-16 12:30:57,561 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-16 12:30:57,686 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-16 12:30:57,848 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-16 12:30:58,486 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-16 12:30:58,608 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-16 12:30:58,630 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|███▉      | 80/202 [00:00<00:00, 796.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1147.36it/s]
+2026-04-16 12:30:58,839 [INFO] root: Running assay=describe-sentiment model=deepseek-v3.2 num_samples_per_instance=3.
+Invoking model 225 times for 24 distinct entities across 9 assay instances with 3 samples per instance (75 entity-instance pairs × 3 samples).
+2026-04-16 12:30:58,847 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,848 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,848 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,849 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,851 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,852 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,853 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,853 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,854 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,856 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,857 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,858 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,859 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,861 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,862 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,863 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,867 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,869 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,870 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,874 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,885 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,891 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,895 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,901 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,903 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,904 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,909 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,910 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,914 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,916 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,918 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,921 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,922 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,924 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,925 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,927 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,928 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,930 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,931 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,932 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,933 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,937 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,942 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,944 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,947 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,951 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,959 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,964 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,967 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,973 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,976 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,979 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,986 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,988 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,993 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:58,997 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,000 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,002 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,008 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,017 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,019 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,023 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,024 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,027 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,028 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,031 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,033 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,035 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,037 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,041 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,043 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,050 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,052 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,053 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,056 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,064 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,066 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,071 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,074 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,077 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,080 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,083 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,087 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,090 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,093 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,099 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,100 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,101 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,103 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,104 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,106 [INFO] root: Invoking deepseek-v3.2.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-14 12:19:26,440 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:26,507 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:26,537 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:27,260 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:27,369 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:27,871 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:28,072 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:28,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:28,287 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:28,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:19:28,380 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:05,092 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   1%|          | 1/144 [02:47<6:39:59, 167.83s/it]2026-04-14 12:22:06,789 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:08,436 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   1%|▏         | 2/144 [02:51<2:48:13, 71.08s/it] 2026-04-14 12:22:09,677 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:16,817 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   2%|▏         | 3/144 [02:59<1:39:42, 42.43s/it]2026-04-14 12:22:19,623 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:33,851 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   3%|▎         | 4/144 [03:16<1:15:40, 32.43s/it]2026-04-14 12:22:34,087 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   3%|▎         | 5/144 [03:16<48:12, 20.81s/it]  2026-04-14 12:22:36,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:36,595 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:22:39,360 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   4%|▍         | 6/144 [03:22<35:41, 15.52s/it]2026-04-14 12:22:40,443 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:01,844 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   5%|▍         | 7/144 [03:44<40:37, 17.79s/it]2026-04-14 12:23:04,490 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:05,801 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   6%|▌         | 8/144 [03:48<30:20, 13.39s/it]2026-04-14 12:23:07,292 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   6%|▋         | 9/144 [03:50<21:45,  9.67s/it]2026-04-14 12:23:08,117 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   7%|▋         | 10/144 [03:50<15:30,  6.94s/it]2026-04-14 12:23:08,519 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:07,598 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:07,936 [INFO] root: Invoking deepseek-v3.2.
-2026-04-14 12:23:08,636 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:10,444 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   8%|▊         | 12/144 [03:53<09:18,  4.23s/it]2026-04-14 12:23:10,786 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:11,516 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   9%|▉         | 13/144 [03:54<07:31,  3.45s/it]2026-04-14 12:23:12,338 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  10%|▉         | 14/144 [03:55<05:57,  2.75s/it]2026-04-14 12:23:12,800 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  10%|█         | 15/144 [03:55<04:33,  2.12s/it]2026-04-14 12:23:12,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:13,583 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  11%|█         | 16/144 [03:56<03:43,  1.75s/it]Descriptions:  12%|█▏        | 17/144 [03:56<02:44,  1.29s/it]2026-04-14 12:23:13,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  13%|█▎        | 19/144 [03:56<01:36,  1.30it/s]2026-04-14 12:23:14,103 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:15,222 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-14 12:23:16,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  14%|█▍        | 20/144 [04:00<02:51,  1.39s/it]Descriptions:  15%|█▍        | 21/144 [04:00<02:30,  1.22s/it]Descriptions:  15%|█▌        | 22/144 [04:00<01:53,  1.08it/s]Descriptions:  17%|█▋        | 24/144 [04:01<01:16,  1.57it/s]Descriptions:  17%|█▋        | 25/144 [04:01<01:03,  1.86it/s]Descriptions:  18%|█▊        | 26/144 [04:03<01:30,  1.31it/s]Descriptions:  19%|█▉        | 27/144 [04:04<01:49,  1.06it/s]Descriptions:  19%|█▉        | 28/144 [04:04<01:32,  1.25it/s]Descriptions:  20%|██        | 29/144 [04:05<01:39,  1.16it/s]Descriptions:  21%|██        | 30/144 [04:06<01:16,  1.49it/s]Descriptions:  22%|██▏       | 31/144 [04:06<01:16,  1.48it/s]Descriptions:  23%|██▎       | 33/144 [04:07<00:58,  1.89it/s]Descriptions:  24%|██▍       | 35/144 [04:07<00:40,  2.71it/s]Descriptions:  26%|██▌       | 37/144 [04:08<00:30,  3.48it/s]Descriptions:  26%|██▋       | 38/144 [04:08<00:41,  2.56it/s]Descriptions:  27%|██▋       | 39/144 [04:09<00:36,  2.88it/s]Descriptions:  28%|██▊       | 40/144 [04:09<00:32,  3.25it/s]Descriptions:  28%|██▊       | 41/144 [04:09<00:31,  3.24it/s]Descriptions:  30%|██▉       | 43/144 [04:09<00:20,  4.85it/s]Descriptions:  31%|███       | 44/144 [04:10<00:26,  3.76it/s]Descriptions:  32%|███▏      | 46/144 [04:10<00:18,  5.43it/s]Descriptions:  33%|███▎      | 47/144 [04:11<00:47,  2.05it/s]Descriptions:  33%|███▎      | 48/144 [04:11<00:38,  2.51it/s]Descriptions:  34%|███▍      | 49/144 [04:12<00:40,  2.32it/s]Descriptions:  35%|███▍      | 50/144 [04:12<00:40,  2.29it/s]Descriptions:  37%|███▋      | 53/144 [04:13<00:20,  4.53it/s]Descriptions:  38%|███▊      | 55/144 [04:13<00:23,  3.82it/s]Descriptions:  39%|███▉      | 56/144 [04:13<00:21,  4.06it/s]Descriptions:  40%|███▉      | 57/144 [04:14<00:35,  2.44it/s]Descriptions:  41%|████      | 59/144 [04:15<00:24,  3.45it/s]Descriptions:  42%|████▏     | 60/144 [04:15<00:24,  3.39it/s]Descriptions:  42%|████▏     | 61/144 [04:15<00:30,  2.77it/s]Descriptions:  43%|████▎     | 62/144 [04:16<00:26,  3.08it/s]Descriptions:  44%|████▍     | 64/144 [04:16<00:20,  3.83it/s]Descriptions:  46%|████▌     | 66/144 [04:16<00:14,  5.27it/s]Descriptions:  47%|████▋     | 68/144 [04:16<00:11,  6.39it/s]Descriptions:  48%|████▊     | 69/144 [04:17<00:15,  4.77it/s]Descriptions:  49%|████▊     | 70/144 [04:18<00:25,  2.91it/s]Descriptions:  49%|████▉     | 71/144 [04:18<00:23,  3.13it/s]Descriptions:  50%|█████     | 72/144 [04:18<00:20,  3.57it/s]Descriptions:  51%|█████     | 73/144 [04:19<00:31,  2.25it/s]Descriptions:  51%|█████▏    | 74/144 [04:19<00:28,  2.47it/s]Descriptions:  53%|█████▎    | 76/144 [04:19<00:17,  3.87it/s]Descriptions:  53%|█████▎    | 77/144 [04:20<00:17,  3.89it/s]Descriptions:  56%|█████▌    | 80/144 [04:20<00:10,  6.05it/s]Descriptions:  56%|█████▋    | 81/144 [04:20<00:09,  6.40it/s]Descriptions:  57%|█████▋    | 82/144 [04:20<00:10,  5.96it/s]Descriptions:  58%|█████▊    | 84/144 [04:20<00:08,  7.11it/s]Descriptions:  60%|██████    | 87/144 [04:21<00:06,  9.43it/s]Descriptions:  62%|██████▏   | 89/144 [04:21<00:06,  8.96it/s]Descriptions:  62%|██████▎   | 90/144 [04:21<00:07,  6.98it/s]Descriptions:  64%|██████▍   | 92/144 [04:21<00:07,  7.36it/s]Descriptions:  67%|██████▋   | 96/144 [04:22<00:04, 10.51it/s]Descriptions:  68%|██████▊   | 98/144 [04:22<00:04,  9.39it/s]Descriptions:  69%|██████▉   | 100/144 [04:23<00:08,  5.14it/s]Descriptions:  70%|███████   | 101/144 [04:23<00:09,  4.66it/s]Descriptions:  71%|███████   | 102/144 [04:23<00:08,  4.67it/s]Descriptions:  72%|███████▏  | 103/144 [04:24<00:15,  2.60it/s]Descriptions:  72%|███████▏  | 104/144 [04:25<00:15,  2.60it/s]Descriptions:  73%|███████▎  | 105/144 [04:25<00:19,  1.99it/s]Descriptions:  74%|███████▎  | 106/144 [04:26<00:22,  1.68it/s]Descriptions:  74%|███████▍  | 107/144 [04:28<00:27,  1.33it/s]Descriptions:  75%|███████▌  | 108/144 [04:28<00:22,  1.59it/s]Descriptions:  76%|███████▌  | 109/144 [04:30<00:33,  1.06it/s]Descriptions:  76%|███████▋  | 110/144 [04:30<00:27,  1.22it/s]Descriptions:  77%|███████▋  | 111/144 [04:31<00:29,  1.12it/s]Descriptions:  78%|███████▊  | 113/144 [04:31<00:16,  1.88it/s]Descriptions:  80%|███████▉  | 115/144 [04:32<00:11,  2.42it/s]Descriptions:  81%|████████  | 116/144 [04:32<00:10,  2.60it/s]Descriptions:  81%|████████▏ | 117/144 [04:33<00:12,  2.08it/s]Descriptions:  82%|████████▏ | 118/144 [04:33<00:12,  2.16it/s]Descriptions:  83%|████████▎ | 119/144 [04:37<00:33,  1.34s/it]Descriptions:  83%|████████▎ | 120/144 [04:51<01:54,  4.78s/it]Descriptions:  85%|████████▍ | 122/144 [04:54<01:15,  3.45s/it]Descriptions:  85%|████████▌ | 123/144 [05:00<01:22,  3.95s/it]Descriptions:  86%|████████▌ | 124/144 [05:00<01:00,  3.04s/it]Descriptions:  87%|████████▋ | 125/144 [05:02<00:53,  2.79s/it]Descriptions:  88%|████████▊ | 126/144 [05:04<00:41,  2.33s/it]Descriptions:  88%|████████▊ | 127/144 [05:04<00:30,  1.79s/it]Descriptions:  89%|████████▉ | 128/144 [05:05<00:26,  1.65s/it]Descriptions:  90%|█████████ | 130/144 [05:06<00:14,  1.05s/it]Descriptions:  91%|█████████ | 131/144 [05:07<00:12,  1.05it/s]Descriptions:  92%|█████████▏| 132/144 [05:07<00:10,  1.14it/s]Descriptions:  92%|█████████▏| 133/144 [05:08<00:08,  1.37it/s]Descriptions:  93%|█████████▎| 134/144 [05:08<00:06,  1.62it/s]Descriptions:  94%|█████████▍| 135/144 [05:09<00:05,  1.57it/s]Descriptions:  94%|█████████▍| 136/144 [05:09<00:05,  1.47it/s]Descriptions:  95%|█████████▌| 137/144 [05:10<00:04,  1.65it/s]Descriptions:  96%|█████████▌| 138/144 [05:11<00:03,  1.53it/s]Descriptions:  97%|█████████▋| 140/144 [05:11<00:01,  2.35it/s]Descriptions:  98%|█████████▊| 141/144 [05:11<00:01,  2.54it/s]Descriptions:  99%|█████████▉| 143/144 [05:13<00:00,  1.87it/s]Descriptions: 100%|██████████| 144/144 [05:13<00:00,  1.90it/s]Descriptions: 100%|██████████| 144/144 [05:13<00:00,  2.18s/it]
-2026-04-14 12:24:31,362 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/deepseek-v3.2.parquet.
+2026-04-16 12:30:59,117 [INFO] root: Invoking deepseek-v3.2.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-16 12:30:59,119 [INFO] root: Invoking deepseek-v3.2.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-16 12:30:59,121 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,125 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,133 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,135 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,136 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,139 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   0%|          | 0/225 [00:00<?, ?it/s]2026-04-16 12:30:59,141 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,145 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,148 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,150 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,152 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,154 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,156 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,157 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,160 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,171 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,181 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,189 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,195 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,201 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,207 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,213 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,220 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,223 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,225 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,231 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,236 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,239 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,248 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,254 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,257 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,269 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,276 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,284 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:30:59,289 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:46,956 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   0%|          | 1/225 [01:47<6:41:59, 107.68s/it]2026-04-16 12:32:47,053 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:47,627 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   1%|▏         | 3/225 [01:48<1:44:12, 28.16s/it] 2026-04-16 12:32:47,680 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:47,684 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:47,785 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   3%|▎         | 6/225 [01:48<39:50, 10.92s/it]  2026-04-16 12:32:47,878 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:47,960 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   4%|▎         | 8/225 [01:48<25:02,  6.92s/it]2026-04-16 12:32:48,024 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,062 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   4%|▍         | 10/225 [01:48<16:18,  4.55s/it]2026-04-16 12:32:48,121 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,121 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,128 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,129 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,216 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   7%|▋         | 15/225 [01:48<07:12,  2.06s/it]2026-04-16 12:32:48,268 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,348 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   8%|▊         | 17/225 [01:49<05:28,  1.58s/it]2026-04-16 12:32:48,434 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,436 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,475 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,503 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   9%|▉         | 20/225 [01:49<03:37,  1.06s/it]2026-04-16 12:32:48,559 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,597 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  10%|█         | 23/225 [01:49<02:26,  1.38it/s]2026-04-16 12:32:48,672 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,750 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,791 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  12%|█▏        | 26/225 [01:49<01:42,  1.95it/s]2026-04-16 12:32:48,793 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,838 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:48,914 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  13%|█▎        | 29/225 [01:49<01:11,  2.73it/s]2026-04-16 12:32:48,970 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,037 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,072 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  14%|█▍        | 32/225 [01:49<00:51,  3.72it/s]2026-04-16 12:32:49,101 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,206 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,210 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  16%|█▌        | 35/225 [01:49<00:38,  4.99it/s]2026-04-16 12:32:49,214 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,243 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,260 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,276 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,278 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,348 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  18%|█▊        | 41/225 [01:50<00:22,  8.36it/s]2026-04-16 12:32:49,364 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,370 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  20%|██        | 45/225 [01:50<00:16, 10.87it/s]2026-04-16 12:32:49,370 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,488 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,505 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  22%|██▏       | 50/225 [01:50<00:11, 15.01it/s]2026-04-16 12:32:49,514 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,525 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,558 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,569 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  24%|██▍       | 54/225 [01:50<00:09, 18.14it/s]2026-04-16 12:32:49,571 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,612 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,634 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,667 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,694 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,722 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  26%|██▌       | 59/225 [01:50<00:07, 23.12it/s]2026-04-16 12:32:49,758 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,760 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,798 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,865 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,899 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,911 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,944 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  28%|██▊       | 63/225 [01:50<00:06, 23.98it/s]2026-04-16 12:32:49,985 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:49,986 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,009 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,040 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,044 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  30%|██▉       | 67/225 [01:50<00:05, 26.78it/s]2026-04-16 12:32:50,106 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,162 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,167 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  32%|███▏      | 71/225 [01:50<00:05, 28.33it/s]2026-04-16 12:32:50,186 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,208 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,210 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,225 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,258 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,285 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  34%|███▍      | 76/225 [01:50<00:04, 32.95it/s]2026-04-16 12:32:50,322 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,325 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,331 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,389 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  36%|███▌      | 81/225 [01:51<00:03, 36.36it/s]2026-04-16 12:32:50,479 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,481 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,489 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,506 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  38%|███▊      | 86/225 [01:51<00:03, 38.11it/s]2026-04-16 12:32:50,508 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,540 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,568 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,583 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,587 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,640 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  40%|████      | 91/225 [01:51<00:03, 36.72it/s]2026-04-16 12:32:50,690 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,716 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,732 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,742 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,744 [INFO] root: Invoking deepseek-v3.2.
+2026-04-16 12:32:50,750 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  44%|████▎     | 98/225 [01:51<00:03, 40.29it/s]Descriptions:  48%|████▊     | 108/225 [01:51<00:02, 53.13it/s]Descriptions:  51%|█████     | 114/225 [01:51<00:02, 52.41it/s]Descriptions:  53%|█████▎    | 120/225 [01:51<00:01, 54.22it/s]Descriptions:  56%|█████▌    | 126/225 [01:52<00:06, 16.02it/s]2026-04-16 12:32:52,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,492 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,494 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,805 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,825 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,913 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,914 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,924 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:52,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,034 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,072 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,076 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,090 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,150 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,191 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,215 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,243 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,275 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,287 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,308 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,315 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,330 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,366 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,390 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,400 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,412 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,462 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,484 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,495 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,538 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,554 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,644 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,730 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,790 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,793 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,922 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,944 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:53,963 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,001 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,249 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,309 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,343 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,605 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:54,783 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,459 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,509 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,627 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,628 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,694 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,708 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,797 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:55,847 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:56,144 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:56,145 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:56,184 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:56,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:57,302 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:57,490 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:57,834 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:32:58,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:33:01,403 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:33:02,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-16 12:33:02,820 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  56%|█████▌    | 126/225 [02:04<00:06, 16.02it/s]Descriptions:  57%|█████▋    | 129/225 [02:54<05:42,  3.57s/it]Descriptions:  58%|█████▊    | 130/225 [02:55<05:18,  3.35s/it]Descriptions:  59%|█████▉    | 133/225 [02:56<03:59,  2.60s/it]Descriptions:  60%|██████    | 136/225 [02:56<02:55,  1.97s/it]Descriptions:  61%|██████▏   | 138/225 [02:57<02:20,  1.61s/it]Descriptions:  62%|██████▏   | 140/225 [02:57<01:49,  1.28s/it]Descriptions:  63%|██████▎   | 142/225 [02:57<01:24,  1.02s/it]Descriptions:  64%|██████▍   | 144/225 [02:57<01:03,  1.27it/s]Descriptions:  65%|██████▍   | 146/225 [03:07<02:27,  1.86s/it]Descriptions:  65%|██████▌   | 147/225 [03:07<02:05,  1.61s/it]Descriptions:  66%|██████▌   | 148/225 [03:08<01:45,  1.38s/it]Descriptions:  66%|██████▌   | 149/225 [03:09<01:41,  1.34s/it]Descriptions:  67%|██████▋   | 150/225 [03:10<01:27,  1.16s/it]Descriptions:  68%|██████▊   | 152/225 [03:10<00:53,  1.36it/s]Descriptions:  68%|██████▊   | 153/225 [03:11<01:08,  1.05it/s]Descriptions:  68%|██████▊   | 154/225 [03:12<01:04,  1.10it/s]Descriptions:  69%|██████▉   | 155/225 [03:14<01:11,  1.02s/it]Descriptions:  69%|██████▉   | 156/225 [03:14<00:59,  1.16it/s]Descriptions:  70%|███████   | 158/225 [03:14<00:34,  1.95it/s]Descriptions:  71%|███████   | 159/225 [03:14<00:27,  2.41it/s]Descriptions:  71%|███████   | 160/225 [03:14<00:24,  2.70it/s]Descriptions:  72%|███████▏  | 161/225 [03:15<00:28,  2.28it/s]Descriptions:  72%|███████▏  | 162/225 [03:15<00:24,  2.55it/s]Descriptions:  72%|███████▏  | 163/225 [03:16<00:24,  2.57it/s]Descriptions:  73%|███████▎  | 164/225 [03:16<00:22,  2.72it/s]Descriptions:  74%|███████▍  | 166/225 [03:16<00:17,  3.36it/s]Descriptions:  74%|███████▍  | 167/225 [03:17<00:17,  3.35it/s]Descriptions:  75%|███████▍  | 168/225 [03:17<00:21,  2.63it/s]Descriptions:  75%|███████▌  | 169/225 [03:18<00:21,  2.57it/s]Descriptions:  76%|███████▌  | 170/225 [03:18<00:20,  2.70it/s]Descriptions:  76%|███████▌  | 171/225 [03:18<00:17,  3.11it/s]Descriptions:  76%|███████▋  | 172/225 [03:18<00:13,  3.84it/s]Descriptions:  77%|███████▋  | 173/225 [03:19<00:14,  3.48it/s]Descriptions:  83%|████████▎ | 186/225 [03:19<00:02, 18.49it/s]Descriptions:  84%|████████▍ | 190/225 [03:20<00:02, 12.45it/s]Descriptions:  86%|████████▌ | 193/225 [03:20<00:03,  8.60it/s]Descriptions:  87%|████████▋ | 195/225 [03:20<00:03,  9.31it/s]Descriptions:  88%|████████▊ | 197/225 [03:21<00:04,  5.94it/s]Descriptions:  88%|████████▊ | 199/225 [03:21<00:04,  6.36it/s]Descriptions:  89%|████████▉ | 201/225 [03:22<00:03,  7.41it/s]Descriptions:  91%|█████████ | 204/225 [03:22<00:02,  9.43it/s]Descriptions:  92%|█████████▏| 206/225 [03:22<00:02,  8.67it/s]Descriptions:  92%|█████████▏| 208/225 [03:22<00:01,  9.28it/s]Descriptions:  94%|█████████▍| 211/225 [03:22<00:01, 10.98it/s]Descriptions:  95%|█████████▍| 213/225 [03:23<00:01,  6.10it/s]Descriptions:  96%|█████████▌| 215/225 [03:24<00:01,  5.69it/s]Descriptions:  96%|█████████▌| 216/225 [03:24<00:01,  5.96it/s]Descriptions:  97%|█████████▋| 219/225 [03:24<00:00,  7.93it/s]Descriptions:  98%|█████████▊| 221/225 [03:24<00:00,  6.92it/s]Descriptions:  99%|█████████▊| 222/225 [03:24<00:00,  6.35it/s]Descriptions: 100%|██████████| 225/225 [03:25<00:00,  1.10it/s]
+2026-04-16 12:34:24,497 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/deepseek-v3.2.parquet.
