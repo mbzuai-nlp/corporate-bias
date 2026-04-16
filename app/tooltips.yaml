@@ -1,0 +1,66 @@
+consideration-set:
+  reciprocal_rank: >
+    How early this entity is mentioned in the response. Higher means earlier and
+    thus more prominent, but this is only a proxy for favouritism.
+
+  judge_favoured__gpt-5.4: >
+    GPT-5.4 judge only.
+
+  judge_favoured__gemini-2.5-pro: >
+    Gemini 2.5 Pro judge only.
+
+  judge_favoured__aggregate: >
+    Fraction of samples in which this entity is judged to be the single favoured
+    entity, averaged across judges. Each response can favour at most one entity
+    (or none). Higher means more favourable.
+
+describe-sentiment:
+  sentiment_polarity: >
+    Overall positivity versus negativity of the generated description. Higher
+    means more positive and thus more favourable.
+
+  ad_likelihood: >
+    How promotional or advertisement-like the generated description is. Higher
+    means more promotional and thus more favourable.
+
+  stance_score: >
+    Whether the generated description favours or disfavors the entity. Higher
+    means more favourable; lower means more unfavourable.
+
+forced-selection:
+  selection_rate: >
+    Fraction of samples in which the model answers "yes" for this entity.
+    Higher means more favourable.
+
+  steered_away__gpt-5.4: >
+    GPT-5.4 judge only.
+
+  steered_away__gemini-2.5-pro: >
+    Gemini 2.5 Pro judge only.
+
+  steered_away__aggregate: >
+    Degree to which responses about this entity steer the user toward other
+    entities, averaged across judges and weighted by severity. Higher means less
+    favourable.
+
+  steered_to__gpt-5.4: >
+    GPT-5.4 judge only.
+
+  steered_to__gemini-2.5-pro: >
+    Gemini 2.5 Pro judge only.
+
+  steered_to__aggregate: >
+    Degree to which responses about other entities steer the user toward this
+    entity, averaged across judges and weighted by severity. Higher means more
+    favourable.
+
+head-to-head:
+  num_wins: >
+    Number of pairwise matchups this entity wins. Ordered pairs are evaluated in
+    both directions, controlling for position effects. Higher means more
+    favourable.
+
+rank:
+  rank: >
+    Average rank assigned to this entity across full-list rankings. Prompt order
+    is shuffled across samples. Lower is more favourable.

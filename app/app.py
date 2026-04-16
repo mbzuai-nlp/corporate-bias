@@ -1,9 +1,11 @@
 import json
 import math
+from pathlib import Path
 
 import panel as pn
 import polars as pl
 import plotly.graph_objects as go
+import yaml
 
 pn.extension("plotly")
 
@@ -16,9 +18,62 @@ INSTANCE_CONTAINER_HEIGHT = "35vh"
 
 ASSAY_PARQUET_PATH = "data/combined_assays.parquet"
 INSTANCE_PARQUET_PATH = "data/db/comparison_set_assay_instance.parquet"
+TOOLTIPS_YAML_PATH = Path("app/tooltips.yaml")
 
 ASSAY_DF = pl.read_parquet(ASSAY_PARQUET_PATH)
 INSTANCE_DF = pl.read_parquet(INSTANCE_PARQUET_PATH)
+
+
+def load_tooltips() -> dict[str, dict[str, str]]:
+    if not TOOLTIPS_YAML_PATH.exists():
+        return {}
+
+    with TOOLTIPS_YAML_PATH.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+
+    return data if isinstance(data, dict) else {}
+
+
+TOOLTIPS = load_tooltips()
+
+
+def get_estimand_tooltip(assay: str, estimand: str | None) -> str:
+    if estimand is None:
+        return ""
+
+    assay_tooltips = TOOLTIPS.get(assay, {})
+    if not isinstance(assay_tooltips, dict):
+        return ""
+
+    tooltip = assay_tooltips.get(estimand, "")
+    return str(tooltip) if tooltip is not None else ""
+
+
+def get_num_samples_per_instance(
+    assay: str,
+    comparison_set_name: str,
+    estimand: str,
+) -> int | None:
+    df = (
+        ASSAY_DF
+        .filter(
+            (pl.col("assay") == assay)
+            & (pl.col("comparison_set_name") == comparison_set_name)
+        )
+        .explode("result")
+        .select(
+            pl.col("result").struct.field("estimand").alias("estimand"),
+            pl.col("result").struct.field("num_samples").alias("num_samples"),
+        )
+        .filter(pl.col("estimand") == estimand)
+        .select("num_samples")
+        .unique()
+    )
+
+    if df.is_empty():
+        return None
+
+    return int(df["num_samples"][0])
 
 
 def get_assays() -> list[str]:
@@ -165,8 +220,14 @@ def get_instance_jsons(
 def make_instance_list_pane(
     assay: str,
     comparison_set_name: str,
+    estimand: str,
 ) -> pn.Column:
     instance_jsons = get_instance_jsons(assay, comparison_set_name)
+    num_samples_per_instance = get_num_samples_per_instance(
+        assay=assay,
+        comparison_set_name=comparison_set_name,
+        estimand=estimand,
+    )
 
     if not instance_jsons:
         return pn.Column(
@@ -176,10 +237,22 @@ def make_instance_list_pane(
             margin=(10, 0, 0, 0),
         )
 
-    blocks = [
-        pn.pane.Markdown("### Instances", margin=(0, 0, 10, 0)),
-        pn.pane.Markdown(f"{len(instance_jsons)} instance(s)", margin=(0, 0, 10, 0)),
-    ]
+    blocks = [pn.pane.Markdown("### Instances", margin=(0, 0, 10, 0))]
+
+    if num_samples_per_instance is not None:
+        blocks.append(
+            pn.pane.Markdown(
+                f"{len(instance_jsons)} instance(s) · {num_samples_per_instance} sample(s) per instance",
+                margin=(0, 0, 10, 0),
+            )
+        )
+    else:
+        blocks.append(
+            pn.pane.Markdown(
+                f"{len(instance_jsons)} instance(s)",
+                margin=(0, 0, 10, 0),
+            )
+        )
 
     for i, payload in enumerate(instance_jsons, start=1):
         blocks.append(
@@ -314,7 +387,13 @@ def make_assay_pane(assay: str) -> pn.Column:
         options=estimands,
         value=estimands[0] if estimands else None,
         width=250,
+        description=get_estimand_tooltip(assay, estimands[0] if estimands else None),
     )
+
+    def _update_estimand_tooltip(event) -> None:
+        estimand_select.description = get_estimand_tooltip(assay, event.new)
+
+    estimand_select.param.watch(_update_estimand_tooltip, "value")
 
     controls = pn.Row(
         comparison_set_select,
@@ -357,6 +436,7 @@ def make_assay_pane(assay: str) -> pn.Column:
             instances_obj = make_instance_list_pane(
                 assay=assay,
                 comparison_set_name=comparison_set_name,
+                estimand=estimand,
             )
 
         plot_inner = pn.Row(
