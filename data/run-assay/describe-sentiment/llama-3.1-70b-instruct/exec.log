@@ -9,12 +9,13 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-16 12:20:22,235 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-16 12:20:22,261 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-16 12:20:22,411 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-16 12:20:22,545 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-16 12:20:22,690 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6043.13it/s]
+2026-04-17 12:03:45,886 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 12:03:45,909 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-17 12:03:46,045 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-17 12:03:46,168 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-17 12:03:46,306 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-17 12:03:46,439 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5707.44it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,340 +23,330 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-16 12:20:22,835 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-16 12:20:22,972 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-16 12:20:22,977 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-16 12:20:23,095 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-16 12:20:23,109 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-16 12:20:23,224 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-16 12:20:24,400 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-16 12:20:24,425 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 925.70it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1252.85it/s]
-2026-04-16 12:20:24,767 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-16 12:20:24,893 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-16 12:20:25,875 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-16 12:20:26,107 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-16 12:20:26,130 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-16 12:20:26,259 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-16 12:20:26,285 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-16 12:20:26,415 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-16 12:20:26,549 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-16 12:20:27,125 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-16 12:20:27,263 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-16 12:20:27,286 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 83/202 [00:00<00:00, 824.10it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1116.06it/s]
-2026-04-16 12:20:27,513 [INFO] root: Running assay=describe-sentiment model=llama-3.1-70b-instruct num_samples_per_instance=3.
-Invoking model 225 times for 24 distinct entities across 9 assay instances with 3 samples per instance (75 entity-instance pairs × 3 samples).
-2026-04-16 12:20:27,521 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,521 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,522 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,523 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,524 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,525 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,526 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,527 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,528 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,530 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,531 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,532 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,540 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,543 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,545 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,551 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,565 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,570 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,573 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,574 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,578 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,581 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,582 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,589 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,596 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,597 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,599 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,601 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,602 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,605 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,606 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,607 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,608 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,609 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,609 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,614 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,619 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,624 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,628 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,631 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,636 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,641 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,643 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,647 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,651 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,654 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,661 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,670 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,674 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,679 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,690 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,693 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,699 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,701 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,705 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,706 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,708 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,709 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,711 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,712 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,713 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,714 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,714 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,715 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,715 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,716 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,717 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,717 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,718 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,720 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,723 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,724 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,729 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,732 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,734 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,737 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,738 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,744 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,746 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,752 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,757 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,760 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,767 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,770 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,773 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,777 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,780 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,782 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,787 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,795 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,797 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,805 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,807 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,810 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,814 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,815 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,818 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,823 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,826 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,828 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,829 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,832 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,833 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,834 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,836 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,843 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,844 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,854 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,857 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   0%|          | 0/225 [00:00<?, ?it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-16 12:20:27,862 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:46,582 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-17 12:03:46,703 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-17 12:03:46,745 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 12:03:46,821 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-17 12:03:46,867 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 12:03:48,142 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 12:03:48,164 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 917.12it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1231.62it/s]
+2026-04-17 12:03:48,522 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 12:03:48,645 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 12:03:49,658 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-17 12:03:49,940 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 12:03:49,964 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-17 12:03:50,086 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 12:03:50,144 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-17 12:03:50,320 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 12:03:50,443 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 12:03:51,121 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-17 12:03:51,239 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 12:03:51,262 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 955.22it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1148.19it/s]
+2026-04-17 12:03:51,469 [INFO] root: Running assay=describe-sentiment model=llama-3.1-70b-instruct num_samples_per_instance=3.
+Invoking model 261 times for 28 distinct entities across 12 assay instances with 3 samples per instance (87 entity-instance pairs × 3 samples).
+2026-04-17 12:03:51,478 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,479 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,480 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,480 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,481 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,482 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,483 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,484 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,486 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,487 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,488 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,489 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,491 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,495 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,502 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,511 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,521 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,523 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,526 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,530 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,531 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,534 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,537 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,539 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,540 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,544 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,546 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,553 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,555 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,560 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,567 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,572 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,576 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,586 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,590 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,599 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,603 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,606 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,610 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,615 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,618 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,622 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,625 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,627 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,628 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,629 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,631 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,634 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,637 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,640 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,642 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,645 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,651 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,652 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,655 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,656 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,657 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,659 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,663 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,666 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,669 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,672 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,678 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,682 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,686 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,690 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,692 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,693 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,696 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,701 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,703 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,705 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,706 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,709 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,715 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,717 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,718 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,721 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,724 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,726 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,729 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,731 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,736 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,737 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,739 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,741 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,742 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,743 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,747 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,749 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,751 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,752 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,758 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,763 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,766 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,770 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,772 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,778 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,779 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,782 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,785 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,790 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,792 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,795 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,796 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,800 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,802 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,812 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,816 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,822 [INFO] root: Invoking llama-3.1-70b-instruct.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-16 12:20:27,870 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,827 [INFO] root: Invoking llama-3.1-70b-instruct.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 12:03:51,830 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   0%|          | 0/261 [00:00<?, ?it/s]2026-04-17 12:03:51,837 [INFO] root: Invoking llama-3.1-70b-instruct.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 12:03:51,840 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,844 [INFO] root: Invoking llama-3.1-70b-instruct.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-16 12:20:27,871 [INFO] root: Invoking llama-3.1-70b-instruct.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-16 12:20:27,873 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,876 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,878 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,880 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,883 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,888 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,890 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,891 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,893 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,895 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,899 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,900 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,908 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,916 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,923 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:20:27,927 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:09,063 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   0%|          | 1/225 [01:41<6:17:33, 101.13s/it]2026-04-16 12:22:09,107 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:09,529 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   1%|▏         | 3/225 [01:41<1:37:38, 26.39s/it] 2026-04-16 12:22:09,792 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   2%|▏         | 4/225 [01:41<1:03:54, 17.35s/it]2026-04-16 12:22:09,852 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:09,866 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,113 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   3%|▎         | 7/225 [01:42<25:38,  7.06s/it]  2026-04-16 12:22:10,156 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,213 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,218 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,261 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,273 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   5%|▍         | 11/225 [01:42<11:50,  3.32s/it]2026-04-16 12:22:10,296 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,346 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,363 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,427 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   7%|▋         | 16/225 [01:42<05:58,  1.72s/it]2026-04-16 12:22:10,484 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,567 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,724 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   8%|▊         | 19/225 [01:42<04:15,  1.24s/it]2026-04-16 12:22:10,737 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,812 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:   9%|▉         | 21/225 [01:42<03:19,  1.02it/s]2026-04-16 12:22:10,896 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,968 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  10%|█         | 23/225 [01:43<02:34,  1.31it/s]2026-04-16 12:22:10,976 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:10,977 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,011 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,045 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,068 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,080 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,127 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  13%|█▎        | 29/225 [01:43<01:16,  2.56it/s]2026-04-16 12:22:11,189 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,190 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,207 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,239 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  15%|█▌        | 34/225 [01:43<00:48,  3.96it/s]2026-04-16 12:22:11,333 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,344 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,413 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,430 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  17%|█▋        | 38/225 [01:43<00:35,  5.24it/s]2026-04-16 12:22:11,448 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,462 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,473 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,477 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,485 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,494 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  21%|██▏       | 48/225 [01:43<00:17, 10.03it/s]2026-04-16 12:22:11,516 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,520 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,532 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,573 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,573 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,601 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,608 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,617 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  24%|██▍       | 54/225 [01:43<00:12, 13.26it/s]2026-04-16 12:22:11,643 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,698 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,712 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,718 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,733 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  28%|██▊       | 63/225 [01:43<00:08, 19.93it/s]2026-04-16 12:22:11,736 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,750 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,759 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,790 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,799 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,809 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,819 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,825 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  31%|███       | 70/225 [01:43<00:06, 25.09it/s]2026-04-16 12:22:11,831 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,858 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,872 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,880 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,919 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,933 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,959 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:11,990 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,041 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,060 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,081 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  34%|███▍      | 76/225 [01:44<00:05, 27.70it/s]2026-04-16 12:22:12,097 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,125 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,149 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,155 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,164 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,181 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,184 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  37%|███▋      | 84/225 [01:44<00:03, 35.38it/s]2026-04-16 12:22:12,187 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,237 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,263 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,267 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,275 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,278 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,320 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  40%|████      | 90/225 [01:44<00:03, 37.55it/s]2026-04-16 12:22:12,329 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,342 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,377 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,379 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,410 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,412 [INFO] root: Invoking llama-3.1-70b-instruct.
-2026-04-16 12:22:12,443 [INFO] root: Invoking llama-3.1-70b-instruct.
-Descriptions:  43%|████▎     | 97/225 [01:44<00:03, 41.85it/s]Descriptions:  48%|████▊     | 107/225 [01:44<00:02, 52.12it/s]Descriptions:  51%|█████     | 114/225 [01:44<00:02, 41.46it/s]Descriptions:  53%|█████▎    | 120/225 [01:45<00:03, 26.40it/s]2026-04-16 12:22:13,309 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,338 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,340 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,348 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,349 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,350 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,354 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,360 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,366 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,381 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  56%|█████▌    | 125/225 [01:45<00:04, 24.77it/s]2026-04-16 12:22:13,434 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,441 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,457 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,461 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,469 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,469 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,476 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,482 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,486 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,519 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,522 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,574 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,576 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,579 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,589 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,590 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,590 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,602 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,608 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,612 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,644 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,647 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,661 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,666 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,674 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,700 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,705 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,715 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,733 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,736 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,737 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,750 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,752 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,756 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,761 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,770 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,790 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,808 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,824 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,845 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,861 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,863 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,869 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,883 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,890 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,895 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,986 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:13,998 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,044 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,066 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,101 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,103 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,108 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,194 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,217 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,347 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,373 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-16 12:22:14,506 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  56%|█████▌    | 125/225 [02:04<00:04, 24.77it/s]Descriptions:  57%|█████▋    | 129/225 [02:33<04:03,  2.54s/it]Descriptions:  58%|█████▊    | 130/225 [02:33<03:46,  2.38s/it]Descriptions:  59%|█████▉    | 133/225 [02:34<02:56,  1.92s/it]Descriptions:  60%|██████    | 135/225 [02:34<02:23,  1.59s/it]Descriptions:  61%|██████    | 137/225 [02:35<01:54,  1.31s/it]Descriptions:  62%|██████▏   | 139/225 [02:35<01:30,  1.05s/it]Descriptions:  63%|██████▎   | 141/225 [02:35<01:09,  1.21it/s]Descriptions:  64%|██████▎   | 143/225 [02:36<00:52,  1.57it/s]Descriptions:  64%|██████▍   | 145/225 [02:47<02:34,  1.93s/it]Descriptions:  65%|██████▌   | 147/225 [02:47<01:57,  1.51s/it]Descriptions:  66%|██████▌   | 148/225 [02:48<01:46,  1.39s/it]Descriptions:  67%|██████▋   | 150/225 [02:48<01:14,  1.01it/s]Descriptions:  67%|██████▋   | 151/225 [02:49<01:02,  1.19it/s]Descriptions:  68%|██████▊   | 153/225 [02:49<00:41,  1.75it/s]Descriptions:  68%|██████▊   | 154/225 [02:49<00:40,  1.76it/s]Descriptions:  69%|██████▉   | 155/225 [02:50<00:37,  1.88it/s]Descriptions:  69%|██████▉   | 156/225 [02:51<00:49,  1.39it/s]Descriptions:  70%|██████▉   | 157/225 [02:52<00:45,  1.49it/s]Descriptions:  70%|███████   | 158/225 [02:56<01:49,  1.64s/it]Descriptions:  71%|███████   | 159/225 [02:56<01:26,  1.31s/it]Descriptions:  71%|███████   | 160/225 [02:57<01:06,  1.02s/it]Descriptions:  72%|███████▏  | 162/225 [02:58<00:51,  1.21it/s]Descriptions:  73%|███████▎  | 164/225 [02:58<00:32,  1.87it/s]Descriptions:  74%|███████▍  | 166/225 [02:58<00:21,  2.73it/s]Descriptions:  74%|███████▍  | 167/225 [02:58<00:20,  2.80it/s]Descriptions:  76%|███████▌  | 170/225 [02:59<00:11,  4.65it/s]Descriptions:  76%|███████▋  | 172/225 [02:59<00:13,  3.80it/s]Descriptions:  77%|███████▋  | 173/225 [03:00<00:15,  3.31it/s]Descriptions:  77%|███████▋  | 174/225 [03:01<00:29,  1.71it/s]Descriptions:  78%|███████▊  | 175/225 [03:02<00:25,  1.93it/s]Descriptions:  78%|███████▊  | 176/225 [03:02<00:26,  1.85it/s]Descriptions:  79%|███████▊  | 177/225 [03:02<00:21,  2.27it/s]Descriptions:  79%|███████▉  | 178/225 [03:04<00:31,  1.49it/s]Descriptions:  80%|███████▉  | 179/225 [03:06<00:46,  1.00s/it]Descriptions:  80%|████████  | 180/225 [03:06<00:34,  1.30it/s]Descriptions:  80%|████████  | 181/225 [03:06<00:26,  1.68it/s]Descriptions:  81%|████████  | 182/225 [03:07<00:25,  1.71it/s]Descriptions:  81%|████████▏ | 183/225 [03:07<00:19,  2.16it/s]Descriptions:  82%|████████▏ | 184/225 [03:07<00:20,  1.99it/s]Descriptions:  82%|████████▏ | 185/225 [03:08<00:19,  2.02it/s]Descriptions:  83%|████████▎ | 186/225 [03:08<00:17,  2.21it/s]Descriptions:  83%|████████▎ | 187/225 [03:08<00:13,  2.77it/s]Descriptions:  84%|████████▎ | 188/225 [03:09<00:12,  2.98it/s]Descriptions:  84%|████████▍ | 189/225 [03:09<00:10,  3.45it/s]Descriptions:  84%|████████▍ | 190/225 [03:09<00:12,  2.87it/s]Descriptions:  85%|████████▌ | 192/225 [03:09<00:07,  4.60it/s]Descriptions:  87%|████████▋ | 195/225 [03:10<00:04,  6.69it/s]Descriptions:  88%|████████▊ | 199/225 [03:10<00:02, 11.21it/s]Descriptions:  89%|████████▉ | 201/225 [03:10<00:02,  9.16it/s]Descriptions:  90%|█████████ | 203/225 [03:11<00:03,  5.76it/s]Descriptions:  91%|█████████ | 205/225 [03:11<00:02,  7.11it/s]Descriptions:  92%|█████████▏| 208/225 [03:11<00:02,  8.48it/s]Descriptions:  93%|█████████▎| 210/225 [03:11<00:01,  9.96it/s]Descriptions:  95%|█████████▌| 214/225 [03:11<00:00, 14.24it/s]Descriptions:  96%|█████████▋| 217/225 [03:12<00:00, 14.07it/s]Descriptions:  99%|█████████▊| 222/225 [03:12<00:00, 20.24it/s]Descriptions: 100%|██████████| 225/225 [03:12<00:00,  1.17it/s]
-2026-04-16 12:23:40,206 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/llama-3.1-70b-instruct.parquet.
+2026-04-17 12:03:51,846 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,849 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,851 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,853 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,857 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,859 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,863 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,870 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,880 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,889 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,894 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,902 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:03:51,906 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,307 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   0%|          | 1/261 [01:42<7:23:42, 102.39s/it]2026-04-17 12:05:34,336 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,417 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,592 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   2%|▏         | 4/261 [01:42<1:23:18, 19.45s/it] 2026-04-17 12:05:34,623 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,807 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   2%|▏         | 6/261 [01:42<46:49, 11.02s/it]  2026-04-17 12:05:34,859 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,913 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   3%|▎         | 8/261 [01:42<28:43,  6.81s/it]2026-04-17 12:05:34,931 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,932 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,939 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,965 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:34,979 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,091 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   5%|▌         | 14/261 [01:43<10:41,  2.60s/it]2026-04-17 12:05:35,102 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,119 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,151 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,255 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   7%|▋         | 18/261 [01:43<06:39,  1.65s/it]2026-04-17 12:05:35,360 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,417 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,490 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:   8%|▊         | 21/261 [01:43<04:47,  1.20s/it]2026-04-17 12:05:35,512 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,534 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,577 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,624 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  10%|▉         | 25/261 [01:43<03:06,  1.27it/s]2026-04-17 12:05:35,636 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,692 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,736 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  11%|█         | 28/261 [01:43<02:15,  1.72it/s]2026-04-17 12:05:35,761 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,786 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,842 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,847 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  12%|█▏        | 31/261 [01:43<01:39,  2.32it/s]2026-04-17 12:05:35,898 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,935 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:35,987 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  13%|█▎        | 35/261 [01:44<01:05,  3.43it/s]2026-04-17 12:05:36,006 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,029 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,086 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,111 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  15%|█▍        | 39/261 [01:44<00:45,  4.88it/s]2026-04-17 12:05:36,144 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,157 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,206 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,226 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,234 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,238 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  16%|█▋        | 43/261 [01:44<00:32,  6.69it/s]2026-04-17 12:05:36,302 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,303 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,312 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,319 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,387 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  19%|█▉        | 50/261 [01:44<00:19, 10.87it/s]2026-04-17 12:05:36,446 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,462 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  21%|██        | 55/261 [01:44<00:14, 14.20it/s]2026-04-17 12:05:36,472 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,475 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,501 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,559 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,569 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,593 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,651 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  23%|██▎       | 59/261 [01:44<00:12, 16.28it/s]2026-04-17 12:05:36,685 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,706 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  25%|██▌       | 66/261 [01:44<00:08, 22.83it/s]2026-04-17 12:05:36,708 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,715 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,743 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,743 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,771 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,790 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,879 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,935 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:36,941 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,001 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  27%|██▋       | 71/261 [01:45<00:08, 22.34it/s]2026-04-17 12:05:37,057 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,067 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,076 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,142 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  29%|██▊       | 75/261 [01:45<00:07, 23.76it/s]2026-04-17 12:05:37,163 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,164 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,210 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,224 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,235 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  31%|███       | 81/261 [01:45<00:06, 28.54it/s]2026-04-17 12:05:37,268 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,296 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,308 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,311 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,317 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  34%|███▍      | 89/261 [01:45<00:04, 35.08it/s]2026-04-17 12:05:37,332 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,353 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,354 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,417 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,436 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,446 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,476 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,482 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,507 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  36%|███▌      | 94/261 [01:45<00:04, 36.54it/s]2026-04-17 12:05:37,520 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,565 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,571 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,613 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  38%|███▊      | 99/261 [01:45<00:04, 38.05it/s]2026-04-17 12:05:37,630 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,698 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,707 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,710 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,742 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,787 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  40%|███▉      | 104/261 [01:45<00:04, 36.33it/s]2026-04-17 12:05:37,820 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,857 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,862 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,865 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,904 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  42%|████▏     | 109/261 [01:46<00:03, 38.37it/s]2026-04-17 12:05:37,935 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:37,962 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,016 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,051 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,077 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,090 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  44%|████▎     | 114/261 [01:46<00:04, 35.83it/s]2026-04-17 12:05:38,107 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,129 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,137 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,167 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,170 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,195 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  46%|████▋     | 121/261 [01:46<00:03, 41.85it/s]2026-04-17 12:05:38,235 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,245 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,299 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,312 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:38,326 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  48%|████▊     | 126/261 [01:46<00:03, 41.79it/s]2026-04-17 12:05:38,510 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:39,304 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:05:39,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:39,979 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:39,984 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,010 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,056 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,062 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,066 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,067 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,072 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,076 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,096 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,191 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,262 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,262 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,263 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,302 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,311 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,312 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,328 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,333 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,504 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,508 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,509 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,513 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:05:40,942 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  48%|████▊     | 126/261 [02:04<00:03, 41.79it/s]2026-04-17 12:07:15,644 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  49%|████▉     | 129/261 [03:23<13:33,  6.16s/it]2026-04-17 12:07:16,080 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  50%|████▉     | 130/261 [03:24<12:25,  5.69s/it]2026-04-17 12:07:16,257 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:07:16,495 [INFO] root: Invoking llama-3.1-70b-instruct.
+2026-04-17 12:07:16,533 [INFO] root: Invoking llama-3.1-70b-instruct.
+Descriptions:  51%|█████▏    | 134/261 [03:24<08:16,  3.91s/it]Descriptions:  52%|█████▏    | 137/261 [03:24<06:02,  2.92s/it]2026-04-17 12:07:16,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  54%|█████▎    | 140/261 [03:25<04:20,  2.15s/it]2026-04-17 12:07:17,033 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 12:07:17,053 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  55%|█████▍    | 143/261 [03:25<03:05,  1.58s/it]2026-04-17 12:07:17,185 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  56%|█████▌    | 146/261 [03:25<02:12,  1.15s/it]Descriptions:  57%|█████▋    | 148/261 [03:25<01:43,  1.09it/s]Descriptions:  57%|█████▋    | 150/261 [03:25<01:19,  1.40it/s]Descriptions:  59%|█████▉    | 154/261 [03:25<00:47,  2.25it/s]2026-04-17 12:07:17,780 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  82%|████████▏ | 213/261 [03:25<00:02, 20.46it/s]Descriptions:  88%|████████▊ | 230/261 [03:28<00:02, 12.59it/s]Descriptions:  93%|█████████▎| 242/261 [03:31<00:02,  8.80it/s]Descriptions:  96%|█████████▌| 251/261 [03:33<00:01,  7.99it/s]Descriptions:  99%|█████████▉| 258/261 [03:40<00:00,  3.67it/s]Descriptions: 100%|██████████| 261/261 [03:42<00:00,  1.17it/s]
+2026-04-17 12:07:34,938 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/llama-3.1-70b-instruct.parquet.
