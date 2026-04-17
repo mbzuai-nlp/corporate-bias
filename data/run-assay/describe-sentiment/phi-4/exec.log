@@ -9,12 +9,10 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-17 12:32:12,069 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 12:32:12,090 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-17 12:32:12,223 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-17 12:32:12,364 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-17 12:32:12,601 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 8141.58it/s]
+2026-04-17 15:40:25,626 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 15:40:25,705 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-17 15:40:25,886 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7770.53it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,327 +20,357 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-17 12:32:12,991 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 12:32:13,508 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 12:32:13,576 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-17 12:32:13,839 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-17 12:32:13,976 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-17 12:32:14,209 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-17 12:32:14,647 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 12:32:14,670 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 99/202 [00:00<00:00, 987.78it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1460.79it/s]
-2026-04-17 12:32:15,210 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 12:32:15,391 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 12:32:16,325 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-17 12:32:16,679 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 12:32:16,699 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-17 12:32:16,847 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 12:32:16,867 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-17 12:32:17,017 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 12:32:17,206 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 12:32:17,808 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-17 12:32:18,067 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 12:32:18,087 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1026.64it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1418.01it/s]
-2026-04-17 12:32:18,252 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=3.
-Invoking model 261 times for 28 distinct entities across 12 assay instances with 3 samples per instance (87 entity-instance pairs × 3 samples).
-2026-04-17 12:32:18,262 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,262 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,263 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,263 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,264 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,265 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,267 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,267 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,268 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,269 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,270 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,271 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,272 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,274 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,276 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,282 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,286 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,288 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,296 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,297 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,300 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,302 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,306 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,308 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,309 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,313 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,316 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,318 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,325 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,330 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,332 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,335 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,339 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,344 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,348 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,357 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,361 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,364 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,366 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,368 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,370 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,373 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,377 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,378 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,381 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,392 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,395 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,398 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,399 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,402 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,405 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,407 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,408 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,411 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,413 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,415 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,416 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,417 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,418 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,420 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,421 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,422 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,422 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,424 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,426 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,427 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,427 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,428 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,428 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,429 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,430 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,430 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,431 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,431 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,432 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,435 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,436 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,439 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,451 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,454 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,457 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,461 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,464 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,468 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,473 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,478 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,490 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,493 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,498 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,502 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,503 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,505 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,508 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,509 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,515 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,525 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,529 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,537 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,542 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,544 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,546 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,547 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,549 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,550 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,552 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,559 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,559 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,564 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,568 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,573 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,580 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,583 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,585 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,589 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,591 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,592 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,593 [INFO] root: Invoking phi-4.
-Descriptions:   0%|          | 0/261 [00:00<?, ?it/s]2026-04-17 12:32:18,596 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,597 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,599 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,601 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,604 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,607 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,611 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,613 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,614 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,615 [INFO] root: Invoking phi-4.
-2026-04-17 12:32:18,616 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:26,582 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 15:40:26,587 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-17 15:40:26,753 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 15:40:26,754 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-17 15:40:26,927 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-17 15:40:27,115 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-17 15:40:27,294 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-17 15:40:27,494 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-17 15:40:28,088 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 15:40:28,138 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▎     | 88/202 [00:00<00:00, 877.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1267.50it/s]
+2026-04-17 15:40:28,553 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 15:40:28,720 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 15:40:29,786 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-17 15:40:30,096 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 15:40:30,177 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-17 15:40:30,321 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 15:40:30,629 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-17 15:40:30,769 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-17 15:40:30,942 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-17 15:40:31,933 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-17 15:40:32,519 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-17 15:40:32,600 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 83/202 [00:00<00:00, 829.16it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1185.41it/s]
+2026-04-17 15:40:32,797 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=3.
+Invoking model 288 times for 31 distinct entities across 15 assay instances with 3 samples per instance (96 entity-instance pairs × 3 samples).
+2026-04-17 15:40:32,809 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,810 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,810 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,812 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,813 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,814 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,815 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,816 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,817 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,819 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,822 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,823 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,824 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,825 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,830 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,834 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,838 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,840 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,844 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,846 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,849 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,852 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,854 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,857 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,858 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,859 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,861 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,862 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,865 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,868 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,872 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,878 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,881 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,889 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,891 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,901 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,907 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,917 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,921 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,923 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,929 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,936 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,938 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,940 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,941 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,946 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,951 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,952 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,954 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,957 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,959 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,961 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,962 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,964 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,967 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,969 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,970 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,973 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,977 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,981 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,983 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,985 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,986 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,987 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,987 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,988 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,993 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,993 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,994 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,994 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,995 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,995 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,997 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,997 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,998 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,999 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:32,999 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,000 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,001 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,001 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,005 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,080 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,012 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,016 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,023 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,031 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,041 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,044 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,056 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,062 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,073 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,010 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,083 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,107 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,112 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,117 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,121 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,124 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,127 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,129 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,131 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,136 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,140 [INFO] root: Invoking phi-4.
+Descriptions:   0%|          | 0/288 [00:00<?, ?it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,146 [INFO] root: Invoking phi-4.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 12:33:59,702 [INFO] root: Invoking phi-4.
-Descriptions:   0%|          | 1/261 [01:41<7:18:01, 101.08s/it]2026-04-17 12:33:59,913 [INFO] root: Invoking phi-4.
-Descriptions:   1%|          | 2/261 [01:41<3:00:13, 41.75s/it] 2026-04-17 12:34:00,077 [INFO] root: Invoking phi-4.
-Descriptions:   1%|          | 3/261 [01:41<1:37:51, 22.76s/it]2026-04-17 12:34:00,375 [INFO] root: Invoking phi-4.
-Descriptions:   2%|▏         | 4/261 [01:41<59:32, 13.90s/it]  2026-04-17 12:34:00,406 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,413 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,660 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,669 [INFO] root: Invoking phi-4.
-Descriptions:   3%|▎         | 7/261 [01:42<22:05,  5.22s/it]2026-04-17 12:34:00,710 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,769 [INFO] root: Invoking phi-4.
-Descriptions:   4%|▍         | 10/261 [01:42<11:34,  2.77s/it]2026-04-17 12:34:00,830 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,857 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,868 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,882 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,888 [INFO] root: Invoking phi-4.
-Descriptions:   5%|▌         | 14/261 [01:42<06:03,  1.47s/it]2026-04-17 12:34:00,984 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:00,990 [INFO] root: Invoking phi-4.
-Descriptions:   7%|▋         | 17/261 [01:42<04:00,  1.01it/s]2026-04-17 12:34:01,057 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,083 [INFO] root: Invoking phi-4.
-Descriptions:   8%|▊         | 20/261 [01:42<02:43,  1.47it/s]2026-04-17 12:34:01,115 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,162 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,183 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,224 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,265 [INFO] root: Invoking phi-4.
-Descriptions:   9%|▉         | 24/261 [01:42<01:42,  2.31it/s]2026-04-17 12:34:01,380 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,470 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,472 [INFO] root: Invoking phi-4.
-Descriptions:  10%|█         | 27/261 [01:42<01:16,  3.06it/s]2026-04-17 12:34:01,483 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,522 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,548 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,557 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,562 [INFO] root: Invoking phi-4.
-Descriptions:  11%|█▏        | 30/261 [01:42<00:55,  4.13it/s]2026-04-17 12:34:01,593 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,620 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,651 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,663 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,682 [INFO] root: Invoking phi-4.
-Descriptions:  14%|█▍        | 37/261 [01:43<00:29,  7.64it/s]2026-04-17 12:34:01,753 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,784 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,812 [INFO] root: Invoking phi-4.
-Descriptions:  16%|█▌        | 41/261 [01:43<00:22,  9.89it/s]2026-04-17 12:34:01,815 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,832 [INFO] root: Invoking phi-4.
-Descriptions:  18%|█▊        | 46/261 [01:43<00:16, 13.19it/s]2026-04-17 12:34:01,833 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,854 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,875 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,939 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,950 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:01,989 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,004 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,080 [INFO] root: Invoking phi-4.
-Descriptions:  19%|█▉        | 50/261 [01:43<00:13, 15.44it/s]2026-04-17 12:34:02,113 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,115 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,121 [INFO] root: Invoking phi-4.
-Descriptions:  21%|██        | 55/261 [01:43<00:10, 19.75it/s]2026-04-17 12:34:02,137 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,196 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,201 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,205 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,297 [INFO] root: Invoking phi-4.
-Descriptions:  23%|██▎       | 59/261 [01:43<00:08, 22.71it/s]2026-04-17 12:34:02,300 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,328 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,339 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,379 [INFO] root: Invoking phi-4.
-Descriptions:  25%|██▍       | 64/261 [01:43<00:07, 26.83it/s]2026-04-17 12:34:02,394 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,426 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,492 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,533 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,534 [INFO] root: Invoking phi-4.
-Descriptions:  26%|██▌       | 68/261 [01:43<00:06, 27.99it/s]2026-04-17 12:34:02,552 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,554 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,562 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,593 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,615 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,624 [INFO] root: Invoking phi-4.
-Descriptions:  28%|██▊       | 74/261 [01:44<00:05, 31.73it/s]2026-04-17 12:34:02,667 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,679 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,692 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,740 [INFO] root: Invoking phi-4.
-Descriptions:  31%|███       | 81/261 [01:44<00:04, 37.65it/s]2026-04-17 12:34:02,753 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,772 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,781 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,818 [INFO] root: Invoking phi-4.
-Descriptions:  33%|███▎      | 86/261 [01:44<00:04, 39.83it/s]2026-04-17 12:34:02,827 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,852 [INFO] root: Invoking phi-4.
-Descriptions:  36%|███▌      | 93/261 [01:44<00:03, 46.83it/s]2026-04-17 12:34:02,876 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,881 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,935 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,946 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,980 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,988 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:02,992 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,000 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,012 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,037 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,106 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,169 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,306 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,348 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,354 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,366 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,369 [INFO] root: Invoking phi-4.
-Descriptions:  38%|███▊      | 99/261 [01:44<00:05, 31.70it/s]2026-04-17 12:34:03,389 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,454 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,460 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,499 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,525 [INFO] root: Invoking phi-4.
-Descriptions:  40%|███▉      | 104/261 [01:44<00:05, 31.34it/s]2026-04-17 12:34:03,607 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,656 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,686 [INFO] root: Invoking phi-4.
-Descriptions:  41%|████▏     | 108/261 [01:45<00:05, 29.81it/s]2026-04-17 12:34:03,700 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,739 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,773 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,835 [INFO] root: Invoking phi-4.
-Descriptions:  43%|████▎     | 112/261 [01:45<00:05, 28.99it/s]2026-04-17 12:34:03,897 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,932 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,987 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:03,992 [INFO] root: Invoking phi-4.
-Descriptions:  44%|████▍     | 116/261 [01:45<00:05, 27.71it/s]2026-04-17 12:34:04,046 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,072 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,125 [INFO] root: Invoking phi-4.
-Descriptions:  46%|████▌     | 119/261 [01:45<00:05, 26.67it/s]2026-04-17 12:34:04,135 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,160 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,245 [INFO] root: Invoking phi-4.
-Descriptions:  47%|████▋     | 122/261 [01:45<00:05, 25.97it/s]2026-04-17 12:34:04,280 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,369 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,454 [INFO] root: Invoking phi-4.
-Descriptions:  48%|████▊     | 125/261 [01:45<00:06, 21.76it/s]2026-04-17 12:34:04,514 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,636 [INFO] root: Invoking phi-4.
-2026-04-17 12:34:04,973 [INFO] root: Invoking phi-4.
-Descriptions:  49%|████▉     | 128/261 [01:46<00:10, 12.31it/s]2026-04-17 12:34:07,461 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,471 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,476 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,482 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,492 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,502 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,507 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,509 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,513 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,519 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,523 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,583 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,588 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,749 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,777 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,796 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,801 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,822 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,827 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:07,857 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,811 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,821 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,822 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,852 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:08,857 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:09,013 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:09,018 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:09,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:09,028 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 12:34:09,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  49%|████▉     | 128/261 [02:04<00:10, 12.31it/s]2026-04-17 12:35:43,242 [INFO] root: Invoking phi-4.
-Descriptions:  49%|████▉     | 129/261 [03:24<24:31, 11.15s/it]2026-04-17 12:35:43,890 [INFO] root: Invoking phi-4.
-Descriptions:  50%|████▉     | 130/261 [03:25<21:09,  9.69s/it]2026-04-17 12:35:44,009 [INFO] root: Invoking phi-4.
-2026-04-17 12:35:44,107 [INFO] root: Invoking phi-4.
-Descriptions:  51%|█████     | 132/261 [03:25<14:59,  6.97s/it]2026-04-17 12:35:44,133 [INFO] root: Invoking phi-4.
-2026-04-17 12:35:44,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  51%|█████▏    | 134/261 [03:25<10:33,  4.99s/it]Descriptions:  52%|█████▏    | 136/261 [03:25<07:25,  3.57s/it]2026-04-17 12:35:44,681 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  53%|█████▎    | 138/261 [03:26<05:13,  2.55s/it]Descriptions:  55%|█████▍    | 143/261 [03:26<02:30,  1.27s/it]Descriptions:  56%|█████▌    | 146/261 [03:26<01:43,  1.12it/s]Descriptions:  57%|█████▋    | 150/261 [03:26<01:05,  1.70it/s]2026-04-17 12:35:45,436 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  58%|█████▊    | 152/261 [03:26<00:52,  2.07it/s]2026-04-17 12:35:45,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  61%|██████    | 158/261 [03:27<00:29,  3.49it/s]Descriptions:  61%|██████▏   | 160/261 [03:27<00:24,  4.07it/s]2026-04-17 12:35:46,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  64%|██████▍   | 167/261 [03:27<00:12,  7.39it/s]Descriptions:  66%|██████▌   | 171/261 [03:27<00:09,  9.55it/s]Descriptions:  68%|██████▊   | 177/261 [03:27<00:06, 13.50it/s]Descriptions:  69%|██████▉   | 181/261 [03:27<00:04, 16.16it/s]Descriptions:  72%|███████▏  | 188/261 [03:28<00:03, 23.18it/s]Descriptions:  75%|███████▌  | 196/261 [03:28<00:02, 31.89it/s]Descriptions:  78%|███████▊  | 204/261 [03:28<00:01, 39.24it/s]Descriptions:  81%|████████  | 211/261 [03:28<00:01, 38.77it/s]Descriptions:  83%|████████▎ | 217/261 [03:28<00:01, 34.15it/s]Descriptions:  85%|████████▌ | 222/261 [03:28<00:01, 28.30it/s]Descriptions:  87%|████████▋ | 226/261 [03:30<00:03, 10.29it/s]Descriptions:  88%|████████▊ | 229/261 [03:30<00:03, 10.29it/s]Descriptions:  89%|████████▉ | 232/261 [03:30<00:02, 11.55it/s]Descriptions:  90%|█████████ | 236/261 [03:30<00:01, 13.64it/s]Descriptions:  92%|█████████▏| 239/261 [03:31<00:01, 12.20it/s]Descriptions:  92%|█████████▏| 241/261 [03:31<00:02,  8.84it/s]Descriptions:  93%|█████████▎| 243/261 [03:31<00:02,  8.90it/s]Descriptions:  95%|█████████▍| 247/261 [03:31<00:01, 12.40it/s]Descriptions:  95%|█████████▌| 249/261 [03:32<00:00, 13.06it/s]Descriptions:  97%|█████████▋| 254/261 [03:32<00:00, 18.96it/s]Descriptions:  98%|█████████▊| 257/261 [03:34<00:00,  4.74it/s]Descriptions:  99%|█████████▉| 259/261 [03:34<00:00,  5.35it/s]Descriptions: 100%|██████████| 261/261 [03:34<00:00,  1.22it/s]
-2026-04-17 12:35:53,305 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,150 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,153 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,158 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,160 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,161 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,174 [INFO] root: Invoking phi-4.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+2026-04-17 15:40:33,179 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,190 [INFO] root: Invoking phi-4.
+2026-04-17 15:40:33,197 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:16,594 [INFO] root: Invoking phi-4.
+Descriptions:   0%|          | 1/288 [01:43<8:14:35, 103.40s/it]2026-04-17 15:42:17,008 [INFO] root: Invoking phi-4.
+Descriptions:   1%|          | 2/288 [01:43<3:24:13, 42.84s/it] 2026-04-17 15:42:17,075 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:17,169 [INFO] root: Invoking phi-4.
+Descriptions:   1%|▏         | 4/288 [01:43<1:15:48, 16.01s/it]2026-04-17 15:42:17,239 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:17,349 [INFO] root: Invoking phi-4.
+Descriptions:   2%|▏         | 6/288 [01:44<39:54,  8.49s/it]  2026-04-17 15:42:17,790 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:17,852 [INFO] root: Invoking phi-4.
+Descriptions:   3%|▎         | 8/288 [01:44<24:07,  5.17s/it]2026-04-17 15:42:17,884 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:17,888 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:17,896 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,041 [INFO] root: Invoking phi-4.
+Descriptions:   4%|▍         | 12/288 [01:44<11:10,  2.43s/it]2026-04-17 15:42:18,053 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,166 [INFO] root: Invoking phi-4.
+Descriptions:   5%|▍         | 14/288 [01:44<08:06,  1.77s/it]2026-04-17 15:42:18,186 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,203 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,299 [INFO] root: Invoking phi-4.
+Descriptions:   6%|▌         | 17/288 [01:45<05:06,  1.13s/it]2026-04-17 15:42:18,375 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,409 [INFO] root: Invoking phi-4.
+Descriptions:   7%|▋         | 19/288 [01:45<03:49,  1.17it/s]2026-04-17 15:42:18,539 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,583 [INFO] root: Invoking phi-4.
+Descriptions:   7%|▋         | 21/288 [01:45<02:51,  1.56it/s]2026-04-17 15:42:18,602 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,646 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,659 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,722 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,742 [INFO] root: Invoking phi-4.
+Descriptions:   9%|▊         | 25/288 [01:45<01:39,  2.65it/s]2026-04-17 15:42:18,824 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,833 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,838 [INFO] root: Invoking phi-4.
+Descriptions:  11%|█         | 32/288 [01:45<00:48,  5.30it/s]2026-04-17 15:42:18,840 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,843 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,852 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,954 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:18,999 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,009 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,019 [INFO] root: Invoking phi-4.
+Descriptions:  12%|█▎        | 36/288 [01:45<00:36,  6.93it/s]2026-04-17 15:42:19,072 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,107 [INFO] root: Invoking phi-4.
+Descriptions:  14%|█▍        | 40/288 [01:45<00:27,  9.10it/s]2026-04-17 15:42:19,111 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,127 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,143 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,192 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,232 [INFO] root: Invoking phi-4.
+Descriptions:  15%|█▌        | 44/288 [01:46<00:21, 11.37it/s]2026-04-17 15:42:19,279 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,329 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,344 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,384 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,428 [INFO] root: Invoking phi-4.
+Descriptions:  17%|█▋        | 48/288 [01:46<00:17, 13.72it/s]2026-04-17 15:42:19,457 [INFO] root: Invoking phi-4.
+Descriptions:  18%|█▊        | 52/288 [01:46<00:13, 17.03it/s]2026-04-17 15:42:19,506 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,507 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,531 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,597 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,607 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,652 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,658 [INFO] root: Invoking phi-4.
+Descriptions:  19%|█▉        | 56/288 [01:46<00:11, 19.79it/s]2026-04-17 15:42:19,674 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,754 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,762 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,834 [INFO] root: Invoking phi-4.
+Descriptions:  21%|██        | 60/288 [01:46<00:11, 20.09it/s]2026-04-17 15:42:19,858 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,871 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,872 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,922 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,932 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:19,952 [INFO] root: Invoking phi-4.
+Descriptions:  23%|██▎       | 66/288 [01:46<00:08, 27.05it/s]2026-04-17 15:42:19,962 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,065 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,073 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,079 [INFO] root: Invoking phi-4.
+Descriptions:  24%|██▍       | 70/288 [01:46<00:07, 28.13it/s]2026-04-17 15:42:20,097 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,101 [INFO] root: Invoking phi-4.
+Descriptions:  26%|██▌       | 74/288 [01:46<00:07, 30.47it/s]2026-04-17 15:42:20,137 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,176 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,192 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,195 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,196 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,201 [INFO] root: Invoking phi-4.
+Descriptions:  28%|██▊       | 80/288 [01:47<00:06, 31.13it/s]2026-04-17 15:42:20,244 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,362 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,368 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,380 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,383 [INFO] root: Invoking phi-4.
+Descriptions:  30%|██▉       | 85/288 [01:47<00:06, 29.64it/s]2026-04-17 15:42:20,450 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,549 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,561 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,588 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,621 [INFO] root: Invoking phi-4.
+Descriptions:  31%|███       | 89/288 [01:47<00:06, 30.80it/s]2026-04-17 15:42:20,633 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,655 [INFO] root: Invoking phi-4.
+Descriptions:  32%|███▏      | 93/288 [01:47<00:05, 32.79it/s]2026-04-17 15:42:20,689 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,704 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,770 [INFO] root: Invoking phi-4.
+Descriptions:  34%|███▍      | 99/288 [01:47<00:06, 31.40it/s]2026-04-17 15:42:20,794 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,832 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,840 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,845 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,855 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,913 [INFO] root: Invoking phi-4.
+Descriptions:  36%|███▋      | 105/288 [01:47<00:05, 31.91it/s]2026-04-17 15:42:20,916 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,951 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,988 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:20,991 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,048 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,158 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,164 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,175 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,199 [INFO] root: Invoking phi-4.
+Descriptions:  38%|███▊      | 110/288 [01:48<00:05, 33.13it/s]2026-04-17 15:42:21,201 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,284 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,289 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,325 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,343 [INFO] root: Invoking phi-4.
+Descriptions:  40%|███▉      | 114/288 [01:48<00:05, 32.74it/s]2026-04-17 15:42:21,416 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,471 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,600 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,618 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,657 [INFO] root: Invoking phi-4.
+Descriptions:  41%|████      | 118/288 [01:48<00:06, 26.32it/s]2026-04-17 15:42:21,659 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,784 [INFO] root: Invoking phi-4.
+Descriptions:  42%|████▏     | 121/288 [01:48<00:06, 25.18it/s]2026-04-17 15:42:21,784 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,795 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,824 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:21,917 [INFO] root: Invoking phi-4.
+Descriptions:  43%|████▎     | 124/288 [01:48<00:06, 24.98it/s]2026-04-17 15:42:22,043 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:22,343 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:22,537 [INFO] root: Invoking phi-4.
+Descriptions:  44%|████▍     | 127/288 [01:49<00:13, 12.13it/s]2026-04-17 15:42:23,406 [INFO] root: Invoking phi-4.
+2026-04-17 15:42:24,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:24,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:24,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:24,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:24,979 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:24,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,145 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,172 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,181 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,195 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,198 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,208 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,220 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,234 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,563 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:25,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-17 15:42:26,097 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  44%|████▍     | 127/288 [02:03<00:13, 12.13it/s]2026-04-17 15:44:01,239 [INFO] root: Invoking phi-4.
+Descriptions:  45%|████▍     | 129/288 [03:28<25:40,  9.69s/it]2026-04-17 15:44:01,451 [INFO] root: Invoking phi-4.
+Descriptions:  45%|████▌     | 130/288 [03:28<22:28,  8.53s/it]2026-04-17 15:44:03,052 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:03,238 [INFO] root: Invoking phi-4.
+Descriptions:  46%|████▌     | 132/288 [03:30<17:02,  6.56s/it]2026-04-17 15:44:03,265 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:03,613 [INFO] root: Invoking phi-4.
+Descriptions:  47%|████▋     | 134/288 [03:30<12:24,  4.84s/it]2026-04-17 15:44:03,856 [INFO] root: Invoking phi-4.
+Descriptions:  47%|████▋     | 135/288 [03:30<10:26,  4.09s/it]2026-04-17 15:44:03,951 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,149 [INFO] root: Invoking phi-4.
+Descriptions:  48%|████▊     | 137/288 [03:30<07:09,  2.85s/it]2026-04-17 15:44:04,183 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,195 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,198 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,236 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,240 [INFO] root: Invoking phi-4.
+Descriptions:  50%|████▉     | 143/288 [03:31<02:57,  1.22s/it]2026-04-17 15:44:04,306 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,418 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,495 [INFO] root: Invoking phi-4.
+Descriptions:  50%|█████     | 145/288 [03:31<02:20,  1.02it/s]2026-04-17 15:44:04,543 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,639 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,647 [INFO] root: Invoking phi-4.
+Descriptions:  51%|█████     | 147/288 [03:31<01:48,  1.30it/s]2026-04-17 15:44:04,705 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,757 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:04,762 [INFO] root: Invoking phi-4.
+Descriptions:  52%|█████▏    | 150/288 [03:31<01:13,  1.89it/s]2026-04-17 15:44:04,906 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:05,064 [INFO] root: Invoking phi-4.
+Descriptions:  53%|█████▎    | 153/288 [03:31<00:52,  2.59it/s]2026-04-17 15:44:05,136 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:05,221 [INFO] root: Invoking phi-4.
+Descriptions:  54%|█████▍    | 155/288 [03:32<00:41,  3.20it/s]2026-04-17 15:44:05,258 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:05,271 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:05,319 [INFO] root: Invoking phi-4.
+2026-04-17 15:44:05,516 [INFO] root: Invoking phi-4.
+Descriptions:  55%|█████▌    | 159/288 [03:32<00:27,  4.62it/s]2026-04-17 15:44:05,566 [INFO] root: Invoking phi-4.
+Descriptions:  56%|█████▌    | 161/288 [03:32<00:23,  5.32it/s]Descriptions:  57%|█████▋    | 163/288 [03:32<00:20,  6.04it/s]Descriptions:  58%|█████▊    | 168/288 [03:32<00:12,  9.97it/s]Descriptions:  59%|█████▉    | 171/288 [03:32<00:09, 12.00it/s]Descriptions:  60%|██████    | 174/288 [03:33<00:08, 13.54it/s]Descriptions:  62%|██████▎   | 180/288 [03:33<00:05, 19.89it/s]Descriptions:  64%|██████▎   | 183/288 [03:33<00:05, 19.99it/s]Descriptions:  65%|██████▌   | 188/288 [03:33<00:03, 25.48it/s]Descriptions:  67%|██████▋   | 192/288 [03:33<00:03, 25.56it/s]Descriptions:  69%|██████▉   | 198/288 [03:33<00:03, 29.70it/s]Descriptions:  70%|███████   | 202/288 [03:33<00:03, 26.75it/s]Descriptions:  72%|███████▏  | 207/288 [03:34<00:02, 30.17it/s]Descriptions:  73%|███████▎  | 211/288 [03:34<00:02, 29.22it/s]Descriptions:  75%|███████▌  | 216/288 [03:34<00:02, 31.70it/s]Descriptions:  76%|███████▋  | 220/288 [03:34<00:02, 26.16it/s]Descriptions:  77%|███████▋  | 223/288 [03:34<00:02, 24.64it/s]Descriptions:  78%|███████▊  | 226/288 [03:34<00:02, 22.42it/s]Descriptions:  80%|███████▉  | 229/288 [03:35<00:05, 10.76it/s]Descriptions:  80%|████████  | 231/288 [03:36<00:11,  5.08it/s]Descriptions:  81%|████████  | 233/288 [03:37<00:11,  4.85it/s]Descriptions:  82%|████████▏ | 237/288 [03:37<00:07,  6.78it/s]Descriptions:  83%|████████▎ | 239/288 [03:37<00:06,  7.27it/s]Descriptions:  84%|████████▎ | 241/288 [03:38<00:08,  5.72it/s]Descriptions:  84%|████████▍ | 242/288 [03:38<00:09,  4.69it/s]Descriptions:  84%|████████▍ | 243/288 [03:39<00:12,  3.54it/s]Descriptions:  85%|████████▍ | 244/288 [03:39<00:12,  3.41it/s]Descriptions:  85%|████████▌ | 245/288 [03:39<00:11,  3.73it/s]Descriptions:  85%|████████▌ | 246/288 [03:40<00:13,  3.19it/s]Descriptions:  86%|████████▌ | 248/288 [03:40<00:09,  4.08it/s]Descriptions:  86%|████████▋ | 249/288 [03:40<00:08,  4.51it/s]Descriptions:  87%|████████▋ | 250/288 [03:41<00:09,  3.80it/s]Descriptions:  88%|████████▊ | 252/288 [03:41<00:09,  3.76it/s]Descriptions:  88%|████████▊ | 253/288 [03:41<00:08,  4.24it/s]Descriptions:  88%|████████▊ | 254/288 [03:42<00:08,  3.86it/s]Descriptions:  89%|████████▉ | 256/288 [03:42<00:06,  5.30it/s]Descriptions:  89%|████████▉ | 257/288 [04:04<02:39,  5.14s/it]Descriptions:  90%|████████▉ | 258/288 [04:04<01:58,  3.93s/it]Descriptions:  90%|█████████ | 260/288 [04:04<01:06,  2.37s/it]Descriptions:  92%|█████████▏| 265/288 [04:04<00:22,  1.02it/s]Descriptions:  94%|█████████▍| 270/288 [04:05<00:09,  1.86it/s]Descriptions: 100%|██████████| 288/288 [04:05<00:00,  1.17it/s]
+2026-04-17 15:44:38,616 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.

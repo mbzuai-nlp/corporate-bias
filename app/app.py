@@ -9,7 +9,7 @@ import yaml
 
 pn.extension("plotly")
 
-APP_WIDTH = "95vw"
+APP_WIDTH = "90vw"
 BASE_PLOT_WIDTH = 0
 WIDTH_PER_BAR = 15
 MIN_PLOT_WIDTH = 800
