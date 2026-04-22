@@ -9,13 +9,16 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-17 14:33:12,233 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:33:12,268 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:33:12,813 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-17 14:33:12,988 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-17 14:33:13,181 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-17 14:33:13,358 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6398.70it/s]
+2026-04-22 11:34:43,879 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:34:43,908 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:34:44,053 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-22 11:34:44,176 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-22 11:34:44,316 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-22 11:34:44,443 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-22 11:34:44,572 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-22 11:34:44,689 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-22 11:34:44,808 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4225.95it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,344 +26,332 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-17 14:33:13,557 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-17 14:33:13,768 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-17 14:33:13,893 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:33:13,938 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-17 14:33:14,051 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:33:15,286 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:33:15,332 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 924.83it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1186.71it/s]
-2026-04-17 14:33:15,707 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:33:15,829 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:33:16,862 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-17 14:33:17,156 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:33:17,216 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:33:17,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:33:17,418 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-17 14:33:17,585 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:33:17,784 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:33:18,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-17 14:33:18,676 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:33:18,745 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 86/202 [00:00<00:00, 857.87it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1101.21it/s]
-2026-04-17 14:33:18,952 [INFO] root: Running assay=describe-sentiment model=gpt-4o-mini num_samples_per_instance=3.
-Invoking model 288 times for 31 distinct entities across 15 assay instances with 3 samples per instance (96 entity-instance pairs × 3 samples).
-2026-04-17 14:33:18,965 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,965 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,966 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,968 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,968 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,969 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,970 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,972 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,975 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,973 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,976 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,979 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,981 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,984 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,985 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,987 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,996 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:18,999 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,003 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,006 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,014 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,017 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,021 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,027 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,032 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,035 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,037 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,039 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,045 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,052 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,060 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,072 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,078 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,082 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,086 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,088 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,099 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,104 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,107 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,110 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,116 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,121 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,123 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,124 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,127 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,129 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,133 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,136 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,137 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,139 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,144 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,153 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,155 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,157 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,159 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,160 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,162 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,163 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,164 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,165 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,167 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,168 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,170 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,170 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,171 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,172 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,173 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,173 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,177 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,178 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,181 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,185 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,191 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,193 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,198 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,207 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,216 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,222 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,229 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,232 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,236 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,241 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,243 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,247 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,252 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,256 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,262 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,266 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,271 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,274 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,277 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,279 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,282 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,286 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,288 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,296 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,299 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,304 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,308 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,310 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,313 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,321 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,325 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,327 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,328 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,332 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,336 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,338 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,345 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,354 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,359 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,362 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,368 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:46,253 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:34:46,374 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:34:47,294 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:34:47,410 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  29%|██▉       | 59/202 [00:00<00:00, 586.55it/s]Loading weights:  61%|██████    | 123/202 [00:00<00:00, 607.65it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 731.47it/s]
+2026-04-22 11:34:47,927 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:34:48,054 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:34:49,688 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-22 11:34:50,536 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:34:50,562 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:34:50,682 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:34:50,707 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-22 11:34:50,828 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:34:50,958 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:34:51,909 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-22 11:34:52,030 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:34:52,057 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 68/202 [00:00<00:00, 674.22it/s]Loading weights:  67%|██████▋   | 136/202 [00:00<00:00, 626.56it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 765.37it/s]
+2026-04-22 11:34:52,392 [INFO] root: Running assay=describe-sentiment model=gpt-4o-mini num_samples_per_instance=3.
+Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
+2026-04-22 11:34:52,413 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,414 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,416 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,417 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,418 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,420 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,421 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,423 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,425 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,426 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,428 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,430 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,435 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,440 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,442 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,445 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,451 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,458 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,467 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,473 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,480 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,483 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,485 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,493 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,499 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,502 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,504 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,510 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,516 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,522 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,532 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,535 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,539 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,555 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,559 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,569 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,572 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,580 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,591 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,599 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,605 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,617 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,623 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,627 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,634 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,637 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,649 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,653 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,659 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,661 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,664 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,672 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,675 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,677 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,687 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,691 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,693 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,697 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,703 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,707 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,709 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,711 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,713 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,732 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,719 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,722 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,724 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,725 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,726 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,728 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,730 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,721 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,738 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,751 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,757 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,760 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,766 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,775 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,788 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,797 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,804 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,812 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,824 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,833 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,843 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,850 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,853 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,863 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,870 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,874 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,876 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,878 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,884 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,886 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,890 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,894 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,896 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,901 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,904 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,906 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,913 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,917 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,922 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,926 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,927 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,929 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,930 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,932 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,935 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 11:34:52,941 [INFO] root: Invoking gpt-4o-mini.
 You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:33:19,371 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,373 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,378 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,386 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,390 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,394 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,404 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,413 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   0%|          | 0/288 [00:00<?, ?it/s]2026-04-17 14:33:19,420 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,426 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,431 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,434 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,446 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,448 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:33:19,450 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:05,150 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   0%|          | 1/288 [01:45<8:25:34, 105.70s/it]2026-04-17 14:35:05,477 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   1%|          | 2/288 [01:46<3:28:24, 43.72s/it] 2026-04-17 14:35:05,595 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   1%|          | 3/288 [01:46<1:53:05, 23.81s/it]2026-04-17 14:35:06,034 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   1%|▏         | 4/288 [01:46<1:09:00, 14.58s/it]2026-04-17 14:35:06,239 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   2%|▏         | 5/288 [01:46<44:20,  9.40s/it]  2026-04-17 14:35:06,352 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   2%|▏         | 6/288 [01:46<29:19,  6.24s/it]2026-04-17 14:35:06,575 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   2%|▏         | 7/288 [01:47<20:00,  4.27s/it]2026-04-17 14:35:06,699 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   3%|▎         | 8/288 [01:47<13:46,  2.95s/it]2026-04-17 14:35:06,713 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:06,800 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   3%|▎         | 10/288 [01:47<07:16,  1.57s/it]2026-04-17 14:35:06,877 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:06,957 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   4%|▍         | 12/288 [01:47<04:27,  1.03it/s]2026-04-17 14:35:06,987 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:06,990 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:06,996 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,023 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,026 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,086 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   6%|▋         | 18/288 [01:47<01:39,  2.71it/s]2026-04-17 14:35:07,127 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,130 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,143 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,164 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,167 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:   8%|▊         | 24/288 [01:47<00:53,  4.95it/s]2026-04-17 14:35:07,212 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,225 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,232 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,233 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,272 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,297 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,316 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  11%|█         | 31/288 [01:47<00:31,  8.18it/s]2026-04-17 14:35:07,367 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,428 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,461 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,513 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,530 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,551 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,576 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,589 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,600 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  12%|█▏        | 35/288 [01:48<00:26,  9.54it/s]2026-04-17 14:35:07,606 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,607 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,639 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,653 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,704 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  15%|█▌        | 44/288 [01:48<00:15, 15.99it/s]2026-04-17 14:35:07,713 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,743 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,754 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,796 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,806 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,809 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,860 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  18%|█▊        | 51/288 [01:48<00:11, 20.43it/s]2026-04-17 14:35:07,893 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,943 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:07,964 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,037 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,052 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,053 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,058 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,080 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  19%|█▉        | 56/288 [01:48<00:11, 20.80it/s]2026-04-17 14:35:08,121 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,147 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,149 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,172 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  23%|██▎       | 65/288 [01:48<00:07, 29.06it/s]2026-04-17 14:35:08,197 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,222 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,244 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,245 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,250 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  25%|██▍       | 71/288 [01:48<00:06, 33.24it/s]2026-04-17 14:35:08,273 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,285 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,334 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,349 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,413 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  26%|██▋       | 76/288 [01:49<00:06, 34.62it/s]2026-04-17 14:35:08,415 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,419 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,458 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,468 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,471 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  28%|██▊       | 82/288 [01:49<00:05, 38.71it/s]2026-04-17 14:35:08,497 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,523 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,549 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,572 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  30%|███       | 87/288 [01:49<00:05, 38.89it/s]2026-04-17 14:35:08,583 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,611 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,632 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,669 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  32%|███▏      | 93/288 [01:49<00:04, 41.28it/s]2026-04-17 14:35:08,683 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,699 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,747 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,775 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,788 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,790 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,819 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,852 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,860 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,937 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:08,965 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  34%|███▍      | 98/288 [01:49<00:05, 35.33it/s]2026-04-17 14:35:09,005 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,109 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,133 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,145 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,208 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,223 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  36%|███▌      | 103/288 [01:49<00:05, 31.55it/s]2026-04-17 14:35:09,241 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,248 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,251 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,294 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,347 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,361 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  37%|███▋      | 107/288 [01:49<00:05, 30.57it/s]2026-04-17 14:35:09,429 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,437 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,498 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  39%|███▉      | 112/288 [01:50<00:05, 31.26it/s]2026-04-17 14:35:09,559 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,566 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,574 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,587 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,602 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,654 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  41%|████      | 118/288 [01:50<00:04, 34.71it/s]2026-04-17 14:35:09,684 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,724 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,750 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:09,795 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  42%|████▏     | 122/288 [01:50<00:05, 32.91it/s]2026-04-17 14:35:09,839 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:10,013 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:10,158 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:10,361 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  44%|████▍     | 126/288 [01:50<00:09, 16.91it/s]2026-04-17 14:35:10,397 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:11,035 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:35:12,590 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,611 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,642 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,676 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,701 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,705 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,726 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,741 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,764 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,779 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,800 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,808 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,877 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,885 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,888 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,894 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,939 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,952 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,959 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:12,965 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:13,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:13,074 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:13,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:35:13,353 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  44%|████▍     | 126/288 [02:04<00:09, 16.91it/s]2026-04-17 14:36:47,358 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  45%|████▍     | 129/288 [03:27<18:44,  7.07s/it]2026-04-17 14:36:47,637 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  45%|████▌     | 130/288 [03:28<16:56,  6.43s/it]2026-04-17 14:36:47,760 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:47,893 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  46%|████▌     | 132/288 [03:28<13:15,  5.10s/it]2026-04-17 14:36:47,917 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:47,935 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  47%|████▋     | 136/288 [03:28<08:05,  3.20s/it]2026-04-17 14:36:47,983 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,049 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,077 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,092 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,448 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  48%|████▊     | 139/288 [03:28<05:44,  2.32s/it]2026-04-17 14:36:48,458 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,510 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,609 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  49%|████▉     | 142/288 [03:29<04:01,  1.66s/it]2026-04-17 14:36:48,737 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:48,916 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  50%|█████     | 144/288 [03:29<03:11,  1.33s/it]2026-04-17 14:36:48,930 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,084 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  51%|█████     | 146/288 [03:29<02:27,  1.04s/it]2026-04-17 14:36:49,096 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,127 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,160 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,174 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  52%|█████▏    | 150/288 [03:29<01:26,  1.59it/s]2026-04-17 14:36:49,222 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,423 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,481 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  53%|█████▎    | 153/288 [03:30<01:03,  2.13it/s]2026-04-17 14:36:49,575 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,577 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,586 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  55%|█████▍    | 157/288 [03:30<00:41,  3.19it/s]2026-04-17 14:36:49,632 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,685 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,686 [INFO] root: Invoking gpt-4o-mini.
-2026-04-17 14:36:49,799 [INFO] root: Invoking gpt-4o-mini.
-Descriptions:  56%|█████▌    | 160/288 [03:30<00:30,  4.19it/s]Descriptions:  57%|█████▋    | 165/288 [03:30<00:19,  6.46it/s]Descriptions:  59%|█████▊    | 169/288 [03:30<00:13,  8.58it/s]Descriptions:  60%|██████    | 174/288 [03:30<00:09, 12.19it/s]Descriptions:  62%|██████▏   | 178/288 [03:30<00:07, 13.92it/s]Descriptions:  64%|██████▍   | 184/288 [03:31<00:05, 19.26it/s]Descriptions:  65%|██████▌   | 188/288 [03:31<00:04, 20.35it/s]Descriptions:  67%|██████▋   | 192/288 [03:31<00:04, 22.27it/s]Descriptions:  68%|██████▊   | 197/288 [03:31<00:03, 26.16it/s]Descriptions:  71%|███████   | 205/288 [03:31<00:02, 36.30it/s]Descriptions:  73%|███████▎  | 210/288 [03:31<00:02, 35.77it/s]Descriptions:  75%|███████▍  | 215/288 [03:31<00:01, 37.72it/s]Descriptions:  76%|███████▋  | 220/288 [03:32<00:02, 32.93it/s]Descriptions:  78%|███████▊  | 224/288 [03:32<00:02, 24.91it/s]Descriptions:  79%|███████▉  | 228/288 [03:32<00:03, 15.23it/s]Descriptions:  80%|████████  | 231/288 [03:34<00:08,  6.94it/s]Descriptions:  81%|████████  | 233/288 [03:34<00:08,  6.12it/s]Descriptions:  82%|████████▏ | 235/288 [03:34<00:07,  6.71it/s]Descriptions:  82%|████████▏ | 237/288 [03:34<00:06,  7.49it/s]Descriptions:  83%|████████▎ | 239/288 [03:35<00:06,  7.77it/s]Descriptions:  84%|████████▎ | 241/288 [03:35<00:06,  7.08it/s]Descriptions:  85%|████████▌ | 245/288 [03:35<00:04,  9.22it/s]Descriptions:  86%|████████▌ | 247/288 [03:36<00:05,  7.90it/s]Descriptions:  86%|████████▋ | 249/288 [03:36<00:06,  6.44it/s]Descriptions:  87%|████████▋ | 250/288 [03:36<00:05,  6.50it/s]Descriptions:  88%|████████▊ | 253/288 [03:37<00:04,  7.37it/s]Descriptions:  89%|████████▊ | 255/288 [03:38<00:07,  4.38it/s]Descriptions:  89%|████████▉ | 256/288 [03:38<00:08,  3.87it/s]Descriptions:  89%|████████▉ | 257/288 [04:00<02:14,  4.35s/it]Descriptions:  90%|█████████ | 260/288 [04:00<01:08,  2.43s/it]Descriptions:  92%|█████████▏| 264/288 [04:00<00:31,  1.33s/it]Descriptions:  95%|█████████▌| 274/288 [04:00<00:07,  1.96it/s]Descriptions:  98%|█████████▊| 281/288 [04:01<00:02,  3.12it/s]Descriptions: 100%|██████████| 288/288 [04:01<00:00,  1.19it/s]
-2026-04-17 14:37:20,681 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-4o-mini.parquet.
+2026-04-22 11:34:52,943 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,951 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,956 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,958 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,960 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,964 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,973 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,996 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:52,999 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,003 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,008 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,011 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,015 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,024 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,033 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,040 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,042 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:53,062 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:34:56,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,696 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,699 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,716 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,806 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,865 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:56,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:34:57,802 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:37:24,885 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   0%|          | 1/297 [02:31<12:28:59, 151.82s/it]2026-04-22 11:37:24,897 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:25,058 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   1%|          | 3/297 [02:32<3:13:12, 39.43s/it]  2026-04-22 11:37:25,501 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:26,076 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   2%|▏         | 5/297 [02:33<1:34:30, 19.42s/it]2026-04-22 11:37:26,238 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   2%|▏         | 6/297 [02:33<1:09:05, 14.24s/it]2026-04-22 11:37:26,471 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   2%|▏         | 7/297 [02:33<50:03, 10.36s/it]  2026-04-22 11:37:26,523 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:26,714 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   3%|▎         | 9/297 [02:33<28:00,  5.83s/it]2026-04-22 11:37:26,822 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   3%|▎         | 10/297 [02:33<21:20,  4.46s/it]2026-04-22 11:37:27,025 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   4%|▎         | 11/297 [02:33<16:03,  3.37s/it]2026-04-22 11:37:27,027 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,033 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,094 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,112 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,122 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   6%|▌         | 18/297 [02:34<04:30,  1.03it/s]2026-04-22 11:37:27,124 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,236 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,261 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,289 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,567 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   7%|▋         | 21/297 [02:34<03:15,  1.41it/s]2026-04-22 11:37:27,588 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,682 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   8%|▊         | 23/297 [02:34<02:33,  1.78it/s]2026-04-22 11:37:27,800 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,821 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   8%|▊         | 25/297 [02:34<02:02,  2.23it/s]2026-04-22 11:37:27,890 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:27,969 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,021 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:   9%|▉         | 28/297 [02:34<01:23,  3.22it/s]2026-04-22 11:37:28,077 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,147 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  10%|█         | 30/297 [02:35<01:06,  4.00it/s]2026-04-22 11:37:28,214 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,446 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  11%|█         | 32/297 [02:35<00:59,  4.47it/s]2026-04-22 11:37:28,526 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,528 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,550 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  12%|█▏        | 35/297 [02:35<00:41,  6.39it/s]2026-04-22 11:37:28,610 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,656 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  12%|█▏        | 37/297 [02:35<00:33,  7.67it/s]2026-04-22 11:37:28,706 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,747 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,791 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  13%|█▎        | 40/297 [02:35<00:26,  9.81it/s]2026-04-22 11:37:28,894 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:28,947 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  14%|█▍        | 42/297 [02:35<00:24, 10.57it/s]2026-04-22 11:37:29,029 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,118 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  15%|█▍        | 44/297 [02:36<00:22, 11.00it/s]2026-04-22 11:37:29,144 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,146 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,150 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,150 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,180 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,232 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,251 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  17%|█▋        | 50/297 [02:36<00:13, 18.32it/s]2026-04-22 11:37:29,316 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,344 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  18%|█▊        | 54/297 [02:36<00:11, 21.91it/s]2026-04-22 11:37:29,355 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,390 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,438 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  19%|█▉        | 57/297 [02:36<00:10, 22.44it/s]2026-04-22 11:37:29,468 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,475 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,483 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,495 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,528 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,563 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,570 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,693 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  22%|██▏       | 64/297 [02:36<00:08, 26.35it/s]2026-04-22 11:37:29,737 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,828 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,840 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  23%|██▎       | 67/297 [02:36<00:09, 25.19it/s]Descriptions:  24%|██▎       | 70/297 [02:36<00:08, 25.60it/s]2026-04-22 11:37:29,870 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,914 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,932 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:29,986 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  25%|██▍       | 73/297 [02:37<00:09, 24.09it/s]2026-04-22 11:37:30,019 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,097 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,178 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,180 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  26%|██▌       | 76/297 [02:37<00:10, 21.29it/s]2026-04-22 11:37:30,252 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,283 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,288 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,291 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  28%|██▊       | 82/297 [02:37<00:08, 25.05it/s]2026-04-22 11:37:30,320 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,328 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,467 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,532 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  29%|██▊       | 85/297 [02:37<00:08, 25.38it/s]2026-04-22 11:37:30,580 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  30%|██▉       | 88/297 [02:37<00:07, 26.19it/s]2026-04-22 11:37:30,581 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,620 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,650 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,684 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:30,737 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,033 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,126 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,142 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  31%|███       | 91/297 [02:38<00:14, 14.42it/s]2026-04-22 11:37:31,164 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,298 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  32%|███▏      | 94/297 [02:38<00:13, 14.93it/s]2026-04-22 11:37:31,301 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  32%|███▏      | 96/297 [02:38<00:13, 15.37it/s]2026-04-22 11:37:31,434 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,487 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,542 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,581 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  33%|███▎      | 99/297 [02:38<00:11, 16.63it/s]2026-04-22 11:37:31,615 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,712 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  34%|███▍      | 101/297 [02:38<00:12, 16.26it/s]2026-04-22 11:37:31,807 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:31,971 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  35%|███▍      | 103/297 [02:38<00:15, 12.81it/s]2026-04-22 11:37:32,106 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  35%|███▌      | 105/297 [02:39<00:14, 13.40it/s]2026-04-22 11:37:32,109 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,115 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,192 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  36%|███▌      | 107/297 [02:39<00:13, 14.51it/s]2026-04-22 11:37:32,213 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,349 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  37%|███▋      | 109/297 [02:39<00:12, 14.58it/s]2026-04-22 11:37:32,426 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,450 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,665 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  38%|███▊      | 112/297 [02:39<00:15, 12.14it/s]2026-04-22 11:37:32,831 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:32,915 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  38%|███▊      | 114/297 [02:39<00:16, 10.78it/s]2026-04-22 11:37:32,961 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:33,497 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  39%|███▉      | 116/297 [02:40<00:26,  6.84it/s]2026-04-22 11:37:33,611 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  39%|███▉      | 117/297 [02:40<00:25,  6.97it/s]2026-04-22 11:37:33,799 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  40%|███▉      | 118/297 [02:40<00:26,  6.66it/s]2026-04-22 11:37:34,061 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  40%|████      | 119/297 [02:41<00:32,  5.55it/s]2026-04-22 11:37:34,686 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  40%|████      | 120/297 [02:41<00:48,  3.63it/s]2026-04-22 11:37:34,991 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  41%|████      | 121/297 [02:41<00:49,  3.54it/s]2026-04-22 11:37:35,003 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:35,418 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  41%|████▏     | 123/297 [02:42<00:44,  3.92it/s]2026-04-22 11:37:35,428 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  42%|████▏     | 124/297 [02:42<00:38,  4.51it/s]2026-04-22 11:37:35,613 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:37:36,206 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  42%|████▏     | 126/297 [02:43<00:46,  3.67it/s]2026-04-22 11:37:36,519 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  43%|████▎     | 127/297 [02:43<00:47,  3.59it/s]2026-04-22 11:37:36,560 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:40,387 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  43%|████▎     | 129/297 [04:47<1:07:28, 24.10s/it]2026-04-22 11:39:42,054 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  44%|████▍     | 130/297 [04:49<53:34, 19.25s/it]  2026-04-22 11:39:42,427 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  44%|████▍     | 131/297 [04:49<40:55, 14.79s/it]2026-04-22 11:39:42,718 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  44%|████▍     | 132/297 [04:49<30:37, 11.13s/it]2026-04-22 11:39:42,825 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  45%|████▍     | 133/297 [04:49<22:28,  8.22s/it]2026-04-22 11:39:43,144 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  45%|████▌     | 134/297 [04:50<16:25,  6.04s/it]2026-04-22 11:39:43,334 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  45%|████▌     | 135/297 [04:50<11:52,  4.40s/it]2026-04-22 11:39:43,516 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  46%|████▌     | 136/297 [04:50<08:33,  3.19s/it]2026-04-22 11:39:43,836 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  46%|████▌     | 137/297 [04:50<06:17,  2.36s/it]2026-04-22 11:39:43,946 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  46%|████▋     | 138/297 [04:50<04:31,  1.71s/it]2026-04-22 11:39:44,201 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  47%|████▋     | 139/297 [04:51<03:19,  1.27s/it]2026-04-22 11:39:44,288 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:44,558 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  47%|████▋     | 141/297 [04:51<01:59,  1.31it/s]2026-04-22 11:39:44,714 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  48%|████▊     | 142/297 [04:51<01:35,  1.63it/s]2026-04-22 11:39:44,799 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:44,807 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  48%|████▊     | 144/297 [04:51<00:58,  2.61it/s]2026-04-22 11:39:45,006 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  49%|████▉     | 145/297 [04:51<00:51,  2.96it/s]2026-04-22 11:39:45,129 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  49%|████▉     | 146/297 [04:52<00:43,  3.51it/s]2026-04-22 11:39:45,180 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,322 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  50%|████▉     | 148/297 [04:52<00:30,  4.82it/s]2026-04-22 11:39:45,342 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,471 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  51%|█████     | 150/297 [04:52<00:23,  6.33it/s]2026-04-22 11:39:45,486 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,490 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  51%|█████     | 152/297 [04:52<00:18,  7.98it/s]2026-04-22 11:39:45,651 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,771 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  52%|█████▏    | 154/297 [04:52<00:16,  8.82it/s]2026-04-22 11:39:45,889 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,916 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:45,938 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  53%|█████▎    | 156/297 [04:52<00:15,  9.35it/s]2026-04-22 11:39:46,007 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,013 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,024 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,039 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  55%|█████▍    | 162/297 [04:53<00:08, 16.86it/s]2026-04-22 11:39:46,101 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,133 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,302 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,355 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,358 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  56%|█████▌    | 165/297 [04:53<00:08, 15.21it/s]2026-04-22 11:39:46,375 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,386 [INFO] root: Invoking gpt-4o-mini.
+2026-04-22 11:39:46,459 [INFO] root: Invoking gpt-4o-mini.
+Descriptions:  57%|█████▋    | 169/297 [04:53<00:06, 19.22it/s]Descriptions:  58%|█████▊    | 172/297 [04:53<00:06, 19.79it/s]Descriptions:  59%|█████▉    | 175/297 [04:53<00:06, 19.73it/s]Descriptions:  60%|██████    | 179/297 [04:53<00:05, 22.54it/s]Descriptions:  63%|██████▎   | 186/297 [04:53<00:03, 29.61it/s]Descriptions:  64%|██████▍   | 190/297 [04:54<00:04, 24.76it/s]Descriptions:  65%|██████▌   | 194/297 [04:54<00:04, 24.07it/s]Descriptions:  67%|██████▋   | 198/297 [04:54<00:03, 25.47it/s]Descriptions:  69%|██████▊   | 204/297 [04:54<00:03, 26.51it/s]Descriptions:  70%|██████▉   | 207/297 [04:55<00:04, 20.06it/s]Descriptions:  71%|███████   | 211/297 [04:55<00:03, 22.69it/s]Descriptions:  72%|███████▏  | 215/297 [04:55<00:03, 24.23it/s]Descriptions:  74%|███████▎  | 219/297 [04:55<00:03, 25.81it/s]Descriptions:  75%|███████▍  | 222/297 [04:55<00:02, 25.94it/s]Descriptions:  76%|███████▌  | 225/297 [04:55<00:02, 25.17it/s]Descriptions:  77%|███████▋  | 228/297 [04:55<00:02, 24.76it/s]Descriptions:  78%|███████▊  | 232/297 [04:55<00:02, 27.15it/s]Descriptions:  79%|███████▉  | 235/297 [04:56<00:02, 25.24it/s]Descriptions:  81%|████████  | 240/297 [04:56<00:01, 29.80it/s]Descriptions:  82%|████████▏ | 244/297 [04:56<00:02, 25.29it/s]Descriptions:  83%|████████▎ | 247/297 [04:56<00:02, 19.52it/s]Descriptions:  84%|████████▍ | 250/297 [04:57<00:03, 12.51it/s]Descriptions:  85%|████████▍ | 252/297 [04:57<00:03, 13.40it/s]Descriptions:  86%|████████▌ | 254/297 [04:57<00:04, 10.71it/s]Descriptions:  86%|████████▌ | 256/297 [04:57<00:04, 10.01it/s]Descriptions:  86%|████████▌ | 256/297 [05:13<00:04, 10.01it/s]Descriptions:  87%|████████▋ | 257/297 [05:38<04:00,  6.00s/it]Descriptions:  87%|████████▋ | 258/297 [05:38<03:14,  4.99s/it]Descriptions:  88%|████████▊ | 260/297 [05:38<02:06,  3.42s/it]Descriptions:  88%|████████▊ | 262/297 [05:38<01:22,  2.35s/it]Descriptions:  89%|████████▉ | 264/297 [05:39<00:54,  1.64s/it]Descriptions:  90%|████████▉ | 266/297 [05:39<00:35,  1.16s/it]Descriptions:  92%|█████████▏| 272/297 [05:39<00:12,  1.97it/s]Descriptions:  93%|█████████▎| 275/297 [05:39<00:08,  2.67it/s]Descriptions:  96%|█████████▋| 286/297 [05:39<00:01,  6.47it/s]Descriptions: 100%|██████████| 297/297 [05:39<00:00,  1.14s/it]
+2026-04-22 11:40:33,056 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-4o-mini.parquet.

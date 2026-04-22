@@ -9,10 +9,11 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-17 15:40:25,626 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 15:40:25,705 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-17 15:40:25,886 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7770.53it/s]
+2026-04-22 12:50:49,711 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:49,797 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-22 12:50:50,155 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-22 12:50:50,428 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4959.60it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -20,357 +21,793 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-17 15:40:26,582 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 15:40:26,587 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-17 15:40:26,753 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 15:40:26,754 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-17 15:40:26,927 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-17 15:40:27,115 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-17 15:40:27,294 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-17 15:40:27,494 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-17 15:40:28,088 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 15:40:28,138 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▎     | 88/202 [00:00<00:00, 877.03it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1267.50it/s]
-2026-04-17 15:40:28,553 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 15:40:28,720 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 15:40:29,786 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-17 15:40:30,096 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 15:40:30,177 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-17 15:40:30,321 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 15:40:30,629 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-17 15:40:30,769 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 15:40:30,942 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 15:40:31,933 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-17 15:40:32,519 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 15:40:32,600 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 83/202 [00:00<00:00, 829.16it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1185.41it/s]
-2026-04-17 15:40:32,797 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=3.
-Invoking model 288 times for 31 distinct entities across 15 assay instances with 3 samples per instance (96 entity-instance pairs × 3 samples).
-2026-04-17 15:40:32,809 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,810 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,810 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,812 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,813 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,814 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,815 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,816 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,817 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,819 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,822 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,823 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,824 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,825 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,830 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,834 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,838 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,840 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,844 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,846 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,849 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,852 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,854 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,857 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,858 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,859 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,861 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,862 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,865 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,868 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,872 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,878 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,881 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,889 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,891 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,901 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,907 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,917 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,921 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,923 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,929 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,936 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,938 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,940 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,941 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,946 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,951 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,952 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,954 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,957 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,959 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,961 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,962 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,964 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,967 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,969 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,970 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,973 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,977 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,981 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,983 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,985 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,986 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,987 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,987 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,988 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,989 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,990 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,991 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,992 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,993 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,993 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,994 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,994 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,995 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,995 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,996 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,997 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,997 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,998 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,999 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:32,999 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,000 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,001 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,001 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,005 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,080 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,012 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,016 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,023 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,031 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,041 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,044 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,056 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,062 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,073 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,010 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,083 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,107 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,112 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,117 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,121 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,124 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,127 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,129 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,131 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,136 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,140 [INFO] root: Invoking phi-4.
-Descriptions:   0%|          | 0/288 [00:00<?, ?it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,146 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,150 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,153 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,158 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,160 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,161 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,174 [INFO] root: Invoking phi-4.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 15:40:33,179 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,190 [INFO] root: Invoking phi-4.
-2026-04-17 15:40:33,197 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:16,594 [INFO] root: Invoking phi-4.
-Descriptions:   0%|          | 1/288 [01:43<8:14:35, 103.40s/it]2026-04-17 15:42:17,008 [INFO] root: Invoking phi-4.
-Descriptions:   1%|          | 2/288 [01:43<3:24:13, 42.84s/it] 2026-04-17 15:42:17,075 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:17,169 [INFO] root: Invoking phi-4.
-Descriptions:   1%|▏         | 4/288 [01:43<1:15:48, 16.01s/it]2026-04-17 15:42:17,239 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:17,349 [INFO] root: Invoking phi-4.
-Descriptions:   2%|▏         | 6/288 [01:44<39:54,  8.49s/it]  2026-04-17 15:42:17,790 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:17,852 [INFO] root: Invoking phi-4.
-Descriptions:   3%|▎         | 8/288 [01:44<24:07,  5.17s/it]2026-04-17 15:42:17,884 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:17,888 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:17,896 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,041 [INFO] root: Invoking phi-4.
-Descriptions:   4%|▍         | 12/288 [01:44<11:10,  2.43s/it]2026-04-17 15:42:18,053 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,166 [INFO] root: Invoking phi-4.
-Descriptions:   5%|▍         | 14/288 [01:44<08:06,  1.77s/it]2026-04-17 15:42:18,186 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,203 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,299 [INFO] root: Invoking phi-4.
-Descriptions:   6%|▌         | 17/288 [01:45<05:06,  1.13s/it]2026-04-17 15:42:18,375 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,409 [INFO] root: Invoking phi-4.
-Descriptions:   7%|▋         | 19/288 [01:45<03:49,  1.17it/s]2026-04-17 15:42:18,539 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,583 [INFO] root: Invoking phi-4.
-Descriptions:   7%|▋         | 21/288 [01:45<02:51,  1.56it/s]2026-04-17 15:42:18,602 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,646 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,659 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,722 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,742 [INFO] root: Invoking phi-4.
-Descriptions:   9%|▊         | 25/288 [01:45<01:39,  2.65it/s]2026-04-17 15:42:18,824 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,833 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,838 [INFO] root: Invoking phi-4.
-Descriptions:  11%|█         | 32/288 [01:45<00:48,  5.30it/s]2026-04-17 15:42:18,840 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,843 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,852 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,954 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:18,999 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,009 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,019 [INFO] root: Invoking phi-4.
-Descriptions:  12%|█▎        | 36/288 [01:45<00:36,  6.93it/s]2026-04-17 15:42:19,072 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,107 [INFO] root: Invoking phi-4.
-Descriptions:  14%|█▍        | 40/288 [01:45<00:27,  9.10it/s]2026-04-17 15:42:19,111 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,127 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,143 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,192 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,232 [INFO] root: Invoking phi-4.
-Descriptions:  15%|█▌        | 44/288 [01:46<00:21, 11.37it/s]2026-04-17 15:42:19,279 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,329 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,344 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,384 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,428 [INFO] root: Invoking phi-4.
-Descriptions:  17%|█▋        | 48/288 [01:46<00:17, 13.72it/s]2026-04-17 15:42:19,457 [INFO] root: Invoking phi-4.
-Descriptions:  18%|█▊        | 52/288 [01:46<00:13, 17.03it/s]2026-04-17 15:42:19,506 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,507 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,531 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,597 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,607 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,652 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,658 [INFO] root: Invoking phi-4.
-Descriptions:  19%|█▉        | 56/288 [01:46<00:11, 19.79it/s]2026-04-17 15:42:19,674 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,754 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,762 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,834 [INFO] root: Invoking phi-4.
-Descriptions:  21%|██        | 60/288 [01:46<00:11, 20.09it/s]2026-04-17 15:42:19,858 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,871 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,872 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,922 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,932 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:19,952 [INFO] root: Invoking phi-4.
-Descriptions:  23%|██▎       | 66/288 [01:46<00:08, 27.05it/s]2026-04-17 15:42:19,962 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,065 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,073 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,079 [INFO] root: Invoking phi-4.
-Descriptions:  24%|██▍       | 70/288 [01:46<00:07, 28.13it/s]2026-04-17 15:42:20,097 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,101 [INFO] root: Invoking phi-4.
-Descriptions:  26%|██▌       | 74/288 [01:46<00:07, 30.47it/s]2026-04-17 15:42:20,137 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,176 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,192 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,195 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,196 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,201 [INFO] root: Invoking phi-4.
-Descriptions:  28%|██▊       | 80/288 [01:47<00:06, 31.13it/s]2026-04-17 15:42:20,244 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,362 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,368 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,380 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,383 [INFO] root: Invoking phi-4.
-Descriptions:  30%|██▉       | 85/288 [01:47<00:06, 29.64it/s]2026-04-17 15:42:20,450 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,549 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,561 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,588 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,621 [INFO] root: Invoking phi-4.
-Descriptions:  31%|███       | 89/288 [01:47<00:06, 30.80it/s]2026-04-17 15:42:20,633 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,655 [INFO] root: Invoking phi-4.
-Descriptions:  32%|███▏      | 93/288 [01:47<00:05, 32.79it/s]2026-04-17 15:42:20,689 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,704 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,770 [INFO] root: Invoking phi-4.
-Descriptions:  34%|███▍      | 99/288 [01:47<00:06, 31.40it/s]2026-04-17 15:42:20,794 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,832 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,840 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,845 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,855 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,913 [INFO] root: Invoking phi-4.
-Descriptions:  36%|███▋      | 105/288 [01:47<00:05, 31.91it/s]2026-04-17 15:42:20,916 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,951 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,988 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:20,991 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,048 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,158 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,164 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,175 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,199 [INFO] root: Invoking phi-4.
-Descriptions:  38%|███▊      | 110/288 [01:48<00:05, 33.13it/s]2026-04-17 15:42:21,201 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,284 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,289 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,325 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,343 [INFO] root: Invoking phi-4.
-Descriptions:  40%|███▉      | 114/288 [01:48<00:05, 32.74it/s]2026-04-17 15:42:21,416 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,471 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,600 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,618 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,657 [INFO] root: Invoking phi-4.
-Descriptions:  41%|████      | 118/288 [01:48<00:06, 26.32it/s]2026-04-17 15:42:21,659 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,784 [INFO] root: Invoking phi-4.
-Descriptions:  42%|████▏     | 121/288 [01:48<00:06, 25.18it/s]2026-04-17 15:42:21,784 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,795 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,824 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:21,917 [INFO] root: Invoking phi-4.
-Descriptions:  43%|████▎     | 124/288 [01:48<00:06, 24.98it/s]2026-04-17 15:42:22,043 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:22,343 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:22,537 [INFO] root: Invoking phi-4.
-Descriptions:  44%|████▍     | 127/288 [01:49<00:13, 12.13it/s]2026-04-17 15:42:23,406 [INFO] root: Invoking phi-4.
-2026-04-17 15:42:24,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:24,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:24,953 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:24,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:24,979 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:24,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,145 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,172 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,181 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,192 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,195 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,198 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,208 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,220 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,234 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,246 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,563 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:25,567 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 15:42:26,097 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  44%|████▍     | 127/288 [02:03<00:13, 12.13it/s]2026-04-17 15:44:01,239 [INFO] root: Invoking phi-4.
-Descriptions:  45%|████▍     | 129/288 [03:28<25:40,  9.69s/it]2026-04-17 15:44:01,451 [INFO] root: Invoking phi-4.
-Descriptions:  45%|████▌     | 130/288 [03:28<22:28,  8.53s/it]2026-04-17 15:44:03,052 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:03,238 [INFO] root: Invoking phi-4.
-Descriptions:  46%|████▌     | 132/288 [03:30<17:02,  6.56s/it]2026-04-17 15:44:03,265 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:03,613 [INFO] root: Invoking phi-4.
-Descriptions:  47%|████▋     | 134/288 [03:30<12:24,  4.84s/it]2026-04-17 15:44:03,856 [INFO] root: Invoking phi-4.
-Descriptions:  47%|████▋     | 135/288 [03:30<10:26,  4.09s/it]2026-04-17 15:44:03,951 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,149 [INFO] root: Invoking phi-4.
-Descriptions:  48%|████▊     | 137/288 [03:30<07:09,  2.85s/it]2026-04-17 15:44:04,183 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,195 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,198 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,236 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,240 [INFO] root: Invoking phi-4.
-Descriptions:  50%|████▉     | 143/288 [03:31<02:57,  1.22s/it]2026-04-17 15:44:04,306 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,418 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,495 [INFO] root: Invoking phi-4.
-Descriptions:  50%|█████     | 145/288 [03:31<02:20,  1.02it/s]2026-04-17 15:44:04,543 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,639 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,647 [INFO] root: Invoking phi-4.
-Descriptions:  51%|█████     | 147/288 [03:31<01:48,  1.30it/s]2026-04-17 15:44:04,705 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,757 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:04,762 [INFO] root: Invoking phi-4.
-Descriptions:  52%|█████▏    | 150/288 [03:31<01:13,  1.89it/s]2026-04-17 15:44:04,906 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:05,064 [INFO] root: Invoking phi-4.
-Descriptions:  53%|█████▎    | 153/288 [03:31<00:52,  2.59it/s]2026-04-17 15:44:05,136 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:05,221 [INFO] root: Invoking phi-4.
-Descriptions:  54%|█████▍    | 155/288 [03:32<00:41,  3.20it/s]2026-04-17 15:44:05,258 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:05,271 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:05,319 [INFO] root: Invoking phi-4.
-2026-04-17 15:44:05,516 [INFO] root: Invoking phi-4.
-Descriptions:  55%|█████▌    | 159/288 [03:32<00:27,  4.62it/s]2026-04-17 15:44:05,566 [INFO] root: Invoking phi-4.
-Descriptions:  56%|█████▌    | 161/288 [03:32<00:23,  5.32it/s]Descriptions:  57%|█████▋    | 163/288 [03:32<00:20,  6.04it/s]Descriptions:  58%|█████▊    | 168/288 [03:32<00:12,  9.97it/s]Descriptions:  59%|█████▉    | 171/288 [03:32<00:09, 12.00it/s]Descriptions:  60%|██████    | 174/288 [03:33<00:08, 13.54it/s]Descriptions:  62%|██████▎   | 180/288 [03:33<00:05, 19.89it/s]Descriptions:  64%|██████▎   | 183/288 [03:33<00:05, 19.99it/s]Descriptions:  65%|██████▌   | 188/288 [03:33<00:03, 25.48it/s]Descriptions:  67%|██████▋   | 192/288 [03:33<00:03, 25.56it/s]Descriptions:  69%|██████▉   | 198/288 [03:33<00:03, 29.70it/s]Descriptions:  70%|███████   | 202/288 [03:33<00:03, 26.75it/s]Descriptions:  72%|███████▏  | 207/288 [03:34<00:02, 30.17it/s]Descriptions:  73%|███████▎  | 211/288 [03:34<00:02, 29.22it/s]Descriptions:  75%|███████▌  | 216/288 [03:34<00:02, 31.70it/s]Descriptions:  76%|███████▋  | 220/288 [03:34<00:02, 26.16it/s]Descriptions:  77%|███████▋  | 223/288 [03:34<00:02, 24.64it/s]Descriptions:  78%|███████▊  | 226/288 [03:34<00:02, 22.42it/s]Descriptions:  80%|███████▉  | 229/288 [03:35<00:05, 10.76it/s]Descriptions:  80%|████████  | 231/288 [03:36<00:11,  5.08it/s]Descriptions:  81%|████████  | 233/288 [03:37<00:11,  4.85it/s]Descriptions:  82%|████████▏ | 237/288 [03:37<00:07,  6.78it/s]Descriptions:  83%|████████▎ | 239/288 [03:37<00:06,  7.27it/s]Descriptions:  84%|████████▎ | 241/288 [03:38<00:08,  5.72it/s]Descriptions:  84%|████████▍ | 242/288 [03:38<00:09,  4.69it/s]Descriptions:  84%|████████▍ | 243/288 [03:39<00:12,  3.54it/s]Descriptions:  85%|████████▍ | 244/288 [03:39<00:12,  3.41it/s]Descriptions:  85%|████████▌ | 245/288 [03:39<00:11,  3.73it/s]Descriptions:  85%|████████▌ | 246/288 [03:40<00:13,  3.19it/s]Descriptions:  86%|████████▌ | 248/288 [03:40<00:09,  4.08it/s]Descriptions:  86%|████████▋ | 249/288 [03:40<00:08,  4.51it/s]Descriptions:  87%|████████▋ | 250/288 [03:41<00:09,  3.80it/s]Descriptions:  88%|████████▊ | 252/288 [03:41<00:09,  3.76it/s]Descriptions:  88%|████████▊ | 253/288 [03:41<00:08,  4.24it/s]Descriptions:  88%|████████▊ | 254/288 [03:42<00:08,  3.86it/s]Descriptions:  89%|████████▉ | 256/288 [03:42<00:06,  5.30it/s]Descriptions:  89%|████████▉ | 257/288 [04:04<02:39,  5.14s/it]Descriptions:  90%|████████▉ | 258/288 [04:04<01:58,  3.93s/it]Descriptions:  90%|█████████ | 260/288 [04:04<01:06,  2.37s/it]Descriptions:  92%|█████████▏| 265/288 [04:04<00:22,  1.02it/s]Descriptions:  94%|█████████▍| 270/288 [04:05<00:09,  1.86it/s]Descriptions: 100%|██████████| 288/288 [04:05<00:00,  1.17it/s]
-2026-04-17 15:44:38,616 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.
+2026-04-22 12:50:50,631 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-22 12:50:50,811 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-22 12:50:51,002 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-22 12:50:51,111 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 12:50:51,176 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-22 12:50:51,265 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 12:50:51,337 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-22 12:50:51,922 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:51,972 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+2026-04-22 12:50:52,139 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:52,176 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-22 12:50:52,311 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 12:50:52,437 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 12:50:53,431 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-22 12:50:53,732 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:53,944 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 77/202 [00:00<00:00, 747.50it/s]Loading weights:  75%|███████▌  | 152/202 [00:00<00:00, 745.07it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 974.71it/s]
+2026-04-22 12:50:54,835 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:54,877 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-22 12:50:55,029 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:55,082 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-22 12:50:55,274 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 12:50:55,443 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 12:50:56,262 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-22 12:50:56,746 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 12:50:56,868 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  35%|███▌      | 71/202 [00:00<00:00, 706.41it/s]Loading weights:  71%|███████   | 143/202 [00:00<00:00, 713.44it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 942.36it/s]
+2026-04-22 12:50:57,301 [INFO] root: Running assay=describe-sentiment model=phi-4 num_samples_per_instance=3.
+Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
+2026-04-22 12:50:57,315 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,315 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,316 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,317 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,318 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,319 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,320 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,322 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,323 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,324 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,325 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,327 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,328 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,329 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,334 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,336 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,349 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,358 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,363 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,378 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,383 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,388 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,403 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,408 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,412 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,415 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,419 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,424 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,428 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,430 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,434 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,438 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,440 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,444 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,445 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,449 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,460 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,474 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,481 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,488 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,492 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,502 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,507 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,526 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,531 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,537 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,543 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,548 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,554 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,558 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,560 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,563 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,565 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,570 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,576 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,579 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,582 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,584 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,586 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,587 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,592 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,594 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,601 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,604 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,606 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,615 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,618 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,620 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,627 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,629 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,632 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,637 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,646 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,651 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,658 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,661 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,665 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,671 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,673 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,680 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,686 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,690 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,695 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,702 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,703 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,710 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,714 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,717 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,723 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,730 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,733 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,738 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,742 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,749 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,753 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,755 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,757 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,765 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,770 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,773 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,778 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,781 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,792 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,796 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,802 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,806 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,809 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,811 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,813 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,816 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,818 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,821 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,824 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,826 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,828 [INFO] root: Invoking phi-4.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 12:50:57,830 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,837 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,839 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,844 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,848 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,850 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,856 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,865 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,871 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,875 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,879 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,881 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:57,886 [INFO] root: Invoking phi-4.
+2026-04-22 12:50:59,214 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,243 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,324 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,329 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,329 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,330 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,331 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,333 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,336 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,337 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,344 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,350 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,351 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,356 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,358 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,360 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,364 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,430 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,449 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,450 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,475 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,570 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,570 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,571 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,572 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,581 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,585 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,586 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,586 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,586 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,588 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,592 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,598 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,613 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,661 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,672 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,673 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,684 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,846 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,848 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,874 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,895 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,950 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:50:59,990 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,006 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,027 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,165 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,189 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,204 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,208 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,258 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,260 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,311 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,342 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,366 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,488 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,490 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,492 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,493 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,493 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,494 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,495 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,505 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,506 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,523 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,525 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,535 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,538 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,614 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,615 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,641 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,643 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,653 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:00,676 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,679 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,688 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,692 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,746 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,748 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,886 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,891 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,904 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:00,904 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:00,906 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,012 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,017 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,017 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,023 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,032 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,137 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,142 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,173 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,187 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,227 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,235 [INFO] root: Invoking phi-4.
+Descriptions:   0%|          | 1/297 [00:03<16:30,  3.34s/it]2026-04-22 12:51:01,320 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,343 [INFO] root: Invoking phi-4.
+Descriptions:   1%|          | 3/297 [00:03<04:26,  1.10it/s]2026-04-22 12:51:01,355 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,369 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,394 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,416 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,428 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,454 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,497 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,530 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,574 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,579 [INFO] root: Invoking phi-4.
+Descriptions:   3%|▎         | 8/297 [00:03<01:21,  3.53it/s]2026-04-22 12:51:01,607 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,631 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,663 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,669 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,692 [INFO] root: Invoking phi-4.
+Descriptions:   3%|▎         | 10/297 [00:03<01:02,  4.62it/s]2026-04-22 12:51:01,693 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,732 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,741 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,755 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,757 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,759 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,765 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,796 [INFO] root: Invoking phi-4.
+Descriptions:   4%|▍         | 13/297 [00:03<00:41,  6.83it/s]2026-04-22 12:51:01,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,809 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:01,810 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,812 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,813 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:01,838 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,867 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:01,891 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,923 [INFO] root: Invoking phi-4.
+Descriptions:   5%|▌         | 16/297 [00:04<00:30,  9.14it/s]2026-04-22 12:51:01,945 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,960 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:01,982 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,061 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,096 [INFO] root: Invoking phi-4.
+Descriptions:   6%|▋         | 19/297 [00:04<00:25, 10.86it/s]2026-04-22 12:51:02,109 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,110 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,114 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,120 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,129 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,135 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,136 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,161 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,166 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,188 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,188 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,219 [INFO] root: Invoking phi-4.
+Descriptions:   8%|▊         | 24/297 [00:04<00:16, 16.12it/s]2026-04-22 12:51:02,233 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,234 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,240 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,428 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,428 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,428 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,429 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,430 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,431 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:   9%|▉         | 28/297 [00:04<00:16, 16.38it/s]2026-04-22 12:51:02,432 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,434 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,440 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,449 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,455 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,460 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,465 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,632 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,637 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,648 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,660 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,808 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,811 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:02,814 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,815 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,822 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+Descriptions:  10%|█         | 31/297 [00:04<00:20, 12.93it/s]2026-04-22 12:51:02,822 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,824 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,852 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:02,856 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,860 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:02,863 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:02,912 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,093 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:03,094 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:03,097 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:03,098 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,099 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:03,102 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:03,104 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:03,108 [INFO] root: Invoking phi-4.
+Descriptions:  11%|█         | 33/297 [00:05<00:23, 11.05it/s]2026-04-22 12:51:03,142 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,210 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:03,212 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:03,214 [INFO] root: Invoking phi-4.
+Descriptions:  12%|█▏        | 35/297 [00:05<00:21, 12.17it/s]2026-04-22 12:51:03,336 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:03,338 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:03,399 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,605 [INFO] root: Invoking phi-4.
+Descriptions:  12%|█▏        | 37/297 [00:05<00:28,  9.12it/s]2026-04-22 12:51:03,639 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,678 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,687 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,735 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,741 [INFO] root: Invoking phi-4.
+Descriptions:  14%|█▍        | 41/297 [00:05<00:20, 12.72it/s]2026-04-22 12:51:03,763 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,805 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,820 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,841 [INFO] root: Invoking phi-4.
+Descriptions:  14%|█▍        | 43/297 [00:05<00:18, 13.84it/s]2026-04-22 12:51:03,866 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,887 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,904 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,924 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:03,941 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:03,988 [INFO] root: Invoking phi-4.
+Descriptions:  16%|█▌        | 48/297 [00:06<00:13, 18.82it/s]2026-04-22 12:51:04,013 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,038 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,039 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,063 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,067 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,088 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,107 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,109 [INFO] root: Invoking phi-4.
+Descriptions:  18%|█▊        | 54/297 [00:06<00:09, 25.67it/s]2026-04-22 12:51:04,110 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,152 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,179 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,180 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,221 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,242 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,258 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,277 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,384 [INFO] root: Invoking phi-4.
+Descriptions:  20%|█▉        | 58/297 [00:06<00:11, 21.06it/s]2026-04-22 12:51:04,400 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,404 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,450 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,486 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,506 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,516 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,521 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,537 [INFO] root: Invoking phi-4.
+Descriptions:  21%|██        | 61/297 [00:06<00:11, 20.69it/s]2026-04-22 12:51:04,561 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,587 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,605 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,607 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,653 [INFO] root: Invoking phi-4.
+Descriptions:  22%|██▏       | 64/297 [00:06<00:10, 21.54it/s]2026-04-22 12:51:04,672 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,689 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,763 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,793 [INFO] root: Invoking phi-4.
+Descriptions:  23%|██▎       | 67/297 [00:06<00:10, 21.77it/s]2026-04-22 12:51:04,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,848 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,904 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,924 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,950 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:04,955 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:04,997 [INFO] root: Invoking phi-4.
+Descriptions:  24%|██▎       | 70/297 [00:07<00:11, 19.23it/s]2026-04-22 12:51:05,017 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,035 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,061 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,093 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,123 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,149 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,149 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,157 [INFO] root: Invoking phi-4.
+Descriptions:  25%|██▍       | 74/297 [00:07<00:10, 20.89it/s]2026-04-22 12:51:05,431 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,448 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,460 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,526 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,582 [INFO] root: Invoking phi-4.
+Descriptions:  26%|██▌       | 77/297 [00:07<00:16, 13.63it/s]2026-04-22 12:51:05,591 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,600 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,671 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,677 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,704 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  27%|██▋       | 80/297 [00:07<00:13, 15.56it/s]2026-04-22 12:51:05,706 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,761 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,793 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,819 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,831 [INFO] root: Invoking phi-4.
+Descriptions:  28%|██▊       | 82/297 [00:07<00:13, 15.68it/s]2026-04-22 12:51:05,863 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,870 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,886 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,905 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:05,931 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,966 [INFO] root: Invoking phi-4.
+Descriptions:  29%|██▉       | 86/297 [00:08<00:11, 18.88it/s]2026-04-22 12:51:05,996 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:05,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,009 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,031 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,063 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,064 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,071 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,089 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,096 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,111 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,125 [INFO] root: Invoking phi-4.
+Descriptions:  30%|██▉       | 89/297 [00:08<00:10, 19.01it/s]2026-04-22 12:51:06,139 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,151 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,224 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,237 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,240 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,248 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,267 [INFO] root: Invoking phi-4.
+Descriptions:  31%|███       | 92/297 [00:08<00:10, 19.46it/s]2026-04-22 12:51:06,287 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,304 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,334 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,337 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,339 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,339 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,354 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,368 [INFO] root: Invoking phi-4.
+Descriptions:  32%|███▏      | 96/297 [00:08<00:08, 23.73it/s]2026-04-22 12:51:06,400 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,421 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,423 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,440 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,464 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,490 [INFO] root: Invoking phi-4.
+Descriptions:  34%|███▎      | 100/297 [00:08<00:07, 25.96it/s]2026-04-22 12:51:06,511 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,514 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,516 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,543 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,548 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,563 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,582 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,586 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,619 [INFO] root: Invoking phi-4.
+Descriptions:  36%|███▌      | 106/297 [00:08<00:05, 32.39it/s]2026-04-22 12:51:06,628 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,649 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,655 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,675 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,679 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,698 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,712 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,732 [INFO] root: Invoking phi-4.
+Descriptions:  37%|███▋      | 111/297 [00:08<00:05, 35.59it/s]2026-04-22 12:51:06,761 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,816 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,845 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,864 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  39%|███▊      | 115/297 [00:08<00:05, 32.09it/s]2026-04-22 12:51:06,864 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,866 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,867 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,870 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,876 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,878 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,906 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,907 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:06,939 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:06,988 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:06,996 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,022 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,025 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,045 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,066 [INFO] root: Invoking phi-4.
+Descriptions:  40%|████      | 119/297 [00:09<00:06, 28.71it/s]2026-04-22 12:51:07,096 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,147 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,163 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,304 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,325 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,360 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,361 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,364 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,366 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,385 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,428 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,429 [INFO] root: Invoking phi-4.
+Descriptions:  41%|████▏     | 123/297 [00:09<00:08, 19.62it/s]2026-04-22 12:51:07,446 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,520 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,526 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,642 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,644 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,678 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,729 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,760 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,764 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:07,769 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,771 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:07,780 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,782 [INFO] root: Invoking phi-4.
+Descriptions:  42%|████▏     | 126/297 [00:09<00:11, 15.00it/s]2026-04-22 12:51:07,801 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,924 [INFO] root: Invoking phi-4.
+Descriptions:  43%|████▎     | 128/297 [00:10<00:11, 14.82it/s]2026-04-22 12:51:07,960 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:07,983 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:07,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,006 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,007 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,038 [INFO] root: Invoking phi-4.
+Descriptions:  44%|████▍     | 132/297 [00:10<00:08, 18.51it/s]2026-04-22 12:51:08,065 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,076 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,083 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,091 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,098 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,155 [INFO] root: Invoking phi-4.
+Descriptions:  45%|████▌     | 135/297 [00:10<00:08, 19.96it/s]2026-04-22 12:51:08,181 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,209 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,227 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,239 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,253 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,259 [INFO] root: Invoking phi-4.
+Descriptions:  47%|████▋     | 139/297 [00:10<00:06, 23.46it/s]2026-04-22 12:51:08,282 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,285 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,287 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,310 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,335 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,380 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,405 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,409 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,460 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,463 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,464 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,484 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,490 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,509 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,518 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,534 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,538 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,559 [INFO] root: Invoking phi-4.
+Descriptions:  48%|████▊     | 142/297 [00:10<00:08, 17.53it/s]2026-04-22 12:51:08,573 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,581 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,665 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,678 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,686 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,689 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,733 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,761 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,767 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,769 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  49%|████▉     | 145/297 [00:10<00:09, 16.49it/s]2026-04-22 12:51:08,794 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,796 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,812 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,816 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,844 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:08,845 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:08,848 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:08,860 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,862 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,919 [INFO] root: Invoking phi-4.
+Descriptions:  50%|█████     | 149/297 [00:11<00:07, 18.94it/s]2026-04-22 12:51:08,953 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,967 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:08,998 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,023 [INFO] root: Invoking phi-4.
+Descriptions:  52%|█████▏    | 153/297 [00:11<00:06, 22.78it/s]2026-04-22 12:51:09,049 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,052 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,068 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,084 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,085 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,100 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,124 [INFO] root: Invoking phi-4.
+Descriptions:  53%|█████▎    | 157/297 [00:11<00:05, 26.27it/s]2026-04-22 12:51:09,126 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,143 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,150 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,163 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,165 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,169 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,177 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,226 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,230 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,236 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,248 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,252 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,278 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,281 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,286 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,288 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,296 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,297 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,301 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,303 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,305 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,308 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,316 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,320 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,321 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,325 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,329 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,331 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,334 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,336 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,343 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,364 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,365 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,374 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,426 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,442 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,446 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,502 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,515 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,516 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,519 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,537 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,540 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,541 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,544 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,548 [INFO] root: Invoking phi-4.
+Descriptions:  54%|█████▍    | 161/297 [00:11<00:08, 16.88it/s]2026-04-22 12:51:09,569 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,587 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,601 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,607 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,607 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,614 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,616 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,623 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,631 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,633 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,636 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,659 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,661 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,662 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,664 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,690 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,692 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,693 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,698 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,719 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-04-22 12:51:09,721 [INFO] backoff: Backing off _invoke_openrouter_model(...) for 5.0s (openrouter.errors.toomanyrequestsresponse_error.TooManyRequestsResponseError: Provider returned error)
+2026-04-22 12:51:09,756 [INFO] root: Invoking phi-4.
+Descriptions:  55%|█████▌    | 164/297 [00:11<00:08, 16.19it/s]2026-04-22 12:51:09,775 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,829 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,856 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,873 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:09,897 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:09,969 [INFO] root: Invoking phi-4.
+Descriptions:  56%|█████▌    | 167/297 [00:12<00:08, 15.58it/s]2026-04-22 12:51:09,992 [INFO] root: Invoking phi-4.
+2026-04-22 12:51:10,011 [INFO] root: Invoking phi-4.
+Descriptions:  58%|█████▊    | 173/297 [00:12<00:05, 21.39it/s]2026-04-22 12:51:10,211 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  59%|█████▉    | 176/297 [00:12<00:06, 19.62it/s]2026-04-22 12:51:10,314 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,314 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,315 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,316 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:10,389 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  60%|██████    | 179/297 [00:12<00:05, 20.29it/s]Descriptions:  61%|██████▏   | 182/297 [00:12<00:05, 19.69it/s]2026-04-22 12:51:10,693 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  62%|██████▏   | 185/297 [00:12<00:05, 20.72it/s]2026-04-22 12:51:10,810 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  63%|██████▎   | 188/297 [00:12<00:05, 20.80it/s]Descriptions:  65%|██████▌   | 194/297 [00:13<00:03, 27.63it/s]2026-04-22 12:51:11,097 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:11,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  67%|██████▋   | 198/297 [00:13<00:04, 23.76it/s]Descriptions:  68%|██████▊   | 203/297 [00:13<00:03, 23.50it/s]2026-04-22 12:51:11,514 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  69%|██████▉   | 206/297 [00:13<00:05, 15.29it/s]2026-04-22 12:51:12,004 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  71%|███████   | 211/297 [00:14<00:04, 19.03it/s]2026-04-22 12:51:12,059 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  73%|███████▎  | 217/297 [00:14<00:03, 25.43it/s]2026-04-22 12:51:12,194 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:12,238 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:12,360 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:12,362 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  74%|███████▍  | 221/297 [00:14<00:03, 21.39it/s]2026-04-22 12:51:12,528 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  75%|███████▌  | 224/297 [00:14<00:03, 19.78it/s]2026-04-22 12:51:12,661 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:12,685 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  76%|███████▋  | 227/297 [00:14<00:03, 19.41it/s]Descriptions:  77%|███████▋  | 230/297 [00:15<00:03, 16.82it/s]2026-04-22 12:51:13,055 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 232/297 [00:15<00:04, 14.98it/s]2026-04-22 12:51:13,194 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  79%|███████▉  | 234/297 [00:15<00:04, 15.15it/s]Descriptions:  79%|███████▉  | 236/297 [00:15<00:03, 15.74it/s]Descriptions:  80%|████████  | 238/297 [00:15<00:03, 15.20it/s]2026-04-22 12:51:13,698 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:13,738 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:13,781 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:13,792 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  81%|████████  | 240/297 [00:15<00:04, 12.07it/s]2026-04-22 12:51:13,837 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:13,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  82%|████████▏ | 243/297 [00:16<00:03, 14.26it/s]Descriptions:  82%|████████▏ | 245/297 [00:16<00:03, 15.33it/s]2026-04-22 12:51:14,153 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  83%|████████▎ | 247/297 [00:16<00:03, 15.02it/s]2026-04-22 12:51:14,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,609 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,629 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,653 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,704 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,711 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,720 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,750 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  84%|████████▍ | 249/297 [00:16<00:06,  7.89it/s]2026-04-22 12:51:14,815 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,838 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,874 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,923 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,966 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:14,999 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,015 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,038 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:15,193 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  85%|████████▍ | 251/297 [00:17<00:07,  6.38it/s]Descriptions:  85%|████████▍ | 252/297 [00:17<00:07,  5.86it/s]Descriptions:  85%|████████▌ | 253/297 [00:17<00:07,  6.00it/s]2026-04-22 12:51:15,744 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  86%|████████▌ | 254/297 [00:17<00:07,  5.66it/s]2026-04-22 12:51:15,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  86%|████████▌ | 256/297 [00:18<00:05,  7.06it/s]2026-04-22 12:51:16,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:16,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  87%|████████▋ | 258/297 [00:18<00:04,  8.57it/s]2026-04-22 12:51:16,247 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 12:51:16,274 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  88%|████████▊ | 260/297 [00:18<00:03,  9.48it/s]Descriptions:  88%|████████▊ | 262/297 [00:18<00:03, 10.90it/s]Descriptions:  90%|████████▉ | 266/297 [00:18<00:02, 12.60it/s]2026-04-22 12:51:16,941 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  90%|█████████ | 268/297 [00:19<00:02, 10.82it/s]Descriptions:  91%|█████████ | 270/297 [00:19<00:02,  9.24it/s]Descriptions:  92%|█████████▏| 273/297 [00:19<00:02, 11.80it/s]Descriptions:  93%|█████████▎| 275/297 [00:19<00:01, 11.62it/s]Descriptions:  94%|█████████▍| 279/297 [00:19<00:01, 13.64it/s]Descriptions:  95%|█████████▍| 281/297 [00:20<00:01, 11.21it/s]Descriptions:  95%|█████████▌| 283/297 [00:20<00:01,  8.00it/s]Descriptions:  96%|█████████▋| 286/297 [00:21<00:01,  7.72it/s]Descriptions:  97%|█████████▋| 288/297 [00:21<00:01,  8.04it/s]Descriptions:  98%|█████████▊| 290/297 [00:21<00:00,  7.73it/s]Descriptions:  98%|█████████▊| 291/297 [00:21<00:00,  6.64it/s]Descriptions:  98%|█████████▊| 292/297 [00:21<00:00,  7.02it/s]Descriptions:  99%|█████████▉| 294/297 [00:22<00:00,  8.37it/s]Descriptions:  99%|█████████▉| 295/297 [00:22<00:00,  8.09it/s]Descriptions: 100%|█████████▉| 296/297 [00:22<00:00,  7.22it/s]Descriptions: 100%|██████████| 297/297 [00:23<00:00,  3.59it/s]Descriptions: 100%|██████████| 297/297 [00:23<00:00, 12.82it/s]
+Sentiment batches:   0%|          | 0/10 [00:00<?, ?it/s]Sentiment batches:  10%|█         | 1/10 [00:01<00:14,  1.61s/it]Sentiment batches:  20%|██        | 2/10 [00:03<00:13,  1.65s/it]Sentiment batches:  30%|███       | 3/10 [00:05<00:12,  1.78s/it]Sentiment batches:  40%|████      | 4/10 [00:07<00:11,  1.84s/it]Sentiment batches:  50%|█████     | 5/10 [00:09<00:09,  1.88s/it]Sentiment batches:  60%|██████    | 6/10 [00:11<00:07,  1.90s/it]Sentiment batches:  70%|███████   | 7/10 [00:12<00:05,  1.91s/it]Sentiment batches:  80%|████████  | 8/10 [00:14<00:03,  1.92s/it]Sentiment batches:  90%|█████████ | 9/10 [00:16<00:01,  1.93s/it]Sentiment batches: 100%|██████████| 10/10 [00:17<00:00,  1.51s/it]Sentiment batches: 100%|██████████| 10/10 [00:17<00:00,  1.74s/it]
+Ad batches:   0%|          | 0/10 [00:00<?, ?it/s]Ad batches:  10%|█         | 1/10 [00:00<00:06,  1.39it/s]Ad batches:  20%|██        | 2/10 [00:01<00:07,  1.14it/s]Ad batches:  30%|███       | 3/10 [00:02<00:06,  1.01it/s]Ad batches:  40%|████      | 4/10 [00:04<00:06,  1.06s/it]Ad batches:  50%|█████     | 5/10 [00:05<00:05,  1.04s/it]Ad batches:  60%|██████    | 6/10 [00:06<00:04,  1.03s/it]Ad batches:  70%|███████   | 7/10 [00:07<00:03,  1.02s/it]Ad batches:  80%|████████  | 8/10 [00:07<00:01,  1.00it/s]Ad batches:  90%|█████████ | 9/10 [00:08<00:00,  1.00it/s]Ad batches: 100%|██████████| 10/10 [00:09<00:00,  1.29it/s]Ad batches: 100%|██████████| 10/10 [00:09<00:00,  1.08it/s]
+Stance batches:   0%|          | 0/28 [00:00<?, ?it/s]Stance batches:   4%|▎         | 1/28 [00:00<00:08,  3.10it/s]Stance batches:   7%|▋         | 2/28 [00:00<00:05,  4.54it/s]Stance batches:  11%|█         | 3/28 [00:00<00:05,  4.71it/s]Stance batches:  14%|█▍        | 4/28 [00:00<00:06,  4.00it/s]Stance batches:  18%|█▊        | 5/28 [00:01<00:06,  3.54it/s]Stance batches:  21%|██▏       | 6/28 [00:01<00:07,  3.10it/s]Stance batches:  25%|██▌       | 7/28 [00:02<00:07,  2.70it/s]Stance batches:  29%|██▊       | 8/28 [00:02<00:07,  2.51it/s]Stance batches:  32%|███▏      | 9/28 [00:03<00:07,  2.39it/s]Stance batches:  36%|███▌      | 10/28 [00:03<00:07,  2.46it/s]Stance batches:  39%|███▉      | 11/28 [00:03<00:06,  2.44it/s]Stance batches:  43%|████▎     | 12/28 [00:04<00:06,  2.37it/s]Stance batches:  46%|████▋     | 13/28 [00:04<00:06,  2.31it/s]Stance batches:  50%|█████     | 14/28 [00:05<00:05,  2.50it/s]Stance batches:  54%|█████▎    | 15/28 [00:05<00:05,  2.39it/s]Stance batches:  57%|█████▋    | 16/28 [00:06<00:05,  2.34it/s]Stance batches:  61%|██████    | 17/28 [00:06<00:04,  2.30it/s]Stance batches:  64%|██████▍   | 18/28 [00:07<00:04,  2.20it/s]Stance batches:  68%|██████▊   | 19/28 [00:07<00:04,  2.21it/s]Stance batches:  71%|███████▏  | 20/28 [00:07<00:03,  2.19it/s]Stance batches:  75%|███████▌  | 21/28 [00:08<00:03,  2.17it/s]Stance batches:  79%|███████▊  | 22/28 [00:08<00:02,  2.17it/s]Stance batches:  82%|████████▏ | 23/28 [00:09<00:02,  2.18it/s]Stance batches:  86%|████████▌ | 24/28 [00:09<00:01,  2.18it/s]Stance batches:  89%|████████▉ | 25/28 [00:10<00:01,  2.19it/s]Stance batches:  93%|█████████▎| 26/28 [00:10<00:00,  2.19it/s]Stance batches:  96%|█████████▋| 27/28 [00:11<00:00,  2.23it/s]Stance batches: 100%|██████████| 28/28 [00:11<00:00,  2.30it/s]Stance batches: 100%|██████████| 28/28 [00:11<00:00,  2.43it/s]
+2026-04-22 12:51:59,344 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/phi-4.parquet.

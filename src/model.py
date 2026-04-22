@@ -186,9 +186,6 @@ def _send_openrouter_request(
         model=model_name,
         messages=_serialize_messages(messages),
         timeout_ms=30000,
-        provider={
-            # "require_parameters": True,
-        },
         **kwargs,
     )
 
@@ -247,6 +244,12 @@ CANONICAL_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
     "microsoft/phi-4": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "meta-llama/llama-3.1-8b-instruct": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "meta-llama/llama-3.1-70b-instruct": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
 }
@@ -516,6 +519,7 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
         _invoke_openrouter_model,
         "microsoft/phi-4",
         reasoning={"effort": "none"},
+        provider={"ignore": ["nextbit"]},
     ),
     "llama-3.1-swallow-8b-instruct-v0.3": partial(
         _invoke_openrouter_model,

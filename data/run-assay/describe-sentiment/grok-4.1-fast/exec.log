@@ -9,12 +9,13 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-17 14:55:08,857 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:55:08,881 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:55:09,015 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-17 14:55:09,139 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-17 14:55:09,270 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6580.08it/s]
+2026-04-22 11:58:39,947 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:58:39,970 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:58:40,101 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-22 11:58:40,224 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-22 11:58:40,369 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-22 11:58:40,510 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 4982.16it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,349 +23,336 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-17 14:55:09,414 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-17 14:55:09,552 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-17 14:55:09,624 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:55:09,682 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-17 14:55:09,750 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:55:09,807 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-17 14:55:11,003 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:55:11,029 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 95/202 [00:00<00:00, 942.22it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1427.12it/s]
-2026-04-17 14:55:11,341 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:55:11,464 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:55:12,379 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-17 14:55:12,631 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:55:12,655 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:55:12,796 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:55:12,818 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-17 14:55:12,943 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:55:13,068 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:55:13,683 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-17 14:55:13,799 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:55:13,821 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▎     | 88/202 [00:00<00:00, 870.50it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1233.11it/s]
-2026-04-17 14:55:14,016 [INFO] root: Running assay=describe-sentiment model=grok-4.1-fast num_samples_per_instance=3.
-Invoking model 288 times for 31 distinct entities across 15 assay instances with 3 samples per instance (96 entity-instance pairs × 3 samples).
-2026-04-17 14:55:14,025 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,026 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,026 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,027 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,028 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,029 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,030 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,031 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,032 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,034 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,035 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,038 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,039 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,044 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,047 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,064 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,075 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,077 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,082 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,086 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,088 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,092 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,095 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,098 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,101 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,105 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,106 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,107 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,109 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,111 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,113 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,114 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,116 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,119 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,127 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,133 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,137 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,142 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,145 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,152 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,154 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,156 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,161 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,167 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,171 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,175 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,183 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,187 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,194 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,196 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,199 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,203 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,206 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,207 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,213 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,220 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,224 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,227 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,228 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,229 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,230 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,232 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,234 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,235 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,235 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,237 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,237 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,238 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,240 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,240 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,241 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,241 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,242 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,243 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,244 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,249 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,245 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,245 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,246 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,244 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,259 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,261 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,268 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,271 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,276 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,279 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,286 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,290 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,293 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,302 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,305 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,308 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,312 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,314 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,319 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,325 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,329 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,332 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,341 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,343 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,349 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,355 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,357 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,359 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,361 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,363 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,365 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,371 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,372 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   0%|          | 0/288 [00:00<?, ?it/s]2026-04-17 14:55:14,376 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,381 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,383 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,385 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,387 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,389 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,392 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,398 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,401 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,409 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,412 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,413 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,415 [INFO] root: Invoking grok-4.1-fast.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:55:14,417 [INFO] root: Invoking grok-4.1-fast.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:55:14,419 [INFO] root: Invoking grok-4.1-fast.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:55:14,421 [INFO] root: Invoking grok-4.1-fast.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:55:14,425 [INFO] root: Invoking grok-4.1-fast.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:55:14,432 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:55:14,435 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:56:59,289 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   0%|          | 1/288 [01:44<8:21:32, 104.85s/it]2026-04-17 14:56:59,985 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   1%|          | 2/288 [01:45<3:27:45, 43.58s/it] 2026-04-17 14:57:00,000 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,025 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,454 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   2%|▏         | 5/288 [01:46<58:54, 12.49s/it]  2026-04-17 14:57:00,516 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,573 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   2%|▏         | 7/288 [01:46<34:53,  7.45s/it]2026-04-17 14:57:00,678 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,732 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   3%|▎         | 9/288 [01:46<22:04,  4.75s/it]2026-04-17 14:57:00,743 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,788 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,852 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   4%|▍         | 12/288 [01:46<12:18,  2.68s/it]2026-04-17 14:57:00,878 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:00,983 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   5%|▍         | 14/288 [01:46<08:41,  1.90s/it]2026-04-17 14:57:01,005 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,009 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,028 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,126 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,133 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   6%|▋         | 18/288 [01:46<04:43,  1.05s/it]2026-04-17 14:57:01,154 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,229 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,310 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   8%|▊         | 22/288 [01:46<02:53,  1.53it/s]2026-04-17 14:57:01,317 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,355 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,356 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,374 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,499 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:   9%|▉         | 27/288 [01:47<01:43,  2.51it/s]2026-04-17 14:57:01,525 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,535 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,572 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,575 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,587 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,614 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  11%|█         | 32/288 [01:47<01:06,  3.86it/s]2026-04-17 14:57:01,678 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,703 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,708 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,830 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  13%|█▎        | 37/288 [01:47<00:46,  5.44it/s]2026-04-17 14:57:01,874 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,876 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,915 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,943 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:01,947 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  14%|█▍        | 41/288 [01:47<00:34,  7.08it/s]2026-04-17 14:57:01,976 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,045 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,050 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,135 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  16%|█▌        | 46/288 [01:47<00:25,  9.47it/s]2026-04-17 14:57:02,156 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,164 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,176 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,187 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,207 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,354 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  18%|█▊        | 52/288 [01:47<00:18, 12.50it/s]2026-04-17 14:57:02,441 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  19%|█▉        | 55/288 [01:48<00:16, 13.91it/s]2026-04-17 14:57:02,453 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,461 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,463 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,482 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,486 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,496 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,497 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,526 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,553 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  23%|██▎       | 65/288 [01:48<00:09, 22.98it/s]2026-04-17 14:57:02,564 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,568 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,619 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,641 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,653 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,679 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,783 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,797 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  24%|██▍       | 69/288 [01:48<00:09, 21.97it/s]2026-04-17 14:57:02,848 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,859 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,885 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,898 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,936 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:02,951 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  26%|██▌       | 75/288 [01:48<00:08, 26.32it/s]2026-04-17 14:57:03,029 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,049 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  27%|██▋       | 79/288 [01:48<00:07, 26.90it/s]2026-04-17 14:57:03,095 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,115 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,119 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,136 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,157 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,193 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  30%|██▉       | 85/288 [01:48<00:06, 29.89it/s]2026-04-17 14:57:03,241 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,245 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  31%|███       | 89/288 [01:48<00:06, 31.55it/s]2026-04-17 14:57:03,264 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,334 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,361 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  33%|███▎      | 94/288 [01:49<00:05, 34.62it/s]2026-04-17 14:57:03,368 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,371 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,405 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,416 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,463 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  35%|███▌      | 101/288 [01:49<00:04, 40.17it/s]2026-04-17 14:57:03,473 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,517 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,521 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,528 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,533 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,572 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,590 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,659 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,699 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,725 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,800 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,875 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  37%|███▋      | 106/288 [01:49<00:05, 30.37it/s]2026-04-17 14:57:03,924 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:03,963 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,002 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,068 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  38%|███▊      | 110/288 [01:49<00:06, 27.32it/s]2026-04-17 14:57:04,075 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,080 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,215 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  40%|███▉      | 114/288 [01:49<00:06, 26.53it/s]2026-04-17 14:57:04,235 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,292 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,319 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,322 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,357 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  41%|████      | 118/288 [01:49<00:06, 27.22it/s]2026-04-17 14:57:04,472 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,480 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  42%|████▏     | 121/288 [01:50<00:06, 26.54it/s]2026-04-17 14:57:04,493 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,664 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,683 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:04,884 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  43%|████▎     | 124/288 [01:50<00:09, 16.48it/s]2026-04-17 14:57:05,057 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:05,169 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:05,500 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  44%|████▍     | 127/288 [01:51<00:15, 10.27it/s]2026-04-17 14:57:05,534 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:57:08,146 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,151 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,152 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,161 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,166 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,166 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,170 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,173 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,177 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,187 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,194 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,208 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,210 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,227 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,231 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,237 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,268 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,276 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,311 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,377 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,383 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,399 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,460 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:57:08,493 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  44%|████▍     | 127/288 [02:05<00:15, 10.27it/s]2026-04-17 14:58:45,331 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  45%|████▍     | 129/288 [03:30<26:10,  9.88s/it]2026-04-17 14:58:45,983 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  45%|████▌     | 130/288 [03:31<23:01,  8.74s/it]2026-04-17 14:58:46,072 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:46,274 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  46%|████▌     | 132/288 [03:31<16:56,  6.51s/it]2026-04-17 14:58:46,637 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:46,898 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  47%|████▋     | 134/288 [03:32<12:23,  4.83s/it]2026-04-17 14:58:47,148 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  47%|████▋     | 135/288 [03:32<10:25,  4.09s/it]2026-04-17 14:58:47,255 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  47%|████▋     | 136/288 [03:32<08:27,  3.34s/it]2026-04-17 14:58:47,350 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:47,488 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:47,498 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  48%|████▊     | 138/288 [03:33<05:32,  2.22s/it]2026-04-17 14:58:47,576 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:47,755 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  49%|████▉     | 141/288 [03:33<03:11,  1.30s/it]2026-04-17 14:58:47,951 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  49%|████▉     | 142/288 [03:33<02:42,  1.11s/it]2026-04-17 14:58:48,004 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,076 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  50%|█████     | 144/288 [03:33<01:51,  1.30it/s]2026-04-17 14:58:48,141 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,180 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,206 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  51%|█████     | 146/288 [03:33<01:17,  1.83it/s]2026-04-17 14:58:48,243 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  52%|█████▏    | 151/288 [03:33<00:36,  3.75it/s]2026-04-17 14:58:48,245 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,293 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  54%|█████▍    | 155/288 [03:33<00:23,  5.70it/s]2026-04-17 14:58:48,301 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,332 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,358 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,370 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,407 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  55%|█████▍    | 158/288 [03:34<00:18,  7.22it/s]2026-04-17 14:58:48,432 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,505 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,548 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,570 [INFO] root: Invoking grok-4.1-fast.
-2026-04-17 14:58:48,685 [INFO] root: Invoking grok-4.1-fast.
-Descriptions:  56%|█████▌    | 161/288 [03:34<00:14,  8.84it/s]Descriptions:  57%|█████▋    | 165/288 [03:34<00:10, 12.19it/s]Descriptions:  59%|█████▊    | 169/288 [03:34<00:08, 14.47it/s]Descriptions:  60%|█████▉    | 172/288 [03:34<00:07, 15.70it/s]Descriptions:  61%|██████    | 175/288 [03:34<00:06, 17.22it/s]Descriptions:  62%|██████▏   | 178/288 [03:34<00:05, 18.60it/s]Descriptions:  63%|██████▎   | 181/288 [03:35<00:05, 18.65it/s]Descriptions:  64%|██████▍   | 185/288 [03:35<00:04, 20.84it/s]Descriptions:  66%|██████▌   | 190/288 [03:35<00:03, 26.26it/s]Descriptions:  67%|██████▋   | 193/288 [03:35<00:03, 23.78it/s]Descriptions:  68%|██████▊   | 196/288 [03:35<00:04, 22.15it/s]Descriptions:  69%|██████▉   | 199/288 [03:35<00:04, 21.87it/s]Descriptions:  71%|███████   | 204/288 [03:36<00:03, 22.05it/s]Descriptions:  72%|███████▏  | 207/288 [03:36<00:03, 20.99it/s]Descriptions:  73%|███████▎  | 210/288 [03:36<00:03, 22.73it/s]Descriptions:  74%|███████▍  | 214/288 [03:36<00:03, 24.58it/s]Descriptions:  75%|███████▌  | 217/288 [03:36<00:03, 19.82it/s]Descriptions:  76%|███████▋  | 220/288 [03:36<00:03, 17.81it/s]Descriptions:  77%|███████▋  | 222/288 [03:37<00:03, 17.73it/s]Descriptions:  78%|███████▊  | 225/288 [03:37<00:03, 16.51it/s]Descriptions:  79%|███████▉  | 227/288 [03:37<00:04, 14.60it/s]Descriptions:  80%|███████▉  | 229/288 [03:37<00:06,  9.45it/s]Descriptions:  80%|████████  | 231/288 [03:38<00:11,  4.91it/s]Descriptions:  81%|████████  | 232/288 [03:38<00:10,  5.12it/s]Descriptions:  81%|████████  | 233/288 [03:39<00:10,  5.44it/s]Descriptions:  81%|████████▏ | 234/288 [03:39<00:10,  5.27it/s]Descriptions:  82%|████████▏ | 236/288 [03:39<00:10,  5.04it/s]Descriptions:  82%|████████▏ | 237/288 [03:39<00:09,  5.57it/s]Descriptions:  83%|████████▎ | 238/288 [03:40<00:08,  5.74it/s]Descriptions:  83%|████████▎ | 239/288 [03:40<00:09,  4.90it/s]Descriptions:  84%|████████▎ | 241/288 [03:40<00:10,  4.56it/s]Descriptions:  84%|████████▍ | 243/288 [03:41<00:08,  5.34it/s]Descriptions:  85%|████████▍ | 244/288 [03:41<00:09,  4.44it/s]Descriptions:  85%|████████▌ | 245/288 [03:41<00:08,  5.07it/s]Descriptions:  86%|████████▌ | 247/288 [03:41<00:06,  5.99it/s]Descriptions:  87%|████████▋ | 250/288 [03:42<00:05,  7.41it/s]Descriptions:  87%|████████▋ | 251/288 [03:42<00:05,  7.17it/s]Descriptions:  89%|████████▊ | 255/288 [03:42<00:02, 11.18it/s]Descriptions:  89%|████████▊ | 255/288 [03:55<00:02, 11.18it/s]Descriptions:  89%|████████▉ | 257/288 [04:05<01:37,  3.15s/it]Descriptions:  90%|████████▉ | 259/288 [04:05<01:06,  2.30s/it]Descriptions:  91%|█████████▏| 263/288 [04:05<00:32,  1.31s/it]Descriptions:  93%|█████████▎| 269/288 [04:06<00:12,  1.46it/s]Descriptions:  95%|█████████▌| 275/288 [04:06<00:05,  2.44it/s]Descriptions: 100%|██████████| 288/288 [04:06<00:00,  1.17it/s]
-2026-04-17 14:59:20,887 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/grok-4.1-fast.parquet.
+2026-04-22 11:58:40,665 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-22 11:58:40,791 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-22 11:58:40,800 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:58:40,912 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-22 11:58:40,919 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:58:41,553 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:58:41,593 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  31%|███       | 62/202 [00:00<00:00, 610.46it/s]Loading weights:  61%|██████▏   | 124/202 [00:00<00:00, 586.45it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 859.83it/s]
+2026-04-22 11:58:42,218 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:58:42,372 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:58:43,299 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-22 11:58:43,566 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:58:43,591 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:58:43,732 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:58:43,757 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-22 11:58:43,881 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:58:44,012 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:58:44,630 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-22 11:58:44,761 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:58:44,789 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  30%|██▉       | 60/202 [00:00<00:00, 594.48it/s]Loading weights:  65%|██████▍   | 131/202 [00:00<00:00, 656.77it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 944.35it/s]
+2026-04-22 11:58:45,045 [INFO] root: Running assay=describe-sentiment model=grok-4.1-fast num_samples_per_instance=3.
+Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
+2026-04-22 11:58:45,060 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,061 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,062 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,063 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,064 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,065 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,066 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,067 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,068 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,069 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,071 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,072 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,073 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,075 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,077 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,080 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,087 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,089 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,094 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,104 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,108 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,115 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,119 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,122 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,124 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,125 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,131 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,136 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,139 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,147 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,150 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,152 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,155 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,159 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,161 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,163 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,163 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,164 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,166 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,167 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,168 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,168 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,169 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,171 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,171 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,172 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,173 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,173 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,174 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,176 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,178 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,181 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,194 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,198 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,202 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,209 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,217 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,220 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,228 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,235 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,247 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,252 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,282 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,291 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,306 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,319 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,331 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,343 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,346 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,353 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,356 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,361 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,366 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,368 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,377 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,382 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,390 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,400 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,404 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,411 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,415 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,420 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,424 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,426 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,428 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,437 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,441 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,444 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,450 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,454 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,458 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,462 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,464 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,471 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,473 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,476 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,479 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,482 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,485 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,490 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,500 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,501 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,504 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,508 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,512 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,516 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,520 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,522 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,527 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,529 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,536 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,538 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,543 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,546 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,550 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,551 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,554 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,558 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,559 [INFO] root: Invoking grok-4.1-fast.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 11:58:45,561 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,564 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,572 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,575 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,576 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,580 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,587 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,592 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,594 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,699 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,700 [INFO] root: Invoking grok-4.1-fast.
+Descriptions:   0%|          | 1/297 [00:00<00:30,  9.80it/s]2026-04-22 11:58:45,702 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,703 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,704 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,705 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,706 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,707 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,709 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,710 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,711 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,711 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,713 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,715 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,715 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,716 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,716 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,718 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,718 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,721 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,722 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,723 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,723 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,723 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,724 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,725 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,726 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,727 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,730 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,732 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,732 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,735 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,736 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,738 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,739 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,743 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,744 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,745 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,746 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,747 [INFO] root: Invoking grok-4.1-fast.
+Descriptions:  33%|███▎      | 99/297 [00:00<00:00, 564.48it/s]2026-04-22 11:58:45,747 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,747 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,748 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,750 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,751 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,752 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,752 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,753 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,754 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,754 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,755 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,756 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,757 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,757 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,758 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,759 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,760 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,760 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,762 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,765 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,765 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,765 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,766 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,767 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,767 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,769 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,769 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,770 [INFO] root: Invoking grok-4.1-fast.
+Descriptions:  55%|█████▌    | 164/297 [00:00<00:00, 591.50it/s]2026-04-22 11:58:45,774 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,775 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,776 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,776 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,776 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,777 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,778 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,779 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,780 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,780 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,782 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,782 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,783 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,785 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,786 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,786 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,788 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,789 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,790 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,791 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,791 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,792 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,792 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,793 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,794 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,794 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,795 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,796 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,797 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,797 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,802 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,804 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,805 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,806 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,807 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,810 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,811 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,814 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,815 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,815 [INFO] root: Invoking grok-4.1-fast.
+Descriptions:  75%|███████▌  | 223/297 [00:00<00:00, 454.69it/s]2026-04-22 11:58:45,816 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,820 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,821 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,822 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,823 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,824 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,825 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,826 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,827 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,828 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,830 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,830 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,831 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,832 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,833 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,833 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,834 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,834 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,835 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,843 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,843 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,843 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,844 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,845 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,851 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,858 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,859 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,859 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,866 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,866 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,867 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,868 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,878 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,880 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,880 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,881 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,883 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,883 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,884 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,885 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,888 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,888 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,890 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,892 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,893 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,893 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,894 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,894 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,894 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,895 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,895 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,896 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,896 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,897 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,899 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,901 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,908 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,908 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,908 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,914 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:45,915 [INFO] root: Invoking grok-4.1-fast.
+2026-04-22 11:58:46,747 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,747 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,748 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,748 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,791 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,841 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:46,847 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:47,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:58:47,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  97%|█████████▋| 289/297 [00:02<00:00, 70.58it/s] Descriptions: 100%|██████████| 297/297 [00:07<00:00, 37.50it/s]
+Stance batches:   0%|          | 0/32 [00:00<?, ?it/s]Stance batches:   3%|▎         | 1/32 [00:00<00:19,  1.60it/s]Stance batches:   6%|▋         | 2/32 [00:00<00:12,  2.33it/s]Stance batches:   9%|▉         | 3/32 [00:01<00:10,  2.71it/s]Stance batches:  12%|█▎        | 4/32 [00:01<00:08,  3.13it/s]Stance batches:  16%|█▌        | 5/32 [00:02<00:11,  2.44it/s]Stance batches:  19%|█▉        | 6/32 [00:02<00:09,  2.72it/s]Stance batches:  22%|██▏       | 7/32 [00:02<00:08,  3.10it/s]Stance batches:  25%|██▌       | 8/32 [00:02<00:07,  3.20it/s]Stance batches:  28%|██▊       | 9/32 [00:03<00:07,  3.27it/s]Stance batches:  31%|███▏      | 10/32 [00:03<00:06,  3.49it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance batches:  34%|███▍      | 11/32 [00:03<00:05,  3.64it/s]Stance batches:  38%|███▊      | 12/32 [00:03<00:05,  3.54it/s]Stance batches:  41%|████      | 13/32 [00:04<00:05,  3.46it/s]Stance batches:  44%|████▍     | 14/32 [00:04<00:05,  3.39it/s]Stance batches:  47%|████▋     | 15/32 [00:04<00:05,  3.35it/s]Stance batches:  50%|█████     | 16/32 [00:05<00:04,  3.34it/s]Stance batches:  53%|█████▎    | 17/32 [00:05<00:04,  3.57it/s]Stance batches:  56%|█████▋    | 18/32 [00:05<00:03,  3.75it/s]Stance batches:  59%|█████▉    | 19/32 [00:05<00:03,  3.87it/s]Stance batches:  62%|██████▎   | 20/32 [00:06<00:03,  3.94it/s]Stance batches:  66%|██████▌   | 21/32 [00:06<00:02,  3.99it/s]Stance batches:  69%|██████▉   | 22/32 [00:06<00:02,  3.99it/s]Stance batches:  72%|███████▏  | 23/32 [00:06<00:02,  3.85it/s]Stance batches:  75%|███████▌  | 24/32 [00:07<00:01,  4.10it/s]Stance batches:  78%|███████▊  | 25/32 [00:07<00:01,  4.19it/s]Stance batches:  81%|████████▏ | 26/32 [00:07<00:01,  4.19it/s]Stance batches:  84%|████████▍ | 27/32 [00:07<00:01,  4.17it/s]Stance batches:  88%|████████▊ | 28/32 [00:08<00:00,  4.16it/s]Stance batches:  91%|█████████ | 29/32 [00:08<00:00,  4.16it/s]Stance batches:  94%|█████████▍| 30/32 [00:08<00:00,  4.20it/s]Stance batches:  97%|█████████▋| 31/32 [00:08<00:00,  3.89it/s]Stance batches: 100%|██████████| 32/32 [00:09<00:00,  3.96it/s]Stance batches: 100%|██████████| 32/32 [00:09<00:00,  3.54it/s]
+2026-04-22 12:02:01,795 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/grok-4.1-fast.parquet.

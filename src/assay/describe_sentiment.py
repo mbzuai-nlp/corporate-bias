@@ -1,7 +1,7 @@
 import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any
+from typing import Any, TypeVar
 
 import polars as pl
 import torch
@@ -22,21 +22,26 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
+_DEVICE = torch.device("cuda")
+
 _SENTIMENT_MODEL_NAME = "siebert/sentiment-roberta-large-english"
 _SENTIMENT_PIPELINE = pipeline(
     "sentiment-analysis",
     model=_SENTIMENT_MODEL_NAME,
+    device=_DEVICE
 )
 
-_STANCE_PIPELINE = pipeline(
-    "zero-shot-classification",
-    model="MoritzLaurer/deberta-v3-base-zeroshot-v1",
-)
+_STANCE_MODEL_NAME = "MoritzLaurer/deberta-v3-base-zeroshot-v1"
+_STANCE_TOKENIZER = AutoTokenizer.from_pretrained(_STANCE_MODEL_NAME)
+_STANCE_MODEL = AutoModelForSequenceClassification.from_pretrained(_STANCE_MODEL_NAME)
+_STANCE_MODEL.eval()
+_STANCE_MODEL.to(_DEVICE)
 
 _AD_MODEL_NAME = "teknology/ad-classifier-v0.3"
 _AD_TOKENIZER = AutoTokenizer.from_pretrained(_AD_MODEL_NAME)
 _AD_MODEL = AutoModelForSequenceClassification.from_pretrained(_AD_MODEL_NAME)
 _AD_MODEL.eval()
+_AD_MODEL.to(_DEVICE)
 
 _AD_LABELS = {
     int(label_id): label_name
@@ -44,54 +49,177 @@ _AD_LABELS = {
 }
 _AD_POSITIVE_LABEL = "LABEL_1"
 
-
-def _score_sentiment_polarity(text: str) -> float:
-    scores = _SENTIMENT_PIPELINE(text, truncation=True, top_k=None)
-    score_by_label = {item["label"]: float(item["score"]) for item in scores}
-    return score_by_label["POSITIVE"] - score_by_label["NEGATIVE"]
+_LOCAL_BATCH_SIZE = 32
 
 
-def _score_ad_likelihood(text: str) -> tuple[float, dict[str, float]]:
-    inputs = _AD_TOKENIZER(
-        text,
-        padding=True,
-        truncation=True,
-        max_length=512,
-        return_tensors="pt",
+T = TypeVar("T")
+
+
+def _batched(items: list[T], batch_size: int) -> list[list[T]]:
+    return [items[i : i + batch_size] for i in range(0, len(items), batch_size)]
+
+
+def _get_model_device(model: torch.nn.Module) -> torch.device:
+    return next(model.parameters()).device
+
+
+def _find_entailment_label_id(model: AutoModelForSequenceClassification) -> int:
+    label2id = {str(k).lower(): int(v) for k, v in model.config.label2id.items()}
+
+    for key, value in label2id.items():
+        if "entail" in key:
+            return value
+
+    raise ValueError(
+        f"Could not find entailment label in label2id={model.config.label2id!r}"
     )
 
-    with torch.no_grad():
-        logits = _AD_MODEL(**inputs).logits
 
-    probs = torch.softmax(logits, dim=-1)[0]
-    score_by_label = {
-        _AD_LABELS[i]: float(probs[i].item()) for i in range(len(_AD_LABELS))
-    }
-
-    return score_by_label[_AD_POSITIVE_LABEL], score_by_label
+_STANCE_ENTAILMENT_LABEL_ID = _find_entailment_label_id(_STANCE_MODEL)
 
 
-def _score_stance(text: str, entity_name: str) -> tuple[float, dict[str, float]]:
-    favor_label = f"favors {entity_name}"
-    disfavor_label = f"disfavors {entity_name}"
-    neutral_label = f"is neutral toward {entity_name}"
+def _score_sentiment_polarity_batch(texts: list[str]) -> list[float]:
+    if not texts:
+        return []
 
-    result = _STANCE_PIPELINE(
-        sequences=text,
-        candidate_labels=[favor_label, disfavor_label, neutral_label],
-        hypothesis_template="This text {}.",
-        multi_label=False,
-    )
+    results: list[float] = []
+    text_batches = _batched(texts, _LOCAL_BATCH_SIZE)
 
-    score_by_label = {
-        label: float(score)
-        for label, score in zip(result["labels"], result["scores"], strict=True)
-    }
+    for text_batch in tqdm(
+        text_batches,
+        total=len(text_batches),
+        desc="Sentiment batches",
+    ):
+        batch_scores = _SENTIMENT_PIPELINE(
+            text_batch,
+            truncation=True,
+            top_k=None,
+            batch_size=len(text_batch),
+        )
 
-    stance_score = score_by_label.get(favor_label, 0.0) - score_by_label.get(
-        disfavor_label, 0.0
-    )
-    return stance_score, score_by_label
+        for scores in batch_scores:
+            score_by_label = {item["label"]: float(item["score"]) for item in scores}
+            results.append(score_by_label["POSITIVE"] - score_by_label["NEGATIVE"])
+
+    return results
+
+
+def _score_ad_likelihood_batch(
+    texts: list[str],
+) -> list[tuple[float, dict[str, float]]]:
+    if not texts:
+        return []
+
+    device = _get_model_device(_AD_MODEL)
+    results: list[tuple[float, dict[str, float]]] = []
+    text_batches = _batched(texts, _LOCAL_BATCH_SIZE)
+
+    for text_batch in tqdm(
+        text_batches,
+        total=len(text_batches),
+        desc="Ad batches",
+    ):
+        inputs = _AD_TOKENIZER(
+            text_batch,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt",
+        )
+        inputs = {key: value.to(device) for key, value in inputs.items()}
+
+        with torch.no_grad():
+            logits = _AD_MODEL(**inputs).logits
+
+        probs = torch.softmax(logits, dim=-1)
+
+        for row_probs in probs:
+            score_by_label = {
+                _AD_LABELS[i]: float(row_probs[i].item()) for i in range(len(_AD_LABELS))
+            }
+            results.append((score_by_label[_AD_POSITIVE_LABEL], score_by_label))
+
+    return results
+
+
+def _score_stance_batch(
+    texts: list[str],
+    entity_names: list[str],
+) -> list[tuple[float, dict[str, float]]]:
+    if not texts:
+        return []
+
+    if len(texts) != len(entity_names):
+        raise ValueError("texts and entity_names must have the same length")
+
+    device = _get_model_device(_STANCE_MODEL)
+
+    # For each text we create 3 hypotheses:
+    #   favors X, disfavors X, neutral toward X
+    # Then we batch all premise/hypothesis pairs through the NLI model.
+    pair_premises: list[str] = []
+    pair_hypotheses: list[str] = []
+    candidate_labels_by_text: list[list[str]] = []
+
+    for text, entity_name in zip(texts, entity_names, strict=True):
+        favor_label = f"favors {entity_name}"
+        disfavor_label = f"disfavors {entity_name}"
+        neutral_label = f"is neutral toward {entity_name}"
+
+        candidate_labels = [favor_label, disfavor_label, neutral_label]
+        candidate_labels_by_text.append(candidate_labels)
+
+        for label in candidate_labels:
+            pair_premises.append(text)
+            pair_hypotheses.append(f"This text {label}.")
+
+    pair_indices = list(range(len(pair_premises)))
+    pair_index_batches = _batched(pair_indices, _LOCAL_BATCH_SIZE)
+
+    entailment_scores: list[float] = []
+
+    for index_batch in tqdm(
+        pair_index_batches,
+        total=len(pair_index_batches),
+        desc="Stance batches",
+    ):
+        premise_batch = [pair_premises[i] for i in index_batch]
+        hypothesis_batch = [pair_hypotheses[i] for i in index_batch]
+
+        inputs = _STANCE_TOKENIZER(
+            premise_batch,
+            hypothesis_batch,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt",
+        )
+        inputs = {key: value.to(device) for key, value in inputs.items()}
+
+        with torch.no_grad():
+            logits = _STANCE_MODEL(**inputs).logits
+
+        batch_entailment_scores = logits[:, _STANCE_ENTAILMENT_LABEL_ID]
+        entailment_scores.extend(batch_entailment_scores.detach().cpu().tolist())
+
+    results: list[tuple[float, dict[str, float]]] = []
+
+    # Reconstruct per-text scores from groups of 3 entailment logits
+    for i, candidate_labels in enumerate(candidate_labels_by_text):
+        start = i * 3
+        group_logits = torch.tensor(entailment_scores[start : start + 3], dtype=torch.float)
+        group_probs = torch.softmax(group_logits, dim=0)
+
+        score_by_label = {
+            label: float(prob.item())
+            for label, prob in zip(candidate_labels, group_probs, strict=True)
+        }
+
+        favor_label, disfavor_label, _neutral_label = candidate_labels
+        stance_score = score_by_label[favor_label] - score_by_label[disfavor_label]
+        results.append((stance_score, score_by_label))
+
+    return results
 
 
 def _build_description_messages(entity_name: str, instance: dict) -> list[Message]:
@@ -100,9 +228,7 @@ def _build_description_messages(entity_name: str, instance: dict) -> list[Messag
     return [
         Message(
             role="system",
-            content=(
-                "You are a helpful assistant."
-            ),
+            content="You are a helpful assistant.",
         ),
         Message(
             role="user",
@@ -128,13 +254,6 @@ def _run_description(
         seed=task["sample_id"],
     )
 
-    sentiment_polarity = _score_sentiment_polarity(output.text)
-    ad_likelihood, ad_score_by_label = _score_ad_likelihood(output.text)
-    stance_score, stance_score_by_label = _score_stance(
-        output.text,
-        task["entity_name"],
-    )
-
     return {
         "sample_id": task["sample_id"],
         "assay": assay,
@@ -145,12 +264,6 @@ def _run_description(
         "entity_id": task["entity_id"],
         "entity_name": task["entity_name"],
         "description": output.text,
-        "sentiment_polarity": sentiment_polarity,
-        "ad_likelihood": ad_likelihood,
-        "ad_score_by_label": ad_score_by_label,
-        "ad_positive_label": _AD_POSITIVE_LABEL,
-        "stance_score": stance_score,
-        "stance_score_by_label": stance_score_by_label,
     }
 
 
@@ -189,6 +302,37 @@ def _build_debug_json(
         ensure_ascii=False,
         sort_keys=True,
     )
+
+
+def _score_descriptions_in_batches(descriptions: list[dict[str, Any]]) -> None:
+    if not descriptions:
+        return
+
+    texts = [description["description"] for description in descriptions]
+    entity_names = [description["entity_name"] for description in descriptions]
+
+    sentiment_scores = _score_sentiment_polarity_batch(texts)
+    ad_results = _score_ad_likelihood_batch(texts)
+    stance_results = _score_stance_batch(texts, entity_names)
+
+    for (
+        description,
+        sentiment_polarity,
+        (ad_likelihood, ad_score_by_label),
+        (stance_score, stance_score_by_label),
+    ) in zip(
+        descriptions,
+        sentiment_scores,
+        ad_results,
+        stance_results,
+        strict=True,
+    ):
+        description["sentiment_polarity"] = sentiment_polarity
+        description["ad_likelihood"] = ad_likelihood
+        description["ad_score_by_label"] = ad_score_by_label
+        description["ad_positive_label"] = _AD_POSITIVE_LABEL
+        description["stance_score"] = stance_score
+        description["stance_score_by_label"] = stance_score_by_label
 
 
 def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
@@ -268,6 +412,8 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             desc="Descriptions",
         ):
             descriptions.append(future.result())
+
+    _score_descriptions_in_batches(descriptions)
 
     descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
         defaultdict(list)

@@ -9,13 +9,14 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-17 14:37:28,204 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:37:28,227 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:37:28,358 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-17 14:37:28,487 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-17 14:37:28,637 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-17 14:37:28,783 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6322.54it/s]
+2026-04-22 11:45:56,070 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:45:56,102 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:45:56,224 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-22 11:45:56,342 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-22 11:45:56,483 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-22 11:45:56,621 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-22 11:45:56,763 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5853.02it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,344 +24,335 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-17 14:37:28,945 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-17 14:37:29,064 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-17 14:37:29,082 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:37:29,199 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-17 14:37:29,203 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:37:30,426 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:37:30,468 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 954.48it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1275.78it/s]
-2026-04-17 14:37:30,807 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:37:30,935 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:37:31,900 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-17 14:37:32,151 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:37:32,173 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-17 14:37:32,291 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:37:32,314 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-17 14:37:32,440 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-17 14:37:32,568 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-17 14:37:33,138 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-17 14:37:33,257 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-17 14:37:33,278 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 86/202 [00:00<00:00, 856.08it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1184.98it/s]
-2026-04-17 14:37:33,476 [INFO] root: Running assay=describe-sentiment model=claude-sonnet-4.6 num_samples_per_instance=3.
-Invoking model 288 times for 31 distinct entities across 15 assay instances with 3 samples per instance (96 entity-instance pairs × 3 samples).
-2026-04-17 14:37:33,485 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,485 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,486 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,487 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,488 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,489 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,489 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,490 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,492 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,493 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,495 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,496 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,498 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,506 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,509 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,516 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,535 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,538 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,543 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,545 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,552 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,555 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,561 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,565 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,568 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,570 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,572 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,576 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,580 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,583 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,589 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,592 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,600 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,610 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,613 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,622 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,626 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,631 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,635 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,636 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,639 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,648 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,650 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,654 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,656 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,664 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,668 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,671 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,673 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,676 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,679 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,683 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,684 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,686 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,686 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,687 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,689 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,690 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,691 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,692 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,693 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,694 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,695 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,696 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,696 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,697 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,698 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,699 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,700 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,701 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,701 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,702 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,703 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,704 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,705 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,706 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,707 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,708 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,708 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,709 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,710 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,710 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,711 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,712 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,716 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,716 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,720 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,723 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,727 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,730 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,736 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,753 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,755 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,761 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,767 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,774 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,777 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,782 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,787 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,790 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,796 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,803 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,822 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,826 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,831 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,833 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,838 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,842 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,846 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,850 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,852 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,858 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,860 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,862 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,864 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,868 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,870 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,871 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,873 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,877 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   0%|          | 0/288 [00:00<?, ?it/s]2026-04-17 14:37:33,879 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,880 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,882 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,883 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,885 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,886 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,888 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:37:33,891 [INFO] root: Invoking claude-sonnet-4.6.
-You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-2026-04-17 14:39:18,245 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   0%|          | 1/288 [01:44<8:19:09, 104.35s/it]2026-04-17 14:39:18,301 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:18,441 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   1%|          | 3/288 [01:44<2:08:52, 27.13s/it] 2026-04-17 14:39:18,799 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:18,815 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   1%|▏         | 4/288 [01:44<1:24:35, 17.87s/it]2026-04-17 14:39:18,871 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:18,951 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   2%|▏         | 7/288 [01:45<33:49,  7.22s/it]  2026-04-17 14:39:18,964 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:18,987 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,014 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,218 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,228 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   4%|▍         | 11/288 [01:45<15:46,  3.42s/it]2026-04-17 14:39:19,263 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,293 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,302 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,351 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   6%|▌         | 16/288 [01:45<07:59,  1.76s/it]2026-04-17 14:39:19,479 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,531 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,552 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   7%|▋         | 19/288 [01:45<05:39,  1.26s/it]2026-04-17 14:39:19,574 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,608 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,610 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,612 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:   9%|▊         | 25/288 [01:45<03:03,  1.44it/s]2026-04-17 14:39:19,623 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,681 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,681 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,706 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  10%|█         | 30/288 [01:45<01:58,  2.18it/s]2026-04-17 14:39:19,710 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,774 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,805 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,890 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  12%|█▏        | 34/288 [01:46<01:26,  2.93it/s]2026-04-17 14:39:19,972 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,975 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:19,993 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,017 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  13%|█▎        | 38/288 [01:46<01:02,  3.99it/s]2026-04-17 14:39:20,039 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,077 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,115 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  15%|█▍        | 42/288 [01:46<00:45,  5.42it/s]2026-04-17 14:39:20,181 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,191 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,222 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,226 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,246 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  16%|█▌        | 46/288 [01:46<00:34,  7.04it/s]2026-04-17 14:39:20,273 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  18%|█▊        | 51/288 [01:46<00:23,  9.98it/s]2026-04-17 14:39:20,348 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,356 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,405 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  19%|█▉        | 55/288 [01:46<00:19, 12.25it/s]2026-04-17 14:39:20,408 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,432 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,459 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,488 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  22%|██▏       | 64/288 [01:46<00:11, 19.21it/s]2026-04-17 14:39:20,538 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,542 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,554 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,612 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,615 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  24%|██▍       | 69/288 [01:47<00:09, 22.21it/s]2026-04-17 14:39:20,628 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,631 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,657 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,677 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  25%|██▌       | 73/288 [01:47<00:09, 22.75it/s]2026-04-17 14:39:20,677 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,696 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,704 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,803 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  28%|██▊       | 81/288 [01:47<00:06, 30.27it/s]2026-04-17 14:39:20,811 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,817 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,853 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  30%|██▉       | 86/288 [01:47<00:06, 31.49it/s]2026-04-17 14:39:20,871 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,915 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,950 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:20,990 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  32%|███▏      | 92/288 [01:47<00:05, 36.34it/s]2026-04-17 14:39:21,057 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,062 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,073 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  34%|███▎      | 97/288 [01:47<00:05, 37.49it/s]2026-04-17 14:39:21,077 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,089 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,131 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  35%|███▌      | 102/288 [01:47<00:04, 38.29it/s]2026-04-17 14:39:21,137 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,175 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,175 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,223 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  37%|███▋      | 107/288 [01:47<00:04, 38.66it/s]2026-04-17 14:39:21,239 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,255 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,284 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,368 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,375 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,391 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,398 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  39%|███▉      | 112/288 [01:48<00:05, 32.46it/s]2026-04-17 14:39:21,445 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,446 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,456 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,479 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,516 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,524 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,565 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,601 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,604 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,606 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,620 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  40%|████      | 116/288 [01:48<00:06, 26.39it/s]2026-04-17 14:39:21,656 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,724 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,728 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,751 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,770 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,798 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  42%|████▏     | 120/288 [01:48<00:05, 28.03it/s]2026-04-17 14:39:21,809 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,825 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,853 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:21,875 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,022 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,030 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  43%|████▎     | 124/288 [01:48<00:05, 27.70it/s]2026-04-17 14:39:22,044 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,054 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,066 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,067 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,308 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,325 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,342 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,346 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,425 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,439 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,508 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,512 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,559 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:22,781 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:23,004 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:23,093 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:39:23,929 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  44%|████▍     | 128/288 [01:50<00:19,  8.25it/s]2026-04-17 14:39:26,427 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:26,854 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:26,905 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,009 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,118 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,143 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,160 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,234 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,242 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,258 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,275 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,317 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,321 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,376 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,417 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,502 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,546 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,826 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,883 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:27,895 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:28,140 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:28,156 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:28,236 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-17 14:39:29,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  44%|████▍     | 128/288 [02:04<00:19,  8.25it/s]2026-04-17 14:40:59,303 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  45%|████▍     | 129/288 [03:25<23:16,  8.78s/it]2026-04-17 14:41:00,230 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  45%|████▌     | 130/288 [03:26<20:45,  7.88s/it]2026-04-17 14:41:00,492 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:00,706 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  46%|████▌     | 132/288 [03:26<15:34,  5.99s/it]2026-04-17 14:41:00,853 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:00,888 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  47%|████▋     | 134/288 [03:27<11:25,  4.45s/it]2026-04-17 14:41:00,950 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:01,098 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  47%|████▋     | 136/288 [03:27<08:16,  3.27s/it]2026-04-17 14:41:01,104 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  48%|████▊     | 138/288 [03:27<05:55,  2.37s/it]2026-04-17 14:41:01,203 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:01,261 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:01,453 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:01,463 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  49%|████▊     | 140/288 [03:27<04:16,  1.73s/it]2026-04-17 14:41:01,534 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:01,701 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  50%|████▉     | 143/288 [03:27<02:40,  1.10s/it]2026-04-17 14:41:02,005 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,059 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  50%|█████     | 145/288 [03:28<02:03,  1.16it/s]2026-04-17 14:41:02,106 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,131 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,133 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,199 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  52%|█████▏    | 149/288 [03:28<01:09,  1.99it/s]2026-04-17 14:41:02,241 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,288 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  52%|█████▏    | 151/288 [03:28<00:54,  2.52it/s]2026-04-17 14:41:02,326 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,349 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  53%|█████▎    | 154/288 [03:28<00:37,  3.58it/s]2026-04-17 14:41:02,422 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,424 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,467 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,564 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  55%|█████▍    | 157/288 [03:28<00:26,  4.96it/s]2026-04-17 14:41:02,681 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,688 [INFO] root: Invoking claude-sonnet-4.6.
-2026-04-17 14:41:02,711 [INFO] root: Invoking claude-sonnet-4.6.
-Descriptions:  56%|█████▌    | 160/288 [03:28<00:20,  6.38it/s]Descriptions:  56%|█████▋    | 162/288 [03:28<00:16,  7.49it/s]Descriptions:  57%|█████▋    | 164/288 [03:29<00:14,  8.45it/s]Descriptions:  58%|█████▊    | 167/288 [03:29<00:10, 11.07it/s]Descriptions:  59%|█████▉    | 171/288 [03:29<00:07, 14.88it/s]Descriptions:  61%|██████▏   | 177/288 [03:29<00:05, 21.43it/s]Descriptions:  62%|██████▎   | 180/288 [03:29<00:05, 20.62it/s]Descriptions:  65%|██████▍   | 186/288 [03:29<00:03, 26.44it/s]Descriptions:  66%|██████▌   | 190/288 [03:29<00:04, 24.12it/s]Descriptions:  68%|██████▊   | 195/288 [03:30<00:03, 27.95it/s]Descriptions:  69%|██████▉   | 199/288 [03:30<00:02, 29.81it/s]Descriptions:  71%|███████   | 204/288 [03:30<00:02, 31.38it/s]Descriptions:  72%|███████▏  | 208/288 [03:30<00:02, 29.85it/s]Descriptions:  74%|███████▎  | 212/288 [03:30<00:02, 31.59it/s]Descriptions:  75%|███████▌  | 217/288 [03:30<00:02, 34.55it/s]Descriptions:  77%|███████▋  | 221/288 [03:30<00:02, 25.86it/s]Descriptions:  78%|███████▊  | 224/288 [03:31<00:02, 21.75it/s]Descriptions:  79%|███████▉  | 227/288 [03:31<00:04, 13.47it/s]Descriptions:  80%|███████▉  | 229/288 [03:32<00:05, 10.61it/s]Descriptions:  80%|████████  | 231/288 [03:35<00:25,  2.27it/s]Descriptions:  81%|████████  | 233/288 [03:35<00:20,  2.71it/s]Descriptions:  82%|████████▏ | 235/288 [03:36<00:17,  3.01it/s]Descriptions:  82%|████████▏ | 236/288 [03:36<00:15,  3.35it/s]Descriptions:  82%|████████▏ | 237/288 [03:36<00:13,  3.73it/s]Descriptions:  83%|████████▎ | 240/288 [03:36<00:09,  5.30it/s]Descriptions:  84%|████████▍ | 242/288 [03:36<00:07,  6.43it/s]Descriptions:  85%|████████▍ | 244/288 [03:37<00:06,  7.15it/s]Descriptions:  85%|████████▌ | 246/288 [03:37<00:05,  7.97it/s]Descriptions:  86%|████████▌ | 248/288 [03:37<00:04,  9.18it/s]Descriptions:  87%|████████▋ | 250/288 [03:37<00:03, 10.04it/s]Descriptions:  88%|████████▊ | 252/288 [03:37<00:03, 11.24it/s]Descriptions:  88%|████████▊ | 254/288 [03:37<00:03, 10.85it/s]Descriptions:  89%|████████▉ | 256/288 [03:38<00:04,  7.47it/s]Descriptions:  89%|████████▉ | 257/288 [03:59<01:57,  3.78s/it]Descriptions:  90%|████████▉ | 258/288 [03:59<01:34,  3.14s/it]Descriptions:  90%|████████▉ | 259/288 [03:59<01:11,  2.46s/it]Descriptions:  93%|█████████▎| 267/288 [03:59<00:14,  1.42it/s]Descriptions:  95%|█████████▍| 273/288 [04:00<00:06,  2.47it/s]Descriptions:  96%|█████████▌| 277/288 [04:00<00:03,  3.40it/s]Descriptions: 100%|██████████| 288/288 [04:00<00:00,  1.20it/s]
-2026-04-17 14:41:34,301 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-sonnet-4.6.parquet.
+2026-04-22 11:45:56,890 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-22 11:45:57,005 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:45:57,031 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-22 11:45:57,126 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:45:57,971 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:45:57,997 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  39%|███▊      | 78/202 [00:00<00:00, 776.41it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1121.18it/s]
+2026-04-22 11:45:58,358 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:45:58,494 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:45:59,403 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-22 11:45:59,651 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:45:59,680 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-22 11:45:59,804 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:45:59,829 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-22 11:45:59,949 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-22 11:46:00,231 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-22 11:46:00,850 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-22 11:46:00,966 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-22 11:46:00,990 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 72/202 [00:00<00:00, 712.59it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1073.23it/s]
+2026-04-22 11:46:01,209 [INFO] root: Running assay=describe-sentiment model=claude-sonnet-4.6 num_samples_per_instance=3.
+Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
+2026-04-22 11:46:01,226 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,227 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,227 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,229 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,229 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,230 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,231 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,232 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,233 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,234 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,236 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,237 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,239 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,241 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,245 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,247 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,261 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,287 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,298 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,310 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,321 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,328 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,331 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,333 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,334 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,337 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,339 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,342 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,345 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,346 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,348 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,349 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,355 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,358 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,369 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,377 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,393 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,396 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,402 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,407 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,414 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,417 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,425 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,429 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,439 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,445 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,451 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,452 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,455 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,460 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,465 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,468 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,473 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,475 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,478 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,481 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,484 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,486 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,488 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,490 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,492 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,494 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,495 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,499 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,500 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,502 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,504 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,505 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,506 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,507 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,509 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,509 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,510 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,510 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,511 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,512 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,513 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,515 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,519 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,521 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,524 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,526 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,529 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,533 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,539 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,542 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,550 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,552 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,557 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,560 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,562 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,573 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,575 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,587 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,598 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,607 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,612 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,619 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,631 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,633 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,638 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,640 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,644 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,646 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,649 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,652 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,653 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,660 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,668 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,669 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,671 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,673 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,677 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 11:46:01,679 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,682 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,686 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,688 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,692 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,699 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,710 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,714 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,718 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,726 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,730 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,733 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,742 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,746 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,748 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,809 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,810 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,816 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,818 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,825 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,827 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,827 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,830 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:   9%|▉         | 27/297 [00:00<00:01, 263.09it/s]2026-04-22 11:46:01,830 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,832 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,834 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,835 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,836 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,836 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,837 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,838 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,839 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,839 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,843 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,845 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,846 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,846 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,847 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,848 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,850 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,850 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,852 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,853 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,854 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,854 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,854 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,855 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,856 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,856 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,856 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,856 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,857 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,858 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,858 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,858 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,859 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,859 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,859 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,860 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  52%|█████▏    | 154/297 [00:00<00:00, 837.00it/s]2026-04-22 11:46:01,860 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,861 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,862 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,862 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,863 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,864 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,865 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,866 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,867 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,867 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,868 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,868 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,868 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,870 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,870 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,871 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,871 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,872 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,872 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,872 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,872 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,873 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,873 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,876 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,877 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,878 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,878 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,879 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,882 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,882 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,883 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,885 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,887 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,888 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,889 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,890 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,891 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,892 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,893 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,893 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,895 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,895 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,896 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,896 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,896 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,898 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,898 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,899 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,900 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,902 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,902 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,903 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,903 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,904 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,905 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,905 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,906 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,906 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,907 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,908 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,908 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,909 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,910 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,912 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,913 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,913 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,917 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,917 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,918 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,918 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,920 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,920 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,921 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,922 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,922 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,923 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,925 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,926 [INFO] root: Invoking claude-sonnet-4.6.
+Descriptions:  80%|████████  | 238/297 [00:00<00:00, 608.76it/s]2026-04-22 11:46:01,926 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,926 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,927 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,927 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,929 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,929 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,930 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,931 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,931 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,932 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,933 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,934 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,934 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,937 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,937 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,937 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,938 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,939 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,939 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,939 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,940 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,940 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,941 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,941 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,946 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,947 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,947 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,949 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,949 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,949 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,950 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,950 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,956 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,967 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,975 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,975 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,979 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,979 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,980 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,980 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,981 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,981 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,983 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,984 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,986 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,986 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:01,988 [INFO] root: Invoking claude-sonnet-4.6.
+2026-04-22 11:46:03,366 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:03,750 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,037 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,233 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,449 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,659 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,678 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-22 11:46:04,729 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  80%|████████  | 238/297 [00:14<00:00, 608.76it/s]Descriptions: 100%|██████████| 297/297 [00:15<00:00, 12.45it/s] Descriptions: 100%|██████████| 297/297 [00:15<00:00, 19.31it/s]
+Stance batches:   0%|          | 0/32 [00:00<?, ?it/s]Stance batches:   3%|▎         | 1/32 [00:01<00:33,  1.09s/it]Stance batches:   6%|▋         | 2/32 [00:01<00:16,  1.82it/s]Stance batches:   9%|▉         | 3/32 [00:01<00:11,  2.56it/s]Stance batches:  12%|█▎        | 4/32 [00:01<00:08,  3.37it/s]Stance batches:  16%|█▌        | 5/32 [00:01<00:06,  4.04it/s]Stance batches:  19%|█▉        | 6/32 [00:01<00:05,  4.63it/s]Stance batches:  22%|██▏       | 7/32 [00:02<00:07,  3.53it/s]Stance batches:  25%|██▌       | 8/32 [00:02<00:05,  4.06it/s]Stance batches:  28%|██▊       | 9/32 [00:02<00:05,  4.48it/s]Stance batches:  31%|███▏      | 10/32 [00:02<00:04,  4.82it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance batches:  34%|███▍      | 11/32 [00:03<00:04,  4.89it/s]Stance batches:  38%|███▊      | 12/32 [00:03<00:03,  5.22it/s]Stance batches:  41%|████      | 13/32 [00:03<00:03,  5.32it/s]Stance batches:  44%|████▍     | 14/32 [00:03<00:03,  5.53it/s]Stance batches:  47%|████▋     | 15/32 [00:03<00:02,  5.76it/s]Stance batches:  50%|█████     | 16/32 [00:03<00:02,  5.69it/s]Stance batches:  53%|█████▎    | 17/32 [00:04<00:02,  5.81it/s]Stance batches:  56%|█████▋    | 18/32 [00:04<00:02,  6.17it/s]Stance batches:  59%|█████▉    | 19/32 [00:04<00:01,  6.53it/s]Stance batches:  62%|██████▎   | 20/32 [00:04<00:01,  6.87it/s]Stance batches:  66%|██████▌   | 21/32 [00:04<00:01,  7.12it/s]Stance batches:  69%|██████▉   | 22/32 [00:04<00:01,  7.23it/s]Stance batches:  72%|███████▏  | 23/32 [00:04<00:01,  7.18it/s]Stance batches:  75%|███████▌  | 24/32 [00:04<00:01,  7.41it/s]Stance batches:  78%|███████▊  | 25/32 [00:05<00:01,  6.87it/s]Stance batches:  81%|████████▏ | 26/32 [00:05<00:00,  6.72it/s]Stance batches:  84%|████████▍ | 27/32 [00:05<00:00,  6.17it/s]Stance batches:  88%|████████▊ | 28/32 [00:05<00:00,  6.05it/s]Stance batches:  91%|█████████ | 29/32 [00:05<00:00,  6.35it/s]Stance batches:  94%|█████████▍| 30/32 [00:05<00:00,  6.58it/s]Stance batches:  97%|█████████▋| 31/32 [00:06<00:00,  6.71it/s]Stance batches: 100%|██████████| 32/32 [00:06<00:00,  7.03it/s]Stance batches: 100%|██████████| 32/32 [00:06<00:00,  5.13it/s]
+2026-04-22 11:48:17,300 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/claude-sonnet-4.6.parquet.
