@@ -9,11 +9,14 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-22 12:39:17,887 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:20,651 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:39:20,341 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-22 12:39:20,551 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6291.48it/s]
+2026-04-23 13:38:44,033 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-23 13:38:44,060 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-23 13:38:44,330 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-23 13:38:44,450 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-23 13:38:44,653 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-23 13:38:44,852 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-23 13:38:45,058 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+Loading weights:  32%|███▏      | 127/393 [00:00<00:00, 1269.85it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 3607.56it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -21,343 +24,327 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-22 12:39:21,170 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-22 12:39:21,326 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-22 12:39:21,879 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-22 12:39:21,879 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:39:26,200 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:39:26,200 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-22 12:39:26,346 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-22 12:39:29,290 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:29,461 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:39:29,689 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:29,751 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-22 12:39:29,974 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:39:30,366 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:39:31,400 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-22 12:39:31,589 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:31,632 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 76/202 [00:00<00:00, 750.25it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1036.11it/s]
-2026-04-22 12:39:32,204 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:32,368 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:39:32,689 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:32,733 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-22 12:39:33,921 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:39:34,137 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:39:35,040 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-22 12:39:36,450 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:39:36,947 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|███▉      | 80/202 [00:00<00:00, 798.30it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1129.36it/s]
-2026-04-22 12:39:37,332 [INFO] root: Running assay=describe-sentiment model=llama-3.1-8b-instruct num_samples_per_instance=3.
+2026-04-23 13:38:45,189 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-23 13:38:45,315 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-23 13:38:45,377 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-23 13:38:45,578 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-23 13:38:47,437 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-23 13:38:47,543 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 44/202 [00:00<00:00, 438.58it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 471.70it/s]Loading weights:  70%|███████   | 142/202 [00:00<00:00, 454.63it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 625.05it/s]
+2026-04-23 13:38:48,175 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-23 13:38:48,368 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-23 13:38:49,992 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-23 13:38:50,384 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-23 13:38:50,416 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-23 13:38:50,542 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-23 13:38:50,568 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-23 13:38:50,692 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-23 13:38:50,399 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-23 13:38:51,617 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-23 13:38:51,738 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-23 13:38:51,767 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  22%|██▏       | 45/202 [00:00<00:00, 448.06it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 486.57it/s]Loading weights:  72%|███████▏  | 146/202 [00:00<00:00, 461.98it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 637.72it/s]
+2026-04-23 13:38:52,439 [INFO] root: Running assay=describe-sentiment model=llama-3.1-8b-instruct num_samples_per_instance=3.
 Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
-2026-04-22 12:39:37,343 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,344 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,344 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,345 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,346 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,347 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,348 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,349 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,350 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,351 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,352 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,354 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,356 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,357 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,358 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,359 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,361 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,369 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,370 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,372 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,376 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,379 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,383 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,389 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,392 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,394 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,396 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,401 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,402 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,404 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,406 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,408 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,411 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,413 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,414 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,414 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,415 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,419 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,428 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,430 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,432 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,434 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,436 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,443 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,453 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,456 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,463 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,466 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,469 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,474 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,480 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,482 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,492 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,497 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,498 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,500 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,501 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,503 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,505 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,508 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,509 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,512 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,515 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,517 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,519 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,523 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,525 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,528 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,533 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,538 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,541 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,544 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,547 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,548 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,555 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,557 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,559 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,563 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,571 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,573 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,575 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,577 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,578 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,580 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,584 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,585 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,587 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,588 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,591 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,594 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,596 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,601 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,602 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,606 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,608 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,611 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,614 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,617 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,619 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,620 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,621 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,625 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,626 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,629 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,630 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,638 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,640 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,644 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,646 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,648 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,650 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,652 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,653 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,660 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,665 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,666 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,673 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,674 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,675 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,676 [INFO] root: Invoking llama-3.1-8b-instruct.
-Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 12:39:37,679 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,681 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,682 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,684 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,685 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,686 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,687 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,687 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,763 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,764 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,764 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,764 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,765 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,766 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,767 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,767 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,769 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,770 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,770 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,771 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,772 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,772 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,775 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,775 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,775 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,776 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,776 [INFO] root: Invoking llama-3.1-8b-instruct.
-Descriptions:  13%|█▎        | 39/297 [00:00<00:00, 386.04it/s]2026-04-22 12:39:37,778 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,778 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,779 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,779 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,781 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,782 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,783 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,783 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,783 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,784 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,784 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,785 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,786 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,787 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,787 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,788 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,788 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,788 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,789 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,790 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,791 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,792 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,793 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,794 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,795 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,796 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,796 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,797 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,797 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,797 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,798 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,798 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,798 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,800 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,800 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,800 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,801 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,801 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,802 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,802 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,802 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,803 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,803 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,804 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,805 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,805 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,806 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,806 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,808 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,808 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,809 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,809 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,810 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,810 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,810 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,811 [INFO] root: Invoking llama-3.1-8b-instruct.
-Descriptions:  64%|██████▍   | 191/297 [00:00<00:00, 1046.14it/s]2026-04-22 12:39:37,811 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,812 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,812 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,813 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,813 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,813 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,814 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,815 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,816 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,816 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,816 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,817 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,817 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,818 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,818 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,822 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,823 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,823 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,824 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,824 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,826 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,826 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,827 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,827 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,827 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,828 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,828 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,829 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,829 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,832 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,833 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,834 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,835 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,835 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,836 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,837 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,839 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,839 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,840 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,841 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,841 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,842 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,842 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,843 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,844 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,844 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,845 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,845 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,846 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,846 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,847 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,847 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,847 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,848 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,848 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,849 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,850 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,850 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,851 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,851 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,852 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,853 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,853 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,853 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,853 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,854 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,855 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,855 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,856 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,856 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,856 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,857 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,858 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,858 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,859 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,859 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,860 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,860 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,860 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,864 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,866 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,866 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,866 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,867 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,869 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,870 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,870 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,871 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,872 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,872 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,872 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,872 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,873 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:37,874 [INFO] root: Invoking llama-3.1-8b-instruct.
-2026-04-22 12:39:39,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,189 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,662 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,663 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:39,716 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:39:40,169 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions: 100%|█████████▉| 296/297 [00:11<00:00, 19.86it/s]  Descriptions: 100%|██████████| 297/297 [00:16<00:00, 12.54it/s]Descriptions: 100%|██████████| 297/297 [00:16<00:00, 17.98it/s]
-Sentiment batches:   0%|          | 0/10 [00:00<?, ?it/s]Sentiment batches:  10%|█         | 1/10 [00:02<00:22,  2.48s/it]Sentiment batches:  20%|██        | 2/10 [00:03<00:13,  1.74s/it]Sentiment batches:  30%|███       | 3/10 [00:04<00:10,  1.50s/it]Sentiment batches:  40%|████      | 4/10 [00:06<00:08,  1.39s/it]Sentiment batches:  50%|█████     | 5/10 [00:07<00:06,  1.32s/it]Sentiment batches:  60%|██████    | 6/10 [00:08<00:05,  1.27s/it]Sentiment batches:  70%|███████   | 7/10 [00:09<00:03,  1.24s/it]Sentiment batches:  80%|████████  | 8/10 [00:10<00:02,  1.23s/it]Sentiment batches:  90%|█████████ | 9/10 [00:12<00:01,  1.21s/it]Sentiment batches: 100%|██████████| 10/10 [00:12<00:00,  1.06it/s]Sentiment batches: 100%|██████████| 10/10 [00:12<00:00,  1.24s/it]
-Ad batches:   0%|          | 0/10 [00:00<?, ?it/s]Ad batches:  10%|█         | 1/10 [00:00<00:08,  1.03it/s]Ad batches:  20%|██        | 2/10 [00:01<00:07,  1.10it/s]Ad batches:  30%|███       | 3/10 [00:02<00:05,  1.18it/s]Ad batches:  40%|████      | 4/10 [00:03<00:04,  1.24it/s]Ad batches:  50%|█████     | 5/10 [00:04<00:03,  1.27it/s]Ad batches:  60%|██████    | 6/10 [00:04<00:03,  1.26it/s]Ad batches:  70%|███████   | 7/10 [00:05<00:02,  1.29it/s]Ad batches:  80%|████████  | 8/10 [00:06<00:01,  1.28it/s]Ad batches:  90%|█████████ | 9/10 [00:07<00:00,  1.27it/s]Ad batches: 100%|██████████| 10/10 [00:07<00:00,  1.65it/s]Ad batches: 100%|██████████| 10/10 [00:07<00:00,  1.34it/s]
-Stance batches:   0%|          | 0/28 [00:00<?, ?it/s]Stance batches:   4%|▎         | 1/28 [00:00<00:14,  1.91it/s]Stance batches:   7%|▋         | 2/28 [00:00<00:10,  2.45it/s]Stance batches:  11%|█         | 3/28 [00:01<00:09,  2.66it/s]Stance batches:  14%|█▍        | 4/28 [00:01<00:08,  2.77it/s]Stance batches:  18%|█▊        | 5/28 [00:01<00:08,  2.83it/s]Stance batches:  21%|██▏       | 6/28 [00:02<00:07,  2.89it/s]Stance batches:  25%|██▌       | 7/28 [00:02<00:07,  2.90it/s]Stance batches:  29%|██▊       | 8/28 [00:02<00:06,  2.92it/s]Stance batches:  32%|███▏      | 9/28 [00:03<00:06,  2.98it/s]Stance batches:  36%|███▌      | 10/28 [00:03<00:06,  2.82it/s]Stance batches:  39%|███▉      | 11/28 [00:03<00:06,  2.77it/s]Stance batches:  43%|████▎     | 12/28 [00:04<00:05,  2.97it/s]Stance batches:  46%|████▋     | 13/28 [00:04<00:04,  3.40it/s]Stance batches:  50%|█████     | 14/28 [00:04<00:04,  3.29it/s]Stance batches:  54%|█████▎    | 15/28 [00:05<00:03,  3.50it/s]Stance batches:  57%|█████▋    | 16/28 [00:05<00:03,  3.39it/s]Stance batches:  68%|██████▊   | 19/28 [00:05<00:01,  5.83it/s]Stance batches:  71%|███████▏  | 20/28 [00:05<00:01,  4.93it/s]Stance batches:  75%|███████▌  | 21/28 [00:06<00:01,  4.35it/s]Stance batches:  79%|███████▊  | 22/28 [00:06<00:01,  3.86it/s]Stance batches:  82%|████████▏ | 23/28 [00:06<00:01,  3.59it/s]Stance batches:  86%|████████▌ | 24/28 [00:07<00:01,  3.51it/s]Stance batches:  89%|████████▉ | 25/28 [00:07<00:00,  3.34it/s]Stance batches:  93%|█████████▎| 26/28 [00:07<00:00,  3.24it/s]Stance batches: 100%|██████████| 28/28 [00:08<00:00,  4.06it/s]Stance batches: 100%|██████████| 28/28 [00:08<00:00,  3.42it/s]
-2026-04-22 12:40:22,314 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/llama-3.1-8b-instruct.parquet.
+2026-04-23 13:38:52,462 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,463 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,464 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,465 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,467 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,469 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,470 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,471 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,473 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,474 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,476 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,479 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,491 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,493 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,499 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,510 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,517 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,531 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,545 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,551 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,557 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,565 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,569 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,572 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,577 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,579 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,584 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,586 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,591 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,593 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,596 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,605 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,608 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,612 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,623 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,639 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,651 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,655 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,660 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,667 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,674 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,678 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,681 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,689 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,704 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,707 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,711 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,724 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,731 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,745 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,754 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,763 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,766 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,771 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,773 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,779 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,784 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,787 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,792 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,796 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,799 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,801 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,804 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,806 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,807 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,810 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,814 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,817 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,821 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,829 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,832 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,835 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,837 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,841 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,849 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,853 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,856 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,872 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,875 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,882 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,890 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,899 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,904 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,909 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,925 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,929 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,934 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,943 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,946 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,950 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,957 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,962 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,969 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,975 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,981 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,986 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:52,994 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,004 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,013 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,017 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,020 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,022 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,029 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,041 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,048 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,058 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,064 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,068 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,073 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,078 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,084 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,094 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,100 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,103 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,106 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-23 13:38:53,117 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,121 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,125 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,129 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,132 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,135 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,137 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,145 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,147 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,150 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,153 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,157 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,162 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,295 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions:   0%|          | 1/297 [00:00<00:32,  8.98it/s]2026-04-23 13:38:53,296 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,296 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,298 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,300 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,302 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,304 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,307 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,310 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,312 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,312 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,316 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,316 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,319 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,321 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,325 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,326 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,327 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,332 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,332 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,334 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,335 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,336 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,337 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,337 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,339 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,340 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,343 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions:  29%|██▉       | 86/297 [00:00<00:00, 481.49it/s]2026-04-23 13:38:53,344 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,344 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,345 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,346 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,347 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,348 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,349 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,350 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,352 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,352 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,353 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,354 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,354 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,355 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,356 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,356 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,357 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,357 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,358 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,358 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,359 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,360 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,361 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,363 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,364 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,365 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,367 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,367 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,368 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,368 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,369 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,370 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,371 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,371 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,371 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,372 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,373 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,374 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,376 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,377 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,378 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,378 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions:  62%|██████▏   | 184/297 [00:00<00:00, 702.37it/s]2026-04-23 13:38:53,379 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,380 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,382 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,383 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,384 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,385 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,386 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,388 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,388 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,389 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,391 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,392 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,393 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,393 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,394 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,395 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,396 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,397 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,398 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,399 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,401 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,402 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,403 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,405 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,406 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,406 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,407 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,408 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,409 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,410 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,410 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,414 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,414 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,415 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,416 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,416 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,417 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,417 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,418 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,419 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,419 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,420 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,421 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,422 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,422 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,423 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,424 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,424 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,425 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,426 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,426 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,427 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,429 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,430 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,432 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,432 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,434 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,434 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,435 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,436 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,438 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,441 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,442 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,444 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,445 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,446 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,447 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,449 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,450 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,450 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,451 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions:  88%|████████▊ | 262/297 [00:00<00:00, 724.45it/s]2026-04-23 13:38:53,452 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,453 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,454 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,454 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,455 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,456 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,458 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,459 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,460 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,461 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,463 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,464 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,466 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,466 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,467 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,468 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,469 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,471 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,471 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,472 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,473 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,474 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,475 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,475 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,476 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,477 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,478 [INFO] root: Invoking llama-3.1-8b-instruct.
+2026-04-23 13:38:53,479 [INFO] root: Invoking llama-3.1-8b-instruct.
+Descriptions: 100%|██████████| 297/297 [00:00<00:00, 639.59it/s]
+Stance:   0%|          | 0/32 [00:00<?, ?it/s]Stance:   3%|▎         | 1/32 [00:02<01:13,  2.37s/it]Stance:   6%|▋         | 2/32 [00:03<00:42,  1.40s/it]Stance:   9%|▉         | 3/32 [00:04<00:35,  1.21s/it]Stance:  12%|█▎        | 4/32 [00:05<00:32,  1.17s/it]Stance:  16%|█▌        | 5/32 [00:06<00:35,  1.31s/it]Stance:  19%|█▉        | 6/32 [00:08<00:37,  1.44s/it]Stance:  22%|██▏       | 7/32 [00:10<00:39,  1.56s/it]Stance:  25%|██▌       | 8/32 [00:11<00:37,  1.56s/it]Stance:  28%|██▊       | 9/32 [00:13<00:37,  1.63s/it]Stance:  31%|███▏      | 10/32 [00:15<00:39,  1.78s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  34%|███▍      | 11/32 [00:17<00:39,  1.90s/it]Stance:  38%|███▊      | 12/32 [00:19<00:36,  1.85s/it]Stance:  41%|████      | 13/32 [00:19<00:26,  1.40s/it]Stance:  44%|████▍     | 14/32 [00:20<00:22,  1.24s/it]Stance:  47%|████▋     | 15/32 [00:21<00:19,  1.12s/it]Stance:  50%|█████     | 16/32 [00:22<00:16,  1.06s/it]Stance:  53%|█████▎    | 17/32 [00:23<00:15,  1.03s/it]Stance:  56%|█████▋    | 18/32 [00:24<00:14,  1.02s/it]Stance:  59%|█████▉    | 19/32 [00:25<00:11,  1.10it/s]Stance:  62%|██████▎   | 20/32 [00:26<00:11,  1.08it/s]Stance:  66%|██████▌   | 21/32 [00:27<00:10,  1.06it/s]Stance:  69%|██████▉   | 22/32 [00:28<00:09,  1.03it/s]Stance:  72%|███████▏  | 23/32 [00:29<00:09,  1.00s/it]Stance:  75%|███████▌  | 24/32 [00:29<00:06,  1.28it/s]Stance:  78%|███████▊  | 25/32 [00:30<00:05,  1.18it/s]Stance:  81%|████████▏ | 26/32 [00:31<00:05,  1.20it/s]Stance:  84%|████████▍ | 27/32 [00:32<00:04,  1.19it/s]Stance:  88%|████████▊ | 28/32 [00:33<00:03,  1.20it/s]Stance:  91%|█████████ | 29/32 [00:33<00:02,  1.21it/s]Stance:  94%|█████████▍| 30/32 [00:34<00:01,  1.19it/s]Stance:  97%|█████████▋| 31/32 [00:35<00:00,  1.18it/s]Stance: 100%|██████████| 32/32 [00:36<00:00,  1.17it/s]Stance: 100%|██████████| 32/32 [00:36<00:00,  1.14s/it]
+Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:01<00:13,  1.48s/it]Ad:  20%|██        | 2/10 [00:03<00:12,  1.62s/it]Ad:  30%|███       | 3/10 [00:05<00:12,  1.80s/it]Ad:  40%|████      | 4/10 [00:07<00:12,  2.01s/it]Ad:  50%|█████     | 5/10 [00:10<00:11,  2.25s/it]Ad:  60%|██████    | 6/10 [00:12<00:09,  2.34s/it]Ad:  70%|███████   | 7/10 [00:16<00:08,  2.69s/it]Ad:  80%|████████  | 8/10 [00:20<00:06,  3.10s/it]Ad:  90%|█████████ | 9/10 [00:23<00:03,  3.10s/it]Ad: 100%|██████████| 10/10 [00:23<00:00,  2.24s/it]Ad: 100%|██████████| 10/10 [00:23<00:00,  2.35s/it]
+2026-04-23 13:40:32,259 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/llama-3.1-8b-instruct.parquet.
