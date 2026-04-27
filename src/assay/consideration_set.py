@@ -168,9 +168,6 @@ def _aggregate_judge_favoured_value(
     sample: dict[str, Any],
     entity_name: str,
 ) -> float:
-    if not _JUDGE_MODELS:
-        return 0.0
-
     votes = [
         1.0
         if sample["judgments"][judge_model]["favored_entity"] == entity_name
@@ -316,11 +313,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     judge_tasks: list[dict] = []
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
-        comparison_set_id = next(
-            assay_instance["comparison_set_id"]
-            for assay_instance in assay_instances
-            if assay_instance["instance_hash"] == instance_hash
-        )
+        comparison_set_id = consideration["comparison_set_id"]
         entities = get_comparison_set_entities(
             comparison_set_df=comparison_set_df,
             entity_lookup=entity_lookup,
@@ -364,11 +357,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
     consideration_samples_by_instance = defaultdict(list)
     for consideration in considerations:
         instance_hash = consideration["assay_instance_hash"]
-        comparison_set_id = next(
-            assay_instance["comparison_set_id"]
-            for assay_instance in assay_instances
-            if assay_instance["instance_hash"] == instance_hash
-        )
+        comparison_set_id = consideration["comparison_set_id"]
         entities = get_comparison_set_entities(
             comparison_set_df=comparison_set_df,
             entity_lookup=entity_lookup,

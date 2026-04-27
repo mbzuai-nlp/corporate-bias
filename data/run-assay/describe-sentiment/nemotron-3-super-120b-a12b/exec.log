@@ -9,13 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-22 12:49:09,623 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:09,653 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:49:09,795 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-22 12:49:09,926 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-22 12:49:10,057 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5773.84it/s]
-2026-04-22 12:49:10,199 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-27 12:50:23,356 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-27 12:50:23,378 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-27 12:50:23,524 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-27 12:50:23,655 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-27 12:50:23,804 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5056.08it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,341 +22,329 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-22 12:49:10,326 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-22 12:49:10,450 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-22 12:49:10,452 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:49:10,568 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-22 12:49:10,574 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:49:11,222 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:11,274 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:49:11,397 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:11,421 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-22 12:49:11,538 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:49:11,666 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:49:12,543 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-22 12:49:12,668 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:12,694 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  35%|███▌      | 71/202 [00:00<00:00, 705.34it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1009.53it/s]
-2026-04-22 12:49:13,327 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:13,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-22 12:49:13,492 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:13,522 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-22 12:49:13,642 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-22 12:49:13,762 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-22 12:49:14,388 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-22 12:49:14,516 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-22 12:49:14,551 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 68/202 [00:00<00:00, 671.87it/s]Loading weights:  72%|███████▏  | 145/202 [00:00<00:00, 728.89it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 984.74it/s]
-2026-04-22 12:49:14,952 [INFO] root: Running assay=describe-sentiment model=nemotron-3-super-120b-a12b num_samples_per_instance=3.
+2026-04-27 12:50:23,938 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-27 12:50:24,067 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-27 12:50:24,077 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-27 12:50:24,428 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-27 12:50:24,428 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-27 12:50:24,583 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-27 12:50:25,744 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-27 12:50:25,767 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 961.73it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1218.31it/s]
+2026-04-27 12:50:26,109 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-27 12:50:26,236 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-27 12:50:27,145 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-27 12:50:27,358 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-27 12:50:27,382 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-27 12:50:27,498 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-27 12:50:27,521 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-27 12:50:27,642 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-27 12:50:27,761 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-27 12:50:28,360 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-27 12:50:28,475 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-27 12:50:28,499 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 69/202 [00:00<00:00, 675.87it/s]Loading weights:  77%|███████▋  | 156/202 [00:00<00:00, 788.85it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 986.14it/s]
+2026-04-27 12:50:28,914 [INFO] root: Running assay=describe-sentiment model=nemotron-3-super-120b-a12b num_samples_per_instance=3.
 Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
-2026-04-22 12:49:14,962 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,962 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,964 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,966 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,968 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,969 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,970 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,971 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,972 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,974 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,976 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,976 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,978 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,981 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,988 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,991 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:14,997 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,020 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,023 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,033 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,042 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,055 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,060 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,063 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,067 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,070 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,073 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,075 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,077 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,080 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,097 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,102 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,109 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,118 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,126 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,132 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,143 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,149 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,155 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,162 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,171 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,182 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,190 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,200 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,205 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,209 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,212 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,218 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,222 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,223 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,225 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,232 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,238 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,241 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,243 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,245 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,249 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,251 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,253 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,257 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,258 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,259 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,260 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,262 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,265 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,270 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,288 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,300 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,306 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,308 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,312 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,318 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,327 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,335 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,338 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,345 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,354 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,359 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,362 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,366 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,375 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,378 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,385 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,387 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,390 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,394 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,397 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,405 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,409 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,412 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,414 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,418 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,421 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,423 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,429 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,431 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,443 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,447 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,454 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,458 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,464 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,474 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,477 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,483 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,486 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,488 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,493 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,495 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,500 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,503 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,506 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,508 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,513 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,523 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,537 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,544 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,549 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,551 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,555 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,559 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,572 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,573 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,577 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-22 12:49:15,579 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,579 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,579 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,580 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,583 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,587 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,588 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,593 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,595 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,597 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,599 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,609 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,610 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,611 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,613 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,613 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,614 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,619 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,622 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,624 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,625 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,627 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,627 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,629 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,632 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,632 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,632 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,633 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,634 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-Descriptions:  31%|███       | 92/297 [00:00<00:00, 858.94it/s]2026-04-22 12:49:15,635 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,637 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,639 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,639 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,641 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,642 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,643 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,644 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,645 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,645 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,647 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,652 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,654 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,654 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,655 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,655 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,656 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,658 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,658 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,658 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,660 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,662 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,663 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,664 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,664 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,665 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,666 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,667 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,670 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,674 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,675 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,676 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,677 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,680 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,680 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,683 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,685 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,686 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-Descriptions:  60%|█████▉    | 178/297 [00:00<00:00, 699.23it/s]2026-04-22 12:49:15,686 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,687 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,687 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,687 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,688 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,689 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,690 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,690 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,692 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,692 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,695 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,697 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,698 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,699 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,700 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,701 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,704 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,706 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,707 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,707 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,710 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,710 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,711 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,712 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,713 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,714 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,715 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,716 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,717 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,722 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,723 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,724 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,724 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,727 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,727 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,728 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,728 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,728 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,729 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,729 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,729 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,731 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,731 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,731 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,732 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,732 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,734 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,735 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,736 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,738 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,739 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,741 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,742 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,744 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,744 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,746 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,746 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,747 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,748 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,749 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,752 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,753 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,756 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,757 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,758 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,760 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,761 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,761 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,762 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,762 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,763 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-Descriptions:  84%|████████▍ | 250/297 [00:00<00:00, 466.65it/s]2026-04-22 12:49:15,764 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,770 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,772 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,772 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,774 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,775 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,776 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,778 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,778 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,779 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,779 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,780 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,780 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,780 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,781 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,781 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,782 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,782 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,783 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,786 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,787 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,788 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,789 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,790 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,790 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,791 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,792 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,792 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,795 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,799 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,800 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,807 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,809 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,810 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,811 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:15,813 [INFO] root: Invoking nemotron-3-super-120b-a12b.
-2026-04-22 12:49:16,485 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:16,486 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:16,511 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:16,633 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:17,813 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:17,814 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:18,112 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:18,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-22 12:49:18,188 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  84%|████████▍ | 250/297 [00:14<00:00, 466.65it/s]Descriptions:  99%|█████████▉| 295/297 [00:39<00:00,  4.35it/s] Descriptions: 100%|█████████▉| 296/297 [00:42<00:00,  3.90it/s]Descriptions: 100%|██████████| 297/297 [00:46<00:00,  6.39it/s]
-Sentiment batches:   0%|          | 0/10 [00:00<?, ?it/s]Sentiment batches:  10%|█         | 1/10 [00:02<00:24,  2.70s/it]Sentiment batches:  20%|██        | 2/10 [00:04<00:18,  2.27s/it]Sentiment batches:  30%|███       | 3/10 [00:06<00:14,  2.13s/it]Sentiment batches:  40%|████      | 4/10 [00:08<00:12,  2.06s/it]Sentiment batches:  50%|█████     | 5/10 [00:10<00:10,  2.02s/it]Sentiment batches:  60%|██████    | 6/10 [00:12<00:07,  2.00s/it]Sentiment batches:  70%|███████   | 7/10 [00:14<00:05,  1.97s/it]Sentiment batches:  80%|████████  | 8/10 [00:16<00:03,  1.96s/it]Sentiment batches:  90%|█████████ | 9/10 [00:18<00:01,  1.96s/it]Sentiment batches: 100%|██████████| 10/10 [00:18<00:00,  1.53s/it]Sentiment batches: 100%|██████████| 10/10 [00:18<00:00,  1.89s/it]
-Ad batches:   0%|          | 0/10 [00:00<?, ?it/s]Ad batches:  10%|█         | 1/10 [00:01<00:11,  1.30s/it]Ad batches:  20%|██        | 2/10 [00:02<00:09,  1.20s/it]Ad batches:  30%|███       | 3/10 [00:03<00:07,  1.11s/it]Ad batches:  40%|████      | 4/10 [00:04<00:06,  1.08s/it]Ad batches:  50%|█████     | 5/10 [00:05<00:05,  1.05s/it]Ad batches:  60%|██████    | 6/10 [00:06<00:04,  1.03s/it]Ad batches:  70%|███████   | 7/10 [00:07<00:03,  1.03s/it]Ad batches:  80%|████████  | 8/10 [00:08<00:02,  1.03s/it]Ad batches:  90%|█████████ | 9/10 [00:09<00:01,  1.02s/it]Ad batches: 100%|██████████| 10/10 [00:09<00:00,  1.25it/s]Ad batches: 100%|██████████| 10/10 [00:09<00:00,  1.02it/s]
-Stance batches:   0%|          | 0/28 [00:00<?, ?it/s]Stance batches:   4%|▎         | 1/28 [00:00<00:09,  2.74it/s]Stance batches:   7%|▋         | 2/28 [00:00<00:07,  3.42it/s]Stance batches:  11%|█         | 3/28 [00:01<00:09,  2.59it/s]Stance batches:  14%|█▍        | 4/28 [00:01<00:09,  2.42it/s]Stance batches:  18%|█▊        | 5/28 [00:02<00:10,  2.30it/s]Stance batches:  21%|██▏       | 6/28 [00:02<00:10,  2.20it/s]Stance batches:  25%|██▌       | 7/28 [00:03<00:09,  2.16it/s]Stance batches:  29%|██▊       | 8/28 [00:03<00:09,  2.14it/s]Stance batches:  32%|███▏      | 9/28 [00:03<00:08,  2.12it/s]Stance batches:  36%|███▌      | 10/28 [00:04<00:08,  2.11it/s]Stance batches:  39%|███▉      | 11/28 [00:04<00:08,  2.12it/s]Stance batches:  43%|████▎     | 12/28 [00:05<00:07,  2.12it/s]Stance batches:  46%|████▋     | 13/28 [00:05<00:07,  2.13it/s]Stance batches:  50%|█████     | 14/28 [00:06<00:06,  2.14it/s]Stance batches:  54%|█████▎    | 15/28 [00:06<00:06,  2.15it/s]Stance batches:  57%|█████▋    | 16/28 [00:07<00:05,  2.17it/s]Stance batches:  61%|██████    | 17/28 [00:07<00:05,  2.16it/s]Stance batches:  64%|██████▍   | 18/28 [00:08<00:04,  2.16it/s]Stance batches:  68%|██████▊   | 19/28 [00:08<00:04,  2.13it/s]Stance batches:  71%|███████▏  | 20/28 [00:09<00:03,  2.10it/s]Stance batches:  75%|███████▌  | 21/28 [00:09<00:03,  2.08it/s]Stance batches:  79%|███████▊  | 22/28 [00:10<00:02,  2.07it/s]Stance batches:  82%|████████▏ | 23/28 [00:10<00:02,  2.06it/s]Stance batches:  86%|████████▌ | 24/28 [00:11<00:01,  2.09it/s]Stance batches:  89%|████████▉ | 25/28 [00:11<00:01,  2.07it/s]Stance batches:  93%|█████████▎| 26/28 [00:12<00:00,  2.06it/s]Stance batches:  96%|█████████▋| 27/28 [00:12<00:00,  2.29it/s]Stance batches: 100%|██████████| 28/28 [00:12<00:00,  2.35it/s]Stance batches: 100%|██████████| 28/28 [00:12<00:00,  2.19it/s]
-2026-04-22 12:50:43,643 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet.
+2026-04-27 12:50:28,924 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,925 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,925 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,926 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,927 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,928 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,929 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,930 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,931 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,933 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,933 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,940 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,941 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,950 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,951 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,959 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,965 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,966 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,973 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,977 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,979 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,984 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,989 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,991 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,994 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,997 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:28,999 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,000 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,002 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,004 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,007 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,012 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,015 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,019 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,027 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,029 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,034 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,037 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,041 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,051 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,055 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,057 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,058 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,062 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,070 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,076 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,084 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,088 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,091 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,092 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,096 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,104 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,110 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,116 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,120 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,124 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,126 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,128 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,133 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,136 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,141 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,149 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,151 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,156 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,158 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,160 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,168 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,173 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,180 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,185 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,188 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,194 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,196 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,199 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,203 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,209 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,212 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,216 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,220 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,222 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,225 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,230 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,232 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,234 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,236 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,239 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,248 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,252 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,254 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,255 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,257 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,265 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,269 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,271 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,276 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,282 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,285 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,287 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,289 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,291 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,292 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,294 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,303 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,304 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,307 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,308 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,308 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,310 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,311 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,313 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,314 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,316 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,319 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,320 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,320 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,321 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,325 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,326 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-27 12:50:29,326 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,327 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,327 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,329 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,330 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,331 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,331 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,332 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,333 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,335 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,335 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,336 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,336 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,338 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,339 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,342 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,342 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,343 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,346 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,348 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,349 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,350 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,353 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,354 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,354 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,356 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,356 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,357 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,361 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,362 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,362 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,363 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,363 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,366 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,367 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,367 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,371 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,372 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,374 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,374 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,375 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,375 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,379 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,380 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,382 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,382 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,382 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,383 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,384 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,385 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,385 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,386 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,390 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,390 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,390 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,391 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,391 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,393 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,394 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions:  57%|█████▋    | 168/297 [00:00<00:00, 1657.21it/s]2026-04-27 12:50:29,394 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,394 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,395 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,396 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,396 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,396 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,396 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,397 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,398 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,398 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,399 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,400 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,400 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,400 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,401 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,401 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,402 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,403 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,404 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,405 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,405 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,405 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,406 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,406 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,407 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,408 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,408 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,408 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,409 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,409 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,410 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,410 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,411 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,411 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,412 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,412 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,414 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,414 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,415 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,415 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,415 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,415 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,416 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,417 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,417 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,418 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,418 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,418 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,419 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,419 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,420 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,421 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,421 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,421 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,422 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,422 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,422 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,423 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,423 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,424 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,424 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,425 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,426 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,426 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,427 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,428 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,428 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,429 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,429 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,429 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,430 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,431 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,431 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,432 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,432 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,433 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,433 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,433 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,433 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,434 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,434 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,434 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,435 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,436 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,436 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,436 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,438 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,438 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,438 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,440 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,441 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,441 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,442 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,443 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,447 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,451 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,455 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,458 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,459 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,461 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,462 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,462 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,462 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,465 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,466 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,467 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,467 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,473 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,474 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,475 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,478 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,482 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,482 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,484 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,486 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,489 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,489 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,490 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,492 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+2026-04-27 12:50:29,494 [INFO] root: Invoking nemotron-3-super-120b-a12b.
+Descriptions: 100%|██████████| 297/297 [00:00<00:00, 1417.88it/s]
+Stance:   0%|          | 0/32 [00:00<?, ?it/s]Stance:   3%|▎         | 1/32 [00:00<00:30,  1.02it/s]Stance:   6%|▋         | 2/32 [00:01<00:20,  1.48it/s]Stance:   9%|▉         | 3/32 [00:01<00:16,  1.73it/s]Stance:  12%|█▎        | 4/32 [00:02<00:15,  1.86it/s]Stance:  16%|█▌        | 5/32 [00:02<00:14,  1.91it/s]Stance:  19%|█▉        | 6/32 [00:03<00:12,  2.00it/s]Stance:  22%|██▏       | 7/32 [00:04<00:16,  1.56it/s]Stance:  25%|██▌       | 8/32 [00:04<00:13,  1.72it/s]Stance:  28%|██▊       | 9/32 [00:05<00:12,  1.82it/s]Stance:  31%|███▏      | 10/32 [00:05<00:11,  1.91it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  34%|███▍      | 11/32 [00:06<00:10,  1.99it/s]Stance:  38%|███▊      | 12/32 [00:06<00:09,  2.02it/s]Stance:  41%|████      | 13/32 [00:07<00:09,  2.07it/s]Stance:  44%|████▍     | 14/32 [00:07<00:08,  2.08it/s]Stance:  47%|████▋     | 15/32 [00:08<00:08,  2.09it/s]Stance:  50%|█████     | 16/32 [00:08<00:07,  2.10it/s]Stance:  53%|█████▎    | 17/32 [00:08<00:07,  2.11it/s]Stance:  56%|█████▋    | 18/32 [00:09<00:06,  2.13it/s]Stance:  59%|█████▉    | 19/32 [00:09<00:06,  2.13it/s]Stance:  62%|██████▎   | 20/32 [00:10<00:05,  2.12it/s]Stance:  66%|██████▌   | 21/32 [00:10<00:05,  2.13it/s]Stance:  69%|██████▉   | 22/32 [00:11<00:04,  2.19it/s]Stance:  72%|███████▏  | 23/32 [00:11<00:04,  2.16it/s]Stance:  75%|███████▌  | 24/32 [00:12<00:03,  2.14it/s]Stance:  78%|███████▊  | 25/32 [00:12<00:03,  2.15it/s]Stance:  81%|████████▏ | 26/32 [00:13<00:02,  2.17it/s]Stance:  84%|████████▍ | 27/32 [00:13<00:02,  2.08it/s]Stance:  88%|████████▊ | 28/32 [00:14<00:01,  2.19it/s]Stance:  91%|█████████ | 29/32 [00:14<00:01,  2.30it/s]Stance:  94%|█████████▍| 30/32 [00:14<00:00,  2.36it/s]Stance:  97%|█████████▋| 31/32 [00:15<00:00,  2.42it/s]Stance: 100%|██████████| 32/32 [00:15<00:00,  2.45it/s]Stance: 100%|██████████| 32/32 [00:15<00:00,  2.05it/s]
+Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.28it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.30it/s]Ad:  30%|███       | 3/10 [00:02<00:05,  1.29it/s]Ad:  40%|████      | 4/10 [00:03<00:04,  1.29it/s]Ad:  50%|█████     | 5/10 [00:03<00:03,  1.28it/s]Ad:  60%|██████    | 6/10 [00:04<00:03,  1.27it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.26it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.26it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.23it/s]Ad: 100%|██████████| 10/10 [00:07<00:00,  1.39it/s]
+2026-04-27 12:51:05,353 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/nemotron-3-super-120b-a12b.parquet.
