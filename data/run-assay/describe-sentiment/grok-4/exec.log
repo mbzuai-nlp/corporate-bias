@@ -9,13 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 12:08:14,840 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:08:14,865 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 12:08:15,047 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 12:08:15,175 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-29 12:08:15,322 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-29 12:08:15,594 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7104.46it/s]
+2026-04-29 13:57:12,033 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 13:57:12,060 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 13:57:12,211 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-29 13:57:12,342 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 13:57:12,731 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5823.28it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,328 +22,365 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 12:08:15,745 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 12:08:15,872 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 12:08:15,886 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:08:16,009 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 12:08:16,024 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:08:17,274 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:08:17,300 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 84/202 [00:00<00:00, 833.28it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1128.83it/s]
-2026-04-29 12:08:17,786 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:08:17,911 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:08:18,758 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 12:08:18,966 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:08:18,987 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 12:08:19,102 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:08:19,126 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 12:08:19,241 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:08:19,362 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:08:19,968 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 12:08:20,103 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:08:20,127 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 83/202 [00:00<00:00, 829.12it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1245.61it/s]
-2026-04-29 12:08:20,474 [INFO] root: Running assay=describe-sentiment model=grok-4 num_samples_per_instance=3.
-Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
-2026-04-29 12:08:20,484 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,485 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,485 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,486 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,487 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,488 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,489 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,490 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,492 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,494 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,495 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,497 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,499 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,500 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,502 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,504 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,507 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,509 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,512 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,513 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,517 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,522 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,523 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,526 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,530 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,531 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,532 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,533 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,534 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,536 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,538 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,539 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,540 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,540 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,541 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,544 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,547 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,550 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,553 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,558 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,560 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,566 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,570 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,572 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,575 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,579 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,586 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,588 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,593 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,599 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,602 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,605 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,607 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,611 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,613 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,615 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,617 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,621 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,630 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,633 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,637 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,639 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,641 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,647 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,649 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,653 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,655 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,658 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,659 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,660 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,661 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,662 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,663 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,664 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,664 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,665 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,666 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,666 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,692 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,667 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,667 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,668 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,668 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,669 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,669 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,670 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,671 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,671 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,672 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,672 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,673 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,674 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,678 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,683 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,688 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,666 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,703 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,706 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,711 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,714 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,719 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,725 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,731 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,733 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,740 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,742 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,745 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,748 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,754 [INFO] root: Invoking grok-4.
-Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-29 12:08:20,758 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,772 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,783 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,792 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,797 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,808 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,816 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,820 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,822 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,826 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,828 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,830 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,832 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,836 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,837 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,842 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,845 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,852 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,859 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,860 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,860 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,866 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,866 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,868 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,868 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,868 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,870 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,872 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,873 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,874 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,874 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,875 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,876 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,876 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,878 [INFO] root: Invoking grok-4.
-Descriptions:  36%|███▌      | 106/297 [00:00<00:00, 1041.79it/s]2026-04-29 12:08:20,879 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,880 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,881 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,882 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,882 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,885 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,886 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,886 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,888 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,888 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,889 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,890 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,890 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,891 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,891 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,892 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,894 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,895 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,895 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,896 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,896 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,897 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,897 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,898 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,898 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,899 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,900 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,901 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,901 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,902 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,903 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,904 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,904 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,904 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,905 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,906 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,906 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,907 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,907 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,908 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,908 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,909 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,912 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,913 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,915 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,916 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,917 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,919 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,920 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,921 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,923 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,925 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,925 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,926 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,928 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,929 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,930 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,934 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,935 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,936 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,938 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,938 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,941 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,941 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,942 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,944 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,945 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,945 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,947 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,948 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,949 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,950 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,954 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,957 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,959 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,959 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,960 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,961 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,961 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,963 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,963 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,964 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,964 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,965 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,966 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,966 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,967 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,968 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,968 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,969 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,970 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,971 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,971 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,971 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,971 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,972 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,973 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,973 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,973 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,974 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,974 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,975 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,975 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,975 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,976 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,976 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,976 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,978 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,978 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,978 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,979 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,979 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,980 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,980 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,981 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,981 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,981 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,982 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,983 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,983 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,984 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,984 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,985 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,986 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,989 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,989 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,990 [INFO] root: Invoking grok-4.
-Descriptions:  90%|████████▉ | 266/297 [00:00<00:00, 1350.75it/s]2026-04-29 12:08:20,990 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,990 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,991 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,991 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,992 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,993 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,993 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,993 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,993 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,994 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,995 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,995 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,996 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,996 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,996 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,997 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,998 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,998 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,999 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:20,999 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,001 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,001 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,002 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,002 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,003 [INFO] root: Invoking grok-4.
-2026-04-29 12:08:21,003 [INFO] root: Invoking grok-4.
-Descriptions: 100%|██████████| 297/297 [00:00<00:00, 1314.76it/s]
-Stance:   0%|          | 0/32 [00:00<?, ?it/s]Stance:   3%|▎         | 1/32 [00:01<00:34,  1.12s/it]Stance:   6%|▋         | 2/32 [00:01<00:23,  1.30it/s]Stance:   9%|▉         | 3/32 [00:02<00:18,  1.56it/s]Stance:  12%|█▎        | 4/32 [00:02<00:16,  1.73it/s]Stance:  16%|█▌        | 5/32 [00:03<00:14,  1.82it/s]Stance:  19%|█▉        | 6/32 [00:03<00:13,  1.87it/s]Stance:  22%|██▏       | 7/32 [00:04<00:13,  1.87it/s]Stance:  25%|██▌       | 8/32 [00:04<00:12,  1.90it/s]Stance:  28%|██▊       | 9/32 [00:05<00:12,  1.91it/s]Stance:  31%|███▏      | 10/32 [00:05<00:11,  1.92it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  34%|███▍      | 11/32 [00:06<00:14,  1.49it/s]Stance:  38%|███▊      | 12/32 [00:07<00:12,  1.60it/s]Stance:  41%|████      | 13/32 [00:07<00:11,  1.68it/s]Stance:  44%|████▍     | 14/32 [00:08<00:10,  1.73it/s]Stance:  47%|████▋     | 15/32 [00:08<00:09,  1.79it/s]Stance:  50%|█████     | 16/32 [00:09<00:08,  1.84it/s]Stance:  53%|█████▎    | 17/32 [00:09<00:07,  1.88it/s]Stance:  56%|█████▋    | 18/32 [00:10<00:07,  1.90it/s]Stance:  59%|█████▉    | 19/32 [00:10<00:06,  1.92it/s]Stance:  62%|██████▎   | 20/32 [00:11<00:06,  1.93it/s]Stance:  66%|██████▌   | 21/32 [00:11<00:05,  1.91it/s]Stance:  69%|██████▉   | 22/32 [00:12<00:05,  1.92it/s]Stance:  72%|███████▏  | 23/32 [00:12<00:04,  1.93it/s]Stance:  75%|███████▌  | 24/32 [00:13<00:04,  1.91it/s]Stance:  78%|███████▊  | 25/32 [00:13<00:03,  1.89it/s]Stance:  81%|████████▏ | 26/32 [00:14<00:03,  1.97it/s]Stance:  84%|████████▍ | 27/32 [00:14<00:02,  1.99it/s]Stance:  88%|████████▊ | 28/32 [00:15<00:02,  1.93it/s]Stance:  91%|█████████ | 29/32 [00:15<00:01,  2.05it/s]Stance:  94%|█████████▍| 30/32 [00:16<00:00,  2.00it/s]Stance:  97%|█████████▋| 31/32 [00:16<00:00,  2.05it/s]Stance: 100%|██████████| 32/32 [00:17<00:00,  2.16it/s]Stance: 100%|██████████| 32/32 [00:17<00:00,  1.85it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.28it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.26it/s]Ad:  30%|███       | 3/10 [00:02<00:05,  1.18it/s]Ad:  40%|████      | 4/10 [00:03<00:05,  1.17it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.16it/s]Ad:  60%|██████    | 6/10 [00:05<00:03,  1.17it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.15it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.16it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.12it/s]Ad: 100%|██████████| 10/10 [00:07<00:00,  1.28it/s]
-2026-04-29 12:08:58,095 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/grok-4.parquet.
+2026-04-29 13:57:12,875 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-29 13:57:13,014 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 13:57:13,019 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 13:57:13,144 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 13:57:13,145 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 13:57:13,287 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-29 13:57:14,433 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 13:57:14,459 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▎     | 88/202 [00:00<00:00, 879.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1079.62it/s]
+2026-04-29 13:57:14,866 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 13:57:15,016 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 13:57:15,981 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 13:57:16,214 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 13:57:16,240 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 13:57:16,515 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 13:57:16,538 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 13:57:16,665 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 13:57:16,792 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 13:57:17,435 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 13:57:17,554 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 13:57:17,577 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 926.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1123.04it/s]
+2026-04-29 13:57:17,942 [INFO] root: Running assay=describe-sentiment model=grok-4 num_samples_per_instance=3.
+Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
+2026-04-29 13:57:17,957 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,958 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,958 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,959 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,960 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,961 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,963 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,965 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,966 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,969 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,971 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,973 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,974 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,976 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,978 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,980 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,984 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,987 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,990 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,992 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,996 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:17,998 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,003 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,006 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,008 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,011 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,013 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,015 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,017 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,018 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,019 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,019 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,021 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,029 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,033 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,036 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,040 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,042 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,044 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,064 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,068 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,071 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,075 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,081 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,085 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,090 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,096 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,105 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,111 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,114 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,118 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,122 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,124 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,127 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,129 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,132 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,133 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,134 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,136 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,137 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,138 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,143 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,147 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,148 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,152 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,158 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,161 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,168 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,171 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,175 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,179 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,182 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,185 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,189 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,195 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,203 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,213 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,216 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,218 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,224 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,231 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,236 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,240 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,245 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,247 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,249 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,253 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,259 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,262 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,264 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,266 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,267 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,269 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,270 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,273 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,278 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,287 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,292 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,294 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,295 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,298 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,300 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,302 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,305 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,307 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,311 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,313 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,319 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,321 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,325 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,327 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,329 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,333 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,341 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,344 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,349 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,354 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,363 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,368 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,369 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,379 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,381 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,382 [INFO] root: Invoking grok-4.
+Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 13:57:18,386 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,387 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,388 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,391 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,392 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,411 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,413 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,415 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,416 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,418 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,418 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,419 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,421 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,426 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,428 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,430 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,432 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,436 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,439 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,440 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,443 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,443 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,445 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,446 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,448 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,448 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,448 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,449 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,450 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,451 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,451 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,452 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,453 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,453 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,455 [INFO] root: Invoking grok-4.
+Descriptions:  33%|███▎      | 104/315 [00:00<00:00, 1029.79it/s]2026-04-29 13:57:18,456 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,457 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,457 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,457 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,458 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,459 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,459 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,460 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,461 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,462 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,463 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,465 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,465 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,465 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,466 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,467 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,467 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,468 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,468 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,469 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,470 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,470 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,471 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,471 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,472 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,472 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,473 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,474 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,474 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,474 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,475 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,475 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,476 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,477 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,477 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,477 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,477 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,478 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,478 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,479 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,480 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,480 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,481 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,481 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,482 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,482 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,482 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,483 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,483 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,483 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,484 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,484 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,484 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,485 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,486 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,487 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,488 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,488 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,488 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,489 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,490 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,490 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,490 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,490 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,491 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,491 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,491 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,491 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,492 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,492 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,493 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,493 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,494 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,494 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,494 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,495 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,496 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,497 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,497 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,498 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,498 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,498 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,499 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,499 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,500 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,500 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,501 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,501 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,501 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,502 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,503 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,504 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,505 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,505 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,506 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,507 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,507 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,507 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,508 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,508 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,509 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,509 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,509 [INFO] root: Invoking grok-4.
+Descriptions:  81%|████████  | 255/315 [00:00<00:00, 1298.23it/s]2026-04-29 13:57:18,510 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,510 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,510 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,511 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,512 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,512 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,513 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,513 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,513 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,514 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,514 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,515 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,515 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,516 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,517 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,517 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,517 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,517 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,518 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,518 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,518 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,519 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,519 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,520 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,520 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,521 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,521 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,522 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,522 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,523 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,523 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,524 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,525 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,525 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,525 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,526 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,526 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,526 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,527 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,528 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,529 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,530 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,531 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,531 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,532 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,532 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,533 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,533 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,535 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,536 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,537 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,538 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,540 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:18,542 [INFO] root: Invoking grok-4.
+2026-04-29 13:57:19,597 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,598 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,600 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,610 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,618 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,626 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,637 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,646 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,653 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,675 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,692 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,703 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,736 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,746 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,755 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,820 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 13:57:19,834 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  81%|████████  | 255/315 [00:14<00:00, 1298.23it/s]Descriptions:  97%|█████████▋| 304/315 [00:24<00:01,  8.40it/s]  Descriptions:  97%|█████████▋| 305/315 [00:25<00:01,  8.08it/s]Descriptions: 100%|██████████| 315/315 [00:36<00:00,  8.60it/s]
+Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:01<00:34,  1.03s/it]Stance:   6%|▌         | 2/34 [00:01<00:23,  1.37it/s]Stance:   9%|▉         | 3/34 [00:02<00:19,  1.59it/s]Stance:  12%|█▏        | 4/34 [00:02<00:17,  1.71it/s]Stance:  15%|█▍        | 5/34 [00:03<00:16,  1.78it/s]Stance:  18%|█▊        | 6/34 [00:03<00:15,  1.85it/s]Stance:  21%|██        | 7/34 [00:04<00:14,  1.87it/s]Stance:  24%|██▎       | 8/34 [00:04<00:13,  1.89it/s]Stance:  26%|██▋       | 9/34 [00:05<00:17,  1.46it/s]Stance:  29%|██▉       | 10/34 [00:06<00:15,  1.57it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  32%|███▏      | 11/34 [00:06<00:13,  1.68it/s]Stance:  35%|███▌      | 12/34 [00:07<00:12,  1.75it/s]Stance:  38%|███▊      | 13/34 [00:07<00:11,  1.78it/s]Stance:  41%|████      | 14/34 [00:08<00:10,  1.83it/s]Stance:  44%|████▍     | 15/34 [00:08<00:10,  1.83it/s]Stance:  47%|████▋     | 16/34 [00:09<00:09,  1.85it/s]Stance:  50%|█████     | 17/34 [00:09<00:09,  1.85it/s]Stance:  53%|█████▎    | 18/34 [00:10<00:08,  1.87it/s]Stance:  56%|█████▌    | 19/34 [00:10<00:07,  1.90it/s]Stance:  59%|█████▉    | 20/34 [00:11<00:07,  1.90it/s]Stance:  62%|██████▏   | 21/34 [00:11<00:06,  1.90it/s]Stance:  65%|██████▍   | 22/34 [00:12<00:06,  1.89it/s]Stance:  68%|██████▊   | 23/34 [00:13<00:05,  1.90it/s]Stance:  71%|███████   | 24/34 [00:13<00:05,  1.90it/s]Stance:  74%|███████▎  | 25/34 [00:14<00:04,  1.90it/s]Stance:  76%|███████▋  | 26/34 [00:14<00:04,  1.99it/s]Stance:  79%|███████▉  | 27/34 [00:14<00:03,  2.01it/s]Stance:  82%|████████▏ | 28/34 [00:15<00:03,  1.94it/s]Stance:  85%|████████▌ | 29/34 [00:15<00:02,  2.06it/s]Stance:  88%|████████▊ | 30/34 [00:16<00:01,  2.15it/s]Stance:  91%|█████████ | 31/34 [00:16<00:01,  2.21it/s]Stance:  94%|█████████▍| 32/34 [00:17<00:00,  2.25it/s]Stance:  97%|█████████▋| 33/34 [00:17<00:00,  2.14it/s]Stance: 100%|██████████| 34/34 [00:18<00:00,  2.05it/s]Stance: 100%|██████████| 34/34 [00:18<00:00,  1.86it/s]
+Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.15it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.16it/s]Ad:  30%|███       | 3/10 [00:02<00:06,  1.16it/s]Ad:  60%|██████    | 6/10 [00:03<00:01,  2.20it/s]Ad:  70%|███████   | 7/10 [00:04<00:01,  1.82it/s]Ad:  80%|████████  | 8/10 [00:05<00:01,  1.54it/s]Ad:  90%|█████████ | 9/10 [00:06<00:00,  1.40it/s]Ad: 100%|██████████| 10/10 [00:06<00:00,  1.39it/s]Ad: 100%|██████████| 10/10 [00:06<00:00,  1.48it/s]
+2026-04-29 13:58:32,858 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/grok-4.parquet.

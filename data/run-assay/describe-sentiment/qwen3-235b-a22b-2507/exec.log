@@ -9,13 +9,10 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 12:13:05,380 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:13:05,404 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 12:13:05,540 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 12:13:05,675 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-29 12:13:05,835 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 12:13:06,213 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7054.17it/s]
+2026-04-29 14:05:23,350 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 14:05:23,388 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 14:05:23,778 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7339.52it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,328 +20,370 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 12:13:06,366 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 12:13:06,478 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:13:06,491 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 12:13:06,607 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:13:06,671 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 12:13:07,859 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:13:07,883 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 845.90it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1065.17it/s]
-2026-04-29 12:13:08,273 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:13:08,410 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:13:09,405 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 12:13:09,733 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:13:09,759 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 12:13:09,886 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:13:09,914 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 12:13:10,039 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 12:13:10,174 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 12:13:10,810 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 12:13:10,939 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 12:13:10,964 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|████      | 81/202 [00:00<00:00, 808.17it/s]Loading weights:  80%|████████  | 162/202 [00:00<00:00, 802.89it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 997.31it/s]
-2026-04-29 12:13:11,400 [INFO] root: Running assay=describe-sentiment model=qwen3-235b-a22b-2507 num_samples_per_instance=3.
-Invoking model 297 times for 32 distinct entities across 15 assay instances with 3 samples per instance (99 entity-instance pairs × 3 samples).
-2026-04-29 12:13:11,411 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,411 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,412 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,412 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,413 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,413 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,414 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,416 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,417 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,419 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,420 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,422 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,425 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,426 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,430 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,431 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,432 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,435 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,438 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,440 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,443 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,444 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,450 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,455 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,458 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,460 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,462 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,464 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,466 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,468 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,469 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,470 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,470 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,471 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,471 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,472 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,472 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,473 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,473 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,475 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,480 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,488 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,492 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,495 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,497 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,503 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,507 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,509 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,512 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,520 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,523 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,534 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,543 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,548 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,550 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,552 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,556 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,562 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,565 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,567 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,570 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,575 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,577 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,579 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,582 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,584 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,586 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,590 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,594 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,596 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,597 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,599 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,602 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,604 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,606 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,608 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,609 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,614 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,616 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,618 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,619 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,621 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,623 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,627 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,628 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,635 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,641 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,645 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,647 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,652 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,655 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,659 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,662 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,665 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,668 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,673 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,675 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,676 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,678 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,681 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,684 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,688 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,692 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,695 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,697 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,698 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,701 [INFO] root: Invoking qwen3-235b-a22b-2507.
-Descriptions:   0%|          | 0/297 [00:00<?, ?it/s]2026-04-29 12:13:11,704 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,711 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,712 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,717 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,726 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,731 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,734 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,738 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,739 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,741 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,743 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,744 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,747 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,748 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,750 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,759 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,761 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,761 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,763 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,766 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,768 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,769 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,770 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,771 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,774 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,775 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,776 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,777 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,778 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,779 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,780 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,781 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,781 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,782 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,783 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,784 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,784 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,784 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,785 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,786 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,787 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,788 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,789 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,790 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,790 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,791 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,792 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,793 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,796 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,797 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,798 [INFO] root: Invoking qwen3-235b-a22b-2507.
-Descriptions:  45%|████▌     | 134/297 [00:00<00:00, 1290.36it/s]2026-04-29 12:13:11,799 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,802 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,802 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,805 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,805 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,806 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,807 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,808 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,809 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,809 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,810 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,811 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,811 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,811 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,812 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,812 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,813 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,813 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,813 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,814 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,814 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,814 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,814 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,815 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,815 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,816 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,817 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,817 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,817 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,818 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,818 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,819 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,819 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,820 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,820 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,821 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,821 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,822 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,822 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,822 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,823 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,823 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,824 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,824 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,825 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,825 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,826 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,826 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,827 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,827 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,829 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,829 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,830 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,831 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,831 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,831 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,832 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,833 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,833 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,834 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,835 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,835 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,836 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,836 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,837 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,837 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,837 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,838 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,838 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,839 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,841 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,842 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,843 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,844 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,844 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,845 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,846 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,847 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,848 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,849 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,851 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,852 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,852 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,854 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,855 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,857 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,861 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,861 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,862 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,863 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,864 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,865 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,866 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,867 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,870 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,871 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,872 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,872 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,875 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,877 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,878 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,879 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,879 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,880 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,880 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,881 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,882 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,886 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,886 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,887 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,887 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,889 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,890 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,891 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,893 [INFO] root: Invoking qwen3-235b-a22b-2507.
-Descriptions:  90%|█████████ | 268/297 [00:00<00:00, 1307.08it/s]2026-04-29 12:13:11,893 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,894 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,895 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,896 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,897 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,898 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,898 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,899 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,900 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,901 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,901 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,902 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,902 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,902 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,904 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,905 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,906 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,906 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,906 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,907 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,907 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,908 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,908 [INFO] root: Invoking qwen3-235b-a22b-2507.
-2026-04-29 12:13:11,908 [INFO] root: Invoking qwen3-235b-a22b-2507.
-Descriptions: 100%|██████████| 297/297 [00:00<00:00, 1315.23it/s]
-Stance:   0%|          | 0/32 [00:00<?, ?it/s]Stance:   3%|▎         | 1/32 [00:01<00:35,  1.14s/it]Stance:   6%|▋         | 2/32 [00:01<00:22,  1.34it/s]Stance:   9%|▉         | 3/32 [00:02<00:18,  1.57it/s]Stance:  12%|█▎        | 4/32 [00:02<00:16,  1.66it/s]Stance:  16%|█▌        | 5/32 [00:03<00:16,  1.66it/s]Stance:  19%|█▉        | 6/32 [00:03<00:13,  1.87it/s]Stance:  22%|██▏       | 7/32 [00:04<00:12,  1.95it/s]Stance:  25%|██▌       | 8/32 [00:04<00:12,  1.96it/s]Stance:  28%|██▊       | 9/32 [00:05<00:10,  2.10it/s]Stance:  31%|███▏      | 10/32 [00:05<00:10,  2.14it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  34%|███▍      | 11/32 [00:05<00:10,  2.10it/s]Stance:  38%|███▊      | 12/32 [00:06<00:08,  2.31it/s]Stance:  41%|████      | 13/32 [00:06<00:07,  2.41it/s]Stance:  44%|████▍     | 14/32 [00:07<00:07,  2.26it/s]Stance:  47%|████▋     | 15/32 [00:07<00:07,  2.14it/s]Stance:  50%|█████     | 16/32 [00:08<00:07,  2.24it/s]Stance:  62%|██████▎   | 20/32 [00:08<00:02,  4.36it/s]Stance:  66%|██████▌   | 21/32 [00:09<00:03,  3.59it/s]Stance:  69%|██████▉   | 22/32 [00:09<00:03,  3.09it/s]Stance:  72%|███████▏  | 23/32 [00:10<00:03,  2.75it/s]Stance:  75%|███████▌  | 24/32 [00:10<00:03,  2.52it/s]Stance:  78%|███████▊  | 25/32 [00:10<00:02,  2.55it/s]Stance:  81%|████████▏ | 26/32 [00:11<00:02,  2.59it/s]Stance:  84%|████████▍ | 27/32 [00:11<00:01,  2.64it/s]Stance:  88%|████████▊ | 28/32 [00:11<00:01,  2.69it/s]Stance:  91%|█████████ | 29/32 [00:12<00:01,  2.69it/s]Stance:  94%|█████████▍| 30/32 [00:12<00:00,  2.62it/s]Stance:  97%|█████████▋| 31/32 [00:13<00:00,  2.62it/s]Stance: 100%|██████████| 32/32 [00:13<00:00,  2.63it/s]Stance: 100%|██████████| 32/32 [00:13<00:00,  2.37it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.17it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.19it/s]Ad:  30%|███       | 3/10 [00:02<00:06,  1.16it/s]Ad:  40%|████      | 4/10 [00:03<00:05,  1.18it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.16it/s]Ad:  60%|██████    | 6/10 [00:04<00:03,  1.26it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.25it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.27it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.22it/s]Ad: 100%|██████████| 10/10 [00:07<00:00,  1.34it/s]
-2026-04-29 12:13:46,772 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet.
+2026-04-29 14:05:24,312 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-29 14:05:24,459 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-04-29 14:05:25,926 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 14:05:26,203 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-29 14:05:26,205 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 14:05:26,682 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 14:05:28,540 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 14:05:28,579 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 14:05:28,641 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]2026-04-29 14:05:28,700 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 846.62it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1221.33it/s]
+2026-04-29 14:05:29,033 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 14:05:29,245 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 14:05:30,145 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 14:05:30,421 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 14:05:30,463 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 14:05:30,616 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 14:05:30,640 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 14:05:30,831 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 14:05:31,019 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 14:05:31,673 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 14:05:32,765 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 14:05:32,931 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 73/202 [00:00<00:00, 729.81it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1094.75it/s]
+2026-04-29 14:05:33,309 [INFO] root: Running assay=describe-sentiment model=qwen3-235b-a22b-2507 num_samples_per_instance=3.
+Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
+2026-04-29 14:05:33,322 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,323 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,323 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,324 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,325 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,327 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,330 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,332 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,333 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,335 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,336 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,337 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,339 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,340 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,342 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,344 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,347 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,348 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,353 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,355 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,358 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,359 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,361 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,365 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,367 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,369 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,371 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,372 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,374 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,378 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,382 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,384 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,384 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,385 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,387 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,387 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,388 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,389 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,389 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,390 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,393 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,395 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,400 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,402 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,404 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,406 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,414 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,417 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,421 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,422 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,427 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,433 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,436 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,439 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,449 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,457 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,459 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,463 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,467 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,475 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,480 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,489 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,491 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,495 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,497 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,503 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,505 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,515 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,518 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,522 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,524 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,526 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,529 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,540 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,543 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,547 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,552 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,554 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,562 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,564 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,568 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,570 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,573 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,576 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,583 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,585 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,586 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,587 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,594 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,603 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,606 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,620 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,622 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,624 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,639 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,646 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,647 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,647 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,648 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,649 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,650 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,650 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,651 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,655 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,656 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,656 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,656 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,657 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,658 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,666 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,667 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,667 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,667 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 14:05:33,667 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,668 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,668 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,669 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,670 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,671 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,674 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,674 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,675 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,677 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,678 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,678 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,678 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,683 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,683 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,684 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,687 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,688 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,688 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,689 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,690 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,694 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,694 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,695 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,695 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,695 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,696 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,697 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,705 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,706 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,707 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,707 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,708 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,708 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,709 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,709 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,710 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,710 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,713 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,714 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,714 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,714 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,715 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,716 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,716 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,717 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,718 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,718 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,719 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,721 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,721 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,722 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,722 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,723 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,724 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,724 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,725 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,726 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,727 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,727 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,729 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,730 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  53%|█████▎    | 166/315 [00:00<00:00, 1655.74it/s]2026-04-29 14:05:33,730 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,730 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,731 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,732 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,738 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,738 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,739 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,740 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,740 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,740 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,741 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,742 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,743 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,743 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,744 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,744 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,745 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,748 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,749 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,750 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,750 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,751 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,752 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,752 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,753 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,754 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,755 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,755 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,756 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,757 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,757 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,758 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,758 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,759 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,759 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,760 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,760 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,760 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,761 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,761 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,762 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,763 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,764 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,764 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,765 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,765 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,766 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,766 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,767 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,767 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,769 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,769 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,770 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,771 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,771 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,772 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,772 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,773 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,774 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,775 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,776 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,777 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,778 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,778 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,779 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,781 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,781 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,783 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,784 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,784 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,785 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,786 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,787 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,788 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,789 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,790 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,792 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,793 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,794 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,795 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,795 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,796 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,797 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,799 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,800 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,803 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,804 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,804 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,807 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,811 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,813 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,815 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,815 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,816 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,819 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,819 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,821 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,821 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,822 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,823 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,824 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,827 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,829 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,830 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,830 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,831 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,832 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,833 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,835 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,836 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,836 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,838 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,839 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,839 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,841 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,841 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,842 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,843 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,844 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,845 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,845 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,847 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,847 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,848 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,849 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,850 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,851 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,851 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,853 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,855 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,855 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,856 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,857 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,858 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,858 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,859 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,860 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,862 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,862 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:33,863 [INFO] root: Invoking qwen3-235b-a22b-2507.
+2026-04-29 14:05:35,910 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:35,911 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:35,914 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,021 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,022 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,023 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,024 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:37,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,917 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,918 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,919 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,920 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,922 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,925 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 14:05:39,926 [INFO] backoff: Backing off invoke_model(...) for 5.0s (src.model.InvalidModelOutputError: Model returned empty content)
+Descriptions:  53%|█████▎    | 166/315 [00:10<00:00, 1655.74it/s]2026-04-29 14:05:44,975 [INFO] root: Invoking qwen3-235b-a22b-2507.
+Descriptions:  96%|█████████▌| 303/315 [00:11<00:00, 21.62it/s]  Descriptions:  97%|█████████▋| 305/315 [00:12<00:00, 19.97it/s]2026-04-29 14:05:47,927 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  97%|█████████▋| 305/315 [00:30<00:00, 19.97it/s]Descriptions:  99%|█████████▉| 313/315 [00:36<00:00,  4.35it/s]Descriptions: 100%|█████████▉| 314/315 [00:39<00:00,  3.96it/s]Descriptions: 100%|██████████| 315/315 [00:42<00:00,  7.44it/s]
+Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:00<00:32,  1.01it/s]Stance:   6%|▌         | 2/34 [00:01<00:23,  1.36it/s]Stance:   9%|▉         | 3/34 [00:02<00:21,  1.46it/s]Stance:  12%|█▏        | 4/34 [00:02<00:18,  1.63it/s]Stance:  15%|█▍        | 5/34 [00:03<00:16,  1.78it/s]Stance:  18%|█▊        | 6/34 [00:03<00:13,  2.05it/s]Stance:  21%|██        | 7/34 [00:03<00:13,  2.03it/s]Stance:  24%|██▎       | 8/34 [00:04<00:12,  2.00it/s]Stance:  26%|██▋       | 9/34 [00:04<00:11,  2.10it/s]Stance:  29%|██▉       | 10/34 [00:05<00:11,  2.06it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  32%|███▏      | 11/34 [00:05<00:11,  2.04it/s]Stance:  35%|███▌      | 12/34 [00:06<00:10,  2.03it/s]Stance:  38%|███▊      | 13/34 [00:06<00:09,  2.28it/s]Stance:  41%|████      | 14/34 [00:07<00:12,  1.64it/s]Stance:  44%|████▍     | 15/34 [00:08<00:10,  1.75it/s]Stance:  47%|████▋     | 16/34 [00:08<00:09,  1.82it/s]Stance:  50%|█████     | 17/34 [00:09<00:09,  1.86it/s]Stance:  53%|█████▎    | 18/34 [00:09<00:08,  1.96it/s]Stance:  56%|█████▌    | 19/34 [00:10<00:07,  1.98it/s]Stance:  59%|█████▉    | 20/34 [00:10<00:06,  2.24it/s]Stance:  62%|██████▏   | 21/34 [00:10<00:05,  2.18it/s]Stance:  65%|██████▍   | 22/34 [00:11<00:05,  2.24it/s]Stance:  68%|██████▊   | 23/34 [00:11<00:04,  2.20it/s]Stance:  71%|███████   | 24/34 [00:12<00:04,  2.15it/s]Stance:  74%|███████▎  | 25/34 [00:12<00:03,  2.26it/s]Stance:  76%|███████▋  | 26/34 [00:13<00:03,  2.34it/s]Stance:  79%|███████▉  | 27/34 [00:13<00:03,  2.33it/s]Stance:  82%|████████▏ | 28/34 [00:13<00:02,  2.37it/s]Stance:  85%|████████▌ | 29/34 [00:14<00:02,  2.42it/s]Stance:  88%|████████▊ | 30/34 [00:14<00:01,  2.46it/s]Stance:  91%|█████████ | 31/34 [00:15<00:01,  2.48it/s]Stance:  94%|█████████▍| 32/34 [00:15<00:00,  2.54it/s]Stance:  97%|█████████▋| 33/34 [00:16<00:00,  2.35it/s]Stance: 100%|██████████| 34/34 [00:16<00:00,  2.24it/s]Stance: 100%|██████████| 34/34 [00:16<00:00,  2.06it/s]
+Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.23it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.26it/s]Ad:  30%|███       | 3/10 [00:02<00:05,  1.24it/s]Ad:  40%|████      | 4/10 [00:03<00:04,  1.22it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.22it/s]Ad:  60%|██████    | 6/10 [00:04<00:03,  1.22it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.21it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.23it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.23it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.29it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.25it/s]
+2026-04-29 14:06:54,095 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3-235b-a22b-2507.parquet.
