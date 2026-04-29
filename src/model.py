@@ -1,7 +1,8 @@
 from copy import deepcopy
 from functools import partial
-from typing import Literal, Mapping, Sequence, Any, Protocol
+from typing import Literal, Mapping, Sequence, Any, Protocol, Callable
 from openrouter import OpenRouter, errors as or_errors
+from openai import OpenAI
 import os
 from dataclasses import dataclass
 import hashlib
@@ -34,6 +35,14 @@ class ModelDelegate(Protocol):
     def __call__(self, messages: Sequence[Message], **kwargs: Any) -> ModelOutput: ...
 
 
+class InvalidModelOutputError(RuntimeError):
+    pass
+
+
+class NonFatalModelInvocationError(RuntimeError):
+    pass
+
+
 Model = Literal[
     "gpt-oss-120b",
     "gpt-5.4",
@@ -51,17 +60,57 @@ Model = Literal[
     "deepseek-v3.2",
     "qwen3-235b-a22b-2507",
     "qwen3.5-flash-02-23",
-    "nemotron-3-super-120b-a12b:free",
-    "nemotron-3-nano-30b-a3b:free",
+    "nemotron-3-super-120b-a12b",
+    "nemotron-3-nano-30b-a3b",
     "phi-4",
     "llama-3.1-swallow-8b-instruct-v0.3"
 ]
+
+
+RETRYABLE_NETWORK_ERRORS = (
+    httpx.HTTPError,
+    httpx.TransportError,
+    or_errors.TooManyRequestsResponseError,
+    or_errors.InternalServerResponseError,
+    or_errors.BadGatewayResponseError,
+    or_errors.ServiceUnavailableResponseError,
+    or_errors.EdgeNetworkTimeoutResponseError,
+    or_errors.ProviderOverloadedResponseError,
+    or_errors.ResponseValidationError,
+)
 
 
 # === DEPENDENCY INJECTION ===
 
 
 _openrouter_client: OpenRouter | None = None
+
+
+_openrouter_vertex_client: OpenRouter | None = None
+
+
+def _get_openrouter_client() -> OpenRouter:
+    global _openrouter_client
+
+    if _openrouter_client is None:
+        api_key = os.environ.get("OPENROUTER_API_KEY")
+        if not api_key:
+            raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
+        _openrouter_client = OpenRouter(api_key=api_key)
+
+    return _openrouter_client
+
+
+def _get_openrouter_vertex_client() -> OpenRouter:
+    global _openrouter_vertex_client
+
+    if _openrouter_vertex_client is None:
+        api_key = os.environ.get("OPENROUTER_VERTEX_API_KEY")
+        if not api_key:
+            raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
+        _openrouter_vertex_client = OpenRouter(api_key=api_key)
+
+    return _openrouter_vertex_client
 
 
 # === CACHE ===
@@ -114,7 +163,7 @@ def _cache_set_obj(key: str, value: Any) -> None:
         conn.commit()
 
 
-def _cache_key_for_openrouter_call(
+def _cache_key(
     model_name: str,
     messages: Sequence[Message],
     kwargs: dict[str, Any],
@@ -138,56 +187,25 @@ def _cache_key_for_openrouter_call(
 # === HELPERS ===
 
 
-def _construct_openrouter_client():
-    api_key = os.environ.get("OPENROUTER_API_KEY")
-    if not api_key:
-        raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
-
-    return OpenRouter(api_key=api_key)
-
-
-def _get_openrouter_client() -> OpenRouter:
-    global _openrouter_client
-
-    if _openrouter_client is None:
-        _openrouter_client = _construct_openrouter_client()
-
-    return _openrouter_client
-
-
 def _serialize_messages(messages: Sequence[Message]) -> list[dict[str, str]]:
     return [{"role": message.role, "content": message.content} for message in messages]
 
 
-def _extract_text(response: Any) -> str:
+def _extract_text_from_model_output(response: Any) -> str:
     try:
         content = response.choices[0].message.content
     except (AttributeError, IndexError) as e:
         raise RuntimeError(f"Unexpected OpenRouter response shape: {response!r}") from e
 
     if not isinstance(content, str):
-        raise TypeError(
+        raise InvalidModelOutputError(
             f"Expected text content to be str, got {type(content).__name__}: {content!r}"
         )
 
     if not content.strip():
-        raise TypeError("Model returned empty content")
+        raise InvalidModelOutputError("Model returned empty content")
 
     return content
-
-
-def _send_openrouter_request(
-    client: OpenRouter,
-    model_name: str,
-    messages: Sequence[Message],
-    **kwargs: Any,
-) -> Any:
-    return client.chat.send(
-        model=model_name,
-        messages=_serialize_messages(messages),
-        timeout_ms=30000,
-        **kwargs,
-    )
 
 
 def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
@@ -220,11 +238,7 @@ def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
-class InvalidModelOutputError(RuntimeError):
-    pass
-
-
-CANONICAL_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
+CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "anthropic/claude-sonnet-4.6": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
@@ -267,7 +281,7 @@ def _strip_schema_keywords(node: Any, keywords_to_strip: set[str]) -> Any:
     return node
 
 
-def canonicalise_json_schema(
+def canonicalise_openrouter_json_schema(
     *,
     model_name: str,
     response_format: dict[str, Any] | None,
@@ -288,7 +302,7 @@ def canonicalise_json_schema(
     if schema is None:
         return out
 
-    rules = CANONICAL_JSON_SCHEMA_RULES.get(model_name, {})
+    rules = CANONICAL_OPENROUTER_JSON_SCHEMA_RULES.get(model_name, {})
     strip_keywords = set(rules.get("strip_keywords", set()))
 
     if strip_keywords:
@@ -340,41 +354,21 @@ def _validate_structured_output(
             ) from e
 
 
-@backoff.on_exception(
-    backoff.constant,
-    (
-        httpx.HTTPError,
-        httpx.TransportError,
-        or_errors.TooManyRequestsResponseError,
-        or_errors.InternalServerResponseError,
-        or_errors.BadGatewayResponseError,
-        or_errors.ServiceUnavailableResponseError,
-        or_errors.EdgeNetworkTimeoutResponseError,
-        or_errors.ProviderOverloadedResponseError,
-        or_errors.ResponseValidationError,
-        TypeError,
-        InvalidModelOutputError,
-    ),
-    interval=5,
-    max_tries=5,
-    jitter=None,
-)
 def _invoke_openrouter_model(
+    client_getter: Callable,
     model_name: str,
     messages: Sequence[Message],
     **kwargs: Any,
 ) -> ModelOutput:
-    client = _get_openrouter_client()
-
-    use_cache = bool(kwargs.pop("use_cache", False))
+    client = client_getter()
 
     original_response_format = kwargs.get("response_format")
-    request_response_format = canonicalise_json_schema(
+
+    request_response_format = canonicalise_openrouter_json_schema(
         model_name=model_name,
         response_format=original_response_format,
     )
 
-    cache_kwargs = dict(kwargs)
     request_kwargs = dict(kwargs)
 
     if original_response_format is not None:
@@ -383,40 +377,20 @@ def _invoke_openrouter_model(
     request_kwargs = _disable_web_plugin(request_kwargs)
     request_kwargs.pop("seed", None)
 
-    cache_key = None
-
-    if use_cache:
-        cache_key = _cache_key_for_openrouter_call(
-            model_name=model_name,
-            messages=messages,
-            kwargs=cache_kwargs,
+    try:
+        response = client.chat.send(
+            model=model_name,
+            messages=_serialize_messages(messages),
+            timeout_ms=30000,
+            **request_kwargs,
         )
-        cached = _cache_get_obj(cache_key)
-        if cached is not None:
-            try:
-                _validate_structured_output(cached.text, original_response_format)
-            except InvalidModelOutputError as e:
-                raise InvalidModelOutputError(
-                    f"Tried returning invalid result from cache.") from e
-            return cached
-
-    response = _send_openrouter_request(
-        client=client,
-        model_name=model_name,
-        messages=messages,
-        **request_kwargs,
-    )
+    except RETRYABLE_NETWORK_ERRORS as e:
+        raise NonFatalModelInvocationError from e
 
     output = ModelOutput(
-        text=_extract_text(response),
+        text=_extract_text_from_model_output(response),
         raw=response,
     )
-
-    # Validate against the original, stronger contract.
-    _validate_structured_output(output.text, original_response_format)
-
-    if use_cache:
-        _cache_set_obj(cache_key, output)
 
     return output
 
@@ -427,102 +401,122 @@ def _invoke_openrouter_model(
 MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
     "gpt-oss-120b": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "openai/gpt-oss-120b",
         reasoning={"effort": "minimal"},
     ),
     "gpt-5.4": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "openai/gpt-5.4",
         reasoning={"effort": "none"},
     ),
     "gpt-4o-mini": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "openai/gpt-4o-mini",
         reasoning={"effort": "none"},
     ),
     "claude-sonnet-4.6": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "anthropic/claude-sonnet-4.6",
         reasoning={"effort": "none"},
     ),
     "claude-opus-4.6": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "anthropic/claude-opus-4.6",
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
-        "google/gemini-2.5-flash",
+        _get_openrouter_vertex_client,
+        "gemini-2.5-flash",
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-pro": partial(
         _invoke_openrouter_model,
-        "google/gemini-2.5-pro",
+        _get_openrouter_vertex_client,
+        "gemini-2.5-pro",
         reasoning={"effort": "minimal"},
     ),
     "grok-4.1-fast": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "x-ai/grok-4.1-fast",
         reasoning={"effort": "none"},
     ),
     "grok-4": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "x-ai/grok-4",
         reasoning={"effort": "minimal"},
     ),
     "llama-3.1-8b-instruct": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "meta-llama/llama-3.1-8b-instruct",
         reasoning={"effort": "none"},
     ),
     "llama-3.1-70b-instruct": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "meta-llama/llama-3.1-70b-instruct",
         reasoning={"effort": "none"},
     ),
     "mistral-nemo": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "mistralai/mistral-nemo",
         reasoning={"effort": "none"},
     ),
     "mistral-small-2603": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "mistralai/mistral-small-2603",
         reasoning={"effort": "none"},
     ),
     "deepseek-v3.2": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "deepseek/deepseek-v3.2",
         reasoning={"effort": "none"},
     ),
     "qwen3-235b-a22b-2507": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "qwen/qwen3-235b-a22b-2507",
         reasoning={"effort": "none"},
     ),
     "qwen3.5-flash-02-23": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "qwen/qwen3.5-flash-02-23",
         reasoning={"effort": "none"},
     ),
     "nemotron-3-super-120b-a12b": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "nvidia/nemotron-3-super-120b-a12b",
         reasoning={"effort": "none"},
     ),
     "nemotron-3-nano-30b-a3b": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "nvidia/nemotron-3-nano-30b-a3b",
         reasoning={"effort": "none"},
     ),
     "phi-4": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "microsoft/phi-4",
         reasoning={"effort": "none"},
         provider={"ignore": ["nextbit"]},
     ),
     "llama-3.1-swallow-8b-instruct-v0.3": partial(
         _invoke_openrouter_model,
+        _get_openrouter_client,
         "tokyotech-llm/llama-3.1-swallow-8b-instruct-v0.3",
         reasoning={"effort": "none"},
     ),
@@ -532,8 +526,21 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
 # === PUBLIC FUNCTIONS ===
 
 
+@backoff.on_exception(
+    backoff.constant,
+    (
+        NonFatalModelInvocationError,
+        InvalidModelOutputError,
+    ),
+    interval=5,
+    max_tries=5,
+    jitter=None,
+)
 def invoke_model(
-    model: Model, messages: Sequence[Message], **kwargs: Any
+    model: Model, 
+    messages: Sequence[Message], 
+    use_cache: bool,
+    **kwargs: Any
 ) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]
@@ -541,4 +548,39 @@ def invoke_model(
         raise ValueError(f"Unsupported model: {model}.") from e
 
     logging.info(f"Invoking {model}.")
-    return model_delegate(messages, **kwargs)
+
+    response_format = deepcopy(kwargs.get("response_format"))
+
+    if use_cache:
+        delegate_kwargs = dict(model_delegate.keywords or {})
+
+        # Match functools.partial behavior: caller kwargs override partial kwargs.
+        effective_kwargs = {
+            **delegate_kwargs,
+            **kwargs,
+        }
+
+        cache_key = _cache_key(
+            model_name=model,
+            messages=messages,
+            kwargs=effective_kwargs,
+        )
+        
+        cached = _cache_get_obj(cache_key)
+        if cached is not None:
+            try:
+                _validate_structured_output(cached.text, response_format)
+            except InvalidModelOutputError as e:
+                raise InvalidModelOutputError(
+                    f"Tried returning invalid result from cache.") from e
+            return cached
+        
+    output = model_delegate(messages, **kwargs)
+
+    # Validate against the original, stronger contract.
+    _validate_structured_output(output.text, response_format)
+
+    if use_cache:
+        _cache_set_obj(cache_key, output)
+
+    return output

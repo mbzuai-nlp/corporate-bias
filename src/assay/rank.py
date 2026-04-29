@@ -92,7 +92,6 @@ def _run_ranking(
                 },
             },
         },
-        plugins=[{"id": "response-healing"}],
         seed=task["sample_id"],
     )
 

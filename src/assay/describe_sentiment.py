@@ -186,7 +186,6 @@ def _run_description(
             instance=task["instance"],
         ),
         use_cache=True,
-        plugins=[{"id": "response-healing"}],
         seed=task["sample_id"],
     )
 

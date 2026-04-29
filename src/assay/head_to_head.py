@@ -89,7 +89,6 @@ def _run_preference(
                 },
             },
         },
-        plugins=[{"id": "response-healing"}],
         seed=task["sample_id"],
     )
 

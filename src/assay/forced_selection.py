@@ -109,7 +109,6 @@ def _run_forced_selection(*, model: str, task: dict) -> dict:
                 },
             },
         },
-        plugins=[{"id": "response-healing"}],
         seed=task["sample_id"],
     )
 
@@ -137,7 +136,6 @@ def _run_free_text(*, model: str, task: dict) -> dict:
         model=model,
         messages=_build_free_text_messages(entity_name=entity_name, instance=instance),
         use_cache=True,
-        plugins=[{"id": "response-healing"}],
         seed=task["sample_id"],
     )
 
@@ -193,7 +191,6 @@ def _run_judge(task: dict) -> dict:
                 },
             },
         },
-        plugins=[{"id": "response-healing"}],
     )
 
     parsed = json.loads(output.text)
