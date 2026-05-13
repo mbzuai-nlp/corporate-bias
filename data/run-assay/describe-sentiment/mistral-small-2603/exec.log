@@ -9,12 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 14:02:41,769 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:02:41,793 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 14:02:41,926 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 14:02:42,065 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-29 14:02:42,385 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 8203.01it/s]
+2026-04-29 20:46:14,084 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:46:14,134 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:46:14,297 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-29 20:46:14,456 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-29 20:46:14,804 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5846.06it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,365 +22,527 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 14:02:42,528 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-29 14:02:42,641 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:02:42,663 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 14:02:42,763 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:02:42,819 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 14:02:42,963 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 14:02:43,984 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:02:44,006 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 91/202 [00:00<00:00, 907.96it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1273.36it/s]
-2026-04-29 14:02:44,337 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:02:44,461 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:02:45,317 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 14:02:45,532 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:02:45,561 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 14:02:45,683 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:02:45,708 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 14:02:45,832 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:02:45,975 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,525 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,648 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:02:46,673 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  40%|████      | 81/202 [00:00<00:00, 800.40it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1365.89it/s]
-2026-04-29 14:02:44,712 [INFO] root: Running assay=describe-sentiment model=mistral-small-2603 num_samples_per_instance=3.
-Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
-2026-04-29 14:02:44,723 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,723 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,724 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,725 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,726 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,727 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,729 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,730 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,731 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,735 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,737 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,738 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,739 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,740 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,742 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,743 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,745 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,747 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,749 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,749 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,750 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,753 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,756 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,758 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,759 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,760 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,761 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,761 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,763 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,764 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,765 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,766 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,767 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,769 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,769 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,770 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,771 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,772 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,773 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,775 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,775 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,776 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,776 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,776 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,777 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,777 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,777 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,778 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,778 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,779 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,779 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,780 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,780 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,780 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,781 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,781 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,781 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,782 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,782 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,782 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,783 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,783 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,784 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,784 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,784 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,785 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,785 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,785 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,786 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,786 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,786 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,787 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,787 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,788 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,788 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,788 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,789 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,789 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,789 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,790 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,790 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,791 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,791 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,800 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,801 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,804 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,808 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,811 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,813 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,816 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,823 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,835 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,840 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,851 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,854 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,871 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,881 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,889 [INFO] root: Invoking mistral-small-2603.
-Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 14:02:44,892 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,894 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,899 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,901 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,907 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,913 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,919 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,920 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,922 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,926 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,927 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,932 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,933 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,936 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,938 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,939 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,941 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,942 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,944 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,946 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,951 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,952 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,955 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,957 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,960 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,965 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,967 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,968 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,977 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:44,979 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,004 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,005 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,007 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,009 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,009 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,011 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,012 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,013 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,016 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  26%|██▌       | 82/315 [00:00<00:00, 789.32it/s]2026-04-29 14:02:45,018 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,018 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,019 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,021 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,023 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,024 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,024 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,025 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,026 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,027 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,028 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,029 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,030 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,032 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,033 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,034 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,035 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,035 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,035 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,037 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,038 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,039 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,040 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,040 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,040 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,042 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,042 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,043 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,044 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,044 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,045 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,045 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,046 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,047 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,047 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,047 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,049 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,049 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,051 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,052 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,052 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,052 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,052 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,053 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,053 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,054 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,054 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,055 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,055 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,056 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,056 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,057 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,058 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,061 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,063 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,064 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,067 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,068 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,071 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,072 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,076 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,076 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,077 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,078 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,080 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,081 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,081 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,083 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,085 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,087 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,087 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,089 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,090 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,091 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,094 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,095 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,098 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,100 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,101 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,101 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,101 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,102 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,103 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,103 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,103 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,104 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,104 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,104 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,105 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,106 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,107 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,108 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,109 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,109 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,109 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,110 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,111 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,111 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,112 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,112 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,112 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,112 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,113 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,113 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,113 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,114 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,114 [INFO] root: Invoking mistral-small-2603.
-Descriptions:  76%|███████▌  | 240/315 [00:00<00:00, 1239.89it/s]2026-04-29 14:02:45,115 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,115 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,116 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,116 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,116 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,117 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,118 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,118 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,118 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,119 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,119 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,120 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,121 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,121 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,122 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,122 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,123 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,124 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,124 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,124 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,125 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,125 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,126 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,126 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,127 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,127 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,128 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,128 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,130 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,130 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,131 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,131 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,133 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,134 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,135 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,135 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,136 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,137 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,137 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,138 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,138 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,139 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,139 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,139 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,139 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,140 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,142 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,142 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,143 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,143 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,144 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,145 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,145 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,146 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,147 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,147 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,148 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,148 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,148 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,149 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,149 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,150 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,152 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,152 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,152 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,152 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,154 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,155 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,156 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,156 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:45,157 [INFO] root: Invoking mistral-small-2603.
-2026-04-29 14:02:46,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,063 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,066 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,091 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,091 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,099 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,109 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,129 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,152 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,187 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,217 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,222 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,232 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,232 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:02:46,251 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions: 100%|██████████| 315/315 [00:12<00:00, 25.00it/s]  
-Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:01<00:33,  1.01s/it]Stance:   6%|▌         | 2/34 [00:01<00:22,  1.40it/s]Stance:   9%|▉         | 3/34 [00:02<00:19,  1.60it/s]Stance:  12%|█▏        | 4/34 [00:02<00:17,  1.72it/s]Stance:  15%|█▍        | 5/34 [00:03<00:16,  1.79it/s]Stance:  18%|█▊        | 6/34 [00:03<00:15,  1.83it/s]Stance:  21%|██        | 7/34 [00:04<00:14,  1.88it/s]Stance:  24%|██▎       | 8/34 [00:04<00:13,  1.91it/s]Stance:  26%|██▋       | 9/34 [00:05<00:13,  1.91it/s]Stance:  29%|██▉       | 10/34 [00:05<00:14,  1.69it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  32%|███▏      | 11/34 [00:06<00:13,  1.74it/s]Stance:  35%|███▌      | 12/34 [00:06<00:12,  1.82it/s]Stance:  38%|███▊      | 13/34 [00:07<00:11,  1.91it/s]Stance:  41%|████      | 14/34 [00:07<00:10,  1.92it/s]Stance:  44%|████▍     | 15/34 [00:08<00:09,  1.94it/s]Stance:  47%|████▋     | 16/34 [00:08<00:09,  1.93it/s]Stance:  50%|█████     | 17/34 [00:09<00:08,  1.93it/s]Stance:  53%|█████▎    | 18/34 [00:09<00:08,  1.92it/s]Stance:  56%|█████▌    | 19/34 [00:10<00:07,  1.92it/s]Stance:  59%|█████▉    | 20/34 [00:10<00:07,  1.92it/s]Stance:  62%|██████▏   | 21/34 [00:11<00:07,  1.83it/s]Stance:  65%|██████▍   | 22/34 [00:12<00:06,  1.85it/s]Stance:  68%|██████▊   | 23/34 [00:12<00:05,  1.90it/s]Stance:  71%|███████   | 24/34 [00:13<00:05,  1.91it/s]Stance:  74%|███████▎  | 25/34 [00:13<00:04,  1.94it/s]Stance:  76%|███████▋  | 26/34 [00:14<00:03,  2.09it/s]Stance:  79%|███████▉  | 27/34 [00:14<00:03,  2.24it/s]Stance:  82%|████████▏ | 28/34 [00:14<00:02,  2.34it/s]Stance:  85%|████████▌ | 29/34 [00:15<00:02,  2.44it/s]Stance:  88%|████████▊ | 30/34 [00:15<00:01,  2.48it/s]Stance:  91%|█████████ | 31/34 [00:15<00:01,  2.47it/s]Stance:  94%|█████████▍| 32/34 [00:16<00:00,  2.49it/s]Stance:  97%|█████████▋| 33/34 [00:16<00:00,  2.29it/s]Stance: 100%|██████████| 34/34 [00:17<00:00,  2.17it/s]Stance: 100%|██████████| 34/34 [00:17<00:00,  1.96it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.24it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.25it/s]Ad:  30%|███       | 3/10 [00:02<00:05,  1.23it/s]Ad:  40%|████      | 4/10 [00:03<00:04,  1.22it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.23it/s]Ad:  60%|██████    | 6/10 [00:04<00:03,  1.24it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.22it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.24it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.25it/s]Ad: 100%|██████████| 10/10 [00:07<00:00,  1.30it/s]Ad: 100%|██████████| 10/10 [00:07<00:00,  1.26it/s]
-2026-04-29 14:03:38,198 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-small-2603.parquet.
+2026-04-29 20:46:14,964 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-29 20:46:15,125 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 20:46:15,140 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:46:15,278 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 20:46:15,291 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:46:15,421 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-29 20:46:16,567 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:46:16,627 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 93/202 [00:00<00:00, 924.55it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1230.65it/s]
+2026-04-29 20:46:17,033 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:46:17,228 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:46:18,176 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 20:46:18,451 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:46:18,492 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:46:18,651 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:46:18,704 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 20:46:18,866 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:46:19,030 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:46:19,644 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 20:46:19,814 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:46:19,870 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 77/202 [00:00<00:00, 764.63it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1041.28it/s]
+2026-04-29 20:46:20,239 [INFO] root: Running assay=describe-sentiment model=mistral-small-2603 num_samples_per_instance=3.
+Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
+2026-04-29 20:46:20,251 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,252 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,252 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,253 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,254 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,255 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,257 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,259 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,260 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,262 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,265 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,267 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,268 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,270 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,272 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,275 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,279 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,280 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,283 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,285 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,287 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,291 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,292 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,295 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,298 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,302 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,304 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,305 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,306 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,307 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,308 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,308 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,308 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,309 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,309 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,310 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,310 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,310 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,311 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,311 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,312 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,312 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,313 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,313 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,314 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,314 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,314 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,316 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,317 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,321 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,323 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,326 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,336 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,342 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,345 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,349 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,358 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,363 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,366 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,374 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,377 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,380 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,385 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,389 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,391 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,397 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,401 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,410 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,416 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,417 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,424 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,429 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,431 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,433 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,435 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,439 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,442 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,445 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,448 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,449 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,456 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,459 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,462 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,464 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,466 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,469 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,471 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,472 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,474 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,476 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,478 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,485 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,487 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,487 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,489 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,491 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,494 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,495 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,496 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,499 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,501 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,502 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,505 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,516 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,519 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,521 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,523 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,532 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,535 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:46:20,537 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,540 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,545 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,546 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,550 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,554 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,557 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,559 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,560 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,566 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,567 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,571 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,573 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,576 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,578 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,581 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,583 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,589 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,594 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,729 [INFO] root: Invoking mistral-small-2603.
+Descriptions:   0%|          | 1/405 [00:00<00:50,  7.94it/s]2026-04-29 20:46:20,731 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,733 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,733 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,733 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,734 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,734 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,736 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,736 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,736 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,737 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,738 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,739 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,739 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,740 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,743 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,743 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,743 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,744 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,744 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,745 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,745 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,746 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,746 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,747 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,747 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,748 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,748 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,748 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,749 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,749 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,751 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,751 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,751 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,752 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,752 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,752 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,753 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,753 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,754 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,754 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,755 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,756 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  20%|█▉        | 79/405 [00:00<00:00, 410.80it/s]2026-04-29 20:46:20,756 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,757 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,758 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,758 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,759 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,759 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,764 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,767 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,769 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,770 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,771 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,773 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,773 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,776 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,777 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,780 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,781 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,781 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,782 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,786 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,791 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,791 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,792 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,796 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,796 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,800 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,800 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,802 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,804 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,805 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,807 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,810 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,811 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,811 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,815 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,821 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,822 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,842 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,843 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,846 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,847 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,848 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  31%|███       | 124/405 [00:00<00:01, 170.35it/s]2026-04-29 20:46:20,858 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,859 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,860 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,862 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,862 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,863 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,864 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,868 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,869 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,870 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,872 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,872 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,872 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,873 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,874 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,875 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,875 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,875 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,902 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,906 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,908 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,930 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,935 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,945 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:20,986 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,053 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,054 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,065 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,065 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,086 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,117 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  38%|███▊      | 153/405 [00:01<00:02, 110.15it/s]2026-04-29 20:46:21,123 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,154 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,158 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,196 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,224 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,282 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,307 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,365 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,376 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,391 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,400 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,401 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,412 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,462 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,486 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,520 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,564 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,585 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,599 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,624 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,633 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,667 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,704 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,706 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,759 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,762 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,764 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,769 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,770 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,772 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,772 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,773 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,774 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,774 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,775 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,776 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,776 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,778 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,778 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,784 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,788 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,788 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,791 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,793 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,794 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,795 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,796 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,797 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,798 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,799 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,800 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,801 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,801 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,803 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,803 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,804 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,804 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,805 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,805 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,807 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,808 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,809 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,809 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,810 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,810 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,810 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,811 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,812 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,812 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,813 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,813 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,814 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,815 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,815 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,817 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,817 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,817 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,818 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,820 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,820 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,820 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,821 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,823 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,825 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,830 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,832 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,833 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,834 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,838 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,838 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,839 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,840 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,844 [INFO] root: Invoking mistral-small-2603.
+Descriptions:  61%|██████    | 246/405 [00:01<00:00, 222.19it/s]2026-04-29 20:46:21,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,845 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,847 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,847 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,847 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,848 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,850 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,850 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,851 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,852 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,853 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,853 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,854 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,854 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,855 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,857 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,857 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,857 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,858 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,860 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,860 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,861 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,863 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,863 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,865 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,865 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,867 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,871 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,872 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,873 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,874 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,874 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,875 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,876 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,877 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,877 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,878 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,880 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,880 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,881 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,881 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,882 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,883 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,884 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,885 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,885 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,885 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,886 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,887 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,887 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,890 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,892 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,892 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,896 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,898 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,900 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,902 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,903 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,903 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,905 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,906 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,907 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,907 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,908 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,909 [INFO] root: Invoking mistral-small-2603.
+2026-04-29 20:46:21,911 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,950 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,986 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,005 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,015 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,028 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,088 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,122 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,132 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,150 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,164 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,169 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,181 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,186 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,187 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,197 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,248 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,263 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,274 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,298 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,298 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,313 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,373 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,408 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,414 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,420 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,469 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,483 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,495 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,527 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,568 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,607 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,666 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,724 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,942 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,974 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,099 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,118 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,120 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,135 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,155 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,187 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,267 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,434 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,451 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,510 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,532 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,660 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,688 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,714 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,726 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,825 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,830 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,832 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,869 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,918 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,929 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,930 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:20,944 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,012 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,034 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,044 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,095 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,125 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,148 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,153 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,197 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,316 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,489 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,873 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,877 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,901 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:21,924 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  82%|████████▏ | 332/405 [00:01<00:00, 319.06it/s]2026-04-29 20:46:22,127 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,303 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,315 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:22,830 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,724 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:46:23,910 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  96%|█████████▌| 388/405 [00:08<00:00, 27.66it/s] Descriptions:  96%|█████████▌| 388/405 [00:24<00:00, 27.66it/s]Descriptions: 100%|██████████| 405/405 [00:24<00:00,  7.26it/s]Descriptions: 100%|██████████| 405/405 [00:24<00:00, 16.68it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:44,  1.03s/it]Stance:   5%|▍         | 2/44 [00:01<00:30,  1.36it/s]Stance:   7%|▋         | 3/44 [00:02<00:25,  1.59it/s]Stance:   9%|▉         | 4/44 [00:02<00:23,  1.71it/s]Stance:  11%|█▏        | 5/44 [00:03<00:22,  1.77it/s]Stance:  14%|█▎        | 6/44 [00:03<00:20,  1.83it/s]Stance:  16%|█▌        | 7/44 [00:04<00:20,  1.85it/s]Stance:  18%|█▊        | 8/44 [00:04<00:19,  1.85it/s]Stance:  20%|██        | 9/44 [00:05<00:18,  1.87it/s]Stance:  23%|██▎       | 10/44 [00:05<00:18,  1.87it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:06<00:17,  1.89it/s]Stance:  27%|██▋       | 12/44 [00:06<00:16,  1.90it/s]Stance:  30%|██▉       | 13/44 [00:07<00:18,  1.71it/s]Stance:  32%|███▏      | 14/44 [00:08<00:16,  1.77it/s]Stance:  34%|███▍      | 15/44 [00:08<00:16,  1.81it/s]Stance:  36%|███▋      | 16/44 [00:09<00:15,  1.85it/s]Stance:  39%|███▊      | 17/44 [00:09<00:14,  1.87it/s]Stance:  41%|████      | 18/44 [00:10<00:13,  1.90it/s]Stance:  43%|████▎     | 19/44 [00:10<00:13,  1.88it/s]Stance:  45%|████▌     | 20/44 [00:11<00:12,  1.89it/s]Stance:  48%|████▊     | 21/44 [00:11<00:12,  1.89it/s]Stance:  50%|█████     | 22/44 [00:12<00:11,  1.88it/s]Stance:  52%|█████▏    | 23/44 [00:12<00:11,  1.88it/s]Stance:  55%|█████▍    | 24/44 [00:13<00:10,  1.90it/s]Stance:  57%|█████▋    | 25/44 [00:13<00:09,  1.91it/s]Stance:  59%|█████▉    | 26/44 [00:14<00:09,  1.86it/s]Stance:  61%|██████▏   | 27/44 [00:14<00:08,  1.99it/s]Stance:  64%|██████▎   | 28/44 [00:15<00:07,  2.08it/s]Stance:  66%|██████▌   | 29/44 [00:15<00:06,  2.17it/s]Stance:  68%|██████▊   | 30/44 [00:16<00:06,  2.23it/s]Stance:  70%|███████   | 31/44 [00:16<00:05,  2.26it/s]Stance:  73%|███████▎  | 32/44 [00:16<00:05,  2.29it/s]Stance:  75%|███████▌  | 33/44 [00:17<00:05,  2.14it/s]Stance:  77%|███████▋  | 34/44 [00:17<00:04,  2.03it/s]Stance:  80%|███████▉  | 35/44 [00:18<00:04,  1.98it/s]Stance:  82%|████████▏ | 36/44 [00:19<00:04,  1.95it/s]Stance:  84%|████████▍ | 37/44 [00:19<00:03,  1.93it/s]Stance:  86%|████████▋ | 38/44 [00:20<00:03,  1.91it/s]Stance:  89%|████████▊ | 39/44 [00:20<00:02,  1.96it/s]Stance:  91%|█████████ | 40/44 [00:21<00:02,  1.92it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.17it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:10,  1.19it/s]Ad:  15%|█▌        | 2/13 [00:01<00:09,  1.19it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.16it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.16it/s]Ad:  38%|███▊      | 5/13 [00:04<00:06,  1.15it/s]Ad:  46%|████▌     | 6/13 [00:05<00:06,  1.14it/s]Ad:  54%|█████▍    | 7/13 [00:06<00:05,  1.13it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:04,  1.14it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.14it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.14it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.23it/s]Ad:  92%|█████████▏| 12/13 [00:10<00:00,  1.21it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.32it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.20it/s]
+2026-04-29 20:47:31,947 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-small-2603.parquet.

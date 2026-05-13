@@ -9,12 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 13:54:19,772 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:54:19,799 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 13:54:19,935 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 13:54:20,077 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 13:54:20,346 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6206.81it/s]
+2026-04-29 20:36:09,402 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:36:09,468 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:36:09,627 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-29 20:36:09,791 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 20:36:10,151 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5953.88it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,365 +22,527 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 13:54:20,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-29 13:54:20,628 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:54:20,650 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 13:54:20,762 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:54:20,822 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 13:54:20,963 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 13:54:21,993 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:54:22,050 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  39%|███▉      | 79/202 [00:00<00:00, 781.99it/s]Loading weights:  83%|████████▎ | 168/202 [00:00<00:00, 842.95it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 929.69it/s]
-2026-04-29 13:54:22,485 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:54:22,624 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:54:24,166 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 13:54:24,418 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:54:24,442 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 13:54:24,570 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:54:22,941 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 13:54:23,078 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:54:23,210 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:54:23,922 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 13:54:24,174 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:54:24,200 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  36%|███▌      | 72/202 [00:00<00:00, 710.59it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1082.67it/s]
-2026-04-29 13:54:24,592 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-pro num_samples_per_instance=3.
-Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
-2026-04-29 13:54:24,606 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,607 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,607 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,608 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,609 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,611 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,613 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,614 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,616 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,618 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,620 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,624 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,626 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,628 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,630 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,633 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,635 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,637 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,642 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,645 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,648 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,650 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,656 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,659 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,663 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,664 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,665 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,671 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,672 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,673 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,674 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,674 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,676 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,676 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,677 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,678 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,679 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,679 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,680 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,681 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,681 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,682 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,683 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,684 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,684 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,685 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,687 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,689 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,694 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,707 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,709 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,718 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,723 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,732 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,735 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,738 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,744 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,749 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,760 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,770 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,772 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,780 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,792 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,794 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,800 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,802 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,804 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,808 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,816 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,821 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,832 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,836 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,844 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,846 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,851 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,859 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,864 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,869 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,871 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,875 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,880 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,885 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,889 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,892 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,900 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,903 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,911 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,913 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,916 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,920 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,922 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,932 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,936 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,943 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,947 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,950 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,952 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,953 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,955 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,956 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,968 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,974 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,975 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,978 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,979 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,981 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,986 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,988 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,992 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,994 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,997 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:24,998 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,000 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,002 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,007 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,010 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,013 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,018 [INFO] root: Invoking gemini-2.5-pro.
-Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 13:54:25,019 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,023 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,023 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,026 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,026 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,027 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,027 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,028 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,031 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,032 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,035 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,035 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,036 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,038 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,039 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,041 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,042 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,042 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,044 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,045 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,046 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,054 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,054 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,055 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,056 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,056 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,056 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,057 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,057 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,058 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,058 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,059 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,060 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,060 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,061 [INFO] root: Invoking gemini-2.5-pro.
-Descriptions:  45%|████▌     | 142/315 [00:00<00:00, 1409.33it/s]2026-04-29 13:54:25,062 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,062 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,062 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,063 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,064 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,064 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,064 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,064 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,066 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,066 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,066 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,066 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,067 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,067 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,069 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,069 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,069 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,069 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,070 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,071 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,071 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,072 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,073 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,074 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,075 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,075 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,077 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,078 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,080 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,085 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,087 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,087 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,088 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,089 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,091 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,092 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,093 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,094 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,096 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,097 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,098 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,099 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,100 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,102 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,103 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,104 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,105 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,105 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,106 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,107 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,108 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,109 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,112 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,112 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,112 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,113 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,114 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,116 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,116 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,117 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,118 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,119 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,119 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,120 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,120 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,122 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,123 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,123 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,124 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,125 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,125 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,126 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,126 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,127 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,128 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,128 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,129 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,129 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,130 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,131 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,131 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,132 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,132 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,133 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,134 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,134 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,134 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,135 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,136 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,136 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,137 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,137 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,138 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,138 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,138 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,139 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,140 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,140 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,141 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,142 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,142 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,142 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,143 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,144 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,144 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,145 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,145 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,146 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,147 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,147 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,148 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,149 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,150 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,150 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,151 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,151 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,152 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,152 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,154 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,154 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,155 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,155 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,156 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,157 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,157 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,157 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,158 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,158 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,159 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,160 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,161 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,162 [INFO] root: Invoking gemini-2.5-pro.
-Descriptions:  90%|████████▉ | 283/315 [00:00<00:00, 1316.68it/s]2026-04-29 13:54:25,166 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,167 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,167 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,169 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,170 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,172 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,173 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,174 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,177 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,178 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,179 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,180 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,182 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,182 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,185 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,186 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,187 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,188 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,189 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,190 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,192 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,193 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,193 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,195 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,197 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,198 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,198 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,199 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,200 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:25,200 [INFO] root: Invoking gemini-2.5-pro.
-2026-04-29 13:54:27,800 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:27,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:28,013 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:28,053 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:28,167 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:28,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:28,424 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:29,402 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:29,923 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:34,359 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,208 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,209 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,214 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,216 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,218 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,221 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:54:36,229 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  90%|████████▉ | 283/315 [00:15<00:00, 1316.68it/s]Descriptions:  95%|█████████▍| 299/315 [00:15<00:01, 11.91it/s]  Descriptions:  95%|█████████▌| 300/315 [00:15<00:01, 11.61it/s]Descriptions:  95%|█████████▌| 300/315 [00:35<00:01, 11.61it/s]Descriptions:  98%|█████████▊| 310/315 [00:36<00:01,  3.54it/s]Descriptions:  99%|█████████▊| 311/315 [00:38<00:01,  3.33it/s]Descriptions: 100%|██████████| 315/315 [00:54<00:00,  5.75it/s]
-Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:01<00:36,  1.10s/it]Stance:   6%|▌         | 2/34 [00:01<00:24,  1.33it/s]Stance:   9%|▉         | 3/34 [00:02<00:27,  1.14it/s]Stance:  12%|█▏        | 4/34 [00:03<00:22,  1.36it/s]Stance:  15%|█▍        | 5/34 [00:03<00:19,  1.52it/s]Stance:  18%|█▊        | 6/34 [00:04<00:17,  1.63it/s]Stance:  21%|██        | 7/34 [00:04<00:15,  1.72it/s]Stance:  24%|██▎       | 8/34 [00:05<00:14,  1.77it/s]Stance:  26%|██▋       | 9/34 [00:05<00:13,  1.81it/s]Stance:  29%|██▉       | 10/34 [00:06<00:13,  1.84it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  32%|███▏      | 11/34 [00:06<00:12,  1.84it/s]Stance:  35%|███▌      | 12/34 [00:07<00:11,  1.87it/s]Stance:  38%|███▊      | 13/34 [00:07<00:11,  1.89it/s]Stance:  41%|████      | 14/34 [00:08<00:10,  1.90it/s]Stance:  44%|████▍     | 15/34 [00:08<00:09,  1.93it/s]Stance:  47%|████▋     | 16/34 [00:09<00:09,  1.95it/s]Stance:  50%|█████     | 17/34 [00:09<00:08,  1.91it/s]Stance:  53%|█████▎    | 18/34 [00:10<00:08,  1.89it/s]Stance:  56%|█████▌    | 19/34 [00:11<00:07,  1.88it/s]Stance:  59%|█████▉    | 20/34 [00:11<00:07,  1.86it/s]Stance:  62%|██████▏   | 21/34 [00:12<00:06,  1.86it/s]Stance:  65%|██████▍   | 22/34 [00:12<00:06,  1.85it/s]Stance:  68%|██████▊   | 23/34 [00:13<00:05,  1.85it/s]Stance:  71%|███████   | 24/34 [00:13<00:05,  1.84it/s]Stance:  74%|███████▎  | 25/34 [00:14<00:04,  1.83it/s]Stance:  76%|███████▋  | 26/34 [00:14<00:04,  1.93it/s]Stance:  79%|███████▉  | 27/34 [00:15<00:03,  1.94it/s]Stance:  82%|████████▏ | 28/34 [00:15<00:03,  1.92it/s]Stance:  85%|████████▌ | 29/34 [00:16<00:02,  2.06it/s]Stance:  88%|████████▊ | 30/34 [00:16<00:01,  2.15it/s]Stance:  91%|█████████ | 31/34 [00:16<00:01,  2.25it/s]Stance:  94%|█████████▍| 32/34 [00:17<00:00,  2.32it/s]Stance:  97%|█████████▋| 33/34 [00:17<00:00,  2.14it/s]Stance: 100%|██████████| 34/34 [00:18<00:00,  1.99it/s]Stance: 100%|██████████| 34/34 [00:18<00:00,  1.83it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.18it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.15it/s]Ad:  30%|███       | 3/10 [00:02<00:06,  1.12it/s]Ad:  40%|████      | 4/10 [00:03<00:05,  1.12it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.12it/s]Ad:  80%|████████  | 8/10 [00:05<00:00,  2.03it/s]Ad:  90%|█████████ | 9/10 [00:06<00:00,  1.72it/s]Ad: 100%|██████████| 10/10 [00:06<00:00,  1.60it/s]Ad: 100%|██████████| 10/10 [00:06<00:00,  1.47it/s]
-2026-04-29 13:55:58,431 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-pro.parquet.
+2026-04-29 20:36:10,331 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-29 20:36:10,492 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:36:10,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 20:36:10,647 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:36:10,718 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 20:36:10,894 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-29 20:36:11,940 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:36:11,996 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 96/202 [00:00<00:00, 959.13it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1134.00it/s]
+2026-04-29 20:36:12,415 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:36:12,601 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:36:13,532 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 20:36:13,799 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:36:13,840 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:36:13,996 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:36:14,055 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 20:36:14,203 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:36:14,348 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:36:14,995 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 20:36:15,151 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:36:15,210 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 844.94it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1188.79it/s]
+2026-04-29 20:36:15,569 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-pro num_samples_per_instance=3.
+Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
+2026-04-29 20:36:15,582 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,583 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,584 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,584 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,585 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,586 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,588 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,589 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,591 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,592 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,595 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,598 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,599 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,601 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,602 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,606 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,607 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,612 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,616 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,619 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,621 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,623 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,625 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,628 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,633 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,634 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,637 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,639 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,640 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,641 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,642 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,643 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,647 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,649 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,655 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,657 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,663 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,667 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,673 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,677 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,683 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,688 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,692 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,695 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,697 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,699 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,703 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,707 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,713 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,717 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,724 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,725 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,727 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,729 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,731 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,734 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,737 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,740 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,741 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,743 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,746 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,747 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,760 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,750 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,752 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,762 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,754 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,755 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,756 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,757 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,757 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,758 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,759 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,759 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,760 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,749 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,761 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,761 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,754 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,763 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,763 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,763 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,764 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,764 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,765 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,766 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,766 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,767 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,767 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,768 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,768 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,769 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,770 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,771 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,772 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,773 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,774 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,775 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,775 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,776 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,777 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,777 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,778 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,780 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,781 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,784 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,785 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,797 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,800 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,803 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,807 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:36:15,823 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,837 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,841 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,857 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,860 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,869 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,873 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,878 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,888 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,894 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,898 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,904 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,911 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,917 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,921 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,922 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:15,926 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,039 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:   0%|          | 1/405 [00:00<00:40,  9.90it/s]2026-04-29 20:36:16,040 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,041 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,042 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,043 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,045 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,048 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,049 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,050 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,050 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,051 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,051 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,052 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,052 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,053 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,053 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,053 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,053 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,054 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,054 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,055 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,055 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,056 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,057 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,057 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,057 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,058 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,059 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,059 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,059 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,062 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,063 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,063 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,064 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,065 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,066 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,067 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,068 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,068 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,068 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,069 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,070 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,071 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,071 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,073 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,076 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,078 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,078 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,080 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,080 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,081 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,081 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,082 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,085 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,087 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  22%|██▏       | 89/405 [00:00<00:00, 518.15it/s]2026-04-29 20:36:16,088 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,089 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,091 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,092 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,095 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,095 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,098 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,099 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,100 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,100 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,101 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,104 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,105 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,106 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,109 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,109 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,110 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,113 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,115 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,116 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,119 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,119 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,120 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,122 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,125 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,126 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,127 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,128 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,131 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,131 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,132 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,136 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,136 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,140 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,143 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,144 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,145 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,146 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,153 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,153 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,154 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,154 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,154 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,158 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,166 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,187 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,187 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,188 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,192 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  35%|███▍      | 141/405 [00:00<00:01, 169.42it/s]2026-04-29 20:36:16,194 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,195 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,197 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,198 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,199 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,210 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,210 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,211 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,211 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,212 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,213 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,214 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,215 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,215 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,217 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,218 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,220 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,220 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,264 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,294 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,309 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,328 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,351 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,366 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,436 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,473 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,517 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,521 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,524 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,556 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,607 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,608 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,609 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,618 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  43%|████▎     | 174/405 [00:01<00:02, 110.04it/s]2026-04-29 20:36:16,675 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,688 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,693 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,746 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,753 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,808 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,822 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,829 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,830 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,831 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,877 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,878 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,879 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,894 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,927 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,955 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,968 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:16,990 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,065 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,065 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,077 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,079 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,087 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,088 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,114 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,154 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,194 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,219 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,239 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,242 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,243 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,245 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,246 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,248 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,249 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,249 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,249 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,251 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,251 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,253 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,253 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,254 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,255 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,256 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,256 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,257 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,258 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,259 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,260 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,261 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,262 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,263 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,263 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,268 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,269 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,269 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,270 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,270 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,271 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,272 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,272 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,273 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,273 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,275 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,277 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,277 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,277 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,278 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,278 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,278 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,279 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,280 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,280 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,281 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,281 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,282 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,285 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,287 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,288 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,291 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,291 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,292 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,293 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,293 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,295 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,295 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,296 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,297 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,298 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,303 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,303 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,304 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,304 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,305 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,305 [INFO] root: Invoking gemini-2.5-pro.
+Descriptions:  66%|██████▌   | 267/405 [00:01<00:00, 210.03it/s]2026-04-29 20:36:17,306 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,307 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,308 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,308 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,310 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,313 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,314 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,318 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,325 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,327 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,328 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,329 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,329 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,330 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,330 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,331 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,332 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,333 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,334 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,336 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,336 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,337 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,337 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,338 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,339 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,340 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,342 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,343 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,344 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,344 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,346 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,347 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,348 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,349 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,350 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,351 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,351 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,352 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,353 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,354 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,354 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,356 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,357 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:17,358 [INFO] root: Invoking gemini-2.5-pro.
+2026-04-29 20:36:18,678 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,807 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,892 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,898 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,971 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:18,999 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,006 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,012 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,013 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,027 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,123 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,129 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,141 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,148 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,168 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,175 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,175 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,211 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,219 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,231 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,237 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,238 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,296 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,369 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,409 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,422 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,440 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,441 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,457 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,516 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,522 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,529 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,535 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,699 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,712 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,713 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,792 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,862 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,874 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,912 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:19,980 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:20,385 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:20,621 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:20,640 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:20,665 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:20,783 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,041 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,088 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,278 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,279 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,310 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,344 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,421 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,472 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,529 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,667 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,863 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:21,996 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:22,241 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:22,259 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:22,706 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:22,862 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:22,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:23,025 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:23,839 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:24,147 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:24,166 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:24,561 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:26,024 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:26,237 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:26,763 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:27,884 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:27,927 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:27,927 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:27,939 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 316/405 [00:12<00:05, 15.15it/s] 2026-04-29 20:36:28,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:28,104 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:28,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:28,297 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:28,305 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:36:28,398 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 317/405 [00:13<00:06, 13.41it/s]Descriptions:  78%|███████▊  | 317/405 [00:24<00:06, 13.41it/s]Descriptions:  85%|████████▌ | 346/405 [00:24<00:09,  6.40it/s]Descriptions:  86%|████████▌ | 347/405 [00:24<00:09,  6.34it/s]Descriptions:  91%|█████████ | 369/405 [00:28<00:05,  6.42it/s]Descriptions:  95%|█████████▍| 384/405 [00:31<00:03,  5.77it/s]Descriptions:  98%|█████████▊| 395/405 [00:34<00:01,  5.50it/s]Descriptions: 100%|█████████▉| 403/405 [00:38<00:00,  4.10it/s]Descriptions: 100%|██████████| 405/405 [00:42<00:00,  9.61it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:47,  1.10s/it]Stance:   5%|▍         | 2/44 [00:01<00:32,  1.31it/s]Stance:   7%|▋         | 3/44 [00:02<00:26,  1.52it/s]Stance:   9%|▉         | 4/44 [00:02<00:24,  1.65it/s]Stance:  11%|█▏        | 5/44 [00:03<00:22,  1.74it/s]Stance:  14%|█▎        | 6/44 [00:03<00:21,  1.78it/s]Stance:  16%|█▌        | 7/44 [00:04<00:20,  1.82it/s]Stance:  18%|█▊        | 8/44 [00:04<00:19,  1.83it/s]Stance:  20%|██        | 9/44 [00:05<00:19,  1.83it/s]Stance:  23%|██▎       | 10/44 [00:05<00:18,  1.83it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:06<00:17,  1.84it/s]Stance:  27%|██▋       | 12/44 [00:06<00:17,  1.84it/s]Stance:  30%|██▉       | 13/44 [00:07<00:16,  1.85it/s]Stance:  32%|███▏      | 14/44 [00:08<00:16,  1.85it/s]Stance:  34%|███▍      | 15/44 [00:08<00:15,  1.85it/s]Stance:  36%|███▋      | 16/44 [00:09<00:19,  1.43it/s]Stance:  39%|███▊      | 17/44 [00:10<00:17,  1.52it/s]Stance:  41%|████      | 18/44 [00:10<00:16,  1.60it/s]Stance:  43%|████▎     | 19/44 [00:11<00:15,  1.66it/s]Stance:  45%|████▌     | 20/44 [00:11<00:14,  1.69it/s]Stance:  48%|████▊     | 21/44 [00:12<00:13,  1.72it/s]Stance:  50%|█████     | 22/44 [00:13<00:12,  1.74it/s]Stance:  52%|█████▏    | 23/44 [00:13<00:11,  1.77it/s]Stance:  55%|█████▍    | 24/44 [00:14<00:11,  1.79it/s]Stance:  57%|█████▋    | 25/44 [00:14<00:10,  1.79it/s]Stance:  59%|█████▉    | 26/44 [00:15<00:09,  1.89it/s]Stance:  61%|██████▏   | 27/44 [00:15<00:08,  1.90it/s]Stance:  64%|██████▎   | 28/44 [00:16<00:08,  1.84it/s]Stance:  66%|██████▌   | 29/44 [00:16<00:07,  1.97it/s]Stance:  68%|██████▊   | 30/44 [00:17<00:06,  2.07it/s]Stance:  70%|███████   | 31/44 [00:17<00:06,  2.13it/s]Stance:  73%|███████▎  | 32/44 [00:17<00:05,  2.15it/s]Stance:  75%|███████▌  | 33/44 [00:18<00:05,  2.03it/s]Stance:  77%|███████▋  | 34/44 [00:19<00:05,  1.96it/s]Stance:  80%|███████▉  | 35/44 [00:19<00:04,  1.90it/s]Stance:  82%|████████▏ | 36/44 [00:20<00:04,  1.86it/s]Stance:  84%|████████▍ | 37/44 [00:20<00:03,  1.85it/s]Stance:  86%|████████▋ | 38/44 [00:21<00:03,  1.84it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  5.17it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  2.03it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:10,  1.13it/s]Ad:  15%|█▌        | 2/13 [00:01<00:09,  1.13it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.13it/s]Ad:  31%|███       | 4/13 [00:03<00:08,  1.12it/s]Ad:  38%|███▊      | 5/13 [00:04<00:07,  1.11it/s]Ad:  46%|████▌     | 6/13 [00:05<00:06,  1.12it/s]Ad:  54%|█████▍    | 7/13 [00:06<00:05,  1.13it/s]Ad:  62%|██████▏   | 8/13 [00:07<00:04,  1.12it/s]Ad:  69%|██████▉   | 9/13 [00:08<00:03,  1.11it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.11it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.12it/s]Ad:  92%|█████████▏| 12/13 [00:10<00:00,  1.10it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.23it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.14it/s]
+2026-04-29 20:37:47,314 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-pro.parquet.

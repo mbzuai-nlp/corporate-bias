@@ -9,13 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 13:53:15,242 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:53:15,274 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 13:53:15,420 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 13:53:15,546 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-29 13:53:15,690 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-29 13:53:16,044 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 5784.15it/s]
+2026-04-29 20:34:51,996 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:34:52,053 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:34:52,227 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-29 20:34:52,387 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-29 20:34:52,766 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6820.06it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -23,364 +22,527 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 13:53:16,190 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 13:53:16,314 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 13:53:16,347 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:53:16,439 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 13:53:16,482 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:53:17,787 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:53:17,812 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 74/202 [00:00<00:00, 720.36it/s]Loading weights:  75%|███████▍  | 151/202 [00:00<00:00, 748.80it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 967.63it/s]
-2026-04-29 13:53:18,227 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:53:18,351 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:53:19,474 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 13:53:19,714 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:53:19,739 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 13:53:19,975 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:53:20,009 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 13:53:20,142 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 13:53:20,270 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 13:53:20,930 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 13:53:21,074 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 13:53:21,098 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 86/202 [00:00<00:00, 849.16it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1176.32it/s]
-2026-04-29 13:53:21,476 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-flash num_samples_per_instance=3.
-Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
-2026-04-29 13:53:21,489 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,489 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,489 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,491 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,493 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,495 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,497 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,498 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,500 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,501 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,502 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,506 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,507 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,508 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,513 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,515 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,518 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,522 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,524 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,525 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,533 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,536 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,538 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,539 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,540 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,541 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,542 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,543 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,543 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,544 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,545 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,545 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,546 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,546 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,547 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,547 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,548 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,548 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,548 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,549 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,549 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,549 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,550 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,550 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,551 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,551 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,552 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,553 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,553 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,560 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,555 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,555 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,556 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,557 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,557 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,558 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,559 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,559 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,554 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,570 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,573 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,575 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,580 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,582 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,584 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,586 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,589 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,596 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,602 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,606 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,609 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,618 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,632 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,636 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,639 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,643 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,646 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,651 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,659 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,668 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,670 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,672 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,678 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,680 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,683 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,686 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,693 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,694 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,696 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,698 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,707 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,710 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,711 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,714 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,716 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,725 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,728 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,729 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,731 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,734 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,735 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,739 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,740 [INFO] root: Invoking gemini-2.5-flash.
-Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 13:53:21,741 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,745 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,748 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,752 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,753 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,757 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,759 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,760 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,762 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,765 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,766 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,769 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,770 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,772 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,777 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,780 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,782 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,784 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,792 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,794 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,797 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,799 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,804 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,805 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,806 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,840 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,841 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,842 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,842 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,845 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,846 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,847 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,849 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,850 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,850 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,852 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,852 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,853 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,854 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,855 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,856 [INFO] root: Invoking gemini-2.5-flash.
-Descriptions:  28%|██▊       | 89/315 [00:00<00:00, 857.82it/s]2026-04-29 13:53:21,857 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,858 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,859 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,861 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,861 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,862 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,862 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,863 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,864 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,865 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,866 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,867 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,867 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,868 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,868 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,869 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,870 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,871 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,872 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,872 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,872 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,873 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,873 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,874 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,874 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,875 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,875 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,876 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,876 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,877 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,877 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,877 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,877 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,877 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,878 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,878 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,878 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,878 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,879 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,879 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,879 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,880 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,880 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,880 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,881 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,882 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,882 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,883 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,883 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,884 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,885 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,886 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,886 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,887 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,887 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,888 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,888 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,889 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,890 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,892 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,894 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,896 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,898 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,899 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,902 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,904 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,907 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,910 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,910 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,911 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,915 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,919 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,922 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,924 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,928 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,929 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,930 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,930 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,932 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,932 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,934 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,934 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,935 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,935 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,938 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,939 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,939 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,939 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,940 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,940 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,940 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,941 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,941 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,942 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,942 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,943 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,944 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,944 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,944 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,945 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,946 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,946 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,947 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,947 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,947 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,948 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,949 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,949 [INFO] root: Invoking gemini-2.5-flash.
-Descriptions:  78%|███████▊  | 246/315 [00:00<00:00, 1262.46it/s]2026-04-29 13:53:21,950 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,950 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,950 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,950 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,951 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,951 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,951 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,952 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,953 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,954 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,954 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,954 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,955 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,956 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,957 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,957 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,957 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,958 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,958 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,959 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,959 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,960 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,961 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,962 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,962 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,964 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,964 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,965 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,965 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,965 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,966 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,966 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,967 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,968 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,968 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,969 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,970 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,970 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,970 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,971 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,971 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,971 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,971 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,974 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,974 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,975 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,975 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,975 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,975 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,976 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,976 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,977 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,978 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,978 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,979 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,980 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,980 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,981 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,983 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,983 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,983 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,984 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:21,984 [INFO] root: Invoking gemini-2.5-flash.
-2026-04-29 13:53:22,802 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,810 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,825 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,891 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,913 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,975 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,993 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:22,994 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,022 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,037 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,075 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,115 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,290 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,435 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 13:53:23,722 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions: 100%|██████████| 315/315 [00:09<00:00, 31.66it/s]  
-Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:00<00:32,  1.02it/s]Stance:   6%|▌         | 2/34 [00:01<00:22,  1.44it/s]Stance:   9%|▉         | 3/34 [00:01<00:19,  1.63it/s]Stance:  12%|█▏        | 4/34 [00:02<00:17,  1.75it/s]Stance:  15%|█▍        | 5/34 [00:03<00:16,  1.78it/s]Stance:  18%|█▊        | 6/34 [00:03<00:15,  1.79it/s]Stance:  21%|██        | 7/34 [00:04<00:15,  1.80it/s]Stance:  24%|██▎       | 8/34 [00:04<00:14,  1.82it/s]Stance:  26%|██▋       | 9/34 [00:05<00:13,  1.83it/s]Stance:  29%|██▉       | 10/34 [00:05<00:13,  1.84it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  32%|███▏      | 11/34 [00:06<00:12,  1.84it/s]Stance:  35%|███▌      | 12/34 [00:06<00:12,  1.83it/s]Stance:  38%|███▊      | 13/34 [00:07<00:11,  1.84it/s]Stance:  41%|████      | 14/34 [00:07<00:10,  1.87it/s]Stance:  50%|█████     | 17/34 [00:08<00:04,  3.74it/s]Stance:  53%|█████▎    | 18/34 [00:08<00:05,  3.15it/s]Stance:  56%|█████▌    | 19/34 [00:09<00:05,  2.76it/s]Stance:  59%|█████▉    | 20/34 [00:09<00:05,  2.52it/s]Stance:  62%|██████▏   | 21/34 [00:10<00:05,  2.32it/s]Stance:  65%|██████▍   | 22/34 [00:10<00:05,  2.18it/s]Stance:  68%|██████▊   | 23/34 [00:11<00:05,  2.09it/s]Stance:  71%|███████   | 24/34 [00:11<00:04,  2.04it/s]Stance:  74%|███████▎  | 25/34 [00:12<00:04,  1.99it/s]Stance:  76%|███████▋  | 26/34 [00:12<00:03,  2.07it/s]Stance:  79%|███████▉  | 27/34 [00:13<00:03,  2.04it/s]Stance:  82%|████████▏ | 28/34 [00:13<00:03,  1.96it/s]Stance:  85%|████████▌ | 29/34 [00:14<00:02,  2.07it/s]Stance:  88%|████████▊ | 30/34 [00:14<00:01,  2.15it/s]Stance:  91%|█████████ | 31/34 [00:15<00:01,  2.20it/s]Stance:  94%|█████████▍| 32/34 [00:15<00:00,  2.07it/s]Stance:  97%|█████████▋| 33/34 [00:16<00:00,  1.99it/s]Stance: 100%|██████████| 34/34 [00:16<00:00,  1.98it/s]Stance: 100%|██████████| 34/34 [00:16<00:00,  2.04it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.28it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.23it/s]Ad:  30%|███       | 3/10 [00:02<00:06,  1.15it/s]Ad:  40%|████      | 4/10 [00:03<00:05,  1.15it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.12it/s]Ad:  60%|██████    | 6/10 [00:05<00:03,  1.11it/s]Ad:  70%|███████   | 7/10 [00:06<00:02,  1.09it/s]Ad:  80%|████████  | 8/10 [00:07<00:01,  1.09it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.11it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.18it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.15it/s]
-2026-04-29 13:54:11,886 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-flash.parquet.
+2026-04-29 20:34:52,947 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-04-29 20:34:53,120 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 20:34:53,140 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:34:53,272 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 20:34:53,301 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:34:53,437 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-29 20:34:54,619 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:34:54,686 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  44%|████▍     | 89/202 [00:00<00:00, 887.86it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1296.66it/s]
+2026-04-29 20:34:55,056 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:34:55,224 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:34:56,179 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 20:34:56,427 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:34:56,484 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:34:56,645 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:34:56,703 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 20:34:56,858 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:34:57,059 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:34:57,700 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 20:34:57,887 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:34:57,929 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  38%|███▊      | 76/202 [00:00<00:00, 758.70it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1159.47it/s]
+2026-04-29 20:34:58,287 [INFO] root: Running assay=describe-sentiment model=gemini-2.5-flash num_samples_per_instance=3.
+Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
+2026-04-29 20:34:58,300 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,301 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,301 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,303 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,303 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,304 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,305 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,306 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,308 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,311 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,313 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,315 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,318 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,320 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,322 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,327 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,332 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,335 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,340 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,344 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,345 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,347 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,349 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,351 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,351 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,352 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,353 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,354 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,355 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,355 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,356 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,356 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,357 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,357 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,358 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,358 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,359 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,359 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,360 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,360 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,361 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,364 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,365 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,374 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,377 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,382 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,387 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,392 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,399 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,407 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,419 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,422 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,424 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,430 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,434 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,440 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,446 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,448 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,449 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,450 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,451 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,455 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,458 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,460 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,464 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,468 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,470 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,477 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,479 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,484 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,487 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,489 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,494 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,500 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,502 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,504 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,506 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,510 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,513 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,517 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,519 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,521 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,523 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,525 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,531 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,533 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,535 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,541 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,545 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,548 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,550 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,553 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,556 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,557 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,559 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,561 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,567 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,571 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,573 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,577 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,581 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,585 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,587 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,589 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,594 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,596 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,599 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,602 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,608 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,615 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,624 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,626 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,630 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,631 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,635 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,637 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,638 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,643 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:34:58,647 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,650 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,655 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,660 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,664 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,665 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,667 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,669 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,674 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,685 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,755 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,756 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,756 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,757 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,758 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,759 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,759 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,760 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,760 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,760 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,761 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,761 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,762 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,763 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,764 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,764 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,765 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,765 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  11%|█         | 45/405 [00:00<00:00, 447.25it/s]2026-04-29 20:34:58,767 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,768 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,769 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,769 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,770 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,771 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,771 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,772 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,775 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,776 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,777 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,777 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,778 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,778 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,779 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,779 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,781 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,781 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,782 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,783 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,784 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,785 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,785 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,786 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,787 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,788 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,789 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,792 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,792 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,793 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,794 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,796 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,796 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,796 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,797 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,797 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,799 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,800 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,800 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,800 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,801 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,804 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,804 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,806 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,810 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,810 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,810 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,816 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,817 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,817 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  25%|██▌       | 103/405 [00:00<00:00, 521.94it/s]2026-04-29 20:34:58,818 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,819 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,821 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,821 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,822 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,822 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,824 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,824 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,827 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,829 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,829 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,831 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,833 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,833 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,836 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,837 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,837 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,841 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,841 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,846 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,848 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,848 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,851 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,852 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,852 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,876 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,876 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,877 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,878 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,878 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,880 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,881 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,882 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,883 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,884 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,890 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,894 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,897 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,898 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,899 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,899 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,901 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,926 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,940 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,943 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:58,994 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,050 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,081 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,128 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,165 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,221 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,266 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  39%|███▊      | 156/405 [00:01<00:02, 110.51it/s]2026-04-29 20:34:59,371 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,387 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,390 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,391 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,433 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,454 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,470 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,476 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,516 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,538 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,552 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,600 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,612 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,634 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,635 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,691 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,730 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,733 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,757 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,769 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,773 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,773 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,774 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,783 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,785 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,786 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,792 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,793 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,800 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,801 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,804 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,804 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,810 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,813 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,814 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,816 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,818 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,819 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,824 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,826 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,828 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,828 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,829 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,830 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,833 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,833 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,834 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,836 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,838 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,838 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,839 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,840 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,841 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,842 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,844 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,846 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,847 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,852 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,854 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,855 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,857 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,857 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,857 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,860 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,861 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,861 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,864 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  54%|█████▍    | 220/405 [00:01<00:01, 173.25it/s]2026-04-29 20:34:59,865 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,866 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,866 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,870 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,871 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,872 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,874 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,877 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,877 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,879 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,881 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,881 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,887 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,887 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,888 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,889 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,890 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,890 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,891 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,891 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,893 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,893 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,894 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,895 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,895 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,896 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,897 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,897 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,898 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,899 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,900 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,902 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,903 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,910 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,910 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,914 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,917 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,918 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,923 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,924 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,924 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,925 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,926 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,927 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,928 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,929 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,929 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,930 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,930 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,931 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,932 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,933 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,934 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,935 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,936 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,937 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,939 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,939 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,940 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,941 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,941 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,942 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,943 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,949 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,953 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,953 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,955 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,956 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,961 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,964 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,964 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,965 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,966 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,966 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,967 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,967 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,968 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,969 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,972 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,972 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,974 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,974 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,976 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,976 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:34:59,977 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,977 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,977 [INFO] root: Invoking gemini-2.5-flash.
+Descriptions:  74%|███████▍  | 301/405 [00:01<00:00, 265.80it/s]2026-04-29 20:34:59,979 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,980 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,981 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,986 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,987 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,987 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,991 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,992 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:34:59,995 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:35:00,002 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:35:00,002 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:35:00,004 [INFO] root: Invoking gemini-2.5-flash.
+2026-04-29 20:35:00,026 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,049 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,054 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,060 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,062 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,075 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,136 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,159 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,197 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,198 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,203 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,209 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,236 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,261 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,266 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,268 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,271 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,272 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,285 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,286 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,301 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,333 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,347 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,357 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,357 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,359 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,361 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,361 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,362 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,368 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,372 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,406 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,407 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,417 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,418 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,434 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,439 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,440 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,450 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,455 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,461 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,488 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,496 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,498 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,500 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,501 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,502 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,530 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,534 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,535 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,537 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,539 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,540 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,543 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,550 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,582 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,591 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,642 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,692 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,701 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,708 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,734 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,743 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,758 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,761 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,828 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,840 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:00,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,078 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,185 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,196 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,405 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,483 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,681 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:01,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:35:04,722 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  88%|████████▊ | 358/405 [00:08<00:01, 23.80it/s] Descriptions:  98%|█████████▊| 396/405 [00:09<00:00, 27.85it/s]Descriptions: 100%|██████████| 405/405 [00:14<00:00, 28.08it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:47,  1.10s/it]Stance:   5%|▍         | 2/44 [00:01<00:31,  1.32it/s]Stance:   7%|▋         | 3/44 [00:02<00:26,  1.53it/s]Stance:   9%|▉         | 4/44 [00:02<00:24,  1.66it/s]Stance:  11%|█▏        | 5/44 [00:03<00:22,  1.73it/s]Stance:  14%|█▎        | 6/44 [00:03<00:21,  1.75it/s]Stance:  16%|█▌        | 7/44 [00:04<00:20,  1.78it/s]Stance:  18%|█▊        | 8/44 [00:04<00:20,  1.79it/s]Stance:  20%|██        | 9/44 [00:05<00:19,  1.80it/s]Stance:  23%|██▎       | 10/44 [00:05<00:18,  1.82it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  34%|███▍      | 15/44 [00:06<00:05,  4.92it/s]Stance:  36%|███▋      | 16/44 [00:06<00:07,  3.89it/s]Stance:  39%|███▊      | 17/44 [00:07<00:08,  3.24it/s]Stance:  41%|████      | 18/44 [00:07<00:09,  2.82it/s]Stance:  43%|████▎     | 19/44 [00:08<00:09,  2.54it/s]Stance:  45%|████▌     | 20/44 [00:08<00:10,  2.35it/s]Stance:  48%|████▊     | 21/44 [00:09<00:10,  2.22it/s]Stance:  50%|█████     | 22/44 [00:09<00:10,  2.13it/s]Stance:  52%|█████▏    | 23/44 [00:10<00:10,  2.06it/s]Stance:  55%|█████▍    | 24/44 [00:10<00:09,  2.01it/s]Stance:  57%|█████▋    | 25/44 [00:11<00:09,  1.99it/s]Stance:  59%|█████▉    | 26/44 [00:11<00:08,  2.09it/s]Stance:  61%|██████▏   | 27/44 [00:12<00:08,  2.09it/s]Stance:  64%|██████▎   | 28/44 [00:12<00:07,  2.00it/s]Stance:  66%|██████▌   | 29/44 [00:13<00:07,  2.13it/s]Stance:  68%|██████▊   | 30/44 [00:13<00:06,  2.22it/s]Stance:  70%|███████   | 31/44 [00:14<00:05,  2.29it/s]Stance:  73%|███████▎  | 32/44 [00:14<00:05,  2.32it/s]Stance:  75%|███████▌  | 33/44 [00:15<00:05,  2.18it/s]Stance:  77%|███████▋  | 34/44 [00:15<00:04,  2.06it/s]Stance:  80%|███████▉  | 35/44 [00:16<00:04,  1.99it/s]Stance:  82%|████████▏ | 36/44 [00:16<00:04,  1.93it/s]Stance:  84%|████████▍ | 37/44 [00:17<00:03,  1.89it/s]Stance:  86%|████████▋ | 38/44 [00:17<00:03,  1.87it/s]Stance:  89%|████████▊ | 39/44 [00:18<00:02,  1.86it/s]Stance:  91%|█████████ | 40/44 [00:18<00:02,  1.83it/s]Stance:  93%|█████████▎| 41/44 [00:19<00:01,  1.84it/s]Stance:  95%|█████████▌| 42/44 [00:19<00:01,  1.83it/s]Stance:  98%|█████████▊| 43/44 [00:20<00:00,  1.85it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  1.84it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  2.09it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:10,  1.12it/s]Ad:  15%|█▌        | 2/13 [00:01<00:09,  1.14it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.13it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.14it/s]Ad:  38%|███▊      | 5/13 [00:04<00:07,  1.13it/s]Ad:  46%|████▌     | 6/13 [00:05<00:06,  1.14it/s]Ad:  54%|█████▍    | 7/13 [00:06<00:05,  1.13it/s]Ad:  62%|██████▏   | 8/13 [00:07<00:04,  1.13it/s]Ad:  69%|██████▉   | 9/13 [00:08<00:03,  1.10it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.14it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.14it/s]Ad:  92%|█████████▏| 12/13 [00:10<00:00,  1.11it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.22it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.15it/s]
+2026-04-29 20:36:04,552 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gemini-2.5-flash.parquet.

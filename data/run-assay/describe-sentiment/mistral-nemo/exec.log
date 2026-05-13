@@ -9,12 +9,13 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 14:01:14,848 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:01:14,874 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 14:01:14,998 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 14:01:15,121 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 14:01:15,422 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7533.09it/s]
+2026-04-29 20:44:52,136 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:44:52,191 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:44:52,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-04-29 20:44:52,519 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-04-29 20:44:52,689 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 20:44:52,960 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6395.47it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,365 +23,526 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 14:01:13,629 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-29 14:01:13,788 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:01:13,789 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 14:01:13,907 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:01:13,907 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 14:01:14,048 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 14:01:15,042 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:01:15,063 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████     | 103/202 [00:00<00:00, 1020.79it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1658.56it/s]
-2026-04-29 14:01:15,343 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:01:15,461 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:01:16,347 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 14:01:16,545 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:01:16,568 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 14:01:16,698 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:01:16,721 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 14:01:16,849 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 14:01:16,979 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 14:01:17,554 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 14:01:17,708 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 14:01:17,733 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 934.99it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1309.36it/s]
-2026-04-29 14:01:18,081 [INFO] root: Running assay=describe-sentiment model=mistral-nemo num_samples_per_instance=3.
-Invoking model 315 times for 34 distinct entities across 18 assay instances with 3 samples per instance (105 entity-instance pairs × 3 samples).
-2026-04-29 14:01:18,093 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,093 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,094 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,094 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,095 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,096 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,097 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,099 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,100 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,101 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,102 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,105 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,108 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,110 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,112 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,113 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,114 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,116 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,117 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,120 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,122 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,123 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,126 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,129 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,133 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,135 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,139 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,140 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,142 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,147 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,148 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,149 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,150 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,151 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,152 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,153 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,153 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,154 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,155 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,156 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,156 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,156 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,157 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,157 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,158 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,158 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,159 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,159 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,163 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,166 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,171 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,173 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,180 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,183 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,185 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,189 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,191 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,193 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,198 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,203 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,213 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,219 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,223 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,234 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,237 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,239 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,241 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,244 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,245 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,247 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,249 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,250 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,253 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,261 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,265 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,268 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,273 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,274 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,277 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,280 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,286 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,288 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,289 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,294 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,296 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,299 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,303 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,306 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,311 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,312 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,317 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,320 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,321 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,323 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,324 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,327 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,330 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,333 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,336 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,339 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,343 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,345 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,347 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,351 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,356 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,357 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,359 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,360 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,365 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,369 [INFO] root: Invoking mistral-nemo.
-Descriptions:   0%|          | 0/315 [00:00<?, ?it/s]2026-04-29 14:01:18,375 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,378 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,384 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,390 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,392 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,393 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,396 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,399 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,403 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,405 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,409 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,411 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,419 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,421 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,426 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,427 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,430 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,432 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,484 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,486 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,486 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,488 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,488 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,489 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,490 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,492 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,493 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,499 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,501 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,501 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,504 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,505 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,507 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,508 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,510 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,514 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,514 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,514 [INFO] root: Invoking mistral-nemo.
-Descriptions:  23%|██▎       | 72/315 [00:00<00:00, 712.83it/s]2026-04-29 14:01:18,515 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,516 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,517 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,518 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,518 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,519 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,519 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,520 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,520 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,521 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,521 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,522 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,523 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,524 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,525 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,525 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,526 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,527 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,527 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,528 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,528 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,530 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,530 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,530 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,531 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,532 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,532 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,532 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,533 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,533 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,533 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,533 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,535 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,535 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,536 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,537 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,537 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,537 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,538 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,538 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,538 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,539 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,540 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,540 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,541 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,541 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,542 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,543 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,544 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,544 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,545 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,545 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,546 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,546 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,547 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,547 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,548 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,548 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,549 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,549 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,549 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,550 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,550 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,551 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,552 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,553 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,553 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,554 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,554 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,555 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,556 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,556 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,556 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,557 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,558 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,558 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,558 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,559 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,559 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,559 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,560 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,561 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,561 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,562 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,563 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,563 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,564 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,565 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,565 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,565 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,566 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,566 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,567 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,568 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,568 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,569 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,569 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,569 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,570 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,570 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,570 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,571 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,571 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,572 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,573 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,573 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,574 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,574 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,574 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,575 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,575 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,575 [INFO] root: Invoking mistral-nemo.
-Descriptions:  82%|████████▏ | 258/315 [00:00<00:00, 1381.54it/s]2026-04-29 14:01:18,575 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,576 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,576 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,577 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,577 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,577 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,578 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,578 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,579 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,579 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,579 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,579 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,580 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,580 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,580 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,581 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,582 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,582 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,583 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,584 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,584 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,584 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,584 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,584 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,585 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,585 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,586 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,586 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,587 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,588 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,588 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,589 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,589 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,590 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,590 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,591 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,592 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,593 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,593 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,594 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,595 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,595 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,596 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,597 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,597 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,597 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,598 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,598 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,599 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,599 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,600 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,601 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,601 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,602 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:18,603 [INFO] root: Invoking mistral-nemo.
-2026-04-29 14:01:19,262 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,263 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,264 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,264 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,270 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,275 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,284 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,446 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,475 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,523 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,911 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:19,939 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:20,096 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:20,284 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:20,311 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:20,467 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 14:01:21,462 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  82%|████████▏ | 258/315 [00:16<00:00, 1381.54it/s]Descriptions:  97%|█████████▋| 304/315 [00:21<00:01, 10.03it/s]  Descriptions:  97%|█████████▋| 305/315 [00:21<00:01,  9.98it/s]Descriptions:  97%|█████████▋| 305/315 [00:37<00:01,  9.98it/s]Descriptions: 100%|██████████| 315/315 [00:38<00:00,  4.20it/s]Descriptions: 100%|██████████| 315/315 [00:38<00:00,  8.27it/s]
-Stance:   0%|          | 0/34 [00:00<?, ?it/s]Stance:   3%|▎         | 1/34 [00:01<00:33,  1.01s/it]Stance:   6%|▌         | 2/34 [00:01<00:23,  1.39it/s]Stance:   9%|▉         | 3/34 [00:02<00:20,  1.51it/s]Stance:  12%|█▏        | 4/34 [00:02<00:17,  1.73it/s]Stance:  15%|█▍        | 5/34 [00:03<00:15,  1.86it/s]Stance:  18%|█▊        | 6/34 [00:03<00:14,  1.92it/s]Stance:  21%|██        | 7/34 [00:04<00:13,  1.94it/s]Stance:  24%|██▎       | 8/34 [00:04<00:13,  1.92it/s]Stance:  26%|██▋       | 9/34 [00:05<00:12,  1.96it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  38%|███▊      | 13/34 [00:05<00:04,  4.28it/s]Stance:  41%|████      | 14/34 [00:05<00:05,  3.54it/s]Stance:  44%|████▍     | 15/34 [00:06<00:06,  3.15it/s]Stance:  47%|████▋     | 16/34 [00:06<00:06,  2.89it/s]Stance:  50%|█████     | 17/34 [00:07<00:06,  2.62it/s]Stance:  53%|█████▎    | 18/34 [00:07<00:06,  2.65it/s]Stance:  56%|█████▌    | 19/34 [00:08<00:06,  2.49it/s]Stance:  59%|█████▉    | 20/34 [00:08<00:06,  2.33it/s]Stance:  62%|██████▏   | 21/34 [00:09<00:05,  2.25it/s]Stance:  65%|██████▍   | 22/34 [00:09<00:05,  2.16it/s]Stance:  68%|██████▊   | 23/34 [00:10<00:05,  2.17it/s]Stance:  71%|███████   | 24/34 [00:10<00:04,  2.26it/s]Stance:  74%|███████▎  | 25/34 [00:10<00:04,  2.19it/s]Stance:  76%|███████▋  | 26/34 [00:11<00:03,  2.28it/s]Stance:  79%|███████▉  | 27/34 [00:11<00:02,  2.36it/s]Stance:  82%|████████▏ | 28/34 [00:12<00:02,  2.44it/s]Stance:  85%|████████▌ | 29/34 [00:12<00:02,  2.47it/s]Stance:  88%|████████▊ | 30/34 [00:12<00:01,  2.47it/s]Stance:  91%|█████████ | 31/34 [00:13<00:01,  2.50it/s]Stance:  94%|█████████▍| 32/34 [00:13<00:00,  2.51it/s]Stance:  97%|█████████▋| 33/34 [00:14<00:00,  2.32it/s]Stance: 100%|██████████| 34/34 [00:14<00:00,  2.20it/s]Stance: 100%|██████████| 34/34 [00:14<00:00,  2.32it/s]
-Ad:   0%|          | 0/10 [00:00<?, ?it/s]Ad:  10%|█         | 1/10 [00:00<00:07,  1.21it/s]Ad:  20%|██        | 2/10 [00:01<00:06,  1.21it/s]Ad:  30%|███       | 3/10 [00:02<00:06,  1.15it/s]Ad:  40%|████      | 4/10 [00:03<00:05,  1.15it/s]Ad:  50%|█████     | 5/10 [00:04<00:04,  1.16it/s]Ad:  60%|██████    | 6/10 [00:04<00:03,  1.29it/s]Ad:  70%|███████   | 7/10 [00:05<00:02,  1.22it/s]Ad:  80%|████████  | 8/10 [00:06<00:01,  1.21it/s]Ad:  90%|█████████ | 9/10 [00:07<00:00,  1.19it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.24it/s]Ad: 100%|██████████| 10/10 [00:08<00:00,  1.21it/s]
-2026-04-29 14:02:34,506 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-nemo.parquet.
+2026-04-29 20:44:53,138 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-04-29 20:44:53,292 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-04-29 20:44:53,298 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:44:53,443 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-04-29 20:44:53,452 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:44:54,761 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:44:54,822 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 92/202 [00:00<00:00, 919.13it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1253.48it/s]
+2026-04-29 20:44:55,206 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:44:52,471 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:44:53,386 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-04-29 20:44:53,643 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:44:53,684 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-04-29 20:44:53,846 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:44:53,890 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-29 20:44:54,048 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-29 20:44:54,217 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-29 20:44:54,780 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-04-29 20:44:54,923 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-04-29 20:44:54,982 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  41%|████      | 82/202 [00:00<00:00, 812.64it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1187.38it/s]
+2026-04-29 20:44:55,341 [INFO] root: Running assay=describe-sentiment model=mistral-nemo num_samples_per_instance=3.
+Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
+2026-04-29 20:44:55,356 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,356 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,357 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,357 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,359 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,361 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,362 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,363 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,364 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,365 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,366 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,368 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,371 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,373 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,374 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,377 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,383 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,385 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,389 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,390 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,395 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,398 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,400 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,403 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,404 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,406 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,408 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,409 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,410 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,412 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,413 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,413 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,414 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,414 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,415 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,415 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,416 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,416 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,417 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,418 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,419 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,424 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,429 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,438 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,447 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,449 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,458 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,463 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,468 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,471 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,474 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,477 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,483 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,488 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,491 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,496 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,499 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,501 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,503 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,510 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,512 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,515 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,519 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,523 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,526 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,528 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,532 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,536 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,540 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,543 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,545 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,548 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,550 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,553 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,555 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,558 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,560 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,562 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,565 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,567 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,568 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,570 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,572 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,576 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,579 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,580 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,581 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,586 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,589 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,591 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,594 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,598 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,603 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,605 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,609 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,612 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,615 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,622 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,628 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,631 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,633 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,637 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,638 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,639 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,644 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,645 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,648 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,651 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,655 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,657 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,660 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,664 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,668 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,670 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,682 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,686 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,691 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,698 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,700 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,704 [INFO] root: Invoking mistral-nemo.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:44:55,706 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,708 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,712 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,718 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,726 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,728 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,730 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,733 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,802 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,803 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,804 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,804 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,805 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,806 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,808 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,808 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,810 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,811 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,815 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,816 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,817 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,819 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,819 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,820 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,821 [INFO] root: Invoking mistral-nemo.
+Descriptions:  12%|█▏        | 49/405 [00:00<00:00, 480.61it/s]2026-04-29 20:44:55,821 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,822 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,823 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,825 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,826 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,827 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,827 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,828 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,828 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,828 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,829 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,829 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,830 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,831 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,831 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,833 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,833 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,834 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,834 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,835 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,836 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,838 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,838 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,838 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,839 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,840 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,840 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,840 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,842 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,843 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,846 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,850 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,851 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,851 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,852 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,853 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,854 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,855 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,856 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,860 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,861 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,863 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,865 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,866 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,866 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,870 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,872 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,874 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,875 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,875 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,877 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,879 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,881 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,882 [INFO] root: Invoking mistral-nemo.
+Descriptions:  26%|██▌       | 105/405 [00:00<00:00, 524.75it/s]2026-04-29 20:44:55,884 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,884 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,884 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,885 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,888 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,888 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,888 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,890 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,891 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,896 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,896 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,897 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,900 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,901 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,904 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,905 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,909 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,910 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,912 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,913 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,914 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,915 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,917 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,918 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,918 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,919 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,919 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,943 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,943 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,946 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,947 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,947 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,950 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,951 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,954 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,955 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,956 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,957 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,957 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,964 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,965 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,966 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,967 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,978 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:55,986 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,001 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,002 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,002 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,003 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,010 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,010 [INFO] root: Invoking mistral-nemo.
+Descriptions:  39%|███▉      | 158/405 [00:00<00:00, 248.70it/s]2026-04-29 20:44:56,010 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,019 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,020 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,021 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,021 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,023 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,028 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,029 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,065 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,071 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,072 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,077 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,081 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,088 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,089 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,091 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,097 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,099 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,108 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,113 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,142 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,147 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,148 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,176 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,183 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,191 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,192 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,215 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,220 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,226 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,264 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,266 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,266 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,293 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,293 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,298 [INFO] root: Invoking mistral-nemo.
+Descriptions:  48%|████▊     | 194/405 [00:00<00:00, 236.94it/s]2026-04-29 20:44:56,308 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,309 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,316 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,316 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,325 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,331 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,333 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,333 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,336 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,336 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,343 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,349 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,350 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,356 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,366 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,366 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,367 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,375 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,376 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,380 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,382 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,383 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,387 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,393 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,396 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,396 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,407 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,412 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,413 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,414 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,416 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,442 [INFO] root: Invoking mistral-nemo.
+Descriptions:  55%|█████▌    | 224/405 [00:01<00:01, 176.12it/s]2026-04-29 20:44:56,443 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,443 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,460 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,461 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,492 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,499 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,502 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,518 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,538 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,541 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,544 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,552 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,572 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,576 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,576 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,577 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,583 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,590 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,601 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,616 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,648 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,650 [INFO] root: Invoking mistral-nemo.
+Descriptions:  61%|██████    | 247/405 [00:01<00:00, 158.23it/s]2026-04-29 20:44:56,653 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,658 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,659 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,659 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,683 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,691 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,707 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,710 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,722 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,740 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,751 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,752 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,757 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,761 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,762 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,794 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,803 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,834 [INFO] root: Invoking mistral-nemo.
+Descriptions:  66%|██████▌   | 267/405 [00:01<00:00, 141.94it/s]2026-04-29 20:44:56,836 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,840 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,844 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,845 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,882 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,882 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,883 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,890 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,891 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,901 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,903 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,908 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,910 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,911 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,938 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,944 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,951 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,955 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,961 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:56,984 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,000 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,002 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,007 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,013 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,026 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,031 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,053 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,055 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,057 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,057 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,058 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,082 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,092 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,095 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,096 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,105 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,107 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,110 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,121 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,121 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,132 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,135 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,141 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,144 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,144 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,145 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,146 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,146 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,147 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,150 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,151 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,152 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,153 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,155 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,163 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,166 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,167 [INFO] root: Invoking mistral-nemo.
+2026-04-29 20:44:57,171 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,211 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,211 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,226 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,228 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,230 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,244 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,257 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,267 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,280 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,288 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,315 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,327 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,327 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,367 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,382 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,403 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,410 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,420 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,469 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,491 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,503 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,504 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,526 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,549 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,560 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,566 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,631 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,641 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,740 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,745 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,757 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,761 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,762 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,786 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,787 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,789 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,797 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,806 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  78%|███████▊  | 316/405 [00:02<00:00, 93.37it/s] 2026-04-29 20:44:57,959 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,997 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,998 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,999 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,999 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:57,999 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,000 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,002 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,004 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,019 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,029 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,042 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,044 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,087 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,131 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,139 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,157 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,162 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,233 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,237 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,295 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,296 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,299 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,309 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,326 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,453 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,464 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,677 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:58,869 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:59,030 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:59,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:59,163 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:59,265 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-04-29 20:44:59,402 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Descriptions:  81%|████████▏ | 330/405 [00:03<00:02, 36.96it/s]Descriptions:  84%|████████▍ | 340/405 [00:05<00:02, 23.04it/s]Descriptions:  86%|████████▌ | 347/405 [00:07<00:04, 13.73it/s]Descriptions:  87%|████████▋ | 352/405 [00:08<00:04, 11.63it/s]Descriptions:  88%|████████▊ | 356/405 [00:09<00:05,  8.69it/s]Descriptions:  89%|████████▊ | 359/405 [00:11<00:06,  6.79it/s]Descriptions:  89%|████████▉ | 361/405 [00:11<00:06,  6.45it/s]Descriptions:  90%|████████▉ | 363/405 [00:11<00:06,  6.71it/s]Descriptions:  90%|█████████ | 365/405 [00:11<00:05,  6.91it/s]Descriptions:  91%|█████████ | 367/405 [00:12<00:04,  7.74it/s]Descriptions:  92%|█████████▏| 371/405 [00:12<00:03, 10.33it/s]Descriptions:  92%|█████████▏| 373/405 [00:12<00:03, 10.27it/s]Descriptions:  93%|█████████▎| 375/405 [00:12<00:03,  9.23it/s]Descriptions:  93%|█████████▎| 377/405 [00:12<00:03,  8.35it/s]Descriptions:  94%|█████████▎| 379/405 [00:13<00:02,  9.69it/s]Descriptions:  94%|█████████▍| 381/405 [00:13<00:02,  9.49it/s]Descriptions:  95%|█████████▍| 383/405 [00:13<00:02,  8.87it/s]Descriptions:  95%|█████████▌| 385/405 [00:14<00:03,  6.09it/s]Descriptions:  95%|█████████▌| 386/405 [00:14<00:04,  4.53it/s]Descriptions:  96%|█████████▌| 388/405 [00:14<00:03,  5.11it/s]Descriptions:  96%|█████████▌| 389/405 [00:15<00:02,  5.61it/s]Descriptions:  97%|█████████▋| 391/405 [00:15<00:02,  5.38it/s]Descriptions:  98%|█████████▊| 395/405 [00:15<00:01,  8.71it/s]Descriptions:  98%|█████████▊| 397/405 [00:15<00:00, 10.12it/s]Descriptions:  99%|█████████▊| 399/405 [00:16<00:01,  4.55it/s]Descriptions:  99%|█████████▉| 401/405 [00:19<00:02,  1.84it/s]Descriptions:  99%|█████████▉| 402/405 [00:22<00:03,  1.02s/it]Descriptions: 100%|█████████▉| 403/405 [00:24<00:02,  1.07s/it]Descriptions: 100%|█████████▉| 404/405 [00:25<00:01,  1.17s/it]Descriptions: 100%|██████████| 405/405 [00:25<00:00, 15.66it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:45,  1.06s/it]Stance:   5%|▍         | 2/44 [00:01<00:32,  1.29it/s]Stance:   7%|▋         | 3/44 [00:02<00:26,  1.53it/s]Stance:   9%|▉         | 4/44 [00:02<00:26,  1.51it/s]Stance:  11%|█▏        | 5/44 [00:03<00:23,  1.66it/s]Stance:  14%|█▎        | 6/44 [00:03<00:21,  1.76it/s]Stance:  16%|█▌        | 7/44 [00:04<00:18,  1.95it/s]Stance:  18%|█▊        | 8/44 [00:04<00:18,  1.97it/s]Stance:  20%|██        | 9/44 [00:05<00:17,  1.98it/s]Stance:  23%|██▎       | 10/44 [00:05<00:16,  2.04it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:06<00:16,  2.01it/s]Stance:  27%|██▋       | 12/44 [00:06<00:16,  2.00it/s]Stance:  30%|██▉       | 13/44 [00:07<00:15,  2.00it/s]Stance:  32%|███▏      | 14/44 [00:07<00:15,  1.97it/s]Stance:  34%|███▍      | 15/44 [00:08<00:14,  1.96it/s]Stance:  36%|███▋      | 16/44 [00:08<00:13,  2.00it/s]Stance:  39%|███▊      | 17/44 [00:09<00:15,  1.75it/s]Stance:  41%|████      | 18/44 [00:09<00:13,  1.95it/s]Stance:  43%|████▎     | 19/44 [00:10<00:12,  2.00it/s]Stance:  45%|████▌     | 20/44 [00:10<00:12,  2.00it/s]Stance:  48%|████▊     | 21/44 [00:11<00:11,  1.98it/s]Stance:  50%|█████     | 22/44 [00:11<00:10,  2.00it/s]Stance:  52%|█████▏    | 23/44 [00:12<00:10,  2.05it/s]Stance:  55%|█████▍    | 24/44 [00:12<00:09,  2.16it/s]Stance:  57%|█████▋    | 25/44 [00:13<00:08,  2.13it/s]Stance:  59%|█████▉    | 26/44 [00:13<00:08,  2.24it/s]Stance:  61%|██████▏   | 27/44 [00:13<00:07,  2.30it/s]Stance:  64%|██████▎   | 28/44 [00:14<00:06,  2.38it/s]Stance:  66%|██████▌   | 29/44 [00:14<00:06,  2.42it/s]Stance:  68%|██████▊   | 30/44 [00:15<00:05,  2.44it/s]Stance:  70%|███████   | 31/44 [00:15<00:05,  2.44it/s]Stance:  73%|███████▎  | 32/44 [00:15<00:04,  2.47it/s]Stance:  75%|███████▌  | 33/44 [00:16<00:04,  2.28it/s]Stance:  77%|███████▋  | 34/44 [00:16<00:04,  2.16it/s]Stance:  93%|█████████▎| 41/44 [00:17<00:00,  6.94it/s]Stance:  95%|█████████▌| 42/44 [00:17<00:00,  5.20it/s]Stance:  98%|█████████▊| 43/44 [00:18<00:00,  4.14it/s]Stance: 100%|██████████| 44/44 [00:18<00:00,  3.47it/s]Stance: 100%|██████████| 44/44 [00:18<00:00,  2.35it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:10,  1.14it/s]Ad:  15%|█▌        | 2/13 [00:01<00:09,  1.17it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.16it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.16it/s]Ad:  38%|███▊      | 5/13 [00:04<00:06,  1.18it/s]Ad:  46%|████▌     | 6/13 [00:04<00:05,  1.25it/s]Ad:  54%|█████▍    | 7/13 [00:05<00:04,  1.21it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:04,  1.19it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.20it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.19it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.28it/s]Ad:  92%|█████████▏| 12/13 [00:09<00:00,  1.22it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.36it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.24it/s]
+2026-04-29 20:46:06,317 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/mistral-nemo.parquet.
