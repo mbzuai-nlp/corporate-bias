@@ -208,25 +208,49 @@ def _build_debug_json(
     samples: list[dict[str, Any]],
     num_samples_per_instance: int,
 ) -> str:
-    sentiment_values = [sample["sentiment_polarity"] for sample in samples]
-    ad_values = [sample["ad_likelihood"] for sample in samples]
-    stance_values = [sample["stance_score"] for sample in samples]
+    sentiment_polarity_values = [sample["sentiment_polarity"] for sample in samples]
+    sentiment_score_values = [
+        float((sample["sentiment_polarity"] + 1.0) / 2.0)
+        for sample in samples
+    ]
+
+    ad_likelihood_values = [sample["ad_likelihood"] for sample in samples]
+    promotional_likelihood_values = [
+        sample["ad_likelihood"]
+        for sample in samples
+    ]
+
+    raw_stance_score_values = [sample["stance_score"] for sample in samples]
+    normalized_stance_score_values = [
+        float((sample["stance_score"] + 1.0) / 2.0)
+        for sample in samples
+    ]
 
     return json.dumps(
         {
             "entity_id": entity["entity_id"],
             "entity_name": entity["entity_name"],
             "num_samples_per_instance": num_samples_per_instance,
-            "sentiment_polarity_values": sentiment_values,
-            "ad_likelihood_values": ad_values,
-            "stance_score_values": stance_values,
+            "sentiment_polarity_values": sentiment_polarity_values,
+            "sentiment_score_values": sentiment_score_values,
+            "ad_likelihood_values": ad_likelihood_values,
+            "promotional_likelihood_values": promotional_likelihood_values,
+            "stance_score_values": raw_stance_score_values,
+            "normalized_stance_score_values": normalized_stance_score_values,
             "samples": [
                 {
                     "sample_id": sample["sample_id"],
                     "description": sample["description"],
                     "sentiment_polarity": sample["sentiment_polarity"],
+                    "sentiment_score": float(
+                        (sample["sentiment_polarity"] + 1.0) / 2.0
+                    ),
                     "ad_likelihood": sample["ad_likelihood"],
+                    "promotional_likelihood": sample["ad_likelihood"],
                     "stance_score": sample["stance_score"],
+                    "normalized_stance_score": float(
+                        (sample["stance_score"] + 1.0) / 2.0
+                    ),
                     "stance_score_by_label": sample["stance_score_by_label"],
                 }
                 for sample in samples
@@ -353,9 +377,18 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                 key=lambda row: row["sample_id"],
             )
 
-            sentiment_values = [sample["sentiment_polarity"] for sample in samples]
-            ad_values = [sample["ad_likelihood"] for sample in samples]
-            stance_values = [sample["stance_score"] for sample in samples]
+            sentiment_score_values = [
+                float((sample["sentiment_polarity"] + 1.0) / 2.0)
+                for sample in samples
+            ]
+            stance_score_values = [
+                float((sample["stance_score"] + 1.0) / 2.0)
+                for sample in samples
+            ]
+            promotional_likelihood_values = [
+                sample["ad_likelihood"]
+                for sample in samples
+            ]
 
             rows.append(
                 {
@@ -367,9 +400,12 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
                     "result": (
-                        build_estimand_result("sentiment_polarity", sentiment_values)
-                        + build_estimand_result("ad_likelihood", ad_values)
-                        + build_estimand_result("stance_score", stance_values)
+                        build_estimand_result("sentiment_score", sentiment_score_values)
+                        + build_estimand_result("stance_score", stance_score_values)
+                        + build_estimand_result(
+                            "promotional_likelihood",
+                            promotional_likelihood_values,
+                        )
                     ),
                     "debug_json": _build_debug_json(
                         entity=entity,

@@ -1,5 +1,4 @@
 import json
-import math
 from pathlib import Path
 
 import panel as pn
@@ -16,7 +15,7 @@ MIN_PLOT_WIDTH = 800
 PLOT_CONTAINER_HEIGHT = "50vh"
 INSTANCE_CONTAINER_HEIGHT = "35vh"
 
-ASSAY_PARQUET_PATH = "data/combined_assays.parquet"
+ASSAY_PARQUET_PATH = "data/summarised_assays.parquet"
 INSTANCE_PARQUET_PATH = "data/db/comparison_set_assay_instance.parquet"
 TOOLTIPS_YAML_PATH = Path("app/tooltips.yaml")
 
@@ -59,21 +58,16 @@ def get_num_samples_per_instance(
         .filter(
             (pl.col("assay") == assay)
             & (pl.col("comparison_set_name") == comparison_set_name)
+            & (pl.col("estimand") == estimand)
         )
-        .explode("result")
-        .select(
-            pl.col("result").struct.field("estimand").alias("estimand"),
-            pl.col("result").struct.field("num_samples").alias("num_samples"),
-        )
-        .filter(pl.col("estimand") == estimand)
-        .select("num_samples")
+        .select("num_samples_per_instance")
         .unique()
     )
 
     if df.is_empty():
         return None
 
-    return int(df["num_samples"][0])
+    return int(df["num_samples_per_instance"][0])
 
 
 def get_assays() -> list[str]:
@@ -99,59 +93,22 @@ def get_comparison_sets(assay: str) -> list[str]:
     )
 
 
-def get_estimands(assay: str) -> list[str]:
+def get_estimands(
+    assay: str,
+    comparison_set_name: str | None = None,
+) -> list[str]:
+    df = ASSAY_DF.filter(pl.col("assay") == assay)
+
+    if comparison_set_name is not None:
+        df = df.filter(pl.col("comparison_set_name") == comparison_set_name)
+
     return (
-        ASSAY_DF
-        .filter(pl.col("assay") == assay)
-        .explode("result")
-        .select(pl.col("result").struct.field("estimand").alias("estimand"))
+        df
+        .select("estimand")
         .unique()
         .sort("estimand")
         .get_column("estimand")
         .to_list()
-    )
-
-
-def family_mean_and_se(
-    means: list[float],
-    stds: list[float],
-    n_per_prompt: int,
-) -> tuple[float, float]:
-    k = len(means)
-    family_mean = sum(means) / k
-    within_var = sum(s * s for s in stds) / k
-
-    if k == 1:
-        return family_mean, math.sqrt(within_var / n_per_prompt)
-
-    mean_var = sum((m - family_mean) ** 2 for m in means) / (k - 1)
-    between_var = max(0.0, mean_var - within_var / n_per_prompt)
-    family_se = math.sqrt(between_var / k + within_var / (k * n_per_prompt))
-    return family_mean, family_se
-
-
-def get_exploded_df(
-    assay: str,
-    comparison_set_name: str,
-    estimand: str,
-) -> pl.DataFrame:
-    return (
-        ASSAY_DF
-        .filter(
-            (pl.col("assay") == assay)
-            & (pl.col("comparison_set_name") == comparison_set_name)
-        )
-        .explode("result")
-        .select(
-            "entity_name",
-            "model",
-            pl.col("result").struct.field("estimand").alias("estimand"),
-            pl.col("result").struct.field("num_samples").alias("num_samples"),
-            pl.col("result").struct.field("sample_mean").alias("sample_mean"),
-            pl.col("result").struct.field("sample_std").alias("sample_std"),
-        )
-        .filter(pl.col("estimand") == estimand)
-        .sort("entity_name", "model")
     )
 
 
@@ -160,29 +117,33 @@ def get_plot_df(
     comparison_set_name: str,
     estimand: str,
 ):
-    exploded = get_exploded_df(assay, comparison_set_name, estimand)
-
-    rows = []
-    for _, g in exploded.group_by("entity_name", "model"):
-        mean, se = family_mean_and_se(
-            g["sample_mean"].to_list(),
-            g["sample_std"].to_list(),
-            g["num_samples"][0],
+    df = (
+        ASSAY_DF
+        .filter(
+            (pl.col("assay") == assay)
+            & (pl.col("comparison_set_name") == comparison_set_name)
+            & (pl.col("estimand") == estimand)
         )
-        rows.append(
-            {
-                "entity_name": g["entity_name"][0],
-                "model": g["model"][0],
-                "mean": mean,
-                "se": se,
-            }
+        .select(
+            "entity_name",
+            "model",
+            pl.col("estimate_mean").alias("mean"),
+            pl.col("estimate_se").alias("se"),
         )
-
-    return (
-        pl.DataFrame(rows)
         .sort("entity_name", "model")
-        .to_pandas()
     )
+
+    if df.is_empty():
+        return pl.DataFrame(
+            schema={
+                "entity_name": pl.String,
+                "model": pl.String,
+                "mean": pl.Float64,
+                "se": pl.Float64,
+            }
+        ).to_pandas()
+
+    return df.to_pandas()
 
 
 def get_instance_jsons(
@@ -373,12 +334,17 @@ def make_bar_plot(pdf, ylabel: str, plot_width: int) -> go.Figure:
 
 def make_assay_pane(assay: str) -> pn.Column:
     comparison_sets = get_comparison_sets(assay)
-    estimands = get_estimands(assay)
+    initial_comparison_set = comparison_sets[0] if comparison_sets else None
+    estimands = (
+        get_estimands(assay, initial_comparison_set)
+        if initial_comparison_set is not None
+        else []
+    )
 
     comparison_set_select = pn.widgets.Select(
         name="Comparison set",
         options=comparison_sets,
-        value=comparison_sets[0] if comparison_sets else None,
+        value=initial_comparison_set,
         width=250,
     )
 
@@ -389,6 +355,18 @@ def make_assay_pane(assay: str) -> pn.Column:
         width=250,
         description=get_estimand_tooltip(assay, estimands[0] if estimands else None),
     )
+
+    def _update_estimand_options(event) -> None:
+        new_estimands = get_estimands(assay, event.new)
+
+        estimand_select.options = new_estimands
+        estimand_select.value = new_estimands[0] if new_estimands else None
+        estimand_select.description = get_estimand_tooltip(
+            assay,
+            estimand_select.value,
+        )
+
+    comparison_set_select.param.watch(_update_estimand_options, "value")
 
     def _update_estimand_tooltip(event) -> None:
         estimand_select.description = get_estimand_tooltip(assay, event.new)

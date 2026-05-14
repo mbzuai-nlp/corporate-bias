@@ -24,14 +24,14 @@ stages:
   run-assay:
     matrix:
       assay:
-      - name: head-to-head
-        samples-per-instance: 3
-      - name: rank
-        samples-per-instance: 3
-      - name: consideration-set
-        samples-per-instance: 3
-      - name: describe-sentiment
-        samples-per-instance: 3
+    #   - name: head-to-head
+    #     samples-per-instance: 3
+    #   - name: rank
+    #     samples-per-instance: 3
+    #   - name: consideration-set
+    #     samples-per-instance: 3
+    #   - name: describe-sentiment
+    #     samples-per-instance: 3
       - name: forced-selection
         samples-per-instance: 3
       model:
@@ -77,15 +77,15 @@ stages:
     - ${data}/assays/${item.assay.name}/${item.model}.parquet:
         cache: false
 
-  combine-assays:
+  summarise-assays:
     cmd: >
-      uv run python -m pipelines.combine_assays
+      uv run python -m pipelines.summarise_assays
       --assays=${data}/assays
-      --save=${data}/combined_assays.parquet
+      --save=${data}/summarised_assays.parquet
     deps:
     - ${data}/assays
     outs:
-    - ${data}/combined_assays.parquet:
+    - ${data}/summarised_assays.parquet:
         cache: false
 metrics:
 - data/run-assay/head-to-head/gpt-oss-120b/exp/metrics.json

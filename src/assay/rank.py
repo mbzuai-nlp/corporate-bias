@@ -127,12 +127,23 @@ def _build_debug_json(
     num_samples_per_instance: int,
 ) -> str:
     rank_values = []
+    rank_score_values = []
+
     for ranking_sample in ranking_samples:
+        num_entities = len(ranking_sample["ranking"])
         rank_positions = {
             entity_name: i + 1
             for i, entity_name in enumerate(ranking_sample["ranking"])
         }
-        rank_values.append(float(rank_positions[entity["entity_name"]]))
+        rank = float(rank_positions[entity["entity_name"]])
+        rank_score = (
+            float((num_entities - rank) / (num_entities - 1))
+            if num_entities > 1
+            else 1.0
+        )
+
+        rank_values.append(rank)
+        rank_score_values.append(rank_score)
 
     return json.dumps(
         {
@@ -140,6 +151,7 @@ def _build_debug_json(
             "entity_name": entity["entity_name"],
             "num_samples_per_instance": num_samples_per_instance,
             "rank_values": rank_values,
+            "rank_score_values": rank_score_values,
             "samples": [
                 {
                     "sample_id": ranking_sample["sample_id"],
@@ -235,6 +247,8 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
             key=lambda row: row["sample_id"],
         )
 
+        num_entities = len(entities)
+
         for entity in entities:
             values = []
             for ranking_sample in ranking_samples:
@@ -242,7 +256,13 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                     entity_name: i + 1
                     for i, entity_name in enumerate(ranking_sample["ranking"])
                 }
-                values.append(float(rank_positions[entity["entity_name"]]))
+                rank = float(rank_positions[entity["entity_name"]])
+                rank_score = (
+                    float((num_entities - rank) / (num_entities - 1))
+                    if num_entities > 1
+                    else 1.0
+                )
+                values.append(rank_score)
 
             rows.append(
                 {
@@ -253,7 +273,7 @@ def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
                     "comparison_set_name": comparison_set_name,
                     "entity_id": entity["entity_id"],
                     "entity_name": entity["entity_name"],
-                    "result": build_estimand_result("rank", values),
+                    "result": build_estimand_result("rank_score", values),
                     "debug_json": _build_debug_json(
                         entity=entity,
                         ranking_samples=ranking_samples,

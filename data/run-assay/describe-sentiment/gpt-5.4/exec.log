@@ -9,14 +9,10 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 20:28:02,124 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:28:02,187 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 20:28:02,379 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 20:28:02,560 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-04-29 20:28:02,757 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-04-29 20:28:02,945 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 20:28:03,274 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6520.21it/s]
+2026-05-13 15:42:30,723 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:42:30,936 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-05-13 15:42:31,238 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7986.36it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -24,525 +20,439 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 20:28:03,423 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 20:28:03,609 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:28:03,611 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 20:28:03,796 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:28:05,380 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:28:05,433 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  29%|██▊       | 58/202 [00:00<00:00, 573.96it/s]Loading weights:  57%|█████▋    | 116/202 [00:00<00:00, 553.83it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 959.68it/s]
-2026-04-29 20:28:06,048 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:28:06,306 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:28:07,731 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 20:28:08,186 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:28:08,268 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 20:28:08,428 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:28:08,493 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 20:28:08,672 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:28:08,821 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:28:09,644 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 20:28:09,874 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:28:09,923 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 85/202 [00:00<00:00, 828.81it/s]Loading weights:  83%|████████▎ | 168/202 [00:00<00:00, 810.01it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 972.25it/s]
-2026-04-29 20:28:10,406 [INFO] root: Running assay=describe-sentiment model=gpt-5.4 num_samples_per_instance=3.
+2026-05-13 15:42:31,652 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-05-13 15:42:31,993 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-05-13 15:42:32,042 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:42:32,311 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-05-13 15:42:32,313 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:42:32,774 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-05-13 15:42:33,180 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-05-13 15:42:33,480 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-05-13 15:42:33,644 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:42:33,899 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  47%|████▋     | 94/202 [00:00<00:00, 936.44it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1494.55it/s]
+2026-05-13 15:42:34,491 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:42:34,785 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:42:35,876 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-05-13 15:42:36,247 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:42:36,322 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-05-13 15:42:36,604 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:42:36,783 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-13 15:42:37,063 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:42:37,449 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:42:38,293 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-05-13 15:42:38,698 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:42:38,771 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  46%|████▌     | 92/202 [00:00<00:00, 909.69it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1476.28it/s]
+2026-05-13 15:42:39,077 [INFO] root: Running assay=describe-sentiment model=gpt-5.4 num_samples_per_instance=3.
 Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
-2026-04-29 20:28:10,423 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,423 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,424 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,425 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,426 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,428 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,429 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,436 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,438 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,440 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,442 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,444 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,447 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,453 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,454 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,456 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,459 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,462 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,464 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,467 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,469 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,471 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,474 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,479 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,483 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,485 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,490 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,495 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,499 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,503 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,505 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,507 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,509 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,513 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,518 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,519 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,520 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,529 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,536 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,538 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,541 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,542 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,544 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,545 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,547 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,552 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,553 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,555 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,560 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,566 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,567 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,572 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,576 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,579 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,583 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,587 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,588 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,591 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,595 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,598 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,604 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,607 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,609 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,616 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,618 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,619 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,621 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,622 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,625 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,628 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,634 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,635 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,647 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,649 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,652 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,655 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,658 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,663 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,670 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,672 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,675 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,678 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,683 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,692 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,694 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,699 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,701 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,704 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,709 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,715 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,717 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,721 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,729 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,731 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,734 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,740 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,744 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,749 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,758 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,760 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,762 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,768 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,774 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,779 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,783 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,785 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,789 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,794 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,802 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,811 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,814 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,818 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,824 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,826 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,832 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,839 [INFO] root: Invoking gpt-5.4.
-Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:28:10,843 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,862 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,865 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,874 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,876 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,882 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,883 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,886 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,891 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,895 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,900 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,904 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,998 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,998 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:10,999 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,000 [INFO] root: Invoking gpt-5.4.
-Descriptions:   3%|▎         | 14/405 [00:00<00:02, 136.28it/s]2026-04-29 20:28:11,001 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,003 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,003 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,005 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,006 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,007 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,007 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,008 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,008 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,012 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,012 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,014 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,015 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,015 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,016 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,016 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,016 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,017 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,017 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,018 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,020 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,021 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,022 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,022 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,025 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,025 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,026 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,027 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,028 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,031 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,032 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,033 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,034 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,035 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,036 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,037 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,037 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,038 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,039 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,041 [INFO] root: Invoking gpt-5.4.
-Descriptions:  20%|█▉        | 79/405 [00:00<00:00, 429.20it/s]2026-04-29 20:28:11,043 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,043 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,044 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,045 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,048 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,050 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,051 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,053 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,054 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,059 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,060 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,063 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,064 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,067 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,067 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,069 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,070 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,070 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,076 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,076 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,079 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,079 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,081 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,082 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,082 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,085 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,089 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,091 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,097 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,097 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,100 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,107 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,109 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,109 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,111 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,141 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,141 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,141 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,145 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,145 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,146 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,148 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,149 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,149 [INFO] root: Invoking gpt-5.4.
-Descriptions:  30%|███       | 122/405 [00:00<00:01, 256.15it/s]2026-04-29 20:28:11,151 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,162 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,162 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,164 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,166 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,169 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,170 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,174 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,177 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,179 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,179 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,180 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,181 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,184 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,185 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,186 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,188 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,189 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,190 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,193 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,194 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,194 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,196 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,215 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,216 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,229 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,236 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,236 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,248 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,248 [INFO] root: Invoking gpt-5.4.
-Descriptions:  38%|███▊      | 154/405 [00:01<00:03, 81.05it/s] 2026-04-29 20:28:11,254 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,280 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,305 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,306 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,356 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,404 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,404 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,420 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,452 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,527 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,546 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,572 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,585 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,608 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,612 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,613 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,654 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,717 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,781 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,781 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,825 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,835 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,869 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,975 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:11,999 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,052 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,075 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,110 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,124 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,125 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,208 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,257 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,265 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,292 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,321 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,323 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,328 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,332 [INFO] root: Invoking gpt-5.4.
-Descriptions:  47%|████▋     | 189/405 [00:01<00:01, 109.27it/s]2026-04-29 20:28:12,338 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,339 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,343 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,346 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,354 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,355 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,356 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,360 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,361 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,362 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,369 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,373 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,373 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,375 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,382 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,386 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,389 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,390 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,396 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,397 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,397 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,399 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,400 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,403 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,404 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,405 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,412 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,412 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,415 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,416 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,417 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,419 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,422 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,423 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,423 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,423 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,426 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,427 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,429 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,431 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,433 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,433 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,435 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,435 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,435 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,436 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,438 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,442 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,446 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,448 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,449 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,453 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,455 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,461 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,461 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,462 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,463 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,464 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,465 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,466 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,467 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,467 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,468 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  62%|██████▏   | 252/405 [00:01<00:00, 177.02it/s]2026-04-29 20:28:12,470 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,472 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,477 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,479 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,479 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,482 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,482 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,483 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,484 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,488 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,489 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,492 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,493 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,495 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,497 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,498 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,498 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,499 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,500 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,500 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,500 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,502 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,502 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,503 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,505 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,506 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,507 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,507 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,510 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,511 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,511 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,513 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,513 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,514 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,515 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,516 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,516 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,517 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,517 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,519 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,520 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,521 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,522 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,523 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,524 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,526 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,527 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,529 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,532 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,533 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,536 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,539 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,539 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,539 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,542 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,545 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,547 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,548 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,551 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,551 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,551 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,552 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,554 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,555 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,555 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,556 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,557 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,557 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,558 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,558 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,560 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,560 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,560 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,561 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,563 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,564 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,565 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,568 [INFO] root: Invoking gpt-5.4.
-Descriptions:  77%|███████▋  | 310/405 [00:01<00:00, 237.96it/s]2026-04-29 20:28:12,570 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,570 [INFO] root: Invoking gpt-5.4.
-2026-04-29 20:28:12,575 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,578 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,579 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,580 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,592 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,595 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,613 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,618 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,621 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,623 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,632 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,636 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,645 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,646 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,646 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,651 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,656 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,680 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,682 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,683 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,684 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,695 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,705 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,710 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,718 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,728 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,730 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,731 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,738 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,746 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,782 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,784 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,805 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,850 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,852 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,855 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,859 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,860 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,866 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,870 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,882 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,885 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,890 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,896 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,921 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,930 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,958 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,958 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,961 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,961 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:12,998 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,009 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,046 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,069 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,081 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,084 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,114 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,118 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,129 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,213 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,604 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:28:13,625 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  87%|████████▋ | 354/405 [00:06<00:01, 28.73it/s] Descriptions:  95%|█████████▍| 384/405 [00:10<00:01, 18.72it/s]Descriptions:  95%|█████████▍| 384/405 [00:22<00:01, 18.72it/s]Descriptions: 100%|██████████| 405/405 [00:57<00:00,  2.23it/s]Descriptions: 100%|██████████| 405/405 [00:57<00:00,  7.10it/s]
-Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<01:08,  1.59s/it]Stance:  11%|█▏        | 5/44 [00:02<00:16,  2.36it/s]Stance:  14%|█▎        | 6/44 [00:03<00:22,  1.72it/s]Stance:  16%|█▌        | 7/44 [00:04<00:28,  1.28it/s]Stance:  18%|█▊        | 8/44 [00:06<00:35,  1.02it/s]Stance:  20%|██        | 9/44 [00:07<00:39,  1.12s/it]Stance:  23%|██▎       | 10/44 [00:09<00:41,  1.23s/it]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  25%|██▌       | 11/44 [00:11<00:44,  1.35s/it]Stance:  27%|██▋       | 12/44 [00:12<00:46,  1.46s/it]Stance:  30%|██▉       | 13/44 [00:14<00:46,  1.51s/it]Stance:  32%|███▏      | 14/44 [00:17<00:58,  1.94s/it]Stance:  34%|███▍      | 15/44 [00:18<00:52,  1.80s/it]Stance:  36%|███▋      | 16/44 [00:20<00:49,  1.76s/it]Stance:  39%|███▊      | 17/44 [00:22<00:47,  1.76s/it]Stance:  41%|████      | 18/44 [00:23<00:41,  1.61s/it]Stance:  43%|████▎     | 19/44 [00:24<00:35,  1.44s/it]Stance:  45%|████▌     | 20/44 [00:26<00:33,  1.42s/it]Stance:  48%|████▊     | 21/44 [00:26<00:29,  1.27s/it]Stance:  50%|█████     | 22/44 [00:28<00:27,  1.23s/it]Stance:  52%|█████▏    | 23/44 [00:29<00:27,  1.32s/it]Stance:  55%|█████▍    | 24/44 [00:30<00:23,  1.16s/it]Stance:  64%|██████▎   | 28/44 [00:31<00:09,  1.75it/s]Stance:  66%|██████▌   | 29/44 [00:32<00:09,  1.57it/s]Stance:  68%|██████▊   | 30/44 [00:33<00:09,  1.49it/s]Stance:  70%|███████   | 31/44 [00:34<00:11,  1.14it/s]Stance:  73%|███████▎  | 32/44 [00:35<00:11,  1.06it/s]Stance:  75%|███████▌  | 33/44 [00:37<00:11,  1.08s/it]Stance:  77%|███████▋  | 34/44 [00:38<00:11,  1.20s/it]Stance:  80%|███████▉  | 35/44 [00:40<00:11,  1.28s/it]Stance:  82%|████████▏ | 36/44 [00:41<00:10,  1.35s/it]Stance:  84%|████████▍ | 37/44 [00:43<00:09,  1.39s/it]Stance:  86%|████████▋ | 38/44 [00:44<00:08,  1.42s/it]Stance:  89%|████████▊ | 39/44 [00:46<00:07,  1.44s/it]Stance:  91%|█████████ | 40/44 [00:47<00:05,  1.47s/it]Stance:  93%|█████████▎| 41/44 [00:49<00:04,  1.49s/it]Stance:  95%|█████████▌| 42/44 [00:50<00:03,  1.51s/it]Stance:  98%|█████████▊| 43/44 [00:52<00:01,  1.51s/it]Stance: 100%|██████████| 44/44 [00:53<00:00,  1.51s/it]Stance: 100%|██████████| 44/44 [00:53<00:00,  1.22s/it]
-Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:01<00:20,  1.73s/it]Ad:  15%|█▌        | 2/13 [00:04<00:23,  2.16s/it]Ad:  31%|███       | 4/13 [00:05<00:11,  1.30s/it]Ad:  38%|███▊      | 5/13 [00:07<00:12,  1.54s/it]Ad:  46%|████▌     | 6/13 [00:09<00:10,  1.50s/it]Ad:  54%|█████▍    | 7/13 [00:11<00:10,  1.69s/it]Ad:  62%|██████▏   | 8/13 [00:13<00:09,  1.82s/it]Ad:  69%|██████▉   | 9/13 [00:15<00:07,  1.88s/it]Ad:  77%|███████▋  | 10/13 [00:17<00:05,  1.93s/it]Ad:  85%|████████▍ | 11/13 [00:19<00:03,  1.85s/it]Ad:  92%|█████████▏| 12/13 [00:21<00:01,  1.96s/it]Ad: 100%|██████████| 13/13 [00:22<00:00,  1.84s/it]Ad: 100%|██████████| 13/13 [00:22<00:00,  1.77s/it]
-2026-04-29 20:31:01,445 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-5.4.parquet.
+2026-05-13 15:42:39,089 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,089 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,090 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,091 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,091 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,092 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,093 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,094 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,096 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,098 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,099 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,100 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,101 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,106 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,107 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,108 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,110 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,111 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,112 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,117 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,118 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,121 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,123 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,127 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,128 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,134 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,137 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,138 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,141 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,142 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,144 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,144 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,146 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,147 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,147 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,148 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,149 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,150 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,152 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,153 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,157 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,160 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,162 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,167 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,170 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,175 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,178 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,180 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,186 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,193 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,198 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,200 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,207 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,210 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,212 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,214 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,217 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,220 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,222 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,223 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,224 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,225 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,233 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,234 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,235 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,237 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,237 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,238 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,239 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,240 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,241 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,242 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,243 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,243 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,244 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,244 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,244 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,245 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,245 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,246 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,246 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,247 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,247 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,247 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,249 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,249 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,250 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,250 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,250 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,251 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,251 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,252 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,252 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,252 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,253 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,253 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,254 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,254 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,254 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,255 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,255 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,255 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,256 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,257 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,264 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,274 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,282 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,284 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,286 [INFO] root: Invoking gpt-5.4.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-05-13 15:42:39,289 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,297 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,300 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,306 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,311 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,317 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,325 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,332 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,335 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,338 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,342 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,347 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,350 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,360 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,366 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,374 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,375 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,377 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,380 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,433 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,435 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,436 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,437 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,438 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,441 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,442 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,443 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,444 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,445 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,447 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,448 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,450 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,452 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,453 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,454 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,454 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,455 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,457 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,458 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,459 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,459 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,460 [INFO] root: Invoking gpt-5.4.
+Descriptions:  19%|█▉        | 76/405 [00:00<00:00, 758.41it/s]2026-05-13 15:42:39,461 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,463 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,465 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,467 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,467 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,467 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,468 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,469 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,469 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,470 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,471 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,472 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,472 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,473 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,474 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,474 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,475 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,475 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,477 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,477 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,478 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,479 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,480 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,480 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,480 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,480 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,481 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,482 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,482 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,482 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,482 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,483 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,483 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,484 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,485 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,485 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,485 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,486 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,486 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,487 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,487 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,487 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,488 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,488 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,489 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,489 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,489 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,489 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,489 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,490 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,490 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,490 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,491 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,491 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,491 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,492 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,492 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,492 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,493 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,493 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,493 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,494 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,494 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,495 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,495 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,496 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,496 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,497 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,497 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,498 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,498 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,554 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,498 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,499 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,499 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,499 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,500 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,500 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,501 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,501 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,502 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,502 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,503 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,503 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,503 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,504 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,504 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,505 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,505 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,506 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,507 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,507 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,507 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,508 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,508 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,509 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,509 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,510 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,511 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,511 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,512 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,513 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,513 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,514 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,514 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,515 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,515 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,515 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,516 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,516 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,517 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,517 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,517 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,518 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,518 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,518 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,518 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,519 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,519 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,519 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,520 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,521 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,521 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,521 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,521 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,522 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,522 [INFO] root: Invoking gpt-5.4.
+Descriptions:  68%|██████▊   | 276/405 [00:00<00:00, 1483.79it/s]2026-05-13 15:42:39,523 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,523 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,524 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,524 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,524 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,524 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,525 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,525 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,526 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,526 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,526 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,526 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,527 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,527 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,527 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,527 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,528 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,528 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,528 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,528 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,529 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,530 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,530 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,531 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,532 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,532 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,532 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,533 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,533 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,533 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,534 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,535 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,536 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,536 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,536 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,537 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,537 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,537 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,538 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,538 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,538 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,539 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,540 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,540 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,542 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,543 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,543 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,544 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,544 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,545 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,545 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,546 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,547 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,547 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,548 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,548 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,549 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,549 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,550 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,550 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,550 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,551 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,551 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,551 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,552 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,553 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,553 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,554 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,498 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,555 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,555 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,556 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,556 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,557 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,557 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,558 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,558 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,559 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,560 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,560 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,562 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,565 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,566 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,566 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,567 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,567 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,567 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,568 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,569 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,570 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,570 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,571 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,573 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,573 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,575 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,576 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,576 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,577 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,577 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,578 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,578 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,578 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,579 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,580 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,580 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,581 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,583 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,583 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,583 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,584 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,584 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,585 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,585 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,585 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,586 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,587 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,587 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,588 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,588 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,588 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,589 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,589 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,590 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,590 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,591 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,592 [INFO] root: Invoking gpt-5.4.
+2026-05-13 15:42:39,592 [INFO] root: Invoking gpt-5.4.
+Descriptions: 100%|██████████| 405/405 [00:00<00:00, 1463.74it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:48,  1.13s/it]Stance:   5%|▍         | 2/44 [00:01<00:31,  1.33it/s]Stance:   7%|▋         | 3/44 [00:02<00:25,  1.61it/s]Stance:   9%|▉         | 4/44 [00:02<00:22,  1.77it/s]Stance:  11%|█▏        | 5/44 [00:03<00:20,  1.89it/s]Stance:  14%|█▎        | 6/44 [00:03<00:19,  1.98it/s]Stance:  16%|█▌        | 7/44 [00:03<00:18,  2.02it/s]Stance:  18%|█▊        | 8/44 [00:04<00:17,  2.06it/s]Stance:  20%|██        | 9/44 [00:04<00:16,  2.13it/s]Stance:  23%|██▎       | 10/44 [00:05<00:15,  2.14it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:05<00:14,  2.22it/s]Stance:  27%|██▋       | 12/44 [00:06<00:13,  2.38it/s]Stance:  30%|██▉       | 13/44 [00:06<00:12,  2.48it/s]Stance:  32%|███▏      | 14/44 [00:06<00:12,  2.36it/s]Stance:  34%|███▍      | 15/44 [00:07<00:12,  2.31it/s]Stance:  36%|███▋      | 16/44 [00:07<00:11,  2.47it/s]Stance:  39%|███▊      | 17/44 [00:08<00:10,  2.58it/s]Stance:  41%|████      | 18/44 [00:08<00:10,  2.45it/s]Stance:  43%|████▎     | 19/44 [00:08<00:10,  2.38it/s]Stance:  45%|████▌     | 20/44 [00:09<00:10,  2.30it/s]Stance:  48%|████▊     | 21/44 [00:09<00:10,  2.26it/s]Stance:  50%|█████     | 22/44 [00:10<00:09,  2.23it/s]Stance:  52%|█████▏    | 23/44 [00:10<00:09,  2.20it/s]Stance:  55%|█████▍    | 24/44 [00:11<00:11,  1.74it/s]Stance:  57%|█████▋    | 25/44 [00:12<00:10,  1.84it/s]Stance:  59%|█████▉    | 26/44 [00:12<00:09,  1.92it/s]Stance:  61%|██████▏   | 27/44 [00:13<00:08,  2.00it/s]Stance:  64%|██████▎   | 28/44 [00:13<00:07,  2.14it/s]Stance:  66%|██████▌   | 29/44 [00:13<00:06,  2.19it/s]Stance:  68%|██████▊   | 30/44 [00:14<00:06,  2.33it/s]Stance:  70%|███████   | 31/44 [00:14<00:05,  2.59it/s]Stance:  73%|███████▎  | 32/44 [00:15<00:04,  2.46it/s]Stance:  75%|███████▌  | 33/44 [00:15<00:04,  2.69it/s]Stance:  77%|███████▋  | 34/44 [00:15<00:03,  2.76it/s]Stance:  80%|███████▉  | 35/44 [00:15<00:02,  3.11it/s]Stance:  82%|████████▏ | 36/44 [00:16<00:02,  3.11it/s]Stance:  84%|████████▍ | 37/44 [00:16<00:02,  3.01it/s]Stance:  86%|████████▋ | 38/44 [00:16<00:02,  2.98it/s]Stance:  89%|████████▊ | 39/44 [00:17<00:01,  2.91it/s]Stance:  91%|█████████ | 40/44 [00:17<00:01,  3.13it/s]Stance:  93%|█████████▎| 41/44 [00:17<00:00,  3.06it/s]Stance:  95%|█████████▌| 42/44 [00:18<00:00,  2.98it/s]Stance:  98%|█████████▊| 43/44 [00:18<00:00,  2.72it/s]Stance: 100%|██████████| 44/44 [00:19<00:00,  2.50it/s]Stance: 100%|██████████| 44/44 [00:19<00:00,  2.30it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:09,  1.31it/s]Ad:  15%|█▌        | 2/13 [00:01<00:08,  1.31it/s]Ad:  23%|██▎       | 3/13 [00:02<00:07,  1.28it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.27it/s]Ad:  38%|███▊      | 5/13 [00:03<00:06,  1.25it/s]Ad:  46%|████▌     | 6/13 [00:04<00:05,  1.27it/s]Ad:  54%|█████▍    | 7/13 [00:05<00:04,  1.26it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:03,  1.27it/s]Ad:  69%|██████▉   | 9/13 [00:06<00:02,  1.45it/s]Ad:  77%|███████▋  | 10/13 [00:07<00:02,  1.41it/s]Ad:  85%|████████▍ | 11/13 [00:08<00:01,  1.36it/s]Ad:  92%|█████████▏| 12/13 [00:09<00:00,  1.34it/s]Ad: 100%|██████████| 13/13 [00:09<00:00,  1.49it/s]Ad: 100%|██████████| 13/13 [00:09<00:00,  1.36it/s]
+2026-05-13 15:43:25,237 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/gpt-5.4.parquet.

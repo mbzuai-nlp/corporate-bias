@@ -412,20 +412,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                 for sample in consideration_samples
             ]
 
-            result = build_estimand_result("reciprocal_rank", rr_values)
-
-            for judge_model in _JUDGE_MODELS:
-                judge_values = [
-                    1.0
-                    if sample["judgments"][judge_model]["favored_entity"]
-                    == entity["entity_name"]
-                    else 0.0
-                    for sample in consideration_samples
-                ]
-                result += build_estimand_result(
-                    f"judge_favoured__{judge_model}",
-                    judge_values,
-                )
+            result = build_estimand_result("mention_score", rr_values)
 
             aggregate_judge_values = [
                 _aggregate_judge_favoured_value(
@@ -435,7 +422,7 @@ def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
                 for sample in consideration_samples
             ]
             result += build_estimand_result(
-                "judge_favoured__aggregate",
+                "judge_favoured_rate",
                 aggregate_judge_values,
             )
 

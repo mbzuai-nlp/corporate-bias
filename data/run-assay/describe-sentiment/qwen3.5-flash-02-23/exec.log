@@ -9,12 +9,11 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-04-29 20:51:20,154 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:51:20,197 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-04-29 20:51:20,366 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-2026-04-29 20:51:20,612 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]2026-04-29 20:51:20,906 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7212.86it/s]
+2026-05-13 15:57:10,065 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:57:10,124 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-05-13 15:57:10,422 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-05-13 15:57:10,728 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7700.79it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -22,527 +21,438 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-04-29 20:51:21,076 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-04-29 20:51:21,210 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:51:21,257 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-04-29 20:51:21,373 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:51:21,439 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-04-29 20:51:21,591 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-04-29 20:51:22,647 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:51:22,693 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  56%|█████▌    | 113/202 [00:00<00:00, 1114.65it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1483.92it/s]
-2026-04-29 20:51:23,037 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:51:23,199 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:51:24,117 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-04-29 20:51:24,370 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:51:24,428 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-04-29 20:51:24,616 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:51:24,687 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-04-29 20:51:24,841 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-04-29 20:51:24,986 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-04-29 20:51:25,573 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-04-29 20:51:25,717 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-04-29 20:51:25,762 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 959.70it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1296.44it/s]
-2026-04-29 20:51:26,100 [INFO] root: Running assay=describe-sentiment model=qwen3.5-flash-02-23 num_samples_per_instance=3.
+2026-05-13 15:57:11,054 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+2026-05-13 15:57:11,254 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:57:11,360 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-05-13 15:57:11,681 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-05-13 15:57:11,681 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:57:11,996 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-05-13 15:57:12,313 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-05-13 15:57:13,105 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:57:13,172 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 963.71it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1439.98it/s]
+2026-05-13 15:57:13,695 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:57:14,072 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:57:15,200 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-05-13 15:57:15,593 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:57:15,659 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-05-13 15:57:16,021 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:57:16,164 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-13 15:57:16,466 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-13 15:57:16,799 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-13 15:57:17,606 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-05-13 15:57:17,911 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-13 15:57:17,973 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 97/202 [00:00<00:00, 961.57it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1369.68it/s]
+2026-05-13 15:57:18,304 [INFO] root: Running assay=describe-sentiment model=qwen3.5-flash-02-23 num_samples_per_instance=3.
 Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
-2026-04-29 20:51:26,113 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,114 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,114 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,115 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,116 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,117 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,118 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,119 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,121 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,122 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,124 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,129 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,132 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,136 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,137 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,140 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,142 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,144 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,145 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,150 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,151 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,153 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,154 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,154 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,155 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,155 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,155 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,156 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,156 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,157 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,157 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,158 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,158 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,158 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,159 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,159 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,160 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,160 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,161 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,161 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,162 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,163 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,163 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,163 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,164 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,164 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,164 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,165 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,165 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,166 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,166 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,167 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,167 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,167 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,168 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,168 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,169 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,169 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,170 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,170 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,171 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,171 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,172 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,172 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,173 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,173 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,174 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,174 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,178 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,188 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,193 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,195 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,202 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,204 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,205 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,206 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,207 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,208 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,211 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,212 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,214 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,216 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,217 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,219 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,220 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,220 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,220 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,221 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,221 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,222 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,222 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,224 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,225 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,230 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,236 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,242 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,245 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,251 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,265 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,270 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,274 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,279 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,287 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,295 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,300 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,305 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,310 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,317 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,328 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,333 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,337 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,345 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,359 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,365 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,371 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,373 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,375 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,383 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,386 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,389 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,392 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-04-29 20:51:26,393 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,394 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,396 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,401 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,405 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,407 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,410 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,504 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,506 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,506 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,507 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,507 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,508 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,509 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,510 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,510 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,511 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,512 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,512 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:   5%|▌         | 21/405 [00:00<00:01, 207.77it/s]2026-04-29 20:51:26,513 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,513 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,514 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,515 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,515 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,516 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,517 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,517 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,518 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,519 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,519 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,520 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,521 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,522 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,523 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,523 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,524 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,526 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,528 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,528 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,528 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,529 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,529 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,530 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,530 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,531 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,531 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,531 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,532 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,533 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,534 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,538 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,538 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,539 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,540 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,541 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,542 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,542 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,542 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,544 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,544 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,544 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,545 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,545 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,545 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,546 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,546 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,549 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,550 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,551 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,552 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,552 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,553 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,554 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,557 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,557 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,559 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,559 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:  26%|██▌       | 106/405 [00:00<00:00, 580.65it/s]2026-04-29 20:51:26,560 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,561 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,564 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,566 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,567 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,568 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,569 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,570 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,570 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,571 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,572 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,573 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,574 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,575 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,578 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,578 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,579 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,579 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,582 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,582 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,583 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,584 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,589 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,589 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,589 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,590 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,607 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,607 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,608 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,609 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,611 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,612 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,613 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,613 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,613 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,620 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,620 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,621 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,637 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,641 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,642 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,652 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,652 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,653 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,660 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,661 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,669 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,669 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,674 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,675 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,682 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,690 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,694 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,695 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,696 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,712 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,716 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,723 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,731 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:  41%|████      | 165/405 [00:00<00:00, 337.80it/s]2026-04-29 20:51:26,735 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,739 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,745 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,749 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,754 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,759 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,760 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,761 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,772 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,776 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,779 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,782 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,786 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,801 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,803 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,808 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,808 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,816 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,817 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,821 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,828 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,847 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,848 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,848 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,849 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,850 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,850 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,851 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,855 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,859 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,862 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,869 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,873 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,877 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,877 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,882 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,883 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,883 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,888 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,889 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,889 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,894 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,895 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:  51%|█████     | 207/405 [00:00<00:00, 332.42it/s]2026-04-29 20:51:26,901 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,905 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,909 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,909 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,916 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,920 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,921 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,922 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,922 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,923 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,927 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,928 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,934 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,942 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,942 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,951 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,952 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,953 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,953 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,959 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,966 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,966 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,967 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,976 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,976 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,981 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,992 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,993 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,994 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,996 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,996 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:26,996 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,003 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,010 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,011 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,012 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,013 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,015 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,045 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,046 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:  61%|██████    | 246/405 [00:00<00:00, 239.75it/s]2026-04-29 20:51:27,046 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,047 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,053 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,055 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,065 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,071 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,073 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,077 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,081 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,088 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,095 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,114 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,116 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,120 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,125 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,127 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,127 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,129 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,141 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,168 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,188 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,203 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,208 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,213 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,223 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,224 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,242 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,252 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,254 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,256 [INFO] root: Invoking qwen3.5-flash-02-23.
-Descriptions:  68%|██████▊   | 276/405 [00:01<00:00, 227.53it/s]2026-04-29 20:51:27,263 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,264 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,274 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,279 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,279 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,279 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,284 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,285 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,288 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,320 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,323 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,324 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,339 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,348 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,363 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,368 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,374 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,387 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,388 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,388 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,404 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,405 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,405 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,414 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,417 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,420 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,422 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,428 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,428 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,431 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,432 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,432 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,433 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,434 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,435 [INFO] root: Invoking qwen3.5-flash-02-23.
-2026-04-29 20:51:27,812 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,814 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,817 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,823 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,825 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,828 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,834 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,835 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,839 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,844 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,846 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,847 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,851 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,860 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,868 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,878 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,899 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,900 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,900 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,903 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,909 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,912 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,922 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,923 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,926 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,929 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,932 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,932 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,933 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,935 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,936 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,945 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,946 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,947 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,949 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,958 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,960 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,962 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,973 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,977 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,989 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,990 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,991 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,992 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,993 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,993 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:27,994 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,004 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,004 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,008 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,011 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,012 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,014 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,015 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,022 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,032 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,035 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,036 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,037 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,039 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,050 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,059 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,060 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,062 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,062 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,064 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,066 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,079 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,086 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,116 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,132 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,145 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,169 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,207 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,247 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,292 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,303 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,312 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,314 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,325 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,330 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,341 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,367 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-04-29 20:51:28,378 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  78%|███████▊  | 316/405 [00:02<00:01, 85.80it/s] Descriptions:  83%|████████▎ | 335/405 [00:03<00:01, 50.56it/s]2026-04-29 20:51:29,753 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-Descriptions:  86%|████████▌ | 349/405 [00:05<00:02, 26.11it/s]Descriptions:  89%|████████▊ | 359/405 [00:07<00:03, 13.74it/s]Descriptions:  90%|█████████ | 366/405 [00:09<00:03, 12.06it/s]Descriptions:  92%|█████████▏| 371/405 [00:09<00:02, 12.92it/s]Descriptions:  93%|█████████▎| 376/405 [00:09<00:02, 13.38it/s]Descriptions:  94%|█████████▍| 380/405 [00:09<00:01, 13.44it/s]Descriptions:  95%|█████████▍| 383/405 [00:10<00:01, 13.21it/s]Descriptions:  95%|█████████▌| 386/405 [00:10<00:01, 14.41it/s]Descriptions:  96%|█████████▌| 389/405 [00:10<00:01, 12.07it/s]Descriptions:  97%|█████████▋| 391/405 [00:10<00:01, 12.04it/s]Descriptions:  97%|█████████▋| 393/405 [00:10<00:00, 12.01it/s]Descriptions:  98%|█████████▊| 395/405 [00:11<00:01,  9.12it/s]Descriptions:  98%|█████████▊| 397/405 [00:11<00:00, 10.18it/s]Descriptions:  99%|█████████▉| 400/405 [00:11<00:00, 10.08it/s]Descriptions:  99%|█████████▉| 402/405 [00:12<00:00,  5.87it/s]Descriptions: 100%|█████████▉| 403/405 [00:12<00:00,  5.23it/s]Descriptions: 100%|█████████▉| 404/405 [00:13<00:00,  4.72it/s]Descriptions: 100%|██████████| 405/405 [00:14<00:00,  2.16it/s]Descriptions: 100%|██████████| 405/405 [00:14<00:00, 27.48it/s]
-Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:01<00:44,  1.05s/it]Stance:   5%|▍         | 2/44 [00:01<00:31,  1.35it/s]Stance:   7%|▋         | 3/44 [00:02<00:26,  1.54it/s]Stance:   9%|▉         | 4/44 [00:02<00:23,  1.67it/s]Stance:  11%|█▏        | 5/44 [00:03<00:22,  1.76it/s]Stance:  14%|█▎        | 6/44 [00:03<00:21,  1.80it/s]Stance:  16%|█▌        | 7/44 [00:04<00:20,  1.84it/s]Stance:  18%|█▊        | 8/44 [00:04<00:19,  1.88it/s]Stance:  20%|██        | 9/44 [00:05<00:18,  1.89it/s]Stance:  23%|██▎       | 10/44 [00:05<00:17,  1.91it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  25%|██▌       | 11/44 [00:06<00:17,  1.91it/s]Stance:  27%|██▋       | 12/44 [00:06<00:16,  1.92it/s]Stance:  30%|██▉       | 13/44 [00:07<00:16,  1.92it/s]Stance:  32%|███▏      | 14/44 [00:08<00:20,  1.48it/s]Stance:  34%|███▍      | 15/44 [00:08<00:18,  1.59it/s]Stance:  36%|███▋      | 16/44 [00:09<00:16,  1.66it/s]Stance:  39%|███▊      | 17/44 [00:09<00:15,  1.73it/s]Stance:  41%|████      | 18/44 [00:10<00:14,  1.78it/s]Stance:  43%|████▎     | 19/44 [00:10<00:13,  1.82it/s]Stance:  45%|████▌     | 20/44 [00:11<00:13,  1.84it/s]Stance:  48%|████▊     | 21/44 [00:12<00:12,  1.84it/s]Stance:  50%|█████     | 22/44 [00:12<00:11,  1.87it/s]Stance:  52%|█████▏    | 23/44 [00:13<00:11,  1.85it/s]Stance:  55%|█████▍    | 24/44 [00:13<00:10,  1.88it/s]Stance:  57%|█████▋    | 25/44 [00:14<00:10,  1.89it/s]Stance:  59%|█████▉    | 26/44 [00:14<00:08,  2.02it/s]Stance:  61%|██████▏   | 27/44 [00:15<00:08,  2.02it/s]Stance:  64%|██████▎   | 28/44 [00:15<00:08,  1.93it/s]Stance:  66%|██████▌   | 29/44 [00:16<00:07,  2.05it/s]Stance:  68%|██████▊   | 30/44 [00:16<00:06,  2.15it/s]Stance:  70%|███████   | 31/44 [00:16<00:05,  2.22it/s]Stance:  73%|███████▎  | 32/44 [00:17<00:05,  2.27it/s]Stance:  75%|███████▌  | 33/44 [00:17<00:05,  2.14it/s]Stance:  89%|████████▊ | 39/44 [00:18<00:00,  6.23it/s]Stance:  91%|█████████ | 40/44 [00:18<00:00,  4.69it/s]Stance:  93%|█████████▎| 41/44 [00:19<00:00,  3.69it/s]Stance:  95%|█████████▌| 42/44 [00:19<00:00,  3.10it/s]Stance:  98%|█████████▊| 43/44 [00:20<00:00,  2.71it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.47it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.13it/s]
-Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:10,  1.16it/s]Ad:  15%|█▌        | 2/13 [00:01<00:09,  1.18it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.15it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.15it/s]Ad:  38%|███▊      | 5/13 [00:04<00:06,  1.15it/s]Ad:  46%|████▌     | 6/13 [00:05<00:06,  1.13it/s]Ad:  54%|█████▍    | 7/13 [00:06<00:05,  1.14it/s]Ad:  62%|██████▏   | 8/13 [00:07<00:04,  1.12it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.13it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.13it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.14it/s]Ad:  92%|█████████▏| 12/13 [00:10<00:00,  1.15it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.25it/s]Ad: 100%|██████████| 13/13 [00:11<00:00,  1.17it/s]
-2026-04-29 20:52:29,349 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3.5-flash-02-23.parquet.
+2026-05-13 15:57:18,316 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,317 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,317 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,318 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,319 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,319 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,321 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,322 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,326 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,327 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,328 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,330 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,335 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,337 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,339 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,343 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,346 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,349 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,350 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,352 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,357 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,360 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,369 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,372 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,374 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,375 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,376 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,377 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,380 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,383 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,389 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,391 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,394 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,395 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,397 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,400 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,404 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,409 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,415 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,419 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,422 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,426 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,429 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,434 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,438 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,445 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,448 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,454 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,456 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,459 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,465 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,470 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,473 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,477 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,479 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,480 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,481 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,483 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,487 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,489 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,490 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,492 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,492 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,495 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,500 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,507 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,516 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,520 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,524 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,529 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,531 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,536 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,540 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,543 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,545 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,550 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,553 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,555 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,556 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,561 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,566 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,571 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,573 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,576 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,579 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,582 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,584 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,587 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,588 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,592 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,598 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,602 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,603 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,615 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,619 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,620 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,622 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,624 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,627 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,629 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,632 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,634 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,645 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,649 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,651 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,651 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,652 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,655 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,656 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,659 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,660 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,660 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,662 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,662 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,664 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,664 [INFO] root: Invoking qwen3.5-flash-02-23.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-05-13 15:57:18,665 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,668 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,669 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,670 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,670 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,671 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,674 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,675 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,675 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,676 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,677 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,677 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,686 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,686 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,687 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,687 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,687 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,688 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,688 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,688 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,689 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,689 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,690 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,690 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,691 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,691 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,692 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,693 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,695 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,695 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,696 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,698 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,699 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,699 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,699 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,700 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,700 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,702 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,703 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,704 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,705 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,705 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,706 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,707 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,707 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,707 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,708 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,708 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,709 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,710 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,710 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,710 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,711 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,711 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,711 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,715 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,715 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,716 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,716 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,716 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,717 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,717 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,717 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,717 [INFO] root: Invoking qwen3.5-flash-02-23.
+Descriptions:  43%|████▎     | 174/405 [00:00<00:00, 1717.95it/s]2026-05-13 15:57:18,718 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,718 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,719 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,719 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,720 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,720 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,721 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,721 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,722 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,723 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,724 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,724 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,725 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,725 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,726 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,726 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,727 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,727 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,728 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,728 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,729 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,729 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,729 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,730 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,730 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,730 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,731 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,731 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,731 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,732 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,732 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,732 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,733 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,733 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,733 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,734 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,736 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,736 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,737 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,737 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,737 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,737 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,738 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,738 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,739 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,739 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,739 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,739 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,740 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,740 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,741 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,741 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,741 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,742 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,742 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,744 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,744 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,745 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,746 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,747 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,748 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,748 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,749 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,750 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,750 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,751 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,751 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,752 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,752 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,753 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,754 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,754 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,755 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,755 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,756 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,756 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,756 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,757 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,757 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,758 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,758 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,762 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,763 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,763 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,764 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,764 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,764 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,765 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,766 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,767 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,768 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,769 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,769 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,770 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,771 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,771 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,772 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,774 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,774 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,775 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,776 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,777 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,780 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,782 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,784 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,786 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,794 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,795 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,799 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,803 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,803 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,806 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,806 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,808 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,808 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,809 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,810 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,811 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,811 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,813 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,813 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,816 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,816 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,816 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,817 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,817 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,817 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,818 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,818 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,819 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,820 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,820 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,822 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,823 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,825 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,825 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,826 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,827 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,828 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,829 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,830 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,830 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,831 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,832 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,833 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,833 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,838 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,838 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,839 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,839 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,840 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,841 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,842 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,844 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,844 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,844 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,844 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,845 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,846 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,848 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,848 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,849 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,850 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,850 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,851 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,851 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,852 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,853 [INFO] root: Invoking qwen3.5-flash-02-23.
+Descriptions:  85%|████████▌ | 346/405 [00:00<00:00, 1417.25it/s]2026-05-13 15:57:18,853 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,856 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,856 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,858 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,859 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,860 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,861 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,863 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,864 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,865 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,866 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,867 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,868 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,869 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,870 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,871 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,873 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,874 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,874 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,874 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,875 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,876 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,877 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,877 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,878 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,878 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,880 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,880 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,880 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,881 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,881 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,882 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,882 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,884 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,885 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,885 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,885 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,886 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,887 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,888 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,889 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,891 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,892 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,893 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,894 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,895 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,897 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,897 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,898 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,898 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,899 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,900 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,901 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,901 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,902 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,903 [INFO] root: Invoking qwen3.5-flash-02-23.
+2026-05-13 15:57:18,904 [INFO] root: Invoking qwen3.5-flash-02-23.
+Descriptions: 100%|██████████| 405/405 [00:00<00:00, 1472.41it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:00<00:41,  1.05it/s]Stance:   5%|▍         | 2/44 [00:01<00:28,  1.49it/s]Stance:   7%|▋         | 3/44 [00:01<00:23,  1.72it/s]Stance:   9%|▉         | 4/44 [00:02<00:21,  1.84it/s]Stance:  11%|█▏        | 5/44 [00:02<00:20,  1.90it/s]Stance:  14%|█▎        | 6/44 [00:03<00:19,  1.96it/s]Stance:  16%|█▌        | 7/44 [00:03<00:18,  2.00it/s]Stance:  18%|█▊        | 8/44 [00:04<00:17,  2.04it/s]Stance:  20%|██        | 9/44 [00:04<00:17,  2.06it/s]Stance:  23%|██▎       | 10/44 [00:05<00:16,  2.08it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:05<00:15,  2.08it/s]Stance:  27%|██▋       | 12/44 [00:06<00:15,  2.11it/s]Stance:  30%|██▉       | 13/44 [00:06<00:14,  2.10it/s]Stance:  32%|███▏      | 14/44 [00:07<00:14,  2.10it/s]Stance:  34%|███▍      | 15/44 [00:07<00:13,  2.11it/s]Stance:  36%|███▋      | 16/44 [00:08<00:13,  2.11it/s]Stance:  39%|███▊      | 17/44 [00:08<00:12,  2.10it/s]Stance:  41%|████      | 18/44 [00:09<00:12,  2.11it/s]Stance:  43%|████▎     | 19/44 [00:09<00:12,  2.07it/s]Stance:  45%|████▌     | 20/44 [00:10<00:11,  2.08it/s]Stance:  48%|████▊     | 21/44 [00:10<00:14,  1.61it/s]Stance:  50%|█████     | 22/44 [00:11<00:12,  1.72it/s]Stance:  52%|█████▏    | 23/44 [00:11<00:11,  1.82it/s]Stance:  55%|█████▍    | 24/44 [00:12<00:10,  1.90it/s]Stance:  57%|█████▋    | 25/44 [00:12<00:09,  1.94it/s]Stance:  59%|█████▉    | 26/44 [00:13<00:09,  1.99it/s]Stance:  61%|██████▏   | 27/44 [00:13<00:08,  2.02it/s]Stance:  64%|██████▎   | 28/44 [00:14<00:07,  2.05it/s]Stance:  66%|██████▌   | 29/44 [00:14<00:07,  2.06it/s]Stance:  68%|██████▊   | 30/44 [00:15<00:06,  2.06it/s]Stance:  70%|███████   | 31/44 [00:15<00:06,  2.05it/s]Stance:  73%|███████▎  | 32/44 [00:16<00:05,  2.06it/s]Stance:  75%|███████▌  | 33/44 [00:16<00:05,  2.06it/s]Stance:  77%|███████▋  | 34/44 [00:17<00:04,  2.05it/s]Stance:  80%|███████▉  | 35/44 [00:17<00:04,  2.07it/s]Stance:  82%|████████▏ | 36/44 [00:18<00:03,  2.20it/s]Stance:  84%|████████▍ | 37/44 [00:18<00:03,  2.22it/s]Stance:  86%|████████▋ | 38/44 [00:19<00:02,  2.14it/s]Stance:  89%|████████▊ | 39/44 [00:19<00:02,  2.25it/s]Stance:  91%|█████████ | 40/44 [00:19<00:01,  2.36it/s]Stance:  93%|█████████▎| 41/44 [00:20<00:01,  2.46it/s]Stance:  95%|█████████▌| 42/44 [00:20<00:00,  2.51it/s]Stance:  98%|█████████▊| 43/44 [00:21<00:00,  2.36it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  2.27it/s]Stance: 100%|██████████| 44/44 [00:21<00:00,  2.04it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:09,  1.26it/s]Ad:  15%|█▌        | 2/13 [00:01<00:08,  1.24it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.22it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.23it/s]Ad:  38%|███▊      | 5/13 [00:04<00:06,  1.23it/s]Ad:  46%|████▌     | 6/13 [00:04<00:05,  1.24it/s]Ad:  54%|█████▍    | 7/13 [00:05<00:04,  1.26it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:03,  1.26it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.25it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.25it/s]Ad:  85%|████████▍ | 11/13 [00:08<00:01,  1.24it/s]Ad:  92%|█████████▏| 12/13 [00:09<00:00,  1.25it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.37it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.27it/s]
+2026-05-13 15:58:08,038 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/qwen3.5-flash-02-23.parquet.
