@@ -9,10 +9,12 @@ with this one instead:
   + pl.col("instance_json").str.json_decode()
 
   .map_elements(json.loads, return_dtype=pl.Object)
-2026-05-13 15:55:04,321 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-05-13 15:55:04,367 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
-2026-05-13 15:55:04,643 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
-Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 6620.03it/s]
+2026-05-21 15:55:09,894 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-21 15:55:09,910 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/siebert/sentiment-roberta-large-english/74cea614e245b0832c770ec9aa51bd58df965b9c/config.json "HTTP/1.1 200 OK"
+2026-05-21 15:55:10,164 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/main/model.safetensors "HTTP/1.1 404 Not Found"
+2026-05-21 15:55:10,519 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
+2026-05-21 15:55:10,784 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/393 [00:00<?, ?it/s]Loading weights: 100%|██████████| 393/393 [00:00<00:00, 7246.34it/s]
 RobertaForSequenceClassification LOAD REPORT from: siebert/sentiment-roberta-large-english
 Key                             | Status     |  | 
 --------------------------------+------------+--+-
@@ -20,439 +22,437 @@ roberta.embeddings.position_ids | UNEXPECTED |  |
 
 Notes:
 - UNEXPECTED	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.
-2026-05-13 15:55:04,966 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english "HTTP/1.1 200 OK"
-2026-05-13 15:55:05,254 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/main "HTTP/1.1 200 OK"
-2026-05-13 15:55:05,378 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-05-13 15:55:05,604 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
-2026-05-13 15:55:05,664 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-05-13 15:55:05,913 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
-2026-05-13 15:55:06,229 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
-2026-05-13 15:55:06,561 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
-2026-05-13 15:55:07,029 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-05-13 15:55:07,084 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  55%|█████▍    | 111/202 [00:00<00:00, 1104.39it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1464.84it/s]
-2026-05-13 15:55:07,591 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-05-13 15:55:07,892 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-05-13 15:55:08,920 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
-2026-05-13 15:55:09,369 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-05-13 15:55:09,445 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-2026-05-13 15:55:09,752 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
-2026-05-13 15:55:09,829 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
-2026-05-13 15:55:10,507 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
-2026-05-13 15:55:10,966 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
-2026-05-13 15:55:11,831 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
-2026-05-13 15:55:12,150 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
-2026-05-13 15:55:12,215 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
-Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 104/202 [00:00<00:00, 1038.08it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1392.61it/s]
-2026-05-13 15:55:12,537 [INFO] root: Running assay=describe-sentiment model=deepseek-v3.2 num_samples_per_instance=3.
+2026-05-21 15:55:11,038 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/discussions?p=0 "HTTP/1.1 200 OK"
+2026-05-21 15:55:11,202 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-21 15:55:11,401 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/commits/refs%2Fpr%2F9 "HTTP/1.1 200 OK"
+2026-05-21 15:55:11,453 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/siebert/sentiment-roberta-large-english/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-21 15:55:11,646 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors.index.json "HTTP/1.1 404 Not Found"
+2026-05-21 15:55:11,898 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/siebert/sentiment-roberta-large-english/resolve/refs%2Fpr%2F9/model.safetensors "HTTP/1.1 302 Found"
+2026-05-21 15:55:12,733 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/MoritzLaurer/deberta-v3-base-zeroshot-v1/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-21 15:55:12,748 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/c2040e8a2599abd2925fdc716cf40e8052d56ec4/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  43%|████▎     | 87/202 [00:00<00:00, 867.40it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1212.14it/s]
+2026-05-21 15:55:13,206 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-21 15:55:13,452 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-21 15:55:14,469 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/MoritzLaurer/deberta-v3-base-zeroshot-v1 "HTTP/1.1 200 OK"
+2026-05-21 15:55:14,918 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-21 15:55:14,934 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+2026-05-21 15:55:15,179 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-21 15:55:15,194 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-05-21 15:55:15,438 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-05-21 15:55:15,683 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-21 15:55:16,389 [INFO] httpx: HTTP Request: GET https://huggingface.co/api/models/teknology/ad-classifier-v0.3 "HTTP/1.1 200 OK"
+2026-05-21 15:55:16,626 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/teknology/ad-classifier-v0.3/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-05-21 15:55:16,641 [INFO] httpx: HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/teknology/ad-classifier-v0.3/0e909a3c256680421b4f4e0d204b3e4634a69870/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/202 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 84/202 [00:00<00:00, 838.51it/s]Loading weights: 100%|██████████| 202/202 [00:00<00:00, 1322.60it/s]
+2026-05-21 15:55:17,326 [INFO] root: Running assay=describe-sentiment model=deepseek-v3.2 num_samples_per_instance=3.
 Invoking model 405 times for 44 distinct entities across 21 assay instances with 3 samples per instance (135 entity-instance pairs × 3 samples).
-2026-05-13 15:55:12,549 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,549 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,550 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,551 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,552 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,554 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,559 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,560 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,562 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,563 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,568 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,569 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,571 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,572 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,573 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,575 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,576 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,578 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,581 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,584 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,586 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,591 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,594 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,595 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,598 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,599 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,601 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,602 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,605 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,606 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,608 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,609 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,610 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,610 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,611 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,611 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,612 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,613 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,613 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,614 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,615 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,617 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,623 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,627 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,631 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,636 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,639 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,644 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,650 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,654 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,660 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,665 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,670 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,673 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,680 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,685 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,689 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,694 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,699 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,701 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,704 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,707 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,708 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,709 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,710 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,712 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,714 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,716 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,718 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,719 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,720 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,721 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,722 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,723 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,724 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,730 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,732 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,734 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,736 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,742 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,748 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,754 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,760 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,762 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,765 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,773 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,775 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,783 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,794 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,797 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,804 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,806 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,811 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,818 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,821 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,825 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,828 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,834 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,840 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,842 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,845 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,848 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,851 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,855 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,862 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,864 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,865 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,867 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,871 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,873 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,875 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,886 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,889 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,891 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,893 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,894 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,896 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,899 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,901 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,903 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-05-13 15:55:12,908 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,910 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,912 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,913 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,914 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,919 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,921 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,922 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,985 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,986 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,988 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,990 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,991 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,992 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,992 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,992 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,993 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,994 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,994 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,995 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,996 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,996 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,997 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,997 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,998 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:12,999 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,000 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,001 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,001 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,002 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,002 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,002 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,003 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,003 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  18%|█▊        | 73/405 [00:00<00:00, 727.26it/s]2026-05-13 15:55:13,003 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,003 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,004 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,004 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,005 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,006 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,007 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,008 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,008 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,009 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,009 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,009 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,010 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,010 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,010 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,011 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,012 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,012 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,013 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,014 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,014 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,015 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,016 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,016 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,017 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,017 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,018 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,018 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,018 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,019 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,019 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,019 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,020 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,020 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,020 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,021 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,021 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,022 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,022 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,023 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,023 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,024 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,025 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,025 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,025 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,026 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,027 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,028 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,028 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,028 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,029 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,030 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,031 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,031 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,032 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,032 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,033 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,033 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,034 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,034 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,035 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,035 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,036 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,036 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,036 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,037 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,037 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,038 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,038 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,039 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,039 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,039 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,040 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,040 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,040 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,041 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,041 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,041 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,042 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,042 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,042 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,043 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,043 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,043 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,044 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,044 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,045 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,045 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,045 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,046 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,046 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,047 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,047 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,048 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,048 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,048 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,049 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,050 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,050 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  62%|██████▏   | 250/405 [00:00<00:00, 1336.95it/s]2026-05-13 15:55:13,051 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,051 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,052 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,052 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,052 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,053 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,054 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,054 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,055 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,055 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,055 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,057 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,058 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,058 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,059 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,059 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,060 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,060 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,061 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,061 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,061 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,062 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,062 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,063 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,063 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,064 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,064 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,065 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,065 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,066 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,066 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,067 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,067 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,067 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,067 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,068 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,068 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,068 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,069 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,069 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,069 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,070 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,070 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,071 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,071 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,072 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,073 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,074 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,074 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,075 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,075 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,075 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,076 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,076 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,076 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,077 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,078 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,078 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,078 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,079 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,080 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,080 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,081 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,081 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,082 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,083 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,083 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,084 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,085 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,085 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,086 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,087 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,087 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,088 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,089 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,089 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,089 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,090 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,091 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,091 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,091 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,092 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,093 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,093 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,094 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,094 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,095 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,095 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,097 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,098 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,099 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,100 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,101 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,103 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,104 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,105 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,106 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,106 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,107 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,108 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,109 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,109 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,110 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,111 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,112 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,112 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,113 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,114 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,114 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,115 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,116 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,116 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,117 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,118 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,118 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,119 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,120 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,122 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,123 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,123 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,123 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,125 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,125 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,126 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,126 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,128 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,129 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,130 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,130 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,131 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,131 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,132 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,133 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,136 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,136 [INFO] root: Invoking deepseek-v3.2.
-Descriptions:  95%|█████████▍| 384/405 [00:00<00:00, 1310.45it/s]2026-05-13 15:55:13,137 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,138 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,138 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,139 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,139 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,139 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,142 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,143 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,143 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,144 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,144 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,145 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,146 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,146 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,147 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,148 [INFO] root: Invoking deepseek-v3.2.
-2026-05-13 15:55:13,149 [INFO] root: Invoking deepseek-v3.2.
-Descriptions: 100%|██████████| 405/405 [00:00<00:00, 1269.61it/s]
-Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:00<00:39,  1.08it/s]Stance:   5%|▍         | 2/44 [00:01<00:27,  1.52it/s]Stance:   7%|▋         | 3/44 [00:01<00:23,  1.75it/s]Stance:   9%|▉         | 4/44 [00:02<00:21,  1.88it/s]Stance:  11%|█▏        | 5/44 [00:02<00:18,  2.10it/s]Stance:  14%|█▎        | 6/44 [00:03<00:17,  2.17it/s]Stance:  16%|█▌        | 7/44 [00:03<00:17,  2.16it/s]Stance:  18%|█▊        | 8/44 [00:04<00:16,  2.16it/s]Stance:  20%|██        | 9/44 [00:04<00:16,  2.11it/s]Stance:  23%|██▎       | 10/44 [00:05<00:16,  2.12it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
-Stance:  25%|██▌       | 11/44 [00:05<00:15,  2.12it/s]Stance:  27%|██▋       | 12/44 [00:05<00:15,  2.12it/s]Stance:  30%|██▉       | 13/44 [00:06<00:14,  2.12it/s]Stance:  32%|███▏      | 14/44 [00:06<00:13,  2.26it/s]Stance:  34%|███▍      | 15/44 [00:07<00:13,  2.20it/s]Stance:  36%|███▋      | 16/44 [00:07<00:11,  2.35it/s]Stance:  39%|███▊      | 17/44 [00:08<00:11,  2.29it/s]Stance:  41%|████      | 18/44 [00:08<00:11,  2.23it/s]Stance:  43%|████▎     | 19/44 [00:09<00:11,  2.19it/s]Stance:  45%|████▌     | 20/44 [00:09<00:11,  2.15it/s]Stance:  48%|████▊     | 21/44 [00:10<00:10,  2.13it/s]Stance:  50%|█████     | 22/44 [00:10<00:10,  2.11it/s]Stance:  52%|█████▏    | 23/44 [00:11<00:10,  2.10it/s]Stance:  55%|█████▍    | 24/44 [00:11<00:12,  1.63it/s]Stance:  57%|█████▋    | 25/44 [00:12<00:10,  1.74it/s]Stance:  59%|█████▉    | 26/44 [00:12<00:09,  1.85it/s]Stance:  61%|██████▏   | 27/44 [00:13<00:08,  1.92it/s]Stance:  64%|██████▎   | 28/44 [00:13<00:08,  1.96it/s]Stance:  66%|██████▌   | 29/44 [00:14<00:07,  2.07it/s]Stance:  68%|██████▊   | 30/44 [00:14<00:06,  2.10it/s]Stance:  70%|███████   | 31/44 [00:15<00:06,  2.11it/s]Stance:  73%|███████▎  | 32/44 [00:15<00:05,  2.11it/s]Stance:  75%|███████▌  | 33/44 [00:16<00:05,  2.10it/s]Stance:  77%|███████▋  | 34/44 [00:16<00:04,  2.09it/s]Stance:  80%|███████▉  | 35/44 [00:16<00:03,  2.35it/s]Stance:  82%|████████▏ | 36/44 [00:17<00:03,  2.44it/s]Stance:  84%|████████▍ | 37/44 [00:17<00:02,  2.50it/s]Stance:  86%|████████▋ | 38/44 [00:18<00:02,  2.56it/s]Stance:  89%|████████▊ | 39/44 [00:18<00:01,  2.60it/s]Stance:  91%|█████████ | 40/44 [00:18<00:01,  2.63it/s]Stance:  93%|█████████▎| 41/44 [00:19<00:01,  2.65it/s]Stance:  95%|█████████▌| 42/44 [00:19<00:00,  2.67it/s]Stance:  98%|█████████▊| 43/44 [00:20<00:00,  2.47it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.34it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.15it/s]
-Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:09,  1.29it/s]Ad:  15%|█▌        | 2/13 [00:01<00:08,  1.28it/s]Ad:  23%|██▎       | 3/13 [00:02<00:07,  1.25it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.26it/s]Ad:  38%|███▊      | 5/13 [00:03<00:06,  1.25it/s]Ad:  46%|████▌     | 6/13 [00:04<00:05,  1.25it/s]Ad:  54%|█████▍    | 7/13 [00:05<00:04,  1.25it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:03,  1.26it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.25it/s]Ad:  77%|███████▋  | 10/13 [00:07<00:02,  1.25it/s]Ad:  85%|████████▍ | 11/13 [00:08<00:01,  1.26it/s]Ad:  92%|█████████▏| 12/13 [00:09<00:00,  1.25it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.40it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.29it/s]
-2026-05-13 15:56:01,114 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/deepseek-v3.2.parquet.
+2026-05-21 15:55:17,340 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,340 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,342 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,341 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,342 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,343 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,344 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,346 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,347 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,348 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,349 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,351 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,353 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,354 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,358 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,359 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,361 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,363 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,366 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,368 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,371 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,375 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,379 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,381 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,382 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,386 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,387 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,391 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,392 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,395 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,398 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,400 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,401 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,402 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,403 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,403 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,404 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,404 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,405 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,405 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,405 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,406 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,409 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,419 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,423 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,434 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,444 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,458 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,465 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,473 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,476 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,482 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,485 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,492 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,499 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,505 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,508 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,512 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,521 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,526 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,532 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,534 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,538 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,542 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,547 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,551 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,554 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,558 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,560 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,562 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,564 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,567 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,572 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,575 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,580 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,582 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,585 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,586 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,588 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,595 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,600 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,601 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,603 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,605 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,608 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,611 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,613 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,616 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,617 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,623 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,625 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,633 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,634 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,636 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,638 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,640 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,643 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,651 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,653 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,655 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,657 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,658 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,662 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,664 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,667 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,674 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,676 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,681 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,688 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,691 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,694 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,704 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,706 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,708 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,710 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:   0%|          | 0/405 [00:00<?, ?it/s]2026-05-21 15:55:17,713 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,715 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,718 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,720 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,722 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,724 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,732 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,734 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,735 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,737 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,738 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,739 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,739 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,743 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,744 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,744 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,745 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,746 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,747 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,748 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,749 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,754 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,756 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,756 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,757 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,758 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,758 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,760 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,760 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,760 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,762 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,763 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,764 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,764 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,765 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,766 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  29%|██▊       | 116/405 [00:00<00:00, 1128.87it/s]2026-05-21 15:55:17,767 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,767 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,768 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,769 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,769 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,771 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,772 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,772 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,772 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,773 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,775 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,775 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,779 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,780 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,782 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,782 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,784 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,784 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,786 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,788 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,789 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,789 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,790 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,790 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,791 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,792 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,793 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,795 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,796 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,797 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,797 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,798 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,801 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,802 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,805 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,806 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,807 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,808 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,809 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,810 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,811 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,813 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,814 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,814 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,815 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,816 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,817 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,818 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,818 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,819 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,820 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,821 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,821 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,823 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,824 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,824 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,825 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,826 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,827 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,828 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,829 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,832 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,833 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,834 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,835 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,835 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,836 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,837 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,838 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,839 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,839 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,840 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,842 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,842 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,842 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,843 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,844 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,844 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,844 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,845 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,846 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,847 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,847 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,847 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,848 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,848 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,849 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,849 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,850 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,850 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,850 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,850 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,851 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,851 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,852 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,852 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,853 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,853 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,854 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,854 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,855 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  62%|██████▏   | 250/405 [00:00<00:00, 1248.77it/s]2026-05-21 15:55:17,855 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,856 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,856 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,857 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,857 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,858 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,858 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,858 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,859 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,860 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,860 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,861 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,862 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,862 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,863 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,863 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,864 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,865 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,866 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,867 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,867 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,867 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,868 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,868 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,869 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,869 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,870 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,870 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,870 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,871 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,872 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,872 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,873 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,873 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,874 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,874 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,875 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,875 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,876 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,878 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,879 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,879 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,880 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,882 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,883 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,883 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,885 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,886 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,886 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,887 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,887 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,888 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,889 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,890 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,892 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,894 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,895 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,897 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,897 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,897 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,898 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,898 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,899 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,900 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,901 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,904 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,904 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,905 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,905 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,906 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,906 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,907 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,909 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,910 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,910 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,912 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,913 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,913 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,914 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,915 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,915 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,916 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,917 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,919 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,919 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,920 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,920 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,920 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,922 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,922 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,925 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,925 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,926 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,927 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,930 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,930 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,931 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,932 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,933 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,935 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,935 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,936 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,937 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,937 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,938 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,939 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,940 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,940 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,941 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,942 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,943 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,943 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,944 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,945 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,945 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,948 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,949 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,950 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,951 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,952 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,953 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,953 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,953 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,955 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,955 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,956 [INFO] root: Invoking deepseek-v3.2.
+Descriptions:  93%|█████████▎| 375/405 [00:00<00:00, 1241.32it/s]2026-05-21 15:55:17,957 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,958 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,958 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,959 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,960 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,960 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,961 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,962 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,963 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,964 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,965 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,965 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,966 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,967 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,968 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,968 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,969 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,971 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,972 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,972 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,973 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,974 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,975 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,977 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,977 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,979 [INFO] root: Invoking deepseek-v3.2.
+2026-05-21 15:55:17,981 [INFO] root: Invoking deepseek-v3.2.
+Descriptions: 100%|██████████| 405/405 [00:00<00:00, 1257.55it/s]
+Stance:   0%|          | 0/44 [00:00<?, ?it/s]Stance:   2%|▏         | 1/44 [00:00<00:42,  1.01it/s]Stance:   5%|▍         | 2/44 [00:01<00:29,  1.43it/s]Stance:   7%|▋         | 3/44 [00:01<00:24,  1.66it/s]Stance:   9%|▉         | 4/44 [00:02<00:22,  1.79it/s]Stance:  11%|█▏        | 5/44 [00:02<00:20,  1.86it/s]Stance:  14%|█▎        | 6/44 [00:03<00:19,  1.91it/s]Stance:  16%|█▌        | 7/44 [00:03<00:19,  1.94it/s]Stance:  18%|█▊        | 8/44 [00:04<00:18,  1.97it/s]Stance:  20%|██        | 9/44 [00:04<00:17,  1.97it/s]Stance:  23%|██▎       | 10/44 [00:05<00:17,  1.98it/s]You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Stance:  25%|██▌       | 11/44 [00:05<00:16,  1.99it/s]Stance:  27%|██▋       | 12/44 [00:06<00:16,  1.99it/s]Stance:  30%|██▉       | 13/44 [00:06<00:15,  1.99it/s]Stance:  32%|███▏      | 14/44 [00:07<00:15,  1.99it/s]Stance:  34%|███▍      | 15/44 [00:07<00:14,  2.01it/s]Stance:  36%|███▋      | 16/44 [00:08<00:13,  2.01it/s]Stance:  39%|███▊      | 17/44 [00:08<00:13,  2.03it/s]Stance:  41%|████      | 18/44 [00:09<00:12,  2.03it/s]Stance:  43%|████▎     | 19/44 [00:09<00:12,  2.02it/s]Stance:  45%|████▌     | 20/44 [00:10<00:11,  2.00it/s]Stance:  48%|████▊     | 21/44 [00:10<00:11,  1.99it/s]Stance:  50%|█████     | 22/44 [00:11<00:11,  1.98it/s]Stance:  52%|█████▏    | 23/44 [00:11<00:10,  1.99it/s]Stance:  55%|█████▍    | 24/44 [00:12<00:12,  1.54it/s]Stance:  57%|█████▋    | 25/44 [00:13<00:11,  1.66it/s]Stance:  59%|█████▉    | 26/44 [00:13<00:10,  1.76it/s]Stance:  61%|██████▏   | 27/44 [00:14<00:09,  1.82it/s]Stance:  64%|██████▎   | 28/44 [00:14<00:08,  1.86it/s]Stance:  66%|██████▌   | 29/44 [00:15<00:07,  1.89it/s]Stance:  68%|██████▊   | 30/44 [00:15<00:07,  1.94it/s]Stance:  70%|███████   | 31/44 [00:16<00:06,  2.03it/s]Stance:  73%|███████▎  | 32/44 [00:16<00:05,  2.03it/s]Stance:  75%|███████▌  | 33/44 [00:17<00:05,  2.02it/s]Stance:  77%|███████▋  | 34/44 [00:17<00:04,  2.17it/s]Stance:  80%|███████▉  | 35/44 [00:18<00:04,  2.11it/s]Stance:  82%|████████▏ | 36/44 [00:18<00:03,  2.05it/s]Stance:  84%|████████▍ | 37/44 [00:19<00:03,  2.19it/s]Stance:  86%|████████▋ | 38/44 [00:19<00:02,  2.29it/s]Stance:  89%|████████▊ | 39/44 [00:19<00:02,  2.37it/s]Stance:  91%|█████████ | 40/44 [00:20<00:01,  2.43it/s]Stance:  93%|█████████▎| 41/44 [00:20<00:01,  2.47it/s]Stance: 100%|██████████| 44/44 [00:20<00:00,  2.14it/s]
+Ad:   0%|          | 0/13 [00:00<?, ?it/s]Ad:   8%|▊         | 1/13 [00:00<00:09,  1.26it/s]Ad:  15%|█▌        | 2/13 [00:01<00:08,  1.26it/s]Ad:  23%|██▎       | 3/13 [00:02<00:08,  1.22it/s]Ad:  31%|███       | 4/13 [00:03<00:07,  1.20it/s]Ad:  38%|███▊      | 5/13 [00:04<00:06,  1.22it/s]Ad:  46%|████▌     | 6/13 [00:04<00:05,  1.21it/s]Ad:  54%|█████▍    | 7/13 [00:05<00:04,  1.21it/s]Ad:  62%|██████▏   | 8/13 [00:06<00:04,  1.20it/s]Ad:  69%|██████▉   | 9/13 [00:07<00:03,  1.19it/s]Ad:  77%|███████▋  | 10/13 [00:08<00:02,  1.20it/s]Ad:  85%|████████▍ | 11/13 [00:09<00:01,  1.21it/s]Ad:  92%|█████████▏| 12/13 [00:09<00:00,  1.20it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.35it/s]Ad: 100%|██████████| 13/13 [00:10<00:00,  1.24it/s]
+2026-05-21 15:56:05,671 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/describe-sentiment/deepseek-v3.2.parquet.

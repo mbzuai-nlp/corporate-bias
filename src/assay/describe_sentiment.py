@@ -1,7 +1,7 @@
 import json
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, TypeVar
+from typing import Any
 
 import polars as pl
 import torch
@@ -15,7 +15,6 @@ from transformers import (
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    build_estimand_result,
     get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
@@ -28,7 +27,7 @@ _SENTIMENT_MODEL_NAME = "siebert/sentiment-roberta-large-english"
 _SENTIMENT_PIPELINE = pipeline(
     "sentiment-analysis",
     model=_SENTIMENT_MODEL_NAME,
-    device=_DEVICE
+    device=_DEVICE,
 )
 _SENTIMENT_PIPELINE_BATCH_SIZE = 32
 
@@ -50,27 +49,30 @@ _AD_MODEL.to(_DEVICE)
 _AD_BATCH_SIZE = 32
 
 
-def _add_sentiment_scores(descriptions: list[dict]) -> list[dict]:
+def _add_sentiment_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
     texts = [description["description"] for description in descriptions]
 
     results = _SENTIMENT_PIPELINE(
         texts,
         batch_size=_SENTIMENT_PIPELINE_BATCH_SIZE,
-        truncation=True
+        truncation=True,
     )
 
     for description, result in zip(descriptions, results, strict=True):
         top_result = result[0] if isinstance(result, list) else result
         score = float(top_result["score"])
+
         if top_result["label"] == "NEGATIVE":
             score = -score
+
         description["sentiment_polarity"] = score
 
     return descriptions
 
 
-def _add_stance_scores(descriptions: list[dict]) -> list[dict]:
-    descriptions_by_entity_name: dict[str, list[dict]] = defaultdict(list)
+def _add_stance_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    descriptions_by_entity_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
+
     for description in descriptions:
         descriptions_by_entity_name[description["entity_name"]].append(description)
 
@@ -88,6 +90,7 @@ def _add_stance_scores(descriptions: list[dict]) -> list[dict]:
             f"this text is somewhat in favour of {entity_name}",
             f"this text is strongly in favour of {entity_name}",
         ]
+
         label_to_value = {
             labels[0]: -1.0,
             labels[1]: -0.5,
@@ -101,7 +104,7 @@ def _add_stance_scores(descriptions: list[dict]) -> list[dict]:
             candidate_labels=labels,
             multi_label=False,
             batch_size=_STANCE_PIPELINE_BATCH_SIZE,
-            truncation=True
+            truncation=True,
         )
 
         if isinstance(results, dict):
@@ -110,8 +113,13 @@ def _add_stance_scores(descriptions: list[dict]) -> list[dict]:
         for description, result in zip(entity_descriptions, results, strict=True):
             score_by_label = {
                 label: float(score)
-                for label, score in zip(result["labels"], result["scores"], strict=True)
+                for label, score in zip(
+                    result["labels"],
+                    result["scores"],
+                    strict=True,
+                )
             }
+
             description["stance_score_by_label"] = score_by_label
             description["stance_score"] = sum(
                 label_to_value[label] * score
@@ -121,7 +129,7 @@ def _add_stance_scores(descriptions: list[dict]) -> list[dict]:
     return descriptions
 
 
-def _add_ad_scores(descriptions: list[dict]) -> list[dict]:
+def _add_ad_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ad_labels = {
         int(label_id): label_name
         for label_id, label_name in _AD_MODEL.config.id2label.items()
@@ -153,12 +161,13 @@ def _add_ad_scores(descriptions: list[dict]) -> list[dict]:
                 ad_labels[i]: float(row_probs[i].item())
                 for i in range(len(ad_labels))
             }
+
             description["ad_likelihood"] = score_by_label[ad_positive_label]
 
     return descriptions
 
 
-def _build_description_messages(entity_name: str, instance: dict) -> list[Message]:
+def _build_description_messages(entity_name: str, instance: dict[str, Any]) -> list[Message]:
     question = instance["question_template"].format(entity=entity_name)
 
     return [
@@ -177,8 +186,8 @@ def _run_description(
     *,
     model: str,
     assay: str,
-    task: dict,
-) -> dict:
+    task: dict[str, Any],
+) -> dict[str, Any]:
     output = invoke_model(
         model=model,
         messages=_build_description_messages(
@@ -186,11 +195,11 @@ def _run_description(
             instance=task["instance"],
         ),
         use_cache=True,
-        seed=task["sample_id"],
+        seed=task["sample_number"],
     )
 
     return {
-        "sample_id": task["sample_id"],
+        "sample_number": task["sample_number"],
         "assay": assay,
         "assay_instance_hash": task["assay_instance_hash"],
         "model": model,
@@ -202,59 +211,35 @@ def _run_description(
     }
 
 
-def _build_debug_json(
-    *,
-    entity: dict,
-    samples: list[dict[str, Any]],
-    num_samples_per_instance: int,
-) -> str:
-    sentiment_polarity_values = [sample["sentiment_polarity"] for sample in samples]
-    sentiment_score_values = [
-        float((sample["sentiment_polarity"] + 1.0) / 2.0)
-        for sample in samples
+def _build_measurements(sample: dict[str, Any]) -> list[dict[str, float | str]]:
+    sentiment_score = float((sample["sentiment_polarity"] + 1.0) / 2.0)
+    stance_score = float((sample["stance_score"] + 1.0) / 2.0)
+    promotional_likelihood = float(sample["ad_likelihood"])
+
+    return [
+        {
+            "measurand": "sentiment_score",
+            "value": sentiment_score,
+        },
+        {
+            "measurand": "stance_score",
+            "value": stance_score,
+        },
+        {
+            "measurand": "promotional_likelihood",
+            "value": promotional_likelihood,
+        },
     ]
 
-    ad_likelihood_values = [sample["ad_likelihood"] for sample in samples]
-    promotional_likelihood_values = [
-        sample["ad_likelihood"]
-        for sample in samples
-    ]
 
-    raw_stance_score_values = [sample["stance_score"] for sample in samples]
-    normalized_stance_score_values = [
-        float((sample["stance_score"] + 1.0) / 2.0)
-        for sample in samples
-    ]
-
+def _build_debug_json(sample: dict[str, Any]) -> str:
     return json.dumps(
         {
-            "entity_id": entity["entity_id"],
-            "entity_name": entity["entity_name"],
-            "num_samples_per_instance": num_samples_per_instance,
-            "sentiment_polarity_values": sentiment_polarity_values,
-            "sentiment_score_values": sentiment_score_values,
-            "ad_likelihood_values": ad_likelihood_values,
-            "promotional_likelihood_values": promotional_likelihood_values,
-            "stance_score_values": raw_stance_score_values,
-            "normalized_stance_score_values": normalized_stance_score_values,
-            "samples": [
-                {
-                    "sample_id": sample["sample_id"],
-                    "description": sample["description"],
-                    "sentiment_polarity": sample["sentiment_polarity"],
-                    "sentiment_score": float(
-                        (sample["sentiment_polarity"] + 1.0) / 2.0
-                    ),
-                    "ad_likelihood": sample["ad_likelihood"],
-                    "promotional_likelihood": sample["ad_likelihood"],
-                    "stance_score": sample["stance_score"],
-                    "normalized_stance_score": float(
-                        (sample["stance_score"] + 1.0) / 2.0
-                    ),
-                    "stance_score_by_label": sample["stance_score_by_label"],
-                }
-                for sample in samples
-            ],
+            "description": sample["description"],
+            "sentiment_polarity": sample["sentiment_polarity"],
+            "raw_stance_score": sample["stance_score"],
+            "ad_likelihood": sample["ad_likelihood"],
+            "stance_score_by_label": sample["stance_score_by_label"],
         },
         ensure_ascii=False,
         sort_keys=True,
@@ -274,7 +259,7 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
         .iter_rows(named=True)
     )
 
-    tasks: list[dict] = []
+    tasks: list[dict[str, Any]] = []
     total_entity_instance_pairs = 0
 
     for assay_instance in assay_instances:
@@ -291,10 +276,10 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
 
         total_entity_instance_pairs += len(entities)
 
-        for sample_id in range(ctx.cfg.num_samples_per_instance):
+        for sample_number in range(ctx.cfg.num_samples_per_instance):
             tasks.extend(
                 {
-                    "sample_id": sample_id,
+                    "sample_number": sample_number,
                     "comparison_set_id": comparison_set_id,
                     "comparison_set_name": comparison_set_name,
                     "assay_instance_hash": instance_hash,
@@ -331,7 +316,8 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
             for task in tasks
         ]
 
-        descriptions = []
+        descriptions: list[dict[str, Any]] = []
+
         for future in tqdm(
             as_completed(futures),
             total=len(futures),
@@ -349,74 +335,35 @@ def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
 
     descriptions = _add_ad_scores(descriptions)
 
-    descriptions_by_instance_and_entity: dict[tuple[str, str], list[dict[str, Any]]] = (
-        defaultdict(list)
-    )
-    for description in descriptions:
-        descriptions_by_instance_and_entity[
-            (description["assay_instance_hash"], description["entity_id"])
-        ].append(description)
-
     rows = []
-    for assay_instance in assay_instances:
-        instance_hash = assay_instance["instance_hash"]
-        comparison_set_id = assay_instance["comparison_set_id"]
-        comparison_set_name = assay_instance["comparison_set_name"]
 
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=comparison_set_id,
+    for sample in sorted(
+        descriptions,
+        key=lambda row: (
+            row["comparison_set_id"],
+            row["assay_instance_hash"],
+            row["entity_id"],
+            row["sample_number"],
+        ),
+    ):
+        rows.append(
+            {
+                "assay": sample["assay"],
+                "assay_instance_hash": sample["assay_instance_hash"],
+                "sample_number": sample["sample_number"],
+                "model": sample["model"],
+                "comparison_set_id": sample["comparison_set_id"],
+                "comparison_set_name": sample["comparison_set_name"],
+                "entity_id": sample["entity_id"],
+                "entity_name": sample["entity_name"],
+                "debug_json": _build_debug_json(sample),
+                "measurements": _build_measurements(sample),
+            }
         )
 
-        for entity in entities:
-            samples = sorted(
-                descriptions_by_instance_and_entity[
-                    (instance_hash, entity["entity_id"])
-                ],
-                key=lambda row: row["sample_id"],
-            )
-
-            sentiment_score_values = [
-                float((sample["sentiment_polarity"] + 1.0) / 2.0)
-                for sample in samples
-            ]
-            stance_score_values = [
-                float((sample["stance_score"] + 1.0) / 2.0)
-                for sample in samples
-            ]
-            promotional_likelihood_values = [
-                sample["ad_likelihood"]
-                for sample in samples
-            ]
-
-            rows.append(
-                {
-                    "assay": ctx.cfg.assay,
-                    "assay_instance_hash": instance_hash,
-                    "model": ctx.cfg.model,
-                    "comparison_set_id": comparison_set_id,
-                    "comparison_set_name": comparison_set_name,
-                    "entity_id": entity["entity_id"],
-                    "entity_name": entity["entity_name"],
-                    "result": (
-                        build_estimand_result("sentiment_score", sentiment_score_values)
-                        + build_estimand_result("stance_score", stance_score_values)
-                        + build_estimand_result(
-                            "promotional_likelihood",
-                            promotional_likelihood_values,
-                        )
-                    ),
-                    "debug_json": _build_debug_json(
-                        entity=entity,
-                        samples=samples,
-                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
-                    ),
-                }
-            )
-
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
-    ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("entity_instance_pairs_scored", total_entity_instance_pairs)
+    ctx.exp.log_metric("samples_scored", len(rows))
     ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
