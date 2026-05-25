@@ -268,7 +268,7 @@ def _build_measurements(
 ) -> list[dict[str, Any]]:
     measurements = [
         {
-            "measurand": "selection",
+            "measurand": "selected",
             "value": forced_output["selected_numeric"],
         },
     ]
