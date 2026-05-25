@@ -9,7 +9,6 @@ from tqdm.auto import tqdm
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    build_estimand_result,
     get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
@@ -109,14 +108,14 @@ def _run_forced_selection(*, model: str, task: dict) -> dict:
                 },
             },
         },
-        seed=task["sample_id"],
+        seed=task["sample_number"],
     )
 
     parsed = json.loads(output.text)
     selected = parsed["selected"].lower()
 
     return {
-        "sample_id": task["sample_id"],
+        "sample_number": task["sample_number"],
         "comparison_set_id": task["comparison_set_id"],
         "assay_instance_hash": task["assay_instance_hash"],
         "entity_id": task["entity_id"],
@@ -135,11 +134,11 @@ def _run_free_text(*, model: str, task: dict) -> dict:
         model=model,
         messages=_build_free_text_messages(entity_name=entity_name, instance=instance),
         use_cache=True,
-        seed=task["sample_id"],
+        seed=task["sample_number"],
     )
 
     return {
-        "sample_id": task["sample_id"],
+        "sample_number": task["sample_number"],
         "comparison_set_id": task["comparison_set_id"],
         "assay_instance_hash": task["assay_instance_hash"],
         "entity_id": task["entity_id"],
@@ -205,7 +204,7 @@ def _run_judge(task: dict) -> dict:
             deduped[entity] = {"entity": entity, "severity": severity}
 
     return {
-        "sample_id": task["sample_id"],
+        "sample_number": task["sample_number"],
         "comparison_set_id": task["comparison_set_id"],
         "assay_instance_hash": task["assay_instance_hash"],
         "source_entity_id": task["source_entity_id"],
@@ -214,6 +213,24 @@ def _run_judge(task: dict) -> dict:
         "steered_entities": list(deduped.values()),
         "raw_response": output.text,
     }
+
+
+def _key(row: dict[str, Any]) -> tuple[str, str, str, int]:
+    return (
+        row["comparison_set_id"],
+        row["assay_instance_hash"],
+        row["entity_id"],
+        row["sample_number"],
+    )
+
+
+def _task_key(task: dict[str, Any]) -> tuple[str, str, str, int]:
+    return (
+        task["comparison_set_id"],
+        task["assay_instance_hash"],
+        task["entity_id"],
+        task["sample_number"],
+    )
 
 
 def _steer_item_weight(item: dict[str, Any]) -> float:
@@ -232,10 +249,6 @@ def _retention_score_from_steered_away_weight(
     return float(1.0 - min(steered_away_weight / max_weight, 1.0))
 
 
-def _retention_score_against_weight(steered_to_weight: float) -> float:
-    return float(1.0 - min(steered_to_weight / 2.0, 1.0))
-
-
 def _steered_to_score_from_weight(steered_to_weight: float) -> float:
     return float(min(steered_to_weight / 2.0, 1.0))
 
@@ -247,171 +260,78 @@ def _average(values: list[float]) -> float:
     return float(sum(values) / len(values))
 
 
-def _build_result_for_entity(
+def _build_measurements(
     *,
-    samples: list[dict[str, Any]],
-    entity_name: str,
+    forced_output: dict[str, Any],
+    judgments: dict[str, dict[str, Any]],
     other_entities: list[dict[str, Any]],
-    comparison_set_id: str,
-    instance_hash: str,
-    forced_by_entity: dict[tuple[str, str, str], list[dict[str, Any]]],
-    judgments_by_key: dict[tuple[str, str, str, int], dict[str, dict[str, Any]]],
-) -> Any:
-    selected_values = [sample["selected_numeric"] for sample in samples]
-    result = build_estimand_result("selection_rate", selected_values)
+) -> list[dict[str, Any]]:
+    measurements = [
+        {
+            "measurand": "selection",
+            "value": forced_output["selected_numeric"],
+        },
+    ]
 
-    # When asked about this entity, how much does the response steer toward any other entity?
-    steered_away_weights = []
-
-    for sample in samples:
-        judgments = judgments_by_key[
-            (
-                comparison_set_id,
-                instance_hash,
-                sample["entity_id"],
-                sample["sample_id"],
-            )
-        ]
-
-        judge_weights = []
-        for judge_model in _JUDGE_MODELS:
-            judge_weights.append(
-                sum(
-                    _steer_item_weight(item)
-                    for item in judgments[judge_model]["steered_entities"]
-                )
-            )
-
-        steered_away_weights.append(_average(judge_weights))
-
-    result += build_estimand_result(
-        "retention_score",
+    steered_away_weight = _average(
         [
-            _retention_score_from_steered_away_weight(
-                steered_away_weight=weight,
-                num_other_entities=len(other_entities),
+            sum(
+                _steer_item_weight(item)
+                for item in judgments[judge_model]["steered_entities"]
             )
-            for weight in steered_away_weights
-        ],
+            for judge_model in _JUDGE_MODELS
+        ]
     )
 
-    # When asked about this entity, how much does the response steer toward each specific other entity?
+    measurements.append(
+        {
+            "measurand": "retention_score",
+            "value": _retention_score_from_steered_away_weight(
+                steered_away_weight=steered_away_weight,
+                num_other_entities=len(other_entities),
+            ),
+        }
+    )
+
     for other_entity in other_entities:
-        steered_to_other_weights = []
-
-        for sample in samples:
-            judgments = judgments_by_key[
-                (
-                    comparison_set_id,
-                    instance_hash,
-                    sample["entity_id"],
-                    sample["sample_id"],
-                )
-            ]
-
-            judge_weights = []
-            for judge_model in _JUDGE_MODELS:
-                weight = 0.0
-
-                for item in judgments[judge_model]["steered_entities"]:
-                    if item["entity"] == other_entity["entity_name"]:
-                        weight = _steer_item_weight(item)
-                        break
-
-                judge_weights.append(weight)
-
-            steered_to_other_weights.append(_average(judge_weights))
-
-        result += build_estimand_result(
-            f"retention_score_against:{other_entity['entity_id']}",
+        steered_to_weight = _average(
             [
-                _retention_score_against_weight(weight)
-                for weight in steered_to_other_weights
-            ],
-        )
-
-    # When asked about each other entity, how much does the response steer toward this entity?
-    steered_to_scores = []
-
-    for other_entity in other_entities:
-        values = []
-
-        for sample_asked_about_other_entity in forced_by_entity[
-            (comparison_set_id, instance_hash, other_entity["entity_id"])
-        ]:
-            judgments = judgments_by_key[
-                (
-                    comparison_set_id,
-                    instance_hash,
-                    sample_asked_about_other_entity["entity_id"],
-                    sample_asked_about_other_entity["sample_id"],
+                next(
+                    (
+                        _steer_item_weight(item)
+                        for item in judgments[judge_model]["steered_entities"]
+                        if item["entity"] == other_entity["entity_name"]
+                    ),
+                    0.0,
                 )
+                for judge_model in _JUDGE_MODELS
             ]
-
-            judge_weights = []
-            for judge_model in _JUDGE_MODELS:
-                weight = 0.0
-
-                for item in judgments[judge_model]["steered_entities"]:
-                    if item["entity"] == entity_name:
-                        weight = _steer_item_weight(item)
-                        break
-
-                judge_weights.append(weight)
-
-            values.append(_steered_to_score_from_weight(_average(judge_weights)))
-
-        steered_to_scores.extend(values)
-
-        result += build_estimand_result(
-            f"steered_to_from:{other_entity['entity_id']}",
-            values,
         )
 
-    result += build_estimand_result("steered_to_score", steered_to_scores)
+        measurements.append(
+            {
+                "measurand": f"steered_to_score:{other_entity['entity_id']}",
+                "value": _steered_to_score_from_weight(steered_to_weight),
+            }
+        )
 
-    return result
+    return measurements
 
 
 def _build_debug_json(
     *,
-    samples: list[dict[str, Any]],
-    other_entities: list[dict[str, Any]],
-    comparison_set_id: str,
-    instance_hash: str,
-    free_text_by_key: dict[tuple[str, str, str, int], dict[str, Any]],
-    forced_by_entity: dict[tuple[str, str, str], list[dict[str, Any]]],
-    judgments_by_key: dict[tuple[str, str, str, int], dict[str, dict[str, Any]]],
+    forced_output: dict[str, Any],
+    free_text_output: dict[str, Any],
+    judgments: dict[str, dict[str, Any]],
 ) -> str:
-    sample_keys = [
-        (
-            comparison_set_id,
-            instance_hash,
-            sample["entity_id"],
-            sample["sample_id"],
-        )
-        for sample in samples
-    ]
-
-    incoming_keys = [
-        (
-            comparison_set_id,
-            instance_hash,
-            sample_asked_about_other_entity["entity_id"],
-            sample_asked_about_other_entity["sample_id"],
-        )
-        for other_entity in other_entities
-        for sample_asked_about_other_entity in forced_by_entity[
-            (comparison_set_id, instance_hash, other_entity["entity_id"])
-        ]
-    ]
-
     return json.dumps(
         {
-            "forced_outputs": samples,
-            "free_text_outputs": [free_text_by_key[key] for key in sample_keys],
-            "judgments": [judgments_by_key[key] for key in sample_keys],
-            "incoming_judgments": [judgments_by_key[key] for key in incoming_keys],
+            "forced_response": forced_output["raw_response"],
+            "free_text_response": free_text_output["free_text_response"],
+            "judgments": {
+                judge_model: judgments[judge_model]["steered_entities"]
+                for judge_model in _JUDGE_MODELS
+            },
         },
         ensure_ascii=False,
         sort_keys=True,
@@ -431,7 +351,9 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
         .iter_rows(named=True)
     )
 
-    tasks: list[dict] = []
+    tasks: list[dict[str, Any]] = []
+    entities_by_comparison_set_id: dict[str, list[dict[str, Any]]] = {}
+    total_entity_instance_pairs = 0
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -445,10 +367,13 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
             comparison_set_id=comparison_set_id,
         )
 
-        for sample_id in range(ctx.cfg.num_samples_per_instance):
+        entities_by_comparison_set_id[comparison_set_id] = entities
+        total_entity_instance_pairs += len(entities)
+
+        for sample_number in range(ctx.cfg.num_samples_per_instance):
             tasks.extend(
                 {
-                    "sample_id": sample_id,
+                    "sample_number": sample_number,
                     "comparison_set_id": comparison_set_id,
                     "comparison_set_name": comparison_set_name,
                     "assay_instance_hash": instance_hash,
@@ -487,24 +412,13 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
         ):
             free_text_outputs.append(future.result())
 
-    free_text_by_key = {
-        (
-            row["comparison_set_id"],
-            row["assay_instance_hash"],
-            row["entity_id"],
-            row["sample_id"],
-        ): row
-        for row in free_text_outputs
-    }
+    forced_by_key = {_key(row): row for row in forced_outputs}
+    free_text_by_key = {_key(row): row for row in free_text_outputs}
 
-    judge_tasks: list[dict] = []
+    judge_tasks: list[dict[str, Any]] = []
 
     for task in tasks:
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=task["comparison_set_id"],
-        )
+        entities = entities_by_comparison_set_id[task["comparison_set_id"]]
         other_entity_names = [
             entity["entity_name"]
             for entity in entities
@@ -514,17 +428,12 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
         if not other_entity_names:
             continue
 
-        task_key = (
-            task["comparison_set_id"],
-            task["assay_instance_hash"],
-            task["entity_id"],
-            task["sample_id"],
-        )
+        task_key = _task_key(task)
 
         for judge_model in _JUDGE_MODELS:
             judge_tasks.append(
                 {
-                    "sample_id": task["sample_id"],
+                    "sample_number": task["sample_number"],
                     "comparison_set_id": task["comparison_set_id"],
                     "assay_instance_hash": task["assay_instance_hash"],
                     "source_entity_id": task["entity_id"],
@@ -547,90 +456,62 @@ def run_forced_selection(ctx: RuntimeContext) -> pl.DataFrame:
         ):
             judge_outputs.append(future.result())
 
-    forced_by_entity: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(
-        list
+    judgments_by_key: dict[tuple[str, str, str, int], dict[str, dict[str, Any]]] = (
+        defaultdict(dict)
     )
-    for row in forced_outputs:
-        forced_by_entity[
-            (
-                row["comparison_set_id"],
-                row["assay_instance_hash"],
-                row["entity_id"],
-            )
-        ].append(row)
 
-    for grouped_samples in forced_by_entity.values():
-        grouped_samples.sort(key=lambda row: row["sample_id"])
-
-    judgments_by_key: dict[
-        tuple[str, str, str, int], dict[str, dict[str, Any]]
-    ] = defaultdict(dict)
     for judgment in judge_outputs:
         judgments_by_key[
             (
                 judgment["comparison_set_id"],
                 judgment["assay_instance_hash"],
                 judgment["source_entity_id"],
-                judgment["sample_id"],
+                judgment["sample_number"],
             )
         ][judgment["judge_model"]] = judgment
 
     rows = []
 
-    for assay_instance in assay_instances:
-        comparison_set_id = assay_instance["comparison_set_id"]
-        comparison_set_name = assay_instance["comparison_set_name"]
-        instance_hash = assay_instance["instance_hash"]
+    for task in tasks:
+        task_key = _task_key(task)
 
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=comparison_set_id,
+        forced_output = forced_by_key[task_key]
+        free_text_output = free_text_by_key[task_key]
+        judgments = judgments_by_key[task_key]
+
+        other_entities = [
+            entity
+            for entity in entities_by_comparison_set_id[task["comparison_set_id"]]
+            if entity["entity_id"] != task["entity_id"]
+        ]
+
+        rows.append(
+            {
+                "assay": ctx.cfg.assay,
+                "assay_instance_hash": task["assay_instance_hash"],
+                "sample_number": task["sample_number"],
+                "model": ctx.cfg.model,
+                "comparison_set_id": task["comparison_set_id"],
+                "comparison_set_name": task["comparison_set_name"],
+                "entity_id": task["entity_id"],
+                "entity_name": task["entity_name"],
+                "debug_json": _build_debug_json(
+                    forced_output=forced_output,
+                    free_text_output=free_text_output,
+                    judgments=judgments,
+                ),
+                "measurements": _build_measurements(
+                    forced_output=forced_output,
+                    judgments=judgments,
+                    other_entities=other_entities,
+                ),
+            }
         )
 
-        for entity in entities:
-            entity_id = entity["entity_id"]
-            entity_name = entity["entity_name"]
-
-            samples = forced_by_entity[(comparison_set_id, instance_hash, entity_id)]
-            other_entities = [
-                other_entity
-                for other_entity in entities
-                if other_entity["entity_id"] != entity_id
-            ]
-
-            rows.append(
-                {
-                    "assay": ctx.cfg.assay,
-                    "assay_instance_hash": instance_hash,
-                    "model": ctx.cfg.model,
-                    "comparison_set_id": comparison_set_id,
-                    "comparison_set_name": comparison_set_name,
-                    "entity_id": entity_id,
-                    "entity_name": entity_name,
-                    "result": _build_result_for_entity(
-                        samples=samples,
-                        entity_name=entity_name,
-                        other_entities=other_entities,
-                        comparison_set_id=comparison_set_id,
-                        instance_hash=instance_hash,
-                        forced_by_entity=forced_by_entity,
-                        judgments_by_key=judgments_by_key,
-                    ),
-                    "debug_json": _build_debug_json(
-                        samples=samples,
-                        other_entities=other_entities,
-                        comparison_set_id=comparison_set_id,
-                        instance_hash=instance_hash,
-                        free_text_by_key=free_text_by_key,
-                        forced_by_entity=forced_by_entity,
-                        judgments_by_key=judgments_by_key,
-                    ),
-                }
-            )
-
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
-    ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("entity_instance_pairs_scored", total_entity_instance_pairs)
+    ctx.exp.log_metric("samples_scored", len(rows))
+    ctx.exp.log_metric("judge_tasks_completed", len(judge_outputs))
     ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
