@@ -31,23 +31,6 @@ COMPARISON_SET_ASSAY_INSTANCE_SCHEMA = {
     "instance": pl.Object,
 }
 
-# ASSAY_SCHEMA = {
-#     "assay": pl.String,  # key
-#     "assay_instance_hash": pl.UInt64,  # key
-#     "model": pl.String,  # key
-#     "comparison_set_id": pl.String,  # key
-#     "comparison_set_name": pl.String,
-#     "entity_id": pl.String,  # key,
-#     "entity_name": pl.String,
-#     "result": pl.List(pl.Struct({
-#         "estimand": pl.Utf8, 
-#         "num_samples": pl.Int64, 
-#         "sample_mean": pl.Float64,
-#         "sample_std": pl.Float64
-#     })),
-#     "debug_json": pl.String
-# }
-
 ASSAY_SCHEMA = {
     "assay": pl.String, # key
     "assay_instance_hash": pl.UInt64, # key
@@ -62,4 +45,32 @@ ASSAY_SCHEMA = {
         "measurand": pl.Utf8, 
         "value": pl.Float64
     }))
+}
+
+REGRESSION_EFFECT_SCHEMA = {
+    "assay": pl.String, # key
+    "measurand": pl.String, # key
+    "term": pl.String, # key
+    "estimate": pl.Float64,
+    "std_error": pl.Float64,
+    "statistic": pl.Float64,
+    "statistic_type": pl.String,
+    "p_value": pl.Float64,
+    "aliased": pl.Boolean,
+    "regression_statistics": pl.Struct(
+        {
+            "nobs": pl.UInt64,
+            "rank": pl.UInt64,
+            "df_residual": pl.UInt64,
+            "r_squared": pl.Float64,
+            "adj_r_squared": pl.Float64,
+            "sigma": pl.Float64,
+            "f_statistic": pl.Float64,
+            "f_numdf": pl.Float64,
+            "f_dendf": pl.Float64,
+            "f_p_value": pl.Float64,
+            "aic": pl.Float64,
+            "bic": pl.Float64,
+        }
+    ),
 }

@@ -77,16 +77,16 @@ stages:
     - ${data}/assays/${item.assay.name}/${item.model}.parquet:
         cache: false
 
-  summarise-assays:
+  model-effects:
     cmd: >
-      uv run python -m pipelines.summarise_assays
+      uv run python -m pipelines.model_effects
       --assays=${data}/assays
-      --save=${data}/summarised_assays.parquet
+      --save-path=${data}/assay_model_effects.parquet
     deps:
     - ${data}/assays
     outs:
-    - ${data}/summarised_assays.parquet:
-        cache: false
+    - ${data}/assay_model_effects.parquet
+    
 metrics:
 - data/run-assay/describe-sentiment/gpt-oss-120b/exp/metrics.json
 - data/run-assay/describe-sentiment/gpt-5.4/exp/metrics.json
