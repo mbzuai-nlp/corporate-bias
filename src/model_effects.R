@@ -7,45 +7,6 @@ fit_score_lm <- function(df) {
   contrasts(df$model) <- contr.sum(nlevels(df$model))
   contrasts(df$comparison_set_id) <- contr.sum(nlevels(df$comparison_set_id))
 
-  make_local_sum_contrasts <- function(data, group_var, child_var) {
-    group <- data[[group_var]]
-    child <- data[[child_var]]
-
-    out <- NULL
-
-    for (g in levels(group)) {
-      idx <- group == g
-      kids <- sort(unique(as.character(child[idx])))
-
-      if (length(kids) <= 1) next
-
-      C <- contr.sum(length(kids))
-      rownames(C) <- kids
-
-      M <- matrix(
-        0,
-        nrow = nrow(data),
-        ncol = ncol(C)
-      )
-
-      M[idx, ] <- C[as.character(child[idx]), , drop = FALSE]
-
-      colnames(M) <- paste0(
-        child_var,
-        "_within_",
-        group_var,
-        "[",
-        g,
-        "]_",
-        seq_len(ncol(C))
-      )
-
-      out <- cbind(out, M)
-    }
-
-    out
-  }
-
   E_within_set <- make_local_sum_contrasts(
     df,
     group_var = "comparison_set_id",
@@ -64,327 +25,320 @@ fit_score_lm <- function(df) {
       E_within_set +
       A_within_set +
       model:E_within_set,
-    data = df
+    data = df,
+    # tells R to store the design matrix it used; avoid reconstructing weights
+    x = TRUE 
   )
 
-  fit_summary <- summary(fit)
-
-  beta <- coef(fit)
-  V <- vcov(fit)
-  coef_names <- names(beta)
-  df_residual <- fit$df.residual
-
-  f_statistic <- NA_real_
-  f_numdf <- NA_real_
-  f_dendf <- NA_real_
-  f_p_value <- NA_real_
-
-  if (!is.null(fit_summary$fstatistic)) {
-    f_statistic <- unname(fit_summary$fstatistic[["value"]])
-    f_numdf <- unname(fit_summary$fstatistic[["numdf"]])
-    f_dendf <- unname(fit_summary$fstatistic[["dendf"]])
-    f_p_value <- pf(
-      f_statistic,
-      f_numdf,
-      f_dendf,
-      lower.tail = FALSE
-    )
-  }
-
-  regression_statistics <- data.frame(
-    nobs = length(fitted(fit)),
-    rank = fit$rank,
-    df_residual = fit$df.residual,
-    r_squared = fit_summary$r.squared,
-    adj_r_squared = fit_summary$adj.r.squared,
-    sigma = fit_summary$sigma,
-    f_statistic = f_statistic,
-    f_numdf = f_numdf,
-    f_dendf = f_dendf,
-    f_p_value = f_p_value,
-    aic = AIC(fit),
-    bic = BIC(fit)
+  list(
+    coefficients = term_contributions(fit, df),
+    regression_statistics = regression_statistics_for_fit(fit)
   )
+}
 
-  empty_weights <- function() {
-    setNames(numeric(0), character(0))
-  }
 
-  factor_weights <- function(prefix, levels_vec, level) {
-    if (length(levels_vec) <= 1) {
-      return(empty_weights())
-    }
+make_local_sum_contrasts <- function(data, group_var, child_var) {
+  group <- data[[group_var]]
+  child <- data[[child_var]]
 
-    C <- contr.sum(length(levels_vec))
-    rownames(C) <- levels_vec
+  out <- matrix(numeric(0), nrow = nrow(data), ncol = 0)
 
-    w <- C[as.character(level), , drop = TRUE]
-    names(w) <- paste0(prefix, seq_along(w))
-
-    w
-  }
-
-  local_weights <- function(matrix_name, group_var, child_var, group_level, child_level) {
-    group <- df[[group_var]]
-    child <- df[[child_var]]
-
-    idx <- as.character(group) == as.character(group_level)
+  for (g in levels(group)) {
+    idx <- group == g
     kids <- sort(unique(as.character(child[idx])))
 
     if (length(kids) <= 1) {
-      return(empty_weights())
+      next
     }
 
     C <- contr.sum(length(kids))
-    rownames(C) <- kids
+    rownames(C) <- kids # assigns levels/category members to rows in C
 
-    w <- C[as.character(child_level), , drop = TRUE]
+    M <- matrix(0, nrow = nrow(data), ncol = ncol(C)) # creates zero matrix
+    # rows outside the current group get zeros, then the locally coded rows
+    # are inserted
+    M[idx, ] <- C[as.character(child[idx]), , drop = FALSE]
 
-    local_names <- paste0(
+    colnames(M) <- paste0(
       child_var,
       "_within_",
       group_var,
       "[",
-      group_level,
+      g,
       "]_",
-      seq_along(w)
+      seq_len(ncol(C))
     )
 
-    names(w) <- paste0(matrix_name, local_names)
-
-    w
+    out <- cbind(out, M) # concatenate horizontally to add next column
   }
 
-  interaction_weights <- function(left, right) {
-    if (length(left) == 0 || length(right) == 0) {
-      return(empty_weights())
-    }
+  # design submatrix for the current locally constrained term
+  # num rows = num observatinos
+  out
+}
 
-    values <- as.vector(outer(left, right))
-    names(values) <- as.vector(outer(
-      names(left),
-      names(right),
-      paste,
-      sep = ":"
-    ))
 
-    values
+regression_statistics_for_fit <- function(fit) {
+  s <- summary(fit)
+
+  f <- if (is.null(s$fstatistic)) {
+    c(value = NA_real_, numdf = NA_real_, dendf = NA_real_)
+  } else {
+    s$fstatistic
   }
 
-  estimate_term <- function(term, weights) {
-    L <- setNames(rep(0, length(beta)), coef_names)
-
-    for (name in names(weights)) {
-      L[name] <- L[name] + weights[name]
-    }
-
-    active <- names(L)[abs(L) > 0]
-
-    if (length(active) == 0) {
-      return(data.frame(
-        term = term,
-        estimate = 0,
-        std_error = 0,
-        statistic = NA_real_,
-        p_value = NA_real_,
-        aliased = FALSE
-      ))
-    }
-
-    aliased <- any(is.na(beta[active])) ||
-      any(is.na(V[active, active, drop = FALSE]))
-
-    if (aliased) {
-      return(data.frame(
-        term = term,
-        estimate = NA_real_,
-        std_error = NA_real_,
-        statistic = NA_real_,
-        p_value = NA_real_,
-        aliased = TRUE
-      ))
-    }
-
-    La <- L[active]
-    estimate <- sum(La * beta[active])
-    variance <- as.numeric(t(La) %*% V[active, active, drop = FALSE] %*% La)
-    std_error <- sqrt(max(variance, 0))
-
-    statistic <- if (std_error == 0) {
+  data.frame(
+    nobs = length(fitted(fit)),
+    rank = fit$rank,
+    df_residual = fit$df.residual,
+    r_squared = s$r.squared,
+    adj_r_squared = s$adj.r.squared,
+    sigma = s$sigma,
+    f_statistic = unname(f[["value"]]),
+    f_numdf = unname(f[["numdf"]]),
+    f_dendf = unname(f[["dendf"]]),
+    f_p_value = if (is.na(f[["value"]])) {
       NA_real_
     } else {
-      estimate / std_error
-    }
+      pf(f[["value"]], f[["numdf"]], f[["dendf"]], lower.tail = FALSE)
+    },
+    aic = AIC(fit),
+    bic = BIC(fit)
+  )
+}
 
-    p_value <- if (is.na(statistic)) {
-      NA_real_
-    } else {
-      2 * pt(abs(statistic), df = df_residual, lower.tail = FALSE)
-    }
 
-    data.frame(
-      term = term,
-      estimate = estimate,
-      std_error = std_error,
-      statistic = statistic,
-      p_value = p_value,
-      aliased = FALSE
-    )
+# creates row index lookup of design matrix to later retrieve
+# the design weights for each individual combination of cols
+representative_effect_rows <- function(df, cols) {
+  if (length(cols) == 0) {
+    return(data.frame(.row = 1L))
   }
 
-  observed <- function(cols) {
-    out <- unique(as.data.frame(
-      lapply(df[cols], as.character),
-      stringsAsFactors = FALSE
-    ))
+  # key = [
+  #     "\r".join(values)
+  #     for values in zip(*(df[c].astype(str) for c in cols))
+  # ]
+  # gets all naturally occurring combinations of cols
+  key <- do.call(
+    paste,
+    c(lapply(df[cols], as.character), sep = "\r")
+  )
 
-    out[do.call(order, out), , drop = FALSE]
-  }
+  keep <- !duplicated(key)
 
-  model_levels <- levels(df$model)
-  comparison_set_levels <- levels(df$comparison_set_id)
+  # drop duplicates and stringify cols
+  out <- df[keep, cols, drop = FALSE]
+  out[] <- lapply(out, as.character)
+  # add a .row col using rownumbers from original df for later lookup
+  out$.row <- which(keep)
 
-  rows <- list()
+  out <- out[do.call(order, out[cols]), , drop = FALSE]
+  # reindex rows ordinally (1, 2, 3, ...), does not impact .rows
+  rownames(out) <- NULL
 
-  add <- function(term, weights) {
-    rows[[length(rows) + 1]] <<- estimate_term(term, weights)
-  }
+  out
+}
 
-  add(
+
+# for each design col, maps it to its original regression term
+# e.g. model1 or model2 -> model
+term_labels_for_design <- function(fit) {
+  labels <- c(
     "(Intercept)",
-    setNames(1, "(Intercept)")
+    attr(fit$terms, "term.labels")
   )
 
-  for (model in model_levels) {
-    add(
-      paste0("model[", model, "]"),
-      factor_weights("model", model_levels, model)
-    )
+  labels[attr(fit$x, "assign") + 1L]
+}
+
+
+# maps model terms to original df columns
+effect_keys <- function(model_term) {
+  switch(
+    model_term,
+    "(Intercept)" = character(0),
+    "model" = "model",
+    "comparison_set_id" = "comparison_set_id",
+    "model:comparison_set_id" = c("model", "comparison_set_id"),
+    "E_within_set" = c("comparison_set_id", "entity_id"),
+    "A_within_set" = c("comparison_set_id", "assay_instance_hash"),
+    "model:E_within_set" = c("model", "comparison_set_id", "entity_id"),
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
+# construct effect labels per calling Python expectation
+effect_label <- function(model_term, row) {
+  switch(
+    model_term,
+    "(Intercept)" = "(Intercept)",
+
+    "model" = paste0(
+      "model[",
+      row$model,
+      "]"
+    ),
+
+    "comparison_set_id" = paste0(
+      "comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:comparison_set_id" = paste0(
+      "model[",
+      row$model,
+      "]:comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "E_within_set" = paste0(
+      "entity_id[",
+      row$entity_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "A_within_set" = paste0(
+      "assay_instance_hash[",
+      row$assay_instance_hash,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:E_within_set" = paste0(
+      "model[",
+      row$model,
+      "]:entity_id[",
+      row$entity_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
+effect_row <- function(
+  term,
+  estimate,
+  std_error,
+  statistic = NA_real_,
+  p_value = NA_real_,
+  aliased = FALSE
+) {
+  data.frame(
+    term = term,
+    estimate = estimate,
+    std_error = std_error,
+    statistic = statistic,
+    p_value = p_value,
+    aliased = aliased
+  )
+}
+
+
+linear_effect <- function(fit, term, weights) {
+  beta <- coef(fit)
+  V <- vcov(fit)
+
+  # local contrasts produce many zeros outside their own comparison set
+  active <- names(weights)[abs(weights) > 0]
+
+  if (length(active) == 0) {
+    return(effect_row(term, 0, 0))
   }
 
-  for (comparison_set_id in comparison_set_levels) {
-    add(
-      paste0("comparison_set_id[", comparison_set_id, "]"),
-      factor_weights(
-        "comparison_set_id",
-        comparison_set_levels,
-        comparison_set_id
-      )
-    )
+  weights <- weights[active]
+
+  # if a coefficient cannot be estimated cleanly, it will be given NA
+  aliased <- any(is.na(beta[active])) ||
+    any(is.na(V[active, active, drop = FALSE]))
+
+  if (aliased) {
+    return(effect_row(
+      term = term,
+      estimate = NA_real_,
+      std_error = NA_real_,
+      aliased = TRUE
+    ))
   }
 
-  model_comparison_sets <- observed(c("model", "comparison_set_id"))
+  # this will also produce the coefficient estimates of implied levels
+  # since weights includes the implied [-1]*k weight
+  estimate <- sum(weights * beta[active])
 
-  for (i in seq_len(nrow(model_comparison_sets))) {
-    model <- model_comparison_sets$model[[i]]
-    comparison_set_id <- model_comparison_sets$comparison_set_id[[i]]
-
-    add(
-      paste0(
-        "model[",
-        model,
-        "]:comparison_set_id[",
-        comparison_set_id,
-        "]"
-      ),
-      interaction_weights(
-        factor_weights("model", model_levels, model),
-        factor_weights(
-          "comparison_set_id",
-          comparison_set_levels,
-          comparison_set_id
-        )
-      )
-    )
-  }
-
-  comparison_set_entities <- observed(c("comparison_set_id", "entity_id"))
-
-  for (i in seq_len(nrow(comparison_set_entities))) {
-    comparison_set_id <- comparison_set_entities$comparison_set_id[[i]]
-    entity_id <- comparison_set_entities$entity_id[[i]]
-
-    add(
-      paste0(
-        "entity_id[",
-        entity_id,
-        "]|comparison_set_id[",
-        comparison_set_id,
-        "]"
-      ),
-      local_weights(
-        "E_within_set",
-        "comparison_set_id",
-        "entity_id",
-        comparison_set_id,
-        entity_id
-      )
-    )
-  }
-
-  comparison_set_assay_instances <- observed(
-    c("comparison_set_id", "assay_instance_hash")
+  # variance = w' V w
+  variance <- as.numeric(
+    t(weights) %*% V[active, active, drop = FALSE] %*% weights
   )
 
-  for (i in seq_len(nrow(comparison_set_assay_instances))) {
-    comparison_set_id <- comparison_set_assay_instances$comparison_set_id[[i]]
-    assay_instance_hash <- comparison_set_assay_instances$assay_instance_hash[[i]]
+  std_error <- sqrt(max(variance, 0))
 
-    add(
-      paste0(
-        "assay_instance_hash[",
-        assay_instance_hash,
-        "]|comparison_set_id[",
-        comparison_set_id,
-        "]"
-      ),
-      local_weights(
-        "A_within_set",
-        "comparison_set_id",
-        "assay_instance_hash",
-        comparison_set_id,
-        assay_instance_hash
-      )
-    )
+  statistic <- if (std_error == 0) {
+    NA_real_
+  } else {
+    estimate / std_error
   }
 
-  model_comparison_set_entities <- observed(
-    c("model", "comparison_set_id", "entity_id")
+  p_value <- if (is.na(statistic)) {
+    NA_real_
+  } else {
+    2 * pt(abs(statistic), df = fit$df.residual, lower.tail = FALSE)
+  }
+
+  effect_row(
+    term = term,
+    estimate = estimate,
+    std_error = std_error,
+    statistic = statistic,
+    p_value = p_value
   )
+}
 
-  for (i in seq_len(nrow(model_comparison_set_entities))) {
-    model <- model_comparison_set_entities$model[[i]]
-    comparison_set_id <- model_comparison_set_entities$comparison_set_id[[i]]
-    entity_id <- model_comparison_set_entities$entity_id[[i]]
 
-    add(
-      paste0(
-        "model[",
-        model,
-        "]:entity_id[",
-        entity_id,
-        "]|comparison_set_id[",
-        comparison_set_id,
-        "]"
-      ),
-      interaction_weights(
-        factor_weights("model", model_levels, model),
-        local_weights(
-          "E_within_set",
-          "comparison_set_id",
-          "entity_id",
-          comparison_set_id,
-          entity_id
-        )
+# infers conceptual regression terms and computes their stats
+term_contributions <- function(fit, df) {
+  X <- fit$x # X is the design matrix used by the model
+  design_terms <- term_labels_for_design(fit)
+
+  # loop through every formula term
+  rows <- lapply(unique(design_terms), function(model_term) {
+    # we use df not X since we want each combination of original
+    # columns for the current term not design columns (recall design
+    # cols drop implied levels)
+    lookup_rows <- representative_effect_rows(df, effect_keys(model_term))
+    term_cols <- design_terms == model_term
+
+    rows_for_term <- lapply(seq_len(nrow(lookup_rows)), function(i) {
+      row <- lookup_rows[i, , drop = FALSE]
+
+      # lookup the row in the design matrix, keeping only cols belonging to
+      # this specific formula term
+      weights <- setNames(
+        as.numeric(X[row$.row, term_cols, drop = TRUE]),
+        colnames(X)[term_cols]
       )
-    )
-  }
+
+      linear_effect(
+        fit = fit,
+        term = effect_label(model_term, row),
+        weights = weights
+      )
+    })
+
+    do.call(rbind, rows_for_term)
+  })
 
   coefficients <- do.call(rbind, rows)
   rownames(coefficients) <- NULL
 
-  list(
-    coefficients = coefficients,
-    regression_statistics = regression_statistics
-  )
+  coefficients
 }

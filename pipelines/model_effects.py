@@ -18,8 +18,6 @@ SCORE_ESTIMANDS = {
     ("describe-sentiment", "stance_score"),
 }
 
-STATISTIC_TYPE = "t"
-
 R_MODEL_EFFECTS_FILE = (
     Path(__file__).resolve().parents[1] / "src" / "model_effects.R"
 )
@@ -154,7 +152,7 @@ def coefficients_to_effects_frame(
                 "estimate": nullable_float(record["estimate"]),
                 "std_error": nullable_float(record["std_error"]),
                 "statistic": nullable_float(record["statistic"]),
-                "statistic_type": STATISTIC_TYPE,
+                "statistic_type": "t",
                 "p_value": nullable_float(record["p_value"]),
                 "aliased": bool(record["aliased"]),
                 "regression_statistics": stats,
