@@ -31,7 +31,57 @@ fit_score_lm <- function(df) {
   )
 
   list(
-    coefficients = term_contributions(fit, df),
+    coefficients = term_contributions(
+      fit,
+      df,
+      effect_keys_fn = score_effect_keys,
+      effect_label_fn = score_effect_label
+    ),
+    regression_statistics = regression_statistics_for_fit(fit)
+  )
+}
+
+
+fit_head_to_head_lpm <- function(df) {
+  df$model <- factor(df$model)
+  df$comparison_set_id <- factor(df$comparison_set_id)
+  df$ordered_pair_id <- factor(df$ordered_pair_id)
+  df$assay_instance_hash <- factor(df$assay_instance_hash)
+
+  contrasts(df$model) <- contr.sum(nlevels(df$model))
+  contrasts(df$comparison_set_id) <- contr.sum(nlevels(df$comparison_set_id))
+
+  # one observation might be P>Q, and another might be Q>P.
+  B_within_set <- make_local_sum_contrasts(
+    df,
+    group_var = "comparison_set_id",
+    child_var = "ordered_pair_id"
+  )
+
+  A_within_set <- make_local_sum_contrasts(
+    df,
+    group_var = "comparison_set_id",
+    child_var = "assay_instance_hash"
+  )
+
+  fit <- lm(
+    score ~
+      model * comparison_set_id +
+      B_within_set +
+      A_within_set +
+      model:B_within_set,
+    data = df,
+    # tells R to store the design matrix it used; avoid reconstructing weights
+    x = TRUE
+  )
+
+  list(
+    coefficients = term_contributions(
+      fit,
+      df,
+      effect_keys_fn = head_to_head_effect_keys,
+      effect_label_fn = head_to_head_effect_label
+    ),
     regression_statistics = regression_statistics_for_fit(fit)
   )
 }
@@ -154,7 +204,7 @@ term_labels_for_design <- function(fit) {
 
 
 # maps model terms to original df columns
-effect_keys <- function(model_term) {
+score_effect_keys <- function(model_term) {
   switch(
     model_term,
     "(Intercept)" = character(0),
@@ -169,8 +219,24 @@ effect_keys <- function(model_term) {
 }
 
 
+# maps model terms to original df columns
+head_to_head_effect_keys <- function(model_term) {
+  switch(
+    model_term,
+    "(Intercept)" = character(0),
+    "model" = "model",
+    "comparison_set_id" = "comparison_set_id",
+    "model:comparison_set_id" = c("model", "comparison_set_id"),
+    "B_within_set" = c("comparison_set_id", "ordered_pair_id"),
+    "A_within_set" = c("comparison_set_id", "assay_instance_hash"),
+    "model:B_within_set" = c("model", "comparison_set_id", "ordered_pair_id"),
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
 # construct effect labels per calling Python expectation
-effect_label <- function(model_term, row) {
+score_effect_label <- function(model_term, row) {
   switch(
     model_term,
     "(Intercept)" = "(Intercept)",
@@ -216,6 +282,63 @@ effect_label <- function(model_term, row) {
       row$model,
       "]:entity_id[",
       row$entity_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
+# construct effect labels per calling Python expectation
+head_to_head_effect_label <- function(model_term, row) {
+  switch(
+    model_term,
+    "(Intercept)" = "(Intercept)",
+
+    "model" = paste0(
+      "model[",
+      row$model,
+      "]"
+    ),
+
+    "comparison_set_id" = paste0(
+      "comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:comparison_set_id" = paste0(
+      "model[",
+      row$model,
+      "]:comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "B_within_set" = paste0(
+      "beats[",
+      row$ordered_pair_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "A_within_set" = paste0(
+      "assay_instance_hash[",
+      row$assay_instance_hash,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:B_within_set" = paste0(
+      "model[",
+      row$model,
+      "]:beats[",
+      row$ordered_pair_id,
       "]|comparison_set_id[",
       row$comparison_set_id,
       "]"
@@ -305,7 +428,12 @@ linear_effect <- function(fit, term, weights) {
 
 
 # infers conceptual regression terms and computes their stats
-term_contributions <- function(fit, df) {
+term_contributions <- function(
+  fit,
+  df,
+  effect_keys_fn,
+  effect_label_fn
+) {
   X <- fit$x # X is the design matrix used by the model
   design_terms <- term_labels_for_design(fit)
 
@@ -314,7 +442,7 @@ term_contributions <- function(fit, df) {
     # we use df not X since we want each combination of original
     # columns for the current term not design columns (recall design
     # cols drop implied levels)
-    lookup_rows <- representative_effect_rows(df, effect_keys(model_term))
+    lookup_rows <- representative_effect_rows(df, effect_keys_fn(model_term))
     term_cols <- design_terms == model_term
 
     rows_for_term <- lapply(seq_len(nrow(lookup_rows)), function(i) {
@@ -329,7 +457,7 @@ term_contributions <- function(fit, df) {
 
       linear_effect(
         fit = fit,
-        term = effect_label(model_term, row),
+        term = effect_label_fn(model_term, row),
         weights = weights
       )
     })
