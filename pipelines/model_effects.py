@@ -30,9 +30,7 @@ STEERING_ESTIMANDS = {
     ("forced-selection", "steered_to_score"),
 }
 
-R_MODEL_EFFECTS_FILE = (
-    Path(__file__).resolve().parents[1] / "src" / "model_effects.R"
-)
+R_MODEL_EFFECTS_FILE = Path(__file__).resolve().parents[1] / "src" / "model_effects.R"
 
 REQUIRED_MODEL_COLUMNS = [
     "score",
@@ -91,7 +89,9 @@ def parse_args() -> argparse.Namespace:
 
 def load_assay_results(assays_dir: Path) -> pl.DataFrame:
     parquet_paths = sorted(assays_dir.glob("*/*.parquet"))
-    logger.info("Loading %s assay parquet files from %s", len(parquet_paths), assays_dir)
+    logger.info(
+        "Loading %s assay parquet files from %s", len(parquet_paths), assays_dir
+    )
     dfs = [pl.read_parquet(path) for path in parquet_paths]
     return pl.concat(dfs, how="vertical")
 
@@ -141,28 +141,21 @@ def build_steering_dataframe(
 ) -> pl.DataFrame:
     source_columns = [col for col in REQUIRED_MODEL_COLUMNS if col != "score"]
 
-    source_df = (
-        df
-        .filter(pl.col("assay") == assay)
-        .select(*source_columns)
-    )
+    source_df = df.filter(pl.col("assay") == assay).select(*source_columns)
 
     # Create all possible targets
-    target_df = (
-        source_df
-        .select(
-            "comparison_set_id",
-            pl.col("entity_id").alias("target_entity_id"),
-            pl.col("entity_name").alias("target_entity_name"),
-        )
-        .unique()
-    )
+    target_df = source_df.select(
+        "comparison_set_id",
+        pl.col("entity_id").alias("target_entity_id"),
+        pl.col("entity_name").alias("target_entity_name"),
+    ).unique()
 
     # Create all source -> target paths
     grid = (
-        source_df
-        .join(target_df, on="comparison_set_id", how="inner") # creates cartesian prod
-        .filter(pl.col("entity_id") != pl.col("target_entity_id")) # drop self -> self
+        source_df.join(
+            target_df, on="comparison_set_id", how="inner"
+        )  # creates cartesian prod
+        .filter(pl.col("entity_id") != pl.col("target_entity_id"))  # drop self -> self
         .with_columns(
             directed_pair_id=pl.concat_str(
                 ["entity_id", "target_entity_id"],
@@ -172,8 +165,7 @@ def build_steering_dataframe(
     )
 
     observed = (
-        df
-        .filter(pl.col("assay") == assay)
+        df.filter(pl.col("assay") == assay)
         .explode("measurements")
         .unnest("measurements")
         .filter(pl.col("measurand").str.starts_with(f"{measurand}:"))
@@ -194,8 +186,7 @@ def build_steering_dataframe(
     ]
 
     return (
-        grid
-        .join(observed, on=join_keys, how="left")
+        grid.join(observed, on=join_keys, how="left")
         .with_columns(
             # ensure unobserved steering paths are given 0
             score=pl.col("score").fill_null(0.0),
@@ -356,12 +347,7 @@ def sorted_unique(series: pd.Series) -> list[str]:
 
 
 def unique_tuples(pdf: pd.DataFrame, cols: list[str]) -> list[tuple[str, ...]]:
-    frame = (
-        pdf[cols]
-        .astype(str)
-        .drop_duplicates()
-        .sort_values(cols)
-    )
+    frame = pdf[cols].astype(str).drop_duplicates().sort_values(cols)
     return list(frame.itertuples(index=False, name=None))
 
 
@@ -468,9 +454,7 @@ def expected_steering_terms(pdf: pd.DataFrame) -> set[str]:
         pdf,
         ["comparison_set_id", "directed_pair_id"],
     ):
-        terms.add(
-            f"steered[{directed_pair_id}]|comparison_set_id[{comparison_set_id}]"
-        )
+        terms.add(f"steered[{directed_pair_id}]|comparison_set_id[{comparison_set_id}]")
 
     for comparison_set_id, assay_instance_hash in unique_tuples(
         pdf,
@@ -502,9 +486,7 @@ def validate_effects(
     observed_set = set(observed)
     expected_set = expected_terms_fn(pdf)
 
-    duplicate_terms = sorted(
-        term for term in observed_set if observed.count(term) > 1
-    )
+    duplicate_terms = sorted(term for term in observed_set if observed.count(term) > 1)
     missing_terms = sorted(expected_set - observed_set)
     unexpected_terms = sorted(observed_set - expected_set)
 
@@ -518,9 +500,7 @@ def validate_effects(
         raise ValueError(f"Unexpected regression effect terms: {unexpected_terms}")
 
     if len(observed) != len(expected_set):
-        raise ValueError(
-            f"Expected {len(expected_set)} effects, found {len(observed)}"
-        )
+        raise ValueError(f"Expected {len(expected_set)} effects, found {len(observed)}")
 
 
 def fit_score_estimand(
@@ -543,7 +523,12 @@ def fit_score_estimand(
 
     log_regression_warnings(effects, assay, measurand)
     validate_effects(effects, pdf, expected_score_terms)
-    logger.info("Finished score estimand %s/%s with %s effects", assay, measurand, effects.height)
+    logger.info(
+        "Finished score estimand %s/%s with %s effects",
+        assay,
+        measurand,
+        effects.height,
+    )
 
     return effects
 
@@ -571,7 +556,12 @@ def fit_head_to_head_estimand(
 
     log_regression_warnings(effects, assay, measurand)
     validate_effects(effects, pdf, expected_head_to_head_terms)
-    logger.info("Finished head-to-head estimand %s/%s with %s effects", assay, measurand, effects.height)
+    logger.info(
+        "Finished head-to-head estimand %s/%s with %s effects",
+        assay,
+        measurand,
+        effects.height,
+    )
 
     return effects
 
@@ -599,7 +589,12 @@ def fit_steering_estimand(
 
     log_regression_warnings(effects, assay, measurand)
     validate_effects(effects, pdf, expected_steering_terms)
-    logger.info("Finished steering estimand %s/%s with %s effects", assay, measurand, effects.height)
+    logger.info(
+        "Finished steering estimand %s/%s with %s effects",
+        assay,
+        measurand,
+        effects.height,
+    )
 
     return effects
 
@@ -615,14 +610,14 @@ def main() -> None:
 
     effects = pl.concat(
         [
-            # *[
-            #     fit_score_estimand(combined, assay, measurand)
-            #     for assay, measurand in sorted(SCORE_ESTIMANDS)
-            # ],
-            # *[
-            #     fit_head_to_head_estimand(combined, assay, measurand)
-            #     for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
-            # ],
+            *[
+                fit_score_estimand(combined, assay, measurand)
+                for assay, measurand in sorted(SCORE_ESTIMANDS)
+            ],
+            *[
+                fit_head_to_head_estimand(combined, assay, measurand)
+                for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
+            ],
             *[
                 fit_steering_estimand(combined, assay, measurand)
                 for assay, measurand in sorted(STEERING_ESTIMANDS)
