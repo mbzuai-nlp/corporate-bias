@@ -26,6 +26,10 @@ HEAD_TO_HEAD_ESTIMANDS = {
     ("head-to-head", "signed_win"),
 }
 
+STEERING_ESTIMANDS = {
+    ("forced-selection", "steered_to_score"),
+}
+
 R_MODEL_EFFECTS_FILE = (
     Path(__file__).resolve().parents[1] / "src" / "model_effects.R"
 )
@@ -48,6 +52,13 @@ REQUIRED_HEAD_TO_HEAD_MODEL_COLUMNS = [
     "ordered_pair_id",
 ]
 
+REQUIRED_STEERING_MODEL_COLUMNS = [
+    *REQUIRED_MODEL_COLUMNS,
+    "target_entity_id",
+    "target_entity_name",
+    "directed_pair_id",
+]
+
 SCORE_STRING_COLUMNS = [
     "model",
     "entity_id",
@@ -59,6 +70,13 @@ HEAD_TO_HEAD_STRING_COLUMNS = [
     *SCORE_STRING_COLUMNS,
     "opponent_entity_id",
     "ordered_pair_id",
+]
+
+STEERING_STRING_COLUMNS = [
+    *SCORE_STRING_COLUMNS,
+    "target_entity_id",
+    "target_entity_name",
+    "directed_pair_id",
 ]
 
 
@@ -113,6 +131,76 @@ def build_head_to_head_dataframe(
             )
         )
         .select(*REQUIRED_HEAD_TO_HEAD_MODEL_COLUMNS)
+    )
+
+
+def build_steering_dataframe(
+    df: pl.DataFrame,
+    assay: str,
+    measurand: str,
+) -> pl.DataFrame:
+    source_columns = [col for col in REQUIRED_MODEL_COLUMNS if col != "score"]
+
+    source_df = (
+        df
+        .filter(pl.col("assay") == assay)
+        .select(*source_columns)
+    )
+
+    # Create all possible targets
+    target_df = (
+        source_df
+        .select(
+            "comparison_set_id",
+            pl.col("entity_id").alias("target_entity_id"),
+            pl.col("entity_name").alias("target_entity_name"),
+        )
+        .unique()
+    )
+
+    # Create all source -> target paths
+    grid = (
+        source_df
+        .join(target_df, on="comparison_set_id", how="inner") # creates cartesian prod
+        .filter(pl.col("entity_id") != pl.col("target_entity_id")) # drop self -> self
+        .with_columns(
+            directed_pair_id=pl.concat_str(
+                ["entity_id", "target_entity_id"],
+                separator=">",
+            )
+        )
+    )
+
+    observed = (
+        df
+        .filter(pl.col("assay") == assay)
+        .explode("measurements")
+        .unnest("measurements")
+        .filter(pl.col("measurand").str.starts_with(f"{measurand}:"))
+        .with_columns(
+            target_entity_id=pl.col("measurand").str.strip_prefix(f"{measurand}:"),
+            score=pl.col("value").cast(pl.Float64),
+        )
+        .select(
+            *source_columns,
+            "target_entity_id",
+            "score",
+        )
+    )
+
+    join_keys = [
+        *source_columns,
+        "target_entity_id",
+    ]
+
+    return (
+        grid
+        .join(observed, on=join_keys, how="left")
+        .with_columns(
+            # ensure unobserved steering paths are given 0
+            score=pl.col("score").fill_null(0.0),
+        )
+        .select(*REQUIRED_STEERING_MODEL_COLUMNS)
     )
 
 
@@ -361,6 +449,50 @@ def expected_head_to_head_terms(pdf: pd.DataFrame) -> set[str]:
     return terms
 
 
+def expected_steering_terms(pdf: pd.DataFrame) -> set[str]:
+    terms = {"(Intercept)"}
+
+    for model in sorted_unique(pdf["model"]):
+        terms.add(f"model[{model}]")
+
+    for comparison_set_id in sorted_unique(pdf["comparison_set_id"]):
+        terms.add(f"comparison_set_id[{comparison_set_id}]")
+
+    for model, comparison_set_id in unique_tuples(
+        pdf,
+        ["model", "comparison_set_id"],
+    ):
+        terms.add(f"model[{model}]:comparison_set_id[{comparison_set_id}]")
+
+    for comparison_set_id, directed_pair_id in unique_tuples(
+        pdf,
+        ["comparison_set_id", "directed_pair_id"],
+    ):
+        terms.add(
+            f"steered[{directed_pair_id}]|comparison_set_id[{comparison_set_id}]"
+        )
+
+    for comparison_set_id, assay_instance_hash in unique_tuples(
+        pdf,
+        ["comparison_set_id", "assay_instance_hash"],
+    ):
+        terms.add(
+            f"assay_instance_hash[{assay_instance_hash}]"
+            f"|comparison_set_id[{comparison_set_id}]"
+        )
+
+    for model, comparison_set_id, directed_pair_id in unique_tuples(
+        pdf,
+        ["model", "comparison_set_id", "directed_pair_id"],
+    ):
+        terms.add(
+            f"model[{model}]:steered[{directed_pair_id}]"
+            f"|comparison_set_id[{comparison_set_id}]"
+        )
+
+    return terms
+
+
 def validate_effects(
     effects: pl.DataFrame,
     pdf: pd.DataFrame,
@@ -444,6 +576,34 @@ def fit_head_to_head_estimand(
     return effects
 
 
+def fit_steering_estimand(
+    combined: pl.DataFrame,
+    assay: str,
+    measurand: str,
+) -> pl.DataFrame:
+    logger.info("Fitting steering estimand %s/%s", assay, measurand)
+    score_df = build_steering_dataframe(combined, assay, measurand)
+    pdf = prepare_for_r(score_df, STEERING_STRING_COLUMNS)
+
+    coefficients, regression_statistics = fit_lm_with_r(
+        pdf,
+        "fit_steering_lm",
+    )
+
+    effects = coefficients_to_effects_frame(
+        coefficients=coefficients,
+        regression_statistics=regression_statistics,
+        assay=assay,
+        measurand=measurand,
+    )
+
+    log_regression_warnings(effects, assay, measurand)
+    validate_effects(effects, pdf, expected_steering_terms)
+    logger.info("Finished steering estimand %s/%s with %s effects", assay, measurand, effects.height)
+
+    return effects
+
+
 def main() -> None:
     args = parse_args()
 
@@ -455,13 +615,17 @@ def main() -> None:
 
     effects = pl.concat(
         [
+            # *[
+            #     fit_score_estimand(combined, assay, measurand)
+            #     for assay, measurand in sorted(SCORE_ESTIMANDS)
+            # ],
+            # *[
+            #     fit_head_to_head_estimand(combined, assay, measurand)
+            #     for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
+            # ],
             *[
-                fit_score_estimand(combined, assay, measurand)
-                for assay, measurand in sorted(SCORE_ESTIMANDS)
-            ],
-            *[
-                fit_head_to_head_estimand(combined, assay, measurand)
-                for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
+                fit_steering_estimand(combined, assay, measurand)
+                for assay, measurand in sorted(STEERING_ESTIMANDS)
             ],
         ],
         how="vertical",

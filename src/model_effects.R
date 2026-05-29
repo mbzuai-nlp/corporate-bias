@@ -87,6 +87,50 @@ fit_head_to_head_lpm <- function(df) {
 }
 
 
+fit_steering_lm <- function(df) {
+  df$model <- factor(df$model)
+  df$comparison_set_id <- factor(df$comparison_set_id)
+  df$directed_pair_id <- factor(df$directed_pair_id)
+  df$assay_instance_hash <- factor(df$assay_instance_hash)
+
+  contrasts(df$model) <- contr.sum(nlevels(df$model))
+  contrasts(df$comparison_set_id) <- contr.sum(nlevels(df$comparison_set_id))
+
+  D_within_set <- make_local_sum_contrasts(
+    df,
+    group_var = "comparison_set_id",
+    child_var = "directed_pair_id"
+  )
+
+  A_within_set <- make_local_sum_contrasts(
+    df,
+    group_var = "comparison_set_id",
+    child_var = "assay_instance_hash"
+  )
+
+  fit <- lm(
+    score ~
+      model * comparison_set_id +
+      D_within_set +
+      A_within_set +
+      model:D_within_set,
+    data = df,
+    # tells R to store the design matrix it used; avoid reconstructing weights
+    x = TRUE
+  )
+
+  list(
+    coefficients = term_contributions(
+      fit,
+      df,
+      effect_keys_fn = steering_effect_keys,
+      effect_label_fn = steering_effect_label
+    ),
+    regression_statistics = regression_statistics_for_fit(fit)
+  )
+}
+
+
 make_local_sum_contrasts <- function(data, group_var, child_var) {
   group <- data[[group_var]]
   child <- data[[child_var]]
@@ -235,6 +279,22 @@ head_to_head_effect_keys <- function(model_term) {
 }
 
 
+# maps model terms to original df columns
+steering_effect_keys <- function(model_term) {
+  switch(
+    model_term,
+    "(Intercept)" = character(0),
+    "model" = "model",
+    "comparison_set_id" = "comparison_set_id",
+    "model:comparison_set_id" = c("model", "comparison_set_id"),
+    "D_within_set" = c("comparison_set_id", "directed_pair_id"),
+    "A_within_set" = c("comparison_set_id", "assay_instance_hash"),
+    "model:D_within_set" = c("model", "comparison_set_id", "directed_pair_id"),
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
 # construct effect labels per calling Python expectation
 score_effect_label <- function(model_term, row) {
   switch(
@@ -339,6 +399,63 @@ head_to_head_effect_label <- function(model_term, row) {
       row$model,
       "]:beats[",
       row$ordered_pair_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    stop("Unknown model term: ", model_term)
+  )
+}
+
+
+# construct effect labels per calling Python expectation
+steering_effect_label <- function(model_term, row) {
+  switch(
+    model_term,
+    "(Intercept)" = "(Intercept)",
+
+    "model" = paste0(
+      "model[",
+      row$model,
+      "]"
+    ),
+
+    "comparison_set_id" = paste0(
+      "comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:comparison_set_id" = paste0(
+      "model[",
+      row$model,
+      "]:comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "D_within_set" = paste0(
+      "steered[",
+      row$directed_pair_id,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "A_within_set" = paste0(
+      "assay_instance_hash[",
+      row$assay_instance_hash,
+      "]|comparison_set_id[",
+      row$comparison_set_id,
+      "]"
+    ),
+
+    "model:D_within_set" = paste0(
+      "model[",
+      row$model,
+      "]:steered[",
+      row$directed_pair_id,
       "]|comparison_set_id[",
       row$comparison_set_id,
       "]"
