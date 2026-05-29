@@ -368,10 +368,13 @@ effect_row <- function(
 }
 
 
-linear_effect <- function(fit, term, weights) {
-  beta <- coef(fit)
-  V <- vcov(fit)
-
+linear_effect <- function(
+  beta,
+  V,
+  df_residual,
+  term,
+  weights
+) {
   # local contrasts produce many zeros outside their own comparison set
   active <- names(weights)[abs(weights) > 0]
 
@@ -414,7 +417,7 @@ linear_effect <- function(fit, term, weights) {
   p_value <- if (is.na(statistic)) {
     NA_real_
   } else {
-    2 * pt(abs(statistic), df = fit$df.residual, lower.tail = FALSE)
+    2 * pt(abs(statistic), df = df_residual, lower.tail = FALSE)
   }
 
   effect_row(
@@ -437,6 +440,9 @@ term_contributions <- function(
   X <- fit$x # X is the design matrix used by the model
   design_terms <- term_labels_for_design(fit)
 
+  beta <- coef(fit)
+  V <- vcov(fit)
+
   # loop through every formula term
   rows <- lapply(unique(design_terms), function(model_term) {
     # we use df not X since we want each combination of original
@@ -456,7 +462,9 @@ term_contributions <- function(
       )
 
       linear_effect(
-        fit = fit,
+        beta = beta,
+        V = V,
+        df_residual = fit$df.residual,
         term = effect_label_fn(model_term, row),
         weights = weights
       )
