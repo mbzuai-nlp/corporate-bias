@@ -47,30 +47,36 @@ ASSAY_SCHEMA = {
     }))
 }
 
+EFFECT_TERM = pl.Struct({
+    "name": pl.String,
+    "estimate": pl.Float64,
+    "std_error": pl.Float64,
+    "p_value": pl.Float64,
+    "t_value": pl.Float64
+})
+
 REGRESSION_EFFECT_SCHEMA = {
     "assay": pl.String, # key
     "measurand": pl.String, # key
-    "term": pl.String, # key
-    "estimate": pl.Float64,
-    "std_error": pl.Float64,
-    "statistic": pl.Float64,
-    "statistic_type": pl.String,
-    "p_value": pl.Float64,
-    "aliased": pl.Boolean,
-    "regression_statistics": pl.Struct(
-        {
-            "nobs": pl.UInt64,
-            "rank": pl.UInt64,
-            "df_residual": pl.UInt64,
-            "r_squared": pl.Float64,
-            "adj_r_squared": pl.Float64,
-            "sigma": pl.Float64,
-            "f_statistic": pl.Float64,
-            "f_numdf": pl.Float64,
-            "f_dendf": pl.Float64,
-            "f_p_value": pl.Float64,
-            "aic": pl.Float64,
-            "bic": pl.Float64,
-        }
-    ),
+    "comparison_set_id": pl.String, # key
+    "model_effects": pl.List(EFFECT_TERM),
+    "entity_effects": pl.List(EFFECT_TERM),
+    "prompt_effects": pl.List(EFFECT_TERM),
+    "model_affiliated_deviation_effects": pl.List(EFFECT_TERM),
+    "affiliated_effect": EFFECT_TERM, # nullable
+    "geo_associated_effect": EFFECT_TERM, # nullable
+    "regression_statistics": pl.Struct({
+        "nobs": pl.UInt64,
+        "rank": pl.UInt64,
+        "df_residual": pl.UInt64,
+        "r_squared": pl.Float64,
+        "adj_r_squared": pl.Float64,
+        "sigma": pl.Float64,
+        "f_statistic": pl.Float64,
+        "f_numdf": pl.Float64,
+        "f_dendf": pl.Float64,
+        "f_p_value": pl.Float64,
+        "aic": pl.Float64,
+        "bic": pl.Float64,
+    }),
 }

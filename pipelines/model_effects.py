@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 from pathlib import Path
 import argparse
 import logging
-from typing import Any
-
+import re
+import statsmodels.formula.api as smf
 import pandas as pd
 import polars as pl
+from typing import Any
+from collections import namedtuple
 
 from pipelines.utils import configure_logging
 from src.data.model import REGRESSION_EFFECT_SCHEMA
@@ -15,67 +16,16 @@ from src.data.model import REGRESSION_EFFECT_SCHEMA
 
 configure_logging()
 logger = logging.getLogger(__name__)
-logging.getLogger("rpy2").setLevel(logging.WARNING)
 
 
-SCORE_ESTIMANDS = {
+SCORE_ESTIMANDS = (
+    ("describe-sentiment", "sentiment_score"),
     ("describe-sentiment", "stance_score"),
-}
-
-HEAD_TO_HEAD_ESTIMANDS = {
-    ("head-to-head", "signed_win"),
-}
-
-STEERING_ESTIMANDS = {
-    ("forced-selection", "steered_to_score"),
-}
-
-R_MODEL_EFFECTS_FILE = Path(__file__).resolve().parents[1] / "src" / "model_effects.R"
-
-REQUIRED_MODEL_COLUMNS = [
-    "score",
-    "assay",
-    "assay_instance_hash",
-    "sample_number",
-    "model",
-    "comparison_set_id",
-    "comparison_set_name",
-    "entity_id",
-    "entity_name",
-]
-
-REQUIRED_HEAD_TO_HEAD_MODEL_COLUMNS = [
-    *REQUIRED_MODEL_COLUMNS,
-    "opponent_entity_id",
-    "ordered_pair_id",
-]
-
-REQUIRED_STEERING_MODEL_COLUMNS = [
-    *REQUIRED_MODEL_COLUMNS,
-    "target_entity_id",
-    "target_entity_name",
-    "directed_pair_id",
-]
-
-SCORE_STRING_COLUMNS = [
-    "model",
-    "entity_id",
-    "comparison_set_id",
-    "assay_instance_hash",
-]
-
-HEAD_TO_HEAD_STRING_COLUMNS = [
-    *SCORE_STRING_COLUMNS,
-    "opponent_entity_id",
-    "ordered_pair_id",
-]
-
-STEERING_STRING_COLUMNS = [
-    *SCORE_STRING_COLUMNS,
-    "target_entity_id",
-    "target_entity_name",
-    "directed_pair_id",
-]
+    ("describe-sentiment", "promotional_likelihood"),
+    ("forced-selection", "retention_score"),
+    ("forced-selection", "selected"),
+    ("consideration-set", "recommendation_score")
+)
 
 
 def parse_args() -> argparse.Namespace:
@@ -93,510 +43,495 @@ def load_assay_results(assays_dir: Path) -> pl.DataFrame:
         "Loading %s assay parquet files from %s", len(parquet_paths), assays_dir
     )
     dfs = [pl.read_parquet(path) for path in parquet_paths]
-    return pl.concat(dfs, how="vertical")
 
+    combined = pl.concat(dfs, how="vertical")
 
-def build_score_dataframe(
-    df: pl.DataFrame,
-    assay: str,
-    measurand: str,
-) -> pl.DataFrame:
+    us_entities = [
+        "gemini",
+        "google-chrome",
+        "supergrok",
+        "nvidia",
+        "grok",
+        "anthropic",
+        "microsoft-365",
+        "gmail",
+        "codex",
+        "openai",
+        "microsoft-edge",
+        "outlook",
+        "gpt",
+        "gemini-code-assist",
+        "google-workspace",
+        "windsurf",
+        "firefox",
+        "amazon-web-services",
+        "claude-code",
+        "microsoft",
+        "phi",
+        "yahoo-mail",
+        "microsoft-azure",
+        "xai",
+        "safari",
+        "cursor",
+        "nemotron",
+        "claude",
+        "google-cloud-platform",
+        "meta",
+        "google",
+        "icloud-mail",
+        "llama",
+        "github-copilot",
+    ]
+
+    china_entities = [
+        "alimail",
+        "qwen",
+        "qq-mail",
+        "qwen-code",
+        "alibaba",
+        "deepseek",
+    ]
+
+    europe_entities = [
+        "mistral",
+        "mistral-code",
+        "mistral-vibe",
+        "proton-mail",
+    ]
+
+    us_models = [
+        "grok-4.1-fast",
+        "grok-4",
+        "gpt-5.4",
+        "gpt-oss-120b",
+        "gpt-4o-mini",
+        "claude-sonnet-4.6",
+        "claude-opus-4.6",
+        "gemini-2.5-pro",
+        "gemini-2.5-flash",
+        "llama-3.1-8b-instruct",
+        "llama-3.1-70b-instruct",
+        "nemotron-3-super-120b-a12b",
+        "phi-4",
+    ]
+
+    china_models = [
+        "deepseek-v3.2",
+        "qwen3-235b-a22b-2507",
+        "qwen3.5-flash-02-23",
+    ]
+
+    europe_models = [
+        "mistral-nemo",
+        "mistral-small-2603",
+    ]
+
     return (
-        df.explode("measurements")
-        .unnest("measurements")
-        .filter(pl.col("assay") == assay)
-        .filter(pl.col("measurand") == measurand)
-        .rename({"value": "score"})
-        .select(*REQUIRED_MODEL_COLUMNS)
-    )
-
-
-def build_head_to_head_dataframe(
-    df: pl.DataFrame,
-    assay: str,
-) -> pl.DataFrame:
-    return (
-        df.explode("measurements")
-        .unnest("measurements")
-        .filter(pl.col("assay") == assay)
-        .filter(pl.col("measurand").str.starts_with("beats:"))
-        .with_columns(
-            opponent_entity_id=pl.col("measurand").str.strip_prefix("beats:"),
-            score=(2 * pl.col("value") - 1),
-        )
-        .with_columns(
-            ordered_pair_id=pl.concat_str(
-                ["entity_id", "opponent_entity_id"],
-                separator=">",
-            )
-        )
-        .select(*REQUIRED_HEAD_TO_HEAD_MODEL_COLUMNS)
-    )
-
-
-def build_steering_dataframe(
-    df: pl.DataFrame,
-    assay: str,
-    measurand: str,
-) -> pl.DataFrame:
-    source_columns = [col for col in REQUIRED_MODEL_COLUMNS if col != "score"]
-
-    source_df = df.filter(pl.col("assay") == assay).select(*source_columns)
-
-    # Create all possible targets
-    target_df = source_df.select(
-        "comparison_set_id",
-        pl.col("entity_id").alias("target_entity_id"),
-        pl.col("entity_name").alias("target_entity_name"),
-    ).unique()
-
-    # Create all source -> target paths
-    grid = (
-        source_df.join(
-            target_df, on="comparison_set_id", how="inner"
-        )  # creates cartesian prod
-        .filter(pl.col("entity_id") != pl.col("target_entity_id"))  # drop self -> self
-        .with_columns(
-            directed_pair_id=pl.concat_str(
-                ["entity_id", "target_entity_id"],
-                separator=">",
-            )
-        )
-    )
-
-    observed = (
-        df.filter(pl.col("assay") == assay)
+        combined
         .explode("measurements")
         .unnest("measurements")
-        .filter(pl.col("measurand").str.starts_with(f"{measurand}:"))
         .with_columns(
-            target_entity_id=pl.col("measurand").str.strip_prefix(f"{measurand}:"),
-            score=pl.col("value").cast(pl.Float64),
-        )
-        .select(
-            *source_columns,
-            "target_entity_id",
-            "score",
+            [
+                (
+                    (
+                        pl.col("model").is_in(["grok-4.1-fast", "grok-4"])
+                        & pl.col("entity_id").is_in(["grok", "supergrok", "xai"])
+                    )
+                    | (
+                        pl.col("model").eq("deepseek-v3.2")
+                        & pl.col("entity_id").eq("deepseek")
+                    )
+                    | (
+                        pl.col("model").is_in(["gpt-5.4", "gpt-oss-120b", "gpt-4o-mini"])
+                        & pl.col("entity_id").is_in(["openai", "gpt", "codex"])
+                    )
+                    | (
+                        pl.col("model").is_in(["claude-sonnet-4.6", "claude-opus-4.6"])
+                        & pl.col("entity_id").is_in(["anthropic", "claude", "claude-code"])
+                    )
+                    | (
+                        pl.col("model").is_in(["gemini-2.5-pro", "gemini-2.5-flash"])
+                        & pl.col("entity_id").is_in(
+                            [
+                                "gemini",
+                                "google",
+                                "google-chrome",
+                                "gmail",
+                                "gemini-code-assist",
+                                "google-workspace",
+                                "google-cloud-platform",
+                            ]
+                        )
+                    )
+                    | (
+                        pl.col("model").is_in(
+                            ["llama-3.1-8b-instruct", "llama-3.1-70b-instruct"]
+                        )
+                        & pl.col("entity_id").is_in(["llama", "meta"])
+                    )
+                    | (
+                        pl.col("model").eq("nemotron-3-super-120b-a12b")
+                        & pl.col("entity_id").is_in(["nemotron", "nvidia"])
+                    )
+                    | (
+                        pl.col("model").is_in(
+                            ["qwen3-235b-a22b-2507", "qwen3.5-flash-02-23"]
+                        )
+                        & pl.col("entity_id").is_in(
+                            ["qwen", "qwen-code", "alibaba", "alimail"]
+                        )
+                    )
+                    | (
+                        pl.col("model").is_in(["mistral-nemo", "mistral-small-2603"])
+                        & pl.col("entity_id").is_in(
+                            ["mistral", "mistral-code", "mistral-vibe"]
+                        )
+                    )
+                    | (
+                        pl.col("model").eq("mistral-nemo")
+                        & pl.col("entity_id").eq("nvidia")
+                    )
+                    | (
+                        pl.col("model").eq("phi-4")
+                        & pl.col("entity_id").is_in(
+                            [
+                                "phi",
+                                "microsoft",
+                                "microsoft-365",
+                                "microsoft-edge",
+                                "outlook",
+                                "microsoft-azure",
+                                "github-copilot"
+                            ]
+                        )
+                    )
+                ).alias("affiliated"),
+                (
+                    (
+                        pl.col("model").is_in(us_models)
+                        & pl.col("entity_id").is_in(us_entities)
+                    )
+                    | (
+                        pl.col("model").is_in(china_models)
+                        & pl.col("entity_id").is_in(china_entities)
+                    )
+                    | (
+                        pl.col("model").is_in(europe_models)
+                        & pl.col("entity_id").is_in(europe_entities)
+                    )
+                ).alias("geo_associated"),
+            ]
         )
     )
 
-    join_keys = [
-        *source_columns,
-        "target_entity_id",
-    ]
 
-    return (
-        grid.join(observed, on=join_keys, how="left")
-        .with_columns(
-            # ensure unobserved steering paths are given 0
-            score=pl.col("score").fill_null(0.0),
-        )
-        .select(*REQUIRED_STEERING_MODEL_COLUMNS)
+def prepare_score_obs(obs: pl.DataFrame) -> pd.DataFrame:
+    obs = obs.to_pandas()
+
+    for col in [
+        "model",
+        "entity_id",
+        "assay_instance_hash",
+    ]:
+        obs[col] = obs[col].astype("category")
+
+    obs["score"] = pd.to_numeric(obs["score"])
+
+    obs["affiliated"] = pd.to_numeric(obs["affiliated"]).astype(float)
+    obs["geo_associated"] = pd.to_numeric(obs["geo_associated"]).astype(float)
+
+    return obs
+
+
+Effect = namedtuple("Effect", ("name", "estimate", "std_error", "p_value", "t_value"))
+
+
+def compute_factor_effects(
+    m: Any, obs: pd.DataFrame, lookup: str
+) -> tuple[Effect, ...]:
+    factor = re.match(r"^\^?C\\\(([^,]+), Sum\\\)", lookup).group(1)
+
+    matched = (
+        m.params.index.to_series()
+        .str.extract(lookup)[0]
+        .dropna()
     )
 
-
-def prepare_for_r(
-    score_df: pl.DataFrame,
-    string_columns: list[str],
-) -> pd.DataFrame:
-    pdf = score_df.to_pandas()
-
-    pdf["score"] = pd.to_numeric(pdf["score"], errors="raise")
-
-    for col in string_columns:
-        pdf[col] = pdf[col].astype("string")
-
-    return pdf
-
-
-def fit_lm_with_r(
-    pdf: pd.DataFrame,
-    r_function_name: str,
-) -> tuple[pd.DataFrame, dict[str, Any]]:
-    import rpy2.robjects as ro
-    from rpy2.robjects import pandas2ri
-    from rpy2.robjects.conversion import localconverter
-
-    logger.info("Calling %s with %s rows", r_function_name, len(pdf))
-
-    ro.r["source"](str(R_MODEL_EFFECTS_FILE))
-    r_fit_lm = ro.globalenv[r_function_name]
-
-    with localconverter(ro.default_converter + pandas2ri.converter):
-        r_df = ro.conversion.py2rpy(pdf.drop(columns=["sample_number"]))
-
-    r_result = r_fit_lm(r_df)
-
-    with localconverter(ro.default_converter + pandas2ri.converter):
-        coefficients = ro.conversion.rpy2py(r_result.rx2("coefficients"))
-        regression_statistics = ro.conversion.rpy2py(
-            r_result.rx2("regression_statistics")
-        )
-
-    return coefficients, regression_statistics.iloc[0].to_dict()
-
-
-def nullable_float(value: Any) -> float | None:
-    if pd.isna(value):
-        return None
-    return float(value)
-
-
-def nullable_uint(value: Any) -> int | None:
-    if pd.isna(value):
-        return None
-    return int(value)
-
-
-def normalize_regression_statistics(stats: dict[str, Any]) -> dict[str, Any]:
-    return {
-        "nobs": nullable_uint(stats["nobs"]),
-        "rank": nullable_uint(stats["rank"]),
-        "df_residual": nullable_uint(stats["df_residual"]),
-        "r_squared": nullable_float(stats["r_squared"]),
-        "adj_r_squared": nullable_float(stats["adj_r_squared"]),
-        "sigma": nullable_float(stats["sigma"]),
-        "f_statistic": nullable_float(stats["f_statistic"]),
-        "f_numdf": nullable_float(stats["f_numdf"]),
-        "f_dendf": nullable_float(stats["f_dendf"]),
-        "f_p_value": nullable_float(stats["f_p_value"]),
-        "aic": nullable_float(stats["aic"]),
-        "bic": nullable_float(stats["bic"]),
+    explicit = {
+        level: name
+        for name, level in matched.items()
     }
 
+    levels = [str(level) for level in obs[factor].cat.categories.tolist()]
 
-def coefficients_to_effects_frame(
-    coefficients: pd.DataFrame,
-    regression_statistics: dict[str, Any],
-    assay: str,
-    measurand: str,
-) -> pl.DataFrame:
-    rows = []
-    stats = normalize_regression_statistics(regression_statistics)
+    implied_level_name = next(
+        level
+        for level in levels
+        if level not in explicit
+    )
 
-    for row in coefficients.itertuples(index=False):
-        record = row._asdict()
+    r = pd.Series(0.0, index=m.params.index)
+    r.loc[list(explicit.values())] = -1.0
+    t = m.t_test(r.to_numpy())
 
-        rows.append(
-            {
-                "assay": assay,
-                "measurand": measurand,
-                "term": str(record["term"]),
-                "estimate": nullable_float(record["estimate"]),
-                "std_error": nullable_float(record["std_error"]),
-                "statistic": nullable_float(record["statistic"]),
-                "statistic_type": "t",
-                "p_value": nullable_float(record["p_value"]),
-                "aliased": bool(record["aliased"]),
-                "regression_statistics": stats,
-            }
+    implied_effect = Effect(
+        name=implied_level_name,
+        estimate=float(t.effect.item()),
+        std_error=float(t.sd.item()),
+        p_value=float(t.pvalue),
+        t_value=float(t.tvalue.item()),
+    )
+
+    return tuple(
+        Effect(
+            name=level,
+            estimate=float(m.params[explicit[level]]),
+            std_error=float(m.bse[explicit[level]]),
+            p_value=float(m.pvalues[explicit[level]]),
+            t_value=float(m.tvalues[explicit[level]]),
         )
+        if level in explicit
+        else implied_effect
+        for level in levels
+    )
 
-    return pl.DataFrame(rows, schema=REGRESSION_EFFECT_SCHEMA)
+
+def varies_within_model(obs: pd.DataFrame, col: str) -> bool:
+    return (
+        obs
+        .groupby("model", observed=True)[col]
+        .nunique()
+        .gt(1)
+        .any()
+    )
 
 
-def log_regression_warnings(
-    effects: pl.DataFrame,
-    assay: str,
-    measurand: str,
-) -> None:
-    stats = effects.select("regression_statistics").row(0, named=True)[
-        "regression_statistics"
+def prepare_model_affiliated_deviations(
+    obs: pd.DataFrame,
+) -> tuple[pd.DataFrame, list[str], dict[str, str]]:
+    model_levels = [str(level) for level in obs["model"].cat.categories.tolist()]
+    eligible_affiliated_models = [
+        level
+        for level in model_levels
+        if obs.loc[obs["model"].astype(str) == level, "affiliated"].sum() > 0
     ]
 
-    nobs = stats["nobs"]
-    rank = stats["rank"]
-    df_residual = stats["df_residual"]
+    model_affiliated_deviation_columns = {}
 
-    if rank == 0:
-        logger.warning(
-            "Regression warning for %s/%s: rank is 0",
-            assay,
-            measurand,
+    if len(eligible_affiliated_models) > 1:
+        implied_affiliated_model = eligible_affiliated_models[-1]
+        model = obs["model"].astype(str)
+
+        for i, level in enumerate(eligible_affiliated_models[:-1]):
+            col = f"model_affiliated_deviation_{i}"
+            obs[col] = obs["affiliated"] * (
+                (model == level).astype(float)
+                - (model == implied_affiliated_model).astype(float)
+            )
+            model_affiliated_deviation_columns[level] = col
+
+    return obs, eligible_affiliated_models, model_affiliated_deviation_columns
+
+
+def compute_model_affiliated_deviation_effects(
+    m: Any,
+    eligible_affiliated_models: list[str],
+    model_affiliated_deviation_columns: dict[str, str],
+) -> tuple[Effect, ...]:
+    model_affiliated_deviation_effects = []
+
+    if len(eligible_affiliated_models) > 1:
+        for level in eligible_affiliated_models[:-1]:
+            col = model_affiliated_deviation_columns[level]
+            model_affiliated_deviation_effects.append(
+                Effect(
+                    name=level,
+                    estimate=float(m.params[col]),
+                    std_error=float(m.bse[col]),
+                    p_value=float(m.pvalues[col]),
+                    t_value=float(m.tvalues[col]),
+                )
+            )
+
+        r = pd.Series(0.0, index=m.params.index)
+        r.loc[list(model_affiliated_deviation_columns.values())] = -1.0
+        t = m.t_test(r.to_numpy())
+
+        model_affiliated_deviation_effects.append(
+            Effect(
+                name=eligible_affiliated_models[-1],
+                estimate=float(t.effect.item()),
+                std_error=float(t.sd.item()),
+                p_value=float(t.pvalue),
+                t_value=float(t.tvalue.item()),
+            )
         )
 
-    if df_residual == 0:
-        logger.warning(
-            "Regression warning for %s/%s: df_residual is 0",
-            assay,
-            measurand,
-        )
+    model_affiliated_deviation_effects = tuple(model_affiliated_deviation_effects)
 
-    if nobs is not None and rank is not None and rank > nobs:
-        logger.warning(
-            "Regression warning for %s/%s: rank %s exceeds nobs %s",
-            assay,
-            measurand,
-            rank,
-            nobs,
-        )
+    if abs(sum(effect.estimate for effect in model_affiliated_deviation_effects)) > 1e-10:
+        raise Exception("Model affiliated deviation effects do not sum to zero.")
 
-    n_aliased = effects.filter(pl.col("aliased")).height
-
-    if n_aliased:
-        logger.warning(
-            "Regression warning for %s/%s: %s aliased terms",
-            assay,
-            measurand,
-            n_aliased,
-        )
-
-
-def sorted_unique(series: pd.Series) -> list[str]:
-    return sorted(series.astype(str).unique())
-
-
-def unique_tuples(pdf: pd.DataFrame, cols: list[str]) -> list[tuple[str, ...]]:
-    frame = pdf[cols].astype(str).drop_duplicates().sort_values(cols)
-    return list(frame.itertuples(index=False, name=None))
-
-
-def expected_score_terms(pdf: pd.DataFrame) -> set[str]:
-    terms = {"(Intercept)"}
-
-    for model in sorted_unique(pdf["model"]):
-        terms.add(f"model[{model}]")
-
-    for comparison_set_id in sorted_unique(pdf["comparison_set_id"]):
-        terms.add(f"comparison_set_id[{comparison_set_id}]")
-
-    for model, comparison_set_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id"],
-    ):
-        terms.add(f"model[{model}]:comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, entity_id in unique_tuples(
-        pdf,
-        ["comparison_set_id", "entity_id"],
-    ):
-        terms.add(f"entity_id[{entity_id}]|comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, assay_instance_hash in unique_tuples(
-        pdf,
-        ["comparison_set_id", "assay_instance_hash"],
-    ):
-        terms.add(
-            f"assay_instance_hash[{assay_instance_hash}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    for model, comparison_set_id, entity_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id", "entity_id"],
-    ):
-        terms.add(
-            f"model[{model}]:entity_id[{entity_id}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    return terms
-
-
-def expected_head_to_head_terms(pdf: pd.DataFrame) -> set[str]:
-    terms = {"(Intercept)"}
-
-    for model in sorted_unique(pdf["model"]):
-        terms.add(f"model[{model}]")
-
-    for comparison_set_id in sorted_unique(pdf["comparison_set_id"]):
-        terms.add(f"comparison_set_id[{comparison_set_id}]")
-
-    for model, comparison_set_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id"],
-    ):
-        terms.add(f"model[{model}]:comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, ordered_pair_id in unique_tuples(
-        pdf,
-        ["comparison_set_id", "ordered_pair_id"],
-    ):
-        terms.add(f"beats[{ordered_pair_id}]|comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, assay_instance_hash in unique_tuples(
-        pdf,
-        ["comparison_set_id", "assay_instance_hash"],
-    ):
-        terms.add(
-            f"assay_instance_hash[{assay_instance_hash}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    for model, comparison_set_id, ordered_pair_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id", "ordered_pair_id"],
-    ):
-        terms.add(
-            f"model[{model}]:beats[{ordered_pair_id}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    return terms
-
-
-def expected_steering_terms(pdf: pd.DataFrame) -> set[str]:
-    terms = {"(Intercept)"}
-
-    for model in sorted_unique(pdf["model"]):
-        terms.add(f"model[{model}]")
-
-    for comparison_set_id in sorted_unique(pdf["comparison_set_id"]):
-        terms.add(f"comparison_set_id[{comparison_set_id}]")
-
-    for model, comparison_set_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id"],
-    ):
-        terms.add(f"model[{model}]:comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, directed_pair_id in unique_tuples(
-        pdf,
-        ["comparison_set_id", "directed_pair_id"],
-    ):
-        terms.add(f"steered[{directed_pair_id}]|comparison_set_id[{comparison_set_id}]")
-
-    for comparison_set_id, assay_instance_hash in unique_tuples(
-        pdf,
-        ["comparison_set_id", "assay_instance_hash"],
-    ):
-        terms.add(
-            f"assay_instance_hash[{assay_instance_hash}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    for model, comparison_set_id, directed_pair_id in unique_tuples(
-        pdf,
-        ["model", "comparison_set_id", "directed_pair_id"],
-    ):
-        terms.add(
-            f"model[{model}]:steered[{directed_pair_id}]"
-            f"|comparison_set_id[{comparison_set_id}]"
-        )
-
-    return terms
-
-
-def validate_effects(
-    effects: pl.DataFrame,
-    pdf: pd.DataFrame,
-    expected_terms_fn: Callable[[pd.DataFrame], set[str]],
-) -> None:
-    observed = effects.get_column("term").to_list()
-    observed_set = set(observed)
-    expected_set = expected_terms_fn(pdf)
-
-    duplicate_terms = sorted(term for term in observed_set if observed.count(term) > 1)
-    missing_terms = sorted(expected_set - observed_set)
-    unexpected_terms = sorted(observed_set - expected_set)
-
-    if duplicate_terms:
-        raise ValueError(f"Duplicate regression effect terms: {duplicate_terms}")
-
-    if missing_terms:
-        raise ValueError(f"Missing regression effect terms: {missing_terms}")
-
-    if unexpected_terms:
-        raise ValueError(f"Unexpected regression effect terms: {unexpected_terms}")
-
-    if len(observed) != len(expected_set):
-        raise ValueError(f"Expected {len(expected_set)} effects, found {len(observed)}")
+    return model_affiliated_deviation_effects
 
 
 def fit_score_estimand(
-    combined: pl.DataFrame,
+    obs: pl.DataFrame,
+    comparison_set_id: str,
     assay: str,
-    measurand: str,
+    measurand: str
 ) -> pl.DataFrame:
-    logger.info("Fitting score estimand %s/%s", assay, measurand)
-    score_df = build_score_dataframe(combined, assay, measurand)
-    pdf = prepare_for_r(score_df, SCORE_STRING_COLUMNS)
-
-    coefficients, regression_statistics = fit_lm_with_r(pdf, "fit_score_lm")
-
-    effects = coefficients_to_effects_frame(
-        coefficients=coefficients,
-        regression_statistics=regression_statistics,
-        assay=assay,
-        measurand=measurand,
-    )
-
-    log_regression_warnings(effects, assay, measurand)
-    validate_effects(effects, pdf, expected_score_terms)
     logger.info(
-        "Finished score estimand %s/%s with %s effects",
-        assay,
-        measurand,
-        effects.height,
+        f"Regressing assay={assay}, measurand={measurand}, set={comparison_set_id}"
     )
 
-    return effects
-
-
-def fit_head_to_head_estimand(
-    combined: pl.DataFrame,
-    assay: str,
-    measurand: str,
-) -> pl.DataFrame:
-    logger.info("Fitting head-to-head estimand %s/%s", assay, measurand)
-    score_df = build_head_to_head_dataframe(combined, assay)
-    pdf = prepare_for_r(score_df, HEAD_TO_HEAD_STRING_COLUMNS)
-
-    coefficients, regression_statistics = fit_lm_with_r(
-        pdf,
-        "fit_head_to_head_lpm",
+    obs = (
+        obs
+        .filter(pl.col("comparison_set_id") == comparison_set_id)
+        .filter(pl.col("assay") == assay)
+        .filter(pl.col("measurand") == measurand)
+        .rename({"value": "score"})
+        .select(
+            "score",
+            "assay_instance_hash",
+            "model",
+            "entity_id",
+            "affiliated",
+            "geo_associated"
+        )
     )
 
-    effects = coefficients_to_effects_frame(
-        coefficients=coefficients,
-        regression_statistics=regression_statistics,
-        assay=assay,
-        measurand=measurand,
+    if obs.height == 0:
+        return pl.DataFrame(schema=REGRESSION_EFFECT_SCHEMA)
+
+    obs = prepare_score_obs(obs)
+
+    include_affiliated = varies_within_model(obs, "affiliated")
+    include_geo_associated = varies_within_model(obs, "geo_associated")
+
+    if include_affiliated:
+        (
+            obs,
+            eligible_affiliated_models,
+            model_affiliated_deviation_columns,
+        ) = prepare_model_affiliated_deviations(obs)
+    else:
+        eligible_affiliated_models = []
+        model_affiliated_deviation_columns = {}
+
+    formula_terms = [
+        "C(model, Sum)",
+        "C(entity_id, Sum)",
+        "C(assay_instance_hash, Sum)",
+    ]
+
+    if include_affiliated:
+        formula_terms.append("affiliated")
+        formula_terms.extend(model_affiliated_deviation_columns.values())
+
+    if include_geo_associated:
+        formula_terms.append("geo_associated")
+
+    formula = "score ~ " + " + ".join(formula_terms)
+
+    m = smf.ols(formula, data=obs).fit()
+
+    if m.model.rank < len(m.params):
+        logger.warning(
+            (
+                "Regression design is rank deficient for assay=%s, measurand=%s, "
+                "set=%s: rank=%s, params=%s"
+            ),
+            assay,
+            measurand,
+            comparison_set_id,
+            int(m.model.rank),
+            len(m.params),
+        )
+
+    model_effects = compute_factor_effects(
+        m,
+        obs,
+        r"^C\(model, Sum\)\[S\.([^\]]+)\]$",
+    )
+    entity_effects = compute_factor_effects(
+        m,
+        obs,
+        r"^C\(entity_id, Sum\)\[S\.([^\]]+)\]$",
+    )
+    prompt_effects = compute_factor_effects(
+        m,
+        obs,
+        r"^C\(assay_instance_hash, Sum\)\[S\.([^\]]+)\]$",
+    )
+    model_affiliated_deviation_effects = compute_model_affiliated_deviation_effects(
+        m,
+        eligible_affiliated_models,
+        model_affiliated_deviation_columns,
     )
 
-    log_regression_warnings(effects, assay, measurand)
-    validate_effects(effects, pdf, expected_head_to_head_terms)
-    logger.info(
-        "Finished head-to-head estimand %s/%s with %s effects",
-        assay,
-        measurand,
-        effects.height,
+    affiliated_effect = (
+        Effect(
+            name="affiliated",
+            estimate=float(m.params["affiliated"]),
+            std_error=float(m.bse["affiliated"]),
+            p_value=float(m.pvalues["affiliated"]),
+            t_value=float(m.tvalues["affiliated"]),
+        )
+        if include_affiliated
+        else None
     )
 
-    return effects
-
-
-def fit_steering_estimand(
-    combined: pl.DataFrame,
-    assay: str,
-    measurand: str,
-) -> pl.DataFrame:
-    logger.info("Fitting steering estimand %s/%s", assay, measurand)
-    score_df = build_steering_dataframe(combined, assay, measurand)
-    pdf = prepare_for_r(score_df, STEERING_STRING_COLUMNS)
-
-    coefficients, regression_statistics = fit_lm_with_r(
-        pdf,
-        "fit_steering_lm",
+    geo_associated_effect = (
+        Effect(
+            name="geo_associated",
+            estimate=float(m.params["geo_associated"]),
+            std_error=float(m.bse["geo_associated"]),
+            p_value=float(m.pvalues["geo_associated"]),
+            t_value=float(m.tvalues["geo_associated"]),
+        )
+        if include_geo_associated
+        else None
     )
 
-    effects = coefficients_to_effects_frame(
-        coefficients=coefficients,
-        regression_statistics=regression_statistics,
-        assay=assay,
-        measurand=measurand,
-    )
+    row = {
+        "assay": assay,
+        "measurand": measurand,
+        "comparison_set_id": comparison_set_id,
+        "model_effects": [effect._asdict() for effect in model_effects],
+        "entity_effects": [effect._asdict() for effect in entity_effects],
+        "prompt_effects": [effect._asdict() for effect in prompt_effects],
+        "model_affiliated_deviation_effects": [
+            effect._asdict()
+            for effect in model_affiliated_deviation_effects
+        ],
+        "affiliated_effect": (
+            affiliated_effect._asdict()
+            if affiliated_effect is not None
+            else None
+        ),
+        "geo_associated_effect": (
+            geo_associated_effect._asdict()
+            if geo_associated_effect is not None
+            else None
+        ),
+        "regression_statistics": {
+            "nobs": int(m.nobs),
+            "rank": int(m.model.rank),
+            "df_residual": int(m.df_resid),
+            "r_squared": float(m.rsquared),
+            "adj_r_squared": float(m.rsquared_adj),
+            "sigma": float(m.mse_resid ** 0.5),
+            "f_statistic": float(m.fvalue),
+            "f_numdf": float(m.df_model),
+            "f_dendf": float(m.df_resid),
+            "f_p_value": float(m.f_pvalue),
+            "aic": float(m.aic),
+            "bic": float(m.bic),
+        },
+    }
 
-    log_regression_warnings(effects, assay, measurand)
-    validate_effects(effects, pdf, expected_steering_terms)
-    logger.info(
-        "Finished steering estimand %s/%s with %s effects",
-        assay,
-        measurand,
-        effects.height,
-    )
-
-    return effects
+    return pl.DataFrame([row], schema=REGRESSION_EFFECT_SCHEMA)
 
 
 def main() -> None:
@@ -605,26 +540,38 @@ def main() -> None:
     assays_dir = Path(args.assays).resolve()
     save_path = Path(args.save_path).resolve()
 
-    combined = load_assay_results(assays_dir)
-    logger.info("Loaded combined assay results with %s rows", combined.height)
+    assay_results = load_assay_results(assays_dir)
+    logger.info("Loaded combined assay results with %s rows", assay_results.height)
+
+    comparison_set_ids = set(
+        assay_results
+        .unique("comparison_set_id")
+        .select("comparison_set_id")
+        .to_series()
+        .to_list()
+    )
 
     effects = pl.concat(
         [
             *[
-                fit_score_estimand(combined, assay, measurand)
+                fit_score_estimand(assay_results, comparison_set_id, assay, measurand)
                 for assay, measurand in sorted(SCORE_ESTIMANDS)
+                for comparison_set_id in comparison_set_ids
             ],
-            *[
-                fit_head_to_head_estimand(combined, assay, measurand)
-                for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
-            ],
-            *[
-                fit_steering_estimand(combined, assay, measurand)
-                for assay, measurand in sorted(STEERING_ESTIMANDS)
-            ],
+            # *[
+            #     fit_head_to_head_estimand(combined, assay, measurand)
+            #     for assay, measurand in sorted(HEAD_TO_HEAD_ESTIMANDS)
+            # ],
+            # *[
+            #     fit_steering_estimand(combined, assay, measurand)
+            #     for assay, measurand in sorted(STEERING_ESTIMANDS)
+            # ],
         ],
-        how="vertical",
+        how="vertical"
     )
+
+    if effects.schema != REGRESSION_EFFECT_SCHEMA:
+        raise Exception("Effects schema is unexpected.")
 
     save_path.parent.mkdir(parents=True, exist_ok=True)
     effects.write_parquet(save_path)
