@@ -49,6 +49,7 @@ Model = Literal[
     "gpt-4o-mini",
     "claude-sonnet-4.6",
     "claude-opus-4.6",
+    "gemma-4-31B-it",
     "gemini-2.5-flash",
     "gemini-2.5-pro",
     "grok-4.1-fast",
@@ -61,9 +62,8 @@ Model = Literal[
     "qwen3-235b-a22b-2507",
     "qwen3.5-flash-02-23",
     "nemotron-3-super-120b-a12b",
-    "nemotron-3-nano-30b-a3b",
     "phi-4",
-    "llama-3.1-swallow-8b-instruct-v0.3"
+    "hy3-preview"
 ]
 
 
@@ -429,6 +429,12 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
         "anthropic/claude-opus-4.6",
         reasoning={"effort": "none"},
     ),
+    "gemma-4-31B-it": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_vertex_client,
+        "gemma-4-31B-it",
+        reasoning={"effort": "none"},
+    ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
@@ -501,12 +507,6 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
         "nvidia/nemotron-3-super-120b-a12b",
         reasoning={"effort": "none"},
     ),
-    "nemotron-3-nano-30b-a3b": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "nvidia/nemotron-3-nano-30b-a3b",
-        reasoning={"effort": "none"},
-    ),
     "phi-4": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
@@ -514,14 +514,14 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
         reasoning={"effort": "none"},
         provider={"ignore": ["nextbit"]},
     ),
-    "llama-3.1-swallow-8b-instruct-v0.3": partial(
+    "hy3-preview": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "tokyotech-llm/llama-3.1-swallow-8b-instruct-v0.3",
+        "tencent/hy3-preview",
         reasoning={"effort": "none"},
     ),
 }
-
+raise Exception("MAKE SURE TO FIX PROVIDERS")
 
 # === PUBLIC FUNCTIONS ===
 

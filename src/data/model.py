@@ -1,31 +1,24 @@
 import polars as pl
 
-ENTITY_SCHEMA = {
-    "id": pl.String,  # key
-    "name": pl.String,
-    "aliases": pl.List(pl.String),
+ENTITY = pl.Struct({
+    "name": pl.String, # key
     "source": pl.String,
-    "facets": pl.List(pl.Struct({"dimension": pl.Utf8, "value": pl.Utf8})),
-}
+    "geography": pl.String,
+})
 
-CLAIM_SCHEMA = {
-    "predicate": pl.String,  # key
-    "subject_id": pl.String,  # key
-    "subject_name": pl.String,
-    "object_id": pl.String,  # key
-    "object_name": pl.String,
+AFFILIATION_LEDGER_SCHEMA = {
+    "model": pl.String,  # key
+    "entity": pl.String,  # key
     "source": pl.String,
 }
 
 COMPARISON_SET_SCHEMA = {
-    "id": pl.String,  # key
     "name": pl.String,
-    "entity_ids": pl.List(pl.String),
+    "entities": pl.List(ENTITY),
 }
 
 COMPARISON_SET_ASSAY_INSTANCE_SCHEMA = {
-    "comparison_set_id": pl.String,  # key
-    "comparison_set_name": pl.String,
+    "comparison_set": pl.String, # key
     "assay": pl.String,  # key
     "instance_hash": pl.UInt64,  # key
     "instance": pl.Object,
@@ -36,10 +29,8 @@ ASSAY_SCHEMA = {
     "assay_instance_hash": pl.UInt64, # key
     "sample_number": pl.UInt64, # key
     "model": pl.String,  # key
-    "comparison_set_id": pl.String,  # key
-    "comparison_set_name": pl.String,
-    "entity_id": pl.String,  # key,
-    "entity_name": pl.String,
+    "comparison_set": pl.String, # key
+    "entity": pl.String,  # key,
     "debug_json": pl.String,
     "measurements": pl.List(pl.Struct({
         "measurand": pl.Utf8, 
@@ -58,7 +49,7 @@ EFFECT_TERM = pl.Struct({
 REGRESSION_EFFECT_SCHEMA = {
     "assay": pl.String, # key
     "measurand": pl.String, # key
-    "comparison_set_id": pl.String, # key
+    "comparison_set": pl.String, # key
     "model_effects": pl.List(EFFECT_TERM),
     "entity_effects": pl.List(EFFECT_TERM),
     "prompt_effects": pl.List(EFFECT_TERM),
