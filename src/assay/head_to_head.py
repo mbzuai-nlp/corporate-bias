@@ -1,5 +1,4 @@
 import json
-from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
@@ -9,7 +8,6 @@ from tqdm.auto import tqdm
 from src.assay.common import (
     RuntimeContext,
     build_entity_lookup,
-    build_estimand_result,
     get_comparison_set_entities,
 )
 from src.data.model import ASSAY_SCHEMA
@@ -89,7 +87,7 @@ def _run_preference(
                 },
             },
         },
-        seed=task["sample_id"],
+        seed=task["sample_number"],
     )
 
     parsed = json.loads(output.text)
@@ -114,7 +112,7 @@ def _run_preference(
         non_preferred_entity_name = left_entity_name
 
     return {
-        "sample_id": task["sample_id"],
+        "sample_number": task["sample_number"],
         "assay": assay,
         "assay_instance_hash": task["assay_instance_hash"],
         "model": model,
@@ -132,22 +130,27 @@ def _run_preference(
     }
 
 
-def _build_debug_json(
-    *,
-    entity: dict,
-    num_samples_per_instance: int,
-    sample_win_rates: list[float],
-    sample_pairwise_win_rates: dict[str, list[float]],
-    preferences: list[dict[str, Any]],
-) -> str:
+def _build_measurements(preference: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        {
+            "measurand": f"beats:{preference['right_entity_id']}",
+            "value": (
+                1.0
+                if preference["preferred_entity_id"] == preference["left_entity_id"]
+                else 0.0
+            ),
+        },
+    ]
+
+
+def _build_debug_json(preference: dict[str, Any]) -> str:
     return json.dumps(
         {
-            "entity_id": entity["entity_id"],
-            "entity_name": entity["entity_name"],
-            "num_samples_per_instance": num_samples_per_instance,
-            "sample_win_rates": sample_win_rates,
-            "sample_pairwise_win_rates": sample_pairwise_win_rates,
-            "preferences": preferences,
+            "right_entity_id": preference["right_entity_id"],
+            "right_entity_name": preference["right_entity_name"],
+            "preferred_entity_id": preference["preferred_entity_id"],
+            "preferred_entity_name": preference["preferred_entity_name"],
+            "raw_response": preference["raw_response"],
         },
         ensure_ascii=False,
         sort_keys=True,
@@ -167,7 +170,7 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         .iter_rows(named=True)
     )
 
-    tasks: list[dict] = []
+    tasks: list[dict[str, Any]] = []
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -181,10 +184,10 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
             comparison_set_id=comparison_set_id,
         )
 
-        for sample_id in range(ctx.cfg.num_samples_per_instance):
+        for sample_number in range(ctx.cfg.num_samples_per_instance):
             tasks.extend(
                 {
-                    "sample_id": sample_id,
+                    "sample_number": sample_number,
                     "comparison_set_id": comparison_set_id,
                     "comparison_set_name": comparison_set_name,
                     "assay_instance_hash": instance_hash,
@@ -216,217 +219,35 @@ def run_head_to_head(ctx: RuntimeContext) -> pl.DataFrame:
         ):
             preferences.append(future.result())
 
-    wins_by_sample_and_entity: dict[tuple[int, int, str], int] = defaultdict(int)
-    trials_by_sample_and_entity: dict[tuple[int, int, str], int] = defaultdict(int)
-
-    wins_by_sample_entity_and_comparator: dict[tuple[int, int, str, str], int] = (
-        defaultdict(int)
-    )
-    trials_by_sample_entity_and_comparator: dict[tuple[int, int, str, str], int] = (
-        defaultdict(int)
-    )
-
-    preferences_by_instance_and_entity: dict[tuple[int, str], list[dict[str, Any]]] = (
-        defaultdict(list)
-    )
-
-    for preference in preferences:
-        instance_hash = preference["assay_instance_hash"]
-        sample_id = preference["sample_id"]
-
-        left_entity_id = preference["left_entity_id"]
-        right_entity_id = preference["right_entity_id"]
-        preferred_entity_id = preference["preferred_entity_id"]
-
-        trials_by_sample_and_entity[
-            (
-                instance_hash,
-                sample_id,
-                left_entity_id,
-            )
-        ] += 1
-        trials_by_sample_and_entity[
-            (
-                instance_hash,
-                sample_id,
-                right_entity_id,
-            )
-        ] += 1
-
-        wins_by_sample_and_entity[
-            (
-                instance_hash,
-                sample_id,
-                preferred_entity_id,
-            )
-        ] += 1
-
-        trials_by_sample_entity_and_comparator[
-            (
-                instance_hash,
-                sample_id,
-                left_entity_id,
-                right_entity_id,
-            )
-        ] += 1
-        trials_by_sample_entity_and_comparator[
-            (
-                instance_hash,
-                sample_id,
-                right_entity_id,
-                left_entity_id,
-            )
-        ] += 1
-
-        if preferred_entity_id == left_entity_id:
-            wins_by_sample_entity_and_comparator[
-                (
-                    instance_hash,
-                    sample_id,
-                    left_entity_id,
-                    right_entity_id,
-                )
-            ] += 1
-        else:
-            wins_by_sample_entity_and_comparator[
-                (
-                    instance_hash,
-                    sample_id,
-                    right_entity_id,
-                    left_entity_id,
-                )
-            ] += 1
-
-        debug_preference = {
-            "sample_id": preference["sample_id"],
-            "left_entity_id": preference["left_entity_id"],
-            "left_entity_name": preference["left_entity_name"],
-            "right_entity_id": preference["right_entity_id"],
-            "right_entity_name": preference["right_entity_name"],
-            "preferred_entity_id": preference["preferred_entity_id"],
-            "preferred_entity_name": preference["preferred_entity_name"],
-            "non_preferred_entity_id": preference["non_preferred_entity_id"],
-            "non_preferred_entity_name": preference["non_preferred_entity_name"],
-            "raw_response": preference["raw_response"],
-        }
-
-        preferences_by_instance_and_entity[
-            (preference["assay_instance_hash"], preference["left_entity_id"])
-        ].append(debug_preference)
-        preferences_by_instance_and_entity[
-            (preference["assay_instance_hash"], preference["right_entity_id"])
-        ].append(debug_preference)
-
     rows = []
-    for assay_instance in assay_instances:
-        instance_hash = assay_instance["instance_hash"]
-        comparison_set_id = assay_instance["comparison_set_id"]
-        comparison_set_name = assay_instance["comparison_set_name"]
 
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=comparison_set_id,
+    for preference in sorted(
+        preferences,
+        key=lambda row: (
+            row["comparison_set_id"],
+            row["assay_instance_hash"],
+            row["sample_number"],
+            row["left_entity_id"],
+            row["right_entity_id"],
+        ),
+    ):
+        rows.append(
+            {
+                "assay": preference["assay"],
+                "assay_instance_hash": preference["assay_instance_hash"],
+                "sample_number": preference["sample_number"],
+                "model": preference["model"],
+                "comparison_set_id": preference["comparison_set_id"],
+                "comparison_set_name": preference["comparison_set_name"],
+                "entity_id": preference["left_entity_id"],
+                "entity_name": preference["left_entity_name"],
+                "debug_json": _build_debug_json(preference),
+                "measurements": _build_measurements(preference),
+            }
         )
 
-        for entity in entities:
-            entity_id = entity["entity_id"]
-
-            win_rate_values = []
-            for sample_id in range(ctx.cfg.num_samples_per_instance):
-                wins = wins_by_sample_and_entity.get(
-                    (
-                        instance_hash,
-                        sample_id,
-                        entity_id,
-                    ),
-                    0,
-                )
-                trials = trials_by_sample_and_entity.get(
-                    (
-                        instance_hash,
-                        sample_id,
-                        entity_id,
-                    ),
-                    0,
-                )
-
-                win_rate_values.append(
-                    float(wins / trials)
-                    if trials > 0
-                    else 0.0
-                )
-
-            result = build_estimand_result("win_rate", win_rate_values)
-
-            sample_pairwise_win_rates: dict[str, list[float]] = {}
-
-            for comparator in entities:
-                comparator_id = comparator["entity_id"]
-
-                if comparator_id == entity_id:
-                    continue
-
-                pairwise_win_rate_values = []
-                for sample_id in range(ctx.cfg.num_samples_per_instance):
-                    wins = wins_by_sample_entity_and_comparator.get(
-                        (
-                            instance_hash,
-                            sample_id,
-                            entity_id,
-                            comparator_id,
-                        ),
-                        0,
-                    )
-                    trials = trials_by_sample_entity_and_comparator.get(
-                        (
-                            instance_hash,
-                            sample_id,
-                            entity_id,
-                            comparator_id,
-                        ),
-                        0,
-                    )
-
-                    pairwise_win_rate_values.append(
-                        float(wins / trials)
-                        if trials > 0
-                        else 0.0
-                    )
-
-                sample_pairwise_win_rates[comparator_id] = pairwise_win_rate_values
-                result += (
-                    build_estimand_result(
-                        f"p_beats:{comparator_id}",
-                        pairwise_win_rate_values,
-                    )
-                )
-
-            rows.append(
-                {
-                    "assay": ctx.cfg.assay,
-                    "assay_instance_hash": instance_hash,
-                    "model": ctx.cfg.model,
-                    "comparison_set_id": comparison_set_id,
-                    "comparison_set_name": comparison_set_name,
-                    "entity_id": entity["entity_id"],
-                    "entity_name": entity["entity_name"],
-                    "result": result,
-                    "debug_json": _build_debug_json(
-                        entity=entity,
-                        num_samples_per_instance=ctx.cfg.num_samples_per_instance,
-                        sample_win_rates=win_rate_values,
-                        sample_pairwise_win_rates=sample_pairwise_win_rates,
-                        preferences=preferences_by_instance_and_entity.get(
-                            (instance_hash, entity["entity_id"]),
-                            [],
-                        ),
-                    ),
-                }
-            )
-
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
-    ctx.exp.log_metric("entities_scored", len(rows))
+    ctx.exp.log_metric("pairwise_samples_scored", len(rows))
     ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
