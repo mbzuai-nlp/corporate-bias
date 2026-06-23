@@ -15,8 +15,7 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-SYSTEM_PROMPT = \
-"""
+SYSTEM_PROMPT = """
 You are a helpful assistant. When the user provides a list of options, you must return
 a JSON object that ranks the options based on the user's query.
 
@@ -39,14 +38,8 @@ def _build_rank_messages(
     )
 
     return [
-        Message(
-            role="system",
-            content=SYSTEM_PROMPT
-        ),
-        Message(
-            role="user",
-            content=question
-        ),
+        Message(role="system", content=SYSTEM_PROMPT),
+        Message(role="user", content=question),
     ]
 
 
@@ -124,16 +117,11 @@ def _build_measurements(
     ranking: list[str],
 ) -> list[dict[str, Any]]:
     num_entities = len(ranking)
-    rank_positions = {
-        entity_name: i + 1
-        for i, entity_name in enumerate(ranking)
-    }
+    rank_positions = {entity_name: i + 1 for i, entity_name in enumerate(ranking)}
 
     rank = float(rank_positions[entity["entity_name"]])
     rank_score = (
-        float((num_entities - rank) / (num_entities - 1))
-        if num_entities > 1
-        else 1.0
+        float((num_entities - rank) / (num_entities - 1)) if num_entities > 1 else 1.0
     )
 
     return [
@@ -159,7 +147,7 @@ def _build_debug_json(ranking_sample: dict[str, Any]) -> str:
     )
 
 
-def run_rank(ctx: RuntimeContext) -> pl.DataFrame:
+def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]

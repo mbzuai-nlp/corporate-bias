@@ -4,36 +4,14 @@ vars:
 - log-fn: exec.log
 
 stages:
-  create-database:
-    cmd: >
-      uv run python -m pipelines.create_database
-      --authored=${data}/authored
-      --db=${data}/db
-    deps:
-    - ${data}/authored/claim.json
-    - ${data}/authored/comparison_set.json
-    - ${data}/authored/entity.json
-    outs:
-    - ${data}/db/claim.parquet:
-        cache: false
-    - ${data}/db/comparison_set.parquet:
-        cache: false
-    - ${data}/db/entity.parquet:
-        cache: false
-
   run-assay:
     matrix:
       assay:
-    #   - name: head-to-head
-    #     samples-per-instance: 3
-    #   - name: rank
-    #     samples-per-instance: 3
-    #   - name: consideration-set
-    #     samples-per-instance: 3
-    #   - name: describe-sentiment
-    #     samples-per-instance: 3
-      - name: forced-selection
-        samples-per-instance: 3
+      - pairwise-comparative-preference
+    #   - listwise-ordinal-preference
+    #   - unaided-recommendation
+    #   - open-ended-characterisation
+    #   - single-entity-endorsement
       model:
       - gpt-oss-120b
       - gpt-5.4
@@ -61,22 +39,18 @@ stages:
     - stage-name: run-assay
     cmd: >
       bash -lc "set -euo pipefail;
-      mkdir -p ${data}/${stage-name}/${item.assay.name}/${item.model};
+      mkdir -p ${data}/${stage-name}/${item.assay}/${item.model};
       uv run python -m pipelines.run_assay
-      --assay=${item.assay.name}
+      --assay=${item.assay}
       --model=${item.model}
       --db=${data}/db
-      --save-path=${data}/assays/${item.assay.name}/${item.model}.parquet
-      --exp=${data}/${stage-name}/${item.assay.name}/${item.model}/exp
-      --samples-per-instance=${item.assay.samples-per-instance}
-      2>&1 | tee ${data}/${stage-name}/${item.assay.name}/${item.model}/${log-fn}"
+      --save-path=${data}/assays/${item.assay}/${item.model}.parquet
+      --exp=${data}/${stage-name}/${item.assay}/${item.model}/exp
+      2>&1 | tee ${data}/${stage-name}/${item.assay}/${item.model}/${log-fn}"
     deps:
-    - ${data}/db/claim.parquet
-    - ${data}/db/comparison_set.parquet
-    - ${data}/db/comparison_set_assay_instance.parquet
-    - ${data}/db/entity.parquet
+    - ${data}/db
     outs:
-    - ${data}/assays/${item.assay.name}/${item.model}.parquet:
+    - ${data}/assays/${item.assay}/${item.model}.parquet:
         cache: false
 
   model-effects:
@@ -88,7 +62,7 @@ stages:
     - ${data}/assays
     outs:
     - ${data}/assay_model_effects.parquet
-    
+
 metrics:
 - data/run-assay/describe-sentiment/gpt-oss-120b/exp/metrics.json
 - data/run-assay/describe-sentiment/gpt-5.4/exp/metrics.json

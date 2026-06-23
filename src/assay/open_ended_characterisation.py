@@ -228,7 +228,7 @@ def _build_debug_json(
     )
 
 
-def run_consideration_set(ctx: RuntimeContext) -> pl.DataFrame:
+def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]

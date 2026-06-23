@@ -1,0 +1,19 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+2026-06-23 13:35:08,460 [INFO] root: Running assay=pairwise-comparative-preference model=gpt-oss-120b 
+['comparison_set', 'left_entity', 'right_entity', 'prompt_template', 'query']
+[String, String, String, String, String]
+['My son has asked for a console for his birthday, should I buy him a PlayStation or Xbox?', "I can't decide between buying a PlayStation or Xbox! Which do you reckon?"]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 90, in <module>
+    main()
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 86, in main
+    assay_model(ctx)
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 59, in assay_model
+    save_assay_df(assay_df, ctx.cfg.save)
+  File "/home/harry/code/corporate-bias/src/assay/common.py", line 38, in save_assay_df
+    df.write_parquet(path)
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'write_parquet'

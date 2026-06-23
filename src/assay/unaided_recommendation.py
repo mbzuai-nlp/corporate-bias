@@ -122,8 +122,7 @@ def _add_stance_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any
 
             description["stance_score_by_label"] = score_by_label
             description["stance_score"] = sum(
-                label_to_value[label] * score
-                for label, score in score_by_label.items()
+                label_to_value[label] * score for label, score in score_by_label.items()
             )
 
     return descriptions
@@ -158,8 +157,7 @@ def _add_ad_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
         for description, row_probs in zip(batch, probs, strict=True):
             score_by_label = {
-                ad_labels[i]: float(row_probs[i].item())
-                for i in range(len(ad_labels))
+                ad_labels[i]: float(row_probs[i].item()) for i in range(len(ad_labels))
             }
 
             description["ad_likelihood"] = score_by_label[ad_positive_label]
@@ -167,7 +165,9 @@ def _add_ad_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return descriptions
 
 
-def _build_description_messages(entity_name: str, instance: dict[str, Any]) -> list[Message]:
+def _build_description_messages(
+    entity_name: str, instance: dict[str, Any]
+) -> list[Message]:
     question = instance["question_template"].format(entity=entity_name)
 
     return [
@@ -246,7 +246,7 @@ def _build_debug_json(sample: dict[str, Any]) -> str:
     )
 
 
-def run_describe_sentiment(ctx: RuntimeContext) -> pl.DataFrame:
+def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     comparison_set_df = ctx.db["comparison_set"]
     comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
     entity_df = ctx.db["entity"]

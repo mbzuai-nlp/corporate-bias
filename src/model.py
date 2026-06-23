@@ -63,7 +63,7 @@ Model = Literal[
     "qwen3.5-flash-02-23",
     "nemotron-3-super-120b-a12b",
     "phi-4",
-    "hy3-preview"
+    "hy3-preview",
 ]
 
 
@@ -521,7 +521,6 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
         reasoning={"effort": "none"},
     ),
 }
-raise Exception("MAKE SURE TO FIX PROVIDERS")
 
 # === PUBLIC FUNCTIONS ===
 
@@ -537,10 +536,7 @@ raise Exception("MAKE SURE TO FIX PROVIDERS")
     jitter=None,
 )
 def invoke_model(
-    model: Model, 
-    messages: Sequence[Message], 
-    use_cache: bool,
-    **kwargs: Any
+    model: Model, messages: Sequence[Message], use_cache: bool, **kwargs: Any
 ) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]
@@ -565,16 +561,17 @@ def invoke_model(
             messages=messages,
             kwargs=effective_kwargs,
         )
-        
+
         cached = _cache_get_obj(cache_key)
         if cached is not None:
             try:
                 _validate_structured_output(cached.text, response_format)
             except InvalidModelOutputError as e:
                 raise InvalidModelOutputError(
-                    f"Tried returning invalid result from cache.") from e
+                    f"Tried returning invalid result from cache."
+                ) from e
             return cached
-        
+
     output = model_delegate(messages, **kwargs)
 
     # Validate against the original, stronger contract.
