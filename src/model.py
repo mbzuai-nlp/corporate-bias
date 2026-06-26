@@ -2,7 +2,6 @@ from copy import deepcopy
 from functools import partial
 from typing import Literal, Mapping, Sequence, Any, Protocol, Callable
 from openrouter import OpenRouter, errors as or_errors
-from openai import OpenAI
 import os
 from dataclasses import dataclass
 import hashlib
@@ -41,30 +40,6 @@ class InvalidModelOutputError(RuntimeError):
 
 class NonFatalModelInvocationError(RuntimeError):
     pass
-
-
-Model = Literal[
-    "gpt-oss-120b",
-    "gpt-5.4",
-    "gpt-4o-mini",
-    "claude-sonnet-4.6",
-    "claude-opus-4.6",
-    "gemma-4-31B-it",
-    "gemini-2.5-flash",
-    "gemini-2.5-pro",
-    "grok-4.1-fast",
-    "grok-4",
-    "llama-3.1-8b-instruct",
-    "llama-3.1-70b-instruct",
-    "mistral-nemo",
-    "mistral-small-2603",
-    "deepseek-v3.2",
-    "qwen3-235b-a22b-2507",
-    "qwen3.5-flash-02-23",
-    "nemotron-3-super-120b-a12b",
-    "phi-4",
-    "hy3-preview",
-]
 
 
 RETRYABLE_NETWORK_ERRORS = (
@@ -286,6 +261,11 @@ def canonicalise_openrouter_json_schema(
     model_name: str,
     response_format: dict[str, Any] | None,
 ) -> dict[str, Any] | None:
+    """
+    Return the provider-facing response_format for an OpenRouter request. Some
+    OpenRouter providers/models reject otherwise-valid JSON Schema keywords
+    even though we still want to validate against the original schema locally.
+    """
     if response_format is None:
         return None
 
@@ -375,7 +355,6 @@ def _invoke_openrouter_model(
         request_kwargs["response_format"] = request_response_format
 
     request_kwargs = _disable_web_plugin(request_kwargs)
-    request_kwargs.pop("seed", None)
 
     try:
         response = client.chat.send(
@@ -398,7 +377,7 @@ def _invoke_openrouter_model(
 # === MODEL DELEGATES ===
 
 
-MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
+MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     "gpt-oss-120b": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
@@ -536,7 +515,7 @@ MODEL_DELEGATES: Mapping[Model, ModelDelegate] = {
     jitter=None,
 )
 def invoke_model(
-    model: Model, messages: Sequence[Message], use_cache: bool, **kwargs: Any
+    model: str, messages: Sequence[Message], use_cache: bool, **kwargs: Any
 ) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]

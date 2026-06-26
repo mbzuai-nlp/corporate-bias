@@ -2,6 +2,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import polars as pl
 from tqdm.auto import tqdm
+from typing import Tuple, Any
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
@@ -55,7 +56,7 @@ def _construct_queries(
 
 def _get_preferred_entity(
     model: str, query: str, left_entity: str, right_entity: str
-) -> str:
+) -> Tuple[str, Any]:
     output = invoke_model(
         model=model,
         messages=[
@@ -95,7 +96,7 @@ def _get_preferred_entity(
             f"Raw response: {output.text}"
         )
 
-    return preferred_entity_name
+    return preferred_entity_name, output.raw
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -106,6 +107,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     query_rows = list(queries_df.iter_rows(named=True))
     preferred_entities = [None] * len(query_rows)
+    raw_responses = [None] * len(query_rows)
 
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
@@ -125,10 +127,42 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             desc="Queries",
         ):
             i = future_to_idx[future]
-            preferred_entities[i] = future.result()
+            result = future.result()
+            preferred_entities[i] = result[0]
+            raw_responses[i] = result[1]
 
-    queries_df = queries_df.with_columns(
-        pl.Series("preferred_entity", preferred_entities)
+    measurements = [
+        [
+            {
+                "measurand": f"beats:{row['right_entity']}",
+                "value": float(preferred_entities[i] == row["left_entity"]),
+            }
+        ]
+        for i, row in enumerate(query_rows)
+    ]
+
+    results_df = queries_df.with_columns(
+        pl.lit(ctx.cfg.assay).alias("assay"),
+        pl.lit(ctx.cfg.model).alias("model"),
+        pl.col("left_entity").alias("entity"),
+        pl.Series(
+            "debug_json",
+            [
+                json.dumps({"raw_response": r}, ensure_ascii=False, default=str)
+                for r in raw_responses
+            ],
+        ),
+        pl.Series("measurements", measurements),
+    ).select(
+        "assay",
+        "prompt_template",
+        "model",
+        "comparison_set",
+        "entity",
+        "debug_json",
+        "measurements",
     )
 
-    ...
+    ctx.exp.log_metric("total_queries run", queries_df.height)
+
+    return results_df

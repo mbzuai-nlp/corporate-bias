@@ -37,7 +37,7 @@ MODEL_SCHEMA = pl.Struct(
 
 ASSAY_SCHEMA = {
     "assay": pl.String,  # key
-    "prompt_template": pl.UInt64,  # key
+    "prompt_template": pl.String,  # key
     "model": pl.String,  # key
     "comparison_set": pl.String,  # key
     "entity": pl.String,  # key
