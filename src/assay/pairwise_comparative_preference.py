@@ -1,12 +1,10 @@
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Mapping
-from collections import namedtuple
 import polars as pl
 from tqdm.auto import tqdm
 
 from src.assay.common import RuntimeContext
-from src.data import Db, ASSAY_SCHEMA
+from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
