@@ -1,0 +1,42 @@
+/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/dvclive/monitor_system.py:11: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  from pynvml import (
+2026-06-26 13:33:14,485 [INFO] root: Running assay=pairwise-comparative-preference model=grok-4.2 
+Queries:   0%|          | 0/18 [00:00<?, ?it/s]Queries:   0%|          | 0/18 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/harry/code/corporate-bias/src/model.py", line 521, in invoke_model
+    model_delegate = MODEL_DELEGATES[model]
+                     ~~~~~~~~~~~~~~~^^^^^^^
+KeyError: 'grok-4.2'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 88, in <module>
+    main()
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 84, in main
+    assay_model(ctx)
+  File "/home/harry/code/corporate-bias/pipelines/run_assay.py", line 60, in assay_model
+    assay_df = assay_delegate(ctx)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/src/assay/pairwise_comparative_preference.py", line 130, in run_assay
+    result = future.result()
+             ^^^^^^^^^^^^^^^
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/harry/miniforge3/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/src/assay/pairwise_comparative_preference.py", line 60, in _get_preferred_entity
+    output = invoke_model(
+             ^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/.venv/lib/python3.12/site-packages/backoff/_sync.py", line 105, in retry
+    ret = target(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/harry/code/corporate-bias/src/model.py", line 523, in invoke_model
+    raise ValueError(f"Unsupported model: {model}.") from e
+ValueError: Unsupported model: grok-4.2.

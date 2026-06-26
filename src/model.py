@@ -426,17 +426,17 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "gemini-2.5-pro",
         reasoning={"effort": "minimal"},
     ),
-    "grok-4.1-fast": partial(
+    "grok-4.20": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "x-ai/grok-4.1-fast",
+        "x-ai/grok-4.20",
         reasoning={"effort": "none"},
     ),
-    "grok-4": partial(
+    "grok-4.3": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "x-ai/grok-4",
-        reasoning={"effort": "minimal"},
+        "x-ai/grok-4.3",
+        reasoning={"effort": "none"},
     ),
     "llama-3.1-8b-instruct": partial(
         _invoke_openrouter_model,
@@ -497,6 +497,18 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "tencent/hy3-preview",
+        reasoning={"effort": "none"},
+    ),
+    "mimo-v2.5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "xiaomi/mimo-v2.5",
+        reasoning={"effort": "none"},
+    ),
+    "glm-5.2": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "z-ai/glm-5.2",
         reasoning={"effort": "none"},
     ),
 }
