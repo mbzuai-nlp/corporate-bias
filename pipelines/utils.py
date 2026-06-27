@@ -1,5 +1,7 @@
 import logging
 import warnings
+import numpy as np
+import random
 
 
 def configure_logging():
@@ -16,3 +18,8 @@ def silence_superfluous_warnings():
         message="The pynvml package is deprecated. Please install nvidia-ml-py*",
         category=FutureWarning,
     )
+
+
+def set_seed(seed: int = 99):
+    np.random.seed(seed)
+    random.seed(seed)

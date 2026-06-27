@@ -1,17 +1,12 @@
 import json
 import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any
-
+from typing import Any, Tuple
 import polars as pl
 from tqdm.auto import tqdm
 
-from src.assay.common import (
-    RuntimeContext,
-    build_entity_lookup,
-    get_comparison_set_entities,
-)
-from src.data.model import ASSAY_SCHEMA
+from src.assay.common import RuntimeContext
+from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
@@ -34,13 +29,31 @@ def _construct_queries(
 ) -> pl.DataFrame:
     entities_agg = entity_df.group_by("comparison_set").agg(pl.col("entity"))
 
+    # For each comparison_set, sample n permutations (n = number of entities)
+    sampled_queries = []
+    for row in entities_agg.iter_rows(named=True):
+        comparison_set = row["comparison_set"]
+        entities = row["entity"]
+        n = len(entities)
+
+        # Sample n random permutations (with replacement)
+        for _ in range(n):
+            shuffled_entities = random.sample(entities, k=len(entities))
+            sampled_queries.append({
+                "comparison_set": comparison_set,
+                "entities": shuffled_entities,
+            })
+
+    sampled_df = pl.DataFrame(sampled_queries)
+
     queries_df = (
-        prompt_template_df.join(entities_agg, on="comparison_set", how="inner")
+        sampled_df.join(prompt_template_df, on="comparison_set", how="inner")
         .with_columns(
-            # Format the query by replacing {entities} with the comma-separated list
             pl.col("prompt_template")
             .str.replace_all(
-                "{entities}", pl.col("entity").list.join(", "), literal=True
+                "{entities}",
+                pl.col("entities").list.join(", "),
+                literal=True,
             )
             .alias("query")
         )
@@ -48,10 +61,64 @@ def _construct_queries(
             "comparison_set",
             "prompt_template",
             "query",
+            "entities"
         )
     )
 
     return queries_df
+
+
+def _get_ranking(
+    model: str, 
+    query: str, 
+    entities: list[str]
+) -> Tuple[list[str], Any]:
+    output = invoke_model(
+        model=model,
+        messages=[
+            Message(role="system", content=SYSTEM_PROMPT),
+            Message(role="user", content=query),
+        ],
+        use_cache=True,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "rank_entities",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "ranking": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": entities,
+                            },
+                            "uniqueItems": True,
+                            "minItems": len(entities),
+                            "maxItems": len(entities),
+                        },
+                    },
+                    "required": ["ranking"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+    )
+
+    parsed = json.loads(output.text)
+    ranking = parsed["ranking"]
+
+    if (
+        len(ranking) != len(entities)
+        or len(set(ranking)) != len(entities)
+        or set(ranking) != set(entities)
+    ):
+        raise ValueError(
+            f"Invalid ranking returned: {ranking}"
+        )
+
+    return ranking, output.raw
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -63,3 +130,57 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     query_rows = list(queries_df.iter_rows(named=True))
     rankings = [None] * len(query_rows)
     raw_responses = [None] * len(query_rows)
+
+    with ThreadPoolExecutor(max_workers=128) as executor:
+        future_to_idx = {
+            executor.submit(
+                _get_ranking,
+                model=ctx.cfg.model,
+                query=row["query"],
+                entities=row["entities"],
+            ): i
+            for i, row in enumerate(query_rows)
+        }
+
+        for future in tqdm(
+            as_completed(future_to_idx),
+            total=len(future_to_idx),
+            desc="Queries",
+        ):
+            i = future_to_idx[future]
+            result = future.result()
+            rankings[i] = result[0]
+            raw_responses[i] = result[1]
+
+    measurements = [
+        [
+            {
+                "measurand": f"rank:{entity}",
+                "value": float(rank),
+            }
+            for rank, entity in enumerate(rankings[i], start=1)
+        ]
+        for i, row in enumerate(query_rows)
+    ]
+
+    results_df = queries_df.with_columns(
+        pl.lit(ctx.cfg.assay).alias("assay"),
+        pl.lit(ctx.cfg.model).alias("model"),
+        pl.Series(
+            "debug_json", 
+            [
+                json.dumps({"raw_response": r}, ensure_ascii=False, default=str) 
+                for r in raw_responses
+            ]
+        ),
+        pl.Series("measurements", measurements),
+    ).select(
+        "assay",
+        "prompt_template",
+        "model",
+        "comparison_set",
+        "debug_json",
+        "measurements",
+    )
+
+    return results_df

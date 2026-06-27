@@ -7,11 +7,12 @@ from dotenv import load_dotenv
 from dvclive import Live
 import polars as pl
 
-from pipelines.utils import configure_logging, silence_superfluous_warnings
+from pipelines.utils import configure_logging, silence_superfluous_warnings, set_seed
 from src.data import load_db
 from src.assay.common import Config, RuntimeContext, AssayDelegate, save_assay_df
 
 
+# set_seed()
 configure_logging()
 silence_superfluous_warnings()
 load_dotenv()

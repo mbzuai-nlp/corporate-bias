@@ -174,7 +174,7 @@ def _extract_text_from_model_output(response: Any) -> str:
 
     if not isinstance(content, str):
         raise InvalidModelOutputError(
-            f"Expected text content to be str, got {type(content).__name__}: {content!r}"
+            f"Expected text content to be str, got {response}"
         )
 
     if not content.strip():
