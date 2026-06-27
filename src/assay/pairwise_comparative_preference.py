@@ -134,7 +134,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     measurements = [
         [
             {
-                "measurand": f"beats:{row['right_entity']}",
+                "measurand": f"{row['left_entity']}:beats:{row['right_entity']}",
                 "value": float(preferred_entities[i] == row["left_entity"]),
             }
         ]
@@ -144,7 +144,6 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
-        pl.col("left_entity").alias("entity"),
         pl.Series(
             "debug_json",
             [
@@ -158,7 +157,6 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "prompt_template",
         "model",
         "comparison_set",
-        "entity",
         "debug_json",
         "measurements",
     )

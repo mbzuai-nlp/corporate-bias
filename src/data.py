@@ -40,7 +40,6 @@ ASSAY_SCHEMA = {
     "prompt_template": pl.String,  # key
     "model": pl.String,  # key
     "comparison_set": pl.String,  # key
-    "entity": pl.String,  # key
     "debug_json": pl.String,
     "measurements": pl.List(
         pl.Struct(
