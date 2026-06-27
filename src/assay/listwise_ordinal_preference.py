@@ -183,4 +183,6 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "measurements",
     )
 
+    ctx.exp.log_metric("total_queries run", queries_df.height)
+
     return results_df
