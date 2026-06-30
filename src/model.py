@@ -368,7 +368,11 @@ def _invoke_openrouter_model(
 
     output = ModelOutput(
         text=_extract_text_from_model_output(response),
-        raw=response,
+        raw={
+            "input_messages": messages,
+            "request_kwargs": request_kwargs,
+            "response": response
+        }
     )
 
     return output

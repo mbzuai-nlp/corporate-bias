@@ -24,7 +24,7 @@ FUNCTION_NAME = "run_assay"
 ASSAY_MODULES: Mapping[str, tuple[str, str]] = {
     "pairwise-comparative-preference": "src.assay.pairwise_comparative_preference",
     "listwise-ordinal-preference": "src.assay.listwise_ordinal_preference",
-    "unaided-recommendation": "src.assay.unaided_recommendation",
+    "unaided-endorsement": "src.assay.unaided_endorsement",
     "open-ended-characterisation": "src.assay.open_ended_characterisation",
     "single-entity-endorsement": "src.assay.single_entity_endorsement",
 }

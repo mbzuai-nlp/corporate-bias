@@ -3588,8 +3588,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-oss-120b.parquet
       hash: md5
-      md5: 1931a810c136131e61bb38d684524612
-      size: 16377
+      md5: 794712a007f52caa0514b86883d3cdd9
+      size: 16274
   run-assay@pairwise-comparative-preference-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-5.4;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -4033,8 +4033,8 @@ stages:
     outs:
     - path: data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
       hash: md5
-      md5: 7fd3e8004bcd7c3d76adb9010403d6e0
-      size: 14844
+      md5: c07827a35edfab9f66c60e46327488cc
+      size: 14139
   run-assay@listwise-ordinal-preference-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-5.4;
       uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-5.4
@@ -4315,3 +4315,20 @@ stages:
       hash: md5
       md5: 3b2ea902f6944791d311f9033f0cc3fa
       size: 11489
+  run-assay@unaided-endorsement-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/unaided-endorsement/gpt-oss-120b.parquet
+      --exp=data/run-assay/unaided-endorsement/gpt-oss-120b/exp 2>&1 | tee data/run-assay/unaided-endorsement/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
+      size: 15773
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gpt-oss-120b.parquet
+      hash: md5
+      md5: 0f08af62007032461b563663efabff45
+      size: 715

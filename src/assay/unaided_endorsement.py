@@ -34,9 +34,14 @@ You must use this scoring scale:
 def _construct_queries(
     entity_df: pl.DataFrame, prompt_template_df: pl.DataFrame
 ) -> pl.DataFrame:
+    entity_df_agg = (
+        entity_df
+        .group_by("comparison_set")
+        .agg(pl.col("entity").alias("entities"))
+    )
     return (
         prompt_template_df.with_columns(pl.col("prompt_template").alias("query"))
-        .join(entity_df, how="inner", on="comparison_set")
+        .join(entity_df_agg, how="inner", on="comparison_set")
         .select("comparison_set", "prompt_template", "entities", "query")
     )
 
@@ -158,7 +163,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             raw_responses[i] = result[1]
 
     # Judge model responses
-    judge_tasks = it.product(zip(endorsement_blurbs, query_rows), _JUDGE_MODELS)
+    judge_tasks = list(it.product(zip(endorsement_blurbs, query_rows), _JUDGE_MODELS))
     endorsements = [None] * len(judge_tasks)
     raw_judge_responses = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
