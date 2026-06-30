@@ -35,20 +35,13 @@ MODEL_SCHEMA = pl.Struct(
 )
 
 
+# Each row should correspond to one invocation of the model
 ASSAY_SCHEMA = {
-    "assay": pl.String,  # key
-    "prompt_template": pl.String,  # key
-    "model": pl.String,  # key
-    "comparison_set": pl.String,  # key
+    "assay": pl.String,
+    "prompt_template": pl.String,
+    "model": pl.String,
+    "comparison_set": pl.String,
     "debug_json": pl.String,
-    "measurements": pl.List(
-        pl.Struct(
-            {
-                "measurand": pl.Utf8,
-                "value": pl.Float64,
-            }
-        )
-    ),
 }
 
 

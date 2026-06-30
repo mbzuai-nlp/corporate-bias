@@ -39,10 +39,12 @@ def _construct_queries(
         # Sample n random permutations (with replacement)
         for _ in range(n):
             shuffled_entities = random.sample(entities, k=len(entities))
-            sampled_queries.append({
-                "comparison_set": comparison_set,
-                "entities": shuffled_entities,
-            })
+            sampled_queries.append(
+                {
+                    "comparison_set": comparison_set,
+                    "entities": shuffled_entities,
+                }
+            )
 
     sampled_df = pl.DataFrame(sampled_queries)
 
@@ -57,22 +59,13 @@ def _construct_queries(
             )
             .alias("query")
         )
-        .select(
-            "comparison_set",
-            "prompt_template",
-            "query",
-            "entities"
-        )
+        .select("comparison_set", "prompt_template", "query", "entities")
     )
 
     return queries_df
 
 
-def _get_ranking(
-    model: str, 
-    query: str, 
-    entities: list[str]
-) -> Tuple[list[str], Any]:
+def _get_ranking(model: str, query: str, entities: list[str]) -> Tuple[list[str], Any]:
     output = invoke_model(
         model=model,
         messages=[
@@ -114,9 +107,7 @@ def _get_ranking(
         or len(set(ranking)) != len(entities)
         or set(ranking) != set(entities)
     ):
-        raise ValueError(
-            f"Invalid ranking returned: {ranking}"
-        )
+        raise ValueError(f"Invalid ranking returned: {ranking}")
 
     return ranking, output.raw
 
@@ -126,11 +117,11 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
-
     query_rows = list(queries_df.iter_rows(named=True))
+
+    # Query model
     rankings = [None] * len(query_rows)
     raw_responses = [None] * len(query_rows)
-
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -152,37 +143,28 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             rankings[i] = result[0]
             raw_responses[i] = result[1]
 
-    measurements = [
-        [
-            {
-                "measurand": f"rank:{entity}",
-                "value": float(rank),
-            }
-            for rank, entity in enumerate(rankings[i], start=1)
-        ]
-        for i, row in enumerate(query_rows)
-    ]
-
+    # Construct results
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
+        pl.Series("rankings", rankings),
         pl.Series(
-            "debug_json", 
+            "debug_json",
             [
-                json.dumps({"raw_response": r}, ensure_ascii=False, default=str) 
+                json.dumps({"raw_response": r}, ensure_ascii=False, default=str)
                 for r in raw_responses
-            ]
+            ],
         ),
-        pl.Series("measurements", measurements),
     ).select(
         "assay",
         "prompt_template",
         "model",
         "comparison_set",
+        "entities",
+        "rankings",
         "debug_json",
-        "measurements",
     )
 
-    ctx.exp.log_metric("total_queries run", queries_df.height)
+    ctx.exp.log_metric("total_queries_run", queries_df.height)
 
     return results_df

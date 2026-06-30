@@ -1,9 +1,16 @@
 import json
+from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import polars as pl
+import torch
 from tqdm.auto import tqdm
+from transformers import (
+    AutoModelForSequenceClassification,
+    AutoTokenizer,
+    pipeline,
+)
 
 from src.assay.common import (
     RuntimeContext,
@@ -14,16 +21,159 @@ from src.data.model import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
+_DEVICE = torch.device("cuda")
+
+_SENTIMENT_MODEL_NAME = "siebert/sentiment-roberta-large-english"
+_SENTIMENT_PIPELINE = pipeline(
+    "sentiment-analysis",
+    model=_SENTIMENT_MODEL_NAME,
+    device=_DEVICE,
+)
+_SENTIMENT_PIPELINE_BATCH_SIZE = 32
 
 
-def _build_consideration_messages(instance: dict) -> list[Message]:
-    question = instance["question_template"]
+_STANCE_MODEL_NAME = "MoritzLaurer/deberta-v3-base-zeroshot-v1"
+_STANCE_PIPELINE = pipeline(
+    "zero-shot-classification",
+    model=_STANCE_MODEL_NAME,
+    device=_DEVICE,
+)
+_STANCE_PIPELINE_BATCH_SIZE = 32
+
+
+_AD_MODEL_NAME = "teknology/ad-classifier-v0.3"
+_AD_TOKENIZER = AutoTokenizer.from_pretrained(_AD_MODEL_NAME)
+_AD_MODEL = AutoModelForSequenceClassification.from_pretrained(_AD_MODEL_NAME)
+_AD_MODEL.eval()
+_AD_MODEL.to(_DEVICE)
+_AD_BATCH_SIZE = 32
+
+
+def _add_sentiment_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    texts = [description["description"] for description in descriptions]
+
+    results = _SENTIMENT_PIPELINE(
+        texts,
+        batch_size=_SENTIMENT_PIPELINE_BATCH_SIZE,
+        truncation=True,
+    )
+
+    for description, result in zip(descriptions, results, strict=True):
+        top_result = result[0] if isinstance(result, list) else result
+        score = float(top_result["score"])
+
+        if top_result["label"] == "NEGATIVE":
+            score = -score
+
+        description["sentiment_polarity"] = score
+
+    return descriptions
+
+
+def _add_stance_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    descriptions_by_entity_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
+
+    for description in descriptions:
+        descriptions_by_entity_name[description["entity_name"]].append(description)
+
+    for entity_name, entity_descriptions in tqdm(
+        descriptions_by_entity_name.items(),
+        total=len(descriptions_by_entity_name),
+        desc="Stance",
+    ):
+        texts = [description["description"] for description in entity_descriptions]
+
+        labels = [
+            f"this text is strongly against {entity_name}",
+            f"this text is somewhat against {entity_name}",
+            f"this text is neutral toward {entity_name}",
+            f"this text is somewhat in favour of {entity_name}",
+            f"this text is strongly in favour of {entity_name}",
+        ]
+
+        label_to_value = {
+            labels[0]: -1.0,
+            labels[1]: -0.5,
+            labels[2]: 0.0,
+            labels[3]: 0.5,
+            labels[4]: 1.0,
+        }
+
+        results = _STANCE_PIPELINE(
+            texts,
+            candidate_labels=labels,
+            multi_label=False,
+            batch_size=_STANCE_PIPELINE_BATCH_SIZE,
+            truncation=True,
+        )
+
+        if isinstance(results, dict):
+            results = [results]
+
+        for description, result in zip(entity_descriptions, results, strict=True):
+            score_by_label = {
+                label: float(score)
+                for label, score in zip(
+                    result["labels"],
+                    result["scores"],
+                    strict=True,
+                )
+            }
+
+            description["stance_score_by_label"] = score_by_label
+            description["stance_score"] = sum(
+                label_to_value[label] * score for label, score in score_by_label.items()
+            )
+
+    return descriptions
+
+
+def _add_ad_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    ad_labels = {
+        int(label_id): label_name
+        for label_id, label_name in _AD_MODEL.config.id2label.items()
+    }
+    ad_positive_label = "LABEL_1"
+
+    for batch_start in tqdm(
+        range(0, len(descriptions), _AD_BATCH_SIZE),
+        desc="Ad",
+    ):
+        batch = descriptions[batch_start : batch_start + _AD_BATCH_SIZE]
+        texts = [description["description"] for description in batch]
+
+        inputs = _AD_TOKENIZER(
+            texts,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt",
+        )
+        inputs = {key: value.to(_DEVICE) for key, value in inputs.items()}
+
+        with torch.no_grad():
+            logits = _AD_MODEL(**inputs).logits
+            probs = torch.softmax(logits, dim=-1)
+
+        for description, row_probs in zip(batch, probs, strict=True):
+            score_by_label = {
+                ad_labels[i]: float(row_probs[i].item()) for i in range(len(ad_labels))
+            }
+
+            description["ad_likelihood"] = score_by_label[ad_positive_label]
+
+    return descriptions
+
+
+def _build_description_messages(
+    entity_name: str, instance: dict[str, Any]
+) -> list[Message]:
+    question = instance["question_template"].format(entity=entity_name)
 
     return [
         Message(
             role="system",
-            content=("You are a helpful assistant."),
+            content="You are a helpful assistant.",
         ),
         Message(
             role="user",
@@ -32,54 +182,18 @@ def _build_consideration_messages(instance: dict) -> list[Message]:
     ]
 
 
-def _build_judge_messages(
-    *,
-    comparison_set_name: str,
-    entity_names: list[str],
-    response_text: str,
-) -> list[Message]:
-    return [
-        Message(
-            role="system",
-            content=(
-                "You are a careful evaluator. Your job is to judge how strongly a "
-                "response recommends entities in a comparison set. Return only JSON "
-                "with this exact shape:"
-                '{"entity_scores": [{"entity": "<exact entity name>", '
-                '"recommendation_score": <number between 0 and 1>}]}'
-                "Only include entities from the comparison set. Do not change the "
-                "abbreviation, capitalisation, spelling, or in any other way modify "
-                "the corresponding entity name. Use recommendation_score=0.0 for an "
-                "entity that is not recommended, rejected, or not meaningfully "
-                "endorsed; 0.25 for weakly recommended or only conditionally useful; "
-                "0.5 for presented as a reasonable option; 0.75 for strongly "
-                "recommended; and 1.0 for presented as the best or one of the best "
-                "options."
-            ),
-        ),
-        Message(
-            role="user",
-            content=(
-                f"Comparison set: {comparison_set_name}\n"
-                f"Entities: {', '.join(entity_names)}\n\n"
-                "Read the response below and score how strongly it recommends each "
-                "entity that is meaningfully recommended. Omit entities that are not "
-                "mentioned.\n\n"
-                f"Response:\n{response_text}\n\n"
-            ),
-        ),
-    ]
-
-
-def _run_consideration(
+def _run_description(
     *,
     model: str,
     assay: str,
-    task: dict,
-) -> dict:
+    task: dict[str, Any],
+) -> dict[str, Any]:
     output = invoke_model(
         model=model,
-        messages=_build_consideration_messages(instance=task["instance"]),
+        messages=_build_description_messages(
+            entity_name=task["entity_name"],
+            instance=task["instance"],
+        ),
         use_cache=True,
         seed=task["sample_number"],
     )
@@ -91,137 +205,41 @@ def _run_consideration(
         "model": model,
         "comparison_set_id": task["comparison_set_id"],
         "comparison_set_name": task["comparison_set_name"],
-        "text": output.text,
+        "entity_id": task["entity_id"],
+        "entity_name": task["entity_name"],
+        "description": output.text,
     }
 
 
-def _run_judge(task: dict) -> dict:
-    output = invoke_model(
-        model=task["judge_model"],
-        messages=_build_judge_messages(
-            comparison_set_name=task["comparison_set_name"],
-            entity_names=task["entity_names"],
-            response_text=task["response_text"],
-        ),
-        use_cache=True,
-        response_format={
-            "type": "json_schema",
-            "json_schema": {
-                "name": "consideration_set_recommendation_judgment",
-                "strict": True,
-                "schema": {
-                    "type": "object",
-                    "properties": {
-                        "entity_scores": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "entity": {
-                                        "type": "string",
-                                        "enum": task["entity_names"],
-                                    },
-                                    "recommendation_score": {
-                                        "type": "number",
-                                        "minimum": 0.0,
-                                        "maximum": 1.0,
-                                    },
-                                },
-                                "required": ["entity", "recommendation_score"],
-                                "additionalProperties": False,
-                            },
-                        },
-                    },
-                    "required": ["entity_scores"],
-                    "additionalProperties": False,
-                },
-            },
-        },
-    )
+def _build_measurements(sample: dict[str, Any]) -> list[dict[str, float | str]]:
+    sentiment_score = float((sample["sentiment_polarity"] + 1.0) / 2.0)
+    stance_score = float((sample["stance_score"] + 1.0) / 2.0)
+    promotional_likelihood = float(sample["ad_likelihood"])
 
-    parsed = json.loads(output.text)
-
-    return {
-        "sample_number": task["sample_number"],
-        "comparison_set_id": task["comparison_set_id"],
-        "assay_instance_hash": task["assay_instance_hash"],
-        "judge_model": task["judge_model"],
-        "recommendation_score_by_entity": {
-            item["entity"]: float(item["recommendation_score"])
-            for item in parsed["entity_scores"]
-        },
-        "raw_response": output.text,
-    }
-
-
-def _consideration_key(row: dict[str, Any]) -> tuple[str, str, int]:
-    return (
-        row["comparison_set_id"],
-        row["assay_instance_hash"],
-        row["sample_number"],
-    )
-
-
-def _judge_key(row: dict[str, Any]) -> tuple[str, str, int, str]:
-    return (
-        row["comparison_set_id"],
-        row["assay_instance_hash"],
-        row["sample_number"],
-        row["judge_model"],
-    )
-
-
-def _average(values: list[float]) -> float:
-    return float(sum(values) / len(values))
-
-
-def _recommendation_score_for_entity(
-    *,
-    entity_name: str,
-    judgments: dict[str, dict[str, Any]],
-) -> float:
-    return _average(
-        [
-            judgments[judge_model]["recommendation_score_by_entity"].get(
-                entity_name,
-                0.0,
-            )
-            for judge_model in _JUDGE_MODELS
-        ]
-    )
-
-
-def _build_measurements(
-    *,
-    entity: dict[str, Any],
-    judgments: dict[str, dict[str, Any]],
-) -> list[dict[str, Any]]:
     return [
         {
-            "measurand": "recommendation_score",
-            "value": _recommendation_score_for_entity(
-                entity_name=entity["entity_name"],
-                judgments=judgments,
-            ),
+            "measurand": "sentiment_score",
+            "value": sentiment_score,
+        },
+        {
+            "measurand": "stance_score",
+            "value": stance_score,
+        },
+        {
+            "measurand": "promotional_likelihood",
+            "value": promotional_likelihood,
         },
     ]
 
 
-def _build_debug_json(
-    *,
-    entity: dict[str, Any],
-    consideration: dict[str, Any],
-    judgments: dict[str, dict[str, Any]],
-) -> str:
+def _build_debug_json(sample: dict[str, Any]) -> str:
     return json.dumps(
         {
-            "raw_response": consideration["text"],
-            "judge_scores": {
-                judge_model: judgments[judge_model][
-                    "recommendation_score_by_entity"
-                ].get(entity["entity_name"], 0.0)
-                for judge_model in _JUDGE_MODELS
-            },
+            "description": sample["description"],
+            "sentiment_polarity": sample["sentiment_polarity"],
+            "raw_stance_score": sample["stance_score"],
+            "ad_likelihood": sample["ad_likelihood"],
+            "stance_score_by_label": sample["stance_score_by_label"],
         },
         ensure_ascii=False,
         sort_keys=True,
@@ -241,8 +259,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         .iter_rows(named=True)
     )
 
-    generation_tasks: list[dict[str, Any]] = []
-    entities_by_comparison_set_id: dict[str, list[dict[str, Any]]] = {}
+    tasks: list[dict[str, Any]] = []
+    total_entity_instance_pairs = 0
 
     for assay_instance in assay_instances:
         comparison_set_id = assay_instance["comparison_set_id"]
@@ -255,121 +273,97 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             entity_lookup=entity_lookup,
             comparison_set_id=comparison_set_id,
         )
-        entities_by_comparison_set_id[comparison_set_id] = entities
+
+        total_entity_instance_pairs += len(entities)
 
         for sample_number in range(ctx.cfg.num_samples_per_instance):
-            generation_tasks.append(
+            tasks.extend(
                 {
                     "sample_number": sample_number,
                     "comparison_set_id": comparison_set_id,
                     "comparison_set_name": comparison_set_name,
                     "assay_instance_hash": instance_hash,
                     "instance": instance,
+                    "entity_id": entity["entity_id"],
+                    "entity_name": entity["entity_name"],
                 }
+                for entity in entities
             )
+
+    num_distinct_entities = len({task["entity_id"] for task in tasks})
+    num_instances = len(assay_instances)
+    num_samples_per_instance = ctx.cfg.num_samples_per_instance
+    total_invocations = len(tasks)
+
+    print(
+        "Invoking model "
+        f"{total_invocations:,} times "
+        f"for {num_distinct_entities:,} distinct entities "
+        f"across {num_instances:,} assay instances "
+        f"with {num_samples_per_instance:,} samples per instance "
+        f"({total_entity_instance_pairs:,} entity-instance pairs × "
+        f"{num_samples_per_instance:,} samples)."
+    )
 
     with ThreadPoolExecutor(max_workers=128) as executor:
         futures = [
             executor.submit(
-                _run_consideration,
+                _run_description,
                 model=ctx.cfg.model,
                 assay=ctx.cfg.assay,
                 task=task,
             )
-            for task in generation_tasks
+            for task in tasks
         ]
 
-        considerations = []
+        descriptions: list[dict[str, Any]] = []
+
         for future in tqdm(
             as_completed(futures),
             total=len(futures),
-            desc="Consideration sets",
+            desc="Descriptions",
         ):
-            considerations.append(future.result())
+            descriptions.append(future.result())
 
-    judge_tasks: list[dict[str, Any]] = []
+    descriptions = _add_sentiment_scores(descriptions)
+    _SENTIMENT_PIPELINE.model.to("cpu")
+    torch.cuda.empty_cache()
 
-    for consideration in considerations:
-        entities = entities_by_comparison_set_id[consideration["comparison_set_id"]]
-        entity_names = [entity["entity_name"] for entity in entities]
+    descriptions = _add_stance_scores(descriptions)
+    _STANCE_PIPELINE.model.to("cpu")
+    torch.cuda.empty_cache()
 
-        for judge_model in _JUDGE_MODELS:
-            judge_tasks.append(
-                {
-                    "sample_number": consideration["sample_number"],
-                    "comparison_set_id": consideration["comparison_set_id"],
-                    "assay_instance_hash": consideration["assay_instance_hash"],
-                    "comparison_set_name": consideration["comparison_set_name"],
-                    "judge_model": judge_model,
-                    "entity_names": entity_names,
-                    "response_text": consideration["text"],
-                }
-            )
-
-    with ThreadPoolExecutor(max_workers=128) as executor:
-        futures = [executor.submit(_run_judge, task) for task in judge_tasks]
-
-        judgments = []
-        for future in tqdm(
-            as_completed(futures),
-            total=len(futures),
-            desc="Judge evaluations",
-        ):
-            judgments.append(future.result())
-
-    judgments_by_key = {_judge_key(judgment): judgment for judgment in judgments}
+    descriptions = _add_ad_scores(descriptions)
 
     rows = []
 
-    for consideration in sorted(
-        considerations,
+    for sample in sorted(
+        descriptions,
         key=lambda row: (
             row["comparison_set_id"],
             row["assay_instance_hash"],
+            row["entity_id"],
             row["sample_number"],
         ),
     ):
-        entities = entities_by_comparison_set_id[consideration["comparison_set_id"]]
-
-        consideration_judgments = {
-            judge_model: judgments_by_key[
-                (
-                    consideration["comparison_set_id"],
-                    consideration["assay_instance_hash"],
-                    consideration["sample_number"],
-                    judge_model,
-                )
-            ]
-            for judge_model in _JUDGE_MODELS
-        }
-
-        for entity in entities:
-            rows.append(
-                {
-                    "assay": ctx.cfg.assay,
-                    "assay_instance_hash": consideration["assay_instance_hash"],
-                    "sample_number": consideration["sample_number"],
-                    "model": ctx.cfg.model,
-                    "comparison_set_id": consideration["comparison_set_id"],
-                    "comparison_set_name": consideration["comparison_set_name"],
-                    "entity_id": entity["entity_id"],
-                    "entity_name": entity["entity_name"],
-                    "debug_json": _build_debug_json(
-                        entity=entity,
-                        consideration=consideration,
-                        judgments=consideration_judgments,
-                    ),
-                    "measurements": _build_measurements(
-                        entity=entity,
-                        judgments=consideration_judgments,
-                    ),
-                }
-            )
+        rows.append(
+            {
+                "assay": sample["assay"],
+                "assay_instance_hash": sample["assay_instance_hash"],
+                "sample_number": sample["sample_number"],
+                "model": sample["model"],
+                "comparison_set_id": sample["comparison_set_id"],
+                "comparison_set_name": sample["comparison_set_name"],
+                "entity_id": sample["entity_id"],
+                "entity_name": sample["entity_name"],
+                "debug_json": _build_debug_json(sample),
+                "measurements": _build_measurements(sample),
+            }
+        )
 
     ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
-    ctx.exp.log_metric("samples_completed", len(considerations))
-    ctx.exp.log_metric("sample_entity_rows_scored", len(rows))
-    ctx.exp.log_metric("judge_tasks_completed", len(judgments))
+    ctx.exp.log_metric("entity_instance_pairs_scored", total_entity_instance_pairs)
+    ctx.exp.log_metric("samples_scored", len(rows))
     ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
 
     return pl.DataFrame(rows, schema=ASSAY_SCHEMA)

@@ -104,11 +104,11 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
-
     query_rows = list(queries_df.iter_rows(named=True))
+
+    # Query model
     preferred_entities = [None] * len(query_rows)
     raw_responses = [None] * len(query_rows)
-
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -131,16 +131,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             preferred_entities[i] = result[0]
             raw_responses[i] = result[1]
 
-    measurements = [
-        [
-            {
-                "measurand": f"{row['left_entity']}:beats:{row['right_entity']}",
-                "value": float(preferred_entities[i] == row["left_entity"]),
-            }
-        ]
-        for i, row in enumerate(query_rows)
-    ]
-
+    # Construct results
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
@@ -151,16 +142,21 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 for r in raw_responses
             ],
         ),
-        pl.Series("measurements", measurements),
+        pl.Series(
+            "left_beat_right",
+            [p == row["left_entity"] for p, row in zip(preferred_entities, query_rows)],
+        ),
     ).select(
         "assay",
         "prompt_template",
         "model",
         "comparison_set",
+        "left_entity",
+        "right_entity",
+        "left_beat_right",
         "debug_json",
-        "measurements",
     )
 
-    ctx.exp.log_metric("total_queries run", queries_df.height)
+    ctx.exp.log_metric("total_queries_run", queries_df.height)
 
     return results_df
