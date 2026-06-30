@@ -7,11 +7,11 @@ stages:
   run-assay:
     matrix:
       assay:
-    #   - pairwise-comparative-preference
-    #   - listwise-ordinal-preference
-    #   - unaided-endorsement
+      - pairwise-comparative-preference
+      - listwise-ordinal-preference
+      - unaided-endorsement
       - open-ended-characterisation
-    #   - single-entity-endorsement
+      - single-entity-steering
       model:
       - gpt-oss-120b
     #   - gpt-5.4
@@ -179,6 +179,7 @@ metrics:
 - data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exp/metrics.json
 - data/run-assay/unaided-endorsement/gpt-oss-120b/exp/metrics.json
 - data/run-assay/open-ended-characterisation/gpt-oss-120b/exp/metrics.json
+- data/run-assay/single-entity-steering/gpt-oss-120b/exp/metrics.json
 plots:
 - data/run-assay/describe-sentiment/gpt-oss-120b/exp/plots/metrics:
     x: step
@@ -409,4 +410,6 @@ plots:
 - data/run-assay/unaided-endorsement/gpt-oss-120b/exp/plots/metrics:
     x: step
 - data/run-assay/open-ended-characterisation/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/gpt-oss-120b/exp/plots/metrics:
     x: step

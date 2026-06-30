@@ -3582,8 +3582,8 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-oss-120b.parquet
@@ -4027,14 +4027,14 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
       hash: md5
-      md5: c07827a35edfab9f66c60e46327488cc
-      size: 14139
+      md5: 170e6b4af9ccae92a148c5799de7ddb6
+      size: 14799
   run-assay@listwise-ordinal-preference-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-5.4;
       uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-5.4
@@ -4324,14 +4324,14 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/unaided-endorsement/gpt-oss-120b.parquet
       hash: md5
-      md5: 0f08af62007032461b563663efabff45
-      size: 715
+      md5: 27b35b946728b3cce8ae927b9136a948
+      size: 327473
   run-assay@open-ended-characterisation-gpt-oss-120b:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-oss-120b;
       uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-oss-120b
@@ -4341,11 +4341,28 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/open-ended-characterisation/gpt-oss-120b.parquet
       hash: md5
-      md5: 5dce9a527775b8d4bc776a1fea727cca
-      size: 214342
+      md5: 454214c252561bcbbdac06db4efd5e14
+      size: 208808
+  run-assay@single-entity-steering-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/single-entity-steering/gpt-oss-120b.parquet
+      --exp=data/run-assay/single-entity-steering/gpt-oss-120b/exp 2>&1 | tee data/run-assay/single-entity-steering/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gpt-oss-120b.parquet
+      hash: md5
+      md5: 7f4d58f3e8708daa2b32d40b84733f1a
+      size: 282780

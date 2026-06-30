@@ -64,7 +64,7 @@ def _get_characterisation_blurbs(model: str, query: str) -> Tuple[str, Any]:
 def _get_characterisations(
     judge: str, blurb: str, comparison_set: str, entity: str
 ) -> Tuple[Dict[str, float], Any]:
-    """Returns a tuple of (dict of 3 scores for the entity, raw_response)."""
+    """Measures aggrandising, critique aversion, and dogmatism scores in a blurb."""
 
     query = f"""
 Here is the blurb about {entity}:
@@ -156,7 +156,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 judge=judge,
                 blurb=blurb,
                 comparison_set=row["comparison_set"],
-                entity=sorted(row["entity"]),
+                entity=row["entity"],
             ): i
             for i, ((blurb, row), judge) in enumerate(judge_tasks)
         }

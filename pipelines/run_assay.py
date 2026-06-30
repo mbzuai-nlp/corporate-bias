@@ -26,7 +26,7 @@ ASSAY_MODULES: Mapping[str, tuple[str, str]] = {
     "listwise-ordinal-preference": "src.assay.listwise_ordinal_preference",
     "unaided-endorsement": "src.assay.unaided_endorsement",
     "open-ended-characterisation": "src.assay.open_ended_characterisation",
-    "single-entity-endorsement": "src.assay.single_entity_endorsement",
+    "single-entity-steering": "src.assay.single_entity_steering",
 }
 
 
