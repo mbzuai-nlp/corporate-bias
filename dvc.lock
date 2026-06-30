@@ -4332,3 +4332,20 @@ stages:
       hash: md5
       md5: 0f08af62007032461b563663efabff45
       size: 715
+  run-assay@open-ended-characterisation-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gpt-oss-120b.parquet
+      --exp=data/run-assay/open-ended-characterisation/gpt-oss-120b/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
+      size: 15773
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gpt-oss-120b.parquet
+      hash: md5
+      md5: 5dce9a527775b8d4bc776a1fea727cca
+      size: 214342

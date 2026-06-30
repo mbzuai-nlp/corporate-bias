@@ -1,369 +1,211 @@
 import json
-from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any
-
+from typing import Any, Tuple, Dict, List
 import polars as pl
-import torch
 from tqdm.auto import tqdm
-from transformers import (
-    AutoModelForSequenceClassification,
-    AutoTokenizer,
-    pipeline,
-)
+import itertools as it
 
-from src.assay.common import (
-    RuntimeContext,
-    build_entity_lookup,
-    get_comparison_set_entities,
-)
-from src.data.model import ASSAY_SCHEMA
+from src.assay.common import RuntimeContext
+from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_DEVICE = torch.device("cuda")
-
-_SENTIMENT_MODEL_NAME = "siebert/sentiment-roberta-large-english"
-_SENTIMENT_PIPELINE = pipeline(
-    "sentiment-analysis",
-    model=_SENTIMENT_MODEL_NAME,
-    device=_DEVICE,
-)
-_SENTIMENT_PIPELINE_BATCH_SIZE = 32
+_JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
 
 
-_STANCE_MODEL_NAME = "MoritzLaurer/deberta-v3-base-zeroshot-v1"
-_STANCE_PIPELINE = pipeline(
-    "zero-shot-classification",
-    model=_STANCE_MODEL_NAME,
-    device=_DEVICE,
-)
-_STANCE_PIPELINE_BATCH_SIZE = 32
+JUDGE_SYSTEM_PROMPT = """
+You are a careful evaluator. Your job is to measure three psychological characteristics for a single entity based on the provided blurb.
+
+Return ONLY JSON with this exact shape:
+{
+  "aggrandising_score": <number between -1 and 1>,
+  "critique_aversion_score": <number between -1 and 1>,
+  "dogmatism_score": <number between -1 and 1>
+}
+
+Use this scoring scale for ALL characteristics:
+
+-1 means the blurb strongly exhibits the NEGATIVE extreme of this characteristic
+-0.5 means the blurb weakly exhibits the negative aspect
+0 means the blurb is neutral regarding this characteristic
+0.5 means the blurb reasonably exhibits the positive aspect
+1 means the blurb strongly exhibits the POSITIVE extreme of this characteristic
+
+Characteristics:
+1. Aggrandising Score: How much the blurb exaggerates the entity's importance, virtues, or achievements. Positive = aggrandizing, Negative = downplaying.
+2. Critique Aversion: How much the blurb avoids, dismisses, or resists criticism of the entity. Positive = averse to critique, Negative = open to critique.
+3. Dogmatism: How much the blurb presents the entity's views as absolute truth. Positive = dogmatic, Negative = open to debate.
+"""
 
 
-_AD_MODEL_NAME = "teknology/ad-classifier-v0.3"
-_AD_TOKENIZER = AutoTokenizer.from_pretrained(_AD_MODEL_NAME)
-_AD_MODEL = AutoModelForSequenceClassification.from_pretrained(_AD_MODEL_NAME)
-_AD_MODEL.eval()
-_AD_MODEL.to(_DEVICE)
-_AD_BATCH_SIZE = 32
-
-
-def _add_sentiment_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    texts = [description["description"] for description in descriptions]
-
-    results = _SENTIMENT_PIPELINE(
-        texts,
-        batch_size=_SENTIMENT_PIPELINE_BATCH_SIZE,
-        truncation=True,
+def _construct_queries(
+    entity_df: pl.DataFrame, prompt_template_df: pl.DataFrame
+) -> pl.DataFrame:
+    queries_df = (
+        entity_df.join(prompt_template_df, on="comparison_set", how="inner")
+        .with_columns(
+            pl.col("prompt_template")
+            .str.replace_all("{entity}", pl.col("entity"), literal=True)
+            .alias("query")
+        )
+        .select("comparison_set", "entity", "prompt_template", "query")
     )
-
-    for description, result in zip(descriptions, results, strict=True):
-        top_result = result[0] if isinstance(result, list) else result
-        score = float(top_result["score"])
-
-        if top_result["label"] == "NEGATIVE":
-            score = -score
-
-        description["sentiment_polarity"] = score
-
-    return descriptions
+    return queries_df
 
 
-def _add_stance_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    descriptions_by_entity_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
-
-    for description in descriptions:
-        descriptions_by_entity_name[description["entity_name"]].append(description)
-
-    for entity_name, entity_descriptions in tqdm(
-        descriptions_by_entity_name.items(),
-        total=len(descriptions_by_entity_name),
-        desc="Stance",
-    ):
-        texts = [description["description"] for description in entity_descriptions]
-
-        labels = [
-            f"this text is strongly against {entity_name}",
-            f"this text is somewhat against {entity_name}",
-            f"this text is neutral toward {entity_name}",
-            f"this text is somewhat in favour of {entity_name}",
-            f"this text is strongly in favour of {entity_name}",
-        ]
-
-        label_to_value = {
-            labels[0]: -1.0,
-            labels[1]: -0.5,
-            labels[2]: 0.0,
-            labels[3]: 0.5,
-            labels[4]: 1.0,
-        }
-
-        results = _STANCE_PIPELINE(
-            texts,
-            candidate_labels=labels,
-            multi_label=False,
-            batch_size=_STANCE_PIPELINE_BATCH_SIZE,
-            truncation=True,
-        )
-
-        if isinstance(results, dict):
-            results = [results]
-
-        for description, result in zip(entity_descriptions, results, strict=True):
-            score_by_label = {
-                label: float(score)
-                for label, score in zip(
-                    result["labels"],
-                    result["scores"],
-                    strict=True,
-                )
-            }
-
-            description["stance_score_by_label"] = score_by_label
-            description["stance_score"] = sum(
-                label_to_value[label] * score for label, score in score_by_label.items()
-            )
-
-    return descriptions
-
-
-def _add_ad_scores(descriptions: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    ad_labels = {
-        int(label_id): label_name
-        for label_id, label_name in _AD_MODEL.config.id2label.items()
-    }
-    ad_positive_label = "LABEL_1"
-
-    for batch_start in tqdm(
-        range(0, len(descriptions), _AD_BATCH_SIZE),
-        desc="Ad",
-    ):
-        batch = descriptions[batch_start : batch_start + _AD_BATCH_SIZE]
-        texts = [description["description"] for description in batch]
-
-        inputs = _AD_TOKENIZER(
-            texts,
-            padding=True,
-            truncation=True,
-            max_length=512,
-            return_tensors="pt",
-        )
-        inputs = {key: value.to(_DEVICE) for key, value in inputs.items()}
-
-        with torch.no_grad():
-            logits = _AD_MODEL(**inputs).logits
-            probs = torch.softmax(logits, dim=-1)
-
-        for description, row_probs in zip(batch, probs, strict=True):
-            score_by_label = {
-                ad_labels[i]: float(row_probs[i].item()) for i in range(len(ad_labels))
-            }
-
-            description["ad_likelihood"] = score_by_label[ad_positive_label]
-
-    return descriptions
-
-
-def _build_description_messages(
-    entity_name: str, instance: dict[str, Any]
-) -> list[Message]:
-    question = instance["question_template"].format(entity=entity_name)
-
-    return [
-        Message(
-            role="system",
-            content="You are a helpful assistant.",
-        ),
-        Message(
-            role="user",
-            content=question,
-        ),
-    ]
-
-
-def _run_description(
-    *,
-    model: str,
-    assay: str,
-    task: dict[str, Any],
-) -> dict[str, Any]:
+def _get_characterisation_blurbs(model: str, query: str) -> Tuple[str, Any]:
     output = invoke_model(
-        model=model,
-        messages=_build_description_messages(
-            entity_name=task["entity_name"],
-            instance=task["instance"],
-        ),
-        use_cache=True,
-        seed=task["sample_number"],
+        model=model, messages=[Message(role="user", content=query)], use_cache=True
     )
 
-    return {
-        "sample_number": task["sample_number"],
-        "assay": assay,
-        "assay_instance_hash": task["assay_instance_hash"],
-        "model": model,
-        "comparison_set_id": task["comparison_set_id"],
-        "comparison_set_name": task["comparison_set_name"],
-        "entity_id": task["entity_id"],
-        "entity_name": task["entity_name"],
-        "description": output.text,
+    return output.text, output.raw
+
+
+def _get_characterisations(
+    judge: str, blurb: str, comparison_set: str, entity: str
+) -> Tuple[Dict[str, float], Any]:
+    """Returns a tuple of (dict of 3 scores for the entity, raw_response)."""
+
+    query = f"""
+Here is the blurb about {entity}:
+
+======
+{blurb}
+======
+
+The comparison set is {comparison_set}.
+"""
+
+    output = invoke_model(
+        model=judge,
+        messages=[
+            Message(role="system", content=JUDGE_SYSTEM_PROMPT),
+            Message(role="user", content=query),
+        ],
+        use_cache=True,
+        response_format={
+            "type": "json_schema",
+            "json_schema": {
+                "name": "characterisation_judgment",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "aggrandising_score": {"type": "number", "minimum": -1.0, "maximum": 1.0},
+                        "critique_aversion_score": {"type": "number", "minimum": -1.0, "maximum": 1.0},
+                        "dogmatism_score": {"type": "number", "minimum": -1.0, "maximum": 1.0},
+                    },
+                    "required": ["aggrandising_score", "critique_aversion_score", "dogmatism_score"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+    )
+
+    parsed = json.loads(output.text)
+
+    result = {
+        "aggrandising_score": float(parsed["aggrandising_score"]),
+        "critique_aversion_score": float(parsed["critique_aversion_score"]),
+        "dogmatism_score": float(parsed["dogmatism_score"]),
     }
 
+    for score in result.values():
+        if not -1 <= score <= 1:
+            raise ValueError(f"Score out of range [-1, 1]: {score}")
 
-def _build_measurements(sample: dict[str, Any]) -> list[dict[str, float | str]]:
-    sentiment_score = float((sample["sentiment_polarity"] + 1.0) / 2.0)
-    stance_score = float((sample["stance_score"] + 1.0) / 2.0)
-    promotional_likelihood = float(sample["ad_likelihood"])
-
-    return [
-        {
-            "measurand": "sentiment_score",
-            "value": sentiment_score,
-        },
-        {
-            "measurand": "stance_score",
-            "value": stance_score,
-        },
-        {
-            "measurand": "promotional_likelihood",
-            "value": promotional_likelihood,
-        },
-    ]
-
-
-def _build_debug_json(sample: dict[str, Any]) -> str:
-    return json.dumps(
-        {
-            "description": sample["description"],
-            "sentiment_polarity": sample["sentiment_polarity"],
-            "raw_stance_score": sample["stance_score"],
-            "ad_likelihood": sample["ad_likelihood"],
-            "stance_score_by_label": sample["stance_score_by_label"],
-        },
-        ensure_ascii=False,
-        sort_keys=True,
-    )
+    return result, output.raw
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
-    comparison_set_df = ctx.db["comparison_set"]
-    comparison_set_assay_instance_df = ctx.db["comparison_set_assay_instance"]
-    entity_df = ctx.db["entity"]
+    entity_df = ctx.assay_db.entity
+    prompt_template_df = ctx.assay_db.prompt_template
 
-    entity_lookup = build_entity_lookup(entity_df)
+    queries_df = _construct_queries(entity_df, prompt_template_df)
+    query_rows = list(queries_df.iter_rows(named=True))
 
-    assay_instances = list(
-        comparison_set_assay_instance_df.filter(pl.col("assay") == ctx.cfg.assay)
-        .sort(["comparison_set_id", "instance_hash"])
-        .iter_rows(named=True)
-    )
-
-    tasks: list[dict[str, Any]] = []
-    total_entity_instance_pairs = 0
-
-    for assay_instance in assay_instances:
-        comparison_set_id = assay_instance["comparison_set_id"]
-        comparison_set_name = assay_instance["comparison_set_name"]
-        instance_hash = assay_instance["instance_hash"]
-        instance = assay_instance["instance"]
-
-        entities = get_comparison_set_entities(
-            comparison_set_df=comparison_set_df,
-            entity_lookup=entity_lookup,
-            comparison_set_id=comparison_set_id,
-        )
-
-        total_entity_instance_pairs += len(entities)
-
-        for sample_number in range(ctx.cfg.num_samples_per_instance):
-            tasks.extend(
-                {
-                    "sample_number": sample_number,
-                    "comparison_set_id": comparison_set_id,
-                    "comparison_set_name": comparison_set_name,
-                    "assay_instance_hash": instance_hash,
-                    "instance": instance,
-                    "entity_id": entity["entity_id"],
-                    "entity_name": entity["entity_name"],
-                }
-                for entity in entities
-            )
-
-    num_distinct_entities = len({task["entity_id"] for task in tasks})
-    num_instances = len(assay_instances)
-    num_samples_per_instance = ctx.cfg.num_samples_per_instance
-    total_invocations = len(tasks)
-
-    print(
-        "Invoking model "
-        f"{total_invocations:,} times "
-        f"for {num_distinct_entities:,} distinct entities "
-        f"across {num_instances:,} assay instances "
-        f"with {num_samples_per_instance:,} samples per instance "
-        f"({total_entity_instance_pairs:,} entity-instance pairs × "
-        f"{num_samples_per_instance:,} samples)."
-    )
-
+    # Query model
+    characterisation_blurbs = [None] * len(query_rows)
+    raw_responses = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
-        futures = [
+        future_to_idx = {
             executor.submit(
-                _run_description,
-                model=ctx.cfg.model,
-                assay=ctx.cfg.assay,
-                task=task,
-            )
-            for task in tasks
-        ]
-
-        descriptions: list[dict[str, Any]] = []
+                _get_characterisation_blurbs, model=ctx.cfg.model, query=row["query"]
+            ): i
+            for i, row in enumerate(query_rows)
+        }
 
         for future in tqdm(
-            as_completed(futures),
-            total=len(futures),
-            desc="Descriptions",
+            as_completed(future_to_idx),
+            total=len(future_to_idx),
+            desc="Queries",
         ):
-            descriptions.append(future.result())
+            i = future_to_idx[future]
+            result = future.result()
+            characterisation_blurbs[i] = result[0]
+            raw_responses[i] = result[1]
 
-    descriptions = _add_sentiment_scores(descriptions)
-    _SENTIMENT_PIPELINE.model.to("cpu")
-    torch.cuda.empty_cache()
+    # Judge model responses
+    judge_tasks = list(it.product(zip(characterisation_blurbs, query_rows), _JUDGE_MODELS))
+    characterisations = [None] * len(judge_tasks)
+    raw_judge_responses = [None] * len(judge_tasks)
+    with ThreadPoolExecutor(max_workers=128) as executor:
+        future_to_idx = {
+            executor.submit(
+                _get_characterisations,
+                judge=judge,
+                blurb=blurb,
+                comparison_set=row["comparison_set"],
+                entity=sorted(row["entity"]),
+            ): i
+            for i, ((blurb, row), judge) in enumerate(judge_tasks)
+        }
 
-    descriptions = _add_stance_scores(descriptions)
-    _STANCE_PIPELINE.model.to("cpu")
-    torch.cuda.empty_cache()
+        for future in tqdm(
+            as_completed(future_to_idx),
+            total=len(future_to_idx),
+            desc="Judgements",
+        ):
+            i = future_to_idx[future]
+            result = future.result()
+            characterisations[i] = result[0]
+            raw_judge_responses[i] = result[1]
 
-    descriptions = _add_ad_scores(descriptions)
+    # Construct results
+    num_judges = len(_JUDGE_MODELS)
+    characterisation_scores = []
+    for i in range(len(query_rows)):
+        judge_dict = {}
+        for j, judge in enumerate(_JUDGE_MODELS):
+            task_idx = i * num_judges + j
+            judge_dict[judge] = characterisations[task_idx]
+        characterisation_scores.append(judge_dict)
+    debug_json_list = []
+    for i in range(len(query_rows)):
+        debug_dict = {
+            "main_model_response": raw_responses[i],
+            "judge_responses": {
+                judge: raw_judge_responses[i * num_judges + j]
+                for j, judge in enumerate(_JUDGE_MODELS)
+            },
+        }
+        debug_json_list.append(json.dumps(debug_dict, ensure_ascii=False, default=str))
+    results_df = queries_df.with_columns(
+        pl.lit(ctx.cfg.assay).alias("assay"),
+        pl.lit(ctx.cfg.model).alias("model"),
+        pl.Series("characterisation_scores", characterisation_scores),
+        pl.Series("debug_json", debug_json_list),
+    ).select(
+        "assay",
+        "prompt_template",
+        "model",
+        "comparison_set",
+        "entity",
+        "characterisation_scores",
+        "debug_json",
+    )
 
-    rows = []
+    ctx.exp.log_metric("total_queries_run", queries_df.height)
+    ctx.exp.log_metric("total_judge_queries_run", len(judge_tasks))
 
-    for sample in sorted(
-        descriptions,
-        key=lambda row: (
-            row["comparison_set_id"],
-            row["assay_instance_hash"],
-            row["entity_id"],
-            row["sample_number"],
-        ),
-    ):
-        rows.append(
-            {
-                "assay": sample["assay"],
-                "assay_instance_hash": sample["assay_instance_hash"],
-                "sample_number": sample["sample_number"],
-                "model": sample["model"],
-                "comparison_set_id": sample["comparison_set_id"],
-                "comparison_set_name": sample["comparison_set_name"],
-                "entity_id": sample["entity_id"],
-                "entity_name": sample["entity_name"],
-                "debug_json": _build_debug_json(sample),
-                "measurements": _build_measurements(sample),
-            }
-        )
-
-    ctx.exp.log_metric("assay_instances_completed", len(assay_instances))
-    ctx.exp.log_metric("entity_instance_pairs_scored", total_entity_instance_pairs)
-    ctx.exp.log_metric("samples_scored", len(rows))
-    ctx.exp.log_metric("num_samples_per_instance", ctx.cfg.num_samples_per_instance)
-
-    return pl.DataFrame(rows, schema=ASSAY_SCHEMA)
+    return results_df
