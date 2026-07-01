@@ -27,7 +27,11 @@ unique.
 def _construct_queries(
     entity_df: pl.DataFrame, prompt_template_df: pl.DataFrame
 ) -> pl.DataFrame:
-    entities_agg = entity_df.group_by("comparison_set").agg(pl.col("entity"))
+    entities_agg = (
+        entity_df.group_by("comparison_set")
+        .agg(pl.col("entity"))
+        .sort("comparison_set")
+    )
 
     # For each comparison_set, sample n permutations (n = number of entities)
     sampled_queries = []
