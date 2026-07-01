@@ -12,7 +12,7 @@ from src.data import load_db
 from src.assay.common import Config, RuntimeContext, AssayDelegate, save_assay_df
 
 
-# set_seed()
+set_seed()
 configure_logging()
 silence_superfluous_warnings()
 load_dotenv()
