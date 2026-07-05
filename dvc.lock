@@ -3561,18 +3561,19 @@ stages:
       md5: bf8c14615e469bc03fc442f2a3623842
       size: 1234603
   model-effects:
-    cmd: "uv run python -m pipelines.model_effects --assays=data/assays --save-path=data/assay_model_effects.parquet\n"
+    cmd: "uv run python -m pipelines.model_effects --assays=data/assays --db=data/db
+      --save-path=data/model-effects.parquet --exp=data/model-effects\n"
     deps:
     - path: data/assays
       hash: md5
-      md5: f4c5a4e513847c6c574588183b23bcc0.dir
-      size: 17127460
-      nfiles: 90
+      md5: 9e0297c36f13f135b02bb9000ad11f71.dir
+      size: 22495932
+      nfiles: 151
     outs:
-    - path: data/assay_model_effects.parquet
+    - path: data/model-effects.parquet
       hash: md5
-      md5: 0c40e579d32aa936c645aedb4b8c4bec
-      size: 76181
+      md5: fe54d219df2953d061a081ff9b7c07a5
+      size: 3462
   run-assay@pairwise-comparative-preference-gpt-oss-120b:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-oss-120b;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference

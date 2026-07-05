@@ -57,11 +57,13 @@ stages:
     cmd: >
       uv run python -m pipelines.model_effects
       --assays=${data}/assays
-      --save-path=${data}/assay_model_effects.parquet
+      --db=${data}/db
+      --save-path=${data}/model-effects.parquet
+      --exp=${data}/model-effects
     deps:
     - ${data}/assays
     outs:
-    - ${data}/assay_model_effects.parquet
+    - ${data}/model-effects.parquet
 
 metrics:
 - data/run-assay/describe-sentiment/gpt-oss-120b/exp/metrics.json
