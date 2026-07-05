@@ -135,41 +135,30 @@ def add_db_features(df: pl.DataFrame, db: Db) -> pl.DataFrame:
 
 
 def model_open_ended_characterisation(df: pl.DataFrame, db: Db) -> pl.DataFrame:
-    df = df.with_columns(
-        (
-            (
-                pl.col("characterisation_scores")
-                    .struct["gpt-5.4"].struct["aggrandising_score"] + 
-                pl.col("characterisation_scores")
-                    .struct["gemini-2.5-pro"].struct["aggrandising_score"]
-            ) / 2
-        ).alias("aggrandising_score"),
-        (
-            (
-                pl.col("characterisation_scores")
-                    .struct["gpt-5.4"].struct["critique_aversion_score"] + 
-                pl.col("characterisation_scores")
-                    .struct["gemini-2.5-pro"].struct["critique_aversion_score"]
-            ) / 2
-        ).alias("critique_aversion_score"),
-        (
-            (
-                pl.col("characterisation_scores")
-                    .struct["gpt-5.4"].struct["dogmatism_score"] + 
-                pl.col("characterisation_scores")
-                    .struct["gemini-2.5-pro"].struct["dogmatism_score"]
-            ) / 2
-        ).alias("dogmatism_score"),
-    )
-
     df = add_db_features(df, db)
 
-    effects_df = pl.concat([
-        compute_effects(df, "aggrandising_score"),
-        compute_effects(df, "critique_aversion_score"),
-        compute_effects(df, "dogmatism_score")
-    ])
+    all_effects = []
+    for measurand in ("aggrandising_score", "critique_aversion_score", 
+                      "dogmatism_score"):
+        df = df.with_columns(
+            (
+                (
+                    pl.col("characterisation_scores")
+                        .struct["gpt-5.4"].struct[measurand] + 
+                    pl.col("characterisation_scores")
+                        .struct["gemini-2.5-pro"].struct[measurand]
+                ) / 2
+            ).alias(measurand)
+        )
 
+        effects = (
+            compute_effects(df, measurand)
+            .with_columns(pl.lit(measurand).alias("measurand"))
+        )
+        all_effects.append(effects)
+
+
+    effects_df = pl.concat(all_effects)
     return effects_df
 
 
@@ -209,11 +198,15 @@ def main() -> None:
                 df_filtered = df.filter(pl.col("comparison_set") == comparison_set)
 
                 if assay == "open-ended-characterisation":
-                    all_effects.append(
-                        model_open_ended_characterisation(df_filtered, db)
-                    )
+                    effects = model_open_ended_characterisation(df_filtered, db)
                 else:
                     raise NotImplementedError(f"Assay `{assay}` is not implemented")
+                
+                effects = effects.with_columns(
+                    pl.lit(assay).alias("assay"),
+                    pl.lit(comparison_set).alias("comparison_set")
+                )
+                all_effects.append(effects)
                 
         effects_df = pl.concat(all_effects)
         effects_df.write_parquet(save_path)
