@@ -6,6 +6,7 @@ from dvclive import Live
 import patsy
 import statsmodels.api as sm
 import numpy as np
+from typing import Tuple
 import pandas as pd
 
 from src.data import load_db, Db
@@ -49,6 +50,36 @@ def validate_design_matrix(X):
     raise InvalidDesignMatrixException()
 
 
+def fit_and_extract_effects(
+    y, X, categorical_vars: list[str], pdf: pd.DataFrame
+) -> pd.DataFrame:
+    validate_design_matrix(X)
+
+    # Regress
+    model = sm.OLS(y, X)
+    result = model.fit()
+
+    # Extract explicit terms
+    params, cov = result.params, result.cov_params()
+    param_names = X.design_info.column_names
+    final_df = pd.DataFrame(
+        {"term": param_names, "coeff": params, "std_err": np.sqrt(np.diag(cov))}
+    )
+
+    # Recover implicit sum-coded terms for categorical variables
+    for var in categorical_vars:
+        var_cols = [c for c in param_names if f"C({var}, Sum)" in c]
+        levels_in_design = [c.split("[S.")[1].split("]")[0] for c in var_cols]
+        ref_level = [l for l in pdf[var].unique() if l not in levels_in_design][0]
+
+        idxs = [param_names.index(c) for c in var_cols]
+        coeff = -sum(params[i] for i in idxs)
+        se = np.sqrt(sum(cov[i, j] for i in idxs for j in idxs))
+        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se]
+
+    return final_df.sort_values("term").reset_index(drop=True)
+
+
 def add_safe_interactions(df, interactions):
     # Only add interaction terms that have data
     new_cols = []
@@ -64,63 +95,100 @@ def add_safe_interactions(df, interactions):
 
 def compute_effects(df: pl.DataFrame, score_col: str) -> pl.DataFrame:
     pdf = df.to_pandas()
-
-    # Only consider model:affiliated terms where the model has affiliations and
-    # unaffiliations, otherwise there is rank deficiency
-    affiliation_cols = add_safe_interactions(pdf, [("model", "affiliated")])
+    affiliation_cols = add_safe_interactions(pdf, [("model", "affiliated_entity")])
 
     formula = (
         f"{score_col} ~ "
         "C(model, Sum) + "
         "C(entity, Sum) + "
         "C(prompt_template, Sum) + "
-        "ownership_geography_match + "
+        "ownership_geography_match_entity + "
         f"{' + '.join(affiliation_cols)}"
     )
     y, X = patsy.dmatrices(formula, data=pdf)
 
-    validate_design_matrix(X)
-
-    # regress
-    model = sm.OLS(y, X)
-    result = model.fit()
-
-    # Extract explicit terms
-    params, cov = result.params, result.cov_params()
-    param_names = X.design_info.column_names
-    final_df = pd.DataFrame(
-        {"term": param_names, "coeff": params, "std_err": np.sqrt(np.diag(cov))}
+    final_df = fit_and_extract_effects(
+        y, X, categorical_vars=["model", "entity", "prompt_template"], pdf=pdf
     )
-
-    # Recover implicit sum-coded terms
-    for var in ["model", "entity", "prompt_template"]:
-        var_cols = [c for c in param_names if f"C({var}, Sum)" in c]
-        levels_in_design = [c.split("[S.")[1].split("]")[0] for c in var_cols]
-
-        # level for which we need to compute term
-        ref_level = [l for l in pdf[var].unique() if l not in levels_in_design][0]
-
-        idxs = [param_names.index(c) for c in var_cols]
-        coeff = -sum(params[i] for i in idxs)
-        se = np.sqrt(sum(cov[i, j] for i in idxs for j in idxs))
-        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se]
-
-    return pl.from_pandas(final_df.sort_values("term").reset_index(drop=True))
+    return pl.from_pandas(final_df)
 
 
-def add_db_features(df: pl.DataFrame, db: Db) -> pl.DataFrame:
-    df = df.join(db.entity, on=["comparison_set", "entity"], how="inner").join(
-        db.model, on="model", how="inner"
+def compute_pairwise_effects(df: pl.DataFrame) -> pl.DataFrame:
+    df = df.cast({"left_beat_right": pl.Float32})
+    pdf = df.to_pandas()
+
+    # Extract unique entities from left and right columns
+    entities = sorted(
+        set(pdf["left_entity"].unique()).union(set(pdf["right_entity"].unique()))
     )
+    implied = entities[-1]  # Use the last entity as implied
+    other_entities = entities[:-1]
 
-    df = df.with_columns(
-        (pl.col("ownership_geography") == pl.col("ownership_geography_right")).alias(
-            "ownership_geography_match"
-        ),
-        (pl.col("affiliated_entities").list.contains(pl.col("entity"))).alias(
-            "affiliated"
-        ),
-    ).drop("ownership_geography_right", "affiliated_entities")
+    # Create entity terms
+    entity_terms = [
+        (
+            f'I((left_entity=="{e}").astype(int) - '
+            f'(right_entity=="{e}").astype(int) - '
+            f'(left_entity=="{implied}").astype(int) + '
+            f'(right_entity=="{implied}").astype(int))'
+        )
+        for e in other_entities
+    ]
+
+    # Extract unique models
+    models = pdf["model"].unique()
+
+    # Add affiliation terms for models that have both affiliations and unaffiliations
+    affiliation_terms = []
+    for m in models:
+        model_mask = pdf["model"] == m
+        left_aff = pdf.loc[model_mask, "affiliated_left_entity"]
+        right_aff = pdf.loc[model_mask, "affiliated_right_entity"]
+        if (left_aff.nunique() > 1) or (right_aff.nunique() > 1):
+            affiliation_terms.append(
+                (
+                    f'I((model=="{m}").astype(int) * '
+                    f'(affiliated_left_entity.astype(int) - '
+                    f'affiliated_right_entity.astype(int)))'
+                )
+            )
+
+    formula = (
+        f"left_beat_right ~ 1 + C(model, Sum) + C(prompt_template, Sum) + "
+        f"{' + '.join(entity_terms + affiliation_terms)}"
+    )
+    y, X = patsy.dmatrices(formula, data=pdf)
+
+    final_df = fit_and_extract_effects(
+        y, X, categorical_vars=["model", "prompt_template"], pdf=pdf
+    )
+    return pl.from_pandas(final_df)
+
+
+def add_db_features(
+    df: pl.DataFrame, 
+    db: Db, 
+    entity_cols: Tuple[str] = ("entity",)
+) -> pl.DataFrame:
+    df = df.join(db.model, on="model", how="inner")
+
+    for entity_col in entity_cols:
+        df = df.join(
+            db.entity,
+            left_on=["comparison_set", entity_col],
+            right_on=["comparison_set", "entity"],
+            how="inner"
+        )
+
+        df = df.with_columns(
+            pl.col("affiliated_entities").list.contains(pl.col(entity_col))
+            .alias(f"affiliated_{entity_col}")
+        )
+
+        df = df.with_columns(
+            (pl.col("ownership_geography") == pl.col("ownership_geography_right"))
+            .alias(f"ownership_geography_match_{entity_col}")
+        ).drop("ownership_geography_right")
 
     return df
 
@@ -208,7 +276,12 @@ def model_listwise_ordinal_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
 
 
 def model_pairwise_comparative_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
-    print(df.schema)
+    df = add_db_features(df, db, entity_cols=("left_entity", "right_entity"))
+
+    effects_df = compute_pairwise_effects(df).with_columns(
+        pl.lit("preference").alias("measurand")
+    )
+    return effects_df
 
 
 def parse_args() -> argparse.Namespace:
@@ -238,7 +311,7 @@ def main() -> None:
             "open-ended-characterisation",
             "unaided-endorsement",
             "listwise-ordinal-preference",
-            # "pairwise-comparative-preference",
+            "pairwise-comparative-preference",
         ):
             df = pl.concat(
                 (pl.read_parquet(f) for f in (assays_dir / assay).glob("*.parquet"))
