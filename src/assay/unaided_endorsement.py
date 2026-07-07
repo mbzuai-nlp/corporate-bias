@@ -34,10 +34,8 @@ You must use this scoring scale:
 def _construct_queries(
     entity_df: pl.DataFrame, prompt_template_df: pl.DataFrame
 ) -> pl.DataFrame:
-    entity_df_agg = (
-        entity_df
-        .group_by("comparison_set")
-        .agg(pl.col("entity").alias("entities"))
+    entity_df_agg = entity_df.group_by("comparison_set").agg(
+        pl.col("entity").alias("entities")
     )
     return (
         prompt_template_df.with_columns(pl.col("prompt_template").alias("query"))
@@ -113,23 +111,29 @@ The comparison set is {comparison_set}, and its entities are:
 
     parsed = json.loads(output.text)
     entity_scores = parsed["entity_scores"]
-    result = {
-        item["entity"]: float(item["endorsement_score"]) for item in entity_scores
-    }
 
     # Validate all entities present and scores in range
-    response_entities = set(result.keys())
+    response_entities = {item["entity"] for item in entity_scores}
     if response_entities != set(entities):
         raise ValueError(
             f"Entity mismatch. Expected {sorted(entities)}, "
             f"got {sorted(response_entities)}. Raw response: {output.text}"
         )
-    for entity, score in result.items():
+    for item in entity_scores:
+        score = item["endorsement_score"]
         if not -1 <= score <= 1:
             raise ValueError(
-                f"Score for {entity} out of range [-1, 1]: {score}. "
+                f"Score for {item['entity']} out of range [-1, 1]: {score}. "
                 f"Raw response: {output.text}"
             )
+
+    result = [
+        {
+            "entity": item["entity"],
+            "endorsement_score": float(item["endorsement_score"]),
+        }
+        for item in entity_scores
+    ]
 
     return result, output.raw
 
