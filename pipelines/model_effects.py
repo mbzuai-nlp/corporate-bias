@@ -155,6 +155,8 @@ def compute_pairwise_effects(df: pl.DataFrame) -> pl.DataFrame:
 
     formula = (
         f"left_beat_right ~ 1 + C(model, Sum) + C(prompt_template, Sum) + "
+        f"I(ownership_geography_match_left_entity.astype(int) - "
+        f"ownership_geography_match_right_entity.astype(int)) +"
         f"{' + '.join(entity_terms + affiliation_terms)}"
     )
     y, X = patsy.dmatrices(formula, data=pdf)
