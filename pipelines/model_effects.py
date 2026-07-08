@@ -113,8 +113,7 @@ def compute_effects(df: pl.DataFrame, score_col: str) -> pl.DataFrame:
     return pl.from_pandas(final_df)
 
 
-def compute_pairwise_effects(df: pl.DataFrame) -> pl.DataFrame:
-    df = df.cast({"left_beat_right": pl.Float32})
+def compute_pairwise_effects(df: pl.DataFrame, measurand_col: str) -> pl.DataFrame:
     pdf = df.to_pandas()
 
     # Extract unique entities from left and right columns
@@ -154,7 +153,7 @@ def compute_pairwise_effects(df: pl.DataFrame) -> pl.DataFrame:
             )
 
     formula = (
-        f"left_beat_right ~ 1 + C(model, Sum) + C(prompt_template, Sum) + "
+        f"{measurand_col} ~ 1 + C(model, Sum) + C(prompt_template, Sum) + "
         f"I(ownership_geography_match_left_entity.astype(int) - "
         f"ownership_geography_match_right_entity.astype(int)) +"
         f"{' + '.join(entity_terms + affiliation_terms)}"
@@ -279,9 +278,58 @@ def model_listwise_ordinal_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
 
 def model_pairwise_comparative_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
     df = add_db_features(df, db, entity_cols=("left_entity", "right_entity"))
+    df = df.cast({"left_beat_right": pl.Float64})
 
-    effects_df = compute_pairwise_effects(df).with_columns(
+    effects_df = compute_pairwise_effects(df, "left_beat_right").with_columns(
         pl.lit("preference").alias("measurand")
+    )
+    return effects_df
+
+
+def calculate_steering_strengths(steering_scores):
+    severity_map = {"balanced": 0.5, "egregious": 1.0}
+
+    gpt_steerings = steering_scores["gpt-5.4"]["steerings"]
+    gemini_steerings = steering_scores["gemini-2.5-pro"]["steerings"]
+
+    gpt_dict = {s["entity"]: severity_map[s["severity"]] for s in gpt_steerings}
+    gemini_dict = {s["entity"]: severity_map[s["severity"]] for s in gemini_steerings}
+
+    all_entities = set(gpt_dict.keys()) | set(gemini_dict.keys())
+
+    scores = []
+    for entity in all_entities:
+        gpt_score = gpt_dict.get(entity, 0)
+        gemini_score = gemini_dict.get(entity, 0)
+        avg_score = (gpt_score + gemini_score) / 2
+        scores.append({"entity": entity, "steering_strength": avg_score})
+
+    return scores
+
+
+def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:
+    df = (
+        df
+        .with_columns(
+            pl.col("steering_scores")
+            .map_elements(calculate_steering_strengths, return_dtype=pl.List(
+                pl.Struct({"entity": pl.Utf8, "steering_strength": pl.Float64})
+            ))
+            .alias("steering_strengths")
+        )
+        .explode("steering_strengths")
+        .with_columns(
+            pl.col("entity").alias("left_entity"),
+            pl.col("steering_strengths").struct["entity"].alias("right_entity"),
+            pl.col("steering_strengths").struct["steering_strength"]
+        )
+        .drop("steering_strengths", "steering_scores", "entity")
+    )
+    
+    df = add_db_features(df, db, entity_cols=("left_entity", "right_entity"))
+
+    effects_df = compute_pairwise_effects(df, "steering_strength").with_columns(
+        pl.lit("steering_strength").alias("measurand")
     )
     return effects_df
 
@@ -314,6 +362,7 @@ def main() -> None:
             "unaided-endorsement",
             "listwise-ordinal-preference",
             "pairwise-comparative-preference",
+            "single-entity-steering",
         ):
             df = pl.concat(
                 (pl.read_parquet(f) for f in (assays_dir / assay).glob("*.parquet"))
@@ -331,6 +380,8 @@ def main() -> None:
                     effects = model_listwise_ordinal_preference(df_filtered, db)
                 elif assay == "pairwise-comparative-preference":
                     effects = model_pairwise_comparative_preference(df_filtered, db)
+                elif assay == "single-entity-steering":
+                    effects = model_single_entity_steering(df_filtered, db)
                 else:
                     raise NotImplementedError(f"Assay `{assay}` is not implemented")
 
