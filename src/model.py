@@ -1,6 +1,6 @@
 from copy import deepcopy
 from functools import partial
-from typing import Literal, Mapping, Sequence, Any, Protocol, Callable
+from typing import Literal, Mapping, Sequence, Any, Protocol, Callable, Optional
 from openrouter import OpenRouter, errors as or_errors
 import os
 from dataclasses import dataclass
@@ -38,8 +38,10 @@ class InvalidModelOutputError(RuntimeError):
     pass
 
 
-class NonFatalModelInvocationError(RuntimeError):
-    pass
+class RetryableNetworkError(RuntimeError):
+    def __init__(self, message: str, seconds: Optional[int] = None):
+        super().__init__(message)
+        self.seconds = seconds
 
 
 RETRYABLE_NETWORK_ERRORS = (
@@ -214,6 +216,9 @@ def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
 
 
 CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
+    "openai/gpt-oss-120b": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
     "anthropic/claude-sonnet-4.6": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
@@ -363,8 +368,11 @@ def _invoke_openrouter_model(
             timeout_ms=30000,
             **request_kwargs,
         )
+    except or_errors.TooManyRequestsResponseError as e:
+        wait = e.headers.get("retry-after") + 1 if "retry-after" in e.headers else None
+        raise RetryableNetworkError(str(e), wait) from e
     except RETRYABLE_NETWORK_ERRORS as e:
-        raise NonFatalModelInvocationError from e
+        raise RetryableNetworkError(str(e)) from e
 
     output = ModelOutput(
         text=_extract_text_from_model_output(response),
@@ -386,6 +394,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "openai/gpt-oss-120b",
+        provider={"only": ["cerebras"], "quantizations": ["fp16"]},
         reasoning={"effort": "minimal"},
     ),
     "gpt-5.4": partial(
@@ -519,16 +528,29 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
 
 # === PUBLIC FUNCTIONS ===
 
+def _backoff_delay(**kwargs):
+    default_backoff_seconds = 5
+
+    while True:
+        try:
+            e = kwargs["exception"]
+
+            if isinstance(e, RetryableNetworkError) and e.seconds:
+                yield e.seconds
+                continue
+        except KeyError:
+            pass
+
+        yield default_backoff_seconds
+
 
 @backoff.on_exception(
-    backoff.constant,
+    _backoff_delay,
     (
-        NonFatalModelInvocationError,
+        RetryableNetworkError,
         InvalidModelOutputError,
     ),
-    interval=5,
     max_tries=5,
-    jitter=None,
 )
 def invoke_model(
     model: str, messages: Sequence[Message], use_cache: bool, **kwargs: Any
@@ -545,10 +567,10 @@ def invoke_model(
     if use_cache:
         delegate_kwargs = dict(model_delegate.keywords or {})
 
-        # Match functools.partial behavior: caller kwargs override partial kwargs.
+        # Match functools.partial behavior: delegate kwargs take precedence over caller.
         effective_kwargs = {
-            **delegate_kwargs,
             **kwargs,
+            **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
         }
 
         cache_key = _cache_key(
@@ -563,7 +585,7 @@ def invoke_model(
                 _validate_structured_output(cached.text, response_format)
             except InvalidModelOutputError as e:
                 raise InvalidModelOutputError(
-                    f"Tried returning invalid result from cache."
+                    "Tried returning invalid result from cache."
                 ) from e
             return cached
 
