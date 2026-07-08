@@ -308,6 +308,9 @@ def calculate_steering_strengths(steering_scores):
 
 
 def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:
+    df_copy = df.clone()
+
+    # Steerings
     df = (
         df
         .with_columns(
@@ -328,10 +331,21 @@ def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:
     
     df = add_db_features(df, db, entity_cols=("left_entity", "right_entity"))
 
-    effects_df = compute_pairwise_effects(df, "steering_strength").with_columns(
+    steering = compute_pairwise_effects(df, "steering_strength").with_columns(
         pl.lit("steering_strength").alias("measurand")
     )
-    return effects_df
+
+    # Decisions
+    df_copy = df_copy.cast({"forced_decision": pl.Float64})
+
+    df_copy = add_db_features(df_copy, db, entity_cols=("entity",))
+
+    decisions = compute_effects(df_copy, "forced_decision").with_columns(
+        pl.lit("forced_decision").alias("measurand")
+    )
+
+    effects = pl.concat([steering, decisions])
+    return effects
 
 
 def parse_args() -> argparse.Namespace:

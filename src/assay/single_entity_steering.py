@@ -277,6 +277,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
+        pl.Series("forced_decision", forced_decisions),
         pl.Series("steering_scores", steering_scores),
         pl.Series("debug_json", debug_json_list),
         pl.col("target_entity").alias("entity")
@@ -286,6 +287,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "model",
         "comparison_set",
         "entity",
+        "forced_decision",
         "steering_scores",
         "debug_json",
     )
