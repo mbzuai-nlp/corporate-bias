@@ -223,32 +223,8 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "google/gemma-4-31b-it": {
         "strip_keywords": {"uniqueItems",},
     },
-    "anthropic/claude-sonnet-4.6": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "anthropic/claude-opus-4.6": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "openai/gpt-5.4": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "openai/gpt-4o-mini": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "mistralai/mistral-nemo": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "mistralai/mistral-small-2603": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "microsoft/phi-4": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "meta-llama/llama-3.1-8b-instruct": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
-    },
-    "meta-llama/llama-3.1-70b-instruct": {
-        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    "anthropic/claude-sonnet-5": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems", "minimum", "maximum"},
     },
 }
 
@@ -382,6 +358,10 @@ def _invoke_openrouter_model(
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs})
         raise RetryableNetworkError(err_str) from e
+    except Exception as e:
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs})
+        raise RuntimeError(err_str) from e
 
     output = ModelOutput(
         text=_extract_text_from_model_output(response),
@@ -421,139 +401,139 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "none"},
         **DEFAULT_SAMPLING_PARAMS
     ),
-    "gpt-4o-mini": partial(
+    # "gpt-4o-mini": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "openai/gpt-4o-mini",
+    #     provider={"only": ["openai"]},
+    #     reasoning={"effort": "none"},
+    #     **DEFAULT_SAMPLING_PARAMS
+    # ),
+    "claude-sonnet-5": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "openai/gpt-4o-mini",
-        provider={"only": ["openai"]},
-        reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
-    ),
-    "claude-sonnet-4.6": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "anthropic/claude-sonnet-4.6",
+        "anthropic/claude-sonnet-5",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
         **DEFAULT_SAMPLING_PARAMS
     ),
-    "claude-opus-4.6": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "anthropic/claude-opus-4.6",
-        provider={"only": ["anthropic"]},
-        reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
-    ),
-    "gemma-4-31b-it": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_vertex_client,
-        "google/gemma-4-31b-it",
-        provider={"only": ["venice"], "quantizations": ["bf16"]},
-        reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
-    ),
-    "gemini-2.5-flash": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_vertex_client,
-        "google/gemini-2.5-flash",
-        provider={"only": ["google-vertex"], "regions": ["global"]},
-        reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
-    ),
-    "gemini-2.5-pro": partial(
+    # "claude-opus-4.6": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "anthropic/claude-opus-4.6",
+    #     provider={"only": ["anthropic"]},
+    #     reasoning={"effort": "none"},
+    #     **DEFAULT_SAMPLING_PARAMS
+    # ),
+    # "gemma-4-31b-it": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_vertex_client,
+    #     "google/gemma-4-31b-it",
+    #     provider={"only": ["venice"], "quantizations": ["bf16"]},
+    #     reasoning={"effort": "none"},
+    #     **DEFAULT_SAMPLING_PARAMS
+    # ),
+    "gemini-3.5-flash": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
-        "google/gemini-2.5-pro",
+        "google/gemini-3.5-flash",
         provider={"only": ["google-vertex"], "regions": ["global"]},
         reasoning={"effort": "minimal"},
         **DEFAULT_SAMPLING_PARAMS
     ),
-    "grok-4.20": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "x-ai/grok-4.20",
-        reasoning={"effort": "none"},
-    ),
-    "grok-4.3": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "x-ai/grok-4.3",
-        reasoning={"effort": "none"},
-    ),
-    "llama-3.1-8b-instruct": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "meta-llama/llama-3.1-8b-instruct",
-        reasoning={"effort": "none"},
-    ),
-    "llama-3.1-70b-instruct": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "meta-llama/llama-3.1-70b-instruct",
-        reasoning={"effort": "none"},
-    ),
-    "mistral-nemo": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "mistralai/mistral-nemo",
-        reasoning={"effort": "none"},
-    ),
-    "mistral-small-2603": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "mistralai/mistral-small-2603",
-        reasoning={"effort": "none"},
-    ),
-    "deepseek-v3.2": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "deepseek/deepseek-v3.2",
-        reasoning={"effort": "none"},
-    ),
-    "qwen3-235b-a22b-2507": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "qwen/qwen3-235b-a22b-2507",
-        reasoning={"effort": "none"},
-    ),
-    "qwen3.5-flash-02-23": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "qwen/qwen3.5-flash-02-23",
-        reasoning={"effort": "none"},
-    ),
-    "nemotron-3-super-120b-a12b": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "nvidia/nemotron-3-super-120b-a12b",
-        reasoning={"effort": "none"},
-    ),
-    "phi-4": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "microsoft/phi-4",
-        reasoning={"effort": "none"},
-        provider={"ignore": ["nextbit"]},
-    ),
-    "hy3-preview": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "tencent/hy3-preview",
-        reasoning={"effort": "none"},
-    ),
-    "mimo-v2.5": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "xiaomi/mimo-v2.5",
-        reasoning={"effort": "none"},
-    ),
-    "glm-5.2": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "z-ai/glm-5.2",
-        reasoning={"effort": "none"},
-    ),
+    # "gemini-2.5-pro": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_vertex_client,
+    #     "google/gemini-2.5-pro",
+    #     provider={"only": ["google-vertex"], "regions": ["global"]},
+    #     reasoning={"effort": "minimal"},
+    #     **DEFAULT_SAMPLING_PARAMS
+    # ),
+    # "grok-4.20": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "x-ai/grok-4.20",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "grok-4.3": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "x-ai/grok-4.3",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "llama-3.1-8b-instruct": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "meta-llama/llama-3.1-8b-instruct",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "llama-3.1-70b-instruct": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "meta-llama/llama-3.1-70b-instruct",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "mistral-nemo": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "mistralai/mistral-nemo",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "mistral-small-2603": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "mistralai/mistral-small-2603",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "deepseek-v3.2": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "deepseek/deepseek-v3.2",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "qwen3-235b-a22b-2507": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "qwen/qwen3-235b-a22b-2507",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "qwen3.5-flash-02-23": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "qwen/qwen3.5-flash-02-23",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "nemotron-3-super-120b-a12b": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "nvidia/nemotron-3-super-120b-a12b",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "phi-4": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "microsoft/phi-4",
+    #     reasoning={"effort": "none"},
+    #     provider={"ignore": ["nextbit"]},
+    # ),
+    # "hy3-preview": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "tencent/hy3-preview",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "mimo-v2.5": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "xiaomi/mimo-v2.5",
+    #     reasoning={"effort": "none"},
+    # ),
+    # "glm-5.2": partial(
+    #     _invoke_openrouter_model,
+    #     _get_openrouter_client,
+    #     "z-ai/glm-5.2",
+    #     reasoning={"effort": "none"},
+    # ),
 }
 
 

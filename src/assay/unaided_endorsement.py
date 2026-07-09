@@ -10,7 +10,7 @@ from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
+_JUDGE_MODELS = ["claude-sonnet-5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
@@ -105,6 +105,9 @@ The comparison set is {comparison_set}, and its entities are:
                     "required": ["entity_scores"],
                     "additionalProperties": False,
                 },
+                "minItems": len(entities),
+                "maxItems": len(entities),
+                "uniqueItems": True,
             },
         },
     )
