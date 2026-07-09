@@ -429,6 +429,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
         "gemma-4-31B-it",
+        provider={"only": ["wandb"], "quantizations": ["fp16"]},
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-flash": partial(
@@ -442,6 +443,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
         "gemini-2.5-pro",
+        provider={"only": ["google-vertex"]},
         reasoning={"effort": "minimal"},
     ),
     "grok-4.20": partial(
