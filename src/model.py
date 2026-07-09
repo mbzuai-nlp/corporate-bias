@@ -13,6 +13,7 @@ import logging
 from tenacity import retry, stop_after_attempt, retry_if_exception_type
 import httpx
 import jsonschema
+from func_timeout import func_timeout, FunctionTimedOut
 
 
 # === TYPES ===
@@ -340,10 +341,10 @@ def _validate_structured_output(
             raise InvalidModelOutputError(
                 f"Model returned JSON that failed schema validation for {schema_name}: {e.message}"
             ) from e
-
+        
 
 def _invoke_openrouter_model(
-    client_getter: Callable,
+    client_getter: Callable[[], OpenRouter],
     model_name: str,
     messages: Sequence[Message],
     **kwargs: Any,
@@ -365,18 +366,21 @@ def _invoke_openrouter_model(
     request_kwargs = _disable_web_plugin(request_kwargs)
 
     try:
+        # If fully determinstic, adding timeout will invariably cause fatality
         response = client.chat.send(
             model=model_name,
             messages=_serialize_messages(messages),
-            timeout_ms=30000,
             **request_kwargs,
         )
     except or_errors.TooManyRequestsResponseError as e:
         wait = int(e.headers.get("retry-after")) + 1 if "retry-after" in e.headers else None
-        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), "body": e.body, "request_kwargs": request_kwargs, "should_wait_seconds": wait})
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs, 
+                              "should_wait_seconds": wait})
         raise RetryableNetworkError(err_str, wait) from e
     except RETRYABLE_NETWORK_ERRORS as e:
-        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), "body": e.body, "request_kwargs": request_kwargs})
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs})
         raise RetryableNetworkError(err_str) from e
 
     output = ModelOutput(
@@ -394,6 +398,12 @@ def _invoke_openrouter_model(
 # === MODEL DELEGATES ===
 
 
+DEFAULT_SAMPLING_PARAMS = {
+    "temperature": 0,
+    "seed": 0
+}
+
+
 MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     "gpt-oss-120b": partial(
         _invoke_openrouter_model,
@@ -401,6 +411,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-oss-120b",
         provider={"only": ["cerebras"], "quantizations": ["fp16"]},
         reasoning={"effort": "minimal"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "gpt-5.4": partial(
         _invoke_openrouter_model,
@@ -408,6 +419,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-5.4",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "gpt-4o-mini": partial(
         _invoke_openrouter_model,
@@ -415,6 +427,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-4o-mini",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "claude-sonnet-4.6": partial(
         _invoke_openrouter_model,
@@ -422,6 +435,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-sonnet-4.6",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "claude-opus-4.6": partial(
         _invoke_openrouter_model,
@@ -429,6 +443,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-opus-4.6",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "gemma-4-31b-it": partial(
         _invoke_openrouter_model,
@@ -436,20 +451,23 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "google/gemma-4-31b-it",
         provider={"only": ["venice"], "quantizations": ["bf16"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
         "google/gemini-2.5-flash",
-        provider={"only": ["google-vertex"]},
+        provider={"only": ["google-vertex"], "regions": ["global"]},
         reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "gemini-2.5-pro": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
         "google/gemini-2.5-pro",
-        provider={"only": ["google-vertex"]},
+        provider={"only": ["google-vertex"], "regions": ["global"]},
         reasoning={"effort": "minimal"},
+        **DEFAULT_SAMPLING_PARAMS
     ),
     "grok-4.20": partial(
         _invoke_openrouter_model,
@@ -544,13 +562,14 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
 
 def _wait(retry_state):
     exception = retry_state.outcome.exception()
+    logging.error(f"Encountered `{exception}`, retrying.")
     if isinstance(exception, RetryableNetworkError) and exception.seconds:
         return exception.seconds
     return 30
 
 
 @retry(
-    stop=stop_after_attempt(5),
+    stop=stop_after_attempt(10),
     wait=_wait,
     retry=retry_if_exception_type((RetryableNetworkError, InvalidModelOutputError)),
     reraise=True,

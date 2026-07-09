@@ -10,7 +10,7 @@ from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-2.5-pro"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
 
 
 JUDGE_SYSTEM_PROMPT = """

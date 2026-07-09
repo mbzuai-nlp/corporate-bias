@@ -8,32 +8,39 @@ stages:
     matrix:
       assay:
       - pairwise-comparative-preference
-      # - listwise-ordinal-preference
-      # - unaided-endorsement
-      # - open-ended-characterisation
-      # - single-entity-steering
+      - listwise-ordinal-preference
+      - unaided-endorsement
+      - open-ended-characterisation
+      - single-entity-steering
       model:
       - gpt-oss-120b
-      - gpt-5.4
-      - gpt-4o-mini
-      - claude-sonnet-4.6
-      - claude-opus-4.6
-      - gemini-2.5-flash
-      - gemini-2.5-pro
-      - gemma-4-31b-it
+      # - gpt-5.4
+      # - gpt-4o-mini
+      # - claude-sonnet-5
+      # - claude-opus-4.5
+      # - claude-3-haiku
+      # - gemini-3.5-flash
+      # - gemini-2.5-pro
+      # - gemma-4-31b-it
       # - grok-4.20
       # - grok-4.3
-      # - llama-3.1-8b-instruct
-      # - llama-3.1-70b-instruct
+      # - grok-4.5
+      # - llama-4-maverick
+      # - llama-3.3-70b-instruct
+      # - llama-3-8b-instruct
       # - mistral-nemo
+      # - mistral-medium-3-5
       # - mistral-small-2603
-      # - deepseek-v3.2
-      # - qwen3-235b-a22b-2507
+      # - deepseek-v4-pro
+      # - deepseek-chat
+      # - qwen3.7-plus
       # - qwen3.5-flash-02-23
-      # - nemotron-3-super-120b-a12b
+      # - nemotron-3-ultra-550b-a55b
+      # - nemotron-3-nano-30b-a3b
       # - phi-4
       # - hy3-preview
       # - mimo-v2.5
+      # - mimo-v2.5-pro
       # - glm-5.2
     vars:
     - stage-name: run-assay
@@ -66,7 +73,12 @@ stages:
     - ${data}/model-effects.parquet:
         cache: false
 metrics:
-- data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exp/metrics.json
+- data/run-assay/single-entity-steering/gpt-5.4/exp/metrics.json
+- data/run-assay/single-entity-steering/gpt-4o-mini/exp/metrics.json
+- data/run-assay/single-entity-steering/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/single-entity-steering/claude-opus-4.6/exp/metrics.json
+- data/run-assay/single-entity-steering/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/single-entity-steering/gemini-2.5-pro/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-oss-120b/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-5.4/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-4o-mini/exp/metrics.json
@@ -75,8 +87,42 @@ metrics:
 - data/run-assay/pairwise-comparative-preference/gemini-2.5-flash/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gemini-2.5-pro/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gemma-4-31b-it/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gpt-5.4/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gpt-4o-mini/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/claude-opus-4.6/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exp/metrics.json
+- data/run-assay/unaided-endorsement/gpt-oss-120b/exp/metrics.json
+- data/run-assay/unaided-endorsement/gpt-5.4/exp/metrics.json
+- data/run-assay/unaided-endorsement/gpt-4o-mini/exp/metrics.json
+- data/run-assay/unaided-endorsement/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/unaided-endorsement/claude-opus-4.6/exp/metrics.json
+- data/run-assay/unaided-endorsement/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/unaided-endorsement/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/unaided-endorsement/gemma-4-31b-it/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gpt-oss-120b/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gpt-5.4/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gpt-4o-mini/exp/metrics.json
+- data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exp/metrics.json
+- data/run-assay/open-ended-characterisation/claude-opus-4.6/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gemini-2.5-flash/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gemini-2.5-pro/exp/metrics.json
+- data/run-assay/open-ended-characterisation/gemma-4-31b-it/exp/metrics.json
 plots:
-- data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exp/plots/metrics:
+- data/run-assay/single-entity-steering/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/gemini-2.5-pro/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/gpt-oss-120b/exp/plots/metrics:
     x: step
@@ -93,4 +139,52 @@ plots:
 - data/run-assay/pairwise-comparative-preference/gemini-2.5-pro/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/gemma-4-31b-it/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gemini-2.5-pro/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/gemma-4-31b-it/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gpt-oss-120b/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gpt-5.4/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gpt-4o-mini/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/claude-opus-4.6/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gemini-2.5-flash/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gemini-2.5-pro/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/gemma-4-31b-it/exp/plots/metrics:
     x: step

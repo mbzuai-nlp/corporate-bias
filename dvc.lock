@@ -15,8 +15,8 @@ stages:
     outs:
     - path: data/assays/listwise-ordinal-preference/gemma-4-31b-it.parquet
       hash: md5
-      md5: 72aed66c5eeb8413f39eb7cafce79072
-      size: 5642
+      md5: 7e1e9fe232aa49909268061d34aa13fa
+      size: 8921
   run-assay@pairwise-comparative-preference-gpt-oss-120b:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-oss-120b;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -32,8 +32,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-oss-120b.parquet
       hash: md5
-      md5: 28fc30592529795bb7ce7af1c8519cfb
-      size: 38965
+      md5: 2d684035130152b38bc5bcce078260a6
+      size: 34363
   run-assay@pairwise-comparative-preference-gpt-5.4:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-5.4;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -49,8 +49,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-5.4.parquet
       hash: md5
-      md5: 053fe9a9049d9708db1a09c121ffc350
-      size: 18404
+      md5: 951fbdaec6f2e7d5a725c4e028639b22
+      size: 18163
   run-assay@pairwise-comparative-preference-gpt-4o-mini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-4o-mini;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -66,8 +66,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-4o-mini.parquet
       hash: md5
-      md5: cf67073eb007248644baffb714be75c9
-      size: 19480
+      md5: 0518ccb8b05dfa8dc5dafba41076272a
+      size: 19567
   run-assay@pairwise-comparative-preference-claude-sonnet-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-sonnet-4.6;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -85,8 +85,8 @@ stages:
     - path: 
         data/assays/pairwise-comparative-preference/claude-sonnet-4.6.parquet
       hash: md5
-      md5: 426c7224974a7c2027b8826990b611fe
-      size: 18852
+      md5: 689c998daf3a80f8ec8cee19f29c9d26
+      size: 18765
   run-assay@pairwise-comparative-preference-claude-opus-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-opus-4.6;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -103,8 +103,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/claude-opus-4.6.parquet
       hash: md5
-      md5: daa312d16f9393357320dabc0f51d579
-      size: 19553
+      md5: ce5b8c7d0b991fa7673081fc092cd907
+      size: 19571
   run-assay@pairwise-comparative-preference-gemini-2.5-flash:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gemini-2.5-flash;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -121,8 +121,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gemini-2.5-flash.parquet
       hash: md5
-      md5: cd4b4a178915e7c9e8327da95993b2cb
-      size: 19596
+      md5: f4c4024220ebc978c798e219b97e568c
+      size: 18933
   run-assay@pairwise-comparative-preference-gemini-2.5-pro:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gemini-2.5-pro;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -139,8 +139,8 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gemini-2.5-pro.parquet
       hash: md5
-      md5: e3271ba69ce6cd84054c8977466f8fdc
-      size: 112662
+      md5: d6c8d8620ab12f37e65e8f2808fd22c6
+      size: 111200
   run-assay@pairwise-comparative-preference-gemma-4-31b-it:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gemma-4-31b-it;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -157,5 +157,516 @@ stages:
     outs:
     - path: data/assays/pairwise-comparative-preference/gemma-4-31b-it.parquet
       hash: md5
-      md5: 9627553bc823e3c68edc86d9ea218ed0
-      size: 20016
+      md5: fde860df3561096cc9871275f6dd0d50
+      size: 20194
+  run-assay@listwise-ordinal-preference-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
+      hash: md5
+      md5: d82c6160eb8e1c65e229abbc802d1d3a
+      size: 12065
+  run-assay@listwise-ordinal-preference-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-5.4
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gpt-5.4.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gpt-5.4/exp 2>&1 | tee data/run-assay/listwise-ordinal-preference/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gpt-5.4.parquet
+      hash: md5
+      md5: 759eaba6b93dbc1a0564d5104d34f4e0
+      size: 8554
+  run-assay@listwise-ordinal-preference-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gpt-4o-mini.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gpt-4o-mini/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gpt-4o-mini/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gpt-4o-mini.parquet
+      hash: md5
+      md5: 1aee75d7ff793f24a037af8e368e4364
+      size: 8827
+  run-assay@listwise-ordinal-preference-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-sonnet-4.6/exp 2>&1
+      | tee data/run-assay/listwise-ordinal-preference/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 3c636be8f02ddbb583b96812878c6963
+      size: 8844
+  run-assay@listwise-ordinal-preference-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-opus-4.6.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-opus-4.6/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-opus-4.6.parquet
+      hash: md5
+      md5: 3a67cf3613dcafb178ec5e64793350cb
+      size: 8700
+  run-assay@listwise-ordinal-preference-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gemini-2.5-flash.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gemini-2.5-flash/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gemini-2.5-flash.parquet
+      hash: md5
+      md5: aead7e81c7fc999efadd6bb1f3fa4afb
+      size: 9143
+  run-assay@listwise-ordinal-preference-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gemini-2.5-pro.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 5aa1708d8f762aa48eae57a241a27f11
+      size: 25668
+  run-assay@unaided-endorsement-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/unaided-endorsement/gpt-oss-120b.parquet
+      --exp=data/run-assay/unaided-endorsement/gpt-oss-120b/exp 2>&1 | tee data/run-assay/unaided-endorsement/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gpt-oss-120b.parquet
+      hash: md5
+      md5: 622d332a413a70101ba0789e00f5caa2
+      size: 34338
+  run-assay@unaided-endorsement-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gpt-5.4
+      --db=data/db --save-path=data/assays/unaided-endorsement/gpt-5.4.parquet --exp=data/run-assay/unaided-endorsement/gpt-5.4/exp
+      2>&1 | tee data/run-assay/unaided-endorsement/gpt-5.4/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gpt-5.4.parquet
+      hash: md5
+      md5: c45741e4382c930935800210a533d40c
+      size: 15202
+  run-assay@unaided-endorsement-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/unaided-endorsement/gpt-4o-mini.parquet
+      --exp=data/run-assay/unaided-endorsement/gpt-4o-mini/exp 2>&1 | tee data/run-assay/unaided-endorsement/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gpt-4o-mini.parquet
+      hash: md5
+      md5: db552caccc16f6aef658e7819cbc68e9
+      size: 15328
+  run-assay@unaided-endorsement-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/unaided-endorsement/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/unaided-endorsement/claude-sonnet-4.6/exp 2>&1 | tee data/run-assay/unaided-endorsement/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 4fec755e5894d041e4e15385f7c92dc5
+      size: 14518
+  run-assay@unaided-endorsement-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/unaided-endorsement/claude-opus-4.6.parquet
+      --exp=data/run-assay/unaided-endorsement/claude-opus-4.6/exp 2>&1 | tee data/run-assay/unaided-endorsement/claude-opus-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/claude-opus-4.6.parquet
+      hash: md5
+      md5: 98a32d77d0422652bdb7a948c51a529d
+      size: 13921
+  run-assay@unaided-endorsement-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/unaided-endorsement/gemini-2.5-flash.parquet
+      --exp=data/run-assay/unaided-endorsement/gemini-2.5-flash/exp 2>&1 | tee data/run-assay/unaided-endorsement/gemini-2.5-flash/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 7154e07152154d1c9ab7ec047158c71e
+      size: 19878
+  run-assay@unaided-endorsement-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/unaided-endorsement/gemini-2.5-pro.parquet
+      --exp=data/run-assay/unaided-endorsement/gemini-2.5-pro/exp 2>&1 | tee data/run-assay/unaided-endorsement/gemini-2.5-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gemini-2.5-pro.parquet
+      hash: md5
+      md5: c9a0ca56cb08fcb08e985438ecc4ae15
+      size: 29774
+  run-assay@unaided-endorsement-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/unaided-endorsement/gemma-4-31b-it.parquet
+      --exp=data/run-assay/unaided-endorsement/gemma-4-31b-it/exp 2>&1 | tee data/run-assay/unaided-endorsement/gemma-4-31b-it/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gemma-4-31b-it.parquet
+      hash: md5
+      md5: fd6b3c267925809bf09adce4364b0709
+      size: 20311
+  run-assay@open-ended-characterisation-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gpt-oss-120b.parquet
+      --exp=data/run-assay/open-ended-characterisation/gpt-oss-120b/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gpt-oss-120b.parquet
+      hash: md5
+      md5: c44eb9d0aaf2fac20c183b269b4db2b9
+      size: 122687
+  run-assay@open-ended-characterisation-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-5.4
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gpt-5.4.parquet
+      --exp=data/run-assay/open-ended-characterisation/gpt-5.4/exp 2>&1 | tee data/run-assay/open-ended-characterisation/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gpt-5.4.parquet
+      hash: md5
+      md5: 4480faa9153bfd60c47fe4adf5e30f7c
+      size: 51557
+  run-assay@open-ended-characterisation-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gpt-4o-mini.parquet
+      --exp=data/run-assay/open-ended-characterisation/gpt-4o-mini/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gpt-4o-mini/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gpt-4o-mini.parquet
+      hash: md5
+      md5: b4cf96dca453e08b8e5d1674a57fc7c7
+      size: 52269
+  run-assay@open-ended-characterisation-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/open-ended-characterisation/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exp 2>&1
+      | tee data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 1e4f079821bdc03094ee679cc9dd4e75
+      size: 52395
+  run-assay@open-ended-characterisation-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/open-ended-characterisation/claude-opus-4.6.parquet
+      --exp=data/run-assay/open-ended-characterisation/claude-opus-4.6/exp 2>&1 |
+      tee data/run-assay/open-ended-characterisation/claude-opus-4.6/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/claude-opus-4.6.parquet
+      hash: md5
+      md5: 8659ed5828ed18cb15e266d388f1da52
+      size: 56772
+  run-assay@open-ended-characterisation-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gemini-2.5-flash.parquet
+      --exp=data/run-assay/open-ended-characterisation/gemini-2.5-flash/exp 2>&1 |
+      tee data/run-assay/open-ended-characterisation/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gemini-2.5-flash.parquet
+      hash: md5
+      md5: d141b5800b083543013d96af2daf1ea0
+      size: 79579
+  run-assay@open-ended-characterisation-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gemini-2.5-pro.parquet
+      --exp=data/run-assay/open-ended-characterisation/gemini-2.5-pro/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 1e7bf2763e366825c98e0b9a83287a29
+      size: 130520
+  run-assay@open-ended-characterisation-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gemma-4-31b-it.parquet
+      --exp=data/run-assay/open-ended-characterisation/gemma-4-31b-it/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gemma-4-31b-it/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gemma-4-31b-it.parquet
+      hash: md5
+      md5: 5f9bff5569aa3c34fe13a8ba0e80edc3
+      size: 76659
+  run-assay@single-entity-steering-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/single-entity-steering/gpt-oss-120b.parquet
+      --exp=data/run-assay/single-entity-steering/gpt-oss-120b/exp 2>&1 | tee data/run-assay/single-entity-steering/gpt-oss-120b/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gpt-oss-120b.parquet
+      hash: md5
+      md5: 5c79f5415686c04dc1bd137cf22954af
+      size: 167746
+  run-assay@single-entity-steering-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gpt-5.4
+      --db=data/db --save-path=data/assays/single-entity-steering/gpt-5.4.parquet
+      --exp=data/run-assay/single-entity-steering/gpt-5.4/exp 2>&1 | tee data/run-assay/single-entity-steering/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gpt-5.4.parquet
+      hash: md5
+      md5: 365bee4c8633eb2223cde7a0fb149856
+      size: 55515
+  run-assay@single-entity-steering-gpt-4o-mini:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gpt-4o-mini;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gpt-4o-mini
+      --db=data/db --save-path=data/assays/single-entity-steering/gpt-4o-mini.parquet
+      --exp=data/run-assay/single-entity-steering/gpt-4o-mini/exp 2>&1 | tee data/run-assay/single-entity-steering/gpt-4o-mini/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gpt-4o-mini.parquet
+      hash: md5
+      md5: b44fa8de03adb0c9f9fbdd1b71fe47f5
+      size: 49800
+  run-assay@single-entity-steering-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/single-entity-steering/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/single-entity-steering/claude-sonnet-4.6/exp 2>&1 | tee
+      data/run-assay/single-entity-steering/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 128aa4259c581850097ebf4d02072954
+      size: 51230
+  run-assay@single-entity-steering-claude-opus-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-opus-4.6;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-opus-4.6
+      --db=data/db --save-path=data/assays/single-entity-steering/claude-opus-4.6.parquet
+      --exp=data/run-assay/single-entity-steering/claude-opus-4.6/exp 2>&1 | tee data/run-assay/single-entity-steering/claude-opus-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/claude-opus-4.6.parquet
+      hash: md5
+      md5: 1d6b1924ae7975964cb6b430cb6091cb
+      size: 50734
+  run-assay@single-entity-steering-gemini-2.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gemini-2.5-flash;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gemini-2.5-flash
+      --db=data/db --save-path=data/assays/single-entity-steering/gemini-2.5-flash.parquet
+      --exp=data/run-assay/single-entity-steering/gemini-2.5-flash/exp 2>&1 | tee
+      data/run-assay/single-entity-steering/gemini-2.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gemini-2.5-flash.parquet
+      hash: md5
+      md5: 9f24853a8fcd5cadeb49c83e31ff1aeb
+      size: 88171
+  run-assay@single-entity-steering-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/single-entity-steering/gemini-2.5-pro.parquet
+      --exp=data/run-assay/single-entity-steering/gemini-2.5-pro/exp 2>&1 | tee data/run-assay/single-entity-steering/gemini-2.5-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 872a9a6c1522ad6eda32999cc81853ec
+      size: 144431
