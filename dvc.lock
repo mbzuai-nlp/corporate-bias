@@ -3635,15 +3635,15 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: 
         data/assays/pairwise-comparative-preference/claude-sonnet-4.6.parquet
       hash: md5
-      md5: 2cdfccc920f8136b291cb05adf60359d
-      size: 11681
+      md5: ee2e4a88bfddbb21898e93de9d725ff2
+      size: 31834
   run-assay@pairwise-comparative-preference-claude-opus-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-opus-4.6;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -4080,14 +4080,14 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/listwise-ordinal-preference/claude-sonnet-4.6.parquet
       hash: md5
-      md5: c28f29c42acc9d4389e56ef18eeec90f
-      size: 11514
+      md5: 628b69837617a6d6626365ea24d65e55
+      size: 24971
   run-assay@listwise-ordinal-preference-claude-opus-4.6:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-opus-4.6;
       uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-opus-4.6
@@ -4740,3 +4740,55 @@ stages:
       hash: md5
       md5: 7591b8636e93c1162672f836329207b9
       size: 166738
+  run-assay@unaided-endorsement-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/unaided-endorsement/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/unaided-endorsement/claude-sonnet-4.6/exp 2>&1 | tee data/run-assay/unaided-endorsement/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 6699d7bde9037a4e409ebf353100faa9
+      size: 112553
+  run-assay@open-ended-characterisation-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/open-ended-characterisation/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exp 2>&1
+      | tee data/run-assay/open-ended-characterisation/claude-sonnet-4.6/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: 515ae9e093b8c131aa4ff780cd445ba8
+      size: 157262
+  run-assay@single-entity-steering-claude-sonnet-4.6:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-sonnet-4.6;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-sonnet-4.6
+      --db=data/db --save-path=data/assays/single-entity-steering/claude-sonnet-4.6.parquet
+      --exp=data/run-assay/single-entity-steering/claude-sonnet-4.6/exp 2>&1 | tee
+      data/run-assay/single-entity-steering/claude-sonnet-4.6/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/claude-sonnet-4.6.parquet
+      hash: md5
+      md5: b5833302bce46420dc4f419351009b09
+      size: 166025

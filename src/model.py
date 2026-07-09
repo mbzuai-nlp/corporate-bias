@@ -415,6 +415,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "anthropic/claude-sonnet-4.6",
+        provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
     ),
     "claude-opus-4.6": partial(
