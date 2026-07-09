@@ -10,7 +10,7 @@ import pickle
 import sqlite3
 import threading
 import logging
-import backoff
+from tenacity import retry, stop_after_attempt, retry_if_exception_type
 import httpx
 import jsonschema
 
@@ -219,6 +219,9 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "openai/gpt-oss-120b": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
+    "google/gemma-4-31b-it": {
+        "strip_keywords": {"uniqueItems",},
+    },
     "anthropic/claude-sonnet-4.6": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
@@ -369,10 +372,12 @@ def _invoke_openrouter_model(
             **request_kwargs,
         )
     except or_errors.TooManyRequestsResponseError as e:
-        wait = e.headers.get("retry-after") + 1 if "retry-after" in e.headers else None
-        raise RetryableNetworkError(str(e), wait) from e
+        wait = int(e.headers.get("retry-after")) + 1 if "retry-after" in e.headers else None
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), "body": e.body, "request_kwargs": request_kwargs, "should_wait_seconds": wait})
+        raise RetryableNetworkError(err_str, wait) from e
     except RETRYABLE_NETWORK_ERRORS as e:
-        raise RetryableNetworkError(str(e)) from e
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), "body": e.body, "request_kwargs": request_kwargs})
+        raise RetryableNetworkError(err_str) from e
 
     output = ModelOutput(
         text=_extract_text_from_model_output(response),
@@ -425,24 +430,24 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
     ),
-    "gemma-4-31B-it": partial(
+    "gemma-4-31b-it": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
-        "gemma-4-31B-it",
-        provider={"only": ["wandb"], "quantizations": ["fp16"]},
+        "google/gemma-4-31b-it",
+        provider={"only": ["venice"], "quantizations": ["bf16"]},
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
-        "gemini-2.5-flash",
+        "google/gemini-2.5-flash",
         provider={"only": ["google-vertex"]},
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-pro": partial(
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
-        "gemini-2.5-pro",
+        "google/gemini-2.5-pro",
         provider={"only": ["google-vertex"]},
         reasoning={"effort": "minimal"},
     ),
@@ -533,31 +538,22 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     ),
 }
 
+
 # === PUBLIC FUNCTIONS ===
 
-def _backoff_delay(**kwargs):
-    default_backoff_seconds = 5
 
-    while True:
-        try:
-            e = kwargs["exception"]
-
-            if isinstance(e, RetryableNetworkError) and e.seconds:
-                yield e.seconds
-                continue
-        except KeyError:
-            pass
-
-        yield default_backoff_seconds
+def _wait(retry_state):
+    exception = retry_state.outcome.exception()
+    if isinstance(exception, RetryableNetworkError) and exception.seconds:
+        return exception.seconds
+    return 30
 
 
-@backoff.on_exception(
-    _backoff_delay,
-    (
-        RetryableNetworkError,
-        InvalidModelOutputError,
-    ),
-    max_tries=5,
+@retry(
+    stop=stop_after_attempt(5),
+    wait=_wait,
+    retry=retry_if_exception_type((RetryableNetworkError, InvalidModelOutputError)),
+    reraise=True,
 )
 def invoke_model(
     model: str, messages: Sequence[Message], use_cache: bool, **kwargs: Any
