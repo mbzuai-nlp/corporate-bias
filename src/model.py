@@ -435,6 +435,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_vertex_client,
         "gemini-2.5-flash",
+        provider={"only": ["google-vertex"]},
         reasoning={"effort": "none"},
     ),
     "gemini-2.5-pro": partial(
