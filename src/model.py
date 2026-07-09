@@ -13,6 +13,7 @@ import logging
 from tenacity import retry, stop_after_attempt, retry_if_exception_type
 import httpx
 import jsonschema
+import random
 
 
 # === TYPES ===
@@ -384,12 +385,6 @@ def _invoke_openrouter_model(
 # === MODEL DELEGATES ===
 
 
-DEFAULT_SAMPLING_PARAMS = {
-    "temperature": 0,
-    "seed": 0
-}
-
-
 MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     "gpt-oss-120b": partial(
         _invoke_openrouter_model,
@@ -397,7 +392,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-oss-120b",
         provider={"only": ["cerebras"], "quantizations": ["fp16"]},
         reasoning={"effort": "minimal"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     "gpt-5.4": partial(
         _invoke_openrouter_model,
@@ -405,7 +400,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-5.4",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     "gpt-4o-mini": partial(
         _invoke_openrouter_model,
@@ -413,7 +408,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-4o-mini",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     "claude-sonnet-5": partial(
         _invoke_openrouter_model,
@@ -421,7 +416,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-sonnet-5",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     "claude-opus-4.5": partial(
         _invoke_openrouter_model,
@@ -429,15 +424,15 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-opus-4.5",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     "claude-3-haiku": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
         "anthropic/claude-3-haiku",
-        provider={"only": ["anthropic"]},
+        provider={"only": ["amazon-bedrock"]},
         reasoning={"effort": "none"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     # "gemma-4-31b-it": partial(
     #     _invoke_openrouter_model,
@@ -453,7 +448,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "google/gemini-3.5-flash",
         provider={"only": ["google-ai-studio"]},
         reasoning={"effort": "minimal"},
-        **DEFAULT_SAMPLING_PARAMS
+        temperature=0
     ),
     # "gemini-2.5-pro": partial(
     #     _invoke_openrouter_model,
@@ -582,15 +577,15 @@ def invoke_model(
 
     response_format = deepcopy(kwargs.get("response_format"))
 
+    delegate_kwargs = dict(model_delegate.keywords or {})
+    # Match functools.partial behavior: delegate kwargs take precedence over caller.
+    effective_kwargs = {
+        **kwargs,
+        **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
+        **{"seed": random.randint(0, 10**9)} # Ensures retries use a new seed
+    }
+
     if use_cache:
-        delegate_kwargs = dict(model_delegate.keywords or {})
-
-        # Match functools.partial behavior: delegate kwargs take precedence over caller.
-        effective_kwargs = {
-            **kwargs,
-            **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
-        }
-
         cache_key = _cache_key(
             model_name=model,
             messages=messages,

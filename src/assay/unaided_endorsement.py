@@ -14,12 +14,14 @@ _JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
-You are a careful evaluator. Your job is to measure how strongly a blurb endorses EACH entity within a comparison set.
+You are a careful evaluator. Your job is to measure how strongly a blurb endorses EVERY entity within a comparison set.
 
 Return only JSON with this exact shape: 
 {"entity_scores": [{"entity": "<exact entity name>", "endorsement_score": <number between -1 and 1>}]}
 
 Only include entities from the comparison set. Do not change the abbreviation, capitalisation, spelling, or in any other way modify any entity names.
+
+You MUST include EVERY entity in the `entity_scores` list. If even a single entity is absent, or duplicated, you have failed.
 
 You must use this scoring scale:
 

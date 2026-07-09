@@ -842,3 +842,89 @@ stages:
       hash: md5
       md5: 2e90dc5d6c6c7310ef69bd5555a09b17
       size: 40104
+  run-assay@pairwise-comparative-preference-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=claude-3-haiku --db=data/db --save-path=data/assays/pairwise-comparative-preference/claude-3-haiku.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/claude-3-haiku/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/claude-3-haiku/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/pairwise-comparative-preference/claude-3-haiku.parquet
+      hash: md5
+      md5: c9436554a7a870ad2ed166a39ef424a6
+      size: 18915
+  run-assay@listwise-ordinal-preference-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-3-haiku
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-3-haiku.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-3-haiku/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/claude-3-haiku/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-3-haiku.parquet
+      hash: md5
+      md5: 6ce148429101f6481f386bbf09520bad
+      size: 9017
+  run-assay@unaided-endorsement-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=claude-3-haiku
+      --db=data/db --save-path=data/assays/unaided-endorsement/claude-3-haiku.parquet
+      --exp=data/run-assay/unaided-endorsement/claude-3-haiku/exp 2>&1 | tee data/run-assay/unaided-endorsement/claude-3-haiku/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/claude-3-haiku.parquet
+      hash: md5
+      md5: 93398822b53012df2598b3e9952049ed
+      size: 14045
+  run-assay@open-ended-characterisation-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=claude-3-haiku
+      --db=data/db --save-path=data/assays/open-ended-characterisation/claude-3-haiku.parquet
+      --exp=data/run-assay/open-ended-characterisation/claude-3-haiku/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/claude-3-haiku/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/claude-3-haiku.parquet
+      hash: md5
+      md5: 837206069f67a169127fecbd37ac962b
+      size: 42887
+  run-assay@single-entity-steering-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-3-haiku
+      --db=data/db --save-path=data/assays/single-entity-steering/claude-3-haiku.parquet
+      --exp=data/run-assay/single-entity-steering/claude-3-haiku/exp 2>&1 | tee data/run-assay/single-entity-steering/claude-3-haiku/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/claude-3-haiku.parquet
+      hash: md5
+      md5: 084cc2028da0aa4c3d9b8c50dd2ea894
+      size: 39014
