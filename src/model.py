@@ -79,18 +79,6 @@ def _get_openrouter_client() -> OpenRouter:
     return _openrouter_client
 
 
-def _get_openrouter_vertex_client() -> OpenRouter:
-    global _openrouter_vertex_client
-
-    if _openrouter_vertex_client is None:
-        api_key = os.environ.get("OPENROUTER_VERTEX_API_KEY")
-        if not api_key:
-            raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
-        _openrouter_vertex_client = OpenRouter(api_key=api_key)
-
-    return _openrouter_vertex_client
-
-
 # === CACHE ===
 
 
@@ -435,9 +423,9 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     # ),
     "gemini-3.5-flash": partial(
         _invoke_openrouter_model,
-        _get_openrouter_vertex_client,
+        _get_openrouter_client,
         "google/gemini-3.5-flash",
-        provider={"only": ["google-vertex"], "regions": ["global"]},
+        provider={"only": ["google-ai-studio"]},
         reasoning={"effort": "minimal"},
         **DEFAULT_SAMPLING_PARAMS
     ),
