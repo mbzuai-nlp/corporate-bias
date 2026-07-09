@@ -422,6 +422,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "anthropic/claude-opus-4.6",
+        provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
     ),
     "gemma-4-31B-it": partial(
