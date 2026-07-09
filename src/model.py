@@ -408,6 +408,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "openai/gpt-4o-mini",
+        provider={"only": ["openai"]},
         reasoning={"effort": "none"},
     ),
     "claude-sonnet-4.6": partial(
