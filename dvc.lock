@@ -3600,14 +3600,14 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/pairwise-comparative-preference/gpt-5.4.parquet
       hash: md5
-      md5: c9f01a13d60ac02bbaf4e03b197375ce
-      size: 11477
+      md5: d7167f0fe009ed7355a12185cb801f96
+      size: 31589
   run-assay@pairwise-comparative-preference-gpt-4o-mini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gpt-4o-mini;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -4045,14 +4045,14 @@ stages:
     deps:
     - path: data/db
       hash: md5
-      md5: 8c2e68ab89a381b7470d674ec5bd3c21.dir
-      size: 15773
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
       nfiles: 10
     outs:
     - path: data/assays/listwise-ordinal-preference/gpt-5.4.parquet
       hash: md5
-      md5: e493c6f9abf7b1c1a56b2a451cbf6484
-      size: 11224
+      md5: 9165c317e6bb62b43a74b2a981b71bfa
+      size: 24773
   run-assay@listwise-ordinal-preference-gpt-4o-mini:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-4o-mini;
       uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-4o-mini
@@ -4690,3 +4690,53 @@ stages:
       hash: md5
       md5: e67e6551946ac6feaf9ed193dbaddeb7
       size: 245802
+  run-assay@unaided-endorsement-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gpt-5.4
+      --db=data/db --save-path=data/assays/unaided-endorsement/gpt-5.4.parquet --exp=data/run-assay/unaided-endorsement/gpt-5.4/exp
+      2>&1 | tee data/run-assay/unaided-endorsement/gpt-5.4/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/gpt-5.4.parquet
+      hash: md5
+      md5: ce07df9685589fe096ebbf17a53d7837
+      size: 114206
+  run-assay@open-ended-characterisation-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gpt-5.4
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gpt-5.4.parquet
+      --exp=data/run-assay/open-ended-characterisation/gpt-5.4/exp 2>&1 | tee data/run-assay/open-ended-characterisation/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/gpt-5.4.parquet
+      hash: md5
+      md5: 9f383b2e9af19ca405bc6a3e4a30f3e6
+      size: 152745
+  run-assay@single-entity-steering-gpt-5.4:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gpt-5.4;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gpt-5.4
+      --db=data/db --save-path=data/assays/single-entity-steering/gpt-5.4.parquet
+      --exp=data/run-assay/single-entity-steering/gpt-5.4/exp 2>&1 | tee data/run-assay/single-entity-steering/gpt-5.4/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: f161995d79cb54c1dc58e411eadf1651.dir
+      size: 15719
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/gpt-5.4.parquet
+      hash: md5
+      md5: 7591b8636e93c1162672f836329207b9
+      size: 166738
