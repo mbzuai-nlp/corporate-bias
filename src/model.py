@@ -351,6 +351,13 @@ def _invoke_openrouter_model(
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs})
         raise RetryableNetworkError(err_str) from e
+    except or_errors.BadRequestResponseError as e:
+        if "rate limit exceeded" in str(e.body): # thanks anthropic...
+            err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs, 
+                              "should_wait_seconds": 61})
+            raise RetryableNetworkError(err_str, 61) from e
+        raise e
     except Exception as e:
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs})
