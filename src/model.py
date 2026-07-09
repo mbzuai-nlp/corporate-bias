@@ -210,6 +210,9 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "openai/gpt-5.4": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
+    "openai/gpt-4o-mini": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
     "google/gemma-4-31b-it": {
         "strip_keywords": {"uniqueItems",},
     },
@@ -391,14 +394,14 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "none"},
         **DEFAULT_SAMPLING_PARAMS
     ),
-    # "gpt-4o-mini": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "openai/gpt-4o-mini",
-    #     provider={"only": ["openai"]},
-    #     reasoning={"effort": "none"},
-    #     **DEFAULT_SAMPLING_PARAMS
-    # ),
+    "gpt-4o-mini": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "openai/gpt-4o-mini",
+        provider={"only": ["openai"]},
+        reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
+    ),
     "claude-sonnet-5": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
