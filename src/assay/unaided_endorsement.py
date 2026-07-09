@@ -100,14 +100,14 @@ The comparison set is {comparison_set}, and its entities are:
                                 "required": ["entity", "endorsement_score"],
                                 "additionalProperties": False,
                             },
+                            "minItems": len(entities),
+                            "maxItems": len(entities),
+                            "uniqueItems": True,
                         },
                     },
                     "required": ["entity_scores"],
                     "additionalProperties": False,
-                },
-                "minItems": len(entities),
-                "maxItems": len(entities),
-                "uniqueItems": True,
+                }
             },
         },
     )

@@ -13,7 +13,6 @@ import logging
 from tenacity import retry, stop_after_attempt, retry_if_exception_type
 import httpx
 import jsonschema
-from func_timeout import func_timeout, FunctionTimedOut
 
 
 # === TYPES ===
@@ -206,6 +205,9 @@ def _disable_web_plugin(kwargs: dict[str, Any]) -> dict[str, Any]:
 
 CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "openai/gpt-oss-120b": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "openai/gpt-5.4": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
     "google/gemma-4-31b-it": {
@@ -533,6 +535,8 @@ def _wait(retry_state):
     logging.error(f"Encountered `{exception}`, retrying.")
     if isinstance(exception, RetryableNetworkError) and exception.seconds:
         return exception.seconds
+    elif isinstance(exception, InvalidModelOutputError):
+        return 1
     return 30
 
 
