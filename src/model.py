@@ -219,6 +219,12 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "anthropic/claude-sonnet-5": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems", "minimum", "maximum"},
     },
+    "anthropic/claude-opus-4.5": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems", "minimum", "maximum"},
+    },
+    "anthropic/claude-3-haiku": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems", "minimum", "maximum"},
+    },
 }
 
 
@@ -417,14 +423,22 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "none"},
         **DEFAULT_SAMPLING_PARAMS
     ),
-    # "claude-opus-4.6": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "anthropic/claude-opus-4.6",
-    #     provider={"only": ["anthropic"]},
-    #     reasoning={"effort": "none"},
-    #     **DEFAULT_SAMPLING_PARAMS
-    # ),
+    "claude-opus-4.5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "anthropic/claude-opus-4.5",
+        provider={"only": ["anthropic"]},
+        reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
+    ),
+    "claude-3-haiku": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "anthropic/claude-3-haiku",
+        provider={"only": ["anthropic"]},
+        reasoning={"effort": "none"},
+        **DEFAULT_SAMPLING_PARAMS
+    ),
     # "gemma-4-31b-it": partial(
     #     _invoke_openrouter_model,
     #     _get_openrouter_vertex_client,

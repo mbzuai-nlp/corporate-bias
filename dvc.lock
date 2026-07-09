@@ -756,3 +756,89 @@ stages:
       hash: md5
       md5: 94ad08738421908b1c1a82c680b10d59
       size: 49247
+  run-assay@pairwise-comparative-preference-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=claude-opus-4.5 --db=data/db --save-path=data/assays/pairwise-comparative-preference/claude-opus-4.5.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/claude-opus-4.5/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/claude-opus-4.5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/pairwise-comparative-preference/claude-opus-4.5.parquet
+      hash: md5
+      md5: 62da538679f6f2bccd173473e1a24fd5
+      size: 19263
+  run-assay@listwise-ordinal-preference-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-opus-4.5
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-opus-4.5.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-opus-4.5/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/claude-opus-4.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-opus-4.5.parquet
+      hash: md5
+      md5: 152ba5579422f0c8c1d879da9442be21
+      size: 8547
+  run-assay@unaided-endorsement-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=claude-opus-4.5
+      --db=data/db --save-path=data/assays/unaided-endorsement/claude-opus-4.5.parquet
+      --exp=data/run-assay/unaided-endorsement/claude-opus-4.5/exp 2>&1 | tee data/run-assay/unaided-endorsement/claude-opus-4.5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/unaided-endorsement/claude-opus-4.5.parquet
+      hash: md5
+      md5: c025e448b4f8f565a45d75bf2768c98c
+      size: 14062
+  run-assay@open-ended-characterisation-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=claude-opus-4.5
+      --db=data/db --save-path=data/assays/open-ended-characterisation/claude-opus-4.5.parquet
+      --exp=data/run-assay/open-ended-characterisation/claude-opus-4.5/exp 2>&1 |
+      tee data/run-assay/open-ended-characterisation/claude-opus-4.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/open-ended-characterisation/claude-opus-4.5.parquet
+      hash: md5
+      md5: 9973101cc8a04bc038236fc9cac1cbfe
+      size: 39992
+  run-assay@single-entity-steering-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-opus-4.5
+      --db=data/db --save-path=data/assays/single-entity-steering/claude-opus-4.5.parquet
+      --exp=data/run-assay/single-entity-steering/claude-opus-4.5/exp 2>&1 | tee data/run-assay/single-entity-steering/claude-opus-4.5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 3b6b2aba80eb4baf50735e9a56e8db5a.dir
+      size: 17219
+      nfiles: 10
+    outs:
+    - path: data/assays/single-entity-steering/claude-opus-4.5.parquet
+      hash: md5
+      md5: 2e90dc5d6c6c7310ef69bd5555a09b17
+      size: 40104
