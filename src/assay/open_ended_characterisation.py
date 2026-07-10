@@ -50,7 +50,7 @@ def _construct_queries(
         )
         .select("comparison_set", "entity", "prompt_template", "query")
     )
-    return queries_df.head(1)
+    return queries_df
 
 
 def _get_characterisation_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:

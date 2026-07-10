@@ -51,7 +51,7 @@ def _construct_queries(
         )
     )
 
-    return queries_df.head(1)
+    return queries_df
 
 
 def _get_preferred_entity(

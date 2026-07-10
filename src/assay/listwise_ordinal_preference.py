@@ -67,7 +67,7 @@ def _construct_queries(
         .select("comparison_set", "prompt_template", "query", "entities")
     )
 
-    return queries_df.head(1)
+    return queries_df
 
 
 def _get_ranking(

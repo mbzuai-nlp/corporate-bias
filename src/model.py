@@ -14,6 +14,7 @@ from tenacity import retry, stop_after_attempt, retry_if_exception_type
 import httpx
 import jsonschema
 import random
+from func_timeout import func_timeout, FunctionTimedOut
 
 
 # === TYPES ===
@@ -361,12 +362,18 @@ def _invoke_openrouter_model(
     request_kwargs = _disable_web_plugin(request_kwargs)
 
     try:
-        # If fully determinstic, adding timeout will invariably cause fatality, so don't
-        response = client.chat.send(
-            model=model_name,
-            messages=_serialize_messages(messages),
-            **request_kwargs,
+        response = func_timeout(
+            60,
+            lambda: client.chat.send(
+                model=model_name,
+                messages=_serialize_messages(messages),
+                **request_kwargs,
+            )
         )
+    except FunctionTimedOut as e:
+        err_str = json.dumps({"message": str(e), "request_kwargs": request_kwargs, 
+                              "model": model_name, "messages": str(messages)})
+        raise RetryableNetworkError(err_str) from e
     except or_errors.TooManyRequestsResponseError as e:
         wait = int(e.headers.get("retry-after")) + 1 if "retry-after" in e.headers else None
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
@@ -375,7 +382,11 @@ def _invoke_openrouter_model(
                               "messages": str(messages)})
         raise RetryableNetworkError(err_str, wait) from e
     except or_errors.BadRequestResponseError as e:
-        if "rate limit exceeded" in str(e.body): # thanks anthropic...
+        body_str = str(e.body).lower()
+        if (
+            ("rate limit exceeded" in str(e.body)) or # anthropic
+            ("detected high-frequency non-compliant requests") # mimo
+        ):
             err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "should_wait_seconds": 61, "model": model_name,
@@ -646,10 +657,10 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "none"},
         temperature=0
     ),
-    "glm-5.2": partial(
+    "glm-5.1": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "z-ai/glm-5.2",
+        "z-ai/glm-5.1",
         provider={"only": ["z-ai/fp8"]}, # best option; chinese; owner
         reasoning={"effort": "none"},
         temperature=0
@@ -657,7 +668,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     "glm-4.5": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
-        "z-ai/glm-5.2",
+        "z-ai/glm-4.5",
         provider={"only": ["z-ai/fp8"]}, # best option; chinese
         reasoning={"effort": "none"},
         temperature=0

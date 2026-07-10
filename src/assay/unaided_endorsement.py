@@ -43,7 +43,7 @@ def _construct_queries(
         prompt_template_df.with_columns(pl.col("prompt_template").alias("query"))
         .join(entity_df_agg, how="inner", on="comparison_set")
         .select("comparison_set", "prompt_template", "entities", "query")
-    ).head(1)
+    )
 
 
 def _get_endorsement_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:

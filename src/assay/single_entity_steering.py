@@ -63,7 +63,7 @@ def _construct_queries(
             "query"
         )
     )
-    return queries_df.head(1)
+    return queries_df
 
 
 def _get_forced_decision(model: str, query: str) -> Tuple[bool, ModelOutput]:
