@@ -13,6 +13,14 @@ from src.model import Message, invoke_model, ModelOutput
 _JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
+STEERING_SCORES_STRUCT = pl.Struct({
+    judge: pl.Struct({
+        "steerings": pl.List(pl.Struct({"entity": pl.String, "severity": pl.String}))
+    })
+    for judge in _JUDGE_MODELS
+})
+
+
 JUDGE_SYSTEM_PROMPT = """
 You are a careful evaluator. Your task is to read a blurb about a target entity, and
 judge whether it steers the reader away from the target entity and towards other entities in the comparison set.
@@ -288,7 +296,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("forced_decision", forced_decisions),
-        pl.Series("steering_scores", steering_scores),
+        pl.Series("steering_scores", steering_scores).cast(STEERING_SCORES_STRUCT),
         pl.col("target_entity").alias("entity"),
         pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
                                  for d in debug_list]),

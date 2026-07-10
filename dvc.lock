@@ -668,8 +668,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/gemini-2.5-pro.parquet
       hash: md5
-      md5: c476e019f4f8f69c0f363c02b66adfa4
-      size: 37248
+      md5: 6511bcc652ac76be5ee5e51b4ef71d37
+      size: 37650
   run-assay@pairwise-comparative-preference-claude-sonnet-5:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/claude-sonnet-5;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -926,8 +926,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/claude-3-haiku.parquet
       hash: md5
-      md5: f5a2a3758bc0892c10f14408bcc4a7bd
-      size: 13710
+      md5: 0bb0c70464220d7453a9973cea4416da
+      size: 14112
   run-assay@pairwise-comparative-preference-gemini-3.5-flash:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gemini-3.5-flash;
       uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
@@ -2560,8 +2560,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/llama-4-maverick.parquet
       hash: md5
-      md5: 6573c8553dad2972b2e301e0607cd009
-      size: 16053
+      md5: 7c724ad21d4aa44a29cf99546dc1c1c9
+      size: 16861
   run-assay@single-entity-steering-llama-3.3-70b-instruct:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/llama-3.3-70b-instruct;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=llama-3.3-70b-instruct
@@ -2612,8 +2612,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/mistral-nemo.parquet
       hash: md5
-      md5: 6dd099818cd0e037a34f99888eaae652
-      size: 17092
+      md5: 72f2199270a5915563939ef4b5904941
+      size: 17494
   run-assay@single-entity-steering-mistral-medium-3-5:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/mistral-medium-3-5;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=mistral-medium-3-5
@@ -2663,8 +2663,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/deepseek-v4-pro.parquet
       hash: md5
-      md5: 84da216e1af408f746211a0c9fd8739e
-      size: 29004
+      md5: 28f9ff5290ecfddbc382969f6b77786d
+      size: 29406
   run-assay@single-entity-steering-deepseek-chat-v3.1:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/deepseek-chat-v3.1;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=deepseek-chat-v3.1
@@ -2768,8 +2768,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/phi-4.parquet
       hash: md5
-      md5: 23630010a16ae7d157ff83bb7aaf6e15
-      size: 15716
+      md5: c77a678010dbc55faa3013a60938b27c
+      size: 16118
   run-assay@single-entity-steering-hy3:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/hy3;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=hy3
@@ -2801,8 +2801,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/mimo-v2.5.parquet
       hash: md5
-      md5: 310977263f33669c460dc3c1e98cbe37
-      size: 15183
+      md5: 1328081eca83cd8b04d9eaea123f8b0a
+      size: 15585
   run-assay@single-entity-steering-mimo-v2.5-pro:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/mimo-v2.5-pro;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=mimo-v2.5-pro
@@ -2938,3 +2938,17 @@ stages:
       hash: md5
       md5: 9270e8b3fd804f4d26109cf61917ba97
       size: 24229
+  model-effects:
+    cmd: "uv run python -m pipelines.model_effects --assays=data/assays --db=data/db
+      --save-path=data/model-effects.parquet --exp=data/model-effects\n"
+    deps:
+    - path: data/assays
+      hash: md5
+      md5: 03fe45090d1d7ddc06b8c80d237e20cb.dir
+      size: 2316413
+      nfiles: 150
+    outs:
+    - path: data/model-effects.parquet
+      hash: md5
+      md5: 2e726e3108a4609e6dd3eae290461242
+      size: 7044
