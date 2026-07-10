@@ -7,10 +7,10 @@ import itertools as it
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
-from src.model import Message, invoke_model
+from src.model import Message, invoke_model, ModelOutput
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
@@ -50,20 +50,20 @@ def _construct_queries(
         )
         .select("comparison_set", "entity", "prompt_template", "query")
     )
-    return queries_df
+    return queries_df.head(1)
 
 
-def _get_characterisation_blurbs(model: str, query: str) -> Tuple[str, Any]:
+def _get_characterisation_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
     output = invoke_model(
         model=model, messages=[Message(role="user", content=query)], use_cache=True
     )
 
-    return output.text, output.raw
+    return output.text, output
 
 
 def _get_characterisations(
     judge: str, blurb: str, comparison_set: str, entity: str
-) -> Tuple[Dict[str, float], Any]:
+) -> Tuple[Dict[str, float], ModelOutput]:
     """Measures aggrandising, critique aversion, and dogmatism scores in a blurb."""
 
     query = f"""
@@ -102,6 +102,9 @@ The comparison set is {comparison_set}.
         },
     )
 
+    if output.refused:
+        return None, output
+
     parsed = json.loads(output.text)
 
     result = {
@@ -114,7 +117,7 @@ The comparison set is {comparison_set}.
         if not -1 <= score <= 1:
             raise ValueError(f"Score out of range [-1, 1]: {score}")
 
-    return result, output.raw
+    return result, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -126,7 +129,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Query model
     characterisation_blurbs = [None] * len(query_rows)
-    raw_responses = [None] * len(query_rows)
+    model_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -143,12 +146,13 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             characterisation_blurbs[i] = result[0]
-            raw_responses[i] = result[1]
+            model_outputs[i] = result[1]
 
     # Judge model responses
-    judge_tasks = list(it.product(zip(characterisation_blurbs, query_rows), _JUDGE_MODELS))
+    judge_tasks = list(it.product(zip(characterisation_blurbs, query_rows), 
+                                  _JUDGE_MODELS))
     characterisations = [None] * len(judge_tasks)
-    raw_judge_responses = [None] * len(judge_tasks)
+    judge_outputs = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -169,33 +173,36 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             characterisations[i] = result[0]
-            raw_judge_responses[i] = result[1]
+            judge_outputs[i] = result[1]
 
     # Construct results
     num_judges = len(_JUDGE_MODELS)
     characterisation_scores = []
+    debug_list = []
     for i in range(len(query_rows)):
-        judge_dict = {}
+        scores_dict = {}
+        debug_dict = {
+            "model_output": model_outputs[i],
+            "judge_outputs": {},
+            "refused": model_outputs[i].refused
+        }
         for j, judge in enumerate(_JUDGE_MODELS):
             task_idx = i * num_judges + j
-            judge_dict[judge] = characterisations[task_idx]
-        characterisation_scores.append(judge_dict)
-    debug_json_list = []
-    for i in range(len(query_rows)):
-        debug_dict = {
-            "main_model_response": raw_responses[i],
-            "judge_responses": {
-                judge: raw_judge_responses[i * num_judges + j]
-                for j, judge in enumerate(_JUDGE_MODELS)
-            },
-        }
-        debug_json_list.append(json.dumps(debug_dict, ensure_ascii=False, default=str))
+            scores_dict[judge] = characterisations[task_idx]
+            debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
+            if judge_outputs[task_idx].refused:
+                debug_dict["refused"] = True
+        characterisation_scores.append(scores_dict)
+        debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("characterisation_scores", characterisation_scores),
-        pl.Series("debug_json", debug_json_list),
+        pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
+                                 for d in debug_list]),
+        pl.Series("refused", [d["refused"] for d in debug_list])
     ).select(
+        "query",
         "assay",
         "prompt_template",
         "model",
@@ -203,6 +210,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "entity",
         "characterisation_scores",
         "debug_json",
+        "refused"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

@@ -27,8 +27,9 @@ class Message:
 
 @dataclass(frozen=True)
 class ModelOutput:
-    text: str
+    text: Optional[str]
     raw: Any
+    refused: bool = False
 
 
 class ModelDelegate(Protocol):
@@ -226,6 +227,33 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "anthropic/claude-3-haiku": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems", "minimum", "maximum"},
     },
+    "meta-llama/llama-4-maverick": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "meta-llama/llama-3.3-70b-instruct": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "meta-llama/llama-3-8b-instruct": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "mistralai/mistral-medium-3-5": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "mistralai/mistral-small-2603": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
+    "deepseek/deepseek-v4-pro": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "deepseek/deepseek-chat-v3.1": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "nvidia/nemotron-3-ultra-550b-a55b": {
+        "strip_keywords": {"uniqueItems",},
+    },
+    "tencent/hy3": {
+        "strip_keywords": {"uniqueItems",},
+    },
 }
 
 
@@ -278,46 +306,36 @@ def canonicalise_openrouter_json_schema(
 
 def _validate_structured_output(
     text: str,
-    response_format: dict[str, Any] | None,
+    response_format: Optional[dict[str, Any]],
+    healer: Callable[[str], str]
 ) -> None:
     if not response_format:
         return
-
-    response_type = response_format.get("type")
-
-    if response_type == "json_object":
+    
+    if healer is not None:
         try:
-            json.loads(text)
-        except json.JSONDecodeError as e:
-            raise InvalidModelOutputError(
-                f"Model returned invalid JSON: {text!r}"
-            ) from e
-        return
+            text = healer(text)
+        except Exception as e:
+            raise e
+    
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError as e:
+        raise InvalidModelOutputError(
+            f"Model returned invalid JSON for json_schema response: {text!r}"
+        ) from e
 
-    if response_type == "json_schema":
-        try:
-            parsed = json.loads(text)
-        except json.JSONDecodeError as e:
-            raise InvalidModelOutputError(
-                f"Model returned invalid JSON for json_schema response: {text!r}"
-            ) from e
+    json_schema_payload = response_format["json_schema"]
+    schema = json_schema_payload["schema"]
+    schema_name = json_schema_payload.get("name", "unnamed_schema")
 
-        json_schema_payload = response_format.get("json_schema") or {}
-        schema = json_schema_payload.get("schema")
-        schema_name = json_schema_payload.get("name", "unnamed_schema")
+    try:
+        jsonschema.Draft202012Validator(schema).validate(parsed)
+    except jsonschema.ValidationError as e:
+        raise InvalidModelOutputError(
+            f"Model returned JSON that failed schema validation for {schema_name}: {e.message}"
+        ) from e
 
-        if schema is None:
-            raise InvalidModelOutputError(
-                "response_format.type='json_schema' but no schema was provided"
-            )
-
-        try:
-            jsonschema.Draft202012Validator(schema).validate(parsed)
-        except jsonschema.ValidationError as e:
-            raise InvalidModelOutputError(
-                f"Model returned JSON that failed schema validation for {schema_name}: {e.message}"
-            ) from e
-        
 
 def _invoke_openrouter_model(
     client_getter: Callable[[], OpenRouter],
@@ -338,11 +356,12 @@ def _invoke_openrouter_model(
 
     if original_response_format is not None:
         request_kwargs["response_format"] = request_response_format
+        request_kwargs["plugins"] = request_kwargs.get("plugins", []) + [{ "id": "response-healing" }]
 
     request_kwargs = _disable_web_plugin(request_kwargs)
 
     try:
-        # If fully determinstic, adding timeout will invariably cause fatality
+        # If fully determinstic, adding timeout will invariably cause fatality, so don't
         response = client.chat.send(
             model=model_name,
             messages=_serialize_messages(messages),
@@ -352,22 +371,39 @@ def _invoke_openrouter_model(
         wait = int(e.headers.get("retry-after")) + 1 if "retry-after" in e.headers else None
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
-                              "should_wait_seconds": wait})
+                              "should_wait_seconds": wait, "model": model_name,
+                              "messages": str(messages)})
         raise RetryableNetworkError(err_str, wait) from e
-    except RETRYABLE_NETWORK_ERRORS as e:
-        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
-                              "body": e.body, "request_kwargs": request_kwargs})
-        raise RetryableNetworkError(err_str) from e
     except or_errors.BadRequestResponseError as e:
         if "rate limit exceeded" in str(e.body): # thanks anthropic...
             err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
-                              "should_wait_seconds": 61})
+                              "should_wait_seconds": 61, "model": model_name,
+                              "messages": str(messages)})
             raise RetryableNetworkError(err_str, 61) from e
-        raise e
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs, 
+                              "model": model_name, "messages": str(messages)})
+        raise RuntimeError(err_str) from e
+    except RETRYABLE_NETWORK_ERRORS as e:
+        if "PROHIBITED_CONTENT" in str(e.body):
+            return ModelOutput(
+                text=None,
+                raw={
+                    "input_messages": messages,
+                    "request_kwargs": request_kwargs,
+                    "exception": str(e)
+                },
+                refused=True
+            )
+        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+                              "body": e.body, "request_kwargs": request_kwargs, 
+                              "model": model_name, "messages": str(messages)})
+        raise RetryableNetworkError(err_str) from e
     except Exception as e:
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
-                              "body": e.body, "request_kwargs": request_kwargs})
+                              "body": e.body, "request_kwargs": request_kwargs, 
+                              "model": model_name, "messages": str(messages)})
         raise RuntimeError(err_str) from e
 
     output = ModelOutput(
@@ -390,7 +426,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "openai/gpt-oss-120b",
-        provider={"only": ["cerebras"], "quantizations": ["fp16"]},
+        provider={"only": ["cerebras/fp16"]},
         reasoning={"effort": "minimal"},
         temperature=0
     ),
@@ -434,14 +470,14 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "none"},
         temperature=0
     ),
-    # "gemma-4-31b-it": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_vertex_client,
-    #     "google/gemma-4-31b-it",
-    #     provider={"only": ["venice"], "quantizations": ["bf16"]},
-    #     reasoning={"effort": "none"},
-    #     **DEFAULT_SAMPLING_PARAMS
-    # ),
+    "gemma-4-31b-it": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "google/gemma-4-31b-it",
+        provider={"only": ["venice/bf16"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
     "gemini-3.5-flash": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
@@ -450,99 +486,182 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         reasoning={"effort": "minimal"},
         temperature=0
     ),
-    # "gemini-2.5-pro": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_vertex_client,
-    #     "google/gemini-2.5-pro",
-    #     provider={"only": ["google-vertex"], "regions": ["global"]},
-    #     reasoning={"effort": "minimal"},
-    #     **DEFAULT_SAMPLING_PARAMS
-    # ),
-    # "grok-4.20": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "x-ai/grok-4.20",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "grok-4.3": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "x-ai/grok-4.3",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "llama-3.1-8b-instruct": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "meta-llama/llama-3.1-8b-instruct",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "llama-3.1-70b-instruct": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "meta-llama/llama-3.1-70b-instruct",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "mistral-nemo": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "mistralai/mistral-nemo",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "mistral-small-2603": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "mistralai/mistral-small-2603",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "deepseek-v3.2": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "deepseek/deepseek-v3.2",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "qwen3-235b-a22b-2507": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "qwen/qwen3-235b-a22b-2507",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "qwen3.5-flash-02-23": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "qwen/qwen3.5-flash-02-23",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "nemotron-3-super-120b-a12b": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "nvidia/nemotron-3-super-120b-a12b",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "phi-4": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "microsoft/phi-4",
-    #     reasoning={"effort": "none"},
-    #     provider={"ignore": ["nextbit"]},
-    # ),
-    # "hy3-preview": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "tencent/hy3-preview",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "mimo-v2.5": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "xiaomi/mimo-v2.5",
-    #     reasoning={"effort": "none"},
-    # ),
-    # "glm-5.2": partial(
-    #     _invoke_openrouter_model,
-    #     _get_openrouter_client,
-    #     "z-ai/glm-5.2",
-    #     reasoning={"effort": "none"},
-    # ),
+    "gemini-2.5-pro": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "google/gemini-2.5-pro",
+        provider={"only": ["google-vertex/global"]},
+        reasoning={"effort": "minimal"},
+        temperature=0
+    ),
+    "grok-4.20": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "x-ai/grok-4.20",
+        provider={"only": ["xai"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "grok-4.3": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "x-ai/grok-4.3",
+        provider={"only": ["xai"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "grok-4.5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "x-ai/grok-4.5",
+        provider={"only": ["xai"]},
+        reasoning={"effort": "minimal"},
+        temperature=0
+    ),
+    "llama-4-maverick": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "meta-llama/llama-4-maverick",
+        provider={"only": ["deepinfra/base"], "quantizations": ["fp8"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "llama-3.3-70b-instruct": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "meta-llama/llama-3.3-70b-instruct",
+        provider={"only": ["wandb/fp16"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "llama-3-8b-instruct": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "meta-llama/llama-3-8b-instruct",
+        provider={"only": ["together/int4"]}, # only available
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "mistral-nemo": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "mistralai/mistral-nemo",
+        provider={"only": ["deepinfra/fp8"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "mistral-medium-3-5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "mistralai/mistral-medium-3-5",
+        provider={"only": ["mistral"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "mistral-small-2603": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "mistralai/mistral-small-2603",
+        provider={"only": ["mistral"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "deepseek-v4-pro": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "deepseek/deepseek-v4-pro",
+        provider={"only": ["baidu/fp8"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "deepseek-chat-v3.1": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "deepseek/deepseek-chat-v3.1",
+        provider={"only": ["wandb/fp8"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "qwen3.7-plus": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "qwen/qwen3.7-plus",
+        provider={"only": ["alibaba"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "qwen3.5-flash-02-23": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "qwen/qwen3.5-flash-02-23",
+        provider={"only": ["alibaba"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "nemotron-3-ultra-550b-a55b": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "nvidia/nemotron-3-ultra-550b-a55b",
+        provider={"only": ["together"]}, # best available
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "nemotron-3-super-120b-a12b": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "nvidia/nemotron-3-super-120b-a12b",
+        provider={"only": ["deepinfra/bf16"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "phi-4": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "microsoft/phi-4",
+        provider={"only": ["deepinfra/bf16"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "hy3": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "tencent/hy3",
+        provider={"only": ["gmicloud/bf16"]}, # native
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "mimo-v2.5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "xiaomi/mimo-v2.5",
+        provider={"only": ["xiaomi/fp8"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "mimo-v2.5-pro": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "xiaomi/mimo-v2.5-pro",
+        provider={"only": ["xiaomi/fp8"]},
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "glm-5.2": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "z-ai/glm-5.2",
+        provider={"only": ["z-ai/fp8"]}, # best option; chinese; owner
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
+    "glm-4.5": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "z-ai/glm-5.2",
+        provider={"only": ["z-ai/fp8"]}, # best option; chinese
+        reasoning={"effort": "none"},
+        temperature=0
+    ),
 }
 
 
@@ -566,7 +685,11 @@ def _wait(retry_state):
     reraise=True,
 )
 def invoke_model(
-    model: str, messages: Sequence[Message], use_cache: bool, **kwargs: Any
+    model: str, 
+    messages: Sequence[Message], 
+    use_cache: bool, 
+    healer: Optional[Callable[[str], str]] = None,
+    **kwargs: Any
 ) -> ModelOutput:
     try:
         model_delegate = MODEL_DELEGATES[model]
@@ -577,35 +700,38 @@ def invoke_model(
 
     response_format = deepcopy(kwargs.get("response_format"))
 
-    delegate_kwargs = dict(model_delegate.keywords or {})
-    # Match functools.partial behavior: delegate kwargs take precedence over caller.
-    effective_kwargs = {
-        **kwargs,
-        **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
-        **{"seed": random.randint(0, 10**9)} # Ensures retries use a new seed
-    }
-
     if use_cache:
+        # Match functools.partial behavior: delegate kwargs take precedence over caller.
+        delegate_kwargs = dict(model_delegate.keywords or {})
+        effective_kwargs = {
+            **kwargs,
+            **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
+        }
+
         cache_key = _cache_key(
             model_name=model,
             messages=messages,
+            # Listens for changes to delegate kwargs AND calling kwargs
             kwargs=effective_kwargs,
         )
 
         cached = _cache_get_obj(cache_key)
-        if cached is not None:
+        if cached is not None and not cached.refused:
             try:
-                _validate_structured_output(cached.text, response_format)
+                _validate_structured_output(cached.text, response_format, healer)
             except InvalidModelOutputError as e:
                 raise InvalidModelOutputError(
                     "Tried returning invalid result from cache."
                 ) from e
             return cached
 
+    # Ensures retries use a new seed; misses cache
+    kwargs["seed"] = random.randint(0, 10**9)
     output = model_delegate(messages, **kwargs)
 
     # Validate against the original, stronger contract.
-    _validate_structured_output(output.text, response_format)
+    if not output.refused:
+        _validate_structured_output(output.text, response_format, healer)
 
     if use_cache:
         _cache_set_obj(cache_key, output)

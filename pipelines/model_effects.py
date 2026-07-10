@@ -380,7 +380,7 @@ def main() -> None:
         ):
             df = pl.concat(
                 (pl.read_parquet(f) for f in (assays_dir / assay).glob("*.parquet"))
-            )
+            ).filter(~pl.col("refused")) # Omit refused queries when effects modelling
 
             comparison_sets = df.select("comparison_set").to_series().unique().to_list()
             for comparison_set in comparison_sets:

@@ -1,0 +1,15 @@
+2026-07-10 02:00:29,640 [INFO] root: Running assay=unaided-endorsement model=mistral-nemo 
+2026-07-10 02:00:29,654 [INFO] root: Invoking mistral-nemo.
+Queries:   0%|          | 0/1 [00:00<?, ?it/s]2026-07-10 02:00:30,249 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-10 02:00:30,251 [ERROR] root: Encountered `{"message": "Provider returned error", "headers": {"date": "Thu, 09 Jul 2026 22:00:29 GMT", "content-type": "application/json", "transfer-encoding": "chunked", "connection": "keep-alive", "access-control-allow-origin": "*", "access-control-expose-headers": "X-Generation-Id,cf-ray", "permissions-policy": "payment=(self \"https://checkout.stripe.com\" \"https://connect-js.stripe.com\" \"https://js.stripe.com\" \"https://*.js.stripe.com\" \"https://hooks.stripe.com\")", "referrer-policy": "no-referrer, strict-origin-when-cross-origin", "x-content-type-options": "nosniff", "server": "cloudflare", "cf-ray": "a18a9a0dd8ed8e29-DXB"}, "body": "{\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"mistralai/mistral-nemo is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false}},\"user_id\":\"org_335ynGeYoz4XtjCVpJMht9GpoaY\"}", "request_kwargs": {"provider": {"only": ["deepinfra/fp8"]}, "reasoning": {"effort": "none"}, "temperature": 0, "seed": 408830029, "plugins": [{"id": "web", "enabled": false}]}, "should_wait_seconds": null, "model": "mistralai/mistral-nemo", "messages": "[Message(role='user', content='Which video game console would you recommend to a teenager?')]"}`, retrying.
+2026-07-10 02:00:59,223 [INFO] root: Invoking mistral-nemo.
+2026-07-10 02:01:00,079 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Queries: 100%|██████████| 1/1 [00:51<00:00, 51.15s/it]Queries: 100%|██████████| 1/1 [00:51<00:00, 51.15s/it]
+2026-07-10 02:01:20,802 [INFO] root: Invoking gpt-5.4.
+2026-07-10 02:01:20,803 [INFO] root: Invoking gemini-3.5-flash.
+Judgements:   0%|          | 0/3 [00:00<?, ?it/s]2026-07-10 02:01:20,804 [INFO] root: Invoking claude-opus-4.5.
+2026-07-10 02:01:21,739 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-10 02:01:22,593 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judgements:  33%|███▎      | 1/3 [00:01<00:03,  1.84s/it]Judgements:  67%|██████▋   | 2/3 [00:02<00:01,  1.05s/it]2026-07-10 02:01:24,252 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+Judgements: 100%|██████████| 3/3 [00:04<00:00,  1.48s/it]Judgements: 100%|██████████| 3/3 [00:04<00:00,  1.44s/it]
+2026-07-10 02:01:25,143 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/unaided-endorsement/mistral-nemo.parquet.

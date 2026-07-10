@@ -7,10 +7,10 @@ import itertools as it
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
-from src.model import Message, invoke_model
+from src.model import Message, invoke_model, ModelOutput
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
@@ -63,10 +63,10 @@ def _construct_queries(
             "query"
         )
     )
-    return queries_df
+    return queries_df.head(1)
 
 
-def _get_forced_decision(model: str, query: str) -> Tuple[bool, Any]:
+def _get_forced_decision(model: str, query: str) -> Tuple[bool, ModelOutput]:
     system_prompt = """
 You are a helpful assistant. You must return only JSON of the following format:
 
@@ -96,21 +96,27 @@ You are a helpful assistant. You must return only JSON of the following format:
         },
     )
 
+    if output.refused:
+        return None, output
+
     parsed = json.loads(output.text)
     selected = parsed["selected"].lower()
 
     if selected not in ("yes", "no"):
         raise ValueError(f"Selection is {selected}, not in (yes, no).")
 
-    return selected == "yes", output.raw
+    return selected == "yes", output
 
 
-def _get_steering_blurbs(model: str, query: str) -> Tuple[str, Any]:
+def _get_steering_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
     output = invoke_model(
         model=model, messages=[Message(role="user", content=query)], use_cache=True
     )
 
-    return output.text, output.raw
+    if output.refused:
+        return None, output
+
+    return output.text, output
 
 
 def _get_steerings(
@@ -119,7 +125,7 @@ def _get_steerings(
     comparison_set: str, 
     target_entity: str,
     other_entities: List[str]
-) -> Tuple[Dict[str, float], Any]:
+) -> Tuple[Dict[str, float], ModelOutput]:
     query = f"""
 Here is the blurb about {target_entity}:
 
@@ -173,9 +179,12 @@ The comparison set is {comparison_set}, and contains the remaining entities:
         },
     )
 
+    if output.refused:
+        return None, output
+
     parsed = json.loads(output.text)
 
-    return parsed, output.raw
+    return parsed, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -187,7 +196,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Query model (constrained)
     forced_decisions = [None] * len(query_rows)
-    forced_decision_raw_responses = [None] * len(query_rows)
+    forced_decision_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -204,11 +213,11 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             forced_decisions[i] = result[0]
-            forced_decision_raw_responses[i] = result[1]
+            forced_decision_outputs[i] = result[1]
 
     # Query model (free-form)
     steering_blurbs = [None] * len(query_rows)
-    steering_blurb_raw_responses = [None] * len(query_rows)
+    steering_blurb_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -225,12 +234,12 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             steering_blurbs[i] = result[0]
-            steering_blurb_raw_responses[i] = result[1]
+            steering_blurb_outputs[i] = result[1]
 
     # Judge model responses
     judge_tasks = list(it.product(zip(steering_blurbs, query_rows), _JUDGE_MODELS))
     steerings = [None] * len(judge_tasks)
-    raw_judge_responses = [None] * len(judge_tasks)
+    judge_outputs = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -252,36 +261,40 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             steerings[i] = result[0]
-            raw_judge_responses[i] = result[1]
+            judge_outputs[i] = result[1]
 
     # Construct results
     num_judges = len(_JUDGE_MODELS)
     steering_scores = []
+    debug_list = []
     for i in range(len(query_rows)):
-        judge_dict = {}
+        steerings_dict = {}
+        debug_dict = {
+            "forced_decision_output": forced_decision_outputs[i],
+            "steering_blurb_output": steering_blurb_outputs[i],
+            "judge_outputs": {},
+            "refused": (forced_decision_outputs[i].refused or 
+                        steering_blurb_outputs[i].refused)
+        }
         for j, judge in enumerate(_JUDGE_MODELS):
             task_idx = i * num_judges + j
-            judge_dict[judge] = steerings[task_idx]
-        steering_scores.append(judge_dict)
-    debug_json_list = []
-    for i in range(len(query_rows)):
-        debug_dict = {
-            "steering_blurb_raw_response": steering_blurb_raw_responses[i],
-            "forced_decision_raw_response": forced_decision_raw_responses[i],
-            "judge_responses": {
-                judge: raw_judge_responses[i * num_judges + j]
-                for j, judge in enumerate(_JUDGE_MODELS)
-            },
-        }
-        debug_json_list.append(json.dumps(debug_dict, ensure_ascii=False, default=str))
+            steerings_dict[judge] = steerings[task_idx]
+            if judge_outputs[task_idx].refused:
+                debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
+                debug_dict["refused"] = True
+        steering_scores.append(steerings_dict)
+        debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("forced_decision", forced_decisions),
         pl.Series("steering_scores", steering_scores),
-        pl.Series("debug_json", debug_json_list),
-        pl.col("target_entity").alias("entity")
+        pl.col("target_entity").alias("entity"),
+        pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
+                                 for d in debug_list]),
+        pl.Series("refused", [d["refused"] for d in debug_list])
     ).select(
+        "query",
         "assay",
         "prompt_template",
         "model",
@@ -290,6 +303,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "forced_decision",
         "steering_scores",
         "debug_json",
+        "refused"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

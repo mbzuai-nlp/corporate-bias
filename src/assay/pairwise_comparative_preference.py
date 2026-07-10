@@ -6,7 +6,7 @@ from typing import Tuple, Any
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
-from src.model import Message, invoke_model
+from src.model import Message, invoke_model, ModelOutput
 
 
 SYSTEM_PROMPT = """
@@ -51,12 +51,12 @@ def _construct_queries(
         )
     )
 
-    return queries_df
+    return queries_df.head(1)
 
 
 def _get_preferred_entity(
     model: str, query: str, left_entity: str, right_entity: str
-) -> Tuple[str, Any]:
+) -> Tuple[str, ModelOutput]:
     output = invoke_model(
         model=model,
         messages=[
@@ -84,6 +84,9 @@ def _get_preferred_entity(
         },
     )
 
+    if output.refused:
+        return None, output
+
     parsed = json.loads(output.text)
     preferred_entity_name = parsed["selected"]
 
@@ -96,7 +99,7 @@ def _get_preferred_entity(
             f"Raw response: {output.text}"
         )
 
-    return preferred_entity_name, output.raw
+    return preferred_entity_name, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -108,7 +111,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Query model
     preferred_entities = [None] * len(query_rows)
-    raw_responses = [None] * len(query_rows)
+    model_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -129,7 +132,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             preferred_entities[i] = result[0]
-            raw_responses[i] = result[1]
+            model_outputs[i] = result[1]
 
     # Construct results
     results_df = queries_df.with_columns(
@@ -138,15 +141,17 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         pl.Series(
             "debug_json",
             [
-                json.dumps({"raw_response": r}, ensure_ascii=False, default=str)
-                for r in raw_responses
+                json.dumps({"model_output": r}, ensure_ascii=False, default=str)
+                for r in model_outputs
             ],
         ),
         pl.Series(
             "left_beat_right",
             [p == row["left_entity"] for p, row in zip(preferred_entities, query_rows)],
         ),
+        pl.Series("refused", [o.refused for o in model_outputs])
     ).select(
+        "query",
         "assay",
         "prompt_template",
         "model",
@@ -155,6 +160,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "right_entity",
         "left_beat_right",
         "debug_json",
+        "refused"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

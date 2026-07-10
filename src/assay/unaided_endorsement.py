@@ -7,10 +7,10 @@ import itertools as it
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
-from src.model import Message, invoke_model
+from src.model import Message, invoke_model, ModelOutput
 
 
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-sonnet-5"]
+_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
@@ -43,20 +43,23 @@ def _construct_queries(
         prompt_template_df.with_columns(pl.col("prompt_template").alias("query"))
         .join(entity_df_agg, how="inner", on="comparison_set")
         .select("comparison_set", "prompt_template", "entities", "query")
-    )
+    ).head(1)
 
 
-def _get_endorsement_blurbs(model: str, query: str) -> Tuple[str, Any]:
+def _get_endorsement_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
     output = invoke_model(
         model=model, messages=[Message(role="user", content=query)], use_cache=True
     )
 
-    return output.text, output.raw
+    if output.refused:
+        return None, output
+
+    return output.text, output
 
 
 def _get_endorsements(
     judge: str, blurb: str, comparison_set: str, entities: List[str]
-) -> Tuple[Dict[str, float], Any]:
+) -> Tuple[Dict[str, float], ModelOutput]:
     """Returns a tuple of (mapping of entity -> endorsement_score, raw_response).
     endorsement_score is a float within [-1, 1]."""
 
@@ -114,6 +117,9 @@ The comparison set is {comparison_set}, and its entities are:
         },
     )
 
+    if output.refused:
+        return None, output
+
     parsed = json.loads(output.text)
     entity_scores = parsed["entity_scores"]
 
@@ -140,7 +146,7 @@ The comparison set is {comparison_set}, and its entities are:
         for item in entity_scores
     ]
 
-    return result, output.raw
+    return result, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -152,7 +158,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Query model
     endorsement_blurbs = [None] * len(query_rows)
-    raw_responses = [None] * len(query_rows)
+    model_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -169,12 +175,12 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             endorsement_blurbs[i] = result[0]
-            raw_responses[i] = result[1]
+            model_outputs[i] = result[1]
 
     # Judge model responses
     judge_tasks = list(it.product(zip(endorsement_blurbs, query_rows), _JUDGE_MODELS))
     endorsements = [None] * len(judge_tasks)
-    raw_judge_responses = [None] * len(judge_tasks)
+    judge_outputs = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -195,39 +201,43 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             endorsements[i] = result[0]
-            raw_judge_responses[i] = result[1]
+            judge_outputs[i] = result[1]
 
     # Construct results
     num_judges = len(_JUDGE_MODELS)
     endorsement_scores = []
+    debug_list = []
     for i in range(len(query_rows)):
         judge_dict = {}
+        debug_dict = {
+            "model_output": model_outputs[i],
+            "judge_outputs": {},
+            "refused": model_outputs[i].refused
+        }
         for j, judge in enumerate(_JUDGE_MODELS):
             task_idx = i * num_judges + j
             judge_dict[judge] = endorsements[task_idx]
+            debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
+            if judge_outputs[task_idx].refused:
+                debug_dict["refused"] = True
         endorsement_scores.append(judge_dict)
-    debug_json_list = []
-    for i in range(len(query_rows)):
-        debug_dict = {
-            "main_model_response": raw_responses[i],
-            "judge_responses": {
-                judge: raw_judge_responses[i * num_judges + j]
-                for j, judge in enumerate(_JUDGE_MODELS)
-            },
-        }
-        debug_json_list.append(json.dumps(debug_dict, ensure_ascii=False, default=str))
+        debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("endorsement_scores", endorsement_scores),
-        pl.Series("debug_json", debug_json_list),
+        pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
+                                 for d in debug_list]),
+        pl.Series("refused", [d["refused"] for d in debug_list])
     ).select(
+        "query",
         "assay",
         "prompt_template",
         "model",
         "comparison_set",
         "endorsement_scores",
         "debug_json",
+        "refused"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

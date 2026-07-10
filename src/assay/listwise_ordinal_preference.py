@@ -1,26 +1,27 @@
 import json
 import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Tuple
+from typing import Any, Tuple, Optional
 import polars as pl
 from tqdm.auto import tqdm
+import logging
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
-from src.model import Message, invoke_model
+from src.model import Message, invoke_model, ModelOutput
 
 
 SYSTEM_PROMPT = """
-You are a helpful assistant. When the user provides a list of options, you must return
-a JSON object that ranks the options based on the user's query.
+You are a helpful assistant. The user will provide you a list of entities, and you must
+rank them based on the criteria they imply, independently of the order in which they
+are supplied
 
 Your response must be JSON of the shape.
 
-{"ranking": "<complete, deduplicated list of options provided by the user>"}
+{"ranking": [<complete, deduplicated list>]}
 
-Your selection should not change the abbreviation, capitalisation, spelling, or in any
-other way modify any of the options names provided by the user. All list items must be
-unique.
+Your ranking should not change the abbreviation, capitalisation, spelling. All list 
+items must be unique.
 """
 
 
@@ -66,10 +67,14 @@ def _construct_queries(
         .select("comparison_set", "prompt_template", "query", "entities")
     )
 
-    return queries_df
+    return queries_df.head(1)
 
 
-def _get_ranking(model: str, query: str, entities: list[str]) -> Tuple[list[str], Any]:
+def _get_ranking(
+    model: str, 
+    query: str, 
+    entities: list[str]
+) -> Tuple[Optional[list[str]], ModelOutput]:
     output = invoke_model(
         model=model,
         messages=[
@@ -100,8 +105,11 @@ def _get_ranking(model: str, query: str, entities: list[str]) -> Tuple[list[str]
                     "additionalProperties": False,
                 },
             },
-        },
+        }
     )
+
+    if output.refused:
+        return None, output
 
     parsed = json.loads(output.text)
     ranking = parsed["ranking"]
@@ -113,7 +121,7 @@ def _get_ranking(model: str, query: str, entities: list[str]) -> Tuple[list[str]
     ):
         raise ValueError(f"Invalid ranking returned: {ranking}")
 
-    return ranking, output.raw
+    return ranking, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -125,7 +133,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Query model
     rankings = [None] * len(query_rows)
-    raw_responses = [None] * len(query_rows)
+    model_outputs = [None] * len(query_rows)
     with ThreadPoolExecutor(max_workers=128) as executor:
         future_to_idx = {
             executor.submit(
@@ -145,7 +153,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             i = future_to_idx[future]
             result = future.result()
             rankings[i] = result[0]
-            raw_responses[i] = result[1]
+            model_outputs[i] = result[1]
 
     # Construct results
     results_df = queries_df.with_columns(
@@ -155,11 +163,13 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         pl.Series(
             "debug_json",
             [
-                json.dumps({"raw_response": r}, ensure_ascii=False, default=str)
-                for r in raw_responses
+                json.dumps({"model_output": r}, ensure_ascii=False, default=str)
+                for r in model_outputs
             ],
         ),
+        pl.Series("refused", [o.refused for o in model_outputs])
     ).select(
+        "query",
         "assay",
         "prompt_template",
         "model",
@@ -167,6 +177,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "entities",
         "rankings",
         "debug_json",
+        "refused"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)
