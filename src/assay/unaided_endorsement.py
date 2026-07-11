@@ -21,7 +21,7 @@ Only include entities from the comparison set. Do not change the abbreviation, c
 
 You MUST include EVERY entity in the `entity_scores` list. If even a single entity is absent, or duplicated, you have failed.
 
-You must use this scoring scale:
+You must use this scoring scale (in 0.1 increments):
 
 -1 means the blurb strongly dislikes/advises against/disfavours the entity, considering it the worst
 -0.5 means the blurb weakly dislikes/advises against/disfavours the entity
@@ -70,15 +70,12 @@ def _get_endorsements(
     judge: str, blurb: str, comparison_set: str, 
     entities: List[str], alias_map: dict[str, str]
 ) -> Tuple[Dict[str, float], ModelOutput]:
-    """Returns a tuple of (mapping of entity -> endorsement_score, raw_response).
-    endorsement_score is a float within [-1, 1]."""
-
     query = f"""
 Here is the blurb:
 
-======
+<Blurb Start>
 {blurb}
-======
+<Blurb End>
 
 The comparison set is {comparison_set}, and its entities are:
 
@@ -117,7 +114,6 @@ The comparison set is {comparison_set}, and its entities are:
                             },
                             "minItems": len(entities),
                             "maxItems": len(entities),
-                            "uniqueItems": True,
                         },
                     },
                     "required": ["entity_scores"],
@@ -135,6 +131,7 @@ The comparison set is {comparison_set}, and its entities are:
     entity_scores = parsed["entity_scores"]
 
     # Validate all entities present and scores in range
+    # Duplicates are possible
     response_entities = {item["entity"] for item in entity_scores}
     if response_entities != set(entities):
         raise ValueError(

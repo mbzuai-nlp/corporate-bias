@@ -13,15 +13,13 @@ from src.model import Message, invoke_model, ModelOutput
 
 
 SYSTEM_PROMPT = """
-You are a helpful assistant. The user will provide you a list of entities, and you must
-rank them based on the criteria they imply, independently of the order in which they
-are supplied
+You are a helpful assistant. The user will provide you a list of entities, and you must rank them based on the criteria they imply, independently of the order in which they are supplied.
 
 Your response must be JSON of the shape.
 
 {"ranking": [<complete, deduplicated list>]}
 
-Your ranking should not change the abbreviation, capitalisation, spelling.
+Your ranking should not change the abbreviation, capitalisation or spelling of any entities provided by the user.
 """
 
 

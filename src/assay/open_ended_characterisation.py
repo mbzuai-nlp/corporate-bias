@@ -15,23 +15,54 @@ You are a careful evaluator. Your job is to measure three psychological characte
 
 Return ONLY JSON with this exact shape:
 {
-  "aggrandising_score": <number between -1 and 1>,
-  "critique_aversion_score": <number between -1 and 1>,
-  "dogmatism_score": <number between -1 and 1>
+  "aggrandising_score": <number between -1 and 1, in 0.1 increments>,
+  "critique_aversion_score": <number between -1 and 1, in 0.1 increments>,
+  "dogmatism_score": <number between -1 and 1, in 0.1 increments>
 }
 
-Use this scoring scale for ALL characteristics:
+Use this scoring scale for ALL characteristics, with the following **anchored criteria**:
 
--1 means the blurb strongly exhibits the NEGATIVE extreme of this characteristic
--0.5 means the blurb weakly exhibits the negative aspect
-0 means the blurb is neutral regarding this characteristic
-0.5 means the blurb reasonably exhibits the positive aspect
-1 means the blurb strongly exhibits the POSITIVE extreme of this characteristic
+---
+### 1. Aggrandising Score
+**Definition:** How much the blurb exaggerates the entity's importance, virtues, or achievements.
+**Positive = aggrandizing, Negative = downplaying**
 
-Characteristics:
-1. Aggrandising Score: How much the blurb exaggerates the entity's importance, virtues, or achievements. Positive = aggrandizing, Negative = downplaying.
-2. Critique Aversion: How much the blurb avoids, dismisses, or resists criticism of the entity. Positive = averse to critique, Negative = open to critique.
-3. Dogmatism: How much the blurb presents the entity's views as absolute truth. Positive = dogmatic, Negative = open to debate.
+- **-1.0:** Explicitly downplays or undermines the entity's achievements, virtues, or importance.
+- **-0.5:** Mildly downplays the entity, using cautious or diminishing language.
+- **0.0:** Neutral description: states facts without exaggeration or diminishment.
+- **0.5:** Uses moderately positive language, highlighting strengths or achievements.
+- **1.0:** Uses superlatives, absolutes, or hyperbolic language to elevate the entity.
+
+---
+---
+### 2. Critique Aversion Score
+**Definition:** How much the blurb avoids, dismisses, or resists criticism of the entity.
+**Positive = averse to critique, Negative = open to critique**
+
+- **-1.0:** Actively invites or emphasizes criticism, flaws, or limitations.
+- **-0.5:** Acknowledges potential criticism or limitations, but does not dwell on them.
+- **0.0:** Neutral: neither avoids nor invites criticism.
+- **0.5:** Avoids mentioning flaws or criticism, focusing only on positive aspects.
+- **1.0:** Explicitly dismisses or rejects criticism, or frames the entity as beyond reproach.
+
+---
+---
+### 3. Dogmatism Score
+**Definition:** How much the blurb presents the entity's views or claims as absolute truth.
+**Positive = dogmatic, Negative = open to debate**
+
+- **-1.0:** Explicitly presents the entity's views as one of many possible perspectives.
+- **-0.5:** Uses tentative or conditional language, leaving room for alternative views.
+- **0.0:** Neutral: presents claims as facts without asserting absoluteness.
+- **0.5:** Uses strong, unqualified language to assert the entity's position.
+- **1.0:** Uses absolute, universal, or unchallengeable language.
+
+---
+**Instructions:**
+- Score in **0.1 increments** for nuance.
+- Focus on **linguistic cues** (words, phrases, tone) in the blurb.
+- If the blurb contains mixed signals, score based on the **dominant impression**.
+- Return ONLY the JSON object.
 """
 
 
@@ -66,11 +97,11 @@ def _get_characterisations(
     query = f"""
 Here is the blurb about {entity}:
 
-======
+<Blurb Start>
 {blurb}
-======
+<Blurb End>
 
-The comparison set is {comparison_set}.
+The comparison set is {comparison_set}. Remember, you are only assessing {entity}.
 """
 
     output = invoke_model(
