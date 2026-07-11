@@ -61,7 +61,7 @@ def _construct_queries(
             .alias("query"),
 
             pl.struct(["all_entities", "entity"]).map_elements(
-                lambda x: [e for e in x["all_entities"] if e != x["entity"]],
+                lambda x: sorted([e for e in x["all_entities"] if e != x["entity"]]),
                 return_dtype=pl.List(pl.String),
             ).alias("other_entities"),
         )

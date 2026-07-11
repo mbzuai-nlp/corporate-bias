@@ -1,3 +1,4 @@
+from scipy import stats
 from pathlib import Path
 import argparse
 import logging
@@ -10,6 +11,7 @@ from typing import Tuple
 import pandas as pd
 
 from src.data import load_db, Db
+from src.assay.common import JUDGE_MODELS
 from pipelines.utils import configure_logging
 
 configure_logging()
@@ -60,10 +62,15 @@ def fit_and_extract_effects(
     result = model.fit()
 
     # Extract explicit terms
-    params, cov = result.params, result.cov_params()
+    params, cov, pvalues = result.params, result.cov_params(), result.pvalues
     param_names = X.design_info.column_names
     final_df = pd.DataFrame(
-        {"term": param_names, "coeff": params, "std_err": np.sqrt(np.diag(cov))}
+        {
+            "term": param_names,
+            "coeff": params,
+            "std_err": np.sqrt(np.diag(cov)),
+            "p_value": pvalues,  # Add p-values here
+        }
     )
 
     # Recover implicit sum-coded terms for categorical variables
@@ -75,7 +82,10 @@ def fit_and_extract_effects(
         idxs = [param_names.index(c) for c in var_cols]
         coeff = -sum(params[i] for i in idxs)
         se = np.sqrt(sum(cov[i, j] for i in idxs for j in idxs))
-        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se]
+        # approx p val
+        t_stat = coeff / se
+        p_value = 2 * (1 - stats.t.cdf(abs(t_stat), df=result.df_resid))
+        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se, p_value]
 
     return final_df.sort_values("term").reset_index(drop=True)
 
@@ -204,16 +214,9 @@ def model_open_ended_characterisation(df: pl.DataFrame, db: Db) -> pl.DataFrame:
         "dogmatism_score",
     ):
         df = df.with_columns(
-            (
-                (
-                    pl.col("characterisation_scores")
-                    .struct["gpt-5.4"]
-                    .struct[measurand]
-                    + pl.col("characterisation_scores")
-                    .struct["gemini-2.5-pro"]
-                    .struct[measurand]
-                )
-                / 2
+            pl.mean_horizontal(
+                *[pl.col("characterisation_scores").struct[j].struct[measurand] 
+                  for j in JUDGE_MODELS]
             ).alias(measurand)
         )
 
@@ -228,14 +231,17 @@ def model_open_ended_characterisation(df: pl.DataFrame, db: Db) -> pl.DataFrame:
 
 def model_unaided_endorsement(df: pl.DataFrame, db: Db) -> pl.DataFrame:
     def align_and_average(scores):
-        gpt = {item["entity"]: item["endorsement_score"] for item in scores["gpt-5.4"]}
-        gemini = {
-            item["entity"]: item["endorsement_score"]
-            for item in scores["gemini-2.5-pro"]
-        }
-        entities = set(gpt) | set(gemini)
+        j_scores = {}
+        for j in JUDGE_MODELS:
+            j_scores[j] = {item["entity"]: item["endorsement_score"] 
+                           for item in scores[j]}
+        entities = set().union(*(s.keys() for j, s in j_scores.items()))
         return [
-            {"entity": e, "endorsement_score": (gpt[e] + gemini[e]) / 2}
+            {
+                "entity": e, 
+                "endorsement_score": sum(j_scores[j][e] 
+                                         for j in JUDGE_MODELS) / len(JUDGE_MODELS)
+            }
             for e in entities
         ]
 
@@ -287,24 +293,23 @@ def model_pairwise_comparative_preference(df: pl.DataFrame, db: Db) -> pl.DataFr
 
 
 def calculate_steering_strengths(steering_scores):
-    severity_map = {"balanced": 0.5, "egregious": 1.0}
+    strength_map = {"balanced": 0.5, "egregious": 1.0}
 
-    gpt_steerings = steering_scores["gpt-5.4"]["steerings"]
-    gemini_steerings = steering_scores["gemini-2.5-pro"]["steerings"]
+    j_scores = {}
+    for j in JUDGE_MODELS:
+        j_scores[j] = {item["entity"]: strength_map[item["severity"]]
+                       for item in steering_scores[j]["steerings"]}
+    entities = set().union(*(s.keys() for j, s in j_scores.items()))
 
-    gpt_dict = {s["entity"]: severity_map[s["severity"]] for s in gpt_steerings}
-    gemini_dict = {s["entity"]: severity_map[s["severity"]] for s in gemini_steerings}
-
-    all_entities = set(gpt_dict.keys()) | set(gemini_dict.keys())
-
-    scores = []
-    for entity in all_entities:
-        gpt_score = gpt_dict.get(entity, 0)
-        gemini_score = gemini_dict.get(entity, 0)
-        avg_score = (gpt_score + gemini_score) / 2
-        scores.append({"entity": entity, "steering_strength": avg_score})
-
-    return scores
+    strengths = [
+        {
+            "entity": e, 
+            "steering_strength": sum(j_scores[j].get(e, 0)
+                                     for j in JUDGE_MODELS) / len(JUDGE_MODELS)
+        }
+        for e in entities
+    ]
+    return strengths
 
 
 def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:

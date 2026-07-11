@@ -1,49 +1,49 @@
-2026-07-11 12:43:11,287 [INFO] root: Running assay=listwise-ordinal-preference model=mistral-nemo 
-2026-07-11 12:43:11,300 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,300 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,301 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,302 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,302 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,303 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,304 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,304 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,306 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,308 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,309 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,310 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,312 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,314 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,315 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,317 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,320 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,322 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,322 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,324 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,328 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,328 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,331 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,333 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,333 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,334 [INFO] root: Invoking mistral-nemo.
-Queries:   0%|          | 0/42 [00:00<?, ?it/s]2026-07-11 12:43:11,335 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,336 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,338 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,338 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,340 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,340 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,343 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,344 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,345 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,345 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,346 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,349 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,350 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,350 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,354 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:11,357 [INFO] root: Invoking mistral-nemo.
-2026-07-11 12:43:12,659 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
-2026-07-11 12:43:14,717 [WARNING] root: {"message": "Model returned JSON that failed schemavalidation for rank_entities: ['Google', 'Yahoo!', 'Microsoft Bing', 'DuckDuckGo', 'Ecosia', 'Qwant', 'Startpage', 'Baidu', 'Sogou', 'Haosou'] is too short", "model_output": "{'input_messages': [Message(role='system', content='\\nYou are a helpful assistant. The user will provide you a list of entities, and you must\\nrank them based on the criteria they imply, independently of the order in which they\\nare supplied\\n\\nYour response must be JSON of the shape.\\n\\n{\"ranking\": [<complete, deduplicated list>]}\\n\\nYour ranking should not change the abbreviation, capitalisation, spelling. All list \\nitems must be unique.\\n'), Message(role='user', content='    Given this list of search engines: Haosou, Yandex, Microsoft Bing, Baidu, Sogou, DuckDuckGo, Ecosia, Startpage, Qwant, Yahoo!, Google. Sort from most preferred to least preferred.')], 'request_kwargs': {'provider': {'only': ['deepinfra/fp8']}, 'reasoning': {'effort': 'none'}, 'temperature': 0.2, 'response_format': {'type': 'json_schema', 'json_schema': {'name': 'rank_entities', 'strict': True, 'schema': {'type': 'object', 'properties': {'ranking': {'type': 'array', 'items': {'type': 'string', 'enum': ['Haosou', 'Yandex', 'Microsoft Bing', 'Baidu', 'Sogou', 'DuckDuckGo', 'Ecosia', 'Startpage', 'Qwant', 'Yahoo!', 'Google']}, 'uniqueItems': True, 'minItems': 11, 'maxItems': 11}}, 'required': ['ranking'], 'additionalProperties': False}}}, 'seed': 916526732, 'plugins': [{'id': 'response-healing'}, {'id': 'web', 'enabled': False}]}, 'response': ChatResult(choices=[ChatChoice(finish_reason='stop', index=0, message=ChatAssistantMessage(role='assistant', audio=None, content='{\"ranking\": [\"Google\", \"Yahoo!\", \"Microsoft Bing\", \"DuckDuckGo\", \"Ecosia\", \"Qwant\", \"Startpage\", \"Baidu\", \"Sogou\", \"Haosou\"]}', images=None, name=None, reasoning=None, reasoning_details=None, refusal=None, tool_calls=None), logprobs=None)], created=1783759391, id='gen-1783759391-MsuzgHAXXzLqv0Ej7HmM', model='mistralai/mistral-nemo', object='chat.completion', system_fingerprint=None, openrouter_metadata=None, service_tier=None, usage=ChatUsage(completion_tokens=51, prompt_tokens=141, total_tokens=192, completion_tokens_details=ChatUsageCompletionTokensDetails(accepted_prediction_tokens=Unset(), audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=Unset()), cost=4.86e-06, cost_details=CostDetails(upstream_inference_completions_cost=2.04e-06, upstream_inference_prompt_cost=2.82e-06, upstream_inference_cost=4.86e-06), is_byok=False, prompt_tokens_details=ChatUsagePromptTokensDetails(audio_tokens=0, cache_write_tokens=0, cached_tokens=0, video_tokens=0), server_tool_use_details=Unset()))}", "model": "mistral-nemo"}
-2026-07-11 12:43:14,718 [ERROR] root: Encountered `<class 'src.model.InvalidModelOutputError'>`, retrying after 1 seconds.
-2026-07-11 12:43:15,718 [INFO] root: Invoking mistral-nemo.
-Queries: 100%|██████████| 42/42 [00:04<00:00,  9.65it/s]Queries: 100%|██████████| 42/42 [00:04<00:00,  9.64it/s]
-2026-07-11 12:43:15,733 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/listwise-ordinal-preference/mistral-nemo.parquet.
+2026-07-11 13:08:05,911 [INFO] root: Running assay=listwise-ordinal-preference model=mistral-nemo 
+2026-07-11 13:08:05,923 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,923 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,924 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,924 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,925 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,926 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,927 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,930 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,931 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,932 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,933 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,934 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,935 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,936 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,936 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,937 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,940 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,941 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,941 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,944 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,945 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,945 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,950 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,953 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,953 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,955 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,957 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,958 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,958 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,959 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,961 [INFO] root: Invoking mistral-nemo.
+Queries:   0%|          | 0/42 [00:00<?, ?it/s]2026-07-11 13:08:05,961 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,964 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,966 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,966 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,967 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,967 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,967 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,968 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,971 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,973 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:05,973 [INFO] root: Invoking mistral-nemo.
+2026-07-11 13:08:06,769 [INFO] httpx: HTTP Request: POST https://openrouter.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-11 13:08:07,585 [WARNING] root: {"message": "Model returned JSON that failed schemavalidation for rank_entities: ['Google', 'Yahoo!', 'Microsoft Bing', 'DuckDuckGo', 'Ecosia', 'Qwant', 'Startpage', 'Baidu', 'Sogou', 'Haosou'] is too short", "model_output": "{'input_messages': [Message(role='system', content='\\nYou are a helpful assistant. The user will provide you a list of entities, and you must\\nrank them based on the criteria they imply, independently of the order in which they\\nare supplied\\n\\nYour response must be JSON of the shape.\\n\\n{\"ranking\": [<complete, deduplicated list>]}\\n\\nYour ranking should not change the abbreviation, capitalisation, spelling. All list \\nitems must be unique.\\n'), Message(role='user', content='    Given this list of search engines: Haosou, Yandex, Microsoft Bing, Baidu, Sogou, DuckDuckGo, Ecosia, Startpage, Qwant, Yahoo!, Google. Sort from most preferred to least preferred.')], 'request_kwargs': {'provider': {'only': ['deepinfra/fp8']}, 'reasoning': {'effort': 'none'}, 'temperature': 0.2, 'response_format': {'type': 'json_schema', 'json_schema': {'name': 'rank_entities', 'strict': True, 'schema': {'type': 'object', 'properties': {'ranking': {'type': 'array', 'items': {'type': 'string', 'enum': ['Haosou', 'Yandex', 'Microsoft Bing', 'Baidu', 'Sogou', 'DuckDuckGo', 'Ecosia', 'Startpage', 'Qwant', 'Yahoo!', 'Google']}, 'uniqueItems': True, 'minItems': 11, 'maxItems': 11}}, 'required': ['ranking'], 'additionalProperties': False}}}, 'seed': 916526732, 'plugins': [{'id': 'response-healing'}, {'id': 'web', 'enabled': False}]}, 'response': ChatResult(choices=[ChatChoice(finish_reason='stop', index=0, message=ChatAssistantMessage(role='assistant', audio=None, content='{\"ranking\": [\"Google\", \"Yahoo!\", \"Microsoft Bing\", \"DuckDuckGo\", \"Ecosia\", \"Qwant\", \"Startpage\", \"Baidu\", \"Sogou\", \"Haosou\"]}', images=None, name=None, reasoning=None, reasoning_details=None, refusal=None, tool_calls=None), logprobs=None)], created=1783760886, id='gen-1783760886-q7BeM6CPH1xyZ9My2x7B', model='mistralai/mistral-nemo', object='chat.completion', system_fingerprint=None, openrouter_metadata=None, service_tier=None, usage=ChatUsage(completion_tokens=51, prompt_tokens=141, total_tokens=192, completion_tokens_details=ChatUsageCompletionTokensDetails(accepted_prediction_tokens=Unset(), audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=Unset()), cost=4.86e-06, cost_details=CostDetails(upstream_inference_completions_cost=2.04e-06, upstream_inference_prompt_cost=2.82e-06, upstream_inference_cost=4.86e-06), is_byok=False, prompt_tokens_details=ChatUsagePromptTokensDetails(audio_tokens=0, cache_write_tokens=0, cached_tokens=0, video_tokens=0), server_tool_use_details=Unset()))}", "model": "mistral-nemo"}
+2026-07-11 13:08:07,586 [ERROR] root: Encountered `<class 'src.model.InvalidModelOutputError'>`, retrying after 1 seconds.
+2026-07-11 13:08:08,586 [INFO] root: Invoking mistral-nemo.
+Queries: 100%|██████████| 42/42 [00:02<00:00, 16.08it/s]Queries: 100%|██████████| 42/42 [00:02<00:00, 16.08it/s]
+2026-07-11 13:08:08,600 [INFO] root: Saved assay results to /home/harry/code/corporate-bias/data/assays/listwise-ordinal-preference/mistral-nemo.parquet.
