@@ -1,3 +1,4 @@
+from functools import partial
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Tuple, Dict, List
@@ -129,12 +130,24 @@ def _get_steering_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
     return output.text, output
 
 
+def _heal_aliases(text: str, alias_map: dict[str, str]) -> str:
+    parsed = json.loads(text)
+
+    # Whenever an alias is found, replace with actual entity
+    for i, item in enumerate(parsed["steerings"]):
+        if item["entity"] in alias_map:
+            parsed["steerings"][i]["entity"] = alias_map[item["entity"]]
+
+    return json.dumps(parsed)
+
+
 def _get_steerings(
     judge: str, 
     blurb: str, 
     comparison_set: str, 
     target_entity: str,
-    other_entities: List[str]
+    other_entities: List[str],
+    alias_map: dict[str, str]
 ) -> Tuple[Dict[str, float], ModelOutput]:
     query = f"""
 Here is the blurb about {target_entity}:
@@ -191,6 +204,7 @@ Remember, you must omit any steering towards an entity that is NOT in the above 
                 },
             },
         },
+        healer=partial(_heal_aliases, alias_map=alias_map)
     )
 
     if output.refused:
@@ -203,6 +217,7 @@ Remember, you must omit any steering towards an entity that is NOT in the above 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     entity_df = ctx.assay_db.entity
+    alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
@@ -262,7 +277,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 blurb=blurb,
                 comparison_set=row["comparison_set"],
                 target_entity=row["target_entity"],
-                other_entities=sorted(row["other_entities"])
+                other_entities=sorted(row["other_entities"]),
+                alias_map=alias_map
             ): i
             for i, ((blurb, row), judge) in enumerate(judge_tasks)
         }

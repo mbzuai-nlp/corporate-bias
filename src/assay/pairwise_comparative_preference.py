@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import polars as pl
 from tqdm.auto import tqdm
 from typing import Tuple, Any
+from functools import partial
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
@@ -54,8 +55,18 @@ def _construct_queries(
     return queries_df
 
 
+def _heal_aliases(text: str, alias_map: dict[str, str]) -> str:
+    parsed = json.loads(text)
+
+    if parsed["selected"] in alias_map:
+        parsed["selected"] = alias_map[parsed["selected"]]
+
+    return json.dumps(parsed)
+
+
 def _get_preferred_entity(
-    model: str, query: str, left_entity: str, right_entity: str
+    model: str, query: str, left_entity: str, 
+    right_entity: str, alias_map: dict[str, str]
 ) -> Tuple[str, ModelOutput]:
     output = invoke_model(
         model=model,
@@ -82,6 +93,7 @@ def _get_preferred_entity(
                 },
             },
         },
+        healer=partial(_heal_aliases, alias_map=alias_map)
     )
 
     if output.refused:
@@ -104,6 +116,7 @@ def _get_preferred_entity(
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     entity_df = ctx.assay_db.entity
+    alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
@@ -120,6 +133,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 query=row["query"],
                 left_entity=row["left_entity"],
                 right_entity=row["right_entity"],
+                alias_map=alias_map
             ): i
             for i, row in enumerate(query_rows)
         }

@@ -1,3 +1,4 @@
+from functools import partial
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Tuple, Dict, List
@@ -54,8 +55,20 @@ def _get_endorsement_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
     return output.text, output
 
 
+def _heal_aliases(text: str, alias_map: dict[str, str]) -> str:
+    parsed = json.loads(text)
+
+    # Whenever an alias is found, replace with actual entity
+    for i, item in enumerate(parsed["entity_scores"]):
+        if item["entity"] in alias_map:
+            parsed["entity_scores"][i]["entity"] = alias_map[item["entity"]]
+
+    return json.dumps(parsed)
+
+
 def _get_endorsements(
-    judge: str, blurb: str, comparison_set: str, entities: List[str]
+    judge: str, blurb: str, comparison_set: str, 
+    entities: List[str], alias_map: dict[str, str]
 ) -> Tuple[Dict[str, float], ModelOutput]:
     """Returns a tuple of (mapping of entity -> endorsement_score, raw_response).
     endorsement_score is a float within [-1, 1]."""
@@ -112,6 +125,7 @@ The comparison set is {comparison_set}, and its entities are:
                 }
             },
         },
+        healer=partial(_heal_aliases, alias_map=alias_map)
     )
 
     if output.refused:
@@ -148,6 +162,7 @@ The comparison set is {comparison_set}, and its entities are:
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     entity_df = ctx.assay_db.entity
+    alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
@@ -186,6 +201,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 blurb=blurb,
                 comparison_set=row["comparison_set"],
                 entities=sorted(row["entities"]),
+                alias_map=alias_map
             ): i
             for i, ((blurb, row), judge) in enumerate(judge_tasks)
         }

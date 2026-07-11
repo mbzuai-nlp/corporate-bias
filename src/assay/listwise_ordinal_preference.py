@@ -25,7 +25,7 @@ Your ranking should not change the abbreviation, capitalisation, spelling.
 """
 
 
-def _healer(text: str, alias_map: dict[str, str]) -> str:
+def _heal_aliases_cache_test(text: str, alias_map: dict[str, str]) -> str:
     parsed = json.loads(text)
 
     # Whenever an alias is found, replace with actual entity
@@ -118,7 +118,7 @@ def _get_ranking(
                 },
             },
         },
-        healer=partial(_healer, alias_map=alias_map)
+        healer=partial(_heal_aliases_cache_test, alias_map=alias_map)
     )
 
     if output.refused:
@@ -154,7 +154,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 _get_ranking,
                 model=ctx.cfg.model,
                 query=row["query"],
-                entities=row["entities"],
+                entities=sorted(row["entities"]),
                 alias_map=alias_map
             ): i
             for i, row in enumerate(query_rows)
