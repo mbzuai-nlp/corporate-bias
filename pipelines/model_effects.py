@@ -9,6 +9,7 @@ import statsmodels.api as sm
 import numpy as np
 from typing import Tuple
 import pandas as pd
+import sympy
 
 from src.data import load_db, Db
 from src.assay.common import JUDGE_MODELS
@@ -22,8 +23,6 @@ class InvalidDesignMatrixException(RuntimeError): ...
 
 
 def validate_design_matrix(X):
-    import sympy
-
     M = sympy.Matrix(X.astype(int).tolist())
     null_vecs = M.nullspace()
     rank = X.shape[1] - len(null_vecs)
