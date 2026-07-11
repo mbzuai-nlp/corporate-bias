@@ -265,8 +265,12 @@ def model_listwise_ordinal_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
         df.with_columns(entity=pl.col("entities"))
         .explode("entity")
         .with_columns(
-            normalised_rank=pl.struct(["rankings", "entity", "entities"]).map_elements(
-                lambda x: x["rankings"].index(x["entity"]) / (len(x["entities"]) - 1),
+            score=pl.struct(["rankings", "entity", "entities"]).map_elements(
+                lambda x: (
+                    1 - (x["rankings"].index(x["entity"]) / len(x["entities"]))
+                    if x["entity"] in x["rankings"]
+                    else 0
+                ),
                 return_dtype=pl.Float64,
             )
         )
@@ -275,8 +279,8 @@ def model_listwise_ordinal_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
 
     df = add_db_features(df, db)
 
-    effects_df = compute_effects(df, "normalised_rank").with_columns(
-        pl.lit("normalised_rank").alias("measurand")
+    effects_df = compute_effects(df, "score").with_columns(
+        pl.lit("listwise_score").alias("measurand")
     )
     return effects_df
 

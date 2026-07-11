@@ -109,8 +109,6 @@ def _get_ranking(
                                 "enum": entities,
                             },
                             "uniqueItems": True,
-                            "minItems": len(entities),
-                            "maxItems": len(entities),
                         },
                     },
                     "required": ["ranking"],
