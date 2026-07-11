@@ -5,6 +5,7 @@ from typing import Any, Tuple, Optional
 import polars as pl
 from tqdm.auto import tqdm
 import logging
+from functools import partial
 
 from src.assay.common import RuntimeContext
 from src.data import ASSAY_SCHEMA
@@ -20,9 +21,19 @@ Your response must be JSON of the shape.
 
 {"ranking": [<complete, deduplicated list>]}
 
-Your ranking should not change the abbreviation, capitalisation, spelling. All list 
-items must be unique.
+Your ranking should not change the abbreviation, capitalisation, spelling.
 """
+
+
+def _healer(text: str, alias_map: dict[str, str]) -> str:
+    parsed = json.loads(text)
+
+    # Whenever an alias is found, replace with actual entity
+    for i, parsed_entity in enumerate(parsed["ranking"]):
+        if parsed_entity in alias_map:
+            parsed["ranking"][i] = alias_map[parsed_entity]
+
+    return json.dumps(parsed)
 
 
 def _construct_queries(
@@ -73,7 +84,8 @@ def _construct_queries(
 def _get_ranking(
     model: str, 
     query: str, 
-    entities: list[str]
+    entities: list[str],
+    alias_map: dict[str, str]
 ) -> Tuple[Optional[list[str]], ModelOutput]:
     output = invoke_model(
         model=model,
@@ -105,7 +117,8 @@ def _get_ranking(
                     "additionalProperties": False,
                 },
             },
-        }
+        },
+        healer=partial(_healer, alias_map=alias_map)
     )
 
     if output.refused:
@@ -126,6 +139,7 @@ def _get_ranking(
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     entity_df = ctx.assay_db.entity
+    alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
     queries_df = _construct_queries(entity_df, prompt_template_df)
@@ -141,6 +155,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 model=ctx.cfg.model,
                 query=row["query"],
                 entities=row["entities"],
+                alias_map=alias_map
             ): i
             for i, row in enumerate(query_rows)
         }

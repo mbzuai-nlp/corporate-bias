@@ -8,6 +8,7 @@ import polars as pl
 @dataclass
 class Db:
     entity: pl.DataFrame
+    alias_map: dict[str, str] # alias: entity
     prompt_template: pl.DataFrame
     model: pl.DataFrame
 
@@ -48,6 +49,13 @@ ASSAY_SCHEMA = {
 def load_db(db_dir: Path) -> Db:
     comparison_set_entity_rows = []
     comparison_set_prompt_template_rows = []
+
+    aliases = json.loads((db_dir / "entity_aliases.json").read_text())
+    alias_map =  {
+        alias: entity
+        for entity, aliases in aliases.items()
+        for alias in aliases
+    }
 
     for path in sorted((db_dir / "comparison-sets").glob("*.json")):
         comparison_set = path.stem
@@ -97,6 +105,7 @@ def load_db(db_dir: Path) -> Db:
 
     return Db(
         entity=comparison_set_entity,
+        alias_map=alias_map,
         prompt_template=comparison_set_prompt_template,
         model=model,
     )

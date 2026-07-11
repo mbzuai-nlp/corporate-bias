@@ -27,7 +27,7 @@ class Message:
     content: str
 
 
-@dataclass(frozen=True)
+@dataclass
 class ModelOutput:
     text: Optional[str]
     raw: Any
@@ -311,17 +311,10 @@ def canonicalise_openrouter_json_schema(
 
 def _validate_structured_output(
     text: str,
-    response_format: Optional[dict[str, Any]],
-    healer: Callable[[str], str]
+    response_format: Optional[dict[str, Any]]
 ) -> None:
     if not response_format:
         return
-    
-    if healer is not None:
-        try:
-            text = healer(text)
-        except Exception as e:
-            raise e
     
     try:
         parsed = json.loads(text)
@@ -350,7 +343,8 @@ def _invoke_openrouter_model(
     **kwargs: Any,
 ) -> ModelOutput:
     # try and inject some randomness to avoid provider caching
-    messages[-1].content = (" " * random.randint(1, 10)) + messages[-1].content
+    messages[-1].content = (("_" * random.randint(1, 10)) 
+                            + messages[-1].content.strip("_"))
 
     client = client_getter()
 
@@ -717,7 +711,11 @@ def _wait(retry_state):
         seconds =  exception.seconds
     elif isinstance(exception, InvalidModelOutputError):
         seconds = 1
-    logging.error(f"Encountered `{type(exception)}`, retrying after {seconds} seconds.")
+    logging.error(
+        (
+            f"Encountered `{type(exception)}`, retrying after {seconds} seconds "
+            f"for the {retry_state.attempt_number} time."
+         ))
     return seconds
 
 
@@ -761,7 +759,7 @@ def invoke_model(
         cached = _cache_get_obj(cache_key)
         if cached is not None and not cached.refused:
             try:
-                _validate_structured_output(cached.text, response_format, healer)
+                _validate_structured_output(cached.text, response_format)
             except InvalidModelOutputError as e:
                 raise InvalidModelOutputError(
                     "Tried returning invalid result from cache."
@@ -774,8 +772,11 @@ def invoke_model(
 
     # Validate against the original, stronger contract.
     if not output.refused:
+        if healer:
+            output.text = healer(output.text)
+
         try:
-            _validate_structured_output(output.text, response_format, healer)
+            _validate_structured_output(output.text, response_format)
         except InvalidModelOutputError as e:
             err_str = json.dumps({"message": str(e), "model_output": str(output.raw),
                                   "model": model})
