@@ -7,10 +7,10 @@ stages:
   run-assay:
     matrix:
       assay:
-      # - pairwise-comparative-preference
-      # - listwise-ordinal-preference
-      # - unaided-endorsement
-      # - open-ended-characterisation
+      - pairwise-comparative-preference
+      - listwise-ordinal-preference
+      - unaided-endorsement
+      - open-ended-characterisation
       - single-entity-steering
       model:
       - gpt-oss-120b
@@ -27,7 +27,6 @@ stages:
       - grok-4.5
       - llama-4-maverick
       - llama-3.3-70b-instruct
-      - llama-3-8b-instruct
       - mistral-nemo
       - mistral-medium-3-5
       - mistral-small-2603
@@ -36,7 +35,6 @@ stages:
       - qwen3.7-plus
       - qwen3.5-flash-02-23
       - nemotron-3-ultra-550b-a55b
-      - nemotron-3-super-120b-a12b
       - phi-4
       - hy3
       - mimo-v2.5
@@ -94,6 +92,14 @@ metrics:
 - data/run-assay/pairwise-comparative-preference/glm-5.2/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/glm-5.2/exp/metrics.json
 - data/run-assay/unaided-endorsement/glm-5.2/exp/metrics.json
+- data/run-assay/single-entity-steering/llama-3-8b-instruct/exp/metrics.json
+- data/run-assay/unaided-endorsement/llama-3-8b-instruct/exp/metrics.json
+- data/run-assay/open-ended-characterisation/llama-3-8b-instruct/exp/metrics.json
+- data/run-assay/listwise-ordinal-preference/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/unaided-endorsement/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/open-ended-characterisation/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/single-entity-steering/nemotron-3-super-120b-a12b/exp/metrics.json
+- data/run-assay/pairwise-comparative-preference/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-oss-120b/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-5.4/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/gpt-4o-mini/exp/metrics.json
@@ -108,7 +114,6 @@ metrics:
 - data/run-assay/pairwise-comparative-preference/grok-4.5/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/llama-4-maverick/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/llama-3.3-70b-instruct/exp/metrics.json
-- data/run-assay/pairwise-comparative-preference/llama-3-8b-instruct/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/mistral-nemo/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/mistral-medium-3-5/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/mistral-small-2603/exp/metrics.json
@@ -117,7 +122,6 @@ metrics:
 - data/run-assay/pairwise-comparative-preference/qwen3.7-plus/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/qwen3.5-flash-02-23/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/nemotron-3-ultra-550b-a55b/exp/metrics.json
-- data/run-assay/pairwise-comparative-preference/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/phi-4/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/hy3/exp/metrics.json
 - data/run-assay/pairwise-comparative-preference/mimo-v2.5/exp/metrics.json
@@ -138,7 +142,6 @@ metrics:
 - data/run-assay/listwise-ordinal-preference/grok-4.5/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/llama-4-maverick/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/llama-3.3-70b-instruct/exp/metrics.json
-- data/run-assay/listwise-ordinal-preference/llama-3-8b-instruct/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/mistral-nemo/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/mistral-medium-3-5/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/mistral-small-2603/exp/metrics.json
@@ -147,7 +150,6 @@ metrics:
 - data/run-assay/listwise-ordinal-preference/qwen3.7-plus/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/qwen3.5-flash-02-23/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/nemotron-3-ultra-550b-a55b/exp/metrics.json
-- data/run-assay/listwise-ordinal-preference/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/phi-4/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/hy3/exp/metrics.json
 - data/run-assay/listwise-ordinal-preference/mimo-v2.5/exp/metrics.json
@@ -168,7 +170,6 @@ metrics:
 - data/run-assay/unaided-endorsement/grok-4.5/exp/metrics.json
 - data/run-assay/unaided-endorsement/llama-4-maverick/exp/metrics.json
 - data/run-assay/unaided-endorsement/llama-3.3-70b-instruct/exp/metrics.json
-- data/run-assay/unaided-endorsement/llama-3-8b-instruct/exp/metrics.json
 - data/run-assay/unaided-endorsement/mistral-nemo/exp/metrics.json
 - data/run-assay/unaided-endorsement/mistral-medium-3-5/exp/metrics.json
 - data/run-assay/unaided-endorsement/mistral-small-2603/exp/metrics.json
@@ -177,7 +178,6 @@ metrics:
 - data/run-assay/unaided-endorsement/qwen3.7-plus/exp/metrics.json
 - data/run-assay/unaided-endorsement/qwen3.5-flash-02-23/exp/metrics.json
 - data/run-assay/unaided-endorsement/nemotron-3-ultra-550b-a55b/exp/metrics.json
-- data/run-assay/unaided-endorsement/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/unaided-endorsement/phi-4/exp/metrics.json
 - data/run-assay/unaided-endorsement/hy3/exp/metrics.json
 - data/run-assay/unaided-endorsement/mimo-v2.5/exp/metrics.json
@@ -198,7 +198,6 @@ metrics:
 - data/run-assay/open-ended-characterisation/grok-4.5/exp/metrics.json
 - data/run-assay/open-ended-characterisation/llama-4-maverick/exp/metrics.json
 - data/run-assay/open-ended-characterisation/llama-3.3-70b-instruct/exp/metrics.json
-- data/run-assay/open-ended-characterisation/llama-3-8b-instruct/exp/metrics.json
 - data/run-assay/open-ended-characterisation/mistral-nemo/exp/metrics.json
 - data/run-assay/open-ended-characterisation/mistral-medium-3-5/exp/metrics.json
 - data/run-assay/open-ended-characterisation/mistral-small-2603/exp/metrics.json
@@ -207,7 +206,6 @@ metrics:
 - data/run-assay/open-ended-characterisation/qwen3.7-plus/exp/metrics.json
 - data/run-assay/open-ended-characterisation/qwen3.5-flash-02-23/exp/metrics.json
 - data/run-assay/open-ended-characterisation/nemotron-3-ultra-550b-a55b/exp/metrics.json
-- data/run-assay/open-ended-characterisation/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/open-ended-characterisation/phi-4/exp/metrics.json
 - data/run-assay/open-ended-characterisation/hy3/exp/metrics.json
 - data/run-assay/open-ended-characterisation/mimo-v2.5/exp/metrics.json
@@ -228,7 +226,6 @@ metrics:
 - data/run-assay/single-entity-steering/grok-4.5/exp/metrics.json
 - data/run-assay/single-entity-steering/llama-4-maverick/exp/metrics.json
 - data/run-assay/single-entity-steering/llama-3.3-70b-instruct/exp/metrics.json
-- data/run-assay/single-entity-steering/llama-3-8b-instruct/exp/metrics.json
 - data/run-assay/single-entity-steering/mistral-nemo/exp/metrics.json
 - data/run-assay/single-entity-steering/mistral-medium-3-5/exp/metrics.json
 - data/run-assay/single-entity-steering/mistral-small-2603/exp/metrics.json
@@ -237,7 +234,6 @@ metrics:
 - data/run-assay/single-entity-steering/qwen3.7-plus/exp/metrics.json
 - data/run-assay/single-entity-steering/qwen3.5-flash-02-23/exp/metrics.json
 - data/run-assay/single-entity-steering/nemotron-3-ultra-550b-a55b/exp/metrics.json
-- data/run-assay/single-entity-steering/nemotron-3-super-120b-a12b/exp/metrics.json
 - data/run-assay/single-entity-steering/phi-4/exp/metrics.json
 - data/run-assay/single-entity-steering/hy3/exp/metrics.json
 - data/run-assay/single-entity-steering/mimo-v2.5/exp/metrics.json
@@ -285,6 +281,22 @@ plots:
     x: step
 - data/run-assay/unaided-endorsement/glm-5.2/exp/plots/metrics:
     x: step
+- data/run-assay/single-entity-steering/llama-3-8b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/llama-3-8b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/llama-3-8b-instruct/exp/plots/metrics:
+    x: step
+- data/run-assay/listwise-ordinal-preference/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/unaided-endorsement/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/open-ended-characterisation/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/single-entity-steering/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
+- data/run-assay/pairwise-comparative-preference/nemotron-3-super-120b-a12b/exp/plots/metrics:
+    x: step
 - data/run-assay/pairwise-comparative-preference/gpt-oss-120b/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/gpt-5.4/exp/plots/metrics:
@@ -313,8 +325,6 @@ plots:
     x: step
 - data/run-assay/pairwise-comparative-preference/llama-3.3-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/pairwise-comparative-preference/llama-3-8b-instruct/exp/plots/metrics:
-    x: step
 - data/run-assay/pairwise-comparative-preference/mistral-nemo/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/mistral-medium-3-5/exp/plots/metrics:
@@ -330,8 +340,6 @@ plots:
 - data/run-assay/pairwise-comparative-preference/qwen3.5-flash-02-23/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/nemotron-3-ultra-550b-a55b/exp/plots/metrics:
-    x: step
-- data/run-assay/pairwise-comparative-preference/nemotron-3-super-120b-a12b/exp/plots/metrics:
     x: step
 - data/run-assay/pairwise-comparative-preference/phi-4/exp/plots/metrics:
     x: step
@@ -373,8 +381,6 @@ plots:
     x: step
 - data/run-assay/listwise-ordinal-preference/llama-3.3-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/listwise-ordinal-preference/llama-3-8b-instruct/exp/plots/metrics:
-    x: step
 - data/run-assay/listwise-ordinal-preference/mistral-nemo/exp/plots/metrics:
     x: step
 - data/run-assay/listwise-ordinal-preference/mistral-medium-3-5/exp/plots/metrics:
@@ -390,8 +396,6 @@ plots:
 - data/run-assay/listwise-ordinal-preference/qwen3.5-flash-02-23/exp/plots/metrics:
     x: step
 - data/run-assay/listwise-ordinal-preference/nemotron-3-ultra-550b-a55b/exp/plots/metrics:
-    x: step
-- data/run-assay/listwise-ordinal-preference/nemotron-3-super-120b-a12b/exp/plots/metrics:
     x: step
 - data/run-assay/listwise-ordinal-preference/phi-4/exp/plots/metrics:
     x: step
@@ -433,8 +437,6 @@ plots:
     x: step
 - data/run-assay/unaided-endorsement/llama-3.3-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/unaided-endorsement/llama-3-8b-instruct/exp/plots/metrics:
-    x: step
 - data/run-assay/unaided-endorsement/mistral-nemo/exp/plots/metrics:
     x: step
 - data/run-assay/unaided-endorsement/mistral-medium-3-5/exp/plots/metrics:
@@ -450,8 +452,6 @@ plots:
 - data/run-assay/unaided-endorsement/qwen3.5-flash-02-23/exp/plots/metrics:
     x: step
 - data/run-assay/unaided-endorsement/nemotron-3-ultra-550b-a55b/exp/plots/metrics:
-    x: step
-- data/run-assay/unaided-endorsement/nemotron-3-super-120b-a12b/exp/plots/metrics:
     x: step
 - data/run-assay/unaided-endorsement/phi-4/exp/plots/metrics:
     x: step
@@ -493,8 +493,6 @@ plots:
     x: step
 - data/run-assay/open-ended-characterisation/llama-3.3-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/open-ended-characterisation/llama-3-8b-instruct/exp/plots/metrics:
-    x: step
 - data/run-assay/open-ended-characterisation/mistral-nemo/exp/plots/metrics:
     x: step
 - data/run-assay/open-ended-characterisation/mistral-medium-3-5/exp/plots/metrics:
@@ -510,8 +508,6 @@ plots:
 - data/run-assay/open-ended-characterisation/qwen3.5-flash-02-23/exp/plots/metrics:
     x: step
 - data/run-assay/open-ended-characterisation/nemotron-3-ultra-550b-a55b/exp/plots/metrics:
-    x: step
-- data/run-assay/open-ended-characterisation/nemotron-3-super-120b-a12b/exp/plots/metrics:
     x: step
 - data/run-assay/open-ended-characterisation/phi-4/exp/plots/metrics:
     x: step
@@ -553,8 +549,6 @@ plots:
     x: step
 - data/run-assay/single-entity-steering/llama-3.3-70b-instruct/exp/plots/metrics:
     x: step
-- data/run-assay/single-entity-steering/llama-3-8b-instruct/exp/plots/metrics:
-    x: step
 - data/run-assay/single-entity-steering/mistral-nemo/exp/plots/metrics:
     x: step
 - data/run-assay/single-entity-steering/mistral-medium-3-5/exp/plots/metrics:
@@ -570,8 +564,6 @@ plots:
 - data/run-assay/single-entity-steering/qwen3.5-flash-02-23/exp/plots/metrics:
     x: step
 - data/run-assay/single-entity-steering/nemotron-3-ultra-550b-a55b/exp/plots/metrics:
-    x: step
-- data/run-assay/single-entity-steering/nemotron-3-super-120b-a12b/exp/plots/metrics:
     x: step
 - data/run-assay/single-entity-steering/phi-4/exp/plots/metrics:
     x: step

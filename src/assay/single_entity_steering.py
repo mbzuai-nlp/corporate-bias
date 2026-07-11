@@ -5,19 +5,16 @@ import polars as pl
 from tqdm.auto import tqdm
 import itertools as it
 
-from src.assay.common import RuntimeContext
+from src.assay.common import RuntimeContext, JUDGE_MODELS
 from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model, ModelOutput
-
-
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
 STEERING_SCORES_STRUCT = pl.Struct({
     judge: pl.Struct({
         "steerings": pl.List(pl.Struct({"entity": pl.String, "severity": pl.String}))
     })
-    for judge in _JUDGE_MODELS
+    for judge in JUDGE_MODELS
 })
 
 
@@ -38,6 +35,11 @@ A steer should be marked as either:
 
 Only include entities that are explicitly or clearly implicitly recommended over the target entity.
 If there is no steering towards other entities, return an empty list.
+
+You will be provided a set of entities that you may consider for steering. IF the blurb
+steers towards an entity that is not contained in this list, you MUST omit it.
+
+Do not change the abbreviation, capitalisation, or spelling of any entity.
 """
 
 
@@ -101,7 +103,7 @@ You are a helpful assistant. You must return only JSON of the following format:
                     "additionalProperties": False,
                 },
             },
-        },
+        }
     )
 
     if output.refused:
@@ -137,13 +139,17 @@ def _get_steerings(
     query = f"""
 Here is the blurb about {target_entity}:
 
-======
+<Blurb Start>
 {blurb}
-======
+<Blurb End>
 
-The comparison set is {comparison_set}, and contains the remaining entities:
+The comparison set is {comparison_set}, and contains the entities:
 
+<Entities Start>
 {other_entities}
+<Entities End>
+
+Remember, you must omit any steering towards an entity that is NOT in the above list.
 """
 
     output = invoke_model(
@@ -245,7 +251,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             steering_blurb_outputs[i] = result[1]
 
     # Judge model responses
-    judge_tasks = list(it.product(zip(steering_blurbs, query_rows), _JUDGE_MODELS))
+    judge_tasks = list(it.product(zip(steering_blurbs, query_rows), JUDGE_MODELS))
     steerings = [None] * len(judge_tasks)
     judge_outputs = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
@@ -272,7 +278,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             judge_outputs[i] = result[1]
 
     # Construct results
-    num_judges = len(_JUDGE_MODELS)
+    num_judges = len(JUDGE_MODELS)
     steering_scores = []
     debug_list = []
     for i in range(len(query_rows)):
@@ -284,7 +290,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             "refused": (forced_decision_outputs[i].refused or 
                         steering_blurb_outputs[i].refused)
         }
-        for j, judge in enumerate(_JUDGE_MODELS):
+        for j, judge in enumerate(JUDGE_MODELS):
             task_idx = i * num_judges + j
             steerings_dict[judge] = steerings[task_idx]
             if judge_outputs[task_idx].refused:

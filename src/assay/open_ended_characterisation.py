@@ -5,12 +5,9 @@ import polars as pl
 from tqdm.auto import tqdm
 import itertools as it
 
-from src.assay.common import RuntimeContext
+from src.assay.common import RuntimeContext, JUDGE_MODELS
 from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model, ModelOutput
-
-
-_JUDGE_MODELS = ["gpt-5.4", "gemini-3.5-flash", "claude-opus-4.5"]
 
 
 JUDGE_SYSTEM_PROMPT = """
@@ -150,7 +147,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Judge model responses
     judge_tasks = list(it.product(zip(characterisation_blurbs, query_rows), 
-                                  _JUDGE_MODELS))
+                                  JUDGE_MODELS))
     characterisations = [None] * len(judge_tasks)
     judge_outputs = [None] * len(judge_tasks)
     with ThreadPoolExecutor(max_workers=128) as executor:
@@ -176,7 +173,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             judge_outputs[i] = result[1]
 
     # Construct results
-    num_judges = len(_JUDGE_MODELS)
+    num_judges = len(JUDGE_MODELS)
     characterisation_scores = []
     debug_list = []
     for i in range(len(query_rows)):
@@ -186,7 +183,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             "judge_outputs": {},
             "refused": model_outputs[i].refused
         }
-        for j, judge in enumerate(_JUDGE_MODELS):
+        for j, judge in enumerate(JUDGE_MODELS):
             task_idx = i * num_judges + j
             scores_dict[judge] = characterisations[task_idx]
             debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]

@@ -7,6 +7,12 @@ from dvclive import Live
 from src.data import Db
 
 
+# === CONSTANTS ===
+
+
+JUDGE_MODELS = ["gpt-5.4-mini", "gemini-2.5-flash", "qwen3.7-plus"]
+
+
 # === TYPES ===
 
 

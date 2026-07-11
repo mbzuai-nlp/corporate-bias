@@ -2,6 +2,7 @@ from copy import deepcopy
 from functools import partial
 from typing import Literal, Mapping, Sequence, Any, Protocol, Callable, Optional
 from openrouter import OpenRouter, errors as or_errors
+from openrouter.components import ChatResult
 import os
 from dataclasses import dataclass
 import hashlib
@@ -20,7 +21,7 @@ from func_timeout import func_timeout, FunctionTimedOut
 # === TYPES ===
 
 
-@dataclass(frozen=True)
+@dataclass
 class Message:
     role: Literal["system", "user", "assistant"]
     content: str
@@ -213,6 +214,9 @@ CANONICAL_OPENROUTER_JSON_SCHEMA_RULES: dict[str, dict[str, Any]] = {
     "openai/gpt-5.4": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
+    "openai/gpt-5.4-mini": {
+        "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
+    },
     "openai/gpt-4o-mini": {
         "strip_keywords": {"minItems", "maxItems", "uniqueItems"},
     },
@@ -334,7 +338,8 @@ def _validate_structured_output(
         jsonschema.Draft202012Validator(schema).validate(parsed)
     except jsonschema.ValidationError as e:
         raise InvalidModelOutputError(
-            f"Model returned JSON that failed schema validation for {schema_name}: {e.message}"
+            "Model returned JSON that failed schema"
+            f"validation for {schema_name}: {e.message}"
         ) from e
 
 
@@ -344,6 +349,9 @@ def _invoke_openrouter_model(
     messages: Sequence[Message],
     **kwargs: Any,
 ) -> ModelOutput:
+    # try and inject some randomness to avoid provider caching
+    messages[-1].content = (" " * random.randint(1, 10)) + messages[-1].content
+
     client = client_getter()
 
     original_response_format = kwargs.get("response_format")
@@ -357,45 +365,58 @@ def _invoke_openrouter_model(
 
     if original_response_format is not None:
         request_kwargs["response_format"] = request_response_format
-        request_kwargs["plugins"] = request_kwargs.get("plugins", []) + [{ "id": "response-healing" }]
+        request_kwargs["plugins"] = (
+            request_kwargs.get("plugins", []) + 
+            [{ "id": "response-healing" }]
+        )
 
     request_kwargs = _disable_web_plugin(request_kwargs)
 
     try:
-        response = func_timeout(
+        response: ChatResult = func_timeout(
             60,
             lambda: client.chat.send(
+                http_headers={
+                    "X-OpenRouter-Cache": "false"
+                },
                 model=model_name,
                 messages=_serialize_messages(messages),
-                **request_kwargs,
+                **request_kwargs
             )
         )
     except FunctionTimedOut as e:
         err_str = json.dumps({"message": str(e), "request_kwargs": request_kwargs, 
                               "model": model_name, "messages": str(messages)})
-        raise RetryableNetworkError(err_str) from e
+        logging.warning(err_str)
+        raise RetryableNetworkError(str(e)) from e
     except or_errors.TooManyRequestsResponseError as e:
-        wait = int(e.headers.get("retry-after")) + 1 if "retry-after" in e.headers else None
+        wait = (
+            int(e.headers.get("retry-after")) + 1 
+            if "retry-after" in e.headers else None
+        )
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "should_wait_seconds": wait, "model": model_name,
                               "messages": str(messages)})
-        raise RetryableNetworkError(err_str, wait) from e
+        logging.warning(err_str)
+        raise RetryableNetworkError(str(e), wait) from e
     except or_errors.BadRequestResponseError as e:
         body_str = str(e.body).lower()
         if (
-            ("rate limit exceeded" in str(e.body)) or # anthropic
-            ("detected high-frequency non-compliant requests") # mimo
+            ("rate limit exceeded" in body_str) or # anthropic
+            ("detected high-frequency non-compliant requests" in body_str) # mimo
         ):
             err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "should_wait_seconds": 61, "model": model_name,
                               "messages": str(messages)})
-            raise RetryableNetworkError(err_str, 61) from e
+            logging.warning(err_str)
+            raise RetryableNetworkError(str(e), 61) from e
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "model": model_name, "messages": str(messages)})
-        raise RuntimeError(err_str) from e
+        logging.warning(err_str)
+        raise RuntimeError(str(e)) from e
     except RETRYABLE_NETWORK_ERRORS as e:
         if "PROHIBITED_CONTENT" in str(e.body):
             return ModelOutput(
@@ -410,12 +431,14 @@ def _invoke_openrouter_model(
         err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "model": model_name, "messages": str(messages)})
-        raise RetryableNetworkError(err_str) from e
+        logging.warning(err_str)
+        raise RetryableNetworkError(str(e)) from e
     except Exception as e:
-        err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
+        err_str = json.dumps({"message": str(e), "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
                               "model": model_name, "messages": str(messages)})
-        raise RuntimeError(err_str) from e
+        logging.warning(err_str)
+        raise RuntimeError(str(e)) from e
 
     output = ModelOutput(
         text=_extract_text_from_model_output(response),
@@ -439,7 +462,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-oss-120b",
         provider={"only": ["cerebras/fp16"]},
         reasoning={"effort": "minimal"},
-        temperature=0
+        temperature=0.2
     ),
     "gpt-5.4": partial(
         _invoke_openrouter_model,
@@ -447,7 +470,15 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-5.4",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
+    ),
+    "gpt-5.4-mini": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "openai/gpt-5.4-mini",
+        provider={"only": ["openai"]},
+        reasoning={"effort": "none"},
+        temperature=0.2
     ),
     "gpt-4o-mini": partial(
         _invoke_openrouter_model,
@@ -455,7 +486,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "openai/gpt-4o-mini",
         provider={"only": ["openai"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "claude-sonnet-5": partial(
         _invoke_openrouter_model,
@@ -463,7 +494,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-sonnet-5",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "claude-opus-4.5": partial(
         _invoke_openrouter_model,
@@ -471,7 +502,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-opus-4.5",
         provider={"only": ["anthropic"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "claude-3-haiku": partial(
         _invoke_openrouter_model,
@@ -479,7 +510,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "anthropic/claude-3-haiku",
         provider={"only": ["amazon-bedrock"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "gemma-4-31b-it": partial(
         _invoke_openrouter_model,
@@ -487,7 +518,15 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "google/gemma-4-31b-it",
         provider={"only": ["venice/bf16"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
+    ),
+    "gemini-2.5-flash": partial(
+        _invoke_openrouter_model,
+        _get_openrouter_client,
+        "google/gemini-2.5-flash",
+        provider={"only": ["google-ai-studio"]},
+        reasoning={"effort": "minimal"},
+        temperature=0.2
     ),
     "gemini-3.5-flash": partial(
         _invoke_openrouter_model,
@@ -495,7 +534,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "google/gemini-3.5-flash",
         provider={"only": ["google-ai-studio"]},
         reasoning={"effort": "minimal"},
-        temperature=0
+        temperature=0.2
     ),
     "gemini-2.5-pro": partial(
         _invoke_openrouter_model,
@@ -503,7 +542,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "google/gemini-2.5-pro",
         provider={"only": ["google-vertex/global"]},
         reasoning={"effort": "minimal"},
-        temperature=0
+        temperature=0.2
     ),
     "grok-4.20": partial(
         _invoke_openrouter_model,
@@ -511,7 +550,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "x-ai/grok-4.20",
         provider={"only": ["xai"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "grok-4.3": partial(
         _invoke_openrouter_model,
@@ -519,7 +558,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "x-ai/grok-4.3",
         provider={"only": ["xai"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "grok-4.5": partial(
         _invoke_openrouter_model,
@@ -527,7 +566,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "x-ai/grok-4.5",
         provider={"only": ["xai"]},
         reasoning={"effort": "minimal"},
-        temperature=0
+        temperature=0.2
     ),
     "llama-4-maverick": partial(
         _invoke_openrouter_model,
@@ -535,7 +574,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "meta-llama/llama-4-maverick",
         provider={"only": ["deepinfra/base"], "quantizations": ["fp8"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "llama-3.3-70b-instruct": partial(
         _invoke_openrouter_model,
@@ -543,15 +582,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "meta-llama/llama-3.3-70b-instruct",
         provider={"only": ["wandb/fp16"]},
         reasoning={"effort": "none"},
-        temperature=0
-    ),
-    "llama-3-8b-instruct": partial(
-        _invoke_openrouter_model,
-        _get_openrouter_client,
-        "meta-llama/llama-3-8b-instruct",
-        provider={"only": ["together/int4"]}, # only available
-        reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "mistral-nemo": partial(
         _invoke_openrouter_model,
@@ -559,7 +590,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "mistralai/mistral-nemo",
         provider={"only": ["deepinfra/fp8"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "mistral-medium-3-5": partial(
         _invoke_openrouter_model,
@@ -567,7 +598,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "mistralai/mistral-medium-3-5",
         provider={"only": ["mistral"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "mistral-small-2603": partial(
         _invoke_openrouter_model,
@@ -575,7 +606,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "mistralai/mistral-small-2603",
         provider={"only": ["mistral"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "deepseek-v4-pro": partial(
         _invoke_openrouter_model,
@@ -583,7 +614,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "deepseek/deepseek-v4-pro",
         provider={"only": ["baidu/fp8"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "deepseek-chat-v3.1": partial(
         _invoke_openrouter_model,
@@ -591,7 +622,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "deepseek/deepseek-chat-v3.1",
         provider={"only": ["wandb/fp8"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "qwen3.7-plus": partial(
         _invoke_openrouter_model,
@@ -599,7 +630,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "qwen/qwen3.7-plus",
         provider={"only": ["alibaba"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "qwen3.5-flash-02-23": partial(
         _invoke_openrouter_model,
@@ -607,7 +638,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "qwen/qwen3.5-flash-02-23",
         provider={"only": ["alibaba"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "nemotron-3-ultra-550b-a55b": partial(
         _invoke_openrouter_model,
@@ -615,15 +646,15 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "nvidia/nemotron-3-ultra-550b-a55b",
         provider={"only": ["together"]}, # best available
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "nemotron-3-super-120b-a12b": partial(
         _invoke_openrouter_model,
         _get_openrouter_client,
         "nvidia/nemotron-3-super-120b-a12b",
-        provider={"only": ["deepinfra/bf16"]}, # native
+        provider={"only": ["dekallm/fp8"]}, # best available
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "phi-4": partial(
         _invoke_openrouter_model,
@@ -631,7 +662,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "microsoft/phi-4",
         provider={"only": ["deepinfra/bf16"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "hy3": partial(
         _invoke_openrouter_model,
@@ -639,7 +670,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "tencent/hy3",
         provider={"only": ["gmicloud/bf16"]}, # native
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "mimo-v2.5": partial(
         _invoke_openrouter_model,
@@ -647,7 +678,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "xiaomi/mimo-v2.5",
         provider={"only": ["xiaomi/fp8"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "mimo-v2.5-pro": partial(
         _invoke_openrouter_model,
@@ -655,7 +686,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "xiaomi/mimo-v2.5-pro",
         provider={"only": ["xiaomi/fp8"]},
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "glm-5.1": partial(
         _invoke_openrouter_model,
@@ -663,7 +694,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "z-ai/glm-5.1",
         provider={"only": ["z-ai/fp8"]}, # best option; chinese; owner
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
     "glm-4.5": partial(
         _invoke_openrouter_model,
@@ -671,7 +702,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         "z-ai/glm-4.5",
         provider={"only": ["z-ai/fp8"]}, # best option; chinese
         reasoning={"effort": "none"},
-        temperature=0
+        temperature=0.2
     ),
 }
 
@@ -681,12 +712,13 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
 
 def _wait(retry_state):
     exception = retry_state.outcome.exception()
-    logging.error(f"Encountered `{exception}`, retrying.")
+    seconds = 30
     if isinstance(exception, RetryableNetworkError) and exception.seconds:
-        return exception.seconds
+        seconds =  exception.seconds
     elif isinstance(exception, InvalidModelOutputError):
-        return 1
-    return 30
+        seconds = 1
+    logging.error(f"Encountered `{type(exception)}`, retrying after {seconds} seconds.")
+    return seconds
 
 
 @retry(
@@ -742,7 +774,13 @@ def invoke_model(
 
     # Validate against the original, stronger contract.
     if not output.refused:
-        _validate_structured_output(output.text, response_format, healer)
+        try:
+            _validate_structured_output(output.text, response_format, healer)
+        except InvalidModelOutputError as e:
+            err_str = json.dumps({"message": str(e), "model_output": str(output.raw),
+                                  "model": model})
+            logging.warning(err_str)
+            raise e
 
     if use_cache:
         _cache_set_obj(cache_key, output)
