@@ -159,7 +159,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
-    queries_df = _construct_queries(entity_df, prompt_template_df).head(2)  # TODO: undo slice
+    queries_df = _construct_queries(entity_df, prompt_template_df)
     query_rows = list(queries_df.iter_rows(named=True))
 
     # Query model
@@ -214,20 +214,20 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     num_judges = len(JUDGE_MODELS)
     endorsement_scores = []
     debug_list = []
+    refusal_reasons = [None] * len(query_rows)
     for i in range(len(query_rows)):
-        judge_dict = {}
+        endorsements_dict = {}
+        refusal_reasons[i] = model_outputs[i].refused
         debug_dict = {
             "model_output": model_outputs[i],
-            "judge_outputs": {},
-            "refused": model_outputs[i].refused
+            "judge_outputs": {}
         }
         for j, judge in enumerate(JUDGE_MODELS):
             task_idx = i * num_judges + j
-            judge_dict[judge] = endorsements[task_idx]
+            endorsements_dict[judge] = endorsements[task_idx]
+            refusal_reasons[i] = refusal_reasons[i] or judge_outputs[task_idx].refused
             debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
-            if judge_outputs[task_idx].refused:
-                debug_dict["refused"] = True
-        endorsement_scores.append(judge_dict)
+        endorsement_scores.append(endorsements_dict)
         debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
@@ -235,7 +235,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         pl.Series("endorsement_scores", endorsement_scores),
         pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
                                  for d in debug_list]),
-        pl.Series("refused", [d["refused"] for d in debug_list])
+        pl.Series("refused", [r is not None for r in refusal_reasons]),
+        pl.Series("refusal_reason", refusal_reasons).cast(pl.Utf8)
     ).select(
         "query",
         "assay",
@@ -244,7 +245,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "comparison_set",
         "endorsement_scores",
         "debug_json",
-        "refused"
+        "refused",
+        "refusal_reason"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

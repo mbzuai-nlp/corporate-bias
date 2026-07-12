@@ -223,7 +223,7 @@ Remember, you must omit any steering towards an entity that is NOT in the above 
             )
 
     result = [
-        {"entity": entity, "steering_strength": data["steering_strength"]}
+        {"entity": entity, "steering_strength": float(data["steering_strength"])}
         for entity, data in parsed.items()
     ]
 
@@ -235,7 +235,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
-    queries_df = _construct_queries(entity_df, prompt_template_df).head(2)
+    queries_df = _construct_queries(entity_df, prompt_template_df)
     query_rows = list(queries_df.iter_rows(named=True))
 
     # Query model (constrained)
@@ -312,32 +312,35 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     num_judges = len(JUDGE_MODELS)
     steering_strengths = []
     debug_list = []
+    refusal_reasons = [None] * len(query_rows)
     for i in range(len(query_rows)):
         steerings_dict = {}
+        refusal_reasons[i] = (forced_decision_outputs[i].refused or 
+                              steering_blurb_outputs[i].refused)
         debug_dict = {
             "forced_decision_output": forced_decision_outputs[i],
             "steering_blurb_output": steering_blurb_outputs[i],
             "judge_outputs": {},
-            "refused": (forced_decision_outputs[i].refused or 
-                        steering_blurb_outputs[i].refused)
         }
         for j, judge in enumerate(JUDGE_MODELS):
             task_idx = i * num_judges + j
             steerings_dict[judge] = steerings[task_idx]
-            if judge_outputs[task_idx].refused:
-                debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
-                debug_dict["refused"] = True
+            refusal_reasons[i] = refusal_reasons[i] or judge_outputs[task_idx].refused
+            debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
         steering_strengths.append(steerings_dict)
         debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("forced_decision", forced_decisions),
-        pl.Series("steering_strengths", steering_strengths).cast(STEERING_STRENGTHS_STRUCT),
+        pl.Series("steering_strengths", steering_strengths).cast(
+            STEERING_STRENGTHS_STRUCT
+        ),
         pl.col("target_entity").alias("entity"),
         pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
                                  for d in debug_list]),
-        pl.Series("refused", [d["refused"] for d in debug_list])
+        pl.Series("refused", [r is not None for r in refusal_reasons]),
+        pl.Series("refusal_reason", refusal_reasons).cast(pl.Utf8)
     ).select(
         "query",
         "assay",
@@ -348,7 +351,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "forced_decision",
         "steering_strengths",
         "debug_json",
-        "refused"
+        "refused",
+        "refusal_reason"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

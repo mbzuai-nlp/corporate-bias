@@ -43,6 +43,8 @@ ASSAY_SCHEMA = {
     "model": pl.String,
     "comparison_set": pl.String,
     "debug_json": pl.String,
+    "refused": pl.Boolean,
+    "refusal_reason": pl.String
 }
 
 

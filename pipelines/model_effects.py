@@ -266,11 +266,8 @@ def model_listwise_ordinal_preference(df: pl.DataFrame, db: Db) -> pl.DataFrame:
         .explode("entity")
         .with_columns(
             score=pl.struct(["rankings", "entity", "entities"]).map_elements(
-                lambda x: (
-                    1 - (x["rankings"].index(x["entity"]) / len(x["entities"]))
-                    if x["entity"] in x["rankings"]
-                    else 0
-                ),
+                # rank 1 = 1.0, rank MAX = 0.0
+                lambda x: (1 - (x["rankings"].index(x["entity"]) / len(x["entities"]))),
                 return_dtype=pl.Float64,
             )
         )
@@ -295,19 +292,17 @@ def model_pairwise_comparative_preference(df: pl.DataFrame, db: Db) -> pl.DataFr
     return effects_df
 
 
-def calculate_steering_strengths(steering_scores):
-    strength_map = {"balanced": 0.5, "egregious": 1.0}
-
+def calculate_steering_strengths(steering_strengths):
     j_scores = {}
     for j in JUDGE_MODELS:
-        j_scores[j] = {item["entity"]: strength_map[item["severity"]]
-                       for item in steering_scores[j]["steerings"]}
+        j_scores[j] = {item["entity"]: item["steering_strength"]
+                       for item in steering_strengths[j]}
     entities = set().union(*(s.keys() for j, s in j_scores.items()))
 
     strengths = [
         {
             "entity": e, 
-            "steering_strength": sum(j_scores[j].get(e, 0)
+            "steering_strength": sum(j_scores[j][e]
                                      for j in JUDGE_MODELS) / len(JUDGE_MODELS)
         }
         for e in entities
@@ -322,7 +317,7 @@ def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:
     df = (
         df
         .with_columns(
-            pl.col("steering_scores")
+            pl.col("steering_strengths")
             .map_elements(calculate_steering_strengths, return_dtype=pl.List(
                 pl.Struct({"entity": pl.Utf8, "steering_strength": pl.Float64})
             ))
@@ -334,7 +329,7 @@ def model_single_entity_steering(df: pl.DataFrame, db: Db) -> pl.DataFrame:
             pl.col("steering_strengths").struct["entity"].alias("right_entity"),
             pl.col("steering_strengths").struct["steering_strength"]
         )
-        .drop("steering_strengths", "steering_scores", "entity")
+        .drop("steering_strengths", "steering_strengths", "entity")
     )
     
     df = add_db_features(df, db, entity_cols=("left_entity", "right_entity"))

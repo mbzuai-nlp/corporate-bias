@@ -163,7 +163,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             "left_beat_right",
             [p == row["left_entity"] for p, row in zip(preferred_entities, query_rows)],
         ),
-        pl.Series("refused", [o.refused for o in model_outputs])
+        pl.Series("refused", [bool(o.refused) for o in model_outputs]),
+        pl.Series("refusal_reason", [o.refused for o in model_outputs]).cast(pl.Utf8)
     ).select(
         "query",
         "assay",
@@ -174,7 +175,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "right_entity",
         "left_beat_right",
         "debug_json",
-        "refused"
+        "refused",
+        "refusal_reason"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)

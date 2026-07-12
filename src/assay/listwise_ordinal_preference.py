@@ -107,6 +107,8 @@ def _get_ranking(
                                 "enum": entities,
                             },
                             "uniqueItems": True,
+                            "minItems": len(entities),
+                            "maxItems": len(entities),
                         },
                     },
                     "required": ["ranking"],
@@ -128,7 +130,9 @@ def _get_ranking(
         or len(set(ranking)) != len(entities)
         or set(ranking) != set(entities)
     ):
-        raise ValueError(f"Invalid ranking returned: {ranking}")
+        raise ValueError(
+            f"Invalid ranking returned: {ranking} for entities: {entities}"
+        )
 
     return ranking, output
 
@@ -178,7 +182,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 for r in model_outputs
             ],
         ),
-        pl.Series("refused", [o.refused for o in model_outputs])
+        pl.Series("refused", [bool(o.refused) for o in model_outputs]),
+        pl.Series("refusal_reason", [o.refused for o in model_outputs]).cast(pl.Utf8)
     ).select(
         "query",
         "assay",
@@ -188,7 +193,8 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "entities",
         "rankings",
         "debug_json",
-        "refused"
+        "refused",
+        "refusal_reason"
     )
 
     ctx.exp.log_metric("total_queries_run", queries_df.height)
