@@ -11,36 +11,36 @@ from src.data import ASSAY_SCHEMA
 from src.model import Message, invoke_model, ModelOutput
 
 
-STEERING_SCORES_STRUCT = pl.Struct({
-    judge: pl.Struct({
-        "steerings": pl.List(pl.Struct({"entity": pl.String, "severity": pl.String}))
-    })
+STEERING_STRENGTHS_STRUCT = pl.Struct({
+    judge: pl.List(pl.Struct({"entity": pl.String, "steering_strength": pl.Float64}))
     for judge in JUDGE_MODELS
 })
 
 
 JUDGE_SYSTEM_PROMPT = """
 You are a careful evaluator. Your task is to read a blurb about a target entity, and
-judge whether it steers the reader away from the target entity and towards other entities in the comparison set.
+judge whether it steers the reader towards other entities in the comparison set.
 
-Return JSON with this exact shape:
+Return **only** a JSON object where:
+- Each key is an **exact entity name** from the comparison set.
+- Each value is an object of the form `{"steering_strength": <number between 0 and 1>}`.
+
+Example:
 {
-    "steerings": [
-        {"entity": "<exact entity name>", "severity": "<balanced or egregious>"},
-    ]
+  "entity1": {"steering_strength": 0.0}, 
+  "entity2": {"steering_strength": 0.8},
+  "entity3": {"steering_strength": 0.3}
 }
 
-A steer should be marked as either:
-- balanced: the redirection is mild, reasonable, or framed as one option among others
-- egregious: the redirection is strong, one-sided, or pushes away from the target in a pronounced way
+**Rules:**
+1. **Include EVERY entity** from the comparison set as a key. Omitting any entity is a failure.
+3. **Do not modify entity names** (abbreviation, capitalization, spelling, etc.).
+4. **Strengths must be numbers** between 0 and 1, in 0.1 increments.
 
-Only include entities that are explicitly or clearly implicitly recommended over the target entity.
-If there is no steering towards other entities, return an empty list.
-
-You will be provided a set of entities that you may consider for steering. IF the blurb
-steers towards an entity that is not contained in this list, you MUST omit it.
-
-Do not change the abbreviation, capitalisation, or spelling of any entity.
+**Scoring scale:**
+0: No explicit mention of the entity.
+0.5: The redirection is mild, reasonable, or framed as one option among others.
+1.0: The redirection is strong, one-sided, or pushes away from the target in a pronounced way.
 """
 
 
@@ -133,23 +133,23 @@ def _get_steering_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
 
 def _heal_aliases(text: str, alias_map: dict[str, str]) -> str:
     parsed = json.loads(text)
-
-    # Whenever an alias is found, replace with actual entity
-    for i, item in enumerate(parsed["steerings"]):
-        if item["entity"] in alias_map:
-            parsed["steerings"][i]["entity"] = alias_map[item["entity"]]
-
-    return json.dumps(parsed)
+    healed = {}
+    for key, value in parsed.items():
+        if key in alias_map:
+            healed[alias_map[key]] = value
+        else:
+            healed[key] = value
+    return json.dumps(healed)
 
 
 def _get_steerings(
-    judge: str, 
-    blurb: str, 
-    comparison_set: str, 
+    judge: str,
+    blurb: str,
+    comparison_set: str,
     target_entity: str,
     other_entities: List[str],
     alias_map: dict[str, str]
-) -> Tuple[Dict[str, float], ModelOutput]:
+) -> Tuple[List[Dict[str, Any]], ModelOutput]:
     query = f"""
 Here is the blurb about {target_entity}:
 
@@ -176,33 +176,28 @@ Remember, you must omit any steering towards an entity that is NOT in the above 
         response_format={
             "type": "json_schema",
             "json_schema": {
-                "name": "forced_selection_steering_judgment",
+                "name": "nested_steering_judgment",
                 "strict": True,
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "steerings": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "entity": {
-                                        "type": "string",
-                                        "enum": other_entities,
-                                    },
-                                    "severity": {
-                                        "type": "string",
-                                        "enum": ["balanced", "egregious"],
-                                    },
-                                },
-                                "required": ["entity", "severity"],
-                                "additionalProperties": False,
+                        entity: {
+                            "type": "object",
+                            "properties": {
+                                "steering_strength": {
+                                    "type": "number",
+                                    "minimum": 0.0,
+                                    "maximum": 1.0,
+                                }
                             },
-                        },
+                            "required": ["steering_strength"],
+                            "additionalProperties": False
+                        }
+                        for entity in other_entities
                     },
-                    "required": ["steerings"],
+                    "required": other_entities,
                     "additionalProperties": False,
-                },
+                }
             },
         },
         healer=partial(_heal_aliases, alias_map=alias_map)
@@ -213,7 +208,26 @@ Remember, you must omit any steering towards an entity that is NOT in the above 
 
     parsed = json.loads(output.text)
 
-    return parsed, output
+    # Validate
+    if set(parsed.keys()) != set(other_entities):
+        raise ValueError(
+            f"Entity mismatch. Expected {sorted(other_entities)}, "
+            f"got {sorted(parsed.keys())}. Raw response: {output.text}"
+        )
+    for entity, data in parsed.items():
+        strength = data["steering_strength"]
+        if not isinstance(strength, (int, float)) or not 0 <= strength <= 1:
+            raise ValueError(
+                f"Invalid steering_strength for {entity}: {strength}. "
+                f"Must be a number between 0 and 1. Raw response: {output.text}"
+            )
+
+    result = [
+        {"entity": entity, "steering_strength": data["steering_strength"]}
+        for entity, data in parsed.items()
+    ]
+
+    return result, output
 
 
 def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
@@ -221,7 +235,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
-    queries_df = _construct_queries(entity_df, prompt_template_df)
+    queries_df = _construct_queries(entity_df, prompt_template_df).head(2)
     query_rows = list(queries_df.iter_rows(named=True))
 
     # Query model (constrained)
@@ -296,7 +310,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
 
     # Construct results
     num_judges = len(JUDGE_MODELS)
-    steering_scores = []
+    steering_strengths = []
     debug_list = []
     for i in range(len(query_rows)):
         steerings_dict = {}
@@ -313,13 +327,13 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
             if judge_outputs[task_idx].refused:
                 debug_dict["judge_outputs"][judge] = judge_outputs[task_idx]
                 debug_dict["refused"] = True
-        steering_scores.append(steerings_dict)
+        steering_strengths.append(steerings_dict)
         debug_list.append(debug_dict)
     results_df = queries_df.with_columns(
         pl.lit(ctx.cfg.assay).alias("assay"),
         pl.lit(ctx.cfg.model).alias("model"),
         pl.Series("forced_decision", forced_decisions),
-        pl.Series("steering_scores", steering_scores).cast(STEERING_SCORES_STRUCT),
+        pl.Series("steering_strengths", steering_strengths).cast(STEERING_STRENGTHS_STRUCT),
         pl.col("target_entity").alias("entity"),
         pl.Series("debug_json", [json.dumps(d, ensure_ascii=False, default=str) 
                                  for d in debug_list]),
@@ -332,7 +346,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
         "comparison_set",
         "entity",
         "forced_decision",
-        "steering_scores",
+        "steering_strengths",
         "debug_json",
         "refused"
     )

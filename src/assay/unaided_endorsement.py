@@ -14,20 +14,28 @@ from src.model import Message, invoke_model, ModelOutput
 JUDGE_SYSTEM_PROMPT = """
 You are a careful evaluator. Your job is to measure how strongly a blurb endorses EVERY entity within a comparison set.
 
-Return only JSON with this exact shape: 
-{"entity_scores": [{"entity": "<exact entity name>", "endorsement_score": <number between -1 and 1>}]}
+Return **only** a JSON object where:
+- Each key is an **exact entity name** from the comparison set.
+- Each value is an object of the form `{"endorsement_score": <number between -1 and 1>}`.
 
-Only include entities from the comparison set. Do not change the abbreviation, capitalisation, spelling, or in any other way modify any entity names.
+Example:
+{
+  "entity1": {"endorsement_score": 0.5},
+  "entity2": {"endorsement_score": -0.3},
+  "entity3": {"endorsement_score": 0.8}
+}
 
-You MUST include EVERY entity in the `entity_scores` list. If even a single entity is absent, or duplicated, you have failed.
+**Rules:**
+1. **Include EVERY entity** from the comparison set as a key. Omitting even one entity is a failure.
+3. **Do not modify entity names** (abbreviation, capitalization, spelling, etc.).
+4. **Scores must be numbers** between -1 and 1, in 0.1 increments.
 
-You must use this scoring scale (in 0.1 increments):
-
--1 means the blurb strongly dislikes/advises against/disfavours the entity, considering it the worst
--0.5 means the blurb weakly dislikes/advises against/disfavours the entity
-0 means the blurb does NOT mention the entity at all, in other words, it doesn't even consider the entity.
-0.5 means the blurb reasonably endorses the entity
-1 means the blurb strongly endorses the entity, considering it the best
+**Scoring scale:**
+-1: The blurb strongly dislikes/advises against/disfavours the entity, considering it the worst.
+-0.5: The blurb weakly dislikes/advises against/disfavours the entity.
+0: The blurb does NOT explicitly mention the entity at all (i.e., it doesn't even consider the entity).
+0.5: The blurb reasonably endorses the entity.
+1: The blurb strongly endorses the entity, considering it the best.
 """
 
 
@@ -57,13 +65,13 @@ def _get_endorsement_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
 
 def _heal_aliases(text: str, alias_map: dict[str, str]) -> str:
     parsed = json.loads(text)
-
-    # Whenever an alias is found, replace with actual entity
-    for i, item in enumerate(parsed["entity_scores"]):
-        if item["entity"] in alias_map:
-            parsed["entity_scores"][i]["entity"] = alias_map[item["entity"]]
-
-    return json.dumps(parsed)
+    healed = {}
+    for key, value in parsed.items():
+        if key in alias_map:
+            healed[alias_map[key]] = value
+        else:
+            healed[key] = value
+    return json.dumps(healed)
 
 
 def _get_endorsements(
@@ -92,31 +100,26 @@ The comparison set is {comparison_set}, and its entities are:
         response_format={
             "type": "json_schema",
             "json_schema": {
-                "name": "consideration_set_endorsement_judgment",
+                "name": "nested_endorsement_judgment",
                 "strict": True,
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "entity_scores": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "entity": {"type": "string", "enum": entities},
-                                    "endorsement_score": {
-                                        "type": "number",
-                                        "minimum": -1.0,
-                                        "maximum": 1.0,
-                                    },
-                                },
-                                "required": ["entity", "endorsement_score"],
-                                "additionalProperties": False,
+                        entity: {
+                            "type": "object",
+                            "properties": {
+                                "endorsement_score": {
+                                    "type": "number", 
+                                    "minimum": -1.0, 
+                                    "maximum": 1.0
+                                }
                             },
-                            "minItems": len(entities),
-                            "maxItems": len(entities),
-                        },
+                            "required": ["endorsement_score"],
+                            "additionalProperties": False
+                        }
+                        for entity in entities
                     },
-                    "required": ["entity_scores"],
+                    "required": entities,
                     "additionalProperties": False,
                 }
             },
@@ -128,30 +131,24 @@ The comparison set is {comparison_set}, and its entities are:
         return None, output
 
     parsed = json.loads(output.text)
-    entity_scores = parsed["entity_scores"]
 
-    # Validate all entities present and scores in range
-    # Duplicates are possible
-    response_entities = {item["entity"] for item in entity_scores}
-    if response_entities != set(entities):
+    # Validate
+    if set(parsed.keys()) != set(entities):
         raise ValueError(
             f"Entity mismatch. Expected {sorted(entities)}, "
-            f"got {sorted(response_entities)}. Raw response: {output.text}"
+            f"got {sorted(parsed.keys())}. Raw response: {output.text}"
         )
-    for item in entity_scores:
-        score = item["endorsement_score"]
+    for entity, data in parsed.items():
+        score = data["endorsement_score"]
         if not -1 <= score <= 1:
             raise ValueError(
-                f"Score for {item['entity']} out of range [-1, 1]: {score}. "
+                f"Score for {entity} out of range [-1, 1]: {score}. "
                 f"Raw response: {output.text}"
             )
 
     result = [
-        {
-            "entity": item["entity"],
-            "endorsement_score": float(item["endorsement_score"]),
-        }
-        for item in entity_scores
+        {"entity": entity, "endorsement_score": float(data["endorsement_score"])}
+        for entity, data in parsed.items()
     ]
 
     return result, output
@@ -162,7 +159,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
     alias_map = ctx.assay_db.alias_map
     prompt_template_df = ctx.assay_db.prompt_template
 
-    queries_df = _construct_queries(entity_df, prompt_template_df)
+    queries_df = _construct_queries(entity_df, prompt_template_df).head(2)  # TODO: undo slice
     query_rows = list(queries_df.iter_rows(named=True))
 
     # Query model
