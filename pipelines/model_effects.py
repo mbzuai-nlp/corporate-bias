@@ -63,12 +63,17 @@ def fit_and_extract_effects(
     # Extract explicit terms
     params, cov, pvalues = result.params, result.cov_params(), result.pvalues
     param_names = X.design_info.column_names
+    # Compute beta weights for explicit terms
+    y_std = np.std(y, ddof=result.df_resid)
+    x_stds = np.std(X, axis=0, ddof=result.df_resid)
+    beta_weights = params * (x_stds / y_std)
     final_df = pd.DataFrame(
         {
             "term": param_names,
             "coeff": params,
             "std_err": np.sqrt(np.diag(cov)),
-            "p_value": pvalues,  # Add p-values here
+            "p_value": pvalues,
+            "beta": beta_weights,
         }
     )
 
@@ -84,7 +89,9 @@ def fit_and_extract_effects(
         # approx p val
         t_stat = coeff / se
         p_value = 2 * (1 - stats.t.cdf(abs(t_stat), df=result.df_resid))
-        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se, p_value]
+        # infer beta weight
+        beta = -sum(beta_weights[i] for i in idxs)
+        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se, p_value, beta]
 
     return final_df.sort_values("term").reset_index(drop=True)
 
