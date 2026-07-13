@@ -187,8 +187,16 @@ def add_db_features(
     db: Db, 
     entity_cols: Tuple[str] = ("entity",)
 ) -> pl.DataFrame:
+    # Join to models
+    original_models = set(df["model"].unique())
     df = df.join(db.model, on="model", how="inner")
+    joined_models = set(df["model"].unique())
 
+    if original_models != joined_models:
+        missing_models = (original_models -joined_models)
+        raise Exception(f"Missing models: {missing_models}")
+
+    # Join to entities
     for entity_col in entity_cols:
         df = df.join(
             db.entity,
