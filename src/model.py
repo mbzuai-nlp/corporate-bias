@@ -85,6 +85,18 @@ def _get_openrouter_client() -> OpenRouter:
     return _openrouter_client
 
 
+def _get_openrouter_vertex_client() -> OpenRouter:
+    global _openrouter_vertex_client
+
+    if _openrouter_vertex_client is None:
+        api_key = os.environ.get("OPENROUTER_VERTEX_API_KEY")
+        if not api_key:
+            raise RuntimeError("Missing OPENROUTER_API_KEY environment variable")
+        _openrouter_vertex_client = OpenRouter(api_key=api_key)
+
+    return _openrouter_vertex_client
+
+
 # === CACHE ===
 
 
@@ -381,7 +393,7 @@ def _invoke_openrouter_model(
         err_str = json.dumps({"message": str(e), "request_kwargs": request_kwargs, 
                               "model": model_name, "messages": str(messages)})
         logging.warning(err_str)
-        raise RetryableNetworkError(str(e)) from e
+        raise RetryableNetworkError(str(e), 1) from e
     except or_errors.TooManyRequestsResponseError as e:
         wait = (
             int(e.headers.get("retry-after")) + 1 
@@ -397,7 +409,8 @@ def _invoke_openrouter_model(
         body_str = str(e.body).lower()
         if (
             ("rate limit exceeded" in body_str) or # anthropic
-            ("detected high-frequency non-compliant requests" in body_str) # mimo
+            ("detected high-frequency non-compliant requests" in body_str) or # mimo
+            ("InternalError.Algo.InvalidParameter: Format error" in body_str) # qwen
         ):
             err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
@@ -526,7 +539,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
-        _get_openrouter_client,
+        _openrouter_client,
         "google/gemini-2.5-flash",
         provider={"only": ["google-ai-studio"]},
         reasoning={"effort": "minimal"},
@@ -534,17 +547,17 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     ),
     "gemini-3.5-flash": partial(
         _invoke_openrouter_model,
-        _get_openrouter_client,
+        _get_openrouter_vertex_client,
         "google/gemini-3.5-flash",
-        provider={"only": ["google-ai-studio"]},
+        provider={"only": ["google-vertex"]},
         reasoning={"effort": "minimal"},
         temperature=0.0
     ),
     "gemini-2.5-pro": partial(
         _invoke_openrouter_model,
-        _get_openrouter_client,
+        _get_openrouter_vertex_client,
         "google/gemini-2.5-pro",
-        provider={"only": ["google-vertex/global"]},
+        provider={"only": ["google-vertex"]},
         reasoning={"effort": "minimal"},
         temperature=0.0
     ),
@@ -576,7 +589,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "meta-llama/llama-4-maverick",
-        provider={"only": ["deepinfra/base"], "quantizations": ["fp8"]}, # native
+        provider={"only": ["parasail/fp8"]}, # native
         reasoning={"effort": "none"},
         temperature=0.0
     ),
@@ -672,7 +685,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
         _invoke_openrouter_model,
         _get_openrouter_client,
         "tencent/hy3",
-        provider={"only": ["gmicloud/bf16"]}, # native
+        provider={"only": ["atlas-cloud/fp8"]}, # gmicloud/bf16 too slow
         reasoning={"effort": "none"},
         temperature=0.0
     ),
@@ -716,7 +729,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
 
 def _wait(retry_state):
     exception = retry_state.outcome.exception()
-    seconds = 30
+    seconds = 60
     if isinstance(exception, RetryableNetworkError) and exception.seconds:
         seconds =  exception.seconds
     elif isinstance(exception, InvalidModelOutputError):
@@ -724,9 +737,10 @@ def _wait(retry_state):
     logging.error(
         (
             f"Encountered `{type(exception)}`, retrying after {seconds} seconds "
-            f"for the {retry_state.attempt_number} time."
+            f"+ jitter for the {retry_state.attempt_number} time."
          ))
-    return seconds
+    jitter = random.randint(1, 15)
+    return seconds + jitter
 
 
 @retry(
@@ -758,6 +772,10 @@ def invoke_model(
             **kwargs,
             **delegate_kwargs, # Ensures kwargs like `provider` cannot be overridden.
         }
+
+        if model == "gemini-2.5-flash": # Hacky solution to avoid cache misses
+           del effective_kwargs["provider"]
+           raise Exception(f"Removed provider from {effective_kwargs}")
 
         cache_key = _cache_key(
             model_name=model,
