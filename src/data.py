@@ -86,12 +86,12 @@ def load_db(db_dir: Path) -> Db:
     comparison_set_entity = pl.DataFrame(
         comparison_set_entity_rows,
         schema=ENTITY_SCHEMA,
-    ).filter(pl.col("comparison_set").is_in(["home-video-game-consoles", "search-engine"]))
+    ).filter(pl.col("comparison_set").is_in(["home-video-game-console", "search-engine", "llm-family", "paas"]))
 
     comparison_set_prompt_template = pl.DataFrame(
         comparison_set_prompt_template_rows,
         schema=PROMPT_TEMPLATE_SCHEMA,
-    ).filter(pl.col("comparison_set").is_in(["home-video-game-consoles", "search-engine"]))
+    ).filter(pl.col("comparison_set").is_in(["home-video-game-console", "search-engine", "llm-family", "paas"]))
 
     model = pl.DataFrame(
         [
