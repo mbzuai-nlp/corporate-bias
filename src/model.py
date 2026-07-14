@@ -785,6 +785,20 @@ def invoke_model(
 
         cached = _cache_get_obj(cache_key)
         if cached is not None:
+            if cached.refused == "INVALID_OUTPUT" and cached.text is not None:
+                parsed = json.loads(cached.text)
+
+                if parsed == {"answer": "No"}:
+                    cached.text = '{"answer": "no"}'
+                    cached.refused = None
+                    _cache_set_obj(cache_key, cached)
+                    return cached
+
+                if parsed == {"answer": "Yes"}:
+                    cached.text = '{"answer": "yes"}'
+                    cached.refused = None
+                    _cache_set_obj(cache_key, cached)
+                    return cached
             if not cached.refused:
                 try:
                     _validate_structured_output(cached.text, response_format)

@@ -1307,8 +1307,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/claude-3-haiku.parquet
       hash: md5
-      md5: 2bffe5993f30d9de32d879f11f3e62a8
-      size: 330113
+      md5: 7f94f0cf8b4ce0b899388cd4c752b1fc
+      size: 329193
   run-assay@single-entity-steering-claude-opus-4.5:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/claude-opus-4.5;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=claude-opus-4.5
@@ -1377,8 +1377,8 @@ stages:
     - path: 
         data/assays/open-ended-characterisation/nemotron-3-ultra-550b-a55b.parquet
       hash: md5
-      md5: 82fa36a1013c69ca90b406437a711dac
-      size: 1014142
+      md5: e37a11ab808a5ef6b04ef97df3f32854
+      size: 1013867
   run-assay@single-entity-steering-deepseek-chat-v3.1:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/deepseek-chat-v3.1;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=deepseek-chat-v3.1
@@ -1599,8 +1599,8 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/llama-3.3-70b-instruct.parquet
       hash: md5
-      md5: 656af9446708e2d851e62a037725bc89
-      size: 421534
+      md5: 45063a10cf03ad6410e18931ccfc180b
+      size: 420713
   run-assay@single-entity-steering-llama-4-maverick:
     cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/llama-4-maverick;
       uv run python -m pipelines.run_assay --assay=single-entity-steering --model=llama-4-maverick
@@ -2155,5 +2155,91 @@ stages:
     outs:
     - path: data/assays/single-entity-steering/mistral-nemo.parquet
       hash: md5
-      md5: 67b771165572a1cf70c633776e52394b
-      size: 409109
+      md5: f74dd9821bf6daa262d8fc8c8cfd6d82
+      size: 408026
+  run-assay@pairwise-comparative-preference-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=gemma-4-31b-it --db=data/db --save-path=data/assays/pairwise-comparative-preference/gemma-4-31b-it.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/gemma-4-31b-it/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/gemma-4-31b-it/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/gemma-4-31b-it.parquet
+      hash: md5
+      md5: 43c051ecdc6be83c4870b92d3e34d232
+      size: 163596
+  run-assay@listwise-ordinal-preference-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gemma-4-31b-it.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gemma-4-31b-it/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gemma-4-31b-it.parquet
+      hash: md5
+      md5: 373046952dcbb50996a3cddc4dc0af06
+      size: 34428
+  run-assay@unaided-endorsement-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/unaided-endorsement/gemma-4-31b-it.parquet
+      --exp=data/run-assay/unaided-endorsement/gemma-4-31b-it/exp 2>&1 | tee data/run-assay/unaided-endorsement/gemma-4-31b-it/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/unaided-endorsement/gemma-4-31b-it.parquet
+      hash: md5
+      md5: f94c2096a61b047bd8ad5a0aa49f5d70
+      size: 71717
+  run-assay@open-ended-characterisation-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/open-ended-characterisation/gemma-4-31b-it.parquet
+      --exp=data/run-assay/open-ended-characterisation/gemma-4-31b-it/exp 2>&1 | tee
+      data/run-assay/open-ended-characterisation/gemma-4-31b-it/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/open-ended-characterisation/gemma-4-31b-it.parquet
+      hash: md5
+      md5: 7335b526bed40f2d1bc4e356d15ea7a9
+      size: 634487
+  run-assay@single-entity-steering-gemma-4-31b-it:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/gemma-4-31b-it;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=gemma-4-31b-it
+      --db=data/db --save-path=data/assays/single-entity-steering/gemma-4-31b-it.parquet
+      --exp=data/run-assay/single-entity-steering/gemma-4-31b-it/exp 2>&1 | tee data/run-assay/single-entity-steering/gemma-4-31b-it/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/single-entity-steering/gemma-4-31b-it.parquet
+      hash: md5
+      md5: 5972f2514b1e15882dfbc74292873f4b
+      size: 598519

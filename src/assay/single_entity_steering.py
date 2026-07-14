@@ -105,14 +105,15 @@ the user's query:
                     "additionalProperties": False,
                 },
             },
-        }
+        },
+        healer=lambda t: t.lower()
     )
 
     if output.refused:
         return None, output
 
     parsed = json.loads(output.text)
-    answer = parsed["answer"].lower()
+    answer = parsed["answer"]
 
     if answer not in ("yes", "no"):
         raise ValueError(f"Answer is {answer}, not in (yes, no).")
