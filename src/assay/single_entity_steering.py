@@ -82,7 +82,7 @@ def _get_forced_decision(model: str, query: str) -> Tuple[bool, ModelOutput]:
 You are a helpful assistant. You must return only JSON of the following format to answer
 the user's query:
 
-{"selected": "<yes or no>"}
+{"answer": "<yes or no>"}
 """
     output = invoke_model(
         model=model,
@@ -99,9 +99,9 @@ the user's query:
                 "schema": {
                     "type": "object",
                     "properties": {
-                        "selected": {"type": "string", "enum": ["yes", "no"]},
+                        "answer": {"type": "string", "enum": ["yes", "no"]},
                     },
-                    "required": ["selected"],
+                    "required": ["answer"],
                     "additionalProperties": False,
                 },
             },

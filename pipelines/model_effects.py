@@ -73,7 +73,9 @@ def fit_and_extract_effects(
             "std_err": np.sqrt(np.diag(cov)),
             "p_value": pvalues,
             "y_standardized": y_standardized,
-            "y_std": y_std
+            "y_std": y_std,
+            "r_squared": result.rsquared,
+            "r_squared_adj": result.rsquared_adj,
         }
     )
 
@@ -90,8 +92,16 @@ def fit_and_extract_effects(
         t_stat = coeff / se
         p_value = 2 * (1 - stats.t.cdf(abs(t_stat), df=result.df_resid))
         y_std_effect = -sum(y_standardized[i] for i in idxs)
-        final_df.loc[len(final_df)] = [f"[{var}] {ref_level}", coeff, se, 
-                                       p_value, y_std_effect, y_std]
+        final_df.loc[len(final_df)] = [
+            f"[{var}] {ref_level}",
+            coeff,
+            se,
+            p_value,
+            y_std_effect,
+            y_std,
+            result.rsquared,
+            result.rsquared_adj,
+        ]
 
     return final_df.sort_values("term").reset_index(drop=True)
 
@@ -310,7 +320,8 @@ def model_pairwise_comparative_preference(df: pl.DataFrame, db: Db) -> pl.DataFr
 def calculate_steering_strengths(steering_strengths):
     j_scores = {}
     for j in JUDGE_MODELS:
-        j_scores[j] = {item["entity"]: item["steering_strength"]
+        # Make +ve -> affinity
+        j_scores[j] = {item["entity"]: -item["steering_strength"]
                        for item in steering_strengths[j]}
     entities = set().union(*(s.keys() for j, s in j_scores.items()))
 
