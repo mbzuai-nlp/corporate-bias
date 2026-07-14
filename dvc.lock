@@ -1,0 +1,444 @@
+schema: '2.0'
+stages:
+  run-assay@listwise-ordinal-preference-gpt-oss-120b:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gpt-oss-120b;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gpt-oss-120b
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gpt-oss-120b/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gpt-oss-120b.parquet
+      hash: md5
+      md5: 3920cfefc1e276f3d43368c33c69bdb0
+      size: 52916
+  run-assay@pairwise-comparative-preference-grok-4.20:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/grok-4.20;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=grok-4.20 --db=data/db --save-path=data/assays/pairwise-comparative-preference/grok-4.20.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/grok-4.20/exp 2>&1 | tee
+      data/run-assay/pairwise-comparative-preference/grok-4.20/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/grok-4.20.parquet
+      hash: md5
+      md5: 8e0560bfe31213f2768d5017d2291e4f
+      size: 167452
+  run-assay@listwise-ordinal-preference-claude-opus-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-opus-4.5;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-opus-4.5
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-opus-4.5.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-opus-4.5/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/claude-opus-4.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-opus-4.5.parquet
+      hash: md5
+      md5: 53e1ee1cfe3b2dbce2c4cc2102baa163
+      size: 32485
+  run-assay@listwise-ordinal-preference-claude-3-haiku:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/claude-3-haiku;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=claude-3-haiku
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/claude-3-haiku.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/claude-3-haiku/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/claude-3-haiku/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/claude-3-haiku.parquet
+      hash: md5
+      md5: 4cc4d329084c278ee1bb48a6d428d3d4
+      size: 36949
+  run-assay@listwise-ordinal-preference-gemini-3.5-flash:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gemini-3.5-flash;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gemini-3.5-flash
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gemini-3.5-flash.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gemini-3.5-flash/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/gemini-3.5-flash/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gemini-3.5-flash.parquet
+      hash: md5
+      md5: f508300b4899b7a46b559ad01af40d98
+      size: 45022
+  run-assay@listwise-ordinal-preference-gemini-2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/gemini-2.5-pro;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=gemini-2.5-pro
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/gemini-2.5-pro.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/gemini-2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/gemini-2.5-pro.parquet
+      hash: md5
+      md5: 1654aaae837b754b4929ebe5f1cbd0a4
+      size: 178942
+  run-assay@pairwise-comparative-preference-grok-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/grok-4.5;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=grok-4.5 --db=data/db --save-path=data/assays/pairwise-comparative-preference/grok-4.5.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/grok-4.5/exp 2>&1 | tee
+      data/run-assay/pairwise-comparative-preference/grok-4.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/grok-4.5.parquet
+      hash: md5
+      md5: 7945e785c0810cfd771a9e5b0b905493
+      size: 2505664
+  run-assay@listwise-ordinal-preference-llama-4-maverick:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/llama-4-maverick;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=llama-4-maverick
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/llama-4-maverick.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/llama-4-maverick/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/llama-4-maverick/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/llama-4-maverick.parquet
+      hash: md5
+      md5: c0e3d10fa6db7f5ca0320be6b4240be3
+      size: 32094
+  run-assay@listwise-ordinal-preference-llama-3.3-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/llama-3.3-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=llama-3.3-70b-instruct
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/llama-3.3-70b-instruct.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/llama-3.3-70b-instruct/exp
+      2>&1 | tee data/run-assay/listwise-ordinal-preference/llama-3.3-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/listwise-ordinal-preference/llama-3.3-70b-instruct.parquet
+      hash: md5
+      md5: 1a3e355d65b15a7690b709da83a4c7fa
+      size: 31515
+  run-assay@pairwise-comparative-preference-llama-4-maverick:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/llama-4-maverick;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=llama-4-maverick --db=data/db --save-path=data/assays/pairwise-comparative-preference/llama-4-maverick.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/llama-4-maverick/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/llama-4-maverick/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/llama-4-maverick.parquet
+      hash: md5
+      md5: 31b39b4ed36b0594f2ff9081d04997ff
+      size: 153307
+  run-assay@listwise-ordinal-preference-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=mistral-nemo
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/mistral-nemo.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/mistral-nemo/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/mistral-nemo/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/mistral-nemo.parquet
+      hash: md5
+      md5: 3996a276e572824bd18ff4563e93eb7a
+      size: 33149
+  run-assay@listwise-ordinal-preference-mistral-medium-3-5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/mistral-medium-3-5;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=mistral-medium-3-5
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/mistral-medium-3-5.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/mistral-medium-3-5/exp 2>&1
+      | tee data/run-assay/listwise-ordinal-preference/mistral-medium-3-5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/mistral-medium-3-5.parquet
+      hash: md5
+      md5: a2a2181ae03fcb7a78a64294abea9218
+      size: 30703
+  run-assay@pairwise-comparative-preference-llama-3.3-70b-instruct:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/llama-3.3-70b-instruct;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=llama-3.3-70b-instruct --db=data/db --save-path=data/assays/pairwise-comparative-preference/llama-3.3-70b-instruct.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/llama-3.3-70b-instruct/exp
+      2>&1 | tee data/run-assay/pairwise-comparative-preference/llama-3.3-70b-instruct/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/pairwise-comparative-preference/llama-3.3-70b-instruct.parquet
+      hash: md5
+      md5: 3bbb02b373faa22fa026579f695cdc6e
+      size: 157069
+  run-assay@listwise-ordinal-preference-deepseek-v4-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/deepseek-v4-pro;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=deepseek-v4-pro
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/deepseek-v4-pro.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/deepseek-v4-pro/exp 2>&1 |
+      tee data/run-assay/listwise-ordinal-preference/deepseek-v4-pro/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/deepseek-v4-pro.parquet
+      hash: md5
+      md5: 26b5396c70ddcb6a891a35c72d7a7531
+      size: 32538
+  run-assay@listwise-ordinal-preference-deepseek-chat-v3.1:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/deepseek-chat-v3.1;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=deepseek-chat-v3.1
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/deepseek-chat-v3.1.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/deepseek-chat-v3.1/exp 2>&1
+      | tee data/run-assay/listwise-ordinal-preference/deepseek-chat-v3.1/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/deepseek-chat-v3.1.parquet
+      hash: md5
+      md5: 93589cd19c9f870846801bebaa0d612b
+      size: 32586
+  run-assay@pairwise-comparative-preference-mistral-nemo:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/mistral-nemo;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=mistral-nemo --db=data/db --save-path=data/assays/pairwise-comparative-preference/mistral-nemo.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/mistral-nemo/exp 2>&1 |
+      tee data/run-assay/pairwise-comparative-preference/mistral-nemo/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/mistral-nemo.parquet
+      hash: md5
+      md5: b59d7d53b91df4938032a77fdd3c0e87
+      size: 158087
+  run-assay@listwise-ordinal-preference-mimo-v2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/mimo-v2.5-pro;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=mimo-v2.5-pro
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/mimo-v2.5-pro.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/mimo-v2.5-pro/exp 2>&1 | tee
+      data/run-assay/listwise-ordinal-preference/mimo-v2.5-pro/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/mimo-v2.5-pro.parquet
+      hash: md5
+      md5: b25bccd5483fde5311167f351a8c3794
+      size: 33355
+  run-assay@pairwise-comparative-preference-mistral-medium-3-5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/mistral-medium-3-5;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=mistral-medium-3-5 --db=data/db --save-path=data/assays/pairwise-comparative-preference/mistral-medium-3-5.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/mistral-medium-3-5/exp
+      2>&1 | tee data/run-assay/pairwise-comparative-preference/mistral-medium-3-5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/pairwise-comparative-preference/mistral-medium-3-5.parquet
+      hash: md5
+      md5: 65d7eb7b236eb2e1a2a378e5b48bb9d9
+      size: 159281
+  run-assay@pairwise-comparative-preference-mistral-small-2603:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/mistral-small-2603;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=mistral-small-2603 --db=data/db --save-path=data/assays/pairwise-comparative-preference/mistral-small-2603.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/mistral-small-2603/exp
+      2>&1 | tee data/run-assay/pairwise-comparative-preference/mistral-small-2603/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/pairwise-comparative-preference/mistral-small-2603.parquet
+      hash: md5
+      md5: 14a6b3404123bde3992970eec611331a
+      size: 162254
+  run-assay@pairwise-comparative-preference-deepseek-v4-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/deepseek-v4-pro;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=deepseek-v4-pro --db=data/db --save-path=data/assays/pairwise-comparative-preference/deepseek-v4-pro.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/deepseek-v4-pro/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/deepseek-v4-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/deepseek-v4-pro.parquet
+      hash: md5
+      md5: 912908a5648f5d298acf99c8bb4bcaeb
+      size: 170676
+  run-assay@pairwise-comparative-preference-deepseek-chat-v3.1:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/deepseek-chat-v3.1;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=deepseek-chat-v3.1 --db=data/db --save-path=data/assays/pairwise-comparative-preference/deepseek-chat-v3.1.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/deepseek-chat-v3.1/exp
+      2>&1 | tee data/run-assay/pairwise-comparative-preference/deepseek-chat-v3.1/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/pairwise-comparative-preference/deepseek-chat-v3.1.parquet
+      hash: md5
+      md5: 72d6942a9ddd920ab584b601bb268c45
+      size: 159152
+  run-assay@pairwise-comparative-preference-qwen3.7-plus:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/qwen3.7-plus;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=qwen3.7-plus --db=data/db --save-path=data/assays/pairwise-comparative-preference/qwen3.7-plus.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/qwen3.7-plus/exp 2>&1 |
+      tee data/run-assay/pairwise-comparative-preference/qwen3.7-plus/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/qwen3.7-plus.parquet
+      hash: md5
+      md5: c50bfd3e85fb62fa370d6be7514f986f
+      size: 155255
+  run-assay@pairwise-comparative-preference-qwen3.5-flash-02-23:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/qwen3.5-flash-02-23;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=qwen3.5-flash-02-23 --db=data/db --save-path=data/assays/pairwise-comparative-preference/qwen3.5-flash-02-23.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/qwen3.5-flash-02-23/exp
+      2>&1 | tee data/run-assay/pairwise-comparative-preference/qwen3.5-flash-02-23/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: 
+        data/assays/pairwise-comparative-preference/qwen3.5-flash-02-23.parquet
+      hash: md5
+      md5: 00c56750a7b51b3ff31744cf94ba5c11
+      size: 156563
+  run-assay@pairwise-comparative-preference-mimo-v2.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/mimo-v2.5;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=mimo-v2.5 --db=data/db --save-path=data/assays/pairwise-comparative-preference/mimo-v2.5.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/mimo-v2.5/exp 2>&1 | tee
+      data/run-assay/pairwise-comparative-preference/mimo-v2.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/mimo-v2.5.parquet
+      hash: md5
+      md5: 1a7673d347fbaa50a547e9eb37479b70
+      size: 157420
+  run-assay@pairwise-comparative-preference-mimo-v2.5-pro:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/mimo-v2.5-pro;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=mimo-v2.5-pro --db=data/db --save-path=data/assays/pairwise-comparative-preference/mimo-v2.5-pro.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/mimo-v2.5-pro/exp 2>&1
+      | tee data/run-assay/pairwise-comparative-preference/mimo-v2.5-pro/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/mimo-v2.5-pro.parquet
+      hash: md5
+      md5: eeb8c9259ff2e5206ef5f61fe20c0b7f
+      size: 155950

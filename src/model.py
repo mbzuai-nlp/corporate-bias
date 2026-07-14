@@ -410,7 +410,7 @@ def _invoke_openrouter_model(
         if (
             ("rate limit exceeded" in body_str) or # anthropic
             ("detected high-frequency non-compliant requests" in body_str) or # mimo
-            ("InternalError.Algo.InvalidParameter: Format error" in body_str) # qwen
+            ("internalerror.algo.invalidparameter: format error" in body_str) # qwen
         ):
             err_str = json.dumps({"message": e.message, "headers": dict(e.headers), 
                               "body": e.body, "request_kwargs": request_kwargs, 
@@ -539,7 +539,7 @@ MODEL_DELEGATES: Mapping[str, ModelDelegate] = {
     ),
     "gemini-2.5-flash": partial(
         _invoke_openrouter_model,
-        _openrouter_client,
+        _get_openrouter_client,
         "google/gemini-2.5-flash",
         provider={"only": ["google-ai-studio"]},
         reasoning={"effort": "minimal"},
@@ -774,8 +774,7 @@ def invoke_model(
         }
 
         if model == "gemini-2.5-flash": # Hacky solution to avoid cache misses
-           del effective_kwargs["provider"]
-           raise Exception(f"Removed provider from {effective_kwargs}")
+           effective_kwargs["provider"] = {"only": ["google-vertex"]}
 
         cache_key = _cache_key(
             model_name=model,

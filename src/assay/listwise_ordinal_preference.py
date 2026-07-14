@@ -154,7 +154,7 @@ def run_assay(ctx: RuntimeContext) -> pl.DataFrame:
                 _get_ranking,
                 model=ctx.cfg.model,
                 query=row["query"],
-                entities=sorted(row["entities"]),
+                entities=row["entities"],
                 alias_map=alias_map
             ): i
             for i, row in enumerate(query_rows)

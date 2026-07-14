@@ -94,7 +94,7 @@ the user's query:
         response_format={
             "type": "json_schema",
             "json_schema": {
-                "name": "forced_selection_decision",
+                "name": "answer",
                 "strict": True,
                 "schema": {
                     "type": "object",
@@ -112,12 +112,12 @@ the user's query:
         return None, output
 
     parsed = json.loads(output.text)
-    selected = parsed["selected"].lower()
+    answer = parsed["answer"].lower()
 
-    if selected not in ("yes", "no"):
-        raise ValueError(f"Selection is {selected}, not in (yes, no).")
+    if answer not in ("yes", "no"):
+        raise ValueError(f"Answer is {answer}, not in (yes, no).")
 
-    return selected == "yes", output
+    return answer == "yes", output
 
 
 def _get_steering_blurbs(model: str, query: str) -> Tuple[str, ModelOutput]:
