@@ -379,7 +379,7 @@ def _invoke_openrouter_model(
 
     try:
         response: ChatResult = func_timeout(
-            60,
+            180,
             lambda: client.chat.send(
                 http_headers={
                     "X-OpenRouter-Cache": "false"

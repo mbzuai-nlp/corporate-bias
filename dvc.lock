@@ -2243,3 +2243,37 @@ stages:
       hash: md5
       md5: 5972f2514b1e15882dfbc74292873f4b
       size: 598519
+  run-assay@pairwise-comparative-preference-glm-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/glm-4.5;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=glm-4.5 --db=data/db --save-path=data/assays/pairwise-comparative-preference/glm-4.5.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/glm-4.5/exp 2>&1 | tee
+      data/run-assay/pairwise-comparative-preference/glm-4.5/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/glm-4.5.parquet
+      hash: md5
+      md5: d979c6845729e561cac3eb4f858961fd
+      size: 159603
+  run-assay@listwise-ordinal-preference-glm-4.5:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/glm-4.5;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=glm-4.5
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/glm-4.5.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/glm-4.5/exp 2>&1 | tee data/run-assay/listwise-ordinal-preference/glm-4.5/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/glm-4.5.parquet
+      hash: md5
+      md5: bca9a2e78509524279344116e8014517
+      size: 35831
