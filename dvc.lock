@@ -2283,11 +2283,94 @@ stages:
     deps:
     - path: data/assays
       hash: md5
-      md5: 936f289b5eb313ee82f6dbfb677c0be5.dir
-      size: 42014885
-      nfiles: 132
+      md5: 47736eae354a7ac5091c4d835c662b4f.dir
+      size: 43165532
+      nfiles: 137
     outs:
     - path: data/model-effects.parquet
       hash: md5
-      md5: e9121a9dace4e7b21125d55f728c1004
-      size: 58827
+      md5: d971b8495f5b13719cc3d8f539053362
+      size: 46052
+  run-assay@pairwise-comparative-preference-hy3:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/pairwise-comparative-preference/hy3;
+      uv run python -m pipelines.run_assay --assay=pairwise-comparative-preference
+      --model=hy3 --db=data/db --save-path=data/assays/pairwise-comparative-preference/hy3.parquet
+      --exp=data/run-assay/pairwise-comparative-preference/hy3/exp 2>&1 | tee data/run-assay/pairwise-comparative-preference/hy3/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/pairwise-comparative-preference/hy3.parquet
+      hash: md5
+      md5: dd29d8876d2cad6f3607205979ad0082
+      size: 169326
+  run-assay@listwise-ordinal-preference-hy3:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/listwise-ordinal-preference/hy3;
+      uv run python -m pipelines.run_assay --assay=listwise-ordinal-preference --model=hy3
+      --db=data/db --save-path=data/assays/listwise-ordinal-preference/hy3.parquet
+      --exp=data/run-assay/listwise-ordinal-preference/hy3/exp 2>&1 | tee data/run-assay/listwise-ordinal-preference/hy3/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/listwise-ordinal-preference/hy3.parquet
+      hash: md5
+      md5: 0d6527f837e7d19395902584ce198c9a
+      size: 39190
+  run-assay@unaided-endorsement-hy3:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/unaided-endorsement/hy3;
+      uv run python -m pipelines.run_assay --assay=unaided-endorsement --model=hy3
+      --db=data/db --save-path=data/assays/unaided-endorsement/hy3.parquet --exp=data/run-assay/unaided-endorsement/hy3/exp
+      2>&1 | tee data/run-assay/unaided-endorsement/hy3/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/unaided-endorsement/hy3.parquet
+      hash: md5
+      md5: 4dbf468df936215451198d6ed2dd117f
+      size: 53506
+  run-assay@open-ended-characterisation-hy3:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/open-ended-characterisation/hy3;
+      uv run python -m pipelines.run_assay --assay=open-ended-characterisation --model=hy3
+      --db=data/db --save-path=data/assays/open-ended-characterisation/hy3.parquet
+      --exp=data/run-assay/open-ended-characterisation/hy3/exp 2>&1 | tee data/run-assay/open-ended-characterisation/hy3/exec.log\"\
+      \n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/open-ended-characterisation/hy3.parquet
+      hash: md5
+      md5: 99ada836744500c702739cca537125a1
+      size: 470174
+  run-assay@single-entity-steering-hy3:
+    cmd: "bash -lc \"set -euo pipefail; mkdir -p data/run-assay/single-entity-steering/hy3;
+      uv run python -m pipelines.run_assay --assay=single-entity-steering --model=hy3
+      --db=data/db --save-path=data/assays/single-entity-steering/hy3.parquet --exp=data/run-assay/single-entity-steering/hy3/exp
+      2>&1 | tee data/run-assay/single-entity-steering/hy3/exec.log\"\n"
+    deps:
+    - path: data/db
+      hash: md5
+      md5: 7339db18e9cf8083b29c4423256c25e3.dir
+      size: 23106
+      nfiles: 11
+    outs:
+    - path: data/assays/single-entity-steering/hy3.parquet
+      hash: md5
+      md5: 83f1161fc949f4b1841b5b2a6f196c60
+      size: 418451

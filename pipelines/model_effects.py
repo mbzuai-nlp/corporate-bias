@@ -127,7 +127,7 @@ def compute_effects(df: pl.DataFrame, score_col: str) -> pl.DataFrame:
         f"{score_col} ~ "
         "C(model, Sum) + "
         "C(entity, Sum) + "
-        "C(prompt_template, Sum) + "
+       "C(prompt_template, Sum) + "
         "ownership_geography_match_entity + "
         f"{' + '.join(affiliation_cols)}"
     )
