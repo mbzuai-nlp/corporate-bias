@@ -400,42 +400,53 @@ def main() -> None:
 
     with Live(dir=exp_dir) as exp:
         all_effects = []
-        for assay in (
-            "open-ended-characterisation",
-            "unaided-endorsement",
-            "listwise-ordinal-preference",
-            "pairwise-comparative-preference",
-            "single-entity-steering",
-        ):
-            df = pl.concat(
-                (pl.read_parquet(f) for f in (assays_dir / assay).glob("*.parquet"))
-            ).filter(~pl.col("refused")) # Omit refused queries when effects modelling
+        for i in range(20):
+            subsample_size = 0.9
+            for assay in (
+                "open-ended-characterisation",
+                "unaided-endorsement",
+                "listwise-ordinal-preference",
+                "pairwise-comparative-preference",
+                "single-entity-steering",
+            ):
+                df = pl.concat(
+                    (pl.read_parquet(f) for f in (assays_dir / assay).glob("*.parquet"))
+                ).filter(~pl.col("refused")) # Omit refused queries
 
-            comparison_sets = df.select("comparison_set").to_series().unique().to_list()
-            for comparison_set in comparison_sets:
-                df_filtered = df.filter(pl.col("comparison_set") == comparison_set)
-
-                if assay == "open-ended-characterisation":
-                    effects = model_open_ended_characterisation(df_filtered, db)
-                elif assay == "unaided-endorsement":
-                    effects = model_unaided_endorsement(df_filtered, db)
-                elif assay == "listwise-ordinal-preference":
-                    effects = model_listwise_ordinal_preference(df_filtered, db)
-                elif assay == "pairwise-comparative-preference":
-                    effects = model_pairwise_comparative_preference(df_filtered, db)
-                elif assay == "single-entity-steering":
-                    effects = model_single_entity_steering(df_filtered, db)
-                else:
-                    raise NotImplementedError(f"Assay `{assay}` is not implemented")
-
-                effects = effects.with_columns(
-                    pl.lit(assay).alias("assay"),
-                    pl.lit(comparison_set).alias("comparison_set"),
+                comparison_sets = (
+                    df.select("comparison_set").to_series().unique().to_list()
                 )
-                all_effects.append(effects)
+                for comparison_set in comparison_sets:
+                    df_filtered = df.filter(pl.col("comparison_set") == comparison_set)
 
-        effects_df = pl.concat(all_effects)
-        effects_df.write_parquet(save_path)
+                    df_sub = df_filtered.sample(
+                        n=int(df_filtered.height * 0.9),
+                        with_replacement=False
+                    )
+
+                    if assay == "open-ended-characterisation":
+                        effects = model_open_ended_characterisation(df_sub, db)
+                    elif assay == "unaided-endorsement":
+                        effects = model_unaided_endorsement(df_sub, db)
+                    elif assay == "listwise-ordinal-preference":
+                        effects = model_listwise_ordinal_preference(df_sub, db)
+                    elif assay == "pairwise-comparative-preference":
+                        effects = model_pairwise_comparative_preference(df_sub, db)
+                    elif assay == "single-entity-steering":
+                        effects = model_single_entity_steering(df_sub, db)
+                    else:
+                        raise NotImplementedError(f"Assay `{assay}` is not implemented")
+
+                    effects = effects.with_columns(
+                        pl.lit(assay).alias("assay"),
+                        pl.lit(comparison_set).alias("comparison_set"),
+                        pl.lit(i).alias("subsample_index"),
+                        pl.lit(subsample_size).alias("subsample_size")
+                    )
+                    all_effects.append(effects)
+
+            effects_df = pl.concat(all_effects)
+            effects_df.write_parquet(save_path)
 
 
 if __name__ == "__main__":
